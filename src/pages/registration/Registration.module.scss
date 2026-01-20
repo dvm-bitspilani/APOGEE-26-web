@@ -1,0 +1,82 @@
+@use "/src/assets/global.scss" as *;
+
+$cyber-yellow: #ffe500;
+$dark-bg: #000;
+
+.container {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: $dark-bg;
+  position: relative;
+
+  .backButton {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 100;
+    padding: 0;
+
+    img {
+      width: 40px;
+      height: auto;
+      display: block;
+    }
+  }
+
+  .leftPanel {
+    width: 61vw;
+    flex: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+
+    .bannerText {
+      position: absolute;
+      width: 80%;
+      object-fit: contain;
+      z-index: 1;
+      filter: drop-shadow(0 0 10px rgba(255, 230, 0, 0.3));
+    }
+
+    .robotFace {
+      position: relative;
+      height: 72%;
+      object-fit: contain;
+      z-index: 2;
+      margin-top: 4%;
+    }
+  }
+
+  .rightPanel {
+    width: 39vw;
+    flex: none;
+    position: relative;
+
+    .backgroundImage {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: fill;
+      z-index: 0;
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    // The Outlet content will be rendered here.
+    // It might need z-index: 1 to sit above the background image.
+    :global(#registration-content) {
+      position: relative;
+      z-index: 1;
+      height: 100%;
+    }
+  }
+}
