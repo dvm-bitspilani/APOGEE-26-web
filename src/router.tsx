@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 
 import Registration from "./pages/registration/Registration";
 import Landing from "./pages/landing/Landing";
+import ContactUs from "./pages/contactUs/ContactUs";
 
 type page = {
     url: string,
@@ -16,6 +17,10 @@ const pages: page[] = [
     {
         url: "/registration",
         component: Registration
+    },
+    {
+        url: "/contact-us",
+        component: ContactUs
     }
 ]
 

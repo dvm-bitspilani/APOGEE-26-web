@@ -1,0 +1,232 @@
+@use "sass:math";
+
+$primary-color: #00f0ff; // Neon Cyan
+$bg-color: #1a1a1a; // Dark Grey placeholder
+$panel-bg: rgba(20, 20, 25, 0.95);
+$font-family-tech: "Orbitron", "Courier New", monospace;
+
+@mixin neon-glow {
+  box-shadow:
+    0 0 5px $primary-color,
+    0 0 10px rgba(0, 240, 255, 0.5);
+}
+
+.sidebarContainer {
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+  
+  gap: 15px;
+  z-index: 100;
+  font-family: $font-family-tech;
+  color: $primary-color;
+}
+
+// Top Section: Timer
+.timerSection {
+  position: relative;
+  background: $panel-bg;
+  padding: 15px 10px;
+  text-align: center;
+  /* Complex sci-fi shape for top panel */
+  clip-path: polygon(
+    10% 0,
+    90% 0,
+    100% 20%,
+    100% 80%,
+    90% 100%,
+    10% 100%,
+    0 80%,
+    0 20%
+  );
+  border-top: 2px solid $primary-color;
+  border-bottom: 2px solid $primary-color;
+
+  // Outer glowing lines simulation
+  &::before {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    bottom: 5px;
+    border: 1px solid rgba(0, 240, 255, 0.3);
+    clip-path: inherit;
+    pointer-events: none;
+  }
+
+  .timerDisplay {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 5px;
+  }
+
+  .timerLabels {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    color: rgba(0, 240, 255, 0.7);
+
+    span {
+      width: 40px;
+    } // Fixed width to align with numbers roughly
+  }
+}
+
+// Middle Section: Navigation
+.navSection {
+  position: relative;
+  background: $panel-bg;
+  padding: 40px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  /* Complex elongated hexagon/tech shape */
+  clip-path: polygon(
+    0 5%,
+    15% 0,
+    85% 0,
+    100% 5%,
+    100% 95%,
+    85% 100%,
+    15% 100%,
+    0 95%
+  );
+
+  // Decorative borders using pseudo elements approach might be tricky with clip-path
+  // Instead, we use internal borders or SVG backgrounds in a real app,
+  // but here we'll simulate the look with careful styling of items.
+
+  .sideDecoLeft,
+  .sideDecoRight {
+    position: absolute;
+    top: 10px;
+    bottom: 10px;
+    width: 20px;
+    border: 1px solid rgba(0, 240, 255, 0.3);
+    pointer-events: none;
+  }
+  .sideDecoLeft {
+    left: 5px;
+    border-right: none;
+  }
+  .sideDecoRight {
+    right: 5px;
+    border-left: none;
+  }
+}
+
+.navItem {
+  position: relative;
+  width: 80%;
+  padding: 15px 0;
+  margin: 5px 0;
+  text-align: center;
+  text-decoration: none;
+  color: $primary-color;
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  transition: all 0.3s ease;
+
+  // The "Bracket" style lines above and below each item
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    height: 2px;
+    width: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      $primary-color,
+      transparent
+    );
+    left: 0;
+    opacity: 0.5;
+    transition: all 0.3s;
+  }
+  &::before {
+    top: 0;
+  }
+  &::after {
+    bottom: 0;
+  }
+
+  // Hover effect: Expand background or glow
+  &:hover,
+  &.active {
+    background: rgba(0, 240, 255, 0.15);
+    text-shadow: 0 0 8px $primary-color;
+
+    &::before,
+    &::after {
+      opacity: 1;
+      width: 110%;
+      left: -5%;
+    }
+  }
+
+  // Active state specific styling (box highlight)
+  &.active {
+    background: $primary-color;
+    color: #000;
+    clip-path: polygon(10% 0, 100% 0, 95% 100%, 5% 100%);
+    // Reset pseudo elements for the active block style
+    &::before,
+    &::after {
+      display: none;
+    }
+  }
+}
+
+// Bottom Section: Socials
+.socialSection {
+  position: relative;
+  background: $panel-bg;
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  /* Complex bottom panel shape */
+  clip-path: polygon(
+    10% 0,
+    90% 0,
+    100% 20%,
+    100% 80%,
+    90% 100%,
+    10% 100%,
+    0 80%,
+    0 20%
+  );
+  border-top: 2px solid $primary-color;
+
+  .socialIcon {
+    width: 40px;
+    height: 40px;
+    border: 2px solid $primary-color;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $primary-color;
+    transition: all 0.3s;
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0.5);
+
+    &:hover {
+      background: $primary-color;
+      color: #000;
+      box-shadow: 0 0 15px $primary-color;
+      transform: scale(1.1);
+    }
+  }
+}
