@@ -1,7 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
 
 import Registration from "./pages/registration/Registration";
-import Instructions from "./pages/registration/components/Instructions";
+// import Instructions from "./pages/registration/components/Instructions";
+import Instructions from "./pages/registration/components/detailsForm/DetailsForm"
 import Landing from "./pages/landing/Landing";
 
 const router = createBrowserRouter([
@@ -16,6 +17,7 @@ const router = createBrowserRouter([
       {
         path: "instructions",
         element: <Instructions />,
+        index: true,
       },
     ],
   },

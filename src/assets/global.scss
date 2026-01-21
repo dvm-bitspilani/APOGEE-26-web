@@ -1,0 +1,56 @@
+@font-face {
+    font-family: 'Cyberpunks';
+    src: url('/font/Cyberpunks.otf') format('opentype'),
+        url('/font/Cyberpunks.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Cyberpunks';
+    src: url('/font/Cyberpunks Italic.otf') format('opentype'),
+        url('/font/Cyberpunks Italic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Blender Pro';
+    src: url('/font/fonnts.com-Blender_Pro_Thin.ttf') format('truetype');
+    font-weight: 100;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Blender Pro';
+    src: url('/font/fonnts.com-Blender_Pro_Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Blender Pro';
+    src: url('/font/fonnts.com-Blender_Pro_Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Blender Pro';
+    src: url('/font/fonnts.com-Blender_Pro_Heavy.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+}
+
+$cyber-yellow: #ffe500;
+$dark-bg: #000;
+
+// Font Families
+$font-cyberpunks: 'Cyberpunks';
+$font-blender: 'Blender Pro';
+
+// Font Weights
+$weight-blender-thin: 100;
+$weight-blender-medium: 500;
+$weight-blender-bold: 700;
+$weight-blender-heavy: 900;
