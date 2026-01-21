@@ -40,7 +40,9 @@ function Registration() {
 
         {registrationStep === "events" && displayEvent && (
           <div className={styles.detailsPanel}>
-            <div className={styles.detailsContent}>
+            {/* Header Section: Fixed at top */}
+            <div className={styles.detailsHeader}>
+              <h2 className={styles.eventName}>[{displayEvent.name}]</h2>
               <button
                 onClick={() => {
                   useRegistrationStore.getState().setStickyEvent(null);
@@ -50,8 +52,15 @@ function Registration() {
               >
                 ✕
               </button>
-              <h2 className={styles.eventName}>[{displayEvent.name}]</h2>
-              <p className={styles.eventDesc}>{displayEvent.about}</p>
+            </div>
+
+            {/* Scrollable Content Section */}
+            <div className={styles.scrollContainer}>
+              <div className={styles.detailsContent}>
+                <p className={styles.eventDesc}>{displayEvent.about}</p>
+              </div>
+              {/* Fade Overlay */}
+              <div className={styles.fadeOverlay}></div>
             </div>
 
             {stickyEvent && (
