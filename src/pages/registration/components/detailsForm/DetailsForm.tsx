@@ -27,8 +27,6 @@ const DetailsForm = () => {
     const form2Ref = useRef<HTMLFormElement>(null);
 
     const { contextSafe } = useGSAP({ scope: container });
-
-    // Initial state
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -44,9 +42,7 @@ const DetailsForm = () => {
 
     useGSAP(() => {
         setPlaceholder(getDatePlaceholder());
-        
-        // Initial setup
-        if (step === 1) {
+                if (step === 1) {
             gsap.set(form1Ref.current, { autoAlpha: 1, display: 'flex' });
             gsap.set(form2Ref.current, { autoAlpha: 0, display: 'none' });
         } else {
