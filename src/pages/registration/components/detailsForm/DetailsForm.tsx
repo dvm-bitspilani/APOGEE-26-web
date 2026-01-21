@@ -2,7 +2,6 @@ import styles from "./DetailsForm.module.scss";
 import { useState, useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { useRegistrationStore } from "../../../../utils/store";
 
 function getDatePlaceholder(locale = navigator.language) {
   const parts = new Intl.DateTimeFormat(locale).formatToParts(
@@ -21,9 +20,6 @@ function getDatePlaceholder(locale = navigator.language) {
 }
 
 const DetailsForm = () => {
-  const { setRegistrationStep } = useRegistrationStore();
-  const handleToEvents = () => setRegistrationStep("events");
-
   const [step, setStep] = useState(1);
   const container = useRef<HTMLDivElement>(null);
   const form1Ref = useRef<HTMLFormElement>(null);
@@ -172,11 +168,22 @@ const DetailsForm = () => {
 
           <div className={styles.buttonContainer}>
             <div className={styles.customBtnWrapper} onClick={handleNext}>
-              <div className={styles.btnFrame}>
-                <img src="/svg/registrations/btnFrame.svg" alt="frame" />
-              </div>
-              <div className={styles.btnInternal}>
-                <img src="/svg/registrations/btnInternal.svg" alt="bg" />
+              <div className={styles.btnSomething}>
+                <img
+                  src="/svg/registrations/btnFrame.svg"
+                  className={styles.leftFrame}
+                  alt="frame"
+                />
+                <img
+                  src="/svg/registrations/btnFrame.svg"
+                  className={styles.rightFrame}
+                  alt="frame"
+                />
+                <img
+                  src="/svg/registrations/btnInternal.svg"
+                  className={styles.btnInternal}
+                  alt="bg"
+                />
               </div>
               <span className={styles.btnText}>Next</span>
             </div>
@@ -262,7 +269,6 @@ const DetailsForm = () => {
             <button
               type="button"
               className={`${styles.button} ${styles.filled}`}
-              onClick={handleToEvents}
             >
               Select Events
             </button>
