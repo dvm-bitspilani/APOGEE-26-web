@@ -13,6 +13,14 @@ $dark-bg: #000;
   padding: 4rem 4rem;
   color: $cyber-yellow;
 
+  @media (max-width: 1300px) {
+    padding: 4rem calc(2.4rem + 0.3vw);
+  }
+
+  @media (max-width: 750px) {
+    
+  }
+
   .heading {
     font-family: $font-cyberpunks, "Orbitron", sans-serif;
     text-align: center;
@@ -30,6 +38,13 @@ $dark-bg: #000;
     padding: 0;
     font-family: $font-blender, "Orbitron", sans-serif;
     font-weight: $weight-blender-bold;
+    flex: 1;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    padding-right: 0.5rem;
+
+    @include content-scroller($cyber-yellow);
+
     li {
       position: relative;
       padding-left: 1.5rem;
