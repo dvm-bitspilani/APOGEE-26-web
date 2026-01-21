@@ -1,14 +1,14 @@
-import styles from "./Landing.module.scss"
-import { Canvas, useFrame, useThree } from "@react-three/fiber"
-import { Html, ScrollControls, Text, useScroll } from "@react-three/drei"
-import { Perf } from "r3f-perf"
-import { useRef } from "react"
-import * as THREE from "three"
+import styles from "./Landing.module.scss";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { Html, ScrollControls, Text, useScroll } from "@react-three/drei";
+import { Perf } from "r3f-perf";
+import { useEffect, useRef, useState } from "react";
+import * as THREE from "three";
 
 /* ---------- Cube ---------- */
 type CubeProps = {
-  cubeRef: React.RefObject<THREE.Mesh>
-}
+  cubeRef: React.RefObject<THREE.Mesh>;
+};
 
 function Cube({ cubeRef }: CubeProps) {
   return (
@@ -16,7 +16,7 @@ function Cube({ cubeRef }: CubeProps) {
       <boxGeometry args={[1, 1, 1]} />
       <meshStandardMaterial color="orange" />
       <Text
-        position={[-0.5001, 0,0]}
+        position={[-0.5001, 0, 0]}
         fontSize={0.25}
         color="white"
         anchorX="center"
@@ -26,82 +26,76 @@ function Cube({ cubeRef }: CubeProps) {
         APOGEE
       </Text>
     </mesh>
-  )
+  );
 }
-
 
 /* ---------- Camera Controller ---------- */
 type CameraControllerProps = {
-  cubeRef: React.RefObject<THREE.Mesh>
-}
+  cubeRef: React.RefObject<THREE.Mesh>;
+  setPage: (p: number) => void;
+};
 
-function CameraController({ cubeRef }: CameraControllerProps) {
-  const { camera } = useThree()
-  const scroll = useScroll()
+function CameraController({ cubeRef, setPage }: CameraControllerProps) {
+  const { camera } = useThree();
+  const scroll = useScroll();
 
   useFrame(() => {
-    // page 0 → 1 only
-    const pageProgress = THREE.MathUtils.clamp(
-      scroll.offset * 4,
-      0,
-      1
-    )
+    const pageProgress = THREE.MathUtils.clamp(scroll.offset * 4, 0, 1);
 
-    const radius = 5
-    const angle = pageProgress * Math.PI / 2
+    const scaleAmount = 0.5;
+    const scale = 1 + pageProgress * scaleAmount;
 
-    // Orbit camera around cube
-    // camera.position.x = Math.sin(angle) * radius
-    // camera.position.z = Math.cos(angle) * radius
-
-    // Rotate cube with scroll
     if (cubeRef.current) {
-        const scaleAmount = 0.5 // how much bigger it gets
-
-const scale = 1 + pageProgress * scaleAmount
-
-      cubeRef.current.rotation.y = pageProgress * Math.PI /2
-      cubeRef.current.scale.setScalar(scale)
-
-      // Always look at cube
-      camera.lookAt(cubeRef.current.position)
+      cubeRef.current.rotation.y = pageProgress * Math.PI / 2;
+      cubeRef.current.scale.setScalar(scale);
+      camera.lookAt(cubeRef.current.position);
     }
-  })
 
-  return null
+    // update current page index
+    const pageIndex = Math.floor(scroll.offset * 4);
+    setPage(pageIndex);
+  });
+
+  return null;
 }
 
-/* ---------- Scene ---------- */
-function Scene() {
-  const cubeRef = useRef<THREE.Mesh>(null!)
+function Scene({ setPage }: { setPage: (p: number) => void }) {
+  const cubeRef = useRef<THREE.Mesh>(null!);
 
   return (
     <>
       <ambientLight intensity={0.9} />
-      {/* <directionalLight position={[5, 5, 5]} intensity={1} /> */}
-
-      <Cube cubeRef={cubeRef}  />
-      <CameraController cubeRef={cubeRef} />
-
-      {import.meta.env.DEV && (
-        <Perf position="top-left" minimal />
-      )}
+      <Cube cubeRef={cubeRef} />
+      <CameraController cubeRef={cubeRef} setPage={setPage} />
     </>
-  )
+  );
 }
 
-/* ---------- Landing ---------- */
 export default function Landing() {
+const pages = [
+  { id: 0, url: "/" },
+  { id: 1, url: "/" },
+  { id: 2, url: "/events" },
+  { id: 3, url: "/aboutus" },
+];
+
+const [page, setPage] = useState(0);
+
+useEffect(() => {
+  const url = pages[page]?.url || "/";
+  history.replaceState(null, "", url);
+}, [page]);
+
+
+
   return (
     <>
-      {/* Optional heading */}
-      {/* <h1 className={styles.heading}>APOGEE 2026</h1> */}
-
       <Canvas camera={{ position: [0, 0, 5] }}>
+        <Perf />
         <ScrollControls pages={4} damping={0.2}>
-          <Scene />
+          <Scene setPage={setPage} />
         </ScrollControls>
       </Canvas>
     </>
-  )
+  );
 }
