@@ -172,11 +172,22 @@ const DetailsForm = () => {
 
           <div className={styles.buttonContainer}>
             <div className={styles.customBtnWrapper} onClick={handleNext}>
-              <div className={styles.btnFrame}>
-                <img src="/svg/registrations/btnFrame.svg" alt="frame" />
-              </div>
-              <div className={styles.btnInternal}>
-                <img src="/svg/registrations/btnInternal.svg" alt="bg" />
+              <div className={styles.btnSomething}>
+                <img
+                  src="/svg/registrations/btnFrame.svg"
+                  className={styles.leftFrame}
+                  alt="frame"
+                />
+                <img
+                  src="/svg/registrations/btnFrame.svg"
+                  className={styles.rightFrame}
+                  alt="frame"
+                />
+                <img
+                  src="/svg/registrations/btnInternal.svg"
+                  className={styles.btnInternal}
+                  alt="bg"
+                />
               </div>
               <span className={styles.btnText}>Next</span>
             </div>

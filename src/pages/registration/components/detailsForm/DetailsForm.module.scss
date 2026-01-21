@@ -125,69 +125,113 @@
 
     .customBtnWrapper {
         position: relative;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 190px; // Width of the frame
-        height: 62px; // Height of the frame
         cursor: pointer;
         user-select: none;
-        
-        // Center the button in the form
-        margin-left: auto; 
-        
-        .btnFrame {
-            position: absolute;
-            top: 0;
-            left: 0;
+        width: 150px;
+        height: 62px;
+        margin-left: auto;
+        display: grid;
+        grid-template-columns: auto;
+        grid-template-rows: auto;
+
+
+        .btnSomething {
+            grid-column: 1/2;
+            grid-row: 1/2;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr;
             width: 100%;
             height: 100%;
-            z-index: 2;
-            pointer-events: none; // Let clicks pass through if needed, though click is on wrapper
-
-            img {
-                width: 100%;
-                height: 100%;
-                object-fit: contain;
-            }
-        }
-
-        .btnInternal {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 71px; // Initial width from image dimensions
-            height: 100%; // Adjust if needed, or keep auto
-            z-index: 1;
-            transition: width 0.3s ease-in-out;
-            display: flex;
-            justify-content: center;
             align-items: center;
-            overflow: hidden; // Ensure image doesn't spill if we resize div (though we are likely resizing div)
+            justify-content: center;
+            justify-items: center;
+            align-content: center;
 
-            img {
-                height: 100%; 
-                width: 100%; 
-                object-fit: fill; // Stretch to fill the container as it expands
+            .leftFrame {
+                grid-column: 1;
+                grid-row: 1;
+                // width: auto; 
+                height: 80%;
+                justify-self: start; // Align to left edge
+                object-fit: contain;
+                pointer-events: none;
+                position: relative;
+                z-index: 2;
+            }
+
+            .rightFrame {
+                grid-column: 2;
+                grid-row: 1;
+                // width: auto;
+                height: 80%;
+                justify-self: end; // Align to right edge
+                object-fit: contain;
+                pointer-events: none;
+                position: relative;
+                z-index: 2;
+                transform: scaleX(-1); // Flip to mirror
+            }
+
+            .btnInternal {
+                grid-column: 1 / -1;
+                grid-row: 1;
+                justify-self: center;
+                width: 85%;
+                height: 85%;
+                transition: width 0.2s ease-in;
+                // cubic-bezier(0.4, 0, 0.2, 1);
+                z-index: 1;
+                overflow: hidden; // Clip content while expanding
+                
+                // img {
+                //     width: 100%; // Fill the container
+                //     height: 100%;
+                //     object-fit: fill; // Stretch yellow part
+                // }
             }
         }
 
         .btnText {
+            grid-column: 1/2;
+            grid-row: 1/2;
             position: relative;
+            align-self: center;
+            // justify-self: center;
+            width: 100%;
+            text-align: center;
+            // transform: translate(-50%, -50%);
             z-index: 3;
             font-family: $font-blender;
             font-weight: $weight-blender-bold;
             font-size: 1.5rem;
             color: #fff;
-            // text-transform: uppercase;
-            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            // letter-spacing: 0.1em;
             pointer-events: none;
+            white-space: nowrap;
+            transition: font-size 0.2s ease-in;
+            //  cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         &:hover {
-            .btnInternal {
-                width: 160px; // Expand to fill most of the frame (adjust visual fit)
+            .btnSomething
+            {
+                // .leftFrame{
+                //     height: 85%;
+                //     width: auto;
+                // }
+                // .rightFrame{
+                //     height: 85%;
+                //     width: auto;
+                // }
+                .btnInternal {
+                    width: 90%; // Expand to full width (190px)
+                }
+            
+            }
+            .btnText {
+                font-size: 1.55rem;
             }
         }
     }
