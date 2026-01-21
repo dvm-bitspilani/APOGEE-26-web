@@ -1,0 +1,92 @@
+@use "/src/assets/global.scss" as *;
+
+$cyber-yellow: #ffe500;
+$dark-bg: #000;
+
+.content {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 4rem 4rem;
+  color: $cyber-yellow;
+
+  .heading {
+    font-family: "Orbitron", sans-serif;
+    font-size: 3.5rem;
+    font-weight: 900;
+    margin-bottom: 2rem;
+    color: $cyber-yellow;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-shadow: 0 0 5px rgba(255, 229, 0, 0.5);
+  }
+
+  .instructionList {
+    list-style: none;
+    padding: 0;
+    li {
+      position: relative;
+      padding-left: 1.5rem;
+      margin-bottom: 0.8rem;
+      line-height: 1.4;
+      font-family: "Rajdhani", sans-serif;
+      font-size: 1.1rem;
+      color: $cyber-yellow;
+
+      &::before {
+        content: "•";
+        position: absolute;
+        left: 0;
+        color: $cyber-yellow;
+        font-weight: bold;
+      }
+    }
+
+    a {
+      color: $cyber-yellow;
+      text-decoration: underline;
+      font-weight: bold;
+
+      &:hover {
+        color: lighten($cyber-yellow, 10%);
+      }
+    }
+  }
+
+  .googleButton {
+    margin-top: 2rem;
+    background-color: $cyber-yellow;
+    background-image: url("/svg/registrations/binary_bg.svg");
+    border: none;
+    border-radius: 8px;
+    padding: 0.8rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    gap: 1rem;
+    width: fit-content;
+    cursor: pointer;
+    font-family: "Roboto", sans-serif;
+    font-weight: 600;
+    color: $dark-bg;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+
+    &:hover {
+      box-shadow: 0 6px 12px rgba(255, 229, 0, 0.2);
+      background-color: lighten($cyber-yellow, 5%);
+    }
+
+    img {
+      width: 24px;
+      height: 24px;
+    }
+
+    span {
+      font-size: 1rem;
+    }
+  }
+}
