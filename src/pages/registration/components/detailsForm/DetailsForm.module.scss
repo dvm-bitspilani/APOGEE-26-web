@@ -13,10 +13,10 @@
 
   .title {
     font-family: $font-cyberpunks;
-    font-size: 4rem;
+    font-size: clamp(3rem, 5vw, 6.5rem);
+    margin-bottom: 1.7vw;
     // text-transform: uppercase;
     letter-spacing: 0.1em;
-    margin-bottom: 0.5rem;
     text-align: center;
     z-index: 1;
   }
@@ -24,24 +24,24 @@
   .subtitle {
     font-family: $font-blender;
     font-weight: $weight-blender-bold;
-    font-size: 1.5rem;
+    font-size: clamp(1rem, 1.7vw, 3rem);
+    margin-bottom: 2vw;
     // text-transform: uppercase;
     letter-spacing: 0.05em;
     color: #fff; // Assuming white based on the image description
-    margin-bottom: 2rem;
     z-index: 1;
   }
 
   .formContainer {
     width: 100%;
-    max-width: 500px;
+    max-width: 27.9vw;
     position: relative;
   }
 
   .form {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1.7vw;
     width: 100%;
     // Opacity and display control will be handled by GSAP
 
@@ -57,12 +57,11 @@
         color: $cyber-yellow;
         font-family: $font-blender;
         font-weight: $weight-blender-bold;
-        font-size: 1.25rem;
-        padding: 1rem;
+        font-size: clamp(1rem, 1.9vw, 4rem);
+        padding: 0.7vw;
         // text-transform: uppercase;
         cursor: pointer;
         transition: all 0.2s ease-in-out;
-        padding: 0.2rem;
 
         &::placeholder {
           color: $cyber-yellow;
@@ -92,8 +91,8 @@
     .buttonContainer {
       display: flex;
       justify-content: flex-end; // Right align as usually expected in flows, or center if preferred
-      margin-top: 1rem;
       gap: 1rem;
+      margin-top: 1vw;
     }
 
     .button {
@@ -136,8 +135,8 @@
     position: relative;
     cursor: pointer;
     user-select: none;
-    width: 150px;
-    height: 62px;
+    width: 10vw;
+    height: 4.1vw;
     margin-left: auto;
     display: grid;
     grid-template-columns: auto;
@@ -160,7 +159,7 @@
         grid-column: 1;
         grid-row: 1;
         // width: auto;
-        height: 80%;
+        height: 60%;
         justify-self: start; // Align to left edge
         object-fit: contain;
         pointer-events: none;
@@ -172,7 +171,7 @@
         grid-column: 2;
         grid-row: 1;
         // width: auto;
-        height: 80%;
+        height: 60%;
         justify-self: end; // Align to right edge
         object-fit: contain;
         pointer-events: none;
@@ -212,7 +211,7 @@
       z-index: 3;
       font-family: $font-blender;
       font-weight: $weight-blender-bold;
-      font-size: 1.5rem;
+      font-size: clamp(1rem, 1.6vw, 3rem);
       color: #fff;
       text-transform: uppercase;
       // letter-spacing: 0.1em;
@@ -237,14 +236,13 @@
         }
       }
       .btnText {
-        font-size: 1.55rem;
+        font-size: clamp(1.1rem, 1.6vw, 2.6rem);
       }
     }
   }
 }
 @media screen and (min-width: 1300px) {
   .container {
-
     .title {
       font-size: clamp(3rem, 5vw, 6.5rem);
       margin-bottom: 1.7vw;
@@ -256,7 +254,6 @@
     }
 
     .formContainer {
-      width: 100%;
       max-width: 27.9vw;
     }
 
@@ -264,7 +261,6 @@
       gap: 1.5vw;
 
       .inputGroup {
-
         .input {
           font-size: clamp(1rem, 1.7vw, 3rem);
           padding: 0.5vw;
@@ -273,151 +269,20 @@
 
       .buttonContainer {
         margin-top: 1vw;
-        gap: 1rem;
-      }
-
-      .button {
-        background-color: transparent;
-        color: $cyber-yellow; // Or fill yellow based on image, looks like yellow fill in image part 2
-        border-radius: 0; // Cyberpunk style usually sharp or chamfered
-        border: 2px solid $cyber-yellow;
-        // Additional styling for chamfered corners if user requested "Select Events" button style which is hexagon-ish
-        clip-path: polygon(
-          10% 0,
-          100% 0,
-          100% 70%,
-          90% 100%,
-          0 100%,
-          0 30%
-        ); // Rough hex/chamfer shape
-        padding: 1rem 2rem;
-        font-family: $font-blender;
-        font-weight: $weight-blender-bold;
-        font-size: 1.25rem;
-        cursor: pointer;
-        // text-transform: uppercase;
-
-        // If filled style is desired for 'Select Events':
-        &.filled {
-          background-color: rgba(
-            $cyber-yellow,
-            0.2
-          ); // Semi-transparent fill maybe? Or solid
-        }
-
-        &:hover {
-          background-color: $cyber-yellow;
-          color: $dark-bg;
-        }
       }
     }
 
     .customBtnWrapper {
-      position: relative;
-      cursor: pointer;
-      user-select: none;
-      width: 150px;
-      height: 62px;
-      margin-left: auto;
-      display: grid;
-      grid-template-columns: auto;
-      grid-template-rows: auto;
-
-      .btnSomething {
-        grid-column: 1/2;
-        grid-row: 1/2;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: 1fr;
-        width: 100%;
-        height: 100%;
-        align-items: center;
-        justify-content: center;
-        justify-items: center;
-        align-content: center;
-
-        .leftFrame {
-          grid-column: 1;
-          grid-row: 1;
-          // width: auto;
-          height: 80%;
-          justify-self: start; // Align to left edge
-          object-fit: contain;
-          pointer-events: none;
-          position: relative;
-          z-index: 2;
-        }
-
-        .rightFrame {
-          grid-column: 2;
-          grid-row: 1;
-          // width: auto;
-          height: 80%;
-          justify-self: end; // Align to right edge
-          object-fit: contain;
-          pointer-events: none;
-          position: relative;
-          z-index: 2;
-          transform: scaleX(-1); // Flip to mirror
-        }
-
-        .btnInternal {
-          grid-column: 1 / -1;
-          grid-row: 1;
-          justify-self: center;
-          width: 85%;
-          height: 85%;
-          transition: width 0.2s ease-in;
-          // cubic-bezier(0.4, 0, 0.2, 1);
-          z-index: 1;
-          overflow: hidden; // Clip content while expanding
-
-          // img {
-          //     width: 100%; // Fill the container
-          //     height: 100%;
-          //     object-fit: fill; // Stretch yellow part
-          // }
-        }
-      }
+      width: 10vw;
+      height: 4.5vw;
 
       .btnText {
-        grid-column: 1/2;
-        grid-row: 1/2;
-        position: relative;
-        align-self: center;
-        // justify-self: center;
-        width: 100%;
-        text-align: center;
-        // transform: translate(-50%, -50%);
-        z-index: 3;
-        font-family: $font-blender;
-        font-weight: $weight-blender-bold;
-        font-size: 1.5rem;
-        color: #fff;
-        text-transform: uppercase;
-        // letter-spacing: 0.1em;
-        pointer-events: none;
-        white-space: nowrap;
-        transition: font-size 0.2s ease-in;
-        //  cubic-bezier(0.4, 0, 0.2, 1);
+        font-size: clamp(1rem, 1.5vw, 2.5rem);
       }
 
       &:hover {
-        .btnSomething {
-          // .leftFrame{
-          //     height: 85%;
-          //     width: auto;
-          // }
-          // .rightFrame{
-          //     height: 85%;
-          //     width: auto;
-          // }
-          .btnInternal {
-            width: 90%; // Expand to full width (190px)
-          }
-        }
         .btnText {
-          font-size: 1.55rem;
+          font-size: clamp(1.1rem, 1.6vw, 2.6rem);
         }
       }
     }
