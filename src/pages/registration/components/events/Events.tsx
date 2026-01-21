@@ -69,7 +69,7 @@ const Events = () => {
     <div className={styles.eventsContainer}>
       <div className={styles.headingCont}>
         {/* <img src="/svgs/registration/leftarr.svg" alt="left" /> */}
-        <h3 className={styles.heading}>CHOOSE EVENTS</h3>
+        <h3 className={styles.heading}>EVENTS</h3>
         {/* <img src="/svgs/registration/rightarr.svg" alt="right" /> */}
       </div>
 
@@ -112,7 +112,7 @@ const Events = () => {
                   }
                 }}
               >
-                <button>{event.name}</button>
+                <button>[{event.name}]</button>
                 <span
                   className={styles.actionIcon}
                   onClick={(e) => {
