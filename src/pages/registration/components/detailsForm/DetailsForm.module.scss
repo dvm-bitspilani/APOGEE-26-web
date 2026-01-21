@@ -43,18 +43,8 @@
         flex-direction: column;
         gap: 1.5rem;
         width: 100%;
-        opacity: 0;
-        transition: opacity 0.5s ease-in-out;
-        
-        // Removed `display: none` to allow transition
-        &.active {
-            opacity: 1;
-        }
+        // Opacity and display control will be handled by GSAP
 
-        // Only hide completely when inactive to prevent layout shifts or interaction
-        &.inactive {
-            display: none; // Or absolute positioning with opacity 0
-        }
 
         .inputGroup {
             position: relative;
@@ -104,6 +94,7 @@
             display: flex;
             justify-content: flex-end; // Right align as usually expected in flows, or center if preferred
             margin-top: 1rem;
+            gap: 1rem;
         }
 
         .button {

@@ -1,5 +1,7 @@
 import styles from './DetailsForm.module.scss';
-import { useState, useEffect } from 'react';
+import { useState, useRef } from 'react';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
 
 function getDatePlaceholder(locale = navigator.language) {
   const parts = new Intl.DateTimeFormat(locale).formatToParts(
@@ -20,7 +22,11 @@ function getDatePlaceholder(locale = navigator.language) {
 
 const DetailsForm = () => {
     const [step, setStep] = useState(1);
-    const [isTransitioning, setIsTransitioning] = useState(false);
+    const container = useRef<HTMLDivElement>(null);
+    const form1Ref = useRef<HTMLFormElement>(null);
+    const form2Ref = useRef<HTMLFormElement>(null);
+
+    const { contextSafe } = useGSAP({ scope: container });
 
     // Initial state
     const [formData, setFormData] = useState({
@@ -36,49 +42,78 @@ const DetailsForm = () => {
 
     const [placeholder, setPlaceholder] = useState("");
 
-    useEffect(() => {
+    useGSAP(() => {
         setPlaceholder(getDatePlaceholder());
-    }, []);
-
+        
+        // Initial setup
+        if (step === 1) {
+            gsap.set(form1Ref.current, { autoAlpha: 1, display: 'flex' });
+            gsap.set(form2Ref.current, { autoAlpha: 0, display: 'none' });
+        } else {
+            gsap.set(form1Ref.current, { autoAlpha: 0, display: 'none' });
+            gsap.set(form2Ref.current, { autoAlpha: 1, display: 'flex' });
+        }
+    }, [step]); // Re-run setup on step change to ensure correct state after re-render
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const handleNext = () => {
-        setIsTransitioning(true);
-        setTimeout(() => {
-            setStep(2);
-            setIsTransitioning(false);
-        }, 500); // Match CSS transition duration
-    };
+    const handleNext = contextSafe(() => {
+        if (step === 1) {
+            const tl = gsap.timeline({
+                onComplete: () => setStep(2)
+            });
+            
+            tl.to(form1Ref.current, {
+                autoAlpha: 0,
+                duration: 0.5,
+                ease: "power2.inOut",
+                onComplete: () => {
+                   gsap.set(form1Ref.current, { display: 'none' });
+                   gsap.set(form2Ref.current, { display: 'flex' });
+                }
+            })
+            .to(form2Ref.current, {
+                autoAlpha: 1,
+                duration: 0.5,
+                ease: "power2.inOut"
+            });
+        }
+    });
 
-    // Helper to get class for step visibility
-    const getStepClass = (currentStep: number) => {
-        if (step === currentStep && !isTransitioning) return `${styles.form} ${styles.active}`;
-        if (step === currentStep && isTransitioning) return `${styles.form}`; // Fading out
-        if (step !== currentStep && isTransitioning && ((step === 1 && currentStep === 2) || (step === 2 && currentStep === 1))) return `${styles.form}`; // Fading in (technically logic is simpler: fade out current, set state, fade in new. But basic approach: fade out -> state change -> fade in)
-        // Actually simplest fade out/in logic:
-        // 1. Click Next -> Set transitioning true (fade out active form)
-        // 2. Timeout -> Set Step 2, Set transitioning false (fade in new active form)
-        
-        // Revised logic with simple classes:
-        // Active component gets .active class (opacity 1). Transitioning handles opacity 0.
-        // We need to unmount/hide the non-active one.
-        return step === currentStep 
-            ? `${styles.form} ${isTransitioning ? '' : styles.active}` 
-            : `${styles.form} ${styles.inactive}`;
-    };
+    const handlePrev = contextSafe(() => {
+        if (step === 2) {
+             const tl = gsap.timeline({
+                onComplete: () => setStep(1)
+            });
+
+            tl.to(form2Ref.current, {
+                autoAlpha: 0,
+                duration: 0.5,
+                ease: "power2.inOut",
+                onComplete: () => {
+                   gsap.set(form2Ref.current, { display: 'none' });
+                   gsap.set(form1Ref.current, { display: 'flex' });
+                }
+            })
+            .to(form1Ref.current, {
+                autoAlpha: 1,
+                duration: 0.5,
+                ease: "power2.inOut"
+            });
+        }
+    });
 
 
     return (
-        <div className={styles.container}>
+        <div ref={container} className={styles.container}>
             <h1 className={styles.title}>REGISTER</h1>
             <h2 className={styles.subtitle}>[ENTER YOUR DETAILS]</h2>
 
             <div className={styles.formContainer}>
                 {/* STEP 1 */}
-                <form className={getStepClass(1)} onSubmit={(e) => e.preventDefault()}>
+                <form ref={form1Ref} className={styles.form} onSubmit={(e) => e.preventDefault()}>
                     <div className={styles.inputGroup}>
                         <input
                             type="text"
@@ -140,7 +175,7 @@ const DetailsForm = () => {
                 </form>
 
                 {/* STEP 2 */}
-                <form className={getStepClass(2)} onSubmit={(e) => e.preventDefault()}>
+                <form ref={form2Ref} className={styles.form} onSubmit={(e) => e.preventDefault()}>
                      <div className={styles.inputGroup}>
                         <input
                             type="text"
@@ -198,6 +233,9 @@ const DetailsForm = () => {
                     </div>
 
                      <div className={styles.buttonContainer}>
+                        <button type="button" className={styles.button} onClick={handlePrev}>
+                            Previous
+                        </button>
                         <button type="button" className={`${styles.button} ${styles.filled}`}>
                             Select Events
                         </button>
