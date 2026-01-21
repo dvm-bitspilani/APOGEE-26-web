@@ -9,7 +9,7 @@ const DUMMY_EVENTS: Event[] = [
     id: 1,
     name: "Event One",
     about:
-      "Oasis, The Annual Cultural Extravaganza Of Birla Institute Of Technology And Science, Pilani, Has Been A Vibrant Part Of India's Cultural Tapestry Since 1971. Managed Entirely By Students, It's A Dazzling Showcase Of Talent In Dance, Drama, Literature, Comedy, Fashion, And Music.",
+      "Oasis, The Annual Cultural Extravaganza Of Birla Institute Of Technology And Science, Pilani, Has Been A Vibrant Part Of India's Cultural Tapestry Since 1971. Managed Entirely By Students, It's A Dazzling Showcase Of Talent In Dance, Drama, Literature, Comedy, Fashion, And Music. Oasis, The Annual Cultural Extravaganza Of Birla Institute Of Technology And Science, Pilani, Has Been A Vibrant Part Of India's Cultural Tapestry Since 1971. Managed Entirely By Students, It's A Dazzling Showcase Of Talent In Dance, Drama, Literature, Comedy, Fashion, And Music.Oasis, The Annual Cultural Extravaganza Of Birla Institute Of Technology And Science, Pilani, Has Been A Vibrant Part Of India's Cultural Tapestry Since 1971. Managed Entirely By Students, It's A Dazzling Showcase Of Talent In Dance, Drama, Literature, Comedy, Fashion, And Music.Oasis, The Annual Cultural Extravaganza Of Birla Institute Of Technology And Science, Pilani, Has Been A Vibrant Part Of India's Cultural Tapestry Since 1971. Managed Entirely By Students, It's A Dazzling Showcase Of Talent In Dance, Drama, Literature, Comedy, Fashion, And Music.Oasis, The Annual Cultural Extravaganza Of Birla Institute Of Technology And Science, Pilani, Has Been A Vibrant Part Of India's Cultural Tapestry Since 1971. Managed Entirely By Students, It's A Dazzling Showcase Of Talent In Dance, Drama, Literature, Comedy, Fashion, And Music.Oasis, The Annual Cultural Extravaganza Of Birla Institute Of Technology And Science, Pilani, Has Been A Vibrant Part Of India's Cultural Tapestry Since 1971. Managed Entirely By Students, It's A Dazzling Showcase Of Talent In Dance, Drama, Literature, Comedy, Fashion, And Music.Oasis, The Annual Cultural Extravaganza Of Birla Institute Of Technology And Science, Pilani, Has Been A Vibrant Part Of India's Cultural Tapestry Since 1971. Managed Entirely By Students, It's A Dazzling Showcase Of Talent In Dance, Drama, Literature, Comedy, Fashion, And Music.",
   },
   {
     id: 2,
@@ -78,7 +78,7 @@ const Events = () => {
           <div className={styles.search}>
             <input
               type="text"
-              placeholder="SEARCH EVENTS"
+              placeholder="[SEARCH EVENTS]"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             />
@@ -120,7 +120,25 @@ const Events = () => {
                     toggleEvent(event);
                   }}
                 >
-                  {isSelected(event.id) ? "✓" : "+"}
+                  {isSelected(event.id) ? (
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M5 12L10 17L20 7"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  ) : (
+                    "+"
+                  )}
                 </span>
               </li>
             ))}
@@ -129,7 +147,9 @@ const Events = () => {
                 className={styles.eventItem}
                 style={{ justifyContent: "center" }}
               >
-                <button style={{ textAlign: "center" }}>NO EVENTS FOUND</button>
+                <button style={{ textAlign: "center" }}>
+                  [NO EVENTS FOUND]
+                </button>
               </li>
             )}
           </ul>

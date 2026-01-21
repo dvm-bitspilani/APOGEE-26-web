@@ -1,6 +1,5 @@
 @use "/src/assets/global.scss" as *;
 
-$cyber-yellow: #ffe500;
 $dark-bg: #000;
 
 .container {
@@ -34,7 +33,7 @@ $dark-bg: #000;
     justify-content: center;
     align-items: center;
     position: relative;
-    overflow: hidden;
+    // overflow: hidden; // REMOVED to allow details panel to protrude
 
     .bannerText {
       position: absolute;
@@ -52,6 +51,109 @@ $dark-bg: #000;
       z-index: 2;
       margin-top: 4%;
       user-select: none;
+    }
+
+    .detailsPanel {
+      position: absolute;
+      top: 50%;
+      right: -3%; // Adjusted to lock perfectly into the gap
+      transform: translateY(-50%);
+      width: 75%;
+      height: 70%;
+      z-index: 50; // High z-index to ensure it sits on top
+      background-image: url("/img/registrations/event-info-panel.png");
+      background-size: 100% 100%; // Force stretch to fill container precisely
+      background-repeat: no-repeat;
+      background-position: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 4rem 6rem 4rem 4rem; // Increased right padding to keep content away from protrusion
+      box-sizing: border-box;
+      color: #e2dccb;
+
+      .closeButton {
+        position: absolute;
+        top: -10px;
+        right: 0;
+        background: transparent;
+        border: none;
+        color: $cyber-yellow;
+        font-size: 1.5rem;
+        cursor: pointer;
+        padding: 1rem;
+        line-height: 1;
+
+        &:hover {
+          opacity: 0.8;
+        }
+      }
+
+      .detailsContent {
+        flex: 1;
+        overflow-y: auto;
+        width: 100%;
+        margin-top: auto;
+        margin-bottom: auto;
+        display: flex;
+        flex-direction: column;
+        max-height: 70%;
+        position: relative;
+
+        // Scrollbar styling for content
+        &::-webkit-scrollbar {
+          width: 4px;
+        }
+        &::-webkit-scrollbar-thumb {
+          background: $cyber-yellow;
+          border-radius: 2px;
+        }
+      }
+
+      .eventName {
+        color: $cyber-yellow;
+        font-size: 2rem;
+        text-transform: uppercase;
+        margin-bottom: 1rem;
+        display: inline-block;
+        padding-right: 2rem;
+        font-family: $font-blender; // Or specific font if needed
+      }
+
+      .eventDesc {
+        font-size: 1rem;
+        line-height: 1.5;
+        text-align: justify;
+        font-family: $font-blender;
+        padding-right: 1rem;
+      }
+
+      .actionButton {
+        border: 1px solid #e2dccb; // Or cyber-yellow if preferred for unselected
+        background: transparent;
+        color: #e2dccb;
+        padding: 0.5rem 2rem;
+        text-transform: uppercase;
+        cursor: pointer;
+        font-size: 1.2rem;
+        font-weight: bold;
+        align-self: flex-end;
+        margin-top: auto;
+        transition: all 0.3s ease;
+        font-family: inherit;
+
+        &:hover {
+          border-color: $cyber-yellow;
+          color: $cyber-yellow;
+        }
+
+        &.selected {
+          border-color: $cyber-yellow;
+          background: $cyber-yellow;
+          color: $dark-bg;
+        }
+      }
     }
   }
 
