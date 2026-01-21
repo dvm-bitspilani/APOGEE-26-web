@@ -10,7 +10,7 @@
     color: $cyber-yellow;
     padding: 2rem;
     gap: 1.5rem;
-    
+
     .title {
         font-family: $font-cyberpunks;
         font-size: 4rem;
@@ -29,8 +29,13 @@
         letter-spacing: 0.05em;
         color: #fff; // Assuming white based on the image description
         margin-bottom: 2rem;
-                z-index: 1;
+        z-index: 1;
+    }
 
+    .formContainer {
+        width: 100%;
+        max-width: 500px;
+        position: relative;
     }
 
     .form {
@@ -38,7 +43,18 @@
         flex-direction: column;
         gap: 1.5rem;
         width: 100%;
-        max-width: 500px;
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+        
+        // Removed `display: none` to allow transition
+        &.active {
+            opacity: 1;
+        }
+
+        // Only hide completely when inactive to prevent layout shifts or interaction
+        &.inactive {
+            display: none; // Or absolute positioning with opacity 0
+        }
 
         .inputGroup {
             position: relative;
@@ -53,14 +69,14 @@
                 font-family: $font-blender;
                 font-weight: $weight-blender-bold;
                 font-size: 1.25rem;
-                padding: 0.2rem;
+                padding: 1rem;
                 text-transform: uppercase;
                 cursor: pointer;
                 transition: all 0.2s ease-in-out;
+                padding: 0.2rem;
 
                 &::placeholder {
                     color: $cyber-yellow;
-                    // opacity: 0.8;
                 }
 
                 &:focus {
@@ -81,6 +97,37 @@
                     background-position: right 1rem center;
                     // background-size: 0.8rem
                 }
+            }
+        }
+
+        .buttonContainer {
+            display: flex;
+            justify-content: flex-end; // Right align as usually expected in flows, or center if preferred
+            margin-top: 1rem;
+        }
+
+        .button {
+            background-color: transparent;
+            color: $cyber-yellow; // Or fill yellow based on image, looks like yellow fill in image part 2
+            border-radius: 0; // Cyberpunk style usually sharp or chamfered
+            border: 2px solid $cyber-yellow;
+            // Additional styling for chamfered corners if user requested "Select Events" button style which is hexagon-ish
+            clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%); // Rough hex/chamfer shape
+            padding: 1rem 2rem;
+            font-family: $font-blender;
+            font-weight: $weight-blender-bold;
+            font-size: 1.25rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            
+            // If filled style is desired for 'Select Events':
+            &.filled {
+                background-color: rgba($cyber-yellow, 0.2); // Semi-transparent fill maybe? Or solid
+            }
+
+            &:hover {
+                background-color: $cyber-yellow;
+                color: $dark-bg;
             }
         }
     }
