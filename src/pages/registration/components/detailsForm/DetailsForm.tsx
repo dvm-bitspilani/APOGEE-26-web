@@ -2,6 +2,7 @@ import styles from "./DetailsForm.module.scss";
 import { useState, useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { useRegistrationStore } from "../../../../utils/store";
 
 function getDatePlaceholder(locale = navigator.language) {
   const parts = new Intl.DateTimeFormat(locale).formatToParts(
@@ -20,6 +21,9 @@ function getDatePlaceholder(locale = navigator.language) {
 }
 
 const DetailsForm = () => {
+  const { setRegistrationStep } = useRegistrationStore();
+  const handleToEvents = () => setRegistrationStep("events");
+
   const [step, setStep] = useState(1);
   const container = useRef<HTMLDivElement>(null);
   const form1Ref = useRef<HTMLFormElement>(null);
@@ -269,6 +273,7 @@ const DetailsForm = () => {
             <button
               type="button"
               className={`${styles.button} ${styles.filled}`}
+              onClick={handleToEvents}
             >
               Select Events
             </button>
