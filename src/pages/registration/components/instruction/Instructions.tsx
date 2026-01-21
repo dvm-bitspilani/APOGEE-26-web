@@ -1,8 +1,14 @@
-// import { useNavigate } from "react-router-dom";
 import styles from "./Instructions.module.scss";
+import { useRegistrationStore } from "../../../../utils/store";
 
 const Instructions = () => {
-  // const navigate = useNavigate();
+  const { setRegistrationStep } = useRegistrationStore();
+
+  const handleSignIn = () => {
+    // TODO: Implement actual Google Sign In logic here
+    console.log("Sign in clicked, moving to details");
+    setRegistrationStep("details");
+  };
 
   return (
     <div className={styles.content} id="registration-content">
@@ -28,7 +34,7 @@ const Instructions = () => {
         </li>
       </ul>
 
-      <button className={styles.googleButton}>
+      <button className={styles.googleButton} onClick={handleSignIn}>
         <img
           src="/svg/registrations/sign-in-google.svg"
           alt="Sign in with Google"
