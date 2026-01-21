@@ -16,6 +16,7 @@ const router = createBrowserRouter([
       {
         path: "instructions",
         element: <Instructions />,
+        index: true,
       },
     ],
   },
