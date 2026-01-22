@@ -1,5 +1,6 @@
-import { Outlet, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styles from "./Registration.module.scss";
+import Instructions from "./components/instruction/Instructions";
 
 function Registration() {
   const navigate = useNavigate();
@@ -27,7 +28,7 @@ function Registration() {
           alt="Background"
           className={styles.backgroundImage}
         />
-        <Outlet />
+        <Instructions />
       </div>
     </div>
   );

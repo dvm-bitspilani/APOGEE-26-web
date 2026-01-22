@@ -14,8 +14,9 @@ $dark-bg: #000;
   color: $cyber-yellow;
 
   .heading {
-    font-family: "Orbitron", sans-serif;
-    font-size: 3.5rem;
+    font-family: $font-cyberpunks, "Orbitron", sans-serif;
+    text-align: center;
+    font-size: 4rem;
     font-weight: 900;
     margin-bottom: 2rem;
     color: $cyber-yellow;
@@ -27,13 +28,15 @@ $dark-bg: #000;
   .instructionList {
     list-style: none;
     padding: 0;
+    font-family: $font-blender, "Orbitron", sans-serif;
+    font-weight: $weight-blender-bold;
     li {
       position: relative;
       padding-left: 1.5rem;
       margin-bottom: 0.8rem;
       line-height: 1.4;
-      font-family: "Rajdhani", sans-serif;
-      font-size: 1.1rem;
+      // font-family: "Rajdhani", sans-serif;
+      font-size: 1.4rem;
       color: $cyber-yellow;
 
       &::before {

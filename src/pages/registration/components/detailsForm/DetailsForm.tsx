@@ -108,7 +108,6 @@ const DetailsForm = () => {
             <h2 className={styles.subtitle}>[ENTER YOUR DETAILS]</h2>
 
             <div className={styles.formContainer}>
-                {/* STEP 1 */}
                 <form ref={form1Ref} className={styles.form} onSubmit={(e) => e.preventDefault()}>
                     <div className={styles.inputGroup}>
                         <input
@@ -164,9 +163,15 @@ const DetailsForm = () => {
                     </div>
 
                     <div className={styles.buttonContainer}>
-                        <button type="button" className={styles.button} onClick={handleNext}>
-                            Next
-                        </button>
+                    <div className={styles.customBtnWrapper} onClick={handleNext}>
+                        <div className={styles.btnFrame}>
+                            <img src="/svg/registrations/btnFrame.svg" alt="frame" />
+                        </div>
+                        <div className={styles.btnInternal}>
+                            <img src="/svg/registrations/btnInternal.svg" alt="bg" />
+                        </div>
+                        <span className={styles.btnText}>Next</span>
+                    </div>
                     </div>
                 </form>
 
