@@ -20,7 +20,7 @@ function getDatePlaceholder(locale = navigator.language) {
     .join("-");
 }
 
-const DetailsForm = () => {
+const DetailsForm = ({ mail = "" }: { mail: string }) => {
   const { setRegistrationStep } = useRegistrationStore();
   const handleToEvents = () => setRegistrationStep("events");
 
@@ -32,7 +32,7 @@ const DetailsForm = () => {
   const { contextSafe } = useGSAP({ scope: container });
   const [formData, setFormData] = useState({
     name: "",
-    email: "",
+    email: mail,
     gender: "",
     dob: "",
     college: "",
@@ -183,13 +183,15 @@ const DetailsForm = () => {
                   className={styles.rightFrame}
                   alt="frame"
                 />
-                <img
-                  src="/svg/registrations/btnInternal.svg"
-                  className={styles.btnInternal}
-                  alt="bg"
-                />
+                <div className={styles.content}>
+                  <img
+                    src="/svg/registrations/btnInternal.svg"
+                    className={styles.btnInternal}
+                    alt="bg"
+                  />
+                  <div className={styles.btnText}>Next</div>
+                </div>
               </div>
-              <span className={styles.btnText}>Next</span>
             </div>
           </div>
         </form>
@@ -263,20 +265,50 @@ const DetailsForm = () => {
           </div>
 
           <div className={styles.buttonContainer}>
-            <button
-              type="button"
-              className={styles.button}
-              onClick={handlePrev}
-            >
-              Previous
-            </button>
-            <button
-              type="button"
-              className={`${styles.button} ${styles.filled}`}
-              onClick={handleToEvents}
-            >
-              Select Events
-            </button>
+            <div className={styles.customBtnWrapper} onClick={handlePrev}>
+              <div className={styles.btnSomething}>
+                <img
+                  src="/svg/registrations/btnFrame.svg"
+                  className={styles.leftFrame}
+                  alt="frame"
+                />
+                <img
+                  src="/svg/registrations/btnFrame.svg"
+                  className={styles.rightFrame}
+                  alt="frame"
+                />
+                <div className={styles.content}>
+                  <img
+                    src="/svg/registrations/btnInternal.svg"
+                    className={styles.btnInternal}
+                    alt="bg"
+                  />
+                  <div className={styles.btnText}>Previous</div>
+                </div>
+              </div>
+            </div>
+            <div className={styles.customBtnWrapper} onClick={handleToEvents}>
+              <div className={styles.btnSomething}>
+                <img
+                  src="/svg/registrations/btnFrame.svg"
+                  className={styles.leftFrame}
+                  alt="frame"
+                />
+                <img
+                  src="/svg/registrations/btnFrame.svg"
+                  className={styles.rightFrame}
+                  alt="frame"
+                />
+                <div className={styles.content}>
+                  <img
+                    src="/svg/registrations/btnInternal.svg"
+                    className={styles.btnInternal}
+                    alt="bg"
+                  />
+                  <div className={styles.btnText}>Select Events</div>
+                </div>
+              </div>
+            </div>
           </div>
         </form>
       </div>
