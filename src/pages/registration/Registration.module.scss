@@ -54,12 +54,14 @@ $dark-bg: #000;
     }
 
     .detailsPanel {
-      position: absolute;
+      position: fixed;
       top: 50%;
-      right: -3%; // Adjusted to lock perfectly into the gap
+      right: 67vh; // 0.059 // Adjusted to lock perfectly into the gap
       transform: translateY(-50%);
-      width: 63%;
-      height: 70%;
+      // width: 75%;
+      aspect-ratio: 1.28;
+      height: 69.2vh;
+      // width: calc(69.2vh/0.807);
       z-index: 50; // High z-index to ensure it sits on top
       background-image: url("/img/registrations/event-info-panel.png");
       background-size: 100% 100%; // Force stretch to fill container precisely
