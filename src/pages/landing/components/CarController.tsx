@@ -1,4 +1,4 @@
-import { useFrame } from "@react-three/fiber";
+import { useFrame, useThree } from "@react-three/fiber";
 import { useScroll } from "@react-three/drei";
 import { useRef } from "react";
 import * as THREE from "three";
@@ -13,13 +13,13 @@ export default function CarController({
   const scroll = useScroll();
   const introProgress = useRef(0);
   const setIntroDone = useIntroStore((s) => s.setIntroDone);
-
+ const {camera} = useThree();
   useFrame((_, delta) => {
     if (!infernusRef.current) return;
 
     /* ---------------- INTRO ---------------- */
     if (introProgress.current < 1) {
-      introProgress.current += delta * 0.6;
+      introProgress.current += delta * 0.4;
       const t = THREE.MathUtils.clamp(introProgress.current, 0, 1);
 
       infernusRef.current.scale.setScalar(0.005);
@@ -54,6 +54,7 @@ export default function CarController({
         );
         infernusRef.current.position.z = THREE.MathUtils.lerp(2.2, 3, p);
         infernusRef.current.rotation.z= THREE.MathUtils.lerp(Math.PI/8,0,p);
+        // infernusRef.current.position.y=THREE.MathUtils.lerp(0,-1,p)
       }
 
       if (t === 1 && orbitRef.current ) {
@@ -69,13 +70,15 @@ export default function CarController({
 
       return;
     }
+    
 
     /* ---------------- SCROLL ---------------- */
     const pageProgress = THREE.MathUtils.clamp(scroll.offset * 4, 0, 1);
 
-    infernusRef.current.rotation.y = (pageProgress * Math.PI) / 2;
-    infernusRef.current.scale.setScalar(0.005 + pageProgress * 0.005);
-
+    camera.rotation.y = (pageProgress * Math.PI) ;
+    camera.position.y = (pageProgress*0.2 ) ;
+    // infernusRef.current.scale.setScalar(0.005 + pageProgress * 0.005);
+    camera.position.z = 5-pageProgress*1.9;
     setPage(Math.floor(scroll.offset * 4));
   });
 

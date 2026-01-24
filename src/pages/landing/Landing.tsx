@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import Scene from "./components/Scene";
 import { OrbitControls as OrbitControlsImpl } from "three-stdlib";
 import { useIntroStore } from "../../utils/store";
-
+import styles from "./Landing.module.scss";
 export default function Landing() {
   // const [introDone, setIntroDone] = useState(false);
   const [page, setPage] = useState(0);
@@ -19,10 +19,12 @@ const introDone = useIntroStore((s) => s.introDone);
   }, [page]);
 
   return (
-    <Canvas camera={{ position: [0, 0, 5] }}>
+    <div className={styles.landing}>
+    <Canvas camera={{ position: [0, 0, 5] }} style={{ width: "100%", height: "100%" }}>
       <OrbitControls
         ref={orbitRef}
-        enabled={introDone}
+        // enabled={introDone}
+        enabled = {false}
         enablePan={false}
         minAzimuthAngle={-Math.PI} // lock horizontal rotation
         maxAzimuthAngle={Math.PI} // lock horizontal rotation
@@ -40,5 +42,6 @@ const introDone = useIntroStore((s) => s.introDone);
         />
       </ScrollControls>
     </Canvas>
+    </div>
   );
 }
