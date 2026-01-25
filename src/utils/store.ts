@@ -9,3 +9,14 @@ export const useIntroStore = create<IntroState>((set) => ({
   introDone: false,
   setIntroDone: (done) => set({ introDone: done }),
 }));
+
+type CameraPhase = "intro" | "free" | "return" | "scroll";
+
+
+export const useCameraPhase = create<{
+  phase: CameraPhase;
+  setPhase: (p: CameraPhase) => void;
+}>((set) => ({
+  phase: "intro",
+  setPhase: (p) => set({ phase: p }),
+}));

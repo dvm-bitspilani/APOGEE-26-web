@@ -1,8 +1,8 @@
-import {useRef } from "react";
-import Infernus from "./models/Infernus";
-import CarController from "./CarController";
+import { useRef } from "react";
+import Infernus from "../models/Infernus";
+import CarController from "../CarController/CarController";
 import * as THREE from "three";
-import type { SceneProps } from "../types/scene.types";
+import type { SceneProps } from "../../types/scene.types";
 import { useTexture } from "@react-three/drei";
 // import { PlaneGeometry } from "three";
 
@@ -20,20 +20,17 @@ export default function Scene({
   //     orbitRef.current.update();
   //   }
   // }, [introDone]);
-const texture = useTexture("/SteelSkiesbg.png");
+  const texture = useTexture("/img/SteelSkiesbg.png");
   // texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
   // texture.repeat.set(8, 8);
   return (
     <>
       <ambientLight intensity={0.9} />
-       <mesh position={[0, -0.3, 0]} rotation={[-Math.PI / 2, 0, 0]}>
-  <planeGeometry args={[10, 10]} />
+      <mesh position={[0, -0.3, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+        <planeGeometry args={[20, 20]} />
 
-  <meshBasicMaterial
-    map={texture}
-    depthWrite={false}
-  />
-</mesh>
+        <meshBasicMaterial map={texture} depthWrite={false} />
+      </mesh>
 
       <Infernus ref={infernusRef} />
 
