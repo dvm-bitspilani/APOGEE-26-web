@@ -3,6 +3,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Registration from "./pages/registration/Registration";
 // import Instructions from "./pages/registration/components/Instructions";
 // import Instructions from "./pages/registration/components/detailsForm/DetailsForm"
+import City from "./pages/city/City";
 import Landing from "./pages/landing/Landing";
 type page = {
   url: string;
@@ -22,6 +23,10 @@ const pages: page[] = [
 
     component: Registration,
   },
+  {
+    url: '/city',
+    component: City,
+  }
 ];
 
 const generateRoutes = (pages: page[]) => {
