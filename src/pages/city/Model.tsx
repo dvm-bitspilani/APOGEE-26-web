@@ -7,8 +7,7 @@ Title: Cyberpunk City - #1
 */
 
 import { Merged, useGLTF } from '@react-three/drei'
-import type { ReactNode } from 'react'
-import { createContext, useContext, useMemo, type JSX } from 'react'
+import { createContext, useContext, useMemo, type JSX, type ReactNode } from 'react'
 import * as THREE from 'three'
 import type { GLTF } from 'three-stdlib'
 
@@ -16,109 +15,29 @@ type GLTFResult = GLTF & {
   nodes: {
     Object_4: THREE.Mesh
     Object_5: THREE.Mesh
-    Object_6: THREE.Mesh
-    Object_7: THREE.Mesh
-    Object_8: THREE.Mesh
-    Object_9: THREE.Mesh
-    Object_10: THREE.Mesh
-    Object_11: THREE.Mesh
-    Object_12: THREE.Mesh
-    Object_13: THREE.Mesh
-    Object_14: THREE.Mesh
-    Object_15: THREE.Mesh
-    Object_16: THREE.Mesh
-    Object_17: THREE.Mesh
-    Object_18: THREE.Mesh
-    Object_19: THREE.Mesh
-    Object_20: THREE.Mesh
-    Object_21: THREE.Mesh
     Object_22: THREE.Mesh
-    Object_23: THREE.Mesh
-    Object_24: THREE.Mesh
-    Object_25: THREE.Mesh
-    Object_26: THREE.Mesh
-    Object_27: THREE.Mesh
-    Object_28: THREE.Mesh
-    Object_29: THREE.Mesh
-    Object_30: THREE.Mesh
-    Object_31: THREE.Mesh
-    Object_32: THREE.Mesh
-    Object_33: THREE.Mesh
   }
   materials: {
-    Meshpart1Mtl: THREE.MeshStandardMaterial
-    Meshpart2Mtl: THREE.MeshStandardMaterial
-    Meshpart3Mtl: THREE.MeshStandardMaterial
-    Meshpart4Mtl: THREE.MeshStandardMaterial
-    Meshpart5Mtl: THREE.MeshStandardMaterial
-    Meshpart6Mtl: THREE.MeshStandardMaterial
-    Meshpart7Mtl: THREE.MeshStandardMaterial
-    Meshpart8Mtl: THREE.MeshStandardMaterial
-    Meshpart9Mtl: THREE.MeshStandardMaterial
-    Meshpart11Mtl: THREE.MeshStandardMaterial
-    Meshpart12Mtl: THREE.MeshStandardMaterial
-    Meshpart13Mtl: THREE.MeshStandardMaterial
-    Meshpart14Mtl: THREE.MeshStandardMaterial
-    Meshpart15Mtl: THREE.MeshStandardMaterial
-    Meshpart16Mtl: THREE.MeshStandardMaterial
-    Meshpart17Mtl: THREE.MeshStandardMaterial
-    Meshpart18Mtl: THREE.MeshStandardMaterial
-    Meshpart19Mtl: THREE.MeshStandardMaterial
-    Meshpart20Mtl: THREE.MeshPhysicalMaterial
-    Meshpart21Mtl: THREE.MeshStandardMaterial
-    Meshpart22Mtl: THREE.MeshStandardMaterial
-    Meshpart23Mtl: THREE.MeshStandardMaterial
-    Meshpart24Mtl: THREE.MeshStandardMaterial
-    Meshpart26Mtl: THREE.MeshStandardMaterial
-    Meshpart27Mtl: THREE.MeshStandardMaterial
-    Meshpart28Mtl: THREE.MeshStandardMaterial
-    Meshpart30Mtl: THREE.MeshStandardMaterial
-    Meshpart32Mtl: THREE.MeshStandardMaterial
-    Meshpart35Mtl: THREE.MeshStandardMaterial
-    Meshpart36Mtl: THREE.MeshStandardMaterial
+    PaletteMaterial001: THREE.MeshStandardMaterial
+    PaletteMaterial002: THREE.MeshStandardMaterial
+    PaletteMaterial003: THREE.MeshPhysicalMaterial
   }
 }
 
 const context = createContext(null as any)
-export function Instances({ children, ...props }: { children: ReactNode; [key: string]: any }) {
-  const { nodes } = useGLTF('/models/city0.glb') as unknown as GLTFResult
+export function Instances({ children, ...props }: { children: ReactNode } & JSX.IntrinsicElements['group']) {
+  const { nodes } = useGLTF('/models/city1.glb') as unknown as GLTFResult
   const instances = useMemo(
     () => ({
       Object: nodes.Object_4,
       Object1: nodes.Object_5,
-      Object2: nodes.Object_6,
-      Object3: nodes.Object_7,
-      Object4: nodes.Object_8,
-      Object5: nodes.Object_9,
-      Object6: nodes.Object_10,
-      Object7: nodes.Object_11,
-      Object8: nodes.Object_12,
-      Object9: nodes.Object_13,
-      Object10: nodes.Object_14,
-      Object11: nodes.Object_15,
-      Object12: nodes.Object_16,
-      Object13: nodes.Object_17,
-      Object14: nodes.Object_18,
-      Object15: nodes.Object_19,
-      Object16: nodes.Object_20,
-      Object17: nodes.Object_21,
-      Object18: nodes.Object_22,
-      Object19: nodes.Object_23,
-      Object20: nodes.Object_24,
-      Object21: nodes.Object_25,
-      Object22: nodes.Object_26,
-      Object23: nodes.Object_27,
-      Object24: nodes.Object_28,
-      Object25: nodes.Object_29,
-      Object26: nodes.Object_30,
-      Object27: nodes.Object_31,
-      Object28: nodes.Object_32,
-      Object29: nodes.Object_33,
+      Object2: nodes.Object_22,
     }),
     [nodes]
   )
   return (
-    <Merged meshes={instances} {...props}>
+    // @ts-ignore
+    <Merged meshes={instances as any} {...props}>
       {(instances) => <context.Provider value={instances} children={children} />}
     </Merged>
   )
@@ -128,44 +47,11 @@ export function Model(props: JSX.IntrinsicElements['group']) {
   const instances = useContext(context)
   return (
     <group {...props} dispose={null}>
-      <group rotation={[-Math.PI / 2, 0, 0]} scale={0.449}>
-        <group rotation={[Math.PI / 2, 0, 0]}>
-          <group rotation={[Math.PI / 2, 0, 0]} scale={0.015}>
-            <instances.Object />
-            <instances.Object1 />
-            <instances.Object2 />
-            <instances.Object3 />
-            <instances.Object4 />
-            <instances.Object5 />
-            <instances.Object6 />
-            <instances.Object7 />
-            <instances.Object8 />
-            <instances.Object9 />
-            <instances.Object10 />
-            <instances.Object11 />
-            <instances.Object12 />
-            <instances.Object13 />
-            <instances.Object14 />
-            <instances.Object15 />
-            <instances.Object16 />
-            <instances.Object17 />
-            <instances.Object18 />
-            <instances.Object19 />
-            <instances.Object20 />
-            <instances.Object21 />
-            <instances.Object22 />
-            <instances.Object23 />
-            <instances.Object24 />
-            <instances.Object25 />
-            <instances.Object26 />
-            <instances.Object27 />
-            <instances.Object28 />
-            <instances.Object29 />
-          </group>
-        </group>
-      </group>
+      <instances.Object rotation={[Math.PI / 2, 0, 0]} scale={0.007} />
+      <instances.Object1 rotation={[Math.PI / 2, 0, 0]} scale={0.007} />
+      <instances.Object2 rotation={[Math.PI / 2, 0, 0]} scale={0.007} />
     </group>
   )
 }
 
-useGLTF.preload('/models/city0.glb')
+useGLTF.preload('/models/city1.glb')
