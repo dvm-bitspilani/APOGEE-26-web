@@ -1,3 +1,4 @@
+import NavButton from "../navButton/NavButton";
 import styles from "./Instructions.module.scss";
 
 const Instructions = ({ googleLogin }: { googleLogin: () => void }) => {
@@ -24,14 +25,14 @@ const Instructions = ({ googleLogin }: { googleLogin: () => void }) => {
           For detailed instructions, <a href="#">click here</a>
         </li>
       </ul>
-
-      <button className={styles.googleButton} onClick={googleLogin}>
+      
+      <NavButton outerClass={styles.googleButton} innerClass={styles.googleButtonContent} onClick={googleLogin}>
         <img
           src="/svg/registrations/sign-in-google.svg"
           alt="Sign in with Google"
         />
         <span>Sign in with Google</span>
-      </button>
+      </NavButton>
     </div>
   );
 };

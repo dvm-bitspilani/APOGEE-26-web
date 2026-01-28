@@ -5,7 +5,7 @@ $dark-bg: #000;
 .container {
   display: flex;
   width: 100vw;
-  height: 100vh;
+  height: 100svh;
   overflow: hidden;
   background-color: $dark-bg;
   position: relative;
@@ -107,6 +107,7 @@ $dark-bg: #000;
         &::-webkit-scrollbar {
           width: 4px;
         }
+
         &::-webkit-scrollbar-thumb {
           background: $cyber-yellow;
           border-radius: 2px;
@@ -165,6 +166,7 @@ $dark-bg: #000;
     height: 100vh;
     width: 72vh;
     position: relative;
+    padding: 4.5rem calc(2rem + 1.5vw);
 
     .backgroundImage {
       position: absolute;
@@ -176,5 +178,49 @@ $dark-bg: #000;
       opacity: 0.5;
       pointer-events: none;
     }
+
+    .bgContainerMobile {
+      display: none;
+      width: 100vw;
+      height: 100svh;
+      overflow: hidden;
+      position: fixed;
+
+      img {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100svh;
+      }
+
+      .bgPanelImage {
+        object-fit: cover;
+      }
+    }
   }
+
+}
+
+@media (max-width: 600px) {
+  .container {
+    .leftPanel {
+      display: none;
+    }
+
+    .rightPanel {
+      padding: 4.5rem 3rem;
+      width: 100%;
+      aspect-ratio: 0.50;
+
+      .backgroundImage {
+        display: none;
+      }
+
+      .bgContainerMobile {
+        display: block;
+      }
+    }
+  }
+
 }

@@ -3,6 +3,8 @@ import { useState, useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { useRegistrationStore } from "../../../../utils/store";
+import locationData from "./cities.json";
+import NavButton from "../navButton/NavButton";
 
 function getDatePlaceholder(locale = navigator.language) {
   const parts = new Intl.DateTimeFormat(locale).formatToParts(
@@ -170,30 +172,9 @@ const DetailsForm = ({ mail = "" }: { mail: string }) => {
             />
           </div>
 
-          <div className={styles.buttonContainer}>
-            <div className={styles.customBtnWrapper} onClick={handleNext}>
-              <div className={styles.btnSomething}>
-                <img
-                  src="/svg/registrations/btnFrame.svg"
-                  className={styles.leftFrame}
-                  alt="frame"
-                />
-                <img
-                  src="/svg/registrations/btnFrame.svg"
-                  className={styles.rightFrame}
-                  alt="frame"
-                />
-                <div className={styles.content}>
-                  <img
-                    src="/svg/registrations/btnInternal.svg"
-                    className={styles.btnInternal}
-                    alt="bg"
-                  />
-                  <div className={styles.btnText}>Next</div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <NavButton onClick={handleNext} outerClass={styles.navButton} innerClass={styles.navButtonContent}>
+            <span>Next</span>
+          </NavButton>
         </form>
 
         {/* STEP 2 */}
@@ -243,8 +224,11 @@ const DetailsForm = ({ mail = "" }: { mail: string }) => {
                 [State]
               </option>
               {/* Placeholder options */}
-              <option value="state1">State 1</option>
-              <option value="state2">State 2</option>
+              {
+                locationData.map((state, i) =>
+                  <option value={state.state} key={i}>{state.state}</option>
+                )
+              }
             </select>
           </div>
 
@@ -259,56 +243,21 @@ const DetailsForm = ({ mail = "" }: { mail: string }) => {
                 [City]
               </option>
               {/* Placeholder options */}
-              <option value="city1">City 1</option>
-              <option value="city2">City 2</option>
+              {
+                locationData.find((state) => state.state === formData.state)?.cities.map((city, _i) =>
+                  <option value={city} key={_i}>{city}</option>
+                )
+              }
             </select>
           </div>
 
           <div className={styles.buttonContainer}>
-            <div className={styles.customBtnWrapper} onClick={handlePrev}>
-              <div className={styles.btnSomething}>
-                <img
-                  src="/svg/registrations/btnFrame.svg"
-                  className={styles.leftFrame}
-                  alt="frame"
-                />
-                <img
-                  src="/svg/registrations/btnFrame.svg"
-                  className={styles.rightFrame}
-                  alt="frame"
-                />
-                <div className={styles.content}>
-                  <img
-                    src="/svg/registrations/btnInternal.svg"
-                    className={styles.btnInternal}
-                    alt="bg"
-                  />
-                  <div className={styles.btnText}>Previous</div>
-                </div>
-              </div>
-            </div>
-            <div className={styles.customBtnWrapper} onClick={handleToEvents}>
-              <div className={styles.btnSomething}>
-                <img
-                  src="/svg/registrations/btnFrame.svg"
-                  className={styles.leftFrame}
-                  alt="frame"
-                />
-                <img
-                  src="/svg/registrations/btnFrame.svg"
-                  className={styles.rightFrame}
-                  alt="frame"
-                />
-                <div className={styles.content}>
-                  <img
-                    src="/svg/registrations/btnInternal.svg"
-                    className={styles.btnInternal}
-                    alt="bg"
-                  />
-                  <div className={styles.btnText}>Select Events</div>
-                </div>
-              </div>
-            </div>
+            <NavButton onClick={handlePrev} outerClass={styles.navButton} innerClass={styles.navButtonContent}>
+              <span>Previous</span>
+            </NavButton>
+            <NavButton onClick={handleToEvents} outerClass={styles.navButton} innerClass={styles.navButtonContent}>
+              <span>Events</span>
+            </NavButton>
           </div>
         </form>
       </div>

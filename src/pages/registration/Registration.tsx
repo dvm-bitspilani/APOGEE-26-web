@@ -165,6 +165,10 @@ function Registration() {
           alt="Background"
           className={styles.backgroundImage}
         />
+        <div className={styles.bgContainerMobile}>
+          <img className={styles.bgPanelImage} src="/img/registrations/instructions-panel-bg-mobile.png" />
+          <img className={styles.bgPanelFrame} src="/img/registrations/instructions-panel-frame-mobile.png" />
+        </div>
         {registrationStep === "instructions" && (
           <Instructions googleLogin={googleLogin} />
         )}
