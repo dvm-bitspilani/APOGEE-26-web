@@ -4,17 +4,17 @@ import { Perf } from "r3f-perf";
 import { useEffect, useRef, useState } from "react";
 import Scene from "./components/Scene/Scene";
 import { OrbitControls as OrbitControlsImpl } from "three-stdlib";
-import { useIntroStore, useCameraPhase } from "../../utils/store";
+import { useCameraPhase } from "../../utils/store";
 import styles from "./Landing.module.scss";
 import EnterButton from "./components/EnterButton/EnterButton";
 import { useKeyboardAzimuth } from "./hooks/useKeyboardOrbit";
 export default function Landing() {
   // const [introDone, setIntroDone] = useState(false);
   const [page, setPage] = useState(0);
-  const introDone = useIntroStore((s) => s.introDone);
+  // const introDone = useIntroStore((s) => s.introDone);
   const orbitRef = useRef<OrbitControlsImpl>(null);
   const phase = useCameraPhase((s) => s.phase);
-  const setPhase = useCameraPhase((s) => s.setPhase);
+  // const setPhase = useCameraPhase((s) => s.setPhase);
   const pages = ["/", "/", "/events", "/aboutus"];
 
   useEffect(() => {
