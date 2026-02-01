@@ -9,21 +9,17 @@ $dark-bg: #000;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 4rem 4rem;
+  // padding: 4rem 4rem;
   color: $cyber-yellow;
 
-  @media (max-width: 1300px) {
-    padding: 4rem calc(2.4rem + 0.3vw);
-  }
-
-  @media (max-width: 750px) {
-    
-  }
+  // @media (max-width: 1300px) {
+  //   padding: 4rem calc(2.4rem + 0.3vw);
+  // }
 
   .heading {
     font-family: $font-cyberpunks, "Orbitron", sans-serif;
     text-align: center;
-    font-size: 4rem;
+    font-size: 3rem;
     font-weight: 900;
     margin-bottom: 2rem;
     color: $cyber-yellow;
@@ -39,7 +35,7 @@ $dark-bg: #000;
     font-weight: $weight-blender-bold;
     flex: 1;
     overflow-x: hidden;
-    overflow-y: scroll;
+    overflow-y: auto;
     padding-right: 0.5rem;
 
     @include content-scroller($cyber-yellow);
@@ -50,7 +46,7 @@ $dark-bg: #000;
       margin-bottom: 0.8rem;
       line-height: 1.4;
       // font-family: "Rajdhani", sans-serif;
-      font-size: 1.4rem;
+      font-size: calc(1rem + 0.5vw);
       color: $cyber-yellow;
 
       &::before {
@@ -75,26 +71,23 @@ $dark-bg: #000;
 
   .googleButton {
     margin-top: 2rem;
-    background-color: $cyber-yellow;
-    background-image: url("/svg/registrations/binary_bg.svg");
+    // background-color: $cyber-yellow;
     border: none;
-    border-radius: 8px;
-    padding: 0.8rem 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     align-self: center;
-    gap: 1rem;
-    width: fit-content;
-    cursor: pointer;
-    font-family: "Roboto", sans-serif;
-    font-weight: 600;
-    color: $dark-bg;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    // border-radius: 8px;
+    // padding: 0.8rem 1rem;
+    // width: fit-content;
+    // box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 
-    &:hover {
-      box-shadow: 0 6px 12px rgba(255, 229, 0, 0.2);
-      background-color: lighten($cyber-yellow, 5%);
+    .googleButtonContent {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      font-family: "Roboto", sans-serif;
+      font-size: 1rem;
+      font-weight: 400;
+      color: #ffffffac;
     }
 
     img {
@@ -104,6 +97,14 @@ $dark-bg: #000;
 
     span {
       font-size: 1rem;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .content {
+    .heading {
+      font-size: 2.5rem;
     }
   }
 }

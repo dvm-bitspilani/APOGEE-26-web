@@ -1,15 +1,7 @@
+import NavButton from "../navButton/NavButton";
 import styles from "./Instructions.module.scss";
-import { useRegistrationStore } from "../../../../utils/store";
 
-const Instructions = () => {
-  const { setRegistrationStep } = useRegistrationStore();
-
-  const handleSignIn = () => {
-    // TODO: Implement actual Google Sign In logic here
-    console.log("Sign in clicked, moving to details");
-    setRegistrationStep("details");
-  };
-
+const Instructions = ({ googleLogin }: { googleLogin: () => void }) => {
   return (
     <div className={styles.content} id="registration-content">
       <h1 className={styles.heading}>INSTRUCTIONS</h1>
@@ -33,14 +25,14 @@ const Instructions = () => {
           For detailed instructions, <a href="#">click here</a>
         </li>
       </ul>
-
-      <button className={styles.googleButton} onClick={handleSignIn}>
+      
+      <NavButton outerClass={styles.googleButton} innerClass={styles.googleButtonContent} onClick={googleLogin}>
         <img
           src="/svg/registrations/sign-in-google.svg"
           alt="Sign in with Google"
         />
         <span>Sign in with Google</span>
-      </button>
+      </NavButton>
     </div>
   );
 };

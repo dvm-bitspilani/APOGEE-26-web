@@ -3,6 +3,8 @@ import { useState, useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { useRegistrationStore } from "../../../../utils/store";
+import locationData from "./cities.json";
+import NavButton from "../navButton/NavButton";
 
 function getDatePlaceholder(locale = navigator.language) {
   const parts = new Intl.DateTimeFormat(locale).formatToParts(
@@ -20,7 +22,7 @@ function getDatePlaceholder(locale = navigator.language) {
     .join("-");
 }
 
-const DetailsForm = () => {
+const DetailsForm = ({ mail = "" }: { mail: string }) => {
   const { setRegistrationStep } = useRegistrationStore();
   const handleToEvents = () => setRegistrationStep("events");
 
@@ -32,7 +34,7 @@ const DetailsForm = () => {
   const { contextSafe } = useGSAP({ scope: container });
   const [formData, setFormData] = useState({
     name: "",
-    email: "",
+    email: mail,
     gender: "",
     dob: "",
     college: "",
@@ -170,28 +172,9 @@ const DetailsForm = () => {
             />
           </div>
 
-          <div className={styles.buttonContainer}>
-            <div className={styles.customBtnWrapper} onClick={handleNext}>
-              <div className={styles.btnSomething}>
-                <img
-                  src="/svg/registrations/btnFrame.svg"
-                  className={styles.leftFrame}
-                  alt="frame"
-                />
-                <img
-                  src="/svg/registrations/btnFrame.svg"
-                  className={styles.rightFrame}
-                  alt="frame"
-                />
-                <img
-                  src="/svg/registrations/btnInternal.svg"
-                  className={styles.btnInternal}
-                  alt="bg"
-                />
-              </div>
-              <span className={styles.btnText}>Next</span>
-            </div>
-          </div>
+          <NavButton onClick={handleNext} outerClass={styles.navButton} innerClass={styles.navButtonContent}>
+            <span>Next</span>
+          </NavButton>
         </form>
 
         {/* STEP 2 */}
@@ -241,8 +224,11 @@ const DetailsForm = () => {
                 [State]
               </option>
               {/* Placeholder options */}
-              <option value="state1">State 1</option>
-              <option value="state2">State 2</option>
+              {
+                locationData.map((state, i) =>
+                  <option value={state.state} key={i}>{state.state}</option>
+                )
+              }
             </select>
           </div>
 
@@ -257,26 +243,21 @@ const DetailsForm = () => {
                 [City]
               </option>
               {/* Placeholder options */}
-              <option value="city1">City 1</option>
-              <option value="city2">City 2</option>
+              {
+                locationData.find((state) => state.state === formData.state)?.cities.map((city, _i) =>
+                  <option value={city} key={_i}>{city}</option>
+                )
+              }
             </select>
           </div>
 
           <div className={styles.buttonContainer}>
-            <button
-              type="button"
-              className={styles.button}
-              onClick={handlePrev}
-            >
-              Previous
-            </button>
-            <button
-              type="button"
-              className={`${styles.button} ${styles.filled}`}
-              onClick={handleToEvents}
-            >
-              Select Events
-            </button>
+            <NavButton onClick={handlePrev} outerClass={styles.navButton} innerClass={styles.navButtonContent}>
+              <span>Previous</span>
+            </NavButton>
+            <NavButton onClick={handleToEvents} outerClass={styles.navButton} innerClass={styles.navButtonContent}>
+              <span>Events</span>
+            </NavButton>
           </div>
         </form>
       </div>
