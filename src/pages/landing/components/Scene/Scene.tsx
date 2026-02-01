@@ -26,11 +26,11 @@ export default function Scene({
   return (
     <>
       <ambientLight intensity={0.9} />
-      <mesh position={[0, -0.3, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+      {/* <mesh position={[0, -0.3, 0]} rotation={[-Math.PI / 2, 0, 0]}>
         <planeGeometry args={[20, 20]} />
 
         <meshBasicMaterial map={texture} depthWrite={false} />
-      </mesh>
+      </mesh> */}
 
       <Infernus ref={infernusRef} />
 
