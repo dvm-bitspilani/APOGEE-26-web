@@ -8,6 +8,7 @@ import Scene from "../landing/components/Scene/Scene";
 import { useRef, useState } from "react";
 import { OrbitControls as OrbitControlsImpl } from "three-stdlib";
 export default function City() {
+  // @ts-ignore
    const [page, setPage] = useState(0);
   // const introDone = useIntroStore((s) => s.introDone);
   const orbitRef = useRef<OrbitControlsImpl>(null);
