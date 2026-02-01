@@ -12,7 +12,7 @@ export default function City() {
   // const introDone = useIntroStore((s) => s.introDone);
   const orbitRef = useRef<OrbitControlsImpl>(null);
   const bloom = useControls("Bloom", {
-    intensity: { value: 8.5, min: 0, max: 50, step: 0.1 },
+    intensity: { value: 5.0, min: 0, max: 50, step: 0.1 },
     threshold: { value: 0.2, min: 0, max: 1, step: 0.01 },
     smoothing: { value: 0.9, min: 0, max: 1, step: 0.01 },
     mipmapBlur: true,
@@ -26,7 +26,7 @@ export default function City() {
                 <OrbitControls/>
 
                 {import.meta.env.DEV && <Perf position="top-left" />}
-                <ambientLight intensity={0.9} />
+                <ambientLight intensity={0.5} />
                 <Instances>
                   <Model />
                   <Scene  orbitRef={orbitRef}

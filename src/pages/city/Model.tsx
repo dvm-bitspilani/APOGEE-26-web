@@ -10,7 +10,7 @@ import { Merged, useGLTF } from '@react-three/drei'
 import { createContext, useContext, useMemo, type JSX, type ReactNode } from 'react'
 import * as THREE from 'three'
 import type { GLTF } from 'three-stdlib'
-import { Center } from "@react-three/drei";
+
 type GLTFResult = GLTF & {
   nodes: {
     Object_4: THREE.Mesh
@@ -46,13 +46,11 @@ export function Instances({ children, ...props }: { children: ReactNode } & JSX.
 export function Model(props: JSX.IntrinsicElements['group']) {
   const instances = useContext(context)
   return (
-    <Center>
-    <group {...props} dispose={null} scale={4} position={[2,-1,2]}>
+    <group {...props} dispose={null} scale={15} position={[-18,-5,-5]}>
       <instances.Object rotation={[Math.PI / 2, 0, 0]} scale={0.007} />
       <instances.Object1 rotation={[Math.PI / 2, 0, 0]} scale={0.007} />
       <instances.Object2 rotation={[Math.PI / 2, 0, 0]} scale={0.007} />
     </group>
-    </Center>
   )
 }
 

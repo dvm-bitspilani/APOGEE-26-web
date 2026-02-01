@@ -18,7 +18,7 @@ export function useCarIntroPhase({ infernusRef, orbitRef }: any) {
     introProgress.current += delta * 0.4;
     const t = THREE.MathUtils.clamp(introProgress.current, 0, 1);
 
-    infernusRef.current.scale.setScalar(0.005);
+    // infernusRef.current.scale.setScalar(0.005);
 
     // phase 1 – slide in
     if (t <= 0.4) {

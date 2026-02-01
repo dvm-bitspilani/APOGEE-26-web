@@ -25,7 +25,7 @@ export default function Scene({
   // texture.repeat.set(8, 8);
   return (
     <>
-      <ambientLight intensity={0.9} />
+      {/* <ambientLight intensity={0.5} /> */}
       {/* <mesh position={[0, -0.3, 0]} rotation={[-Math.PI / 2, 0, 0]}>
         <planeGeometry args={[20, 20]} />
 

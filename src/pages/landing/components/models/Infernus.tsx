@@ -1,7 +1,7 @@
 import { forwardRef } from "react";
 import { useGLTF } from "@react-three/drei";
 import * as THREE from "three";
-import carModel from "../../../../assets/3d/landing/car3.glb";
+import carModel from "../../../../assets/3d/landing/car2k.glb";
 const Infernus = forwardRef<THREE.Group>((props, ref) => {
   const { scene } = useGLTF(carModel);
 
