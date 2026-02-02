@@ -1,0 +1,188 @@
+@import "/src/assets/global.scss";
+
+.buttonContainer {
+    display: flex;
+    justify-content: flex-end; // Right align as usually expected in flows, or center if preferred
+    gap: 1rem;
+    margin-top: 1vw;
+    cursor: pointer;
+    user-select: none;
+
+    .customBtnWrapper {
+        .btnSomething {
+            position: relative;
+
+            .leftFrame,
+            .rightFrame {
+                position: absolute;
+                height: 100%;
+                aspect-ratio: 1;
+                width: auto;
+                transition: transform 0.3s;
+            }
+
+            .rightFrame {
+                right: 0;
+                transform: rotateY(180deg);
+            }
+
+            .content {
+                padding: 0.5rem;
+
+                .btnInternal {
+                    position: absolute;
+                    width: calc(100% - 1rem);
+                    height: calc(100% - 1rem);
+                    transition: scale 0.3s;
+                }
+            }
+        }
+    }
+
+    .btnContent {
+        padding: 0.5rem 1.2rem;
+
+        * {
+            z-index: 10;
+            position: relative;
+        }
+    }
+
+    // .customBtnWrapper {
+    //     position: relative;
+    //     cursor: pointer;
+    //     user-select: none;
+    //     width: 10vw;
+    //     height: 4.1vw;
+    //     margin-left: auto;
+    //     display: grid;
+    //     grid-template-columns: auto;
+    //     grid-template-rows: auto;
+
+    //     .btnSomething {
+    //         grid-column: 1/2;
+    //         grid-row: 1/2;
+    //         display: grid;
+    //         grid-template-columns: 1fr 1fr;
+    //         grid-template-rows: 1fr;
+    //         width: 100%;
+    //         height: 100%;
+    //         align-items: center;
+    //         justify-content: center;
+    //         justify-items: center;
+    //         align-content: center;
+    //         position: relative;
+
+    //         .leftFrame {
+    //             grid-column: 1;
+    //             grid-row: 1;
+    //             // width: auto;
+    //             height: 60%;
+    //             justify-self: start; // Align to left edge
+    //             object-fit: contain;
+    //             pointer-events: none;
+    //             position: relative;
+    //             z-index: 2;
+    //         }
+
+    //         .rightFrame {
+    //             grid-column: 2;
+    //             grid-row: 1;
+    //             // width: auto;
+    //             height: 60%;
+    //             justify-self: end; // Align to right edge
+    //             object-fit: contain;
+    //             pointer-events: none;
+    //             position: relative;
+    //             z-index: 2;
+    //             transform: scaleX(-1); // Flip to mirror
+    //         }
+
+    //         .content {
+    //             position: absolute;
+    //             top: 50%;
+    //             left: 50%;
+    //             height: 100%;
+    //             width: 100%;
+    //             transform: translate(-50%, -50%);
+
+    //             .btnInternal {
+    //                 width: 80%;
+    //                 object-fit: fill;
+    //                 position: absolute;
+    //                 top: 50%;
+    //                 left: 50%;
+    //                 transform: translate(-50%, -50%);
+    //             }
+
+    //             .btnText {
+    //                 // position: absolute;
+    //                 top: 50%;
+    //                 left: 50%;
+    //                 transform: translate(-50%, -50%);
+    //             }
+    //         }
+
+    //         .btnInternal {
+    //             grid-column: 1 / -1;
+    //             grid-row: 1;
+    //             justify-self: center;
+    //             transition: width 0.2s ease-in, height 0.2s ease-in;
+    //             width: fit-content;
+    //             // cubic-bezier(0.4, 0, 0.2, 1);
+    //             z-index: 1;
+    //             overflow: hidden; // Clip content while expanding
+
+    //             // img {
+    //             //     width: 100%; // Fill the container
+    //             //     height: 100%;
+    //             //     object-fit: fill; // Stretch yellow part
+    //             // }
+    //         }
+    //     }
+
+    .btnText {
+        grid-column: 1/2;
+        grid-row: 1/2;
+        position: relative;
+        align-self: center;
+        // justify-self: center;
+        width: 100%;
+        text-align: center;
+        // transform: translate(-50%, -50%);
+        z-index: 3;
+        font-family: $font-blender;
+        font-weight: $weight-blender-bold;
+        font-size: clamp(1rem, 1.6vw, 3rem);
+        color: #fff;
+        text-transform: uppercase;
+        // letter-spacing: 0.1em;
+        pointer-events: none;
+        white-space: nowrap;
+        transition: font-size 0.2s ease-in;
+        //  cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    &:hover {
+        .btnSomething {
+
+            .leftFrame {
+                transform: translateX(-25%) scale(1.1);
+            }
+
+            .rightFrame {
+                transform: translateX(25%) rotateY(180deg) scale(1.1);
+            }
+
+            .btnInternal {
+                scale: 1.1;
+            }
+        }
+
+        .btnText {
+            font-size: clamp(1.1rem, 1.6vw, 2.6rem);
+        }
+    }
+
+    // }
+}

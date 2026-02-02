@@ -1,9 +1,7 @@
-// import { useNavigate } from "react-router-dom";
+import NavButton from "../navButton/NavButton";
 import styles from "./Instructions.module.scss";
 
-const Instructions = () => {
-  // const navigate = useNavigate();
-
+const Instructions = ({ googleLogin }: { googleLogin: () => void }) => {
   return (
     <div className={styles.content} id="registration-content">
       <h1 className={styles.heading}>INSTRUCTIONS</h1>
@@ -27,14 +25,14 @@ const Instructions = () => {
           For detailed instructions, <a href="#">click here</a>
         </li>
       </ul>
-
-      <button className={styles.googleButton}>
+      
+      <NavButton outerClass={styles.googleButton} innerClass={styles.googleButtonContent} onClick={googleLogin}>
         <img
           src="/svg/registrations/sign-in-google.svg"
           alt="Sign in with Google"
         />
         <span>Sign in with Google</span>
-      </button>
+      </NavButton>
     </div>
   );
 };

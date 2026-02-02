@@ -1,194 +1,188 @@
-@import '../../../../assets/global.scss';
+@import "/src/assets/global.scss";
 
 .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
+  color: $cyber-yellow;
+  // padding: 2rem;
+  gap: 1.5rem;
+
+  .title {
+    font-family: $font-cyberpunks;
+    font-size: clamp(3rem, 5vw, 6.5rem);
+    margin-bottom: 1.7vw;
+    // text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-align: center;
+    z-index: 1;
+  }
+
+  .subtitle {
+    font-family: $font-blender;
+    font-weight: $weight-blender-bold;
+    font-size: clamp(1rem, 1.7vw, 3rem);
+    margin-bottom: 2vw;
+    // text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #fff; // Assuming white based on the image description
+    z-index: 1;
+  }
+
+  .formContainer {
+    width: 100%;
+    max-width: 27.9vw;
+    position: relative;
+  }
+
+  .form {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
+    gap: 1.7vw;
     width: 100%;
-    color: $cyber-yellow;
-    padding: 2rem;
-    gap: 1.5rem;
+    // Opacity and display control will be handled by GSAP
 
-    .title {
-        font-family: $font-cyberpunks;
-        font-size: 4rem;
-        // text-transform: uppercase;
-        letter-spacing: 0.1em;
-        margin-bottom: 0.5rem;
+    .buttonContainer {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .navButton {
+      margin-top: 3vw;
+      width: fit-content;
+      margin: auto;
+
+      .navButtonContent {
+        padding: 0.3rem 1.5rem;
+        position: relative;
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #ffffffbd;
+        min-width: 7.2rem;
         text-align: center;
-        z-index: 1;
+      }
+    }
+
+    .inputGroup {
+      position: relative;
+      width: 100%;
+
+      .input {
+        width: 100%;
+        background: $dark-bg;
+        border: none;
+        outline: none;
+        color: $cyber-yellow;
+        font-family: $font-blender;
+        font-weight: $weight-blender-bold;
+        font-size: clamp(1rem, 1.9vw, 4rem);
+        padding: 0.7vw;
+        // text-transform: uppercase;
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+
+        &::placeholder {
+          color: $cyber-yellow;
+        }
+
+        &:focus {
+          background-color: $cyber-yellow;
+          color: $dark-bg;
+
+          &::placeholder {
+            color: $dark-bg;
+          }
+        }
+
+        &.select {
+          appearance: none;
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          // background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23ffe500%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+          background-repeat: no-repeat;
+          background-position: right 1rem center;
+          // background-size: 0.8rem
+        }
+      }
+    }
+
+    .button {
+      background-color: transparent;
+      color: $cyber-yellow; // Or fill yellow based on image, looks like yellow fill in image part 2
+      border-radius: 0; // Cyberpunk style usually sharp or chamfered
+      border: 2px solid $cyber-yellow;
+      // Additional styling for chamfered corners if user requested "Select Events" button style which is hexagon-ish
+      clip-path: polygon(10% 0,
+          100% 0,
+          100% 70%,
+          90% 100%,
+          0 100%,
+          0 30%); // Rough hex/chamfer shape
+      padding: 1rem 2rem;
+      font-family: $font-blender;
+      font-weight: $weight-blender-bold;
+      font-size: 1.25rem;
+      cursor: pointer;
+      // text-transform: uppercase;
+
+      // If filled style is desired for 'Select Events':
+      &.filled {
+        background-color: rgba($cyber-yellow,
+            0.2); // Semi-transparent fill maybe? Or solid
+      }
+
+      &:hover {
+        background-color: $cyber-yellow;
+        color: $dark-bg;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1300px) {
+  .container {
+    .title {
+      font-size: clamp(3rem, 5vw, 6.5rem);
+      margin-bottom: 1.7vw;
     }
 
     .subtitle {
-        font-family: $font-blender;
-        font-weight: $weight-blender-bold;
-        font-size: 1.5rem;
-        // text-transform: uppercase;
-        letter-spacing: 0.05em;
-        color: #fff; // Assuming white based on the image description
-        margin-bottom: 2rem;
-        z-index: 1;
+      font-size: clamp(1rem, 1.7vw, 3rem);
+      margin-bottom: 2vw;
     }
 
     .formContainer {
-        width: 100%;
-        max-width: 500px;
-        position: relative;
+      max-width: 27.9vw;
     }
 
     .form {
-        display: flex;
-        flex-direction: column;
-        gap: 1.5rem;
-        width: 100%;
-        // Opacity and display control will be handled by GSAP
+      gap: 1.5vw;
 
-
-        .inputGroup {
-            position: relative;
-            width: 100%;
-
-            .input {
-                width: 100%;
-                background: $dark-bg;
-                border: none;
-                outline: none;
-                color: $cyber-yellow;
-                font-family: $font-blender;
-                font-weight: $weight-blender-bold;
-                font-size: 1.25rem;
-                padding: 1rem;
-                // text-transform: uppercase;
-                cursor: pointer;
-                transition: all 0.2s ease-in-out;
-                padding: 0.2rem;
-
-                &::placeholder {
-                    color: $cyber-yellow;
-                }
-
-                &:focus {
-                    background-color: $cyber-yellow;
-                    color: $dark-bg;
-
-                    &::placeholder {
-                        color: $dark-bg;
-                    }
-                }
-
-                &.select {
-                    appearance: none;
-                    -webkit-appearance: none;
-                    -moz-appearance: none;
-                    // background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23ffe500%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
-                    background-repeat: no-repeat;
-                    background-position: right 1rem center;
-                    // background-size: 0.8rem
-                }
-            }
+      .inputGroup {
+        .input {
+          font-size: clamp(1rem, 1.7vw, 3rem);
+          padding: 0.5vw;
         }
+      }
 
-        .buttonContainer {
-            display: flex;
-            justify-content: flex-end; // Right align as usually expected in flows, or center if preferred
-            margin-top: 1rem;
-            gap: 1rem;
-        }
-
-        .button {
-            background-color: transparent;
-            color: $cyber-yellow; // Or fill yellow based on image, looks like yellow fill in image part 2
-            border-radius: 0; // Cyberpunk style usually sharp or chamfered
-            border: 2px solid $cyber-yellow;
-            // Additional styling for chamfered corners if user requested "Select Events" button style which is hexagon-ish
-            clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%); // Rough hex/chamfer shape
-            padding: 1rem 2rem;
-            font-family: $font-blender;
-            font-weight: $weight-blender-bold;
-            font-size: 1.25rem;
-            cursor: pointer;
-            // text-transform: uppercase;
-            
-            // If filled style is desired for 'Select Events':
-            &.filled {
-                background-color: rgba($cyber-yellow, 0.2); // Semi-transparent fill maybe? Or solid
-            }
-
-            &:hover {
-                background-color: $cyber-yellow;
-                color: $dark-bg;
-            }
-        }
     }
 
     .customBtnWrapper {
-        position: relative;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 190px; // Width of the frame
-        height: 62px; // Height of the frame
-        cursor: pointer;
-        user-select: none;
-        
-        // Center the button in the form
-        margin-left: auto; 
-        
-        .btnFrame {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 2;
-            pointer-events: none; // Let clicks pass through if needed, though click is on wrapper
+      width: 10vw;
+      height: 4.5vw;
 
-            img {
-                width: 100%;
-                height: 100%;
-                object-fit: contain;
-            }
-        }
+      .btnText {
+        font-size: clamp(1rem, 1.5vw, 2.5rem);
+      }
 
-        .btnInternal {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 71px; // Initial width from image dimensions
-            height: 100%; // Adjust if needed, or keep auto
-            z-index: 1;
-            transition: width 0.3s ease-in-out;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden; // Ensure image doesn't spill if we resize div (though we are likely resizing div)
-
-            img {
-                height: 100%; 
-                width: 100%; 
-                object-fit: fill; // Stretch to fill the container as it expands
-            }
-        }
-
+      &:hover {
         .btnText {
-            position: relative;
-            z-index: 3;
-            font-family: $font-blender;
-            font-weight: $weight-blender-bold;
-            font-size: 1.5rem;
-            color: #fff;
-            // text-transform: uppercase;
-            letter-spacing: 0.1em;
-            pointer-events: none;
+          font-size: clamp(1.1rem, 1.6vw, 2.6rem);
         }
-
-        &:hover {
-            .btnInternal {
-                width: 160px; // Expand to fill most of the frame (adjust visual fit)
-            }
-        }
+      }
     }
+  }
 }
