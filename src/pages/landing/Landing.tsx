@@ -27,7 +27,7 @@ export default function Landing() {
   return (
     <div className={styles.landing}>
       <Canvas
-        camera={{ position: [0, 0, 5] }}
+        // camera={{ position: [0, 0, 5] }}
         style={{ width: "100%", height: "100%" }}
       >
         <OrbitControls

@@ -17,6 +17,6 @@ export const useCameraPhase = create<{
   phase: CameraPhase;
   setPhase: (p: CameraPhase) => void;
 }>((set) => ({
-  phase: "intro",
+  phase: "scroll",
   setPhase: (p) => set({ phase: p }),
 }));

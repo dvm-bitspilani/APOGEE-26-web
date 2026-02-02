@@ -3,7 +3,7 @@ import Infernus from "../models/Infernus";
 import CarController from "../CarController/CarController";
 import * as THREE from "three";
 import type { SceneProps } from "../../types/scene.types";
-import { useTexture } from "@react-three/drei";
+// import { useTexture } from "@react-three/drei";
 // import { PlaneGeometry } from "three";
 
 export default function Scene({
@@ -20,12 +20,12 @@ export default function Scene({
   //     orbitRef.current.update();
   //   }
   // }, [introDone]);
-  const texture = useTexture("/img/SteelSkiesbg.png");
+  // const texture = useTexture("/img/SteelSkiesbg.png");
   // texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
   // texture.repeat.set(8, 8);
   return (
     <>
-      {/* <ambientLight intensity={0.5} /> */}
+      <ambientLight intensity={0.5} />
       {/* <mesh position={[0, -0.3, 0]} rotation={[-Math.PI / 2, 0, 0]}>
         <planeGeometry args={[20, 20]} />
 
