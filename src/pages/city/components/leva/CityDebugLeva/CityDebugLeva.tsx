@@ -1,8 +1,12 @@
 import { useControls } from "leva";
 import * as THREE from "three";
-import { Model } from "../../models/Model";
+import { useCityStore } from "../../../../../utils/store";
+import { useEffect } from "react";
+import { useCityLandingStart } from "../../../hooks/useCityLandingStart";
 
 export default function CityDebug() {
+  const city = useCityStore((s) => s.city)
+  useCityLandingStart();
   const debug = useControls("City (debug)", {
     posX: { value: -10, min: -50, max: 50, step: 0.1 },
     posY: { value: -5, min: -50, max: 50, step: 0.1 },
@@ -14,18 +18,25 @@ export default function CityDebug() {
 
     scale: { value: 15, min: 1, max: 50, step: 0.1 },
   });
+  useEffect(() => {
+    if (!city) return
 
-  return (
-    <group
-      position={[debug.posX, debug.posY, debug.posZ]}
-      rotation={[
-        THREE.MathUtils.degToRad(debug.rotX),
-        THREE.MathUtils.degToRad(debug.rotY),
-        THREE.MathUtils.degToRad(debug.rotZ),
-      ]}
-      scale={debug.scale}
-    >
-      <Model />
-    </group>
-  );
+    city.position.set(debug.posX, debug.posY, debug.posZ)
+    city.rotation.set(
+      THREE.MathUtils.degToRad(debug.rotX),
+      THREE.MathUtils.degToRad(debug.rotY),
+      THREE.MathUtils.degToRad(debug.rotZ)
+    )
+    city.scale.setScalar(debug.scale)
+  }, [
+    city,
+    debug.posX,
+    debug.posY,
+    debug.posZ,
+    debug.rotX,
+    debug.rotY,
+    debug.rotZ,
+    debug.scale,
+  ])
+  return null
 }

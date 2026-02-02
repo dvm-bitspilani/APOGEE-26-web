@@ -1,13 +1,21 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { ScrollControls } from "@react-three/drei";
-import { Instances } from "../models/Model";
+import { Instances, Model } from "../models/Model";
 import Infernus from "../models/Infernus";
 import CityDebug from "../leva/CityDebugLeva/CityDebugLeva";
 import { Perf } from "r3f-perf";
+import { useCityStore } from "../../../../utils/store";
 export default function CityScene({}: any) {
   const infernusRef = useRef<THREE.Group>(null!);
+  const cityRef = useRef<THREE.Group>(null!);
+  const setCity = useCityStore((s) => s.setCity);
 
+  useEffect(() => {
+    if (cityRef.current) {
+      setCity(cityRef.current);
+    }
+  }, [setCity]);
   return (
     <>
       <color attach="background" args={["#110013"]} />
@@ -16,10 +24,13 @@ export default function CityScene({}: any) {
       <Instances>
         <group>
           {/* <ambientLight intensity={0.5} /> */}
-          <CityDebug />
+          <group ref={cityRef}>
+            <Model />
+          </group>
           <ScrollControls pages={4} damping={0.2}>
-            <Infernus ref={infernusRef} />
+            <CityDebug />
           </ScrollControls>
+          <Infernus ref={infernusRef} />
         </group>
       </Instances>
     </>
