@@ -1,0 +1,13 @@
+.scrollreminder{
+    position:absolute;
+    bottom:20px;
+    right:2vw;
+    width:5vw;
+    // height:50vw;
+    z-index: 200;
+    background-color:red;
+    p{
+        color:white;
+            z-index: 200;
+    }
+}
