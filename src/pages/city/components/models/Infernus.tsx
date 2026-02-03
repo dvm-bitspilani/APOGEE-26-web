@@ -8,8 +8,8 @@ const Infernus = forwardRef<THREE.Group>((props, ref) => {
   return (
     <group
       ref={ref}
-      rotation={[0, Math.PI / 2, 0]}
-      position={[0, 2, -2]}
+      rotation={[0, Math.PI , 0]}
+      position={[0, 2-3.2, -2+2]}
       scale={2}
       {...props}
     >

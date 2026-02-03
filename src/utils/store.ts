@@ -42,6 +42,15 @@ export const useCityStore = create<CityStore>((set) => ({
   setCity: (city) => set({ city }),
 }))
 
+type PivotStore={
+  pivot:THREE.Group | null
+  setPivot:(pivot: THREE.Group) => void
+}
+export const usePivotStore = create<PivotStore>((set)=>({
+  pivot:null,
+  setPivot:(pivot) => set({pivot}),
+}))
+
 export interface Event {
   id: number;
   name: string;

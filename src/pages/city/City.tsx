@@ -4,8 +4,9 @@ import CameraControllerLeva from "./components/leva/CameraControllerLeva/CameraC
 import BloomLeva from "./components/leva/BloomLeva/BloomLeva";
 import ReactHelmet from "../components/ReactHelmet";
 import ScrollReminder from "./components/ScrollReminder/ScrollReminder";
-import { Html } from "@react-three/drei";
+// import { Html } from "@react-three/drei";
 import styles from "./City.module.scss";
+import { OrbitControls } from "@react-three/drei";
 export default function City() {
   return (
     <>
@@ -16,17 +17,18 @@ export default function City() {
       />
       <div className={styles.city}>
         <Canvas
-          camera={{ position: [0, 3.2, -2] }}
+          camera={{ position: [0,2, -2],near: 0.1, far: 10000, fov: 50, }}
           style={{ width: "100%", height: "100%" }}
-        >
           
-          <CameraControllerLeva />
+        >
+         <CameraControllerLeva />
+          {/* <OrbitControls/> */}
           <CityScene />
           <BloomLeva />
         </Canvas>
         {/* <Html> */}
-            <ScrollReminder />
-          {/* </Html> */}
+        <ScrollReminder />
+        {/* </Html> */}
       </div>
     </>
   );
