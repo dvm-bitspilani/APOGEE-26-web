@@ -194,7 +194,9 @@ $dark-bg: #000;
         height: 100svh;
       }
 
+      .bgPanelFrame {filter: brightness(2.25);}
       .bgPanelImage {
+        filter: brightness(0.9);
         object-fit: cover;
       }
     }

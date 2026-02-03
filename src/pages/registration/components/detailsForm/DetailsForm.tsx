@@ -5,6 +5,8 @@ import { useGSAP } from "@gsap/react";
 import { useRegistrationStore } from "../../../../utils/store";
 import locationData from "./cities.json";
 import NavButton from "../navButton/NavButton";
+import FormPart1 from "./components/FormPart1";
+import FormPart2 from "./components/FormPart2";
 
 function getDatePlaceholder(locale = navigator.language) {
   const parts = new Intl.DateTimeFormat(locale).formatToParts(
@@ -111,66 +113,18 @@ const DetailsForm = ({ mail = "" }: { mail: string }) => {
       <h1 className={styles.title}>REGISTER</h1>
       <h2 className={styles.subtitle}>[ENTER YOUR DETAILS]</h2>
 
-      <div className={styles.formContainer}>
+      <div className={`${styles.formContainer} ${styles.desktopFormContainer}`}>
         <form
           ref={form1Ref}
           className={styles.form}
           onSubmit={(e) => e.preventDefault()}
         >
-          <div className={styles.inputGroup}>
-            <input
-              type="text"
-              name="name"
-              placeholder="[Enter your name]"
-              value={formData.name}
-              onChange={handleChange}
-              className={styles.input}
-              autoComplete="off"
-            />
-          </div>
 
-          <div className={styles.inputGroup}>
-            <input
-              type="email"
-              name="email"
-              placeholder="[Enter your e-mail address]"
-              value={formData.email}
-              onChange={handleChange}
-              className={styles.input}
-              autoComplete="off"
-            />
-          </div>
-
-          <div className={styles.inputGroup}>
-            <select
-              name="gender"
-              value={formData.gender}
-              onChange={handleChange}
-              className={`${styles.input} ${styles.select}`}
-            >
-              <option value="" disabled hidden>
-                [Gender]
-              </option>
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-              <option value="other">Other</option>
-            </select>
-          </div>
-
-          <div className={styles.inputGroup}>
-            <input
-              type="text"
-              name="dob"
-              placeholder={`[Date of Birth ${placeholder}]`}
-              onFocus={(e) => (e.target.type = "date")}
-              onBlur={(e) => {
-                if (!e.target.value) e.target.type = "text";
-              }}
-              value={formData.dob}
-              onChange={handleChange}
-              className={styles.input}
-            />
-          </div>
+          <FormPart1
+            formData={formData}
+            handleChange={handleChange}
+            placeholder={placeholder}
+          />
 
           <NavButton onClick={handleNext} outerClass={styles.navButton} innerClass={styles.navButtonContent}>
             <span>Next</span>
@@ -183,73 +137,11 @@ const DetailsForm = ({ mail = "" }: { mail: string }) => {
           className={styles.form}
           onSubmit={(e) => e.preventDefault()}
         >
-          <div className={styles.inputGroup}>
-            <input
-              type="text"
-              name="college"
-              placeholder="[College]"
-              value={formData.college}
-              onChange={handleChange}
-              className={styles.input}
-              autoComplete="off"
-            />
-          </div>
-
-          <div className={styles.inputGroup}>
-            <select
-              name="year"
-              value={formData.year}
-              onChange={handleChange}
-              className={`${styles.input} ${styles.select}`}
-            >
-              <option value="" disabled hidden>
-                [Year of study]
-              </option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-            </select>
-          </div>
-
-          <div className={styles.inputGroup}>
-            <select
-              name="state"
-              value={formData.state}
-              onChange={handleChange}
-              className={`${styles.input} ${styles.select}`}
-            >
-              <option value="" disabled hidden>
-                [State]
-              </option>
-              {/* Placeholder options */}
-              {
-                locationData.map((state, i) =>
-                  <option value={state.state} key={i}>{state.state}</option>
-                )
-              }
-            </select>
-          </div>
-
-          <div className={styles.inputGroup}>
-            <select
-              name="city"
-              value={formData.city}
-              onChange={handleChange}
-              className={`${styles.input} ${styles.select}`}
-            >
-              <option value="" disabled hidden>
-                [City]
-              </option>
-              {/* Placeholder options */}
-              {
-                locationData.find((state) => state.state === formData.state)?.cities.map((city, _i) =>
-                  <option value={city} key={_i}>{city}</option>
-                )
-              }
-            </select>
-          </div>
+          <FormPart2
+            formData={formData}
+            handleChange={handleChange}
+            locationData={locationData}
+          />
 
           <div className={styles.buttonContainer}>
             <NavButton onClick={handlePrev} outerClass={styles.navButton} innerClass={styles.navButtonContent}>
@@ -260,6 +152,27 @@ const DetailsForm = ({ mail = "" }: { mail: string }) => {
             </NavButton>
           </div>
         </form>
+      </div>
+      <div className={`${styles.formContainer} ${styles.mobileFormContainer}`}>
+        <form
+          ref={form1Ref}
+          className={styles.form}
+          onSubmit={(e) => e.preventDefault()}
+        >
+          <FormPart1
+            formData={formData}
+            handleChange={handleChange}
+            placeholder={placeholder}
+          />
+          <FormPart2
+            formData={formData}
+            handleChange={handleChange}
+            locationData={locationData}
+          />
+        </form>
+        <NavButton onClick={handleToEvents} outerClass={styles.navButton} innerClass={styles.navButtonContent}>
+          <span>Select Events</span>
+        </NavButton>
       </div>
     </div>
   );
