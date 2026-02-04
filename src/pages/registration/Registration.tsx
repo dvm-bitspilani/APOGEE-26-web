@@ -115,9 +115,19 @@ function Registration() {
     // },
   });
 
+  const handleBack = () => {
+    if (registrationStep === "events") {
+      setRegistrationStep("details");
+    } else if (registrationStep === "details") {
+      setRegistrationStep("instructions");
+    } else {
+      navigate(-1);
+    }
+  };
+
   return (
     <div className={styles.container}>
-      <button className={styles.backButton} onClick={() => navigate(-1)}>
+      <button className={styles.backButton} onClick={handleBack}>
         <img src="/svg/registrations/back-button.svg" alt="Back" />
       </button>
 
@@ -173,8 +183,14 @@ function Registration() {
           className={styles.backgroundImage}
         />
         <div className={styles.bgContainerMobile}>
-          <img className={styles.bgPanelImage} src="/img/registrations/instructions-panel-bg-mobile.png" />
-          <img className={styles.bgPanelFrame} src="/img/registrations/instructions-panel-frame-mobile.png" />
+          <img
+            className={styles.bgPanelImage}
+            src="/img/registrations/instructions-panel-bg-mobile.png"
+          />
+          <img
+            className={styles.bgPanelFrame}
+            src="/img/registrations/instructions-panel-frame-mobile.png"
+          />
         </div>
         {registrationStep === "instructions" && (
           <Instructions googleLogin={googleLogin} />

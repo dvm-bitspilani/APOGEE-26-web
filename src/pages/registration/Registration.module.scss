@@ -134,6 +134,7 @@ $dark-bg: #000;
           width: 4px;
         }
 
+
         &::-webkit-scrollbar-thumb {
           background: $cyber-yellow;
           border-radius: 2px;
@@ -269,6 +270,11 @@ $dark-bg: #000;
 
       .bgContainerMobile {
         display: block;
+
+        .bgPanelImage{
+          filter: brightness(0.5);
+        }
+        
       }
     }
   }

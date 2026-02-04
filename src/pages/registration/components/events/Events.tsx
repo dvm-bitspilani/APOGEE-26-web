@@ -50,15 +50,21 @@ const DUMMY_EVENTS: Event[] = [
 ];
 
 const Events = () => {
-  const { events, setEvents, selectedEvents, toggleEvent, setActiveEvent } =
-    useRegistrationStore();
+  const {
+    events,
+    setEvents,
+    selectedEvents,
+    toggleEvent,
+    setActiveEvent,
+    activeEvent,
+  } = useRegistrationStore();
 
   const [search, setSearch] = useState("");
 
   useEffect(() => {
     // Simulate API call
     setEvents(DUMMY_EVENTS);
-  }, [setEvents]);
+  }, [setEvents, setEvents]);
 
   const filteredEvents = events.filter((event) =>
     event.name.toLowerCase().includes(search.toLowerCase()),
@@ -68,13 +74,19 @@ const Events = () => {
 
   return (
     <div className={styles.eventsContainer}>
-      <div className={styles.headingCont}>
-        {/* <img src="/svgs/registration/leftarr.svg" alt="left" /> */}
-        <h3 className={styles.heading}>EVENTS</h3>
-        {/* <img src="/svgs/registration/rightarr.svg" alt="right" /> */}
-      </div>
+      {/* Mobile Header with Back Button if event is active */}
+      {/* Handled inside mobileDetailsContainer for better layout control */}
 
-      <div className={styles.eventsSubContainer}>
+      {/* List Container - Hidden on mobile if event is active */}
+      <div
+        className={`${styles.eventsSubContainer} ${activeEvent ? styles.hasActiveEvent : ""}`}
+      >
+        <div className={styles.headingCont}>
+          {/* <img src="/svgs/registration/leftarr.svg" alt="left" /> */}
+          <h3 className={styles.heading}>EVENTS</h3>
+          {/* <img src="/svgs/registration/rightarr.svg" alt="right" /> */}
+        </div>
+
         <div className={styles.eventsListCont}>
           <div className={styles.search}>
             <input
@@ -163,6 +175,37 @@ const Events = () => {
           </button> */}
           <NavButton outerClass={styles.confirmButton} innerClass={styles.confirmButtonContent}>Confirm Selection</NavButton>
         </div>
+      </div>
+
+      {/* Mobile Details Container - Visible only on mobile when event is active */}
+      <div
+        className={`${styles.mobileDetailsContainer} ${activeEvent ? styles.active : ""}`}
+      >
+        <h3 className={styles.mobileHeading}>EVENTS</h3>
+
+        {activeEvent && (
+          <div className={styles.detailsCard}>
+            <button
+              className={styles.mobileCloseButton}
+              onClick={() => {
+                setActiveEvent(null);
+                useRegistrationStore.getState().setStickyEvent(null);
+              }}
+            >
+              ✕
+            </button>
+            <div className={styles.eventNameHeader}>{activeEvent.name}</div>
+            <div className={styles.mobileScrollContent}>
+              {activeEvent.about}
+            </div>
+            <button
+              className={`${styles.mobileAddButton} ${isSelected(activeEvent.id) ? styles.selected : ""}`}
+              onClick={() => toggleEvent(activeEvent)}
+            >
+              {isSelected(activeEvent.id) ? "REMOVE" : "ADD"}
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
