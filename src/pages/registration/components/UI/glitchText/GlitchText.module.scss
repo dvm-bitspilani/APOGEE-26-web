@@ -1,0 +1,35 @@
+.container {
+    /* Positions the elements */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    /* Crucial for smoothness */
+    transition: transform 0.1s ease-out;
+    /* Ensures the 3D tilt doesn't flatten instantly */
+    transform-style: preserve-3d;
+
+    /* If the text is huge, prevent it from causing scrollbars */
+    will-change: transform;
+}
+
+.bannerText {
+    /* Your existing text styles... */
+    font-size: 10rem;
+    font-weight: bold;
+    color: #FFE800;
+    margin: 0;
+
+    @media (max-width: 1400px) {
+        font-size: 7rem;
+    }
+
+    @media (max-width: 1000px) {
+        font-size: 5rem;
+    }
+
+    @media (max-width: 700px) {
+        font-size: 3rem;
+    }
+}
