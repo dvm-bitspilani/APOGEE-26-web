@@ -1,15 +1,29 @@
 import styles from "../DetailsForm.module.scss"
 
-interface FormPart2Props {
-    formData: any,
-    handleChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void, 
-    locationData: {state: string, cities: string[]}[];
+interface FormData {
+    college: string;
+    year: string;
+    state: string;
+    city: string;
 }
 
-export default function FormPart2({formData, handleChange, locationData}: FormPart2Props) {
+interface FormPart2Props {
+    formData: FormData,
+    handleChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void,
+    locationData: { state: string, cities: string[] }[];
+    errors: {
+        college: string;
+        year: string;
+        state: string;
+        city: string;
+    };
+}
+
+export default function FormPart2({ formData, handleChange, locationData, errors }: FormPart2Props) {
     return (
         <>
             <div className={styles.inputGroup}>
+                {errors.college && <p className={styles.error}>{errors.college}</p>}
                 <input
                     type="text"
                     name="college"
@@ -22,6 +36,7 @@ export default function FormPart2({formData, handleChange, locationData}: FormPa
             </div>
 
             <div className={styles.inputGroup}>
+                {errors.year && <p className={styles.error}>{errors.year}</p>}
                 <select
                     name="year"
                     value={formData.year}
@@ -40,6 +55,7 @@ export default function FormPart2({formData, handleChange, locationData}: FormPa
             </div>
 
             <div className={styles.inputGroup}>
+                {errors.state && <p className={styles.error}>{errors.state}</p>}
                 <select
                     name="state"
                     value={formData.state}
@@ -59,6 +75,7 @@ export default function FormPart2({formData, handleChange, locationData}: FormPa
             </div>
 
             <div className={styles.inputGroup}>
+                {errors.city && <p className={styles.error}>{errors.city}</p>}
                 <select
                     name="city"
                     value={formData.city}
