@@ -37,10 +37,13 @@ $dark-bg: #000;
 
     .bannerText {
       position: absolute;
-      width: 80%;
+      width: 90%;
       object-fit: contain;
       z-index: 1;
       filter: drop-shadow(0 0 10px rgba(255, 230, 0, 0.3));
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .robotFace {
@@ -51,6 +54,7 @@ $dark-bg: #000;
       z-index: 2;
       margin-top: 4%;
       user-select: none;
+
     }
 
     .detailsPanel {

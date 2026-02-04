@@ -20,15 +20,15 @@ interface RegistrationStore {
   // Events Data State
   events: Event[];
   setEvents: (events: Event[]) => void;
-  
+
   // User Selection State
   selectedEvents: Event[];
   toggleEvent: (event: Event) => void;
-  
+
   // Active Event for Left Panel
   activeEvent: Event | null;
   setActiveEvent: (event: Event | null) => void;
-  
+
   // Sticky Event (Clicked/Frozen)
   stickyEvent: Event | null;
   setStickyEvent: (event: Event | null) => void;
@@ -39,7 +39,7 @@ interface RegistrationStore {
 }
 
 export const useRegistrationStore = create<RegistrationStore>((set) => ({
-  registrationStep: 'details',
+  registrationStep: 'instructions',
   setRegistrationStep: (step) => set({ registrationStep: step }),
 
   events: [],
@@ -57,7 +57,7 @@ export const useRegistrationStore = create<RegistrationStore>((set) => ({
 
   activeEvent: null,
   setActiveEvent: (event) => set({ activeEvent: event }),
-  
+
   stickyEvent: null,
   setStickyEvent: (event) => set({ stickyEvent: event }),
 

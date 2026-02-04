@@ -9,7 +9,7 @@ import { CookiesProvider } from 'react-cookie'
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
         <CookiesProvider>
-            <GoogleOAuthProvider clientId="513838793862-gfa9g1snl74coi736ggti5nd9uglh66k.apps.googleusercontent.com">
+            <GoogleOAuthProvider clientId="650062736141-pb64o0ubh8ejek13gogejjb9t5r6sdf0.apps.googleusercontent.com">
                 <App />
             </GoogleOAuthProvider>
         </CookiesProvider>

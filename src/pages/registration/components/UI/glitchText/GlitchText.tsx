@@ -1,27 +1,28 @@
 import styles from "./GlitchText.module.scss";
 import { PowerGlitch } from "powerglitch";
 import { useRef, useEffect } from "react";
+import ApogeeText from "/img/registrations/apogee2026.png"
 
-interface PowerGlitchConfig {
-    playMode: "always" | "hover";
-    createContainers: boolean;
-    hideOverflow: boolean;
-    timing: { duration: number; iterations: number };
-    glitchTimeSpan: { start: number; end: number };
-    shake: { velocity: number; amplitudeX: number; amplitudeY: number };
-    slice: {
-        count: number;
-        velocity: number;
-        minHeight: number;
-        maxHeight: number;
-        hueRotate: boolean;
-    };
-}
+// interface PowerGlitchConfig {
+//     playMode: "always" | "hover";
+//     createContainers: boolean;
+//     hideOverflow: boolean;
+//     timing: { duration: number; iterations: number };
+//     glitchTimeSpan: { start: number; end: number };
+//     shake: { velocity: number; amplitudeX: number; amplitudeY: number };
+//     slice: {
+//         count: number;
+//         velocity: number;
+//         minHeight: number;
+//         maxHeight: number;
+//         hueRotate: boolean;
+//     };
+// }
 
 function GlitchText() {
-    const containerRef = useRef<HTMLDivElement | null>(null);
-    const text1Ref = useRef<HTMLHeadingElement | null>(null);
-    const text2Ref = useRef<HTMLHeadingElement | null>(null);
+    // const containerRef = useRef<HTMLDivElement | null>(null);
+    const text1Ref = useRef<HTMLImageElement | null>(null);
+    // const text2Ref = useRef<HTMLHeadingElement | null>(null);
 
     // 1. Mouse Movement Logic (Opposite Move + 3D Tilt)
     // useEffect(() => {
@@ -73,42 +74,46 @@ function GlitchText() {
 
     // 2. Glitch Logic (Existing)
     useEffect(() => {
-        if (text1Ref.current && text2Ref.current) {
-            // Shared config for consistency
-            const glitchConfig: PowerGlitchConfig = {
+        if (text1Ref.current) {
+            PowerGlitch.glitch(text1Ref.current, {
                 playMode: "always",
                 createContainers: true,
                 hideOverflow: false,
-                timing: { duration: 2000, iterations: Infinity },
-                glitchTimeSpan: { start: 0.5, end: 0.7 },
-                shake: { velocity: 15, amplitudeX: 0.05, amplitudeY: 0.2 },
+                timing: {
+                    duration: 2000,
+                    iterations: Infinity,
+                },
+                // CHANGE THIS: 0 to 1 means it glitches 100% of the time
+                glitchTimeSpan: {
+                    start: 0.5,
+                    end: 0.7,
+                },
+                shake: {
+                    velocity: 15,
+                    amplitudeX: 0.2,
+                    amplitudeY: 0.2,
+                },
                 slice: {
                     count: 6,
                     velocity: 15,
                     minHeight: 0.02,
                     maxHeight: 0.15,
-                    hueRotate: false, // No rainbow
+                    hueRotate: false, // Keep false for yellow
                 },
-            };
-
-            // Apply Glitch
-            // Force yellow color manually if needed, or rely on CSS
-            // text1Ref.current.style.color = "#FFE800"; 
-
-            PowerGlitch.glitch(text1Ref.current, glitchConfig);
-            PowerGlitch.glitch(text2Ref.current, glitchConfig);
+            });
         }
     }, []);
 
     return (
         // We attach the movement ref to this container
-        <div className={styles.container} ref={containerRef}>
-            <h1 className={styles.bannerText} ref={text1Ref}>
+        <div className={styles.container} >
+            <img src={ApogeeText} className={styles.bannerText} alt="Apogee" ref={text1Ref} />
+            {/* <h1 className={styles.bannerText} ref={text1Ref}>
                 APOGEE
             </h1>
             <h1 className={styles.bannerText} ref={text2Ref}>
                 2026
-            </h1>
+            </h1> */}
         </div>
     );
 }
