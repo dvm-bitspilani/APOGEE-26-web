@@ -30,8 +30,8 @@ const DetailsForm = ({ mail = "" }: { mail: string }) => {
 
   const [step, setStep] = useState(1);
   const container = useRef<HTMLDivElement>(null);
-  const form1Ref = useRef<HTMLFormElement>(null);
-  const form2Ref = useRef<HTMLFormElement>(null);
+  const form1Ref = useRef<HTMLDivElement>(null);
+  const form2Ref = useRef<HTMLDivElement>(null);
 
   const { contextSafe } = useGSAP({ scope: container });
   const [formData, setFormData] = useState({
@@ -50,11 +50,11 @@ const DetailsForm = ({ mail = "" }: { mail: string }) => {
   useGSAP(() => {
     setPlaceholder(getDatePlaceholder());
     if (step === 1) {
-      gsap.set(form1Ref.current, { autoAlpha: 1, display: "flex" });
+      gsap.set(form1Ref.current, { autoAlpha: 1, display: "block" });
       gsap.set(form2Ref.current, { autoAlpha: 0, display: "none" });
     } else {
       gsap.set(form1Ref.current, { autoAlpha: 0, display: "none" });
-      gsap.set(form2Ref.current, { autoAlpha: 1, display: "flex" });
+      gsap.set(form2Ref.current, { autoAlpha: 1, display: "block" });
     }
   }, [step]); // Re-run setup on step change to ensure correct state after re-render
 
@@ -76,7 +76,7 @@ const DetailsForm = ({ mail = "" }: { mail: string }) => {
         ease: "power2.inOut",
         onComplete: () => {
           gsap.set(form1Ref.current, { display: "none" });
-          gsap.set(form2Ref.current, { display: "flex" });
+          gsap.set(form2Ref.current, { display: "block" });
         },
       }).to(form2Ref.current, {
         autoAlpha: 1,
@@ -98,7 +98,7 @@ const DetailsForm = ({ mail = "" }: { mail: string }) => {
         ease: "power2.inOut",
         onComplete: () => {
           gsap.set(form2Ref.current, { display: "none" });
-          gsap.set(form1Ref.current, { display: "flex" });
+          gsap.set(form1Ref.current, { display: "block" });
         },
       }).to(form1Ref.current, {
         autoAlpha: 1,
@@ -114,35 +114,39 @@ const DetailsForm = ({ mail = "" }: { mail: string }) => {
       <h2 className={styles.subtitle}>[ENTER YOUR DETAILS]</h2>
 
       <div className={`${styles.formContainer} ${styles.desktopFormContainer}`}>
-        <form
-          ref={form1Ref}
-          className={styles.form}
-          onSubmit={(e) => e.preventDefault()}
-        >
+        <div ref={form1Ref}>
+          <form
+            // ref={form1Ref}
+            className={styles.form}
+            onSubmit={(e) => e.preventDefault()}
+          >
 
-          <FormPart1
-            formData={formData}
-            handleChange={handleChange}
-            placeholder={placeholder}
-          />
+            <FormPart1
+              formData={formData}
+              handleChange={handleChange}
+              placeholder={placeholder}
+            />
+          </form>
 
           <NavButton onClick={handleNext} outerClass={styles.navButton} innerClass={styles.navButtonContent}>
             <span>Next</span>
           </NavButton>
-        </form>
+        </div>
 
         {/* STEP 2 */}
-        <form
-          ref={form2Ref}
-          className={styles.form}
-          onSubmit={(e) => e.preventDefault()}
-        >
-          <FormPart2
-            formData={formData}
-            handleChange={handleChange}
-            locationData={locationData}
-          />
+        <div ref={form2Ref}>
+          <form
+            // ref={form2Ref}
+            className={styles.form}
+            onSubmit={(e) => e.preventDefault()}
+          >
+            <FormPart2
+              formData={formData}
+              handleChange={handleChange}
+              locationData={locationData}
+            />
 
+          </form>
           <div className={styles.buttonContainer}>
             <NavButton onClick={handlePrev} outerClass={styles.navButton} innerClass={styles.navButtonContent}>
               <span>Previous</span>
@@ -151,11 +155,11 @@ const DetailsForm = ({ mail = "" }: { mail: string }) => {
               <span>Events</span>
             </NavButton>
           </div>
-        </form>
+        </div>
       </div>
       <div className={`${styles.formContainer} ${styles.mobileFormContainer}`}>
         <form
-          ref={form1Ref}
+          // ref={form1Ref}
           className={styles.form}
           onSubmit={(e) => e.preventDefault()}
         >

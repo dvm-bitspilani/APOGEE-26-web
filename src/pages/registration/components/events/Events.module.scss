@@ -5,7 +5,7 @@
   flex-direction: column;
   width: 100%;
   height: 100%;
-  padding: 20% 0;
+  // padding: 20% 0;
   box-sizing: border-box;
   color: $cyber-yellow;
   font-family: $font-blender; // Use correct font
@@ -26,7 +26,7 @@
   margin-bottom: 2rem;
 
   .heading {
-    font-size: 4rem;
+    font-size: clamp(3.2rem, 5vw, 6.5rem);
     font-weight: 500;
     text-transform: uppercase;
     color: $cyber-yellow;
@@ -42,7 +42,6 @@
 
 .eventsSubContainer {
   display: flex;
-  flex: 1;
   overflow: hidden;
   position: relative;
   gap: 1rem;
@@ -92,6 +91,7 @@
   padding: 0;
   margin: 0;
   flex: 1;
+  max-height: 65%;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
@@ -101,6 +101,7 @@
   &::-webkit-scrollbar {
     width: 4px;
   }
+
   &::-webkit-scrollbar-thumb {
     background: #ffff00;
     border-radius: 2px;
@@ -110,9 +111,11 @@
 // Selected state styling
 .selectedEvent {
   background: #ffff00 !important;
+
   button {
     color: #000 !important;
   }
+
   .actionIcon {
     color: #000 !important;
   }
@@ -127,7 +130,7 @@
   justify-content: space-between;
   padding: 0.5rem;
   transition: all 0.2s ease-in-out;
-  background: rgba(24, 24, 24, 0.8); // Match input dark-bg basically
+  background: $dark-bg; // Match input dark-bg basically
   // No border by default
 
   user-select: none; // Disable text selection
@@ -138,6 +141,7 @@
     button {
       color: #000; // dark-bg
     }
+
     .actionIcon {
       color: #000;
     }
@@ -173,13 +177,13 @@
 
 .confirmButton {
   margin-top: 1rem;
-  background: transparent;
-  border: 2px solid $cyber-yellow;
-  color: $cyber-yellow;
-  padding: 0.8rem;
-  font-size: 1.5rem;
+  // background: transparent;
+  // border: 2px solid $cyber-yellow;
+  // color: $cyber-yellow;
+  // padding: 0.8rem;
+  // font-size: 1.5rem;
   font-weight: 700;
-  text-transform: uppercase;
+  // text-transform: uppercase;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -188,18 +192,31 @@
   transition: all 0.3s ease;
   font-family: inherit;
 
-  &:hover {
-    background: $cyber-yellow;
-    color: #000;
-
-    .confirmIcon path {
-      fill: #000;
-      stroke: #000;
-    }
+  .confirmButtonContent {
+    font-weight: 700;
+    color: #dddddd;
+    z-index: 1;
+    position: relative;
   }
 
-  .confirmIcon {
-    width: 50px;
-    height: auto;
+  // &:hover {
+  //   background: $cyber-yellow;
+  //   color: #000;
+
+  //   .confirmIcon path {
+  //     fill: #000;
+  //     stroke: #000;
+  //   }
+  // }
+
+  // .confirmIcon {
+  //   width: 50px;
+  //   height: auto;
+  // }
+}
+
+@media (max-width: 750px) {
+  .eventsSubContainer {
+    width: 90%;
   }
 }

@@ -42,7 +42,9 @@
     align-items: center;
     gap: 0.9rem;
 
-    &.desktopFormContainer {display: none;}
+    &.desktopFormContainer {
+      display: none;
+    }
   }
 
   .form {
@@ -50,31 +52,11 @@
     flex-direction: column;
     gap: 1.2rem;
     width: 100%;
-    max-height: 45vh;  //? [03:47 AM] A stupid mistake averted...
+    max-height: 45vh; //? [03:47 AM] A stupid mistake averted...
     overflow: auto;
     @include content-scroller($cyber-yellow);
     // Opacity and display control will be handled by GSAP
 
-    .buttonContainer {
-      display: flex;
-      gap: 1rem;
-    }
-
-    .navButton {
-      margin-top: 3vw;
-      width: fit-content;
-      margin: auto;
-
-      .navButtonContent {
-        padding: 0.3rem 1.5rem;
-        position: relative;
-        font-size: 1.2rem;
-        font-weight: 600;
-        color: #ffffffbd;
-        min-width: 7.2rem;
-        text-align: center;
-      }
-    }
 
     .inputGroup {
       position: relative;
@@ -157,8 +139,14 @@
   .container {
     .formContainer {
       max-width: 27.9vw;
-      &.desktopFormContainer {display: block;}
-      &.mobileFormContainer {display: none;}
+
+      &.desktopFormContainer {
+        display: block;
+      }
+
+      &.mobileFormContainer {
+        display: none;
+      }
     }
 
     .form .inputGroup {
@@ -211,5 +199,26 @@
         }
       }
     }
+  }
+}
+
+.buttonContainer {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.navButton {
+  padding-top: 1.5rem;
+  width: fit-content;
+  margin: auto;
+
+  .navButtonContent {
+    padding: 0.3rem 1.2rem;
+    position: relative;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #e6e6e6;
+    min-width: 7.2rem;
+    text-align: center;
   }
 }

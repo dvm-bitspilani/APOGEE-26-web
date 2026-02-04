@@ -163,7 +163,7 @@ $dark-bg: #000;
   .rightPanel {
     // width: 39vw;
     aspect-ratio: 0.72;
-    height: 100vh;
+    height: 100svh;
     width: 72vh;
     position: relative;
     padding: 4.5rem calc(2rem + 1.5vw);
@@ -204,7 +204,7 @@ $dark-bg: #000;
 
 }
 
-@media (max-width: 600px) {
+@media (max-width: 750px) {
   .container {
     .leftPanel {
       display: none;
@@ -224,5 +224,16 @@ $dark-bg: #000;
       }
     }
   }
+}
 
+@media (aspect-ratio < 1.57) {
+  .container {
+    .leftPanel {
+      .detailsPanel {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+  }
 }
