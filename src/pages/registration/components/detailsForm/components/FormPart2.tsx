@@ -23,7 +23,6 @@ export default function FormPart2({ formData, handleChange, locationData, errors
     return (
         <>
             <div className={styles.inputGroup}>
-                {errors.college && <p className={styles.error}>{errors.college}</p>}
                 <input
                     type="text"
                     name="college"
@@ -33,10 +32,10 @@ export default function FormPart2({ formData, handleChange, locationData, errors
                     className={styles.input}
                     autoComplete="off"
                 />
+                {errors.college && <p className={styles.error}>{errors.college}</p>}
             </div>
 
             <div className={styles.inputGroup}>
-                {errors.year && <p className={styles.error}>{errors.year}</p>}
                 <select
                     name="year"
                     value={formData.year}
@@ -52,10 +51,10 @@ export default function FormPart2({ formData, handleChange, locationData, errors
                     <option value="4">4</option>
                     <option value="5">5</option>
                 </select>
+                {errors.year && <p className={styles.error}>{errors.year}</p>}
             </div>
 
             <div className={styles.inputGroup}>
-                {errors.state && <p className={styles.error}>{errors.state}</p>}
                 <select
                     name="state"
                     value={formData.state}
@@ -72,10 +71,10 @@ export default function FormPart2({ formData, handleChange, locationData, errors
                         )
                     }
                 </select>
+                {errors.state && <p className={styles.error}>{errors.state}</p>}
             </div>
 
             <div className={styles.inputGroup}>
-                {errors.city && <p className={styles.error}>{errors.city}</p>}
                 <select
                     name="city"
                     value={formData.city}
@@ -92,6 +91,7 @@ export default function FormPart2({ formData, handleChange, locationData, errors
                         )
                     }
                 </select>
+                {errors.city && <p className={styles.error}>{errors.city}</p>}
             </div>
         </>
     )

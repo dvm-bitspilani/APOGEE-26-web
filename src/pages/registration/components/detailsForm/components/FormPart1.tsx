@@ -1,5 +1,5 @@
 import styles from "../DetailsForm.module.scss"
-
+import { useState, useEffect } from "react";
 
 interface FormData {
     name: string;
@@ -21,10 +21,20 @@ interface FormPart1Props {
 }
 
 export default function FormPart1({ formData, handleChange, placeholder, errors }: FormPart1Props) {
+    const [isMobile, setIsMobile] = useState(false);
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 750);
+        };
+        handleResize();
+        window.addEventListener("resize", handleResize);
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    }, []);
     return (
         <>
             <div className={styles.inputGroup}>
-                {errors.name && <p className={styles.error}>{errors.name}</p>}
                 <input
                     type="text"
                     name="name"
@@ -34,10 +44,10 @@ export default function FormPart1({ formData, handleChange, placeholder, errors 
                     className={styles.input}
                     autoComplete="off"
                 />
+                {errors.name && <p className={styles.error}>{errors.name}</p>}
             </div>
 
             <div className={styles.inputGroup}>
-                {errors.email && <p className={styles.error}>{errors.email}</p>}
                 <input
                     type="email"
                     name="email"
@@ -47,10 +57,10 @@ export default function FormPart1({ formData, handleChange, placeholder, errors 
                     className={styles.input}
                     autoComplete="off"
                 />
+                {errors.email && <p className={styles.error}>{errors.email}</p>}
             </div>
 
             <div className={styles.inputGroup}>
-                {errors.gender && <p className={styles.error}>{errors.gender}</p>}
                 <select
                     name="gender"
                     value={formData.gender}
@@ -64,12 +74,12 @@ export default function FormPart1({ formData, handleChange, placeholder, errors 
                     <option value="female">Female</option>
                     <option value="other">Other</option>
                 </select>
+                {errors.gender && <p className={styles.error}>{errors.gender}</p>}
             </div>
 
             <div className={styles.inputGroup}>
-                {errors.dob && <p className={styles.error}>{errors.dob}</p>}
                 <input
-                    type="text"
+                    type={isMobile ? "date" : "text"}
                     name="dob"
                     placeholder={`[Date of Birth ${placeholder}]`}
                     onFocus={(e) => (e.target.type = "date")}
@@ -80,6 +90,7 @@ export default function FormPart1({ formData, handleChange, placeholder, errors 
                     onChange={handleChange}
                     className={styles.input}
                 />
+                {errors.dob && <p className={styles.error}>{errors.dob}</p>}
             </div>
         </>
     )

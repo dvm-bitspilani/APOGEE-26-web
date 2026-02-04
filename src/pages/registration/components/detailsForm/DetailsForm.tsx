@@ -13,7 +13,7 @@ const validationForm1Schema = Yup.object({
   name: Yup.string().required("[Name is required]"),
   email: Yup.string().email("Invalid email").required("[Email is required]"),
   gender: Yup.string().required("[Gender is required]"),
-  dob: Yup.string().required("[Date of Birth is required]"),
+  dob: Yup.date().typeError("[Invalid date]").required("[Date of Birth is required]"),
 });
 
 const validationForm2Schema = Yup.object({
@@ -42,7 +42,6 @@ function getDatePlaceholder(locale = navigator.language) {
 
 const DetailsForm = ({ mail = "" }: { mail: string }) => {
   const { setRegistrationStep } = useRegistrationStore();
-  // const handleToEvents = () => setRegistrationStep("events");
 
   const [errors, setErrors] = useState({
     name: "",
@@ -90,50 +89,6 @@ const DetailsForm = ({ mail = "" }: { mail: string }) => {
   ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
-  // const handleNext = contextSafe(() => {
-  //   if (step === 1) {
-  //     const tl = gsap.timeline({
-  //       onComplete: () => setStep(2),
-  //     });
-
-  //     tl.to(form1Ref.current, {
-  //       autoAlpha: 0,
-  //       duration: 0.5,
-  //       ease: "power2.inOut",
-  //       onComplete: () => {
-  //         gsap.set(form1Ref.current, { display: "none" });
-  //         gsap.set(form2Ref.current, { display: "block" });
-  //       },
-  //     }).to(form2Ref.current, {
-  //       autoAlpha: 1,
-  //       duration: 0.5,
-  //       ease: "power2.inOut",
-  //     });
-  //   }
-  // });
-
-  // const handlePrev = contextSafe(() => {
-  //   if (step === 2) {
-  //     const tl = gsap.timeline({
-  //       onComplete: () => setStep(1),
-  //     });
-
-  //     tl.to(form2Ref.current, {
-  //       autoAlpha: 0,
-  //       duration: 0.5,
-  //       ease: "power2.inOut",
-  //       onComplete: () => {
-  //         gsap.set(form2Ref.current, { display: "none" });
-  //         gsap.set(form1Ref.current, { display: "block" });
-  //       },
-  //     }).to(form1Ref.current, {
-  //       autoAlpha: 1,
-  //       duration: 0.5,
-  //       ease: "power2.inOut",
-  //     });
-  //   }
-  // });
 
   const validateForm1 = async () => {
     try {
@@ -277,7 +232,6 @@ const DetailsForm = ({ mail = "" }: { mail: string }) => {
           </NavButton>
         </div>
 
-        {/* STEP 2 */}
         <div ref={form2Ref}>
           <form
             // ref={form2Ref}
