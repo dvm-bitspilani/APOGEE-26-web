@@ -8,6 +8,8 @@ import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import { useCookies } from "react-cookie";
 import { useState } from "react";
+import Helmet from "./components/UI/helmet/Helmet";
+import GlitchText from "./components/UI/glitchText/GlitchText";
 
 function Registration() {
   const navigate = useNavigate();
@@ -113,27 +115,35 @@ function Registration() {
     // },
   });
 
+  const handleBack = () => {
+    if (registrationStep === "events") {
+      setRegistrationStep("details");
+    } else if (registrationStep === "details") {
+      setRegistrationStep("instructions");
+    } else {
+      navigate(-1);
+    }
+  };
+
   return (
     <div className={styles.container}>
-      <button className={styles.backButton} onClick={() => navigate(-1)}>
+      <button className={styles.backButton} onClick={handleBack}>
         <img src="/svg/registrations/back-button.svg" alt="Back" />
       </button>
 
       <div className={styles.leftPanel}>
-        <img
-          src="/img/registrations/apogee-text-banner.png"
-          alt="APOGEE 2026"
-          className={styles.bannerText}
-        />
-        <img
-          src="/img/registrations/robot-face.png"
-          alt="Mascot"
-          className={styles.robotFace}
-        />
+        <div className={styles.bannerText}>
+          <GlitchText />
+        </div>
+        <div className={styles.robotFace}>
+          <Helmet />
+        </div>
 
         {registrationStep === "events" && displayEvent && (
           <div className={styles.detailsPanel}>
-            <div className={styles.detailsContent}>
+            {/* Header Section: Fixed at top */}
+            <div className={styles.detailsHeader}>
+              <h2 className={styles.eventName}>[{displayEvent.name}]</h2>
               <button
                 onClick={() => {
                   useRegistrationStore.getState().setStickyEvent(null);
@@ -143,8 +153,15 @@ function Registration() {
               >
                 ✕
               </button>
-              <h2 className={styles.eventName}>[{displayEvent.name}]</h2>
-              <p className={styles.eventDesc}>{displayEvent.about}</p>
+            </div>
+
+            {/* Scrollable Content Section */}
+            <div className={styles.scrollContainer}>
+              <div className={styles.detailsContent}>
+                <p className={styles.eventDesc}>{displayEvent.about}</p>
+              </div>
+              {/* Fade Overlay */}
+              <div className={styles.fadeOverlay}></div>
             </div>
 
             {stickyEvent && (
@@ -166,8 +183,14 @@ function Registration() {
           className={styles.backgroundImage}
         />
         <div className={styles.bgContainerMobile}>
-          <img className={styles.bgPanelImage} src="/img/registrations/instructions-panel-bg-mobile.png" />
-          <img className={styles.bgPanelFrame} src="/img/registrations/instructions-panel-frame-mobile.png" />
+          <img
+            className={styles.bgPanelImage}
+            src="/img/registrations/instructions-panel-bg-mobile.png"
+          />
+          <img
+            className={styles.bgPanelFrame}
+            src="/img/registrations/instructions-panel-frame-mobile.png"
+          />
         </div>
         {registrationStep === "instructions" && (
           <Instructions googleLogin={googleLogin} />

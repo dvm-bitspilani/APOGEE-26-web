@@ -1,0 +1,24 @@
+.container {
+    /* Positions the elements */
+    display: flex;
+    // flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    // transition: transform 0.1s ease-out;
+    // transform-style: preserve-3d;
+
+    // will-change: transform;
+    width: 80%;
+}
+
+.bannerText {
+    /* Your existing text styles... */
+    // font-size: 10rem;
+    width: 100%;
+    font-weight: bold;
+    color: #FFE800;
+    margin: 0;
+
+
+}

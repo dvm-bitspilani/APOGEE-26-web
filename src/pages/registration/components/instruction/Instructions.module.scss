@@ -19,7 +19,7 @@ $dark-bg: #000;
   .heading {
     font-family: $font-cyberpunks, "Orbitron", sans-serif;
     text-align: center;
-    font-size: 3rem;
+    font-size: clamp(3rem, 5vw, 4rem);
     font-weight: 900;
     margin-bottom: 2rem;
     color: $cyber-yellow;
@@ -34,6 +34,7 @@ $dark-bg: #000;
     font-family: $font-blender, "Orbitron", sans-serif;
     font-weight: $weight-blender-bold;
     flex: 1;
+    max-height: 50vh;
     overflow-x: hidden;
     overflow-y: auto;
     padding-right: 0.5rem;
@@ -86,8 +87,8 @@ $dark-bg: #000;
       gap: 0.6rem;
       font-family: "Roboto", sans-serif;
       font-size: 1rem;
-      font-weight: 400;
-      color: #ffffffac;
+      font-weight: 700;
+      color: #dddddd;
     }
 
     img {

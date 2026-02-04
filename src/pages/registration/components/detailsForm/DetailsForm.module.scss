@@ -1,11 +1,11 @@
-@import "/src/assets/global.scss";
+@use "/src/assets/global.scss" as *;
 
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
+  min-height: 100%;
   width: 100%;
   color: $cyber-yellow;
   // padding: 2rem;
@@ -13,7 +13,7 @@
 
   .title {
     font-family: $font-cyberpunks;
-    font-size: clamp(3rem, 5vw, 6.5rem);
+    font-size: clamp(3.2rem, 5vw, 6.5rem);
     margin-bottom: 1.7vw;
     // text-transform: uppercase;
     letter-spacing: 0.1em;
@@ -24,7 +24,7 @@
   .subtitle {
     font-family: $font-blender;
     font-weight: $weight-blender-bold;
-    font-size: clamp(1rem, 1.7vw, 3rem);
+    font-size: clamp(1.2rem, 1.7vw, 3rem);
     margin-bottom: 2vw;
     // text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -33,38 +33,30 @@
   }
 
   .formContainer {
-    width: 100%;
-    max-width: 27.9vw;
+    width: 95%;
+    min-width: 75%;
+    max-width: 18rem;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.9rem;
+
+    &.desktopFormContainer {
+      display: none;
+    }
   }
 
   .form {
     display: flex;
     flex-direction: column;
-    gap: 1.7vw;
+    gap: 1.2rem;
     width: 100%;
+    max-height: 45vh; //? [03:47 AM] A stupid mistake averted...
+    overflow: auto;
+    @include content-scroller($cyber-yellow);
     // Opacity and display control will be handled by GSAP
 
-    .buttonContainer {
-      display: flex;
-      gap: 1rem;
-    }
-
-    .navButton {
-      margin-top: 3vw;
-      width: fit-content;
-      margin: auto;
-
-      .navButtonContent {
-        padding: 0.3rem 1.5rem;
-        position: relative;
-        font-size: 1.2rem;
-        font-weight: 600;
-        color: #ffffffbd;
-        min-width: 7.2rem;
-        text-align: center;
-      }
-    }
 
     .inputGroup {
       position: relative;
@@ -77,9 +69,10 @@
         outline: none;
         color: $cyber-yellow;
         font-family: $font-blender;
-        font-weight: $weight-blender-bold;
-        font-size: clamp(1rem, 1.9vw, 4rem);
-        padding: 0.7vw;
+        font-weight: $weight-blender-medium;
+        font-size: clamp(1.2rem, 1.9vw, 4rem);
+        // padding: 0.7vw;
+        padding: 0.3rem 1.2rem;
         // text-transform: uppercase;
         cursor: pointer;
         transition: all 0.2s ease-in-out;
@@ -142,6 +135,28 @@
   }
 }
 
+@media screen and (min-width: 750px) {
+  .container {
+    .formContainer {
+      max-width: 27.9vw;
+
+      &.desktopFormContainer {
+        display: block;
+      }
+
+      &.mobileFormContainer {
+        display: none;
+      }
+    }
+
+    .form .inputGroup {
+      .input {
+        font-weight: $weight-blender-bold;
+      }
+    }
+  }
+}
+
 @media screen and (min-width: 1300px) {
   .container {
     .title {
@@ -184,5 +199,26 @@
         }
       }
     }
+  }
+}
+
+.buttonContainer {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.navButton {
+  padding-top: 1.5rem;
+  width: fit-content;
+  margin: auto;
+
+  .navButtonContent {
+    padding: 0.3rem 1.2rem;
+    position: relative;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #e6e6e6;
+    min-width: 7.2rem;
+    text-align: center;
   }
 }
