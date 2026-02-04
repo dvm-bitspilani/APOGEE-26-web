@@ -7,6 +7,22 @@ import locationData from "./cities.json";
 import NavButton from "../navButton/NavButton";
 import FormPart1 from "./components/FormPart1";
 import FormPart2 from "./components/FormPart2";
+import * as Yup from "yup";
+
+const validationForm1Schema = Yup.object({
+  name: Yup.string().required("[Name is required]"),
+  email: Yup.string().email("Invalid email").required("[Email is required]"),
+  gender: Yup.string().required("[Gender is required]"),
+  dob: Yup.date().typeError("[Invalid date]").required("[Date of Birth is required]"),
+});
+
+const validationForm2Schema = Yup.object({
+  college: Yup.string().required("[College is required]"),
+  year: Yup.string().required("[Year is required]"),
+  state: Yup.string().required("[State is required]"),
+  city: Yup.string().required("[City is required]"),
+});
+
 
 function getDatePlaceholder(locale = navigator.language) {
   const parts = new Intl.DateTimeFormat(locale).formatToParts(
@@ -26,7 +42,17 @@ function getDatePlaceholder(locale = navigator.language) {
 
 const DetailsForm = ({ mail = "" }: { mail: string }) => {
   const { setRegistrationStep } = useRegistrationStore();
-  const handleToEvents = () => setRegistrationStep("events");
+
+  const [errors, setErrors] = useState({
+    name: "",
+    email: "",
+    gender: "",
+    dob: "",
+    college: "",
+    year: "",
+    state: "",
+    city: "",
+  });
 
   const [step, setStep] = useState(1);
   const container = useRef<HTMLDivElement>(null);
@@ -64,7 +90,58 @@ const DetailsForm = ({ mail = "" }: { mail: string }) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleNext = contextSafe(() => {
+  const validateForm1 = async () => {
+    try {
+      await validationForm1Schema.validate(formData, { abortEarly: false });
+      setErrors({
+        name: "",
+        email: "",
+        gender: "",
+        dob: "",
+        college: "",
+        year: "",
+        state: "",
+        city: "",
+      });
+      return true;
+    } catch (err: any) {
+      const newErrors: any = {};
+      err.inner.forEach((error: any) => {
+        newErrors[error.path] = error.message;
+      });
+      setErrors((prev) => ({ ...prev, ...newErrors }));
+      return false;
+    }
+  };
+
+  const validateForm2 = async () => {
+    try {
+      await validationForm2Schema.validate(formData, { abortEarly: false });
+      setErrors({
+        name: "",
+        email: "",
+        gender: "",
+        dob: "",
+        college: "",
+        year: "",
+        state: "",
+        city: "",
+      });
+      return true;
+    } catch (err: any) {
+      const newErrors: any = {};
+      err.inner.forEach((error: any) => {
+        newErrors[error.path] = error.message;
+      });
+      setErrors((prev) => ({ ...prev, ...newErrors }));
+      return false;
+    }
+  };
+
+  const handleNext = contextSafe(async () => {
+    const isValid = await validateForm1();
+    if (!isValid) return;
+
     if (step === 1) {
       const tl = gsap.timeline({
         onComplete: () => setStep(2),
@@ -108,6 +185,27 @@ const DetailsForm = ({ mail = "" }: { mail: string }) => {
     }
   });
 
+  const handleToEvents = contextSafe(async () => {
+    const v1 = await validateForm1();
+    const v2 = await validateForm2();
+    if (!v1 || !v2) return;
+
+    const tl = gsap.timeline({
+      onComplete: () => setRegistrationStep("events"),
+    });
+
+    tl.to(form2Ref.current, {
+      autoAlpha: 0,
+      duration: 0.5,
+      ease: "power2.inOut",
+      onComplete: () => {
+        gsap.set(form2Ref.current, { display: "none" });
+        // gsap.set(form1Ref.current, { display: "block" });
+      },
+    })
+
+  });
+
   return (
     <div ref={container} className={styles.container}>
       <h1 className={styles.title}>REGISTER</h1>
@@ -125,6 +223,7 @@ const DetailsForm = ({ mail = "" }: { mail: string }) => {
               formData={formData}
               handleChange={handleChange}
               placeholder={placeholder}
+              errors={errors}
             />
           </form>
 
@@ -133,7 +232,6 @@ const DetailsForm = ({ mail = "" }: { mail: string }) => {
           </NavButton>
         </div>
 
-        {/* STEP 2 */}
         <div ref={form2Ref}>
           <form
             // ref={form2Ref}
@@ -144,6 +242,7 @@ const DetailsForm = ({ mail = "" }: { mail: string }) => {
               formData={formData}
               handleChange={handleChange}
               locationData={locationData}
+              errors={errors}
             />
 
           </form>
@@ -167,11 +266,13 @@ const DetailsForm = ({ mail = "" }: { mail: string }) => {
             formData={formData}
             handleChange={handleChange}
             placeholder={placeholder}
+            errors={errors}
           />
           <FormPart2
             formData={formData}
             handleChange={handleChange}
             locationData={locationData}
+            errors={errors}
           />
         </form>
         <NavButton onClick={handleToEvents} outerClass={styles.navButton} innerClass={styles.navButtonContent}>

@@ -2,23 +2,29 @@ import styles from "../DetailsForm.module.scss";
 import Select, { type StylesConfig } from "react-select";
 import { useEffect, useState } from "react";
 
+interface FormData {
+    college: string;
+    year: string;
+    state: string;
+    city: string;
+}
+
 interface FormPart2Props {
-  formData: any;
-  handleChange: (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
-  ) => void;
-  locationData: { state: string; cities: string[] }[];
+    formData: FormData,
+    handleChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void,
+    locationData: { state: string, cities: string[] }[];
+    errors: {
+        college: string;
+        year: string;
+        state: string;
+        city: string;
+    };
 }
 
-interface OptionType {
-  value: string;
-  label: string;
-}
-
-export default function FormPart2({
+export default function FormPart2({ 
   formData,
   handleChange,
-  locationData,
+  locationData, errors ,
 }: FormPart2Props) {
   const [cityOptions, setCityOptions] = useState<OptionType[]>([]);
 
@@ -167,6 +173,7 @@ export default function FormPart2({
           className={styles.input}
           autoComplete="off"
         />
+                {errors.college && <p className={styles.error}>{errors.college}</p>}
       </div>
 
       <div className={styles.inputGroup}>
@@ -185,6 +192,7 @@ export default function FormPart2({
           <option value="4">4</option>
           <option value="5">5</option>
         </select>
+                {errors.year && <p className={styles.error}>{errors.year}</p>}
       </div>
 
       <div className={styles.inputGroup}>
@@ -206,6 +214,7 @@ export default function FormPart2({
           menuPlacement="top"
           className={styles.selectContainer}
         />
+                {errors.state && <p className={styles.error}>{errors.state}</p>}
       </div>
 
       <div className={styles.inputGroup}>

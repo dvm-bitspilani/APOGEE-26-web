@@ -1,12 +1,37 @@
 import styles from "../DetailsForm.module.scss"
+import { useState, useEffect } from "react";
 
-interface FormPart1Props {
-    formData: any,
-    handleChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void,
-    placeholder: string
+interface FormData {
+    name: string;
+    email: string;
+    gender: string;
+    dob: string;
 }
 
-export default function FormPart1({formData, handleChange, placeholder}: FormPart1Props) {
+interface FormPart1Props {
+    formData: FormData,
+    handleChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void,
+    placeholder: string
+    errors: {
+        name: string;
+        email: string;
+        gender: string;
+        dob: string;
+    };
+}
+
+export default function FormPart1({ formData, handleChange, placeholder, errors }: FormPart1Props) {
+    const [isMobile, setIsMobile] = useState(false);
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 750);
+        };
+        handleResize();
+        window.addEventListener("resize", handleResize);
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    }, []);
     return (
         <>
             <div className={styles.inputGroup}>
@@ -19,6 +44,7 @@ export default function FormPart1({formData, handleChange, placeholder}: FormPar
                     className={styles.input}
                     autoComplete="off"
                 />
+                {errors.name && <p className={styles.error}>{errors.name}</p>}
             </div>
 
             <div className={styles.inputGroup}>
@@ -31,6 +57,7 @@ export default function FormPart1({formData, handleChange, placeholder}: FormPar
                     className={styles.input}
                     autoComplete="off"
                 />
+                {errors.email && <p className={styles.error}>{errors.email}</p>}
             </div>
 
             <div className={styles.inputGroup}>
@@ -47,21 +74,23 @@ export default function FormPart1({formData, handleChange, placeholder}: FormPar
                     <option value="female">Female</option>
                     <option value="other">Other</option>
                 </select>
+                {errors.gender && <p className={styles.error}>{errors.gender}</p>}
             </div>
 
             <div className={styles.inputGroup}>
                 <input
-                    type="text"
+                    type={isMobile ? "date" : "text"}
                     name="dob"
                     placeholder={`[Date of Birth ${placeholder}]`}
-                    onFocus={(e) => (e.target.type = "date")}
-                    onBlur={(e) => {
+                    onFocus={!isMobile ? (e) => (e.target.type = "date") : undefined}
+                    onBlur={!isMobile ? (e) => {
                         if (!e.target.value) e.target.type = "text";
-                    }}
+                    } : undefined}
                     value={formData.dob}
                     onChange={handleChange}
                     className={styles.input}
                 />
+                {errors.dob && <p className={styles.error}>{errors.dob}</p>}
             </div>
         </>
     )
