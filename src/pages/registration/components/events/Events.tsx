@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 // import axios from "axios";
 import { useRegistrationStore, type Event } from "../../../../utils/store";
 import styles from "./Events.module.scss";
+import NavButton from "../navButton/NavButton";
 
 // Dummy Data until API is ready
 const DUMMY_EVENTS: Event[] = [
@@ -154,12 +155,13 @@ const Events = () => {
             )}
           </ul>
 
-          <button
+          {/* <button
             className={styles.confirmButton}
             onClick={() => console.log("Submit", selectedEvents)}
           >
             CONFIRM SELECTION
-          </button>
+          </button> */}
+          <NavButton outerClass={styles.confirmButton} innerClass={styles.confirmButtonContent}>Confirm Selection</NavButton>
         </div>
       </div>
     </div>

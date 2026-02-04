@@ -8,6 +8,8 @@ import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import { useCookies } from "react-cookie";
 import { useState } from "react";
+import Helmet from "./components/UI/helmet/Helmet";
+import GlitchText from "./components/UI/glitchText/GlitchText";
 
 function Registration() {
   const navigate = useNavigate();
@@ -120,16 +122,12 @@ function Registration() {
       </button>
 
       <div className={styles.leftPanel}>
-        <img
-          src="/img/registrations/apogee-text-banner.png"
-          alt="APOGEE 2026"
-          className={styles.bannerText}
-        />
-        <img
-          src="/img/registrations/robot-face.png"
-          alt="Mascot"
-          className={styles.robotFace}
-        />
+        <div className={styles.bannerText}>
+          <GlitchText />
+        </div>
+        <div className={styles.robotFace}>
+          <Helmet />
+        </div>
 
         {registrationStep === "events" && displayEvent && (
           <div className={styles.detailsPanel}>
