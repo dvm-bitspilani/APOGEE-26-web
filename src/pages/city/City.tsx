@@ -36,7 +36,14 @@ export default function City() {
             color={"#61bbf7"}
             // distance={0.5}
             intensity={100.5}/>
-          {/* <OrbitControls/> */}
+             {/* <spotLight 
+            position={[0, 500*15, 141*15]}
+            // angle={0.3}
+            distance={5000}
+            angle={4000}
+            color={"purple"}
+            intensity={1000000000000.5}/> */}
+          <OrbitControls/>
           <CityScene />
           <BloomLeva />
            {/* <FogPlane /> */}

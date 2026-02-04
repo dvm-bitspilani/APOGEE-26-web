@@ -46,7 +46,7 @@ export function Instances({ children, ...props }: { children: ReactNode } & JSX.
 export function Model(props: JSX.IntrinsicElements['group']) {
   const instances = useContext(context)
   return (
-    <group {...props} dispose={null}  scale={[15,30,15]} position={[-30,-5,-30]}>
+    <group {...props} dispose={null}  scale={15} position={[-30,-5,-30]}>
       <instances.Object rotation={[Math.PI / 2, 0, 0]} scale={0.007} />
       <instances.Object1 rotation={[Math.PI / 2, 0, 0]} scale={0.007} />
       <instances.Object2 rotation={[Math.PI / 2, 0, 0]} scale={0.007} />

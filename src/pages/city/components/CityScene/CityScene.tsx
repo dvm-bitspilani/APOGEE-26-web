@@ -31,6 +31,11 @@ export default function CityScene({}: any) {
       setPivot(carPivotRef.current);
     }
   }, [setPivot]);
+  const axesRef= useRef<THREE.AxesHelper>(null!);
+  console.log(axesRef.current)
+  const worldPos = new THREE.Vector3();
+  axesRef.current?.getWorldPosition(worldPos);
+  console.log("City World Position:", worldPos);
   return (
     <>
       <color attach="background" args={["#110013"]} />
@@ -41,7 +46,13 @@ export default function CityScene({}: any) {
         <group ref={carPivotRef} position={[0, 0, 0]}>
           {/* <ambientLight intensity={0.5} /> */}
           <group ref={cityRef}>
-            <axesHelper args={[200]} />
+            <spotLight 
+            position={[0, 3000, 0]}
+            // angle={0.3}
+            distance={500000}
+            color={"purple"}
+            intensity={100000000.5}/>
+            <axesHelper ref={axesRef}args={[200]} />
             <CityGrid />
           </group>
           </group>
