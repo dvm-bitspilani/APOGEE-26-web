@@ -45,8 +45,8 @@ $dark-bg: #000;
 
     .robotFace {
       position: relative;
-      height: 72%;
-      max-width: 18vw;
+      height: 100%;
+      width: 100%;
       object-fit: contain;
       z-index: 2;
       margin-top: 4%;
@@ -235,7 +235,10 @@ $dark-bg: #000;
         height: 100svh;
       }
 
-      .bgPanelFrame {filter: brightness(2.25);}
+      .bgPanelFrame {
+        filter: brightness(2.25);
+      }
+
       .bgPanelImage {
         filter: brightness(0.9);
         object-fit: cover;

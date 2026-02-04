@@ -1,4 +1,4 @@
-@import "/src/assets/global.scss";
+@use "/src/assets/global.scss" as *;
 
 .container {
   display: flex;
