@@ -36,7 +36,7 @@ export default function City() {
             color={"#61bbf7"}
             // distance={0.5}
             intensity={100.5}/>
-          <OrbitControls/>
+          {/* <OrbitControls/> */}
           <CityScene />
           <BloomLeva />
            {/* <FogPlane /> */}

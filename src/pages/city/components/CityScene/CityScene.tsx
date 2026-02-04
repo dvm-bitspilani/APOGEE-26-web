@@ -7,6 +7,7 @@ import CityDebug from "../leva/CityDebugLeva/CityDebugLeva";
 import { Perf } from "r3f-perf";
 import { useCityStore, usePivotStore } from "../../../../utils/store";
 // import { useCameraMouseParallax } from "../../hooks/useHoverCamera";
+// import {useCarInsideScroll} from "../../hooks/useCarInsideScroll"
 import CityGrid from "../CityGrid";
 import PivotLeva from "../leva/PivotLeva/PivotLeva";
 export default function CityScene({}: any) {
@@ -19,6 +20,7 @@ export default function CityScene({}: any) {
   //   minY: -0.1,
   //   maxY: 0.1,
   // });
+  // useCarInsideScroll();
   useEffect(() => {
     if (cityRef.current) {
       setCity(cityRef.current);

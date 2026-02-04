@@ -8,16 +8,16 @@ export default function CameraControllerLeva() {
 
   const { x, y, z, rotx, roty, rotz, fov, near, far } = useControls("Camera", {
     x: { value: 0, min: -50, max: 500, step: 0.04 },
-    y: { value: 0, min: -50, max: 500, step: 0.04 },
-    z: { value: 0, min: -50, max: 500, step: 0.04 },
+    y: { value: 7, min: -50, max: 500, step: 0.04 },
+    z: { value: 12, min: -50, max: 500, step: 0.04 },
 
-    rotx: { value: 0, min: -Math.PI, max: Math.PI, step: 0.1 },
-    roty: { value: 0, min: -Math.PI, max: Math.PI, step: 0.1 },
-    rotz: { value: 0, min: -Math.PI, max: Math.PI, step: 0.1 },
+    rotx: { value: -0.4, min: -Math.PI, max: Math.PI, step: 0.01 },
+    roty: { value: 0, min: -Math.PI, max: Math.PI, step: 0.01 },
+    rotz: { value: 0, min: -Math.PI, max: Math.PI, step: 0.01 },
 
-    fov: { value: 50, min: 10, max: 120, step: 1 },
+    fov: { value: 39, min: 10, max: 120, step: 1 },
     near: { value: 0.1, min: 0.01, max: 50, step: 0.01 },
-    far: { value: 1000, min: 50, max: 5000, step: 10 },
+    far: { value: 1000000, min: 50, max: 5000000, step: 10 },
   });
 
   useEffect(() => {
