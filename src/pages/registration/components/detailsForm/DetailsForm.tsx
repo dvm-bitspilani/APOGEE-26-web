@@ -3,6 +3,10 @@ import { useState, useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { useRegistrationStore } from "../../../../utils/store";
+import locationData from "./cities.json";
+import NavButton from "../navButton/NavButton";
+import FormPart1 from "./components/FormPart1";
+import FormPart2 from "./components/FormPart2";
 
 function getDatePlaceholder(locale = navigator.language) {
   const parts = new Intl.DateTimeFormat(locale).formatToParts(
@@ -20,19 +24,19 @@ function getDatePlaceholder(locale = navigator.language) {
     .join("-");
 }
 
-const DetailsForm = () => {
+const DetailsForm = ({ mail = "" }: { mail: string }) => {
   const { setRegistrationStep } = useRegistrationStore();
   const handleToEvents = () => setRegistrationStep("events");
 
   const [step, setStep] = useState(1);
   const container = useRef<HTMLDivElement>(null);
-  const form1Ref = useRef<HTMLFormElement>(null);
-  const form2Ref = useRef<HTMLFormElement>(null);
+  const form1Ref = useRef<HTMLDivElement>(null);
+  const form2Ref = useRef<HTMLDivElement>(null);
 
   const { contextSafe } = useGSAP({ scope: container });
   const [formData, setFormData] = useState({
     name: "",
-    email: "",
+    email: mail,
     gender: "",
     dob: "",
     college: "",
@@ -46,11 +50,11 @@ const DetailsForm = () => {
   useGSAP(() => {
     setPlaceholder(getDatePlaceholder());
     if (step === 1) {
-      gsap.set(form1Ref.current, { autoAlpha: 1, display: "flex" });
+      gsap.set(form1Ref.current, { autoAlpha: 1, display: "block" });
       gsap.set(form2Ref.current, { autoAlpha: 0, display: "none" });
     } else {
       gsap.set(form1Ref.current, { autoAlpha: 0, display: "none" });
-      gsap.set(form2Ref.current, { autoAlpha: 1, display: "flex" });
+      gsap.set(form2Ref.current, { autoAlpha: 1, display: "block" });
     }
   }, [step]); // Re-run setup on step change to ensure correct state after re-render
 
@@ -72,7 +76,7 @@ const DetailsForm = () => {
         ease: "power2.inOut",
         onComplete: () => {
           gsap.set(form1Ref.current, { display: "none" });
-          gsap.set(form2Ref.current, { display: "flex" });
+          gsap.set(form2Ref.current, { display: "block" });
         },
       }).to(form2Ref.current, {
         autoAlpha: 1,
@@ -94,7 +98,7 @@ const DetailsForm = () => {
         ease: "power2.inOut",
         onComplete: () => {
           gsap.set(form2Ref.current, { display: "none" });
-          gsap.set(form1Ref.current, { display: "flex" });
+          gsap.set(form1Ref.current, { display: "block" });
         },
       }).to(form1Ref.current, {
         autoAlpha: 1,
@@ -109,176 +113,70 @@ const DetailsForm = () => {
       <h1 className={styles.title}>REGISTER</h1>
       <h2 className={styles.subtitle}>[ENTER YOUR DETAILS]</h2>
 
-      <div className={styles.formContainer}>
-        <form
-          ref={form1Ref}
-          className={styles.form}
-          onSubmit={(e) => e.preventDefault()}
-        >
-          <div className={styles.inputGroup}>
-            <input
-              type="text"
-              name="name"
-              placeholder="[Enter your name]"
-              value={formData.name}
-              onChange={handleChange}
-              className={styles.input}
-              autoComplete="off"
+      <div className={`${styles.formContainer} ${styles.desktopFormContainer}`}>
+        <div ref={form1Ref}>
+          <form
+            // ref={form1Ref}
+            className={styles.form}
+            onSubmit={(e) => e.preventDefault()}
+          >
+
+            <FormPart1
+              formData={formData}
+              handleChange={handleChange}
+              placeholder={placeholder}
             />
-          </div>
+          </form>
 
-          <div className={styles.inputGroup}>
-            <input
-              type="email"
-              name="email"
-              placeholder="[Enter your e-mail address]"
-              value={formData.email}
-              onChange={handleChange}
-              className={styles.input}
-              autoComplete="off"
-            />
-          </div>
-
-          <div className={styles.inputGroup}>
-            <select
-              name="gender"
-              value={formData.gender}
-              onChange={handleChange}
-              className={`${styles.input} ${styles.select}`}
-            >
-              <option value="" disabled hidden>
-                [Gender]
-              </option>
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-              <option value="other">Other</option>
-            </select>
-          </div>
-
-          <div className={styles.inputGroup}>
-            <input
-              type="text"
-              name="dob"
-              placeholder={`[Date of Birth ${placeholder}]`}
-              onFocus={(e) => (e.target.type = "date")}
-              onBlur={(e) => {
-                if (!e.target.value) e.target.type = "text";
-              }}
-              value={formData.dob}
-              onChange={handleChange}
-              className={styles.input}
-            />
-          </div>
-
-          <div className={styles.buttonContainer}>
-            <div className={styles.customBtnWrapper} onClick={handleNext}>
-              <div className={styles.btnSomething}>
-                <img
-                  src="/svg/registrations/btnFrame.svg"
-                  className={styles.leftFrame}
-                  alt="frame"
-                />
-                <img
-                  src="/svg/registrations/btnFrame.svg"
-                  className={styles.rightFrame}
-                  alt="frame"
-                />
-                <img
-                  src="/svg/registrations/btnInternal.svg"
-                  className={styles.btnInternal}
-                  alt="bg"
-                />
-              </div>
-              <span className={styles.btnText}>Next</span>
-            </div>
-          </div>
-        </form>
+          <NavButton onClick={handleNext} outerClass={styles.navButton} innerClass={styles.navButtonContent}>
+            <span>Next</span>
+          </NavButton>
+        </div>
 
         {/* STEP 2 */}
+        <div ref={form2Ref}>
+          <form
+            // ref={form2Ref}
+            className={styles.form}
+            onSubmit={(e) => e.preventDefault()}
+          >
+            <FormPart2
+              formData={formData}
+              handleChange={handleChange}
+              locationData={locationData}
+            />
+
+          </form>
+          <div className={styles.buttonContainer}>
+            <NavButton onClick={handlePrev} outerClass={styles.navButton} innerClass={styles.navButtonContent}>
+              <span>Previous</span>
+            </NavButton>
+            <NavButton onClick={handleToEvents} outerClass={styles.navButton} innerClass={styles.navButtonContent}>
+              <span>Events</span>
+            </NavButton>
+          </div>
+        </div>
+      </div>
+      <div className={`${styles.formContainer} ${styles.mobileFormContainer}`}>
         <form
-          ref={form2Ref}
+          // ref={form1Ref}
           className={styles.form}
           onSubmit={(e) => e.preventDefault()}
         >
-          <div className={styles.inputGroup}>
-            <input
-              type="text"
-              name="college"
-              placeholder="[College]"
-              value={formData.college}
-              onChange={handleChange}
-              className={styles.input}
-              autoComplete="off"
-            />
-          </div>
-
-          <div className={styles.inputGroup}>
-            <select
-              name="year"
-              value={formData.year}
-              onChange={handleChange}
-              className={`${styles.input} ${styles.select}`}
-            >
-              <option value="" disabled hidden>
-                [Year of study]
-              </option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-            </select>
-          </div>
-
-          <div className={styles.inputGroup}>
-            <select
-              name="state"
-              value={formData.state}
-              onChange={handleChange}
-              className={`${styles.input} ${styles.select}`}
-            >
-              <option value="" disabled hidden>
-                [State]
-              </option>
-              {/* Placeholder options */}
-              <option value="state1">State 1</option>
-              <option value="state2">State 2</option>
-            </select>
-          </div>
-
-          <div className={styles.inputGroup}>
-            <select
-              name="city"
-              value={formData.city}
-              onChange={handleChange}
-              className={`${styles.input} ${styles.select}`}
-            >
-              <option value="" disabled hidden>
-                [City]
-              </option>
-              {/* Placeholder options */}
-              <option value="city1">City 1</option>
-              <option value="city2">City 2</option>
-            </select>
-          </div>
-
-          <div className={styles.buttonContainer}>
-            <button
-              type="button"
-              className={styles.button}
-              onClick={handlePrev}
-            >
-              Previous
-            </button>
-            <button
-              type="button"
-              className={`${styles.button} ${styles.filled}`}
-              onClick={handleToEvents}
-            >
-              Select Events
-            </button>
-          </div>
+          <FormPart1
+            formData={formData}
+            handleChange={handleChange}
+            placeholder={placeholder}
+          />
+          <FormPart2
+            formData={formData}
+            handleChange={handleChange}
+            locationData={locationData}
+          />
         </form>
+        <NavButton onClick={handleToEvents} outerClass={styles.navButton} innerClass={styles.navButtonContent}>
+          <span>Select Events</span>
+        </NavButton>
       </div>
     </div>
   );
