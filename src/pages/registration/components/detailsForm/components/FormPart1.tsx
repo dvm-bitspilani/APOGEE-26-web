@@ -82,10 +82,10 @@ export default function FormPart1({ formData, handleChange, placeholder, errors 
                     type={isMobile ? "date" : "text"}
                     name="dob"
                     placeholder={`[Date of Birth ${placeholder}]`}
-                    onFocus={(e) => (e.target.type = "date")}
-                    onBlur={(e) => {
+                    onFocus={!isMobile ? (e) => (e.target.type = "date") : undefined}
+                    onBlur={!isMobile ? (e) => {
                         if (!e.target.value) e.target.type = "text";
-                    }}
+                    } : undefined}
                     value={formData.dob}
                     onChange={handleChange}
                     className={styles.input}
