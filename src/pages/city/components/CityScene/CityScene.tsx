@@ -1,12 +1,14 @@
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
-import { Center, ScrollControls } from "@react-three/drei";
-import { Instances, Model } from "../models/Model";
+import { ScrollControls } from "@react-three/drei";
+import { Instances } from "../models/Model";
 import Infernus from "../models/Infernus";
 import CityDebug from "../leva/CityDebugLeva/CityDebugLeva";
 import { Perf } from "r3f-perf";
 import { useCityStore, usePivotStore } from "../../../../utils/store";
-import { useCameraMouseParallax } from "../../hooks/useHoverCamera";
+// import { useCameraMouseParallax } from "../../hooks/useHoverCamera";
+// import {useCarInsideScroll} from "../../hooks/useCarInsideScroll"
+import CityGrid from "../CityGrid";
 import PivotLeva from "../leva/PivotLeva/PivotLeva";
 export default function CityScene({}: any) {
   const infernusRef = useRef<THREE.Group>(null!);
@@ -14,10 +16,11 @@ export default function CityScene({}: any) {
   const setCity = useCityStore((s) => s.setCity);
   const setPivot = usePivotStore((s) => s.setPivot);
   const carPivotRef = useRef<THREE.Group>(null!);
-    useCameraMouseParallax({
-    minY: -0.1,
-    maxY: 0.1,
-  });
+  //   useCameraMouseParallax({
+  //   minY: -0.1,
+  //   maxY: 0.1,
+  // });
+  // useCarInsideScroll();
   useEffect(() => {
     if (cityRef.current) {
       setCity(cityRef.current);
@@ -39,15 +42,22 @@ export default function CityScene({}: any) {
           {/* <ambientLight intensity={0.5} /> */}
           <group ref={cityRef}>
             <axesHelper args={[200]} />
-            <Model />
+            <CityGrid />
           </group>
           </group>
 
           <ScrollControls pages={4} damping={0.2}>
+            {/* Use PivotLeva to roate the city around the car's axis */}
             <PivotLeva />
+            {/* Use CItyDebug for position x y and z if by chance u rotate here whole city will be rotated around its axis */}
             <CityDebug />
           </ScrollControls>
+          <group >
+            {/* <directionalLight
+            position={[0, 10, 0]}
+           intensity={0.5} /> */}
           <Infernus ref={infernusRef} />
+          </group>
         </group>
       </Instances>
     </>
