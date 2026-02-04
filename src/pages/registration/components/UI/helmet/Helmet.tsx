@@ -30,14 +30,12 @@ function HelmetModel() {
         raycaster.setFromCamera(mouse, camera)
         raycaster.ray.intersectPlane(plane, target.current)
 
-        // Clamp raw target
-        target.current.x = THREE.MathUtils.clamp(target.current.x, -1.5, 1.5)
-        target.current.y = THREE.MathUtils.clamp(target.current.y, -1, 1)
+        target.current.x = THREE.MathUtils.clamp(target.current.x, -1, 1)
+        target.current.y = THREE.MathUtils.clamp(target.current.y, -0.5, 0.5)
 
-        // Smooth target
         smooth.current.lerp(
             target.current,
-            1 - Math.exp(-delta * 8)
+            1 - Math.exp(-delta * 6)
         )
 
         const localTarget = smooth.current.clone().sub(
