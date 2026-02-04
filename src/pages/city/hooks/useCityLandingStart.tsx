@@ -27,11 +27,12 @@ export function useCityLandingStart() {
     }
 
     // 👉 ROTATE AROUND CAR
-    if (pageProgress > 0.6 && pageProgress <= 0.8) {
-      city.position.x = -370 - (pageProgress - 0.6) * 300
-      city.position.z = -5 + (pageProgress - 0.6) * 190
-
-      pivot.rotation.y = (pageProgress - 0.6) * Math.PI
+    if (pageProgress > 0.6 && pageProgress <= 1) {
+      city.position.x = -110 - (pageProgress - 0.6) * 300
+      city.position.z = 140 + (pageProgress - 0.6) * 200
+      city.position.y= -120 -(pageProgress-0.6)*40
+      pivot.rotation.x = -(pageProgress - 0.6) * Math.PI/4
+      pivot.rotation.y = -(pageProgress - 0.6) * Math.PI - Math.PI
     }
   })
 }

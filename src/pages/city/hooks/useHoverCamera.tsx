@@ -14,8 +14,8 @@ export function useCameraMouseParallax({
 
     const targetY = THREE.MathUtils.lerp(maxY, minY, tx );
     const targetX = THREE.MathUtils.lerp(0.05, -0.05, -ty );
-    camera.position.y = THREE.MathUtils.lerp(
-      camera.position.y,
+    camera.rotation.x = THREE.MathUtils.lerp(
+      camera.rotation.x,
       targetX,
       lerp
     );

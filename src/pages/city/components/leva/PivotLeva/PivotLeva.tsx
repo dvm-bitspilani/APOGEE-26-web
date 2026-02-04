@@ -11,7 +11,7 @@ export default function PivotLeva() {
   // useCityKeyboardControl();
   const debug = useControls("Pivot (debug)", {
     rotX: { value: 0, min: -180, max: 180, step: 1 },
-    rotY: { value: -148, min: -180, max: 180, step: 1 },
+    rotY: { value: -180, min: -180, max: 180, step: 1 },
     rotZ: { value: 0, min: -180, max: 180, step: 1 },
 
     scale: { value: 15, min: 1, max: 50, step: 0.1 },
