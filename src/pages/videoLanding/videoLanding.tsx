@@ -7,13 +7,16 @@ import styles from './vidLanding.module.scss';
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
-const FRAME_COUNT = 160;
-const FRAME_PATH = '/videos/frames_webp/f_';
+// const FRAME_COUNT = 160;
+const FRAME_COUNT = 200;
+// const FRAME_PATH = '/videos/frames_webp/f_';
+const FRAME_PATH = '/videos/frames/f_';
 
 // Generate frame path with zero-padded number (1-indexed: frame_0001.webp to frame_0192.webp)
 const getFramePath = (index: number): string => {
     const paddedIndex = String(index).padStart(4, '0');
-    return `${FRAME_PATH}${paddedIndex}.webp`;
+    // return `${FRAME_PATH}${paddedIndex}.webp`;
+    return `${FRAME_PATH}${paddedIndex}.jpg`;
 };
 
 export default function VideoLanding() {
@@ -148,7 +151,8 @@ export default function VideoLanding() {
             smoothTouch: 0.1,
         });
 
-        // Create ScrollTrigger animation for frame scrubbing
+        // Create ScrollTrigger animation for frame scrubbing with snap points
+        // 5 sections = snap at 0, 0.25, 0.5, 0.75, 1
         gsap.to(frameObj, {
             frame: FRAME_COUNT - 1,
             ease: 'none',
@@ -157,6 +161,12 @@ export default function VideoLanding() {
                 start: 'top top',
                 end: 'bottom bottom',
                 scrub: 0.5,
+                snap: {
+                    snapTo: [0, 0.2, 0.4, 0.6, 0.8, 1], // Snap points for each section
+                    duration: { min: 0.2, max: 0.5 },
+                    delay: 0.1,
+                    ease: 'power1.inOut',
+                },
                 onUpdate: () => {
                     drawFrame();
                 },
