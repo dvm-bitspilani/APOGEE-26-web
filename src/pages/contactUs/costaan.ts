@@ -11,7 +11,7 @@ interface Contact {
 const costaans: Contact[] = [
     {
         name: "Navneet Singh",
-        dept: "The Eastern Outlook",
+        dept: "SPONSORSHIPS & COMPANY COLLABORATION",
         phone: "+91 9876543210",
         email: "something@something.com",
         photo: sample,
