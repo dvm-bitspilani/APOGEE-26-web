@@ -2,7 +2,7 @@ import { Float, useGLTF } from "@react-three/drei";
 import { editable as e } from "@theatre/r3f";
 import { forwardRef } from "react";
 import * as THREE from "three";
-import carModel from "../../../../assets/3d/landing/car4.0.glb";
+import carModel from "../../../../assets/3d/landing/newcar5.glb";
 const Infernus = forwardRef<THREE.Group>((props, ref) => {
   const { scene } = useGLTF(carModel);
 
