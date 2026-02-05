@@ -48,7 +48,7 @@ export function Instances({ children, ...props }: { children: ReactNode } & JSX.
 export function Model(props: any) {
   const instances = useContext(context)
   return (
-    <e.group {...props} theatreKey='cityModel' dispose={null}  scale={[15,30,15]} position={[0.32181*15, -0.53*30, -2.8262*15]}>
+    <e.group {...props} theatreKey='cityModel' dispose={null}  scale={[10,10,10]} position={[0.32181*5, -0.53*5, -2.8262*5]}>
       <instances.Object rotation={[Math.PI / 2, 0, 0]} scale={0.007} />
       <instances.Object1 rotation={[Math.PI / 2, 0, 0]} scale={0.007} />
       <instances.Object2 rotation={[Math.PI / 2, 0, 0]} scale={0.007} />

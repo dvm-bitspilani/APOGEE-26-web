@@ -18,11 +18,12 @@ export default function CityGrid() {
 
   return (
     <>
-      {positions.map((pos, i) => (
-        <group key={i} position={pos}>
+      {/* {positions.map((pos, i) => ( */}
+        {/* <group key={i} position={pos}> */}
+        <group>
           <Model />
         </group>
-      ))}
+      {/* ))} */}
     </>
   )
 }
