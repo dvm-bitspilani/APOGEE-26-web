@@ -1,5 +1,5 @@
-import { create } from "zustand";
 import * as THREE from "three";
+import { create } from "zustand";
 type IntroState = {
   introDone: boolean;
   setIntroDone: (done: boolean) => void;
@@ -42,13 +42,23 @@ export const useCityStore = create<CityStore>((set) => ({
   setCity: (city) => set({ city }),
 }))
 
-type PivotStore={
-  pivot:THREE.Group | null
-  setPivot:(pivot: THREE.Group) => void
+type PivotStore = {
+  pivot: THREE.Group | null
+  setPivot: (pivot: THREE.Group) => void
 }
-export const usePivotStore = create<PivotStore>((set)=>({
-  pivot:null,
-  setPivot:(pivot) => set({pivot}),
+export const usePivotStore = create<PivotStore>((set) => ({
+  pivot: null,
+  setPivot: (pivot) => set({ pivot }),
+}))
+
+type InfernusStore = {
+  infernus: THREE.Group | null
+  setInfernus: (infernus: THREE.Group) => void
+}
+
+export const useInfernusStore = create<InfernusStore>((set) => ({
+  infernus: null,
+  setInfernus: (infernus) => set({ infernus }),
 }))
 
 export interface Event {

@@ -1,7 +1,7 @@
 import { useControls } from "leva";
+import { useEffect } from "react";
 import * as THREE from "three";
 import { useCityStore } from "../../../../../utils/store";
-import { useEffect } from "react";
 // import { useCityLandingStart } from "../../../hooks/useCityLandingStart";
 import { useCityKeyboardControl } from "../../../hooks/useCityKeyboardControl";
 
@@ -18,7 +18,7 @@ export default function CityDebug() {
     rotY: { value: 0, min: -180, max: 180, step: 1 },
     rotZ: { value: 0, min: -180, max: 180, step: 1 },
 
-    scale: { value: 15, min: 1, max: 50, step: 0.1 },
+    scale: { value: 17.6, min: 1, max: 50, step: 0.1 },
   });
   useEffect(() => {
     if (!city) return

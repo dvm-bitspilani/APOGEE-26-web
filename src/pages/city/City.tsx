@@ -1,30 +1,30 @@
 import { Canvas } from "@react-three/fiber";
-import CityScene from "./components/CityScene/CityScene";
-import CameraControllerLeva from "./components/leva/CameraControllerLeva/CameraControllerLeva";
-import BloomLeva from "./components/leva/BloomLeva/BloomLeva";
 import ReactHelmet from "../components/ReactHelmet";
+import CityScene from "./components/CityScene/CityScene";
+import BloomLeva from "./components/leva/BloomLeva/BloomLeva";
 import ScrollReminder from "./components/ScrollReminder/ScrollReminder";
 // import { Html } from "@react-three/drei";
 import styles from "./City.module.scss";
-import { OrbitControls } from "@react-three/drei";
 // import FogPlane from "./components/FogPlane";
 
-import { getProject } from "@theatre/core";
-import studio from "@theatre/studio";
+import { editable as e, SheetProvider } from "@theatre/r3f";
 import extension from '@theatre/r3f/dist/extension';
-import { editable as e, PerspectiveCamera, SheetProvider } from "@theatre/r3f";
+import studio from "@theatre/studio";
+import { sheet } from "./theatre";
 
 import debugFunctions from "../../utils/debug";
+import { OrbitControls } from "@react-three/drei";
 
 if (import.meta.env.DEV) {
   debugFunctions();
   studio.initialize()
   studio.extend(extension)
 }
-const project = getProject("APOGEE 26")
-const sheet = project.sheet("Cyber City")
-await project.ready;
-sheet.sequence.position = sheet.sequence.position;
+
+// Ensure the sheet is ready before rendering, if necessary, or just rely on React to handle it.
+// await project.ready; // Top level await might be issue if not handled, but usually fine in Vite + standard setups if supported.
+// Actually, usually we don't await at module level for React components unless Suspense is involved. 
+// Theatre documentation often suggests just using it.
 
 export default function City() {
   return (
