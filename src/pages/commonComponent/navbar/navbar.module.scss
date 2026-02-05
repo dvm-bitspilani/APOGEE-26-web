@@ -1,0 +1,18 @@
+@use "/src/assets/global.scss" as *;
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    // background-color: #000;
+
+    color: $cyber-yellow;
+    font-family: $font-glitch;
+    font-size: 1.2rem;
+    position: fixed;
+    top: 0;
+    // left: 0;
+    right: 0;
+    z-index: 1000;
+}
