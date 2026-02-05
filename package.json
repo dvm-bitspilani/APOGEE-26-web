@@ -31,6 +31,7 @@
     "react-helmet": "^6.1.0",
     "react-router-dom": "^7.12.0",
     "sass": "^1.97.2",
+    "scrolly-video": "^0.0.24",
     "three": "^0.182.0"
   },
   "devDependencies": {

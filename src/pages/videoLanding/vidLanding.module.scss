@@ -1,0 +1,29 @@
+.container {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    background-color: #000;
+}
+
+.videoContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 0;
+    
+    // ScrollyVideo usually creates a canvas or video element
+    :global(.scrolly-video-container) {
+        width: 100% !important;
+        height: 100% !important;
+    }
+}
+
+.content {
+    position: relative;
+    z-index: 1;
+    color: white;
+    padding-top: 20vh;
+    text-align: center;
+}
