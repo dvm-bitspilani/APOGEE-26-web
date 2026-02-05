@@ -13,7 +13,9 @@ import GlitchText from "./components/UI/glitchText/GlitchText";
 
 function Registration() {
   const navigate = useNavigate();
-  const { setRegistrationStep } = useRegistrationStore();
+  const { setRegistrationStep, setEvents } = useRegistrationStore();
+
+
 
   const {
     registrationStep,
@@ -21,6 +23,7 @@ function Registration() {
     stickyEvent,
     selectedEvents,
     toggleEvent,
+    setAccessToken,
   } = useRegistrationStore();
 
   const displayEvent = stickyEvent || activeEvent;
@@ -64,6 +67,18 @@ function Registration() {
 
   const [userEmail, setUserEmail] = useState("");
 
+
+  const getEvents = () => {
+    axios
+      .get("https://merge.bits-apogee.org/2026/main/registrations/web_events/")
+      .then((res) => {
+        setEvents(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const googleLogin = useGoogleLogin({
     onSuccess: (response) => {
       axios
@@ -99,7 +114,13 @@ function Registration() {
 
             setUserEmail(res.data.email);
 
-            if (res.data.email) setRegistrationStep("details");
+            setAccessToken(response.access_token);
+
+            if (res.data.email) {
+              setRegistrationStep("details");
+              getEvents();
+            }
+
           }
         })
 
@@ -158,7 +179,7 @@ function Registration() {
             {/* Scrollable Content Section */}
             <div className={styles.scrollContainer}>
               <div className={styles.detailsContent}>
-                <p className={styles.eventDesc}>{displayEvent.about}</p>
+                <p className={styles.eventDesc}>{displayEvent.description}</p>
               </div>
               {/* Fade Overlay */}
               <div className={styles.fadeOverlay}></div>
