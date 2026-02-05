@@ -1,3 +1,5 @@
+//@ts-nocheck //! remove this if this file is used in
+//! Removing all imports/use of this file since it does nothing after creating unused objects
 import { useScroll } from "@react-three/drei"
 import { useCityStore, usePivotStore } from "../../../utils/store"
 import { useRef } from "react"

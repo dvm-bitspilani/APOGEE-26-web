@@ -2,12 +2,12 @@ import { useControls } from "leva";
 import * as THREE from "three";
 import { usePivotStore } from "../../../../../utils/store";
 import { useEffect } from "react";
-import { useCityLandingStart } from "../../../hooks/useCityLandingStart";
+// import { useCityLandingStart } from "../../../hooks/useCityLandingStart";
 // import { useCityKeyboardControl } from "../../../hooks/useCityKeyboardControl";
 
 export default function PivotLeva() {
   const pivot = usePivotStore((s) => s.pivot)
-  useCityLandingStart();
+  // useCityLandingStart();
   // useCityKeyboardControl();
   const debug = useControls("Pivot (debug)", {
     rotX: { value: 0, min: -180, max: 180, step: 1 },
