@@ -1,0 +1,136 @@
+{
+  "sheetsById": {
+    "Cyber City": {
+      "staticOverrides": {
+        "byObject": {}
+      },
+      "sequence": {
+        "subUnitsPerUnit": 30,
+        "length": 10,
+        "type": "PositionalSequence",
+        "tracksByObject": {
+          "infernus": {
+            "trackData": {
+              "bMyvjinWxs": {
+                "type": "BasicKeyframedTrack",
+                "__debugName": "infernus:[\"position\",\"x\"]",
+                "keyframes": []
+              },
+              "stUqJIN-Vd": {
+                "type": "BasicKeyframedTrack",
+                "__debugName": "infernus:[\"position\",\"y\"]",
+                "keyframes": []
+              },
+              "kZGtJ4piQD": {
+                "type": "BasicKeyframedTrack",
+                "__debugName": "infernus:[\"position\",\"z\"]",
+                "keyframes": [
+                  {
+                    "id": "c_ISJloY6Z",
+                    "position": 0,
+                    "connectedRight": true,
+                    "handles": [
+                      0.5,
+                      1,
+                      0.5,
+                      0
+                    ],
+                    "type": "bezier",
+                    "value": 0
+                  },
+                  {
+                    "id": "jOc6Yd7VhB",
+                    "position": 1,
+                    "connectedRight": true,
+                    "handles": [
+                      0.5,
+                      1,
+                      0.5,
+                      0
+                    ],
+                    "type": "bezier",
+                    "value": -1.5
+                  }
+                ]
+              }
+            },
+            "trackIdByPropPath": {
+              "[\"position\",\"x\"]": "bMyvjinWxs",
+              "[\"position\",\"y\"]": "stUqJIN-Vd",
+              "[\"position\",\"z\"]": "kZGtJ4piQD"
+            }
+          },
+          "cityModel": {
+            "trackData": {
+              "s1HYlAJjqh": {
+                "type": "BasicKeyframedTrack",
+                "__debugName": "cityModel:[\"position\",\"x\"]",
+                "keyframes": [
+                  {
+                    "id": "z1uxs_-cO5",
+                    "position": 0,
+                    "connectedRight": true,
+                    "handles": [
+                      0.5,
+                      1,
+                      0.5,
+                      0
+                    ],
+                    "type": "bezier",
+                    "value": 1.6090499999999999
+                  }
+                ]
+              },
+              "Sy5qA6QOH3": {
+                "type": "BasicKeyframedTrack",
+                "__debugName": "cityModel:[\"position\",\"y\"]",
+                "keyframes": []
+              },
+              "YEDSg5rdJC": {
+                "type": "BasicKeyframedTrack",
+                "__debugName": "cityModel:[\"position\",\"z\"]",
+                "keyframes": [
+                  {
+                    "id": "wpTZQnGOmZ",
+                    "position": 0,
+                    "connectedRight": true,
+                    "handles": [
+                      0.5,
+                      1,
+                      0.5,
+                      0
+                    ],
+                    "type": "bezier",
+                    "value": -14.131
+                  },
+                  {
+                    "id": "iP0O6ouHp6",
+                    "position": 0.967,
+                    "connectedRight": true,
+                    "handles": [
+                      0.5,
+                      1,
+                      0.5,
+                      0
+                    ],
+                    "type": "bezier",
+                    "value": -16
+                  }
+                ]
+              }
+            },
+            "trackIdByPropPath": {
+              "[\"position\",\"x\"]": "s1HYlAJjqh",
+              "[\"position\",\"y\"]": "Sy5qA6QOH3",
+              "[\"position\",\"z\"]": "YEDSg5rdJC"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitionVersion": "0.4.0",
+  "revisionHistory": [
+    "o7edOuCeTCBNdCv5"
+  ]
+}

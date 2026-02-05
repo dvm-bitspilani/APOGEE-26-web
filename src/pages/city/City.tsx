@@ -10,15 +10,19 @@ import styles from "./City.module.scss";
 import { editable as e, SheetProvider } from "@theatre/r3f";
 import extension from '@theatre/r3f/dist/extension';
 import studio from "@theatre/studio";
-import { sheet } from "./theatre";
-
+// import { sheet } from "./theatre";
+import state from "./state.json"
 import debugFunctions from "../../utils/debug";
 import { OrbitControls } from "@react-three/drei";
+import { getProject } from "@theatre/core";
+import { useEffect } from "react";
 
+export const project = getProject("City Project", { state });
+export const sheet = project.sheet("Scene");
 if (import.meta.env.DEV) {
-  debugFunctions();
+  // debugFunctions();
   studio.initialize()
-  studio.extend(extension)
+  // studio.extend(extension)
 }
 
 // Ensure the sheet is ready before rendering, if necessary, or just rely on React to handle it.
@@ -27,6 +31,12 @@ if (import.meta.env.DEV) {
 // Theatre documentation often suggests just using it.
 
 export default function City() {
+  useEffect(() => {
+    project.ready.then(() => {
+      sheet.sequence.play({ iterationCount: Infinity }); 
+      // remove Infinity if you want play only once
+    });
+  }, []);
   return (
     <>
       <ReactHelmet
@@ -48,7 +58,7 @@ export default function City() {
               angle={0.3}
               distance={0.5}
               intensity={10.5} />
-            <OrbitControls/>
+            {/* <OrbitControls/> */}
             {/* If enabling OrbitControls, disable the CameraControllerLeva here and useHoverCamera, useCityLandingSTrat and useKeyboard control */}
             <spotLight
               position={[0, 5, 0]}
