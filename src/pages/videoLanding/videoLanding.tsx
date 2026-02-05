@@ -8,15 +8,12 @@ import styles from './vidLanding.module.scss';
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
 const FRAME_COUNT = 160;
-// const FRAME_COUNT = 200;
 const FRAME_PATH = '/videos/frames_webp/f_';
-// const FRAME_PATH = '/videos/frames/f_';
 
-// Generate frame path with zero-padded number (1-indexed: frame_0001.webp to frame_0192.webp)
+// Generate frame path with zero-padded number (1-indexed: f_0001.webp to f_0160.webp)
 const getFramePath = (index: number): string => {
     const paddedIndex = String(index).padStart(4, '0');
-    // return `${FRAME_PATH}${paddedIndex}.webp`;
-    return `${FRAME_PATH}${paddedIndex}.jpg`;
+    return `${FRAME_PATH}${paddedIndex}.webp`;
 };
 
 export default function VideoLanding() {
