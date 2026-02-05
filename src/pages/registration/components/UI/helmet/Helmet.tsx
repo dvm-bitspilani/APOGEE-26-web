@@ -61,7 +61,7 @@ function HelmetModel() {
     return (
         <group ref={followRef}>
 
-            <group rotation={[0, Math.PI, 0]} position={[0, 0.3, 0]} scale={0.7}>
+            <group rotation={[0, Math.PI, 0]} position={[0, 0.3, 0]} scale={0.8}>
                 <primitive object={scene} />
                 <ambientLight intensity={colour.intensity1} color={colour.color1} />
                 <directionalLight
