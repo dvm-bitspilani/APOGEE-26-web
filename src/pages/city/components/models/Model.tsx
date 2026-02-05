@@ -11,6 +11,8 @@ import { createContext, useContext, useMemo, type JSX, type ReactNode } from 're
 import * as THREE from 'three'
 import type { GLTF } from 'three-stdlib'
 
+import { editable as e } from '@theatre/r3f'
+
 type GLTFResult = GLTF & {
   nodes: {
     Object_4: THREE.Mesh
@@ -43,14 +45,14 @@ export function Instances({ children, ...props }: { children: ReactNode } & JSX.
   )
 }
 
-export function Model(props: JSX.IntrinsicElements['group']) {
+export function Model(props: any) {
   const instances = useContext(context)
   return (
-    <group {...props} dispose={null}  scale={[15,30,15]} position={[-30,-5,-30]}>
+    <e.group {...props} theatreKey='cityModel' dispose={null}  scale={[15,30,15]} position={[0.32181*15, -0.53*30, -2.8262*15]}>
       <instances.Object rotation={[Math.PI / 2, 0, 0]} scale={0.007} />
       <instances.Object1 rotation={[Math.PI / 2, 0, 0]} scale={0.007} />
       <instances.Object2 rotation={[Math.PI / 2, 0, 0]} scale={0.007} />
-    </group>
+    </e.group>
   )
 }
 

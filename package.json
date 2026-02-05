@@ -17,6 +17,7 @@
     "@react-three/postprocessing": "^3.0.4",
     "@react-three/rapier": "^2.2.0",
     "@theatre/core": "^0.7.2",
+    "@theatre/r3f": "^0.7.2",
     "@theatre/studio": "^0.7.2",
     "axios": "^1.13.2",
     "gsap": "^3.14.2",

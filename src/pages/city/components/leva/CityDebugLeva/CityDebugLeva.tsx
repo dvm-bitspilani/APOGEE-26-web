@@ -2,13 +2,13 @@ import { useControls } from "leva";
 import * as THREE from "three";
 import { useCityStore } from "../../../../../utils/store";
 import { useEffect } from "react";
-import { useCityLandingStart } from "../../../hooks/useCityLandingStart";
-// import { useCityKeyboardControl } from "../../../hooks/useCityKeyboardControl";
+// import { useCityLandingStart } from "../../../hooks/useCityLandingStart";
+import { useCityKeyboardControl } from "../../../hooks/useCityKeyboardControl";
 
 export default function CityDebug() {
   const city = useCityStore((s) => s.city)
-  useCityLandingStart();
-  // useCityKeyboardControl();
+  // useCityLandingStart();
+  useCityKeyboardControl();
   const debug = useControls("City (debug)", {
     posX: { value: -110, min: -500, max: 500, step: 0.1 },
     posY: { value: -120, min: -500, max: 500, step: 0.1 },
