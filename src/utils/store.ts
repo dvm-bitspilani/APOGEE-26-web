@@ -61,6 +61,16 @@ export const useInfernusStore = create<InfernusStore>((set) => ({
   setInfernus: (infernus) => set({ infernus }),
 }))
 
+type TheatreCameraStore = {
+  theatreCamera: THREE.PerspectiveCamera | null,
+  setTheatreCamera: (theatreCamera: THREE.PerspectiveCamera) => void
+}
+
+export const useTheatreCameraStore = create<TheatreCameraStore>((set) => ({
+  theatreCamera: null,
+  setTheatreCamera: (camera) => set({ theatreCamera: camera }),
+}))
+
 export interface Event {
   id: number;
   name: string;

@@ -3,12 +3,12 @@ import { useEffect } from "react";
 import * as THREE from "three";
 import { useCityStore } from "../../../../../utils/store";
 // import { useCityLandingStart } from "../../../hooks/useCityLandingStart";
-// import { useCityKeyboardControl } from "../../../hooks/useCityKeyboardControl";
+import { useCityKeyboardControl } from "../../../hooks/useCityKeyboardControl";
 
 export default function CityDebug() {
   const city = useCityStore((s) => s.city)
   // useCityLandingStart();
-  // useCityKeyboardControl();
+  useCityKeyboardControl();
   const debug = useControls("City (debug)", {
     posX: { value: -130, min: -500, max: 500, step: 0.1 },
     posY: { value: 22.7, min: -500, max: 500, step: 0.1 },

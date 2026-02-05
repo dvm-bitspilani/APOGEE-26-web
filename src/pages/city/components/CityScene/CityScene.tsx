@@ -8,20 +8,24 @@ import { Instances } from "../models/Model";
 // import { useCameraMouseParallax } from "../../hooks/useHoverCamera";
 // import {useCarInsideScroll} from "../../hooks/useCarInsideScroll"
 import { PerspectiveCamera, editable as e } from '@theatre/r3f';
-import { useInfernusStore } from "../../../../utils/store";
-import CityGrid from "../CityGrid";
-import CameraLeva from "../leva/CameraLeva/CameraLeva";
+import { useInfernusStore, useTheatreCameraStore } from "../../../../utils/store";
+// import CityGrid from "../CityGrid";
+// import CameraLeva from "../leva/CameraLeva/CameraLeva";
 import InfernusLeva from "../leva/InfernusLeva/InfernusLeva";
 import PivotLeva from "../leva/PivotLeva/PivotLeva";
 import ScrollSync from "../ScrollSync/ScrollSync";
+import Constellation from "../Constellation";
+import TheatreCameraLeva from "../leva/CameraLeva/TheatreCameraLeva";
 
 export default function CityScene({ }: any) {
   const infernusRef = useRef<THREE.Group>(null!);
   const cityRef = useRef<THREE.Group>(null!);
+  const theatreCameraRef = useRef<THREE.PerspectiveCamera>(null!);
   const setCity = useCityStore((s) => s.setCity);
   const setPivot = usePivotStore((s) => s.setPivot);
   const setInfernus = useInfernusStore((s) => s.setInfernus); // Add this
   const carPivotRef = useRef<THREE.Group>(null!);
+  const setTheatreCamera = useTheatreCameraStore((s) => s.setTheatreCamera);
   //   useCameraMouseParallax({
   //   minY: -0.1,
   //   maxY: 0.1,
@@ -42,11 +46,17 @@ export default function CityScene({ }: any) {
       setInfernus(infernusRef.current);
     }
   }, [setInfernus]);
+  useEffect(() => {
+    if (theatreCameraRef.current) {
+      setTheatreCamera(theatreCameraRef.current);
+    }
+  }, [setTheatreCamera]);
 
   return (
     <>
       <InfernusLeva />
-      <CameraLeva />
+      {/* <CameraLeva /> */}
+      {/* <TheatreCameraLeva  /> //?: Not yet working... */}
       <color attach="background" args={["#110013"]} />
       {/* {import.meta.env.DEV && <Perf position="top-left" />} */}
       <ambientLight intensity={0.5} />
@@ -56,10 +66,27 @@ export default function CityScene({ }: any) {
             {/* <ambientLight intensity={0.5} /> */}
             <group ref={cityRef}>
               <axesHelper args={[200]} />
-              <CityGrid />
+              {/* <CityGrid /> */}
+              <Constellation />
             </group>
           </group>
 
+          <e.group theatreKey="CamCar">
+            {/* <directionalLight
+            position={[0, 10, 0]}
+           intensity={0.5} /> */}
+            <PerspectiveCamera
+              makeDefault
+              ref={theatreCameraRef}
+              near={0.1}
+              far={1000000}
+              fov={39}
+              theatreKey="TheatreCamera"
+              position={[0, 7, 12]}
+              rotation={[0, Math.PI/2, 0]}
+            />
+            <Infernus ref={infernusRef} />
+          </e.group>
           <ScrollControls pages={4} damping={0.2}>
             {/* Use PivotLeva to roate the city around the car's axis */}
             <PivotLeva />
@@ -67,21 +94,6 @@ export default function CityScene({ }: any) {
             <CityDebug />
             <ScrollSync />
           </ScrollControls>
-          <e.group theatreKey="CamCar">
-            {/* <directionalLight
-            position={[0, 10, 0]}
-           intensity={0.5} /> */}
-            <PerspectiveCamera
-              makeDefault
-              near={0.1}
-              far={1000000}
-              fov={39}
-              theatreKey="Camera"
-              position={[0, 7, 12]}
-              rotation={[-Math.PI*0.15, 0, 0]}
-            />
-            <Infernus ref={infernusRef} />
-          </e.group>
         </group>
       </Instances>
     </>
