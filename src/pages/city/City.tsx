@@ -18,7 +18,7 @@ import { getProject } from "@theatre/core";
 import { useEffect } from "react";
 
 export const project = getProject("City Project", { state });
-export const sheet = project.sheet("Scene");
+export const sheet = project.sheet("Cyber City");
 if (import.meta.env.DEV) {
   // debugFunctions();
   studio.initialize()
