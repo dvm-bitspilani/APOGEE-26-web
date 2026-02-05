@@ -1,8 +1,19 @@
-.container {
+// ScrollSmoother wrapper
+.wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 2; // Above canvas
+}
+
+.smoothContent {
     position: relative;
     width: 100%;
-    min-height: 500vh; // Scrollable area for frame scrubbing
-    background-color: #000;
+    min-height: 500vh; // Scrollable area for all 192 frames
+    background-color: transparent; // Transparent so canvas shows through
 }
 
 // Loading screen
@@ -54,8 +65,9 @@
     left: 0;
     width: 100%;
     height: 100vh;
-    z-index: 0;
+    z-index: 1; // Behind wrapper but visible
     overflow: hidden;
+    background-color: #000; // Fallback background
 }
 
 .canvas {
