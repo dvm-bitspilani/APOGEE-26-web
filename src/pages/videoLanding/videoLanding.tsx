@@ -173,20 +173,24 @@ export default function VideoLanding() {
 
     return (
         <>
-            {/* Loading indicator */}
-            {isLoading && (
-                <div className={styles.loader}>
-                    <div className={styles.loaderContent}>
-                        <div className={styles.loaderBar}>
+            {/* Preloader */}
+            <div className={`${styles.preloader} ${!isLoading ? styles.preloaderHidden : ''}`}>
+                <div className={styles.preloaderContent}>
+                    <div className={styles.preloaderLogo}>
+                        <span>APOGEE</span>
+                    </div>
+                    <div className={styles.preloaderBarContainer}>
+                        <div className={styles.preloaderBar}>
                             <div
-                                className={styles.loaderProgress}
+                                className={styles.preloaderProgress}
                                 style={{ width: `${loadProgress}%` }}
                             />
                         </div>
-                        <span className={styles.loaderText}>Loading frames {loadProgress}%</span>
+                        <span className={styles.preloaderText}>{loadProgress}%</span>
                     </div>
+                    <p className={styles.preloaderHint}>Loading experience...</p>
                 </div>
-            )}
+            </div>
 
             {/* Fixed canvas background - OUTSIDE ScrollSmoother to stay truly fixed */}
             <div className={styles.canvasContainer}>

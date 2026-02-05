@@ -1,3 +1,105 @@
+// Preloader - full screen overlay
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #0a0a0a 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    transition: opacity 0.8s ease-out, visibility 0.8s ease-out;
+}
+
+.preloaderHidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.preloaderContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    text-align: center;
+}
+
+.preloaderLogo {
+    span {
+        font-size: clamp(3rem, 10vw, 6rem);
+        font-weight: 900;
+        letter-spacing: 0.3em;
+        background: linear-gradient(135deg, #fff 0%, #a855f7 50%, #6366f1 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: pulse 2s ease-in-out infinite;
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+.preloaderBarContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%;
+    max-width: 300px;
+}
+
+.preloaderBar {
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.preloaderProgress {
+    height: 100%;
+    background: linear-gradient(90deg, #6366f1, #a855f7, #ec4899);
+    border-radius: 2px;
+    transition: width 0.15s ease-out;
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
+}
+
+.preloaderText {
+    font-size: 1.5rem;
+    font-weight: 600;
+    font-family: system-ui, -apple-system, sans-serif;
+    color: #fff;
+    letter-spacing: 0.1em;
+}
+
+.preloaderHint {
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.5);
+    font-family: system-ui, -apple-system, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    animation: fadeInOut 2s ease-in-out infinite;
+}
+
+@keyframes fadeInOut {
+    0%, 100% {
+        opacity: 0.5;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
 // ScrollSmoother wrapper
 .wrapper {
     position: fixed;
@@ -6,56 +108,14 @@
     width: 100%;
     height: 100%;
     overflow: hidden;
-    z-index: 2; // Above canvas
+    z-index: 2;
 }
 
 .smoothContent {
     position: relative;
     width: 100%;
-    min-height: 500vh; // Scrollable area for all 192 frames
-    background-color: transparent; // Transparent so canvas shows through
-}
-
-// Loading screen
-.loader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background: #000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 100;
-}
-
-.loaderContent {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-}
-
-.loaderBar {
-    width: 200px;
-    height: 4px;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 2px;
-    overflow: hidden;
-}
-
-.loaderProgress {
-    height: 100%;
-    background: linear-gradient(90deg, #6366f1, #8b5cf6);
-    border-radius: 2px;
-    transition: width 0.1s ease-out;
-}
-
-.loaderText {
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 0.875rem;
-    font-family: system-ui, -apple-system, sans-serif;
+    min-height: 500vh;
+    background-color: transparent;
 }
 
 // Canvas container - fixed in viewport
@@ -65,9 +125,9 @@
     left: 0;
     width: 100%;
     height: 100vh;
-    z-index: 1; // Behind wrapper but visible
+    z-index: 1;
     overflow: hidden;
-    background-color: #000; // Fallback background
+    background-color: #000;
 }
 
 .canvas {
