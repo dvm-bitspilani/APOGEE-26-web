@@ -56,7 +56,7 @@ export default function CityScene({ }: any) {
     <>
       <InfernusLeva />
       {/* <CameraLeva /> */}
-      {/* <TheatreCameraLeva  /> //?: Not yet working... */}
+      <TheatreCameraLeva  /> //?: Not yet working...
       <color attach="background" args={["#110013"]} />
       {/* {import.meta.env.DEV && <Perf position="top-left" />} */}
       <ambientLight intensity={0.5} />
@@ -85,7 +85,7 @@ export default function CityScene({ }: any) {
               position={[0, 7, 12]}
               rotation={[0, Math.PI/2, 0]}
             />
-            <Infernus ref={infernusRef} />
+            {/* <Infernus ref={infernusRef} /> */}
           </e.group>
           <ScrollControls pages={4} damping={0.2}>
             {/* Use PivotLeva to roate the city around the car's axis */}

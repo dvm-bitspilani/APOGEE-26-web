@@ -13,9 +13,10 @@ import studio from "@theatre/studio";
 // import { sheet } from "./theatre";
 import state from "./state.json"
 import debugFunctions from "../../utils/debug";
-// import { OrbitControls } from "@react-three/drei";
+import { OrbitControls } from "@react-three/drei";
 import { getProject } from "@theatre/core";
 import { useEffect } from "react";
+import { Environment } from "@react-three/drei";
 
 export const project = getProject("City Project", { state });
 export const sheet = project.sheet("Cyber City");
@@ -50,6 +51,7 @@ export default function City() {
           style={{ width: "100%", height: "100%" }}
 
         >
+          <Environment preset="city" />
           <SheetProvider sheet={sheet}>
             {/* <CameraControllerLeva /> */}
             <e.spotLight
@@ -58,7 +60,7 @@ export default function City() {
               angle={0.3}
               distance={0.5}
               intensity={10.5} />
-            {/* <OrbitControls/> */}
+            <OrbitControls/>
             {/* If enabling OrbitControls, disable the CameraControllerLeva here and useHoverCamera, useCityLandingSTrat and useKeyboard control */}
             <spotLight
               position={[0, 5, 0]}

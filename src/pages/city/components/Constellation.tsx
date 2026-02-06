@@ -3,7 +3,7 @@ import { editable as e } from "@theatre/r3f";
 
 const BLOCKS = 1
 const SPACING = 100
-const scaleFactor = [0.1,0.1,0.1]
+const scaleFactor = [1,1,1]
 
 export default function Constellation() {
     const positions: [number, number, number][] = [];
