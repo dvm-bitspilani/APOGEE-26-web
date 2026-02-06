@@ -1,5 +1,5 @@
 import styles from "./DetailsForm.module.scss";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { useRegistrationStore } from "../../../../utils/store";
@@ -8,6 +8,7 @@ import NavButton from "../navButton/NavButton";
 import FormPart1 from "./components/FormPart1";
 import FormPart2 from "./components/FormPart2";
 import * as Yup from "yup";
+import axios from "axios";
 
 const validationForm1Schema = Yup.object({
   name: Yup.string().required("[Name is required]"),
@@ -41,7 +42,7 @@ function getDatePlaceholder(locale = navigator.language) {
 }
 
 const DetailsForm = ({ mail = "" }: { mail: string }) => {
-  const { setRegistrationStep } = useRegistrationStore();
+  const { setRegistrationStep, userData, setUserData } = useRegistrationStore();
 
   const [errors, setErrors] = useState({
     name: "",
@@ -55,21 +56,13 @@ const DetailsForm = ({ mail = "" }: { mail: string }) => {
   });
 
   const [step, setStep] = useState(1);
+  const [collegeList, setCollegeList] = useState([]);
   const container = useRef<HTMLDivElement>(null);
   const form1Ref = useRef<HTMLDivElement>(null);
   const form2Ref = useRef<HTMLDivElement>(null);
 
   const { contextSafe } = useGSAP({ scope: container });
-  const [formData, setFormData] = useState({
-    name: "",
-    email: mail,
-    gender: "",
-    dob: "",
-    college: "",
-    year: "",
-    state: "",
-    city: "",
-  });
+
 
   const [placeholder, setPlaceholder] = useState("");
 
@@ -87,12 +80,16 @@ const DetailsForm = ({ mail = "" }: { mail: string }) => {
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setUserData({ ...userData, [e.target.name]: e.target.value });
   };
+
+  useEffect(() => {
+    setUserData({ ...userData, email: mail });
+  }, [mail]);
 
   const validateForm1 = async () => {
     try {
-      await validationForm1Schema.validate(formData, { abortEarly: false });
+      await validationForm1Schema.validate(userData, { abortEarly: false });
       setErrors({
         name: "",
         email: "",
@@ -116,7 +113,7 @@ const DetailsForm = ({ mail = "" }: { mail: string }) => {
 
   const validateForm2 = async () => {
     try {
-      await validationForm2Schema.validate(formData, { abortEarly: false });
+      await validationForm2Schema.validate(userData, { abortEarly: false });
       setErrors({
         name: "",
         email: "",
@@ -206,6 +203,16 @@ const DetailsForm = ({ mail = "" }: { mail: string }) => {
 
   });
 
+  useEffect(() => {
+    axios.get("https://merge.bits-apogee.org/2026/main/registrations/get_college/")
+      .then((res) => {
+        setCollegeList(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <div ref={container} className={styles.container}>
       <h1 className={styles.title}>REGISTER</h1>
@@ -220,7 +227,7 @@ const DetailsForm = ({ mail = "" }: { mail: string }) => {
           >
 
             <FormPart1
-              formData={formData}
+              formData={userData}
               handleChange={handleChange}
               placeholder={placeholder}
               errors={errors}
@@ -239,9 +246,10 @@ const DetailsForm = ({ mail = "" }: { mail: string }) => {
             onSubmit={(e) => e.preventDefault()}
           >
             <FormPart2
-              formData={formData}
+              formData={userData}
               handleChange={handleChange}
               locationData={locationData}
+              collegeList={collegeList}
               errors={errors}
             />
 
@@ -263,16 +271,17 @@ const DetailsForm = ({ mail = "" }: { mail: string }) => {
           onSubmit={(e) => e.preventDefault()}
         >
           <FormPart1
-            formData={formData}
+            formData={userData}
             handleChange={handleChange}
             placeholder={placeholder}
             errors={errors}
           />
           <FormPart2
-            formData={formData}
+            formData={userData}
             handleChange={handleChange}
             locationData={locationData}
             errors={errors}
+            collegeList={collegeList}
           />
         </form>
         <NavButton onClick={handleToEvents} outerClass={styles.navButton} innerClass={styles.navButtonContent}>

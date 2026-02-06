@@ -17,13 +17,14 @@ interface FormPart2Props {
         state: string;
         city: string;
     };
+    collegeList: { id: string, name: string }[];
 }
 
-export default function FormPart2({ formData, handleChange, locationData, errors }: FormPart2Props) {
+export default function FormPart2({ formData, handleChange, locationData, errors, collegeList }: FormPart2Props) {
     return (
         <>
             <div className={styles.inputGroup}>
-                <input
+                {/* <input
                     type="text"
                     name="college"
                     placeholder="[College]"
@@ -31,7 +32,23 @@ export default function FormPart2({ formData, handleChange, locationData, errors
                     onChange={handleChange}
                     className={styles.input}
                     autoComplete="off"
-                />
+                /> */}
+                <select
+                    name="college"
+                    value={formData.college}
+                    onChange={handleChange}
+                    className={`${styles.input} ${styles.select}`}
+                >
+                    <option value="" disabled hidden>
+                        [College]
+                    </option>
+                    {/* Placeholder options */}
+                    {
+                        collegeList.map((college, i) =>
+                            <option value={college.id} key={i}>{college.name}</option>
+                        )
+                    }
+                </select>
                 {errors.college && <p className={styles.error}>{errors.college}</p>}
             </div>
 

@@ -10,10 +10,13 @@ import { useCookies } from "react-cookie";
 import { useState } from "react";
 import Helmet from "./components/UI/helmet/Helmet";
 import GlitchText from "./components/UI/glitchText/GlitchText";
+import redirectWithPost from "./redirectWithPost";
 
 function Registration() {
   const navigate = useNavigate();
-  const { setRegistrationStep } = useRegistrationStore();
+  const { setRegistrationStep, setEvents } = useRegistrationStore();
+
+
 
   const {
     registrationStep,
@@ -21,6 +24,7 @@ function Registration() {
     stickyEvent,
     selectedEvents,
     toggleEvent,
+    setAccessToken,
   } = useRegistrationStore();
 
   const displayEvent = stickyEvent || activeEvent;
@@ -36,40 +40,26 @@ function Registration() {
     "Access_token",
   ]);
 
-  function redirectWithPost(url: string, data: { [key: string]: string }) {
-    const form = document.createElement("form");
-
-    form.method = "POST";
-
-    form.action = url;
-
-    for (const key in data) {
-      if (data.hasOwnProperty(key)) {
-        const input = document.createElement("input");
-
-        input.type = "hidden";
-
-        input.name = key;
-
-        input.value = data[key];
-
-        form.appendChild(input);
-      }
-    }
-
-    document.body.appendChild(form);
-
-    form.submit();
-  }
-
   const [userEmail, setUserEmail] = useState("");
+
+
+  const getEvents = () => {
+    axios
+      .get("https://bits-apogee.org/2026/main/registrations/web_events/")
+      .then((res) => {
+        setEvents(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const googleLogin = useGoogleLogin({
     onSuccess: (response) => {
       axios
 
         .post(
-          "https://merge.bits-apogee.org/2026/main/registrations/google-reg/",
+          "https://bits-apogee.org/2026/main/registrations/google-reg/",
           {
             access_token: response.access_token,
           },
@@ -86,7 +76,7 @@ function Registration() {
             // window.location.href = `https://bits-oasis.org/2025/main/registrations?token=${res.data.tokens.access}`;
 
             redirectWithPost(
-              "https://merge.bits-apogee.org/2026/main/registrations/google-reg/",
+              "https://bits-apogee.org/2026/main/registrations/google-reg/",
 
               {
                 token: res.data.tokens.access,
@@ -99,7 +89,13 @@ function Registration() {
 
             setUserEmail(res.data.email);
 
-            if (res.data.email) setRegistrationStep("details");
+            setAccessToken(response.access_token);
+
+            if (res.data.email) {
+              setRegistrationStep("details");
+              getEvents();
+            }
+
           }
         })
 
@@ -158,7 +154,7 @@ function Registration() {
             {/* Scrollable Content Section */}
             <div className={styles.scrollContainer}>
               <div className={styles.detailsContent}>
-                <p className={styles.eventDesc}>{displayEvent.about}</p>
+                <p className={styles.eventDesc}>{displayEvent.description}</p>
               </div>
               {/* Fade Overlay */}
               <div className={styles.fadeOverlay}></div>

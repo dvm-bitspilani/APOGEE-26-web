@@ -16,6 +16,10 @@ function HelmetModel() {
         color2: "#6bffe5",
         color3: "#6bffe5",
         color4: "#f9ff00",
+        intensity1: { value: 2, min: 0, max: 10, step: 0.1 },
+        intensity2: { value: 2, min: 0, max: 10, step: 0.1 },
+        intensity3: { value: 2, min: 0, max: 10, step: 0.1 },
+        intensity4: { value: 2, min: 0, max: 10, step: 0.1 },
         // intensity: { value: 2, min: 0, max: 10, step: 0.1 },
     })
 
@@ -59,20 +63,20 @@ function HelmetModel() {
 
             <group rotation={[0, Math.PI, 0]} position={[0, 0.3, 0]} scale={0.8}>
                 <primitive object={scene} />
-                <ambientLight intensity={2} color={colour.color1} />
+                <ambientLight intensity={colour.intensity1} color={colour.color1} />
                 <directionalLight
                     position={[40, 40, 40]}
-                    intensity={5.4}
+                    intensity={colour.intensity2}
                     color={colour.color2}
                 />
                 <directionalLight
                     position={[-40, 40, 40]}
-                    intensity={5.4}
+                    intensity={colour.intensity3}
                     color={colour.color3}
                 />
                 <directionalLight
                     position={[10, 10, -10]}
-                    intensity={4.8}
+                    intensity={colour.intensity4}
                     color={colour.color4}
                 />
             </group>

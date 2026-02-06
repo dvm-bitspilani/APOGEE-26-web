@@ -70,9 +70,9 @@ export default function FormPart1({ formData, handleChange, placeholder, errors 
                     <option value="" disabled hidden>
                         [Gender]
                     </option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                    <option value="other">Other</option>
+                    <option value="M">Male</option>
+                    <option value="F">Female</option>
+                    <option value="O">Other</option>
                 </select>
                 {errors.gender && <p className={styles.error}>{errors.gender}</p>}
             </div>
