@@ -11,7 +11,7 @@ export default function TheatreCameraLeva() {
         posY: { value: 7, min: -100, max: 100, step: 0.1 },
         posZ: { value: 12, min: -100, max: 100, step: 0.1 },
 
-        rotX: { value: -27, min: -180, max: 180, step: 1 },
+        rotX: { value: -5, min: -180, max: 180, step: 1 },
         rotY: { value: 0, min: -180, max: 180, step: 1 },
         rotZ: { value: 0, min: -180, max: 180, step: 1 },
     });

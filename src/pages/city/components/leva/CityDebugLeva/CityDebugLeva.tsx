@@ -8,11 +8,12 @@ import { useCityKeyboardControl } from "../../../hooks/useCityKeyboardControl";
 export default function CityDebug() {
   const city = useCityStore((s) => s.city)
   // useCityLandingStart();
-  useCityKeyboardControl();
+  // useCityKeyboardControl();
+  const defaultPosition = { x: -3.6, y: 274.2, z: 456.0 }
   const debug = useControls("City (debug)", {
-    posX: { value: -130, min: -500, max: 500, step: 0.1 },
-    posY: { value: 22.7, min: -500, max: 500, step: 0.1 },
-    posZ: { value: 136, min: -500, max: 500, step: 0.1 },
+    posX: { value: defaultPosition.x, min: -500, max: 500, step: 0.1 },
+    posY: { value: defaultPosition.y, min: -500, max: 500, step: 0.1 },
+    posZ: { value: defaultPosition.z, min: -500, max: 500, step: 0.1 },
 
     rotX: { value: 0, min: -180, max: 180, step: 1 },
     rotY: { value: 0, min: -180, max: 180, step: 1 },

@@ -56,10 +56,10 @@ export default function CityScene({ }: any) {
     <>
       <InfernusLeva />
       {/* <CameraLeva /> */}
-      <TheatreCameraLeva  /> //?: Not yet working...
+      {/* <TheatreCameraLeva  /> //?: Not yet working... */}
       <color attach="background" args={["#110013"]} />
       {/* {import.meta.env.DEV && <Perf position="top-left" />} */}
-      <ambientLight intensity={0.5} />
+      {/* <ambientLight intensity={0.5} /> */}
       <Instances>
         <group>
           <group ref={carPivotRef} position={[0, 0, 0]}>
@@ -83,7 +83,7 @@ export default function CityScene({ }: any) {
               fov={39}
               theatreKey="TheatreCamera"
               position={[0, 7, 12]}
-              rotation={[0, Math.PI/2, 0]}
+              rotation={[Math.PI/4, Math.PI/2, 0]}
             />
             {/* <Infernus ref={infernusRef} /> */}
           </e.group>
