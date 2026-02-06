@@ -6,6 +6,7 @@ import Registration from "./pages/registration/Registration";
 import City from "./pages/city/City";
 import Landing from "./pages/landing/Landing";
 import VideoLanding from "./pages/videoLanding/videoLanding";
+import VideoLandingScrolly from "./pages/videoLanding/videoLandingScrolly";
 type page = {
   url: string;
 
@@ -31,6 +32,10 @@ const pages: page[] = [
   {
     url: '/video-landing',
     component: VideoLanding,
+  },
+  {
+    url: '/scrolly',
+    component: VideoLandingScrolly,
   }
 ];
 
