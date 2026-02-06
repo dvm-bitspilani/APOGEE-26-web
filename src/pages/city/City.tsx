@@ -60,7 +60,7 @@ export default function City() {
               angle={0.3}
               distance={0.5}
               intensity={10.5} />
-            <OrbitControls/>
+            {/* <OrbitControls/> */}
             {/* If enabling OrbitControls, disable the CameraControllerLeva here and useHoverCamera, useCityLandingSTrat and useKeyboard control */}
             <spotLight
               position={[0, 5, 0]}
