@@ -17,6 +17,7 @@ import ScrollSync from "../ScrollSync/ScrollSync";
 import Constellation from "../Constellation";
 // import TheatreCameraLeva from "../leva/CameraLeva/TheatreCameraLeva";
 import PivotFinal from "../config/PivotFinal";
+import Infernus from "../models/Infernus";
 
 export default function CityScene({ }: any) {
   const infernusRef = useRef<THREE.Group>(null!);
@@ -86,7 +87,7 @@ export default function CityScene({ }: any) {
               position={[0, 7, 12]}
               rotation={[0, -Math.PI, 0]}
             />
-            {/* <Infernus ref={infernusRef} /> */}
+            <Infernus ref={infernusRef} />
           </group>
           <ScrollControls pages={4} damping={0.2}>
             {/* Use PivotLeva to roate the city around the car's axis */}

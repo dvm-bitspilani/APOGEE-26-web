@@ -7,15 +7,15 @@ export default function InfernusLeva() {
   const infernus = useInfernusStore((s) => s.infernus);
 
   const debug = useControls("Infernus (debug)", {
-    posX: { value: 0, min: -50, max: 50, step: 0.1 },
-    posY: { value: -1.2, min: -50, max: 50, step: 0.1 },
-    posZ: { value: 0, min: -50, max: 50, step: 0.1 },
+    posX: { value: 0.5, min: -50, max: 50, step: 0.1 },
+    posY: { value: -6, min: -50, max: 50, step: 0.1 },
+    posZ: { value: 60, min: -50, max: 50, step: 0.1 },
 
     rotX: { value: 0, min: -180, max: 180, step: 1 },
-    rotY: { value: 180, min: -180, max: 180, step: 1 },
+    rotY: { value: 0, min: -180, max: 180, step: 1 },
     rotZ: { value: 0, min: -180, max: 180, step: 1 },
 
-    scale: { value: 2, min: 0.1, max: 10, step: 0.1 },
+    scale: { value: 6, min: 0.1, max: 10, step: 0.1 },
   });
 
   useEffect(() => {
