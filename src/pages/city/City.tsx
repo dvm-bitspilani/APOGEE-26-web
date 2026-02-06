@@ -13,7 +13,7 @@ import studio from "@theatre/studio";
 // import { sheet } from "./theatre";
 import state from "./state.json"
 import debugFunctions from "../../utils/debug";
-import { OrbitControls } from "@react-three/drei";
+// import { OrbitControls } from "@react-three/drei";
 import { getProject } from "@theatre/core";
 import { useEffect } from "react";
 import { Environment } from "@react-three/drei";

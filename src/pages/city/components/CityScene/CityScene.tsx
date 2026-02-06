@@ -3,19 +3,19 @@ import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { useCityStore, usePivotStore } from "../../../../utils/store";
 import CityDebug from "../leva/CityDebugLeva/CityDebugLeva";
-import Infernus from "../models/Infernus";
+// import Infernus from "../models/Infernus";
 import { Instances } from "../models/Model";
 // import { useCameraMouseParallax } from "../../hooks/useHoverCamera";
 // import {useCarInsideScroll} from "../../hooks/useCarInsideScroll"
-import { PerspectiveCamera, editable as e } from '@theatre/r3f';
+import { PerspectiveCamera } from '@theatre/r3f';
 import { useInfernusStore, useTheatreCameraStore } from "../../../../utils/store";
 // import CityGrid from "../CityGrid";
 // import CameraLeva from "../leva/CameraLeva/CameraLeva";
 import InfernusLeva from "../leva/InfernusLeva/InfernusLeva";
-import PivotLeva from "../leva/PivotLeva/PivotLeva";
+// import PivotLeva from "../leva/PivotLeva/PivotLeva";
 import ScrollSync from "../ScrollSync/ScrollSync";
 import Constellation from "../Constellation";
-import TheatreCameraLeva from "../leva/CameraLeva/TheatreCameraLeva";
+// import TheatreCameraLeva from "../leva/CameraLeva/TheatreCameraLeva";
 import PivotFinal from "../config/PivotFinal";
 
 export default function CityScene({ }: any) {
