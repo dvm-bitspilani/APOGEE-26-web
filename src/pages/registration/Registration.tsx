@@ -10,6 +10,7 @@ import { useCookies } from "react-cookie";
 import { useState } from "react";
 import Helmet from "./components/UI/helmet/Helmet";
 import GlitchText from "./components/UI/glitchText/GlitchText";
+import redirectWithPost from "./redirectWithPost";
 
 function Registration() {
   const navigate = useNavigate();
@@ -39,38 +40,12 @@ function Registration() {
     "Access_token",
   ]);
 
-  function redirectWithPost(url: string, data: { [key: string]: string }) {
-    const form = document.createElement("form");
-
-    form.method = "POST";
-
-    form.action = url;
-
-    for (const key in data) {
-      if (data.hasOwnProperty(key)) {
-        const input = document.createElement("input");
-
-        input.type = "hidden";
-
-        input.name = key;
-
-        input.value = data[key];
-
-        form.appendChild(input);
-      }
-    }
-
-    document.body.appendChild(form);
-
-    form.submit();
-  }
-
   const [userEmail, setUserEmail] = useState("");
 
 
   const getEvents = () => {
     axios
-      .get("https://merge.bits-apogee.org/2026/main/registrations/web_events/")
+      .get("https://bits-apogee.org/2026/main/registrations/web_events/")
       .then((res) => {
         setEvents(res.data);
       })
@@ -84,7 +59,7 @@ function Registration() {
       axios
 
         .post(
-          "https://merge.bits-apogee.org/2026/main/registrations/google-reg/",
+          "https://bits-apogee.org/2026/main/registrations/google-reg/",
           {
             access_token: response.access_token,
           },
@@ -101,7 +76,7 @@ function Registration() {
             // window.location.href = `https://bits-oasis.org/2025/main/registrations?token=${res.data.tokens.access}`;
 
             redirectWithPost(
-              "https://merge.bits-apogee.org/2026/main/registrations/google-reg/",
+              "https://bits-apogee.org/2026/main/registrations/google-reg/",
 
               {
                 token: res.data.tokens.access,
