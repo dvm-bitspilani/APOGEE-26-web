@@ -17,6 +17,7 @@ import ScrollSync from "../ScrollSync/ScrollSync";
 import Constellation from "../Constellation";
 // import TheatreCameraLeva from "../leva/CameraLeva/TheatreCameraLeva";
 import PivotFinal from "../config/PivotFinal";
+import { useCityKeyboardControl } from "../../hooks/useCityKeyboardControl";
 
 export default function CityScene({ }: any) {
   const infernusRef = useRef<THREE.Group>(null!);
@@ -27,6 +28,8 @@ export default function CityScene({ }: any) {
   const setInfernus = useInfernusStore((s) => s.setInfernus); // Add this
   const carPivotRef = useRef<THREE.Group>(null!);
   const setTheatreCamera = useTheatreCameraStore((s) => s.setTheatreCamera);
+
+  useCityKeyboardControl();
   //   useCameraMouseParallax({
   //   minY: -0.1,
   //   maxY: 0.1,

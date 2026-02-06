@@ -5,7 +5,7 @@ import { useCityStore } from "../../../utils/store"
 
 const SPEED = 0.15*4
 const TILT = 0.015/5
-const DAMPING = 0.08
+const DAMPING = 0.1
 
 export function useCityKeyboardControl() {
   const city = useCityStore((s) => s.city)
@@ -53,8 +53,8 @@ export function useCityKeyboardControl() {
     if (!city) return
 
     // forward / backward
-    if (keys.current.forward) offset.current.x -= SPEED
-    if (keys.current.backward) offset.current.x += SPEED
+    if (keys.current.forward) offset.current.z -= SPEED
+    if (keys.current.backward) offset.current.z += SPEED
 
     // tilt left / right
     if (keys.current.left) offset.current.rotY -= TILT
@@ -65,7 +65,7 @@ export function useCityKeyboardControl() {
     offset.current.rotY = THREE.MathUtils.lerp(offset.current.rotY, 0, DAMPING)
 
     // 🔥 ADDITIVE application
-    city.position.x += offset.current.x
+    city.position.z += offset.current.z
     city.rotation.y += offset.current.rotY
   })
 }
