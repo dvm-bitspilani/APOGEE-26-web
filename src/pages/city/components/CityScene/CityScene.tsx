@@ -3,10 +3,10 @@ import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { useCityStore, usePivotStore } from "../../../../utils/store";
 import CityDebug from "../leva/CityDebugLeva/CityDebugLeva";
-import { Instances } from "../models/Model";
+// import { Instances } from "../models/Model";
 // import { useCameraMouseParallax } from "../../hooks/useHoverCamera";
 // import {useCarInsideScroll} from "../../hooks/useCarInsideScroll"
-import { PerspectiveCamera } from '@theatre/r3f';
+// import { PerspectiveCamera } from '@theatre/r3f';
 import { useInfernusStore, useTheatreCameraStore } from "../../../../utils/store";
 // import CityGrid from "../CityGrid";
 // import CameraLeva from "../leva/CameraLeva/CameraLeva";
