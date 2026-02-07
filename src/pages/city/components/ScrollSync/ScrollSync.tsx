@@ -1,10 +1,13 @@
 import { useScroll } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import { sheet } from "../../theatre";
+// import { sheet } from "../../theatre";
+import { getProject } from "@theatre/core";
 
+import state from "../../state2.json"
+export const project = getProject("City Project", { state });
+export const sheet = project.sheet("Cyber City");
 export default function ScrollSync() {
   const scroll = useScroll();
-
   useFrame(() => {
     // Calculate the sequence position based on scroll offset
     // Using a fixed sequence length of 10 for consistency, or we can use sheet.sequence.length
@@ -13,7 +16,7 @@ export default function ScrollSync() {
     
     // Check if the sequence exists and has a length, otherwise default to 10
     const sequenceLength = 10; 
-    
+
     // Update the sequence position
     sheet.sequence.position = scroll.offset * sequenceLength;
   });

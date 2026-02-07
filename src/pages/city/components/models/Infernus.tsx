@@ -15,6 +15,7 @@ const Infernus = forwardRef<THREE.Group>((props, ref) => {
         position={[0.5, -6, 60]}
         scale={[6,6,6]}
         {...props}
+        frustumCulled={false} 
       >
         <primitive object={scene} />
       </e.group>

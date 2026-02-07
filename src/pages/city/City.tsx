@@ -11,7 +11,7 @@ import { editable as e, SheetProvider } from "@theatre/r3f";
 import extension from '@theatre/r3f/dist/extension';
 import studio from "@theatre/studio";
 // import { sheet } from "./theatre";
-import state from "./state.json"
+import state from "./state2.json"
 import debugFunctions from "../../utils/debug";
 // import { OrbitControls } from "@react-three/drei";
 import { getProject } from "@theatre/core";

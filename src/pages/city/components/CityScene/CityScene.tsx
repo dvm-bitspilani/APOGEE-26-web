@@ -18,6 +18,7 @@ import Constellation from "../Constellation";
 import PivotFinal from "../config/PivotFinal";
 import { useCityKeyboardControl } from "../../hooks/useCityKeyboardControl";
 import Infernus from "../models/Infernus";
+import { Perf } from "r3f-perf";
 
 export default function CityScene({ }: any) {
   const infernusRef = useRef<THREE.Group>(null!);
@@ -64,7 +65,8 @@ export default function CityScene({ }: any) {
       <color attach="background" args={["#110013"]} />
       {/* {import.meta.env.DEV && <Perf position="top-left" />} */}
       {/* <ambientLight intensity={0.5} /> */}
-      <Instances>
+      {/* <Instances> */}
+        <Perf position="top-left" />
         <group>
           <group ref={carPivotRef} position={[0, 0, 0]}>
             {/* <ambientLight intensity={0.5} /> */}
@@ -100,7 +102,7 @@ export default function CityScene({ }: any) {
             <ScrollSync />
           </ScrollControls>
         </group>
-      </Instances>
+      {/* </Instances> */}
     </>
   );
 }
