@@ -3,7 +3,7 @@ import { useGLTF } from "@react-three/drei";
 export function StarJunction({ instances, ...props }: any) {
 
     return (
-        <group {...props} dispose={null} scale={0.001} frustumCulled={false}>
+        <group {...props} dispose={null} scale={0.001} >
             <instances.Object_11 castShadow receiveShadow />
             <instances.Object_14 rotation={[Math.PI / 2, 0, 0]} scale={1660.198} castShadow receiveShadow />
             <instances.Object_20 castShadow receiveShadow />

@@ -46,7 +46,7 @@ export default function City() {
         url="https://www.bits-apogee.org/city"
       />
       <div className={styles.city}>
-        <Canvas
+        <Canvas shadows={false}
           camera={{manual: true}}  // {{ position: [0, 2, -2], near: 0.1, far: 1000000, fov: 50 }}
           style={{ width: "100%", height: "100%" }}
 

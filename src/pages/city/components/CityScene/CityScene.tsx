@@ -19,6 +19,7 @@ import PivotFinal from "../config/PivotFinal";
 import { useCityKeyboardControl } from "../../hooks/useCityKeyboardControl";
 import Infernus from "../models/Infernus";
 import { Perf } from "r3f-perf";
+import TheatreCameraFinal from "./TheatreCameraFinal";
 
 export default function CityScene({ }: any) {
   const infernusRef = useRef<THREE.Group>(null!);
@@ -82,16 +83,10 @@ export default function CityScene({ }: any) {
             {/* <directionalLight
             position={[0, 10, 0]}
            intensity={0.5} /> */}
-            <PerspectiveCamera
-              makeDefault
-              ref={theatreCameraRef}
-              near={0.1}
-              far={1000000}
-              fov={39}
-              theatreKey="TheatreCamera"
-              position={[0, 7, 12]}
-              rotation={[0, -Math.PI, 0]}
-            />
+           
+             {/* The TheatreCameraFinal is a pre-configured camera with the same settings as above, but with added parallax and scroll effects     */}
+              
+            <TheatreCameraFinal/>
             <Infernus ref={infernusRef} />
           </group>
           <ScrollControls pages={4} damping={0.2}>

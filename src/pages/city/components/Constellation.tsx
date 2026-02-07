@@ -3,8 +3,9 @@ import { StarJunction } from "./models/StarJunction";
 import { editable as e } from "@theatre/r3f";
 import type { GLTF } from "three/examples/jsm/Addons.js";
 import * as THREE from "three";
+import { useMemo } from "react";
 
-const BLOCKS = 5
+const BLOCKS = 50
 const SPACING = 24
 const scaleFactor = [1, 1, 1]
 const position = [0, 0, 0]//[-3.6, 274, 456.0]
@@ -80,17 +81,26 @@ type GLTFResult = GLTF & {
 }
 
 export default function Constellation() {
-    const positions: [number, number, number][] = [];
+    // const positions: [number, number, number][] = [];
+   const positions = useMemo<[number, number, number][]>(() => {
+  const arr: [number, number, number][] = []
+  for (let block = 0; block < BLOCKS; block++) {
+    arr.push([-block * SPACING, 0, 0])
+  }
+  return arr
+}, [])
+
+
     const { nodes } = useGLTF('/models/city3-v1.glb') as unknown as GLTFResult
 
 
-    for (let block = 0; block < BLOCKS; block++) {
-        positions.push([
-            -block * SPACING,
-            0,
-            0
-        ])
-    }
+    // for (let block = 0; block < BLOCKS; block++) {
+    //     positions.push([
+    //         -block * SPACING,
+    //         0,
+    //         0
+    //     ])
+    // }
 
     return (
         <e.group theatreKey="Constellation" scale={scaleFactor} position={effectivePosition} rotation={[-Math.PI / 2, 0, Math.PI / 2]}>
@@ -101,7 +111,7 @@ export default function Constellation() {
                             positions.map((pos, i) =>
                                 <group key={i} position={pos}>
                                     <Center>
-                                        <StarJunction instances={instances} position={pos} />
+                                        <StarJunction instances={instances} />
                                     </Center>
                                 </group>
                             )
