@@ -15,7 +15,7 @@ function NavLink({ to, children }: {to: string, children: React.ReactNode }) {
 
 export default function NavBar() {
 
-    const location = useLocation();
+    // const location = useLocation();
 
     return (
         <div className={styles.navbar}>

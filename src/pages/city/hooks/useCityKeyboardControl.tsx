@@ -36,8 +36,8 @@ export function useCityKeyboardControl() {
       if (e.key === "s") keys.current.backward = true
       if (e.key === "a") keys.current.left = true
       if (e.key === "d") keys.current.right = true
-      if (e.key === "PageUp" || e.key === "Shift") keys.current.up = true
-      if (e.key === "PageDown" || e.key === "Control") keys.current.down = true
+      if (e.key === "PageUp") keys.current.up = true
+      if (e.key === "PageDown") keys.current.down = true
       if (e.key === "q") keys.current.rotAntiClock = true
       if (e.key === "e") keys.current.rotClock = true
     }
@@ -47,8 +47,8 @@ export function useCityKeyboardControl() {
       if (e.key === "s") keys.current.backward = false
       if (e.key === "a") keys.current.left = false
       if (e.key === "d") keys.current.right = false
-      if (e.key === "PageUp" || e.key === "Shift") keys.current.up = false
-      if (e.key === "PageDown" || e.key === "Control") keys.current.down = false
+      if (e.key === "PageUp" || e.key === "Up") keys.current.up = false
+      if (e.key === "PageDown" || e.key === "Down") keys.current.down = false
       if (e.key === "q") keys.current.rotAntiClock = false
       if (e.key === "e") keys.current.rotClock = false
     }

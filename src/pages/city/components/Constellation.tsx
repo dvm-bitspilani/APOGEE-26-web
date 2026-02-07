@@ -5,9 +5,9 @@ import type { GLTF } from "three/examples/jsm/Addons.js";
 import * as THREE from "three";
 import { useMemo } from "react";
 
-const BLOCKS = 5
-const SPACING = 50
-const ypos=0.01;
+const BLOCKS = 1
+const SPACING = 49.3
+const ypos=0.10;
 const scaleFactor = [1, 1, 1]
 const position = [0, 0, 0]//[-3.6, 274, 456.0]
 const effectivePosition = [-position[0] * scaleFactor[0], -position[1] * scaleFactor[1], -position[2] * scaleFactor[2]]

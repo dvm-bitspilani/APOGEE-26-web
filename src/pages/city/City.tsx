@@ -7,7 +7,7 @@ import ScrollReminder from "./components/ScrollReminder/ScrollReminder";
 import styles from "./City.module.scss";
 // import FogPlane from "./components/FogPlane";
 
-import { editable as e, SheetProvider } from "@theatre/r3f";
+import { SheetProvider } from "@theatre/r3f";
 import extension from '@theatre/r3f/dist/extension';
 import studio from "@theatre/studio";
 // import { sheet } from "./theatre";
@@ -53,23 +53,23 @@ export default function City() {
           style={{ width: "100%", height: "100%" }}
 
         >
-          <Environment preset="city" />
+          <Environment preset="city" environmentIntensity={0.1} />
           <SheetProvider sheet={sheet}>
             {/* <CameraControllerLeva /> */}
-            <e.spotLight
+            {/* <e.spotLight
               theatreKey="someSpotlight"
               position={[0, 10, 0]}
               angle={0.3}
               distance={0.5}
-              intensity={10.5} />
+              intensity={0} /> */}
             {/* <OrbitControls/> */}
             {/* If enabling OrbitControls, disable the CameraControllerLeva here and useHoverCamera, useCityLandingSTrat and useKeyboard control */}
-            <spotLight
+            {/* <spotLight
               position={[0, 5, 0]}
               // angle={0.3}
               color={"#61bbf7"}
               // distance={0.5}
-              intensity={100.5} />
+              intensity={0} /> */}
             {/* <OrbitControls/> */}
             <CityScene />
             <BloomLeva />
