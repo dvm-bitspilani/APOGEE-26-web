@@ -18,7 +18,7 @@ import Constellation from "../Constellation";
 import PivotFinal from "../config/PivotFinal";
 import { useCityKeyboardControl } from "../../hooks/useCityKeyboardControl";
 import Infernus from "../models/Infernus";
-import { Perf } from "r3f-perf";
+// import { Perf } from "r3f-perf";
 import TheatreCameraFinal from "./TheatreCameraFinal";
 import { editable as e } from "@theatre/r3f";
 
