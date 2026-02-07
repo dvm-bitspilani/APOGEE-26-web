@@ -9,7 +9,7 @@ export default function CityDebug() {
   const city = useCityStore((s) => s.city)
   // useCityLandingStart();
   // useCityKeyboardControl();
-  const defaultPosition = { x: -3.6, y: 274.2, z: 456.0 }
+  const defaultPosition = { x: 0, y: -10, z: 456.0 }
   const debug = useControls("City (debug)", {
     posX: { value: defaultPosition.x, min: -500, max: 500, step: 0.1 },
     posY: { value: defaultPosition.y, min: -500, max: 500, step: 0.1 },
