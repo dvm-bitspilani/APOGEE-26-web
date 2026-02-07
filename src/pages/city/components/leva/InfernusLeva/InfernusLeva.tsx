@@ -8,7 +8,7 @@ export default function InfernusLeva() {
 
   const debug = useControls("Infernus (debug)", {
     posX: { value: 0.5, min: -50, max: 50, step: 0.1 },
-    posY: { value: -6, min: -50, max: 50, step: 0.1 },
+    posY: { value: -3, min: -50, max: 50, step: 0.1 },
     posZ: { value: 60, min: -50, max: 50, step: 0.1 },
 
     rotX: { value: 0, min: -180, max: 180, step: 1 },

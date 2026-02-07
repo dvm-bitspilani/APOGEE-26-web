@@ -20,6 +20,7 @@ import { useCityKeyboardControl } from "../../hooks/useCityKeyboardControl";
 import Infernus from "../models/Infernus";
 import { Perf } from "r3f-perf";
 import TheatreCameraFinal from "./TheatreCameraFinal";
+import { editable as e } from "@theatre/r3f";
 
 export default function CityScene({ }: any) {
   const infernusRef = useRef<THREE.Group>(null!);
@@ -57,18 +58,18 @@ export default function CityScene({ }: any) {
       setTheatreCamera(theatreCameraRef.current);
     }
   }, [setTheatreCamera]);
-  const color ="#ced5fe"
+  const color ="#00030c"
   return (
     <>
       <InfernusLeva />
-      <fogExp2 attach="fog" args={[color, 0.001]} />
+      {/* <fogExp2 attach="fog" args={["#", 0.001]} /> */}
       {/* <CameraLeva /> */}
       {/* <TheatreCameraLeva  /> //?: Not yet working... */}
       <color attach="background" args={[color]} />
       {/* {import.meta.env.DEV && <Perf position="top-left" />} */}
-      {/* <ambientLight intensity={0.5} /> */}
+      <e.directionalLight theatreKey="light" intensity={-0.5} color="#250707" />
       {/* <Instances> */}
-        <Perf position="top-left" />
+        {/* <Perf position="top-left" /> */}
         <group>
           <group ref={carPivotRef} position={[0, 0, 0]}>
             {/* <ambientLight intensity={0.5} /> */}

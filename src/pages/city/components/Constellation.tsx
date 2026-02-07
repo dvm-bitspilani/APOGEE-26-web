@@ -5,8 +5,9 @@ import type { GLTF } from "three/examples/jsm/Addons.js";
 import * as THREE from "three";
 import { useMemo } from "react";
 
-const BLOCKS = 3
-const SPACING = 24
+const BLOCKS = 5
+const SPACING = 50
+const ypos=0.01;
 const scaleFactor = [1, 1, 1]
 const position = [0, 0, 0]//[-3.6, 274, 456.0]
 const effectivePosition = [-position[0] * scaleFactor[0], -position[1] * scaleFactor[1], -position[2] * scaleFactor[2]]
@@ -85,7 +86,7 @@ export default function Constellation() {
    const positions = useMemo<[number, number, number][]>(() => {
   const arr: [number, number, number][] = []
   for (let block = 0; block < BLOCKS; block++) {
-    arr.push([-block * SPACING, 0, 0])
+    arr.push([-block * SPACING, ypos*block, 0])
   }
   return arr
 }, [])
