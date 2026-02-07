@@ -10,7 +10,7 @@ type UseKeyboardAzimuthParams = {
 export function useKeyboardAzimuth({
   controlsRef,
   enabled,
-  step = 0.2,
+  step = 0.02,
 }: UseKeyboardAzimuthParams) {
   useEffect(() => {
     if (!enabled) return;
@@ -21,11 +21,11 @@ export function useKeyboardAzimuth({
       console.log(controls);
       let azimuth = controls.getAzimuthalAngle();
 
-      if (e.key === "ArrowLeft" || e.key === "a") {
+      if (e.key === "ArrowLeft" || e.key === "q") {
         azimuth += step;
       }
 
-      if (e.key === "ArrowRight" || e.key === "d") {
+      if (e.key === "ArrowRight" || e.key === "e") {
         azimuth -= step;
       }
 

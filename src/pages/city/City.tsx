@@ -17,6 +17,7 @@ import debugFunctions from "../../utils/debug";
 import { getProject } from "@theatre/core";
 import { useEffect } from "react";
 import { Environment } from "@react-three/drei";
+import NavBar from "../components/NavBar/NavBar";
 
 export const project = getProject("City Project", { state });
 export const sheet = project.sheet("Cyber City");
@@ -45,6 +46,7 @@ export default function City() {
         description="Explore the city of APOGEE 2026."
         url="https://www.bits-apogee.org/city"
       />
+      <NavBar />
       <div className={styles.city}>
         <Canvas shadows={false}
           camera={{manual: true}}  // {{ position: [0, 2, -2], near: 0.1, far: 1000000, fov: 50 }}
