@@ -7,7 +7,7 @@ const Infernus = forwardRef<THREE.Group>((props, ref) => {
   const { scene } = useGLTF(carModel);
 
   return (
-    <Float floatIntensity={1} rotationIntensity={0.25} speed={5}>
+    <Float floatIntensity={3} rotationIntensity={0.05} speed={5}>
       <e.group
         theatreKey="infernus"
         ref={ref}

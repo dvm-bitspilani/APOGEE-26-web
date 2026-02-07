@@ -61,7 +61,7 @@ export function useCityKeyboardControl() {
     if (keys.current.right) offset.current.rotY += TILT
 
     // damping back to neutral
-    offset.current.x = THREE.MathUtils.lerp(offset.current.x, 0, DAMPING)
+    offset.current.z = THREE.MathUtils.lerp(offset.current.z, 0, DAMPING)
     offset.current.rotY = THREE.MathUtils.lerp(offset.current.rotY, 0, DAMPING)
 
     // 🔥 ADDITIVE application

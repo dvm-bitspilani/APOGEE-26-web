@@ -56,13 +56,14 @@ export default function CityScene({ }: any) {
       setTheatreCamera(theatreCameraRef.current);
     }
   }, [setTheatreCamera]);
-
+  const color ="#ced5fe"
   return (
     <>
       <InfernusLeva />
+      <fogExp2 attach="fog" args={[color, 0.001]} />
       {/* <CameraLeva /> */}
       {/* <TheatreCameraLeva  /> //?: Not yet working... */}
-      <color attach="background" args={["#110013"]} />
+      <color attach="background" args={[color]} />
       {/* {import.meta.env.DEV && <Perf position="top-left" />} */}
       {/* <ambientLight intensity={0.5} /> */}
       {/* <Instances> */}
