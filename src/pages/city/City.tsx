@@ -18,6 +18,8 @@ import { getProject } from "@theatre/core";
 import { useEffect } from "react";
 import { Environment } from "@react-three/drei";
 import NavBar from "../components/NavBar/NavBar";
+import { EffectComposer, Noise } from "@react-three/postprocessing";
+import { BlendFunction } from "postprocessing";
 
 export const project = getProject("City Project", { state });
 export const sheet = project.sheet("Cyber City");
@@ -53,6 +55,12 @@ export default function City() {
           style={{ width: "100%", height: "100%" }}
 
         >
+          <EffectComposer>
+   <Noise
+    premultiply // enables or disables noise premultiplication
+    blendFunction={BlendFunction.ADD} // blend mode
+  />
+  </EffectComposer>
           <Environment preset="city" environmentIntensity={0.1} />
           <SheetProvider sheet={sheet}>
             {/* <CameraControllerLeva /> */}

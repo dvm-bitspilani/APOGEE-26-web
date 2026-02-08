@@ -9,7 +9,8 @@ export default function SceneLights() {
       </e.group>
       <e.group theatreKey={"SceneLights"}>
         <ambientLight intensity={0.5} />
-        <directionalLight position={[0.1, 1, 0.1]} color={"purple"} intensity={2} />
-      </e.group></>
+        <directionalLight position={[0.1, 1, 0.1]} color={"purple"} intensity={0.5} />
+      </e.group>
+      </>
   );
 }
