@@ -15,8 +15,8 @@ import { useEffect } from "react";
 import { Environment } from "@react-three/drei";
 import NavBar from "../components/NavBar/NavBar";
 import RegisterButton from "../components/RegisterButton/RegisterButton";
-import { EffectComposer, Noise } from "@react-three/postprocessing";
-import { BlendFunction } from "postprocessing";
+// import { EffectComposer, Noise } from "@react-three/postprocessing";
+// import { BlendFunction } from "postprocessing";
 
 export const project = getProject("City Project", { state });
 export const sheet = project.sheet("Cyber City");
