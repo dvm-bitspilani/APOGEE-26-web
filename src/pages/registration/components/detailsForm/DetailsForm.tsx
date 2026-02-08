@@ -1,5 +1,5 @@
 import styles from "./DetailsForm.module.scss";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { useRegistrationStore } from "../../../../utils/store";
@@ -7,48 +7,65 @@ import locationData from "./cities.json";
 import NavButton from "../navButton/NavButton";
 import FormPart1 from "./components/FormPart1";
 import FormPart2 from "./components/FormPart2";
+import * as Yup from "yup";
+import axios from "axios";
 
-function getDatePlaceholder(locale = navigator.language) {
-  const parts = new Intl.DateTimeFormat(locale).formatToParts(
-    new Date(2000, 11, 31),
-  );
+const validationForm1Schema = Yup.object({
+  name: Yup.string().required("[Name is required]"),
+  email: Yup.string().email("Invalid email").required("[Email is required]"),
+  gender: Yup.string().required("[Gender is required]"),
+  phone: Yup.string().matches(/^[1-9]\d{9}$/, "Invalid number").required("[Phone number is required]"),
+});
 
-  return parts
-    .filter((p) => p.type !== "literal")
-    .map((p) => {
-      if (p.type === "day") return "DD";
-      if (p.type === "month") return "MM";
-      if (p.type === "year") return "YYYY";
-      return "";
-    })
-    .join("-");
-}
+const validationForm2Schema = Yup.object({
+  college: Yup.string().required("[College is required]"),
+  year: Yup.string().required("[Year is required]"),
+  state: Yup.string().required("[State is required]"),
+  city: Yup.string().required("[City is required]"),
+});
+
+
+// function getDatePlaceholder(locale = navigator.language) {
+//   const parts = new Intl.DateTimeFormat(locale).formatToParts(
+//     new Date(2000, 11, 31),
+//   );
+
+//   return parts
+//     .filter((p) => p.type !== "literal")
+//     .map((p) => {
+//       if (p.type === "day") return "DD";
+//       if (p.type === "month") return "MM";
+//       if (p.type === "year") return "YYYY";
+//       return "";
+//     })
+//     .join("-");
+// }
 
 const DetailsForm = ({ mail = "" }: { mail: string }) => {
-  const { setRegistrationStep } = useRegistrationStore();
-  const handleToEvents = () => setRegistrationStep("events");
+  const { setRegistrationStep, userData, setUserData } = useRegistrationStore();
 
-  const [step, setStep] = useState(1);
-  const container = useRef<HTMLDivElement>(null);
-  const form1Ref = useRef<HTMLDivElement>(null);
-  const form2Ref = useRef<HTMLDivElement>(null);
-
-  const { contextSafe } = useGSAP({ scope: container });
-  const [formData, setFormData] = useState({
+  const [errors, setErrors] = useState({
     name: "",
-    email: mail,
+    email: "",
     gender: "",
-    dob: "",
+    phone: "",
     college: "",
     year: "",
     state: "",
     city: "",
   });
 
-  const [placeholder, setPlaceholder] = useState("");
+  const [step, setStep] = useState(1);
+  const [collegeList, setCollegeList] = useState([]);
+  const container = useRef<HTMLDivElement>(null);
+  const form1Ref = useRef<HTMLDivElement>(null);
+  const form2Ref = useRef<HTMLDivElement>(null);
+
+  const { contextSafe } = useGSAP({ scope: container });
+
+
 
   useGSAP(() => {
-    setPlaceholder(getDatePlaceholder());
     if (step === 1) {
       gsap.set(form1Ref.current, { autoAlpha: 1, display: "block" });
       gsap.set(form2Ref.current, { autoAlpha: 0, display: "none" });
@@ -61,10 +78,65 @@ const DetailsForm = ({ mail = "" }: { mail: string }) => {
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setUserData({ ...userData, [e.target.name]: e.target.value });
   };
 
-  const handleNext = contextSafe(() => {
+  useEffect(() => {
+    setUserData({ ...userData, email: mail });
+  }, [mail]);
+
+  const validateForm1 = async () => {
+    try {
+      await validationForm1Schema.validate(userData, { abortEarly: false });
+      setErrors({
+        name: "",
+        email: "",
+        gender: "",
+        phone: "",
+        college: "",
+        year: "",
+        state: "",
+        city: "",
+      });
+      return true;
+    } catch (err: any) {
+      const newErrors: any = {};
+      err.inner.forEach((error: any) => {
+        newErrors[error.path] = error.message;
+      });
+      setErrors((prev) => ({ ...prev, ...newErrors }));
+      return false;
+    }
+  };
+
+  const validateForm2 = async () => {
+    try {
+      await validationForm2Schema.validate(userData, { abortEarly: false });
+      setErrors({
+        name: "",
+        email: "",
+        gender: "",
+        phone: "",
+        college: "",
+        year: "",
+        state: "",
+        city: "",
+      });
+      return true;
+    } catch (err: any) {
+      const newErrors: any = {};
+      err.inner.forEach((error: any) => {
+        newErrors[error.path] = error.message;
+      });
+      setErrors((prev) => ({ ...prev, ...newErrors }));
+      return false;
+    }
+  };
+
+  const handleNext = contextSafe(async () => {
+    const isValid = await validateForm1();
+    if (!isValid) return;
+
     if (step === 1) {
       const tl = gsap.timeline({
         onComplete: () => setStep(2),
@@ -108,6 +180,37 @@ const DetailsForm = ({ mail = "" }: { mail: string }) => {
     }
   });
 
+  const handleToEvents = contextSafe(async () => {
+    const v1 = await validateForm1();
+    const v2 = await validateForm2();
+    if (!v1 || !v2) return;
+
+    const tl = gsap.timeline({
+      onComplete: () => setRegistrationStep("events"),
+    });
+
+    tl.to(form2Ref.current, {
+      autoAlpha: 0,
+      duration: 0.5,
+      ease: "power2.inOut",
+      onComplete: () => {
+        gsap.set(form2Ref.current, { display: "none" });
+        // gsap.set(form1Ref.current, { display: "block" });
+      },
+    })
+
+  });
+
+  useEffect(() => {
+    axios.get("https://merge.bits-apogee.org/2026/main/registrations/get_college/")
+      .then((res) => {
+        setCollegeList(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <div ref={container} className={styles.container}>
       <h1 className={styles.title}>REGISTER</h1>
@@ -122,9 +225,9 @@ const DetailsForm = ({ mail = "" }: { mail: string }) => {
           >
 
             <FormPart1
-              formData={formData}
+              formData={userData}
               handleChange={handleChange}
-              placeholder={placeholder}
+              errors={errors}
             />
           </form>
 
@@ -133,7 +236,6 @@ const DetailsForm = ({ mail = "" }: { mail: string }) => {
           </NavButton>
         </div>
 
-        {/* STEP 2 */}
         <div ref={form2Ref}>
           <form
             // ref={form2Ref}
@@ -141,9 +243,11 @@ const DetailsForm = ({ mail = "" }: { mail: string }) => {
             onSubmit={(e) => e.preventDefault()}
           >
             <FormPart2
-              formData={formData}
+              formData={userData}
               handleChange={handleChange}
               locationData={locationData}
+              collegeList={collegeList}
+              errors={errors}
             />
 
           </form>
@@ -164,14 +268,16 @@ const DetailsForm = ({ mail = "" }: { mail: string }) => {
           onSubmit={(e) => e.preventDefault()}
         >
           <FormPart1
-            formData={formData}
+            formData={userData}
             handleChange={handleChange}
-            placeholder={placeholder}
+            errors={errors}
           />
           <FormPart2
-            formData={formData}
+            formData={userData}
             handleChange={handleChange}
             locationData={locationData}
+            errors={errors}
+            collegeList={collegeList}
           />
         </form>
         <NavButton onClick={handleToEvents} outerClass={styles.navButton} innerClass={styles.navButtonContent}>

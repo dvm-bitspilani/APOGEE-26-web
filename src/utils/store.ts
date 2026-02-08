@@ -74,12 +74,18 @@ export const useTheatreCameraStore = create<TheatreCameraStore>((set) => ({
 export interface Event {
   id: number;
   name: string;
-  about: string;
+  description: string;
 }
 
 interface UserData {
   name: string;
   email: string;
+  phone: string;
+  gender: string;
+  college: string;
+  year: string;
+  state: string;
+  city: string;
   // Add other fields as needed
 }
 
@@ -107,6 +113,10 @@ interface RegistrationStore {
   // User Data
   userData: UserData;
   setUserData: (data: Partial<UserData>) => void;
+
+  // Access Token
+  accessToken: string;
+  setAccessToken: (token: string) => void;
 }
 
 export const useRegistrationStore = create<RegistrationStore>((set) => ({
@@ -132,6 +142,9 @@ export const useRegistrationStore = create<RegistrationStore>((set) => ({
   stickyEvent: null,
   setStickyEvent: (event) => set({ stickyEvent: event }),
 
-  userData: { name: "", email: "" },
+  userData: { name: "", email: "", phone: "", gender: "", college: "", year: "", state: "", city: "" },
   setUserData: (data) => set((state) => ({ userData: { ...state.userData, ...data } })),
+
+  accessToken: "",
+  setAccessToken: (token) => set({ accessToken: token }),
 }));

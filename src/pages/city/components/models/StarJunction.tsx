@@ -55,4 +55,4 @@ export function StarJunction({ instances, ...props }: any) {
     )
 }
 
-useGLTF.preload('/models/city3-v1.glb')
+useGLTF.preload('/models/citynewest.glb')

@@ -44,7 +44,7 @@
 
 @font-face {
     font-family: 'Doctor Glitch';
-    src: url('/font/Doctor Glitch.otf') format('opentype')
+    src: url('/font/Doctor Glitch.otf') format('opentype');
 }
 
 $cyber-yellow: #FFEB00;
@@ -62,9 +62,23 @@ $weight-blender-bold: 700;
 $weight-blender-heavy: 900;
 
 @mixin content-scroller($color) {
-    &::-webkit-scrollbar-button {display: none;}
-    &::-webkit-scrollbar-track-piece {background-color: #0006;}
-    &::-webkit-scrollbar-track {background-color: #0006;}
-    &::-webkit-scrollbar {width: 3px;}
-    &::-webkit-scrollbar-thumb {background-color: $color;}
+    &::-webkit-scrollbar-button {
+        display: none;
+    }
+
+    &::-webkit-scrollbar-track-piece {
+        background-color: #0006;
+    }
+
+    &::-webkit-scrollbar-track {
+        background-color: #0006;
+    }
+
+    &::-webkit-scrollbar {
+        width: 3px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: $color;
+    }
 }

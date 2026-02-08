@@ -97,3 +97,92 @@ export default function Infernus() {
 
 useGLTF.preload(infernusModel)
 
+// import { Float, useGLTF } from "@react-three/drei";
+// import { editable as e } from "@theatre/r3f";
+// import { forwardRef, useMemo, useRef } from "react";
+// import * as THREE from "three";
+// import { useFrame } from "@react-three/fiber";
+// import carModel from "../../../../assets/3d/landing/car4.0.glb";
+
+// const Infernus = forwardRef<THREE.Group>((props, ref) => {
+//   const { scene } = useGLTF(carModel);
+//   const materialRef = useRef<THREE.ShaderMaterial>(null);
+
+//   // Neon Shader
+ 
+
+//      const neonMaterial = useMemo(() => {
+//   return new THREE.ShaderMaterial({
+//     uniforms: {},
+
+//     vertexShader: `
+//       varying vec3 vNormal;
+//       varying vec3 vViewDir;
+
+//       void main() {
+//         vec4 worldPos = modelViewMatrix * vec4(position, 1.0);
+
+//         vNormal = normalize(normalMatrix * normal);
+//         vViewDir = normalize(-worldPos.xyz); // camera direction
+
+//         gl_Position = projectionMatrix * worldPos;
+//       }
+//     `,
+
+//     fragmentShader: `
+//       varying vec3 vNormal;
+//       varying vec3 vViewDir;
+
+//       void main() {
+
+//         vec3 neonColor = vec3(214, 95, 251) / 255.0; // constant cyan
+
+//         // View-dependent fresnel (stable during rotation)
+//         float fresnel = pow(1.0 - max(dot(normalize(vNormal), normalize(vViewDir)), 0.0), 5.5);
+
+//         vec3 glow = neonColor * ( fresnel * 1.05*0.8);
+
+//         gl_FragColor = vec4(glow * 1.0, 1.5); // bloom-ready
+//       }
+//     `,
+
+//     toneMapped: false,
+//   });
+// }, []);
+
+
+
+//   // Apply shader to all meshes in GLB
+//   useMemo(() => {
+//     scene.traverse((child: any) => {
+//       if (child.isMesh) {
+//         child.material = neonMaterial;
+//       }
+//     });
+//   }, [scene, neonMaterial]);
+//   // color="rgb(214, 95, 251)"
+//   // Animate time
+//   useFrame((state) => {
+//     if (materialRef.current) {
+//       materialRef.current.uniforms.uTime.value = state.clock.elapsedTime;
+//     }
+//   });
+
+//   return (
+//     <Float floatIntensity={3} rotationIntensity={0.05} speed={5}>
+//       <e.group
+//         theatreKey="infernus"
+//         ref={ref}
+//         rotation={[0, 0, 0]}
+//         position={[0.5, -6, 60]}
+//         scale={[6, 6, 6]}
+//         {...props}
+//         frustumCulled={false}
+//       >
+//         <primitive object={scene} />
+//       </e.group>
+//      </Float>
+//   );
+// });
+
+// export default Infernus;

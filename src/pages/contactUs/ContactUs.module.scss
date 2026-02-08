@@ -1,0 +1,57 @@
+@use "/src/assets/global.scss" as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  background: center / cover no-repeat url("/public/img/contacts/bg.png");
+  align-items: center;
+  width: 100vw;
+  min-height: 100vh;
+
+  .title {
+    font-size: 3vw;
+    font-weight: 600;
+    color: #4df4fc;
+    text-align: center;
+    margin: 3vw 0 1.5vw 0;
+    font-family: $font-glitch;
+    letter-spacing: 3px;
+    position: fixed;
+    top: 0;
+    z-index: 1;
+  }
+  .cards {
+    margin-top: 8vw;
+    display: grid;
+    grid-template-columns: repeat(10, 5.5vw);
+    grid-template-rows: repeat(2, calc(351 / 244 * 13.5vw));
+    gap: 2.5vw;
+    .gridBox {
+      grid-column: span 2;
+    }
+    .gridBox2 {
+      grid-column: 2 / span 2;
+    }
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .container {
+    .title {
+      font-size: 9vw;
+      margin: 10vw 0 6vw 0;
+    }
+    .cards {
+      margin-top: 25vw;
+      grid-template-columns: repeat(4, 15vw);
+      grid-template-rows: repeat(5, calc(351 / 244 * 35vw));
+      gap: 5vw;
+      .gridBox {
+        grid-column: span 2;
+      }
+      .gridBox2 {
+        grid-column: 2 / span 2;
+      }
+    }
+  }
+}

@@ -1,0 +1,82 @@
+@use "/src/assets/global.scss" as *;
+
+.card {
+  display: grid;
+  grid-template-rows: auto 4vw 1vw 2vw;
+  gap: 0.4vw;
+  align-items: center;
+  justify-content: center;
+  background: center / contain no-repeat url("/public/img/contacts/cardBG.png");
+  width: 100%;
+  position: relative;
+  padding: 1vw;
+
+  .borderIMG {
+    width: 13.5vw;
+    aspect-ratio: 244/351;
+    position: absolute;
+    object-fit: contain;
+    top: 0;
+    left: 0;
+  }
+
+  .contactIMG {
+    width: 7vw;
+    justify-self: center;
+    object-fit: cover;
+  }
+
+  .dept {
+    text-align: center;
+    color: #00ffff;
+    font-family: $font-blender;
+    font-size: 1.2vw;
+  }
+  .name {
+    text-align: center;
+    color: #fff32c;
+    font-family: $font-blender;
+    font-size: 1.2vw;
+  }
+  .contact {
+    display: flex;
+    gap: 2vw;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    svg {
+      width: 1.4vw;
+      height: 1.4vw;
+      cursor: pointer;
+    }
+  }
+}
+@media screen and (max-width: 550px) {
+  .card {
+    grid-template-rows: auto 14vw 6vw 5vw;
+    gap: 0.4vw;
+    padding: 2vw;
+
+    .borderIMG {
+      width: 35vw;
+    }
+
+    .contactIMG {
+      width: 15vw;
+    }
+
+    .dept {
+      font-size: 3.6vw;
+    }
+    .name {
+      font-size: 3.6vw;
+    }
+    .contact {
+      gap: 2vw;
+      svg {
+        width: 3.6vw;
+        height: 3.6vw;
+      }
+    }
+  }
+}

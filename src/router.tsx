@@ -5,6 +5,7 @@ import Registration from "./pages/registration/Registration";
 // import Instructions from "./pages/registration/components/detailsForm/DetailsForm"
 import City from "./pages/city/City";
 import Landing from "./pages/landing/Landing";
+import ContactUs from "./pages/contactUs/ContactUs";
 type page = {
   url: string;
 
@@ -26,6 +27,11 @@ const pages: page[] = [
   {
     url: '/city',
     component: City,
+  },
+  {
+    url: "/contact",
+
+    component: ContactUs,
   }
 ];
 
