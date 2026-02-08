@@ -117,7 +117,6 @@ export default function FormPart2({
             zIndex: 9999,
             marginTop: "0",
             marginBottom: "0",
-
         }),
         menuList: (provided) => ({
             ...provided,
@@ -158,10 +157,6 @@ export default function FormPart2({
         indicatorSeparator: () => ({
             display: "none",
         }),
-        menuPortal: (provided) => ({
-            ...provided,
-            zIndex: 9999,
-        }),
     };
 
     const handleSelectChange = (name: string, option: OptionType | null) => {
@@ -190,8 +185,7 @@ export default function FormPart2({
                     placeholder="[College]"
                     styles={customStyles}
                     isSearchable
-                    menuPlacement="auto"
-                    menuPortalTarget={document.body}
+                    menuPlacement="top"
                     className={styles.selectContainer}
                 />
                 {errors.college && <p className={styles.error}>{errors.college}</p>}
@@ -216,8 +210,7 @@ export default function FormPart2({
                     placeholder="[Year of study]"
                     styles={customStyles}
                     isSearchable
-                    menuPlacement="auto"
-                    menuPortalTarget={document.body}
+                    menuPlacement="top"
                     className={styles.selectContainer}
                 />
                 {errors.year && <p className={styles.error}>{errors.year}</p>}
@@ -236,8 +229,7 @@ export default function FormPart2({
                     placeholder="[State]"
                     styles={customStyles}
                     isSearchable
-                    menuPlacement="auto"
-                    menuPortalTarget={document.body}
+                    menuPlacement="top"
                     className={styles.selectContainer}
                 />
                 {errors.state && <p className={styles.error}>{errors.state}</p>}
@@ -258,8 +250,7 @@ export default function FormPart2({
                     isSearchable
                     isDisabled={!formData.state}
                     noOptionsMessage={() => "Select a state first"}
-                    menuPlacement="auto"
-                    menuPortalTarget={document.body}
+                    menuPlacement="top"
                 />
                 {errors.city && <p className={styles.error}>{errors.city}</p>}
             </div>
