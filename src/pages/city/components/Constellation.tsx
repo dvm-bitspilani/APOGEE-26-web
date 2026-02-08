@@ -92,7 +92,7 @@ export default function Constellation() {
 }, [])
 
 
-    const { nodes } = useGLTF('/models/citynewest.glb') as unknown as GLTFResult
+    const { nodes } = useGLTF('/models/citynewest-transformed.glb') as unknown as GLTFResult
 
 
     // for (let block = 0; block < BLOCKS; block++) {

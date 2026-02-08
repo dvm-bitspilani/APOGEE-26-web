@@ -33,21 +33,27 @@ import * as THREE from 'three'
 import { useGLTF } from '@react-three/drei'
 import { type GLTF } from 'three-stdlib'
 import { useEffect, useRef } from 'react'
-import infernusModel from "../../../../assets/3d/landing/car1mb.glb";
+import infernusModel from "../../../../assets/3d/landing/car5.0.glb";
 import { editable as e } from '@theatre/r3f';
 import { useInfernusStore } from '../../../../utils/store';
-
 type GLTFResult = GLTF & {
   nodes: {
     meshId5_name: THREE.Mesh
     meshId5_name_1: THREE.Mesh
     meshId5_name_2: THREE.Mesh
+    meshId5_name_3: THREE.Mesh
+    meshId5_name_4: THREE.Mesh
+    meshId5_name_5: THREE.Mesh
+    spinner003: THREE.Mesh
   }
   materials: {
-    mirror: THREE.MeshStandardMaterial
+    ['white light']: THREE.MeshStandardMaterial
     ex: THREE.MeshStandardMaterial
     int: THREE.MeshStandardMaterial
-    metal: THREE.MeshStandardMaterial
+    mirror: THREE.MeshStandardMaterial
+    ['red light']: THREE.MeshStandardMaterial
+    blue: THREE.MeshStandardMaterial
+    ['lights purple']: THREE.MeshStandardMaterial
   }
 }
 
@@ -72,11 +78,11 @@ export default function Infernus() {
       scale={[6, 6, 6]}
       frustumCulled={false} >
       <group rotation={[Math.PI / 2, 0, 0]} scale={1.492}>
-        <mesh
+         <mesh
           castShadow
           receiveShadow
           geometry={nodes.meshId5_name.geometry}
-          material={materials.mirror}
+          material={materials['white light']}
         />
         <mesh
           castShadow
@@ -90,7 +96,33 @@ export default function Infernus() {
           geometry={nodes.meshId5_name_2.geometry}
           material={materials.int}
         />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.meshId5_name_3.geometry}
+          material={materials.mirror}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.meshId5_name_4.geometry}
+          material={materials['red light']}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.meshId5_name_5.geometry}
+          material={materials.blue}
+        />
       </group>
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.spinner003.geometry}
+        material={materials['lights purple']}
+        rotation={[Math.PI / 2, 0, 0]}
+        scale={1.492}
+      />
     </e.group>
   )
 }

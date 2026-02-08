@@ -3,23 +3,17 @@ import ReactHelmet from "../components/ReactHelmet";
 import CityScene from "./components/CityScene/CityScene";
 import BloomLeva from "./components/leva/BloomLeva/BloomLeva";
 import ScrollReminder from "./components/ScrollReminder/ScrollReminder";
-// import { Html } from "@react-three/drei";
 import styles from "./City.module.scss";
-// import FogPlane from "./components/FogPlane";
-
 import { SheetProvider } from "@theatre/r3f";
 import extension from '@theatre/r3f/dist/extension';
 import studio from "@theatre/studio";
 // import { sheet } from "./theatre";
 import state from "./state2.json"
 import debugFunctions from "../../utils/debug";
-// import { OrbitControls } from "@react-three/drei";
 import { getProject } from "@theatre/core";
 import { useEffect } from "react";
 import { Environment } from "@react-three/drei";
 import NavBar from "../components/NavBar/NavBar";
-import { EffectComposer, Noise } from "@react-three/postprocessing";
-import { BlendFunction } from "postprocessing";
 
 export const project = getProject("City Project", { state });
 export const sheet = project.sheet("Cyber City");
@@ -55,12 +49,12 @@ export default function City() {
           style={{ width: "100%", height: "100%" }}
 
         >
-          <EffectComposer>
+          {/* <EffectComposer>
    <Noise
     premultiply // enables or disables noise premultiplication
     blendFunction={BlendFunction.ADD} // blend mode
   />
-  </EffectComposer>
+  </EffectComposer> */}
           <Environment preset="city" environmentIntensity={0.1} />
           <SheetProvider sheet={sheet}>
             {/* <CameraControllerLeva /> */}
@@ -70,7 +64,6 @@ export default function City() {
               angle={0.3}
               distance={0.5}
               intensity={0} /> */}
-            {/* <OrbitControls/> */}
             {/* If enabling OrbitControls, disable the CameraControllerLeva here and useHoverCamera, useCityLandingSTrat and useKeyboard control */}
             {/* <spotLight
               position={[0, 5, 0]}
