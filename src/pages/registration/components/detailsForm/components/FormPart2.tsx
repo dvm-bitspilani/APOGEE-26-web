@@ -1,5 +1,6 @@
 import styles from "../DetailsForm.module.scss";
-import Select, { type StylesConfig } from "react-select";
+import Select from "react-select";
+import customStyles from "./customStyles";
 import { useEffect, useState } from "react";
 
 interface FormData {
@@ -35,6 +36,18 @@ export default function FormPart2({
     collegeList,
 }: FormPart2Props) {
     const [cityOptions, setCityOptions] = useState<OptionType[]>([]);
+    const [collegeName, setCollegeName] = useState<string>("");
+
+    useEffect(() => {
+        if (formData.college) {
+            const selectedCollege = collegeList.find(
+                (c) => c.id === formData.college,
+            );
+            if (selectedCollege) {
+                setCollegeName(selectedCollege.name);
+            }
+        }
+    }, [formData.college, collegeList]);
 
     useEffect(() => {
         if (formData.state) {
@@ -61,109 +74,6 @@ export default function FormPart2({
         label: s.state,
     }));
 
-    const customStyles: StylesConfig<OptionType, false> = {
-        control: (provided, state) => ({
-            ...provided,
-            backgroundColor: "#000", // $dark-bg
-            border: "none",
-            boxShadow: "none",
-            borderRadius: "0",
-            minHeight: "unset",
-            padding: "var(--input-padding)", // Responsive padding
-            cursor: "pointer",
-            // Imitate focus state of .input
-            ...(state.isFocused &&
-                state.menuIsOpen && {
-                backgroundColor: "#FFEB00", // $cyber-yellow
-                color: "#000", // $dark-bg
-            }),
-        }),
-        valueContainer: (provided, state) => ({
-            ...provided,
-            padding: "0",
-            margin: "0",
-            color: state.selectProps.menuIsOpen ? "#000" : "#FFEB00",
-            fontFamily: "Blender Pro, sans-serif",
-            fontWeight: "var(--input-font-weight)" as any,
-            fontSize: "var(--input-font-size)", // Responsive font size
-        }),
-        input: (provided, state) => ({
-            ...provided,
-            color: state.selectProps.menuIsOpen ? "#000" : "#FFEB00",
-            padding: 0,
-            margin: 0,
-            fontFamily: "Blender Pro, sans-serif",
-            fontSize: "var(--input-font-size)",
-        }),
-        singleValue: (provided, state) => ({
-            ...provided,
-            color: state.selectProps.menuIsOpen ? "#000" : "#FFEB00",
-            margin: 0,
-            fontFamily: "Blender Pro, sans-serif",
-            fontSize: "var(--input-font-size)",
-        }),
-        placeholder: (provided, state) => ({
-            ...provided,
-            color: state.selectProps.menuIsOpen ? "#000" : "#FFEB00",
-            opacity: state.selectProps.menuIsOpen ? 0.8 : 1, // Placeholder style
-            fontFamily: "Blender Pro, sans-serif",
-            fontSize: "var(--input-font-size)",
-        }),
-        menu: (provided) => ({
-            ...provided,
-            backgroundColor: "#000",
-            border: "1px solid #FFEB00",
-            borderRadius: "0",
-            zIndex: 9999,
-            marginTop: "0",
-            marginBottom: "0",
-
-        }),
-        menuList: (provided) => ({
-            ...provided,
-            padding: 0,
-            "::-webkit-scrollbar": {
-                width: "4px",
-            },
-            "::-webkit-scrollbar-thumb": {
-                background: "#FFEB00",
-            },
-        }),
-        option: (provided, state) => ({
-            ...provided,
-            backgroundColor: state.isFocused ? "#FFEB00" : "#000",
-            color: state.isFocused ? "#000" : "#FFEB00",
-            fontFamily: "Blender Pro, sans-serif",
-            fontSize: "1.2rem",
-            fontWeight: "bold",
-            cursor: "pointer",
-            padding: "0.5rem 1rem",
-            "&:active": {
-                backgroundColor: "#FFEB00",
-                color: "#000",
-            },
-        }),
-        dropdownIndicator: (provided, state) => ({
-            ...provided,
-            color: state.selectProps.menuIsOpen ? "#000" : "#FFEB00",
-            padding: "0",
-            "&:hover": {
-                color: state.selectProps.menuIsOpen ? "#000" : "#FFEB00",
-            },
-            "& svg": {
-                width: "1.5rem",
-                height: "1.5rem",
-            },
-        }),
-        indicatorSeparator: () => ({
-            display: "none",
-        }),
-        menuPortal: (provided) => ({
-            ...provided,
-            zIndex: 9999,
-        }),
-    };
-
     const handleSelectChange = (name: string, option: OptionType | null) => {
         // Create a synthetic event to pass to the parent's handleChange
         const e = {
@@ -183,7 +93,7 @@ export default function FormPart2({
                     options={collegeList.map((college) => ({ value: college.id, label: college.name }))}
                     value={
                         formData.college
-                            ? { value: formData.college, label: formData.college }
+                            ? { value: formData.college, label: collegeName }
                             : null
                     }
                     onChange={(option) => handleSelectChange("college", option)}

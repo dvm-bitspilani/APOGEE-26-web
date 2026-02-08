@@ -1,4 +1,6 @@
 import styles from "../DetailsForm.module.scss"
+import Select from "react-select"
+import customStyles from "./customStyles"
 
 interface FormData {
     name: string;
@@ -18,7 +20,25 @@ interface FormPart1Props {
     };
 }
 
+interface OptionType {
+    value: string;
+    label: string;
+}
+
+
 export default function FormPart1({ formData, handleChange, errors }: FormPart1Props) {
+
+
+    const handleSelectChange = (name: string, option: OptionType | null) => {
+        // Create a synthetic event to pass to the parent's handleChange
+        const e = {
+            target: {
+                name,
+                value: option ? option.value : "",
+            },
+        } as unknown as React.ChangeEvent<HTMLSelectElement>; // Type casting carefully
+        handleChange(e);
+    };
     return (
         <>
             <div className={styles.inputGroup}>
@@ -48,19 +68,26 @@ export default function FormPart1({ formData, handleChange, errors }: FormPart1P
             </div>
 
             <div className={styles.inputGroup}>
-                <select
+                <Select
                     name="gender"
-                    value={formData.gender}
-                    onChange={handleChange}
-                    className={`${styles.input} ${styles.select}`}
-                >
-                    <option value="" disabled hidden>
-                        [Gender]
-                    </option>
-                    <option value="M">Male</option>
-                    <option value="F">Female</option>
-                    <option value="O">Other</option>
-                </select>
+                    options={[
+                        { value: "M", label: "Male" },
+                        { value: "F", label: "Female" },
+                        { value: "O", label: "Other" },
+                    ]}
+                    value={
+                        formData.gender
+                            ? { value: formData.gender, label: formData.gender == "M" ? "Male" : formData.gender == "F" ? "Female" : "Other" }
+                            : null
+                    }
+                    onChange={(option) => handleSelectChange("gender", option)}
+                    placeholder="[Gender]"
+                    styles={customStyles}
+                    isSearchable
+                    menuPlacement="auto"
+                    menuPortalTarget={document.body}
+                    className={styles.selectContainer}
+                />
                 {errors.gender && <p className={styles.error}>{errors.gender}</p>}
             </div>
 
