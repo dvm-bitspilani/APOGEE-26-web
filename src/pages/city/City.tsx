@@ -14,6 +14,9 @@ import { getProject } from "@theatre/core";
 import { useEffect } from "react";
 import { Environment } from "@react-three/drei";
 import NavBar from "../components/NavBar/NavBar";
+import RegisterButton from "../components/RegisterButton/RegisterButton";
+import { EffectComposer, Noise } from "@react-three/postprocessing";
+import { BlendFunction } from "postprocessing";
 
 export const project = getProject("City Project", { state });
 export const sheet = project.sheet("Cyber City");
@@ -31,7 +34,7 @@ if (import.meta.env.DEV) {
 export default function City() {
   useEffect(() => {
     project.ready.then(() => {
-      sheet.sequence.play({ iterationCount: Infinity }); 
+      sheet.sequence.play({ iterationCount: Infinity });
       // remove Infinity if you want play only once
     });
   }, []);
@@ -42,10 +45,10 @@ export default function City() {
         description="Explore the city of APOGEE 2026."
         url="https://www.bits-apogee.org/city"
       />
-      <NavBar />
+      {
       <div className={styles.city}>
         <Canvas shadows={false}
-          camera={{manual: true}}  // {{ position: [0, 2, -2], near: 0.1, far: 1000000, fov: 50 }}
+          camera={{ manual: true }}  // {{ position: [0, 2, -2], near: 0.1, far: 1000000, fov: 50 }}
           style={{ width: "100%", height: "100%" }}
 
         >
@@ -81,6 +84,9 @@ export default function City() {
         <ScrollReminder />
         {/* </Html> */}
       </div>
+      }
+      <NavBar />
+      <RegisterButton />
     </>
   );
 }
