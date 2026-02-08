@@ -76,7 +76,16 @@
       width: 100%;
       margin-bottom: 1rem;
 
+      input[type="number"] {
+        -moz-appearance: textfield;
+
+        &::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+        }
+      }
+
       .input {
+
         width: 100%;
         background: $dark-bg;
         border: none;
@@ -145,6 +154,7 @@
         background-color: $cyber-yellow;
         color: $dark-bg;
       }
+
     }
   }
 }

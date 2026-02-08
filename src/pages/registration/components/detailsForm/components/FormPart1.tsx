@@ -1,37 +1,24 @@
 import styles from "../DetailsForm.module.scss"
-import { useState, useEffect } from "react";
 
 interface FormData {
     name: string;
     email: string;
     gender: string;
-    dob: string;
+    phone: string;
 }
 
 interface FormPart1Props {
     formData: FormData,
     handleChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void,
-    placeholder: string
     errors: {
         name: string;
         email: string;
         gender: string;
-        dob: string;
+        phone: string;
     };
 }
 
-export default function FormPart1({ formData, handleChange, placeholder, errors }: FormPart1Props) {
-    const [isMobile, setIsMobile] = useState(false);
-    useEffect(() => {
-        const handleResize = () => {
-            setIsMobile(window.innerWidth < 750);
-        };
-        handleResize();
-        window.addEventListener("resize", handleResize);
-        return () => {
-            window.removeEventListener("resize", handleResize);
-        };
-    }, []);
+export default function FormPart1({ formData, handleChange, errors }: FormPart1Props) {
     return (
         <>
             <div className={styles.inputGroup}>
@@ -78,7 +65,7 @@ export default function FormPart1({ formData, handleChange, placeholder, errors 
             </div>
 
             <div className={styles.inputGroup}>
-                <input
+                {/* <input
                     type={isMobile ? "date" : "text"}
                     name="dob"
                     placeholder={`[Date of Birth ${placeholder}]`}
@@ -89,8 +76,9 @@ export default function FormPart1({ formData, handleChange, placeholder, errors 
                     value={formData.dob}
                     onChange={handleChange}
                     className={styles.input}
-                />
-                {errors.dob && <p className={styles.error}>{errors.dob}</p>}
+                /> */}
+                <input type="number" name="phone" placeholder="[Enter your phone number]" value={formData.phone} onChange={handleChange} className={styles.input} />
+                {errors.phone && <p className={styles.error}>{errors.phone}</p>}
             </div>
         </>
     )

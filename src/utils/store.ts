@@ -11,7 +11,6 @@ interface UserData {
   email: string;
   phone: string;
   gender: string;
-  dob: string;
   college: string;
   year: string;
   state: string;
@@ -72,7 +71,7 @@ export const useRegistrationStore = create<RegistrationStore>((set) => ({
   stickyEvent: null,
   setStickyEvent: (event) => set({ stickyEvent: event }),
 
-  userData: { name: "", email: "", phone: "9999999999", gender: "", dob: "", college: "", year: "", state: "", city: "" },
+  userData: { name: "", email: "", phone: "", gender: "", college: "", year: "", state: "", city: "" },
   setUserData: (data) => set((state) => ({ userData: { ...state.userData, ...data } })),
 
   accessToken: "",

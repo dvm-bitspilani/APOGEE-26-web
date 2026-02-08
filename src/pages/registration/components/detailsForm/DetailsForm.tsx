@@ -14,7 +14,7 @@ const validationForm1Schema = Yup.object({
   name: Yup.string().required("[Name is required]"),
   email: Yup.string().email("Invalid email").required("[Email is required]"),
   gender: Yup.string().required("[Gender is required]"),
-  dob: Yup.date().typeError("[Invalid date]").required("[Date of Birth is required]"),
+  phone: Yup.string().matches(/^[1-9]\d{9}$/, "Invalid number").required("[Phone number is required]"),
 });
 
 const validationForm2Schema = Yup.object({
@@ -25,21 +25,21 @@ const validationForm2Schema = Yup.object({
 });
 
 
-function getDatePlaceholder(locale = navigator.language) {
-  const parts = new Intl.DateTimeFormat(locale).formatToParts(
-    new Date(2000, 11, 31),
-  );
+// function getDatePlaceholder(locale = navigator.language) {
+//   const parts = new Intl.DateTimeFormat(locale).formatToParts(
+//     new Date(2000, 11, 31),
+//   );
 
-  return parts
-    .filter((p) => p.type !== "literal")
-    .map((p) => {
-      if (p.type === "day") return "DD";
-      if (p.type === "month") return "MM";
-      if (p.type === "year") return "YYYY";
-      return "";
-    })
-    .join("-");
-}
+//   return parts
+//     .filter((p) => p.type !== "literal")
+//     .map((p) => {
+//       if (p.type === "day") return "DD";
+//       if (p.type === "month") return "MM";
+//       if (p.type === "year") return "YYYY";
+//       return "";
+//     })
+//     .join("-");
+// }
 
 const DetailsForm = ({ mail = "" }: { mail: string }) => {
   const { setRegistrationStep, userData, setUserData } = useRegistrationStore();
@@ -48,7 +48,7 @@ const DetailsForm = ({ mail = "" }: { mail: string }) => {
     name: "",
     email: "",
     gender: "",
-    dob: "",
+    phone: "",
     college: "",
     year: "",
     state: "",
@@ -64,10 +64,8 @@ const DetailsForm = ({ mail = "" }: { mail: string }) => {
   const { contextSafe } = useGSAP({ scope: container });
 
 
-  const [placeholder, setPlaceholder] = useState("");
 
   useGSAP(() => {
-    setPlaceholder(getDatePlaceholder());
     if (step === 1) {
       gsap.set(form1Ref.current, { autoAlpha: 1, display: "block" });
       gsap.set(form2Ref.current, { autoAlpha: 0, display: "none" });
@@ -94,7 +92,7 @@ const DetailsForm = ({ mail = "" }: { mail: string }) => {
         name: "",
         email: "",
         gender: "",
-        dob: "",
+        phone: "",
         college: "",
         year: "",
         state: "",
@@ -118,7 +116,7 @@ const DetailsForm = ({ mail = "" }: { mail: string }) => {
         name: "",
         email: "",
         gender: "",
-        dob: "",
+        phone: "",
         college: "",
         year: "",
         state: "",
@@ -229,7 +227,6 @@ const DetailsForm = ({ mail = "" }: { mail: string }) => {
             <FormPart1
               formData={userData}
               handleChange={handleChange}
-              placeholder={placeholder}
               errors={errors}
             />
           </form>
@@ -273,7 +270,6 @@ const DetailsForm = ({ mail = "" }: { mail: string }) => {
           <FormPart1
             formData={userData}
             handleChange={handleChange}
-            placeholder={placeholder}
             errors={errors}
           />
           <FormPart2
