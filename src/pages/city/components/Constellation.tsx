@@ -5,7 +5,7 @@ import type { GLTF } from "three/examples/jsm/Addons.js";
 import * as THREE from "three";
 import { useMemo } from "react";
 
-const BLOCKS = 1
+const BLOCKS = 3
 const SPACING = 49.3
 const ypos=0.10;
 const scaleFactor = [1, 1, 1]
