@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRegistrationStore } from "../../../../utils/store";
 import styles from "./Events.module.scss";
 import NavButton from "../navButton/NavButton";
@@ -16,11 +16,20 @@ const Events = () => {
     accessToken,
   } = useRegistrationStore();
 
+  const inputRef = useRef<HTMLInputElement>(null);
+
   const [search, setSearch] = useState("");
 
   const filteredEvents = events.filter((event) =>
     event.name.toLowerCase().includes(search.toLowerCase()),
   );
+
+  useEffect(() => {
+    if (search && inputRef.current) {
+      inputRef.current.focus();
+      inputRef.current.value = search;
+    }
+  }, [search]);
 
   const isSelected = (id: number) => selectedEvents.some((e) => e.id === id);
 
@@ -69,6 +78,7 @@ const Events = () => {
               type="text"
               placeholder="[SEARCH EVENTS]"
               value={search}
+              ref={inputRef}
               onChange={(e) => setSearch(e.target.value)}
             />
             <svg
@@ -82,6 +92,17 @@ const Events = () => {
                 fill="currentColor"
               />
             </svg>
+            <button
+              onMouseDown={(e) => {
+                e.preventDefault();
+                setSearch("");
+                inputRef.current?.focus();
+              }}
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </button>
           </div>
 
           <ul className={styles.eventsList}>
@@ -143,7 +164,7 @@ const Events = () => {
             )}
           </ul>
 
-          <NavButton onClick={register} outerClass={styles.confirmButton} innerClass={styles.confirmButtonContent}>Confirm Selection</NavButton>
+          <NavButton onClick={register} outerClass={styles.confirmButton} innerClass={styles.confirmButtonContent}>Register</NavButton>
         </div>
       </div>
 
