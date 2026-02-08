@@ -6,10 +6,21 @@
   align-items: center;
   justify-content: center;
   min-height: 100%;
+
   width: 100%;
   color: $cyber-yellow;
   // padding: 2rem;
   gap: 1.5rem;
+
+  .error {
+    position: absolute;
+    bottom: -15px;
+    left: 5px;
+    color: red;
+    font-size: 1rem;
+    font-weight: $weight-blender-medium;
+    font-family: $font-blender;
+  }
 
   .title {
     font-family: $font-cyberpunks;
@@ -45,15 +56,17 @@
     &.desktopFormContainer {
       display: none;
     }
+
   }
 
   .form {
+    overflow: scroll;
     display: flex;
     flex-direction: column;
     gap: 1.2rem;
     width: 100%;
     max-height: 45vh; //? [03:47 AM] A stupid mistake averted...
-    overflow: auto;
+    // overflow: auto;
     @include content-scroller($cyber-yellow);
     // Opacity and display control will be handled by GSAP
 
@@ -61,8 +74,18 @@
     .inputGroup {
       position: relative;
       width: 100%;
+      margin-bottom: 1rem;
+
+      input[type="number"] {
+        -moz-appearance: textfield;
+
+        &::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+        }
+      }
 
       .input {
+
         width: 100%;
         background: $dark-bg;
         border: none;
@@ -131,6 +154,7 @@
         background-color: $cyber-yellow;
         color: $dark-bg;
       }
+
     }
   }
 }

@@ -1,12 +1,24 @@
 import styles from "../DetailsForm.module.scss"
 
-interface FormPart1Props {
-    formData: any,
-    handleChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void,
-    placeholder: string
+interface FormData {
+    name: string;
+    email: string;
+    gender: string;
+    phone: string;
 }
 
-export default function FormPart1({formData, handleChange, placeholder}: FormPart1Props) {
+interface FormPart1Props {
+    formData: FormData,
+    handleChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void,
+    errors: {
+        name: string;
+        email: string;
+        gender: string;
+        phone: string;
+    };
+}
+
+export default function FormPart1({ formData, handleChange, errors }: FormPart1Props) {
     return (
         <>
             <div className={styles.inputGroup}>
@@ -19,6 +31,7 @@ export default function FormPart1({formData, handleChange, placeholder}: FormPar
                     className={styles.input}
                     autoComplete="off"
                 />
+                {errors.name && <p className={styles.error}>{errors.name}</p>}
             </div>
 
             <div className={styles.inputGroup}>
@@ -31,6 +44,7 @@ export default function FormPart1({formData, handleChange, placeholder}: FormPar
                     className={styles.input}
                     autoComplete="off"
                 />
+                {errors.email && <p className={styles.error}>{errors.email}</p>}
             </div>
 
             <div className={styles.inputGroup}>
@@ -43,25 +57,28 @@ export default function FormPart1({formData, handleChange, placeholder}: FormPar
                     <option value="" disabled hidden>
                         [Gender]
                     </option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                    <option value="other">Other</option>
+                    <option value="M">Male</option>
+                    <option value="F">Female</option>
+                    <option value="O">Other</option>
                 </select>
+                {errors.gender && <p className={styles.error}>{errors.gender}</p>}
             </div>
 
             <div className={styles.inputGroup}>
-                <input
-                    type="text"
+                {/* <input
+                    type={isMobile ? "date" : "text"}
                     name="dob"
                     placeholder={`[Date of Birth ${placeholder}]`}
-                    onFocus={(e) => (e.target.type = "date")}
-                    onBlur={(e) => {
+                    onFocus={!isMobile ? (e) => (e.target.type = "date") : undefined}
+                    onBlur={!isMobile ? (e) => {
                         if (!e.target.value) e.target.type = "text";
-                    }}
+                    } : undefined}
                     value={formData.dob}
                     onChange={handleChange}
                     className={styles.input}
-                />
+                /> */}
+                <input type="number" name="phone" placeholder="[Enter your phone number]" value={formData.phone} onChange={handleChange} className={styles.input} />
+                {errors.phone && <p className={styles.error}>{errors.phone}</p>}
             </div>
         </>
     )

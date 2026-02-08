@@ -1,16 +1,30 @@
 import styles from "../DetailsForm.module.scss"
 
-interface FormPart2Props {
-    formData: any,
-    handleChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void, 
-    locationData: {state: string, cities: string[]}[];
+interface FormData {
+    college: string;
+    year: string;
+    state: string;
+    city: string;
 }
 
-export default function FormPart2({formData, handleChange, locationData}: FormPart2Props) {
+interface FormPart2Props {
+    formData: FormData,
+    handleChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void,
+    locationData: { state: string, cities: string[] }[];
+    errors: {
+        college: string;
+        year: string;
+        state: string;
+        city: string;
+    };
+    collegeList: { id: string, name: string }[];
+}
+
+export default function FormPart2({ formData, handleChange, locationData, errors, collegeList }: FormPart2Props) {
     return (
         <>
             <div className={styles.inputGroup}>
-                <input
+                {/* <input
                     type="text"
                     name="college"
                     placeholder="[College]"
@@ -18,7 +32,24 @@ export default function FormPart2({formData, handleChange, locationData}: FormPa
                     onChange={handleChange}
                     className={styles.input}
                     autoComplete="off"
-                />
+                /> */}
+                <select
+                    name="college"
+                    value={formData.college}
+                    onChange={handleChange}
+                    className={`${styles.input} ${styles.select}`}
+                >
+                    <option value="" disabled hidden>
+                        [College]
+                    </option>
+                    {/* Placeholder options */}
+                    {
+                        collegeList.map((college, i) =>
+                            <option value={college.id} key={i}>{college.name}</option>
+                        )
+                    }
+                </select>
+                {errors.college && <p className={styles.error}>{errors.college}</p>}
             </div>
 
             <div className={styles.inputGroup}>
@@ -37,6 +68,7 @@ export default function FormPart2({formData, handleChange, locationData}: FormPa
                     <option value="4">4</option>
                     <option value="5">5</option>
                 </select>
+                {errors.year && <p className={styles.error}>{errors.year}</p>}
             </div>
 
             <div className={styles.inputGroup}>
@@ -56,6 +88,7 @@ export default function FormPart2({formData, handleChange, locationData}: FormPa
                         )
                     }
                 </select>
+                {errors.state && <p className={styles.error}>{errors.state}</p>}
             </div>
 
             <div className={styles.inputGroup}>
@@ -75,6 +108,7 @@ export default function FormPart2({formData, handleChange, locationData}: FormPa
                         )
                     }
                 </select>
+                {errors.city && <p className={styles.error}>{errors.city}</p>}
             </div>
         </>
     )
