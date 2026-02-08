@@ -51,19 +51,20 @@ export default function CityScene({ }: any) {
       setTheatreCamera(theatreCameraRef.current);
     }
   }, [setTheatreCamera]);
-  const color ="#00030c"
+  const color ="#3e93be"
   return (
     <>
       <InfernusLeva />
       <SceneLights />
-      {/* <fogExp2 attach="fog" args={["#", 0.001]} /> */}
+      <fogExp2 attach="fog" args={[color, 0.004]} />
+      {/* <fog attach="fog" args={[color, 50, 2000]} />   */}
       {/* <CameraLeva /> */}
       {/* <TheatreCameraLeva  /> //?: Not yet working... */}
       <color attach="background" args={[color]} />
-      {import.meta.env.DEV && <Perf position="top-left" />}
+      {/* {import.meta.env.DEV && <Perf position="top-left" />} */}
       {/* <e.directionalLight theatreKey="light" intensity={0} color="#250707" /> */}
       {/* <Instances> */}
-        {/* <Perf position="top-left" /> */}
+        <Perf position="top-left" />
         <group>
           <group ref={carPivotRef} position={[0, 0, 0]}>
             {/* <ambientLight intensity={0.5} /> */}

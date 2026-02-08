@@ -5,7 +5,7 @@ import type { GLTF } from "three/examples/jsm/Addons.js";
 import * as THREE from "three";
 import { useMemo } from "react";
 
-const BLOCKS = 5
+const BLOCKS = 3
 const SPACING = 49.3
 const ypos=0.10;
 const scaleFactor = [1, 1, 1]
@@ -92,7 +92,7 @@ export default function Constellation() {
 }, [])
 
 
-    const { nodes } = useGLTF('/models/city3-v1.glb') as unknown as GLTFResult
+    const { nodes } = useGLTF('/models/citynewest.glb') as unknown as GLTFResult
 
 
     // for (let block = 0; block < BLOCKS; block++) {
