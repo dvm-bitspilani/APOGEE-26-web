@@ -1,11 +1,28 @@
 import styles from "./Preloader.module.scss";
+import figlet from "figlet";
+import { useEffect, useState } from "react";
 
 export default function Preloader() {
+  const [text, setText] = useState("");
+
+  useEffect(() => {
+    figlet.defaults({
+      fontPath: "/font",
+    });
+    figlet.text("a", { font: "3D-ASCII" }, (err, data) => {
+      if (err) {
+        console.error(err);
+        return;
+      }
+      setText(data ?? "");
+    });
+  }, []);
   return (
     <div className={styles.container}>
       <div className={styles.subContainer}>
         <div className={styles.box}>
           <div className={styles.navbar}>{`>TERMINAL`}</div>
+          <div>{text}</div>
           <div className={styles.txtBox}>
             <p className={styles.txtWhite}>A-SQUARE CITY --RUN</p>
             <p className={styles.txtRed}>
@@ -3131,9 +3148,7 @@ export default function Preloader() {
             <p className={styles.txtWhite}>FEST VERSION: 0.44.0</p>
             <p className={styles.txtGreen}>{`>> LOADING RESOURCES...`}</p>
           </div>
-          <div className={styles.launchBtn}>
-            {`>>LAUNCH<<`}
-          </div>
+          <div className={styles.launchBtn}>{`>>LAUNCH<<`}</div>
         </div>
         <div className={styles.box}>
           <div className={styles.subBox}>
