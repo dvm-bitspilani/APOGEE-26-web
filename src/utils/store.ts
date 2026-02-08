@@ -49,7 +49,7 @@ interface RegistrationStore {
 }
 
 export const useRegistrationStore = create<RegistrationStore>((set) => ({
-  registrationStep: 'events',
+  registrationStep: 'instructions',
   setRegistrationStep: (step) => set({ registrationStep: step }),
 
   events: [],
