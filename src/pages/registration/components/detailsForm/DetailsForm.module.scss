@@ -74,12 +74,21 @@
       width: 100%;
       margin-bottom: 1rem;
 
+      input[type="number"] {
+        -moz-appearance: textfield;
+
+        &::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+        }
+      }
+
       // Define CSS variables for responsiveness sharing with react-select
       --input-padding: 0.3rem 1.2rem;
       --input-font-size: clamp(1.2rem, 1.9vw, 4rem);
       --input-font-weight: #{$weight-blender-medium};
 
       .input {
+
         width: 100%;
         background: $dark-bg;
         border: none;
@@ -154,6 +163,7 @@
         background-color: $cyber-yellow;
         color: $dark-bg;
       }
+
     }
   }
 }
