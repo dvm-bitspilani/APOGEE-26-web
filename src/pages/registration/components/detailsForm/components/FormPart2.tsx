@@ -2,29 +2,23 @@ import styles from "../DetailsForm.module.scss";
 import Select, { type StylesConfig } from "react-select";
 import { useEffect, useState } from "react";
 
-interface FormData {
-    college: string;
-    year: string;
-    state: string;
-    city: string;
-}
-
 interface FormPart2Props {
-    formData: FormData,
-    handleChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void,
-    locationData: { state: string, cities: string[] }[];
-    errors: {
-        college: string;
-        year: string;
-        state: string;
-        city: string;
-    };
+  formData: any;
+  handleChange: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+  ) => void;
+  locationData: { state: string; cities: string[] }[];
 }
 
-export default function FormPart2({ 
+interface OptionType {
+  value: string;
+  label: string;
+}
+
+export default function FormPart2({
   formData,
   handleChange,
-  locationData, errors ,
+  locationData,
 }: FormPart2Props) {
   const [cityOptions, setCityOptions] = useState<OptionType[]>([]);
 
@@ -56,49 +50,50 @@ export default function FormPart2({
   const customStyles: StylesConfig<OptionType, false> = {
     control: (provided, state) => ({
       ...provided,
-      backgroundColor: state.isFocused && state.menuIsOpen ? "#FFEB00" : "#000",
+      backgroundColor: "#000", // $dark-bg
       border: "none",
       boxShadow: "none",
       borderRadius: "0",
-      minHeight: "unset", // Important to let CSS padding dictate height
-      padding: 0,
+      minHeight: "unset",
+      padding: "var(--input-padding)", // Responsive padding
       cursor: "pointer",
-      color: state.isFocused && state.menuIsOpen ? "#000" : "#FFEB00",
+      // Imitate focus state of .input
+      ...(state.isFocused &&
+        state.menuIsOpen && {
+          backgroundColor: "#FFEB00", // $cyber-yellow
+          color: "#000", // $dark-bg
+        }),
     }),
     valueContainer: (provided, state) => ({
       ...provided,
-      padding: "0", // Reset internal padding
+      padding: "0",
       margin: "0",
-      color: "inherit", // Inherit from control (which gets it from class)
-      fontFamily: "inherit",
-      fontWeight: "inherit",
-      fontSize: "inherit",
-      lineHeight: "inherit",
+      color: state.selectProps.menuIsOpen ? "#000" : "#FFEB00",
+      fontFamily: "Blender Pro, sans-serif",
+      fontWeight: "var(--input-font-weight)" as any,
+      fontSize: "var(--input-font-size)", // Responsive font size
     }),
-    input: (provided) => ({
+    input: (provided, state) => ({
       ...provided,
-      color: "inherit",
+      color: state.selectProps.menuIsOpen ? "#000" : "#FFEB00",
       padding: 0,
       margin: 0,
-      fontFamily: "inherit",
-      fontSize: "inherit",
-      lineHeight: "inherit",
+      fontFamily: "Blender Pro, sans-serif",
+      fontSize: "var(--input-font-size)",
     }),
-    singleValue: (provided) => ({
+    singleValue: (provided, state) => ({
       ...provided,
-      color: "inherit",
+      color: state.selectProps.menuIsOpen ? "#000" : "#FFEB00",
       margin: 0,
-      fontFamily: "inherit",
-      fontSize: "inherit",
-      lineHeight: "inherit",
+      fontFamily: "Blender Pro, sans-serif",
+      fontSize: "var(--input-font-size)",
     }),
     placeholder: (provided, state) => ({
       ...provided,
-      color: "inherit",
-      opacity: state.selectProps.menuIsOpen ? 0.8 : 1,
-      fontFamily: "inherit",
-      fontSize: "inherit",
-      lineHeight: "inherit",
+      color: state.selectProps.menuIsOpen ? "#000" : "#FFEB00",
+      opacity: state.selectProps.menuIsOpen ? 0.8 : 1, // Placeholder style
+      fontFamily: "Blender Pro, sans-serif",
+      fontSize: "var(--input-font-size)",
     }),
     menu: (provided) => ({
       ...provided,
@@ -135,10 +130,10 @@ export default function FormPart2({
     }),
     dropdownIndicator: (provided, state) => ({
       ...provided,
-      color: "inherit",
+      color: state.selectProps.menuIsOpen ? "#000" : "#FFEB00",
       padding: "0",
       "&:hover": {
-        color: "inherit",
+        color: state.selectProps.menuIsOpen ? "#000" : "#FFEB00",
       },
       "& svg": {
         width: "1.5rem",
@@ -173,7 +168,6 @@ export default function FormPart2({
           className={styles.input}
           autoComplete="off"
         />
-                {errors.college && <p className={styles.error}>{errors.college}</p>}
       </div>
 
       <div className={styles.inputGroup}>
@@ -192,7 +186,6 @@ export default function FormPart2({
           <option value="4">4</option>
           <option value="5">5</option>
         </select>
-                {errors.year && <p className={styles.error}>{errors.year}</p>}
       </div>
 
       <div className={styles.inputGroup}>
@@ -207,14 +200,10 @@ export default function FormPart2({
           onChange={(option) => handleSelectChange("state", option)}
           placeholder="[State]"
           styles={customStyles}
-          classNames={{
-            control: () => styles.input, // Inherit .input styles for dimensions
-          }}
           isSearchable
           menuPlacement="top"
           className={styles.selectContainer}
         />
-                {errors.state && <p className={styles.error}>{errors.state}</p>}
       </div>
 
       <div className={styles.inputGroup}>
@@ -229,9 +218,6 @@ export default function FormPart2({
           onChange={(option) => handleSelectChange("city", option)}
           placeholder="[City]"
           styles={customStyles}
-          classNames={{
-            control: () => styles.input, // Inherit .input styles for dimensions
-          }}
           isSearchable
           isDisabled={!formData.state}
           noOptionsMessage={() => "Select a state first"}
