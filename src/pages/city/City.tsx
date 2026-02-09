@@ -1,20 +1,20 @@
 import { Canvas } from "@react-three/fiber";
+import extension from "@theatre/r3f/dist/extension";
+import studio from "@theatre/studio";
 import ReactHelmet from "../components/ReactHelmet";
+import styles from "./City.module.scss";
 import CityScene from "./components/CityScene/CityScene";
 import BloomLeva from "./components/leva/BloomLeva/BloomLeva";
 import ScrollReminder from "./components/ScrollReminder/ScrollReminder";
-import styles from "./City.module.scss";
-import { SheetProvider } from "@theatre/r3f";
-import extension from '@theatre/r3f/dist/extension';
-import studio from "@theatre/studio";
 // import { sheet } from "./theatre";
-import state from "./state2.json"
-import debugFunctions from "../../utils/debug";
-import { getProject } from "@theatre/core";
-import { useEffect } from "react";
 import { Environment } from "@react-three/drei";
+import { getProject } from "@theatre/core";
+import { SheetProvider } from "@theatre/r3f";
+import { useEffect } from "react";
+import debugFunctions from "../../utils/debug";
 import NavBar from "../components/NavBar/NavBar";
 import RegisterButton from "../components/RegisterButton/RegisterButton";
+import state from "./state4.json";
 // import { EffectComposer, Noise } from "@react-three/postprocessing";
 // import { BlendFunction } from "postprocessing";
 
@@ -22,13 +22,13 @@ export const project = getProject("City Project", { state });
 export const sheet = project.sheet("Cyber City");
 if (import.meta.env.DEV) {
   debugFunctions();
-  studio.initialize()
-  studio.extend(extension)
+  studio.initialize();
+  studio.extend(extension);
 }
 
 // Ensure the sheet is ready before rendering, if necessary, or just rely on React to handle it.
 // await project.ready; // Top level await might be issue if not handled, but usually fine in Vite + standard setups if supported.
-// Actually, usually we don't await at module level for React components unless Suspense is involved. 
+// Actually, usually we don't await at module level for React components unless Suspense is involved.
 // Theatre documentation often suggests just using it.
 
 export default function City() {
@@ -46,44 +46,44 @@ export default function City() {
         url="https://www.bits-apogee.org/city"
       />
       {
-      <div className={styles.city}>
-        <Canvas shadows={false}
-          camera={{ manual: true }}  // {{ position: [0, 2, -2], near: 0.1, far: 1000000, fov: 50 }}
-          style={{ width: "100%", height: "100%" }}
-
-        >
-          {/* <EffectComposer>
+        <div className={styles.city}>
+          <Canvas
+            shadows={false}
+            camera={{ manual: true }} // {{ position: [0, 2, -2], near: 0.1, far: 1000000, fov: 50 }}
+            style={{ width: "100%", height: "100%" }}
+          >
+            {/* <EffectComposer>
    <Noise
     premultiply // enables or disables noise premultiplication
     blendFunction={BlendFunction.ADD} // blend mode
   />
   </EffectComposer> */}
-          <Environment preset="city" environmentIntensity={0.1} />
-          <SheetProvider sheet={sheet}>
-            {/* <CameraControllerLeva /> */}
-            {/* <e.spotLight
+            <Environment preset="city" environmentIntensity={0.1} />
+            <SheetProvider sheet={sheet}>
+              {/* <CameraControllerLeva /> */}
+              {/* <e.spotLight
               theatreKey="someSpotlight"
               position={[0, 10, 0]}
               angle={0.3}
               distance={0.5}
               intensity={0} /> */}
-            {/* If enabling OrbitControls, disable the CameraControllerLeva here and useHoverCamera, useCityLandingSTrat and useKeyboard control */}
-            {/* <spotLight
+              {/* If enabling OrbitControls, disable the CameraControllerLeva here and useHoverCamera, useCityLandingSTrat and useKeyboard control */}
+              {/* <spotLight
               position={[0, 5, 0]}
               // angle={0.3}
               color={"#61bbf7"}
               // distance={0.5}
               intensity={0} /> */}
-            {/* <OrbitControls/> */}
-            <CityScene />
-            <BloomLeva />
-            {/* <FogPlane /> */}
-          </SheetProvider>
-        </Canvas>
-        {/* <Html> */}
-        <ScrollReminder />
-        {/* </Html> */}
-      </div>
+              {/* <OrbitControls/> */}
+              <CityScene />
+              <BloomLeva />
+              {/* <FogPlane /> */}
+            </SheetProvider>
+          </Canvas>
+          {/* <Html> */}
+          <ScrollReminder />
+          {/* </Html> */}
+        </div>
       }
       <NavBar />
       <RegisterButton />
