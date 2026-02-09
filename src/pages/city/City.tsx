@@ -16,7 +16,7 @@ import NavBar from "../components/NavBar/NavBar";
 import RegisterButton from "../components/RegisterButton/RegisterButton";
 // import { EffectComposer, Noise } from "@react-three/postprocessing";
 // import { BlendFunction } from "postprocessing";
-
+// import * as THREE from "three";
 export const project = getProject("City Project", { state });
 export const sheet = project.sheet("Cyber City");
 // if (import.meta.env.DEV) {
@@ -51,6 +51,11 @@ export default function City() {
             camera={{ manual: true }} // {{ position: [0, 2, -2], near: 0.1, far: 1000000, fov: 50 }}
             style={{ width: "100%", height: "100%" }}
           >
+            {/* <mesh rotation={[-Math.PI ,Math.PI/4, 0]} position={[-20, 5, 100]}>
+  <planeGeometry args={[100, 10]} />
+  <meshBasicMaterial color="red" side={THREE.DoubleSide} />
+</mesh> */}
+
             {/* <EffectComposer>
    <Noise
     premultiply // enables or disables noise premultiplication
