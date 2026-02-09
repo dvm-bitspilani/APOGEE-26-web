@@ -9,7 +9,7 @@ export default function Preloader() {
     figlet.defaults({
       fontPath: "/font",
     });
-    figlet.text("APOGEE", { font: "3D-ASCII" }, (err, data) => {
+    figlet.text("b", { font: "3D-ASCII" }, (err, data) => {
       if (err) {
         console.error(err);
         return;
@@ -22,17 +22,16 @@ export default function Preloader() {
       <div className={styles.subContainer}>
         <div className={styles.box}>
           <div className={styles.navbar}>{`>TERMINAL`}</div>
-          <pre
-            style={{
-              fontFamily: "monospace",
-              whiteSpace: "pre",
-              color: "#ff2fdc",
-            }}
-          >
-            {text}
-          </pre>
           <div className={styles.txtBox}>
             <p className={styles.txtWhite}>A-SQUARE CITY --RUN</p>
+            <pre
+              style={{
+                whiteSpace: "pre",
+              }}
+              className={styles.figlet}
+            >
+              {text}
+            </pre>
             <p className={styles.txtRed}>
               AN INTERACTIVE AUDIOVISUAL EXPERIENCE BY DVM
             </p>
@@ -3143,7 +3142,6 @@ export default function Preloader() {
                 </filter>
               </defs>
             </svg>
-
             <p
               className={styles.txtGreen}
             >{`>> INITIATING BOOT SEQUENCE...`}</p>
@@ -3154,7 +3152,9 @@ export default function Preloader() {
             </p>
             <p className={styles.txtWhite}>OS NAME: THREE.JS</p>
             <p className={styles.txtWhite}>FEST VERSION: 0.44.0</p>
-            <p className={styles.txtGreen}>{`>> LOADING RESOURCES...`}</p>
+            <p
+              className={styles.txtGreen + " " + styles.customMargin}
+            >{`>> LOADING RESOURCES...`}</p>
           </div>
           <div className={styles.launchBtn}>{`>>LAUNCH<<`}</div>
         </div>
@@ -3190,49 +3190,49 @@ export default function Preloader() {
           <div className={styles.subBox}>
             <div className={styles.navbar}>{`>SETTINGS`}</div>
             <div className={styles.txtBox}>
-              <span className={styles.txtBlue + " " + styles.customMargin}>
+              <span className={styles.txtBlue + " " + styles.customDisplay}>
                 MODE:
               </span>
-              <span className={styles.txtSelected + " " + styles.customMargin}>
+              <span className={styles.txtSelected + " " + styles.customDisplay}>
                 [IN PROGRESS]
               </span>
-              <span className={styles.txtWhite + " " + styles.customMargin}>
+              <span className={styles.txtWhite + " " + styles.customDisplay}>
                 [ACTIVE]
               </span>
               <br />
-              <span className={styles.txtBlue + " " + styles.customMargin}>
+              <span className={styles.txtBlue + " " + styles.customDisplay}>
                 EDITION:
               </span>
-              <span className={styles.txtWhite + " " + styles.customMargin}>
+              <span className={styles.txtWhite + " " + styles.customDisplay}>
                 [40TH]
               </span>
-              <span className={styles.txtWhite + " " + styles.customMargin}>
+              <span className={styles.txtWhite + " " + styles.customDisplay}>
                 [42ND]
               </span>
-              <span className={styles.txtSelected + " " + styles.customMargin}>
+              <span className={styles.txtSelected + " " + styles.customDisplay}>
                 [44TH]
               </span>
               <br />
-              <span className={styles.txtBlue + " " + styles.customMargin}>
+              <span className={styles.txtBlue + " " + styles.customDisplay}>
                 THEME:
               </span>
-              <span className={styles.txtWhite + " " + styles.customMargin}>
+              <span className={styles.txtWhite + " " + styles.customDisplay}>
                 [BIOPUNK]
               </span>
-              <span className={styles.txtWhite + " " + styles.customMargin}>
+              <span className={styles.txtWhite + " " + styles.customDisplay}>
                 [STEAMPUNK]
               </span>
-              <span className={styles.txtSelected + " " + styles.customMargin}>
+              <span className={styles.txtSelected + " " + styles.customDisplay}>
                 [CYBERPUNK]
               </span>
               <br />
-              <span className={styles.txtBlue + " " + styles.customMargin}>
+              <span className={styles.txtBlue + " " + styles.customDisplay}>
                 DEDUCTIONS:
               </span>
-              <span className={styles.txtSelected + " " + styles.customMargin}>
+              <span className={styles.txtSelected + " " + styles.customDisplay}>
                 [WORTH IT]
               </span>
-              <span className={styles.txtWhite + " " + styles.customMargin}>
+              <span className={styles.txtWhite + " " + styles.customDisplay}>
                 [NOT WORTH IT]
               </span>
               <br />
