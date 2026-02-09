@@ -261,7 +261,7 @@ const DetailsForm = ({ mail = "" }: { mail: string }) => {
           </div>
         </div>
       </div>
-      <div className={`${styles.formContainer} ${styles.mobileFormContainer}`}>
+      {/* <div className={`${styles.formContainer} ${styles.mobileFormContainer}`}>
         <form
           // ref={form1Ref}
           className={styles.form}
@@ -283,7 +283,7 @@ const DetailsForm = ({ mail = "" }: { mail: string }) => {
         <NavButton onClick={handleToEvents} outerClass={styles.navButton} innerClass={styles.navButtonContent}>
           <span>Select Events</span>
         </NavButton>
-      </div>
+      </div> */}
     </div>
   );
 };

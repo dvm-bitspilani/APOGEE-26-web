@@ -53,9 +53,9 @@
     align-items: center;
     gap: 0.9rem;
 
-    &.desktopFormContainer {
-      display: none;
-    }
+    // &.desktopFormContainer {
+    //   display: none;
+    // }
   }
 
   .form {
@@ -173,9 +173,9 @@
         display: block;
       }
 
-      &.mobileFormContainer {
-        display: none;
-      }
+      // &.mobileFormContainer {
+      //   display: none;
+      // }
     }
 
     .form .inputGroup {
