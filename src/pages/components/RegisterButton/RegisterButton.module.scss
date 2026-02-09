@@ -1,0 +1,32 @@
+@use "../../../assets/global.scss" as *;
+
+.registerButton {
+    right: 0;
+    bottom: 0;
+    position: fixed;
+    margin: 1.5rem;
+    cursor: pointer;
+
+    .registerIcon {
+        width: 12rem;
+        fill: $cyber-yellow;
+        transition: filter 0.2s ease;
+    }
+
+    .registerText {
+        position: absolute;
+        color: #5DB7FF;
+        text-shadow: 0.3rem 0.3rem #9018cc50;
+        font-family: $font-glitch;
+        font-size: 1.8rem;
+        top: 30%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    &:hover {
+        .registerIcon {filter: hue-rotate(-135deg) brightness(3);}
+
+        .registerText {color: #faff5dca;}
+    }
+}

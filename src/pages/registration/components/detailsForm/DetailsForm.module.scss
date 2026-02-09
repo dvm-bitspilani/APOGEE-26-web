@@ -56,7 +56,6 @@
     &.desktopFormContainer {
       display: none;
     }
-
   }
 
   .form {
@@ -69,7 +68,6 @@
     // overflow: auto;
     @include content-scroller($cyber-yellow);
     // Opacity and display control will be handled by GSAP
-
 
     .inputGroup {
       position: relative;
@@ -84,6 +82,11 @@
         }
       }
 
+      // Define CSS variables for responsiveness sharing with react-select
+      --input-padding: 0.3rem 1.2rem;
+      --input-font-size: clamp(1.2rem, 1.9vw, 4rem);
+      --input-font-weight: #{$weight-blender-medium};
+
       .input {
 
         width: 100%;
@@ -92,10 +95,12 @@
         outline: none;
         color: $cyber-yellow;
         font-family: $font-blender;
-        font-weight: $weight-blender-medium;
-        font-size: clamp(1.2rem, 1.9vw, 4rem);
-        // padding: 0.7vw;
-        padding: 0.3rem 1.2rem;
+
+        // Use variables
+        font-weight: var(--input-font-weight);
+        font-size: var(--input-font-size);
+        padding: var(--input-padding);
+
         // text-transform: uppercase;
         cursor: pointer;
         transition: all 0.2s ease-in-out;
@@ -174,9 +179,8 @@
     }
 
     .form .inputGroup {
-      .input {
-        font-weight: $weight-blender-bold;
-      }
+      // Update variable for this breakpoint
+      --input-font-weight: #{$weight-blender-bold};
     }
   }
 }
@@ -201,12 +205,10 @@
       gap: 1.5vw;
 
       .inputGroup {
-        .input {
-          font-size: clamp(1rem, 1.7vw, 3rem);
-          padding: 0.5vw;
-        }
+        // Update variables for this breakpoint
+        --input-font-size: clamp(1rem, 1.7vw, 3rem);
+        --input-padding: 0.5vw;
       }
-
     }
 
     .customBtnWrapper {
