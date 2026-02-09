@@ -8,7 +8,7 @@ export function useHoverCamera({
   maxY = 0.08,
   minX = -0.05,
   maxX = 0.05,
-  lerp = 1,
+  lerp = 0.1,
 } = {}) {
   const camera = useTheatreCameraStore((s) => s.theatreCamera);
 

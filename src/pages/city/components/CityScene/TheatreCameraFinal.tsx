@@ -2,10 +2,18 @@ import { PerspectiveCamera } from "@theatre/r3f";
 import { useRef, useEffect } from "react";
 import * as THREE from "three";
 import { useTheatreCameraStore } from "../../../../utils/store";
+import { useHoverCamera } from "../../hooks/useHoverCamera";
 
 export default function TheatreCameraFinal() {
   const theatreCameraRef = useRef<THREE.PerspectiveCamera>(null!);
   const setTheatreCamera = useTheatreCameraStore((s) => s.setTheatreCamera);
+  useHoverCamera({
+  minY: -0.08,
+  maxY: 0.08,
+  minX: -0.05,
+  maxX: 0.05,
+  lerp: 1,
+});
 
   useEffect(() => {
     if (theatreCameraRef.current) {
