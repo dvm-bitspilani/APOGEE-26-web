@@ -1,40 +1,218 @@
 import styles from "./Preloader.module.scss";
-import figlet from "figlet";
-import { useEffect, useState } from "react";
+// import figlet from "figlet";
+import { useEffect, useRef } from "react";
+import { gsap } from "gsap";
+import SplitText from "gsap/src/SplitText";
 
 export default function Preloader() {
-  const [text, setText] = useState("");
+  // const [text, setText] = useState("");
+  // const [iteration, setIteration] = useState(0);
+  const textRef = useRef<(HTMLParagraphElement|HTMLPreElement)[]>([]);
+  const preRef = useRef<HTMLPreElement>(null);
+  gsap.registerPlugin(SplitText);
+
+  const asciiText = `
+        █████████   ███████████     ███████      █████████  ██████████ ██████████
+       ███▒▒▒▒▒███ ▒▒███▒▒▒▒▒███  ███▒▒▒▒▒███   ███▒▒▒▒▒███▒▒███▒▒▒▒▒█▒▒███▒▒▒▒▒█
+      ▒███    ▒███  ▒███    ▒███ ███     ▒▒███ ███     ▒▒▒  ▒███  █ ▒  ▒███  █ ▒ 
+      ▒███████████  ▒██████████ ▒███      ▒███▒███          ▒██████    ▒██████   
+      ▒███▒▒▒▒▒███  ▒███▒▒▒▒▒▒  ▒███      ▒███▒███    █████ ▒███▒▒█    ▒███▒▒█   
+      ▒███    ▒███  ▒███        ▒▒███     ███ ▒▒███  ▒▒███  ▒███ ▒   █ ▒███ ▒   █
+      █████   █████ █████        ▒▒▒███████▒   ▒▒█████████  ██████████ ██████████
+      ▒▒▒▒▒   ▒▒▒▒▒ ▒▒▒▒▒           ▒▒▒▒▒▒▒      ▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒▒▒▒ ▒▒▒▒▒▒▒▒▒▒ 
+
+`;
 
   useEffect(() => {
-    figlet.defaults({
-      fontPath: "/font",
+    // const tl = gsap.timeline();
+
+    // const split = new SplitText(preRef.current, {
+    //   type: "chars",
+    //   charsClass: "char",
+    //   reduceWhiteSpace: false,
+    // });
+    // console.log(split.chars);
+
+    // tl.from(split.chars, {
+    //   display: "none",
+    //   duration: 1,
+    //   stagger: 0.005,
+    //   ease: "none",
+    // });
+     const tl2 = gsap.timeline();
+    const split2 = new SplitText(textRef.current, {
+      type: "chars",
+      charsClass: "char",
+      reduceWhiteSpace: false,
     });
-    figlet.text("b", { font: "3D-ASCII" }, (err, data) => {
-      if (err) {
-        console.error(err);
-        return;
-      }
-      setText(data ?? "");
+
+    tl2.from(split2.chars, {
+      display: "none",
+      duration: 1,
+      stagger: 0.009,
+      ease: "none",
     });
+
+    return () => split2.revert();
+    // const doAnimation = () => {
+    //   const el = textRef.current[iteration];
+    //   if (!el) return;
+    //   const width = el.innerText.length * 1.08;
+
+    //   tl.fromTo(
+    //     textRef.current[iteration],
+    //     {
+    //       width: "0",
+    //     },
+    //     {
+    //       width: `${width}ch`,
+    //       duration: 1,
+    //       ease: SteppedEase.config(width * 1.5),
+    //       onStart: () => {
+    //         el.style.borderRight = "10px solid rgba(255,255,255,0.75)";
+    //       },
+    //       onComplete: () => {
+    //         setTimeout(() => {
+    //           el.style.border = "none";
+    //           setIteration((prev) => prev + 1);
+    //         }, 500);
+    //       },
+    //     },
+    //     0,
+    //   );
+
+    //   tl.fromTo(
+    //     textRef.current[iteration],
+    //     {
+    //       borderRightColor: "rgba(255,255,255,0.75)",
+    //     },
+    //     {
+    //       borderRightColor: "rgba(255,255,255,0)",
+    //       duration: 0.5,
+    //       repeat: -1,
+    //       ease: SteppedEase.config(37),
+    //     },
+    //     0,
+    //   );
+
+    //   tl.play();
+    // };
+
+    // doAnimation();
+
+    // return () => {
+    //   tl.kill();
+    // };
   }, []);
+
+  // useEffect(() => {
+  //   const el = preRef.current;
+  //   if (!el) return;
+
+  //   const width = asciiText.length / 7.3;
+  //   const tl = gsap.timeline({ paused: true });
+
+  //   tl.fromTo(
+  //     preRef.current,
+  //     {
+  //       width: "0",
+  //       height: "0",
+  //     },
+  //     {
+  //       width: `${width}ch`,
+  //       height: "auto",
+  //       duration: 1,
+  //       ease: SteppedEase.config(width * 0.8),
+  //       onStart: () => {
+  //         el.style.borderRight = "10px solid rgba(255,255,255,0.75)";
+  //       },
+  //       onComplete: () => {
+  //         // setTimeout(() => {
+  //         el.style.border = "none";
+  //         // }, 500);
+  //       },
+  //     },
+  //     0,
+  //   );
+
+  //   tl.fromTo(
+  //     preRef.current,
+  //     {
+  //       borderRightColor: "rgba(255,255,255,0.75)",
+  //     },
+  //     {
+  //       borderRightColor: "rgba(255,255,255,0)",
+  //       duration: 0.5,
+  //       repeat: -1,
+  //       ease: SteppedEase.config(37),
+  //     },
+  //     0,
+  //   );
+
+  //   tl.play();
+
+  //   return () => {
+  //     tl.kill();
+  //   };
+  // }, []);
+
+  // useEffect(() => {
+  //   figlet.defaults({
+  //     fontPath: "/font",
+  //   });
+  //   figlet.text("b", { font: "3D-ASCII" }, (err, data) => {
+  //     if (err) {
+  //       console.error(err);
+  //       return;
+  //     }
+  //     setText(data ?? "");
+  //   });
+  // }, []);
+
   return (
     <div className={styles.container}>
       <div className={styles.subContainer}>
         <div className={styles.box}>
           <div className={styles.navbar}>{`>TERMINAL`}</div>
-          <div className={styles.txtBox}>
-            <p className={styles.txtWhite}>A-SQUARE CITY --RUN</p>
+          <div className={styles.txtBox}  ref={(el) => {
+                if (el) textRef.current[0] = el;
+              }}>
+            <div
+              className={styles.txtWhite}
+              ref={(el) => {
+                if (el) textRef.current[0] = el;
+              }}
+            >
+              A-SQUARE&nbsp;CITY&nbsp;--RUN
+            </div>
             <pre
               style={{
                 whiteSpace: "pre",
               }}
               className={styles.figlet}
+              ref={(el) => {
+                if (el) textRef.current[1] = el;
+              }}
             >
-              {text}
+              <br />
+<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;█████████   ███████████     ███████      █████████  ██████████ ██████████</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;███▒▒▒▒▒███ ▒▒███▒▒▒▒▒███  ███▒▒▒▒▒███   ███▒▒▒▒▒███▒▒███▒▒▒▒▒█▒▒███▒▒▒▒▒█<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▒███    ▒███  ▒███    ▒███ ███     ▒▒███ ███     ▒▒▒  ▒███  █ ▒  ▒███  █ ▒ <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▒███████████  ▒██████████ ▒███      ▒███▒███          ▒██████    ▒██████   <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▒███▒▒▒▒▒███  ▒███▒▒▒▒▒▒  ▒███      ▒███▒███    █████ ▒███▒▒█    ▒███▒▒█   <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▒███    ▒███  ▒███        ▒▒███     ███ ▒▒███  ▒▒███  ▒███ ▒   █ ▒███ ▒   █<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;█████   █████ █████        ▒▒▒███████▒   ▒▒█████████  ██████████ ██████████<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▒▒▒▒▒   ▒▒▒▒▒ ▒▒▒▒▒           ▒▒▒▒▒▒▒      ▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒▒▒▒ ▒▒▒▒▒▒▒▒▒▒<br />
+<br />
             </pre>
-            <p className={styles.txtRed}>
-              AN INTERACTIVE AUDIOVISUAL EXPERIENCE BY DVM
-            </p>
+            <div
+              className={styles.txtRed}
+              ref={(el) => {
+                if (el) textRef.current[2] = el;
+              }}
+            >
+              &nbsp;&nbsp;&nbsp;AN INTERACTIVE AUDIOVISUAL EXPERIENCE BY DVM
+            </div>
             <svg
               width="694"
               height="30"
@@ -3142,18 +3320,39 @@ export default function Preloader() {
                 </filter>
               </defs>
             </svg>
-            <p
+            <div
               className={styles.txtGreen}
-            >{`>> INITIATING BOOT SEQUENCE...`}</p>
-            <p className={styles.txtWhite}>BUILD VERSION: 10.04.26</p>
-            <p className={styles.txtWhite}>SYSTEM MANUFACTURER: BITS PILANI</p>
-            <p className={styles.txtWhite}>
-              SYSTEM BOOTH TIME: {`<DATE OF OPENING WEBSITE>`}
+              ref={(el) => {
+                if (el) textRef.current[3] = el;
+              }}
+            >{`>> INITIATING BOOT SEQUENCE...`}</div>
+            <p
+              className={styles.txtWhite}
+              ref={(el) => {
+                if (el) textRef.current[4] = el;
+              }}
+            >
+              BUILD VERSION: 10.04.26
             </p>
-            <p className={styles.txtWhite}>OS NAME: THREE.JS</p>
-            <p className={styles.txtWhite}>FEST VERSION: 0.44.0</p>
+            <p className={styles.txtWhite} ref={(el) => {
+                if (el) textRef.current[5] = el;
+              }}>SYSTEM MANUFACTURER: BITS PILANI</p>
+            <p className={styles.txtWhite} ref={(el) => {
+                if (el) textRef.current[6] = el;
+              }}>
+              SYSTEM BOOT TIME: {`<DATE OF OPENING WEBSITE>`}
+            </p>
+            <p className={styles.txtWhite} ref={(el) => {
+                if (el) textRef.current[7] = el;
+              }}>OS NAME: THREE.JS</p>
+            <p className={styles.txtWhite} ref={(el) => {
+                if (el) textRef.current[8] = el;
+              }}>FEST VERSION: 0.44.0</p>
             <p
               className={styles.txtGreen + " " + styles.customMargin}
+              ref={(el) => {
+                if (el) textRef.current[9] = el;
+              }}
             >{`>> LOADING RESOURCES...`}</p>
           </div>
           <div className={styles.launchBtn}>{`>>LAUNCH<<`}</div>
@@ -3242,18 +3441,18 @@ export default function Preloader() {
             <div className={styles.navbar}>{`>WHOAMI`}</div>
             <div className={styles.txtBox}>
               <span className={styles.txtWhite}>{`>>`}</span>
-              <span className={styles.txtBlue}>[DESIGN]</span>
-              <span className={styles.txtWhite}>Vannya Raiyyan</span>
-              <br />
-              <span className={styles.txtWhite}>{`>>`}</span>
               <span className={styles.txtBlue}>[FRONTEND]</span>
               <span className={styles.txtWhite}>
-                Ishaan Ansh Pranjal Sumit Varun
+                Pranjal Ishaan Ansh Sumit Varun
               </span>
               <br />
               <span className={styles.txtWhite}>{`>>`}</span>
               <span className={styles.txtBlue}>[VIDEO]</span>
-              <span className={styles.txtWhite}>Tejasvi Jotswaroop</span>
+              <span className={styles.txtWhite}>Jotswroop Tejasvi</span>
+              <br />
+              <span className={styles.txtWhite}>{`>>`}</span>
+              <span className={styles.txtBlue}>[DESIGN]</span>
+              <span className={styles.txtWhite}>Raiyyan Vannya</span>
               <br />
               <span className={styles.txtWhite}>{`>>`}</span>
               <span className={styles.txtBlue}>[BACKEND]</span>
