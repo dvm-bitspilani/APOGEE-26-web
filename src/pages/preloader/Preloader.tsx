@@ -9,7 +9,7 @@ export default function Preloader() {
     figlet.defaults({
       fontPath: "/font",
     });
-    figlet.text("a", { font: "3D-ASCII" }, (err, data) => {
+    figlet.text("APOGEE", { font: "3D-ASCII" }, (err, data) => {
       if (err) {
         console.error(err);
         return;
@@ -22,7 +22,15 @@ export default function Preloader() {
       <div className={styles.subContainer}>
         <div className={styles.box}>
           <div className={styles.navbar}>{`>TERMINAL`}</div>
-          <div>{text}</div>
+          <pre
+            style={{
+              fontFamily: "monospace",
+              whiteSpace: "pre",
+              color: "#ff2fdc",
+            }}
+          >
+            {text}
+          </pre>
           <div className={styles.txtBox}>
             <p className={styles.txtWhite}>A-SQUARE CITY --RUN</p>
             <p className={styles.txtRed}>
