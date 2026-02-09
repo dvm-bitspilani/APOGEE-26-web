@@ -2,22 +2,24 @@ import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { useRef } from "react";
 import { useTheatreCameraStore } from "../../../utils/store";
+import type { HoverCameraProps } from "../types/hooks.types";
 
 export function useHoverCamera({
-  minY = -0.08,
-  maxY = 0.08,
-  minX = -0.05,
-  maxX = 0.05,
+  minY,
+  maxY,
+  minX,
+  maxX,
   lerp = 0.1,
-} = {}) {
+  enabled = true,
+}: HoverCameraProps){
   const camera = useTheatreCameraStore((s) => s.theatreCamera);
 
   // store BASE rotation (0, -PI, 0)
   const baseRot = useRef(new THREE.Euler(0, -Math.PI, 0));
 
   useFrame((state) => {
-    if (!camera) return;
-
+    if (!camera || !enabled) return;
+    
     // normalize mouse → 0..1
     const tx = (state.mouse.x + 1) / 2;
     const ty = (state.mouse.y + 1) / 2;
