@@ -1,0 +1,195 @@
+@use "/src/assets/global.scss" as *;
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #190048;
+  width: 100vw;
+  height: 100vh;
+  background-image: url("/img/preloader/bg.png");
+  background-repeat: repeat;
+  backdrop-filter: blur(100px), brightness(0.5);
+  animation: flicker 0.5s infinite;
+
+  @keyframes flicker {
+    0% {
+      filter: brightness(100%);
+    }
+    10% {
+      filter: brightness(110%);
+    }
+    30% {
+      filter: brightness(105%);
+    }
+    50% {
+      filter: brightness(103%);
+    }
+    70% {
+      filter: brightness(108%);
+    }
+    100% {
+      filter: brightness(100%);
+    }
+  }
+
+  .subContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 76vw;
+    height: 40vw;
+    box-shadow: 0px 0px 5px 0.5px #4df4fc;
+    animation: shake 0.5s infinite;
+
+    @keyframes shake {
+      0% {
+        transform: translate(0, 0);
+      }
+      10% {
+        transform: translate(0.2px, 0.4px);
+      }
+      30% {
+        transform: translate(0.1px, 0.2px);
+      }
+      50% {
+        transform: translate(0.5px, 0.1px);
+      }
+      70% {
+        transform: translate(0.1px, 0.6px);
+      }
+      100% {
+        transform: translate(0, 0);
+      }
+    }
+
+    .box {
+      width: 38vw;
+      height: 40vw;
+      border: 0.3vw solid #4df4fc;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+
+      &:nth-child(2) {
+        border-left: 0;
+      }
+      .launchBtn {
+        width: 36vw;
+        height: 4vw;
+        border-top-left-radius: 2vw;
+        border-bottom-right-radius: 2vw;
+        background-color: rgb(191, 22, 191);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.7vw;
+        font-family: $font-jetBrains;
+        color: #780a8f;
+        font-weight: 1000;
+      }
+      .subBox {
+        width: 38vw;
+        height: 30vw;
+        border-bottom: 0.3vw solid #4df4fc;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        &:nth-child(3) {
+          border-bottom: 0;
+        }
+      }
+      .navbar {
+        margin: 0.3vw 0;
+        width: 37vw;
+        height: 2vw;
+        background-color: #4df4fc;
+        font-size: 1.2vw;
+        color: #057379;
+        font-family: $font-jetBrains;
+        box-shadow: 0px 0px 8px 0.7px #4df4fc;
+        line-height: 2vw;
+        padding-left: 0.5vw;
+      }
+      .txtBox {
+        width: 100%;
+        margin-top: 0.2vw;
+
+        .customMargin {
+          display: inline-block;
+        }
+
+        .txtWhite {
+          color: #fff;
+          font-size: 1.35vw;
+          font-family: $font-jetBrains;
+          margin-top: 0.3vw;
+          text-align: left;
+          padding-left: 0.5vw;
+          text-shadow:
+            0px 0px 5px white,
+            0px 0px 25px white;
+          filter: blur(0.4px);
+        }
+        .txtBlue {
+          color: #4df4fc;
+          font-size: 1.35vw;
+          font-family: $font-jetBrains;
+          margin-top: 0.3vw;
+          text-align: left;
+          padding-left: 0.5vw;
+          text-shadow:
+            0px 0px 2px #e9e9e9,
+            0px 0px 4px #e9e9e9;
+          filter: blur(0.1px);
+        }
+        .txtGreen {
+          color: #05dd8b;
+          font-size: 1.35vw;
+          font-family: $font-jetBrains;
+          margin-top: 0.3vw;
+          text-align: left;
+          padding-left: 0.5vw;
+          text-shadow:
+            0px 0px 1px white,
+            0px 0px 3px white;
+          filter: blur(0.1px);
+        }
+        .txtSelected {
+          color: #057379;
+          background-color: #4df4fc;
+          font-size: 1.35vw;
+          font-family: $font-jetBrains;
+          margin-top: 0.3vw;
+          text-align: left;
+          margin-left: 0.5vw;
+          text-shadow:
+            0px 0px 1px white,
+            0px 0px 3px white;
+          box-shadow: 0px 0px 5px 0.5px #4df4fc;
+          filter: blur(0.1px);
+        }
+        .txtRed {
+          color: #e03a5b;
+          font-size: 1.2vw;
+          font-family: $font-jetBrains;
+          margin-top: 0.3vw;
+          padding-left: 0.5vw;
+          text-shadow: 0px 0px 20px #e03a5b;
+          text-align: center;
+          // filter: blur(0.4px);
+        }
+        .redDesign {
+          width: 34vw;
+          margin: 0 1.7vw;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .container {
+    display: flex;
+  }
+}
