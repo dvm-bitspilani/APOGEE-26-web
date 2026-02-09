@@ -1,6 +1,6 @@
 import { Canvas } from "@react-three/fiber";
-import extension from "@theatre/r3f/dist/extension";
-import studio from "@theatre/studio";
+// import extension from "@theatre/r3f/dist/extension";
+// import studio from "@theatre/studio";
 import ReactHelmet from "../components/ReactHelmet";
 import styles from "./City.module.scss";
 import CityScene from "./components/CityScene/CityScene";
@@ -10,7 +10,7 @@ import { Environment } from "@react-three/drei";
 import { getProject } from "@theatre/core";
 import { SheetProvider } from "@theatre/r3f";
 import { useEffect } from "react";
-import debugFunctions from "../../utils/debug";
+// import debugFunctions from "../../utils/debug";
 import NavBar from "../components/NavBar/NavBar";
 import RegisterButton from "../components/RegisterButton/RegisterButton";
 import state from "./state4.json";

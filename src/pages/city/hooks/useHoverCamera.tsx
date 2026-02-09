@@ -9,7 +9,7 @@ export function useHoverCamera({
   maxY,
   minX,
   maxX,
-  lerp = 0.1,
+  lerp = 1,
   enabled = true,
 }: HoverCameraProps){
   const camera = useTheatreCameraStore((s) => s.theatreCamera);

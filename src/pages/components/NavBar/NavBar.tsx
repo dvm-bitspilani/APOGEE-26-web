@@ -27,7 +27,7 @@ export default function NavBar() {
         <div className={styles.navbarContainer}>
             <div className={styles.navbar}>
                 <div className={styles.titleLogo}>
-                    <img className={styles.logo} src="/img/apogee26_theme.png" alt="Logo" />
+                    <img className={styles.logo} src="/img/apogee26.png" alt="Logo" />
                 </div>
                 <div className={styles.navlinks}>
                     <NavLink to="/city" label="Home" />

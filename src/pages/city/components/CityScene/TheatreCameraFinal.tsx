@@ -15,7 +15,7 @@ export default function TheatreCameraFinal() {
     maxY: 0.08,
     minX: -0.05,
     maxX: 0.05,
-    lerp: 0.5,
+    lerp: 0.08,
     enabled: isLaptop, 
   });
 

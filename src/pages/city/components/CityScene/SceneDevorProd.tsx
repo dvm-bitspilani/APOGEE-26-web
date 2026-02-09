@@ -13,7 +13,7 @@ export default function SceneDevOrProd() {
     useCityKeyboardControl();
     return (
       <>
-        <Perf position="top-left" />
+        <Perf position="bottom-left" />
         <CombinedLeva />
       </>
     );
