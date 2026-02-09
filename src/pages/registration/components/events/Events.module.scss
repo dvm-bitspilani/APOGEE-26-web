@@ -70,8 +70,9 @@
     flex: 1;
     background: transparent;
     border: none;
-    color: #e2dccb;
+    color: #ffff00;
     font-size: 1.2rem;
+    font-weight: 700;
     outline: none;
     font-family: $font-blender;
 
@@ -79,6 +80,22 @@
       color: $cyber-yellow;
       font-family: $font-blender;
     }
+
+
+  }
+
+  button {
+    background: transparent;
+    border: none;
+    color: #ffff00;
+    font-size: 1.2rem;
+    font-weight: 700;
+    outline: none;
+    font-family: $font-blender;
+    padding: 0;
+    margin: 0;
+    line-height: 0;
+    display: none;
   }
 
   svg {
@@ -86,6 +103,16 @@
     height: 24px;
     fill: #e2dccb;
   }
+
+  input:focus~svg {
+    display: none;
+  }
+
+  input:focus~button {
+    display: block;
+  }
+
+
 }
 
 .eventsList {
@@ -93,7 +120,7 @@
   padding: 0;
   margin: 0;
   flex: 1;
-  max-height: 65%;
+  max-height: 75%;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
@@ -166,7 +193,7 @@
   }
 
   .actionIcon {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     color: $cyber-yellow;
     width: 24px;
     height: 24px;
@@ -195,10 +222,15 @@
   font-family: inherit;
 
   .confirmButtonContent {
+    font-size: 1.5rem;
     font-weight: 700;
     color: #dddddd;
     z-index: 1;
     position: relative;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   // &:hover {
@@ -520,6 +552,7 @@
         &::-webkit-scrollbar {
           width: 4px;
         }
+
         &::-webkit-scrollbar-thumb {
           background: $cyber-yellow;
           border-radius: 2px;
