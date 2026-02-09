@@ -4,13 +4,9 @@ import * as THREE from "three";
 import { useCityStore, usePivotStore } from "../../../../utils/store";
 import ScrollSync from "../ScrollSync/ScrollSync";
 import Constellation from "../Constellation";
-import PivotFinal from "../config/PivotFinal";
 import Infernus from "../models/Infernus";
-import { Perf } from "r3f-perf";
 import TheatreCameraFinal from "./TheatreCameraFinal";
 import SceneLights from "./SceneLights";
-import CombinedLeva from "../leva/CombinedLeva";
-import FinalProdConfig from "../config/FinalProdConfig";
 import SceneDevOrProd from "./SceneDevorProd";
 
 export default function CityScene({}: any) {
@@ -43,7 +39,7 @@ export default function CityScene({}: any) {
         <group ref={carPivotRef} position={[0, 0, 0]}>
           {/* <ambientLight intensity={0.5} /> */}
           <group ref={cityRef}>
-            <axesHelper args={[200]} />
+            {/* <axesHelper args={[200]} /> */}
             {/* <CityGrid /> */}
             <Constellation />
           </group>
