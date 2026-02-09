@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "./ScrollReminder.module.scss";
-import Arrowgif from "/gif/arrow.gif"
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import gsap from "gsap";

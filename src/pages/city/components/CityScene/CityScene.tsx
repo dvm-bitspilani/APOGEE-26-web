@@ -55,7 +55,7 @@ export default function CityScene({}: any) {
           <TheatreCameraFinal />
           <Infernus />
         </group>
-        <ScrollControls pages={3} damping={0.8}>
+        <ScrollControls pages={6} damping={0.8}>
           {/* Use PivotLeva to roate the city around the car's axis */}
           {/* <PivotLeva /> */}
           {/* <PivotFinal /> */}

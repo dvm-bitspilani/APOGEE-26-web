@@ -13,7 +13,7 @@ import { useEffect } from "react";
 // import debugFunctions from "../../utils/debug";
 import NavBar from "../components/NavBar/NavBar";
 import RegisterButton from "../components/RegisterButton/RegisterButton";
-import state from "./state4.json";
+import state from "./state5.json";
 // import { EffectComposer, Noise } from "@react-three/postprocessing";
 // import { BlendFunction } from "postprocessing";
 // import * as THREE from "three";
