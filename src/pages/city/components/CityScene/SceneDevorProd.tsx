@@ -14,7 +14,7 @@ export default function SceneDevOrProd() {
     return (
       <>
         <Perf position="bottom-left" />
-        <CombinedLeva />
+        {/* <CombinedLeva /> */}
       </>
     );
   }
