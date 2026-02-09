@@ -12,7 +12,6 @@ export default function PivotFinal() {
     rotX: 0,
     rotY: -180,
     rotZ: 0,
-
     scale: 15
   };
   useEffect(() => {

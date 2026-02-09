@@ -76,7 +76,7 @@ export default function City() {
               intensity={0} /> */}
             {/* <OrbitControls/> */}
             <CityScene />
-            <BloomLeva />
+            {/* <BloomLeva /> */}
             {/* <FogPlane /> */}
           </SheetProvider>
         </Canvas>

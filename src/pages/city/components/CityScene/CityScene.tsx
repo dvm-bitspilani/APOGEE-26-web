@@ -11,6 +11,8 @@ import Infernus from "../models/Infernus";
 import { Perf } from "r3f-perf";
 import TheatreCameraFinal from "./TheatreCameraFinal";
 import SceneLights from "./SceneLights";
+import CombinedLeva from "../leva/CombinedLeva";
+import FinalProdConfig from "../config/FinalProdConfig";
 
 export default function CityScene({ }: any) {
   const cityRef = useRef<THREE.Group>(null!);
@@ -31,7 +33,8 @@ export default function CityScene({ }: any) {
   const color ="#3e93be"
   return (
     <>
-      <InfernusLeva />
+    {import.meta.env.DEV ? <CombinedLeva /> : <FinalProdConfig />}
+      {/* <InfernusLeva /> */}
       <SceneLights />
       <fogExp2 attach="fog" args={[color, 0.004]} />
       {/* <fog attach="fog" args={[color, 50, 2000]} />   */}
@@ -66,7 +69,7 @@ export default function CityScene({ }: any) {
             {/* <PivotLeva /> */}
             <PivotFinal />
             {/* Use CItyDebug for position x y and z if by chance u rotate here whole city will be rotated around its axis */}
-            <CityDebug />
+            {/* <CityDebug /> */}
             <ScrollSync />
           </ScrollControls>
         </group>
