@@ -3,7 +3,7 @@ import { useFrame } from "@react-three/fiber";
 // import { sheet } from "../../theatre";
 import { getProject } from "@theatre/core";
 
-import state from "../../state6.json";
+import state from "../../state7.json";
 import { useModalStore } from "../../../../utils/store";
 import { type Section, useCurrentSectionStore } from "../../../../utils/store";
 // import { useLocation, useNavigate } from "react-router-dom";
@@ -12,8 +12,8 @@ export const sheet = project.sheet("Cyber City");
 
 const stopPoints: Record<Section, [number, number]> = {
   "home": [0, 0.25],
-  "about": [4, 8],
-  "contact": [11.75, 16],
+  "about": [4, 6],
+  "contact": [10, 16],
   "transition": [-1, -1],
 }
 const sequenceLength = 12;
