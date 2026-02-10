@@ -1,0 +1,74 @@
+.wrapper {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2; 
+  pointer-events: none; 
+}
+
+.box {
+  /* Using rem for the inner content container to keep it stable */
+  width: 79%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #ffffff;
+  font-family: "Orbitron", sans-serif;
+
+  /* PERCENTAGE-BASED CLIP: This matches your 800x500 path geometry exactly */
+  /* It handles the beveled corners and the top/bottom indents */
+  clip-path: 
+   polygon(5.25% 2%, 18.25% 2%, 19.75% 0%, 81% 0%, 82.5% 2%, 95.05% 2%, 100% 10%, 100% 91%, 95.0% 99%, 5.25% 99%, 0% 90%, 0% 10%);
+
+  /* Your requested background color */
+  background: linear-gradient(
+    180deg,
+    rgba(153, 0, 0, 0.9), // Deep Red
+    rgba(80, 0, 0, 1)     // Darker Red
+  );
+
+  backdrop-filter: blur(6px);
+  /* Use rem for the gap to avoid it becoming too small on mobile */
+  padding: 2rem;
+}
+
+.title {
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  letter-spacing: 0.15em;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  color: #00f3ff; // Cyan text pops better on red
+}
+
+.subtitle {
+  font-size: clamp(0.8rem, 1.2vw, 1rem);
+  opacity: 0.8;
+  margin-bottom: 1.5rem;
+  max-width: 80%;
+}
+
+.loader {
+  display: flex;
+  gap: 0.5rem;
+
+  span {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: #00f3ff;
+    animation: bounce 1.2s infinite ease-in-out;
+  }
+
+  span:nth-child(2) { animation-delay: 0.2s; }
+  span:nth-child(3) { animation-delay: 0.4s; }
+}
+
+@keyframes bounce {
+  0%, 80%, 100% { transform: translateY(0); opacity: 0.5; }
+  40% { transform: translateY(-0.5rem); opacity: 1; }
+}
