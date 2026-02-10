@@ -30,7 +30,7 @@
   // User asked for "separate entity", but flex start is usually what they mean by "top".
 
   .heading {
-    font-size: clamp(3rem, 3.5vw, 5rem);
+    font-size: clamp(2.6rem, 3.5vw, 5rem);
     font-weight: 500;
     text-transform: uppercase;
     color: $cyber-yellow;
@@ -489,7 +489,7 @@
 
     .mobileHeading {
       text-align: center;
-      font-family: $font-cyberpunks;
+      font-family: $font-ethnocentric;
       font-size: 2rem;
       color: $cyber-yellow;
       margin-bottom: 1rem;
