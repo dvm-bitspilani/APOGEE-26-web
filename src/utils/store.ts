@@ -1,5 +1,6 @@
 import * as THREE from "three";
 import { create } from "zustand";
+import Modal from '../pages/city/components/Modal/Modal';
 type IntroState = {
   introDone: boolean;
   setIntroDone: (done: boolean) => void;
@@ -70,6 +71,42 @@ export const useTheatreCameraStore = create<TheatreCameraStore>((set) => ({
   theatreCamera: null,
   setTheatreCamera: (camera) => set({ theatreCamera: camera }),
 }))
+
+type pages = ["home", "about", "events", "contact"][number];
+
+type TargetLocationStore = {
+  targetLocation: pages;
+  setTargetLocation: (location: pages) => void;
+}
+
+export const useTargetLocationStore = create<TargetLocationStore>((set) => ({
+  targetLocation: "home",
+  setTargetLocation: (location: pages) => set({ targetLocation: location }),
+}));
+
+type ScrollLockStore = {
+  locked: boolean;
+  lock: () => void;
+  unlock: () => void;
+}
+
+export const useScrollLockStore = create<ScrollLockStore>((set) => ({
+  locked: false,
+  lock: () => set({ locked: true }),
+  unlock: () => set({ locked: false }),
+}));
+
+type Modal = {
+  isModalOpen: boolean;
+  openModal: () => void;
+  closeModal: () => void;
+}
+
+export const useModalStore = create<Modal>((set) => ({
+  isModalOpen: false,
+  openModal: () => set({ isModalOpen: true }),
+  closeModal: () => set({ isModalOpen: false }),
+}));
 
 export interface Event {
   id: number;

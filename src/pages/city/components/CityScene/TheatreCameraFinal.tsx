@@ -11,11 +11,11 @@ export default function TheatreCameraFinal() {
   const { isLaptop } = useDeviceType();
 
   useHoverCamera({
-    minY: -0.08,
-    maxY: 0.08,
-    minX: -0.05,
-    maxX: 0.05,
-    lerp: 0.08,
+    minY: -0.04,
+    maxY: 0.04,
+    minX: -0.04,
+    maxX: 0.04,
+    lerp: 0.03,
     enabled: isLaptop, 
   });
 
