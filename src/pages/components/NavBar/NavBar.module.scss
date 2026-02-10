@@ -28,7 +28,13 @@ body {
         display: flex;
         flex-direction: column;
         gap: 1rem;
+        transition: transform 0.3s ease;
 
+        &.hiddenNavbar {
+            transform: rotateY(40deg);
+        }
+
+        @media (max-width: 750px) {display: none;}
 
         .titleLogo {
             display: flex;

@@ -12,7 +12,7 @@ import { SheetProvider } from "@theatre/r3f";
 import { useEffect, useState } from "react";
 // import debugFunctions from "../../utils/debug";
 import * as THREE from "three";
-import { useModalStore, useSceneLoadedStore } from "../../utils/store";
+import { useSceneLoadedStore } from "../../utils/store";
 import NavBar from "../components/NavBar/NavBar";
 import RegisterButton from "../components/RegisterButton/RegisterButton";
 import Preloader from "../preloader/Preloader";
@@ -56,8 +56,6 @@ export default function City() {
       // remove Infinity if you want play only once
     });
   }, []);
-
-  const isModalopen = useModalStore((s) => s.isModalOpen);
 
   return (
     <>
@@ -127,7 +125,7 @@ export default function City() {
       }
       <NavBar />
       <RegisterButton />
-      {isModalopen && <Modal />}
+      <Modal />
     </>
   );
 }

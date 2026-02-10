@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import styles from "./NavBar.module.scss";
 import { FaInstagram, } from "react-icons/fa";
 import { FaLinkedin, FaXTwitter } from "react-icons/fa6";
+import { useModalStore } from "../../../utils/store";
 
 function NavLink({ to, label }: { to: string, label: string }) {
 
@@ -16,16 +17,15 @@ function NavLink({ to, label }: { to: string, label: string }) {
             }
         </a>
     )
-
 }
 
 export default function NavBar() {
 
     // const location = useLocation();
-
+    const isModalOpen = useModalStore((s) => s.isModalOpen);
     return (
         <div className={styles.navbarContainer}>
-            <div className={styles.navbar}>
+            <div className={`${styles.navbar} ${isModalOpen ? styles.hiddenNavbar : ""}`}>
                 <div className={styles.titleLogo}>
                     <img className={styles.logo} src="/img/apogee26.png" alt="Logo" />
                 </div>

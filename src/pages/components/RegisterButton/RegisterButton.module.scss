@@ -31,4 +31,16 @@
         .registerIcon {filter: brightness(2);}
         .registerText {filter: brightness(1);}
     }
+
+    @media (max-width: 750px) {
+        margin: 0.5rem;
+
+        .registerIcon {
+            width: 8rem;
+        }
+
+        .registerText {
+            font-size: 1.2rem;
+        }
+    }
 }
