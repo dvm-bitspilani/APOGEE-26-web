@@ -2,7 +2,7 @@ import helmet from "../../../../../assets/3d/registration/helmet.glb"
 // import helmetNeck from "../../../../../assets/3d/registration/helmetNeck.glb"
 import { useGLTF } from "@react-three/drei"
 import { Canvas, useFrame, useThree } from "@react-three/fiber"
-import { useControls } from "leva"
+// import { useControls } from "leva"
 import { useRef, useEffect } from "react"
 import * as THREE from "three"
 // import { Center } from "@react-three/drei"
@@ -53,17 +53,17 @@ function HelmetModel() {
 
     const { scene } = useGLTF(helmet)
 
-    const colour = useControls({
+    const colour = {
         color1: "#ffffffff",
         color2: "#6bffe5",
         color3: "#6bffe5",
         color4: "#f9ff00",
-        intensity1: { value: 2, min: 0, max: 10, step: 0.1 },
-        intensity2: { value: 2, min: 0, max: 10, step: 0.1 },
-        intensity3: { value: 2, min: 0, max: 10, step: 0.1 },
-        intensity4: { value: 2, min: 0, max: 10, step: 0.1 },
+        intensity1: 2,
+        intensity2: 2,
+        intensity3: 2,
+        intensity4: 2,
         // intensity: { value: 2, min: 0, max: 10, step: 0.1 },
-    })
+    }
 
     // Cursor → 3D math helpers
     const raycaster = new THREE.Raycaster()

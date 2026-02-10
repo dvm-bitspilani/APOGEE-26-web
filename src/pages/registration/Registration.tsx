@@ -263,7 +263,7 @@ function Registration() {
 
       <div className={styles.rightPanel}>
         <img
-          src="/img/registrations/instructions-right-panel.png"
+          src="/img/registrations/regBackground.png"
           alt="Background"
           className={styles.backgroundImage}
         />
