@@ -4,8 +4,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 2; 
-  pointer-events: none; 
+  z-index: 2;
+  pointer-events: none;
 }
 
 .box {
@@ -21,9 +21,22 @@
   overflow: hidden;
   position: relative;
 
-  animation: expandModal 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+  // GSAP handles the expand animation
 
-  clip-path: polygon(5.25% 2%, 18.25% 2%, 19.75% 0%, 81% 0%, 82.5% 2%, 95.05% 2%, 100% 10%, 100% 91%, 95% 98%, 5.25% 98%, 0.40% 90%, 0.40% 10%);
+  clip-path: polygon(
+    5.25% 2%,
+    18.25% 2%,
+    19.75% 0%,
+    81% 0%,
+    82.5% 2%,
+    95.05% 2%,
+    100% 10%,
+    100% 91%,
+    95% 98%,
+    5.25% 98%,
+    0.4% 90%,
+    0.4% 10%
+  );
 
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
@@ -50,7 +63,6 @@
   mix-blend-mode: multiply; /* makes lines look real over glass */
 }
 
-
 .title {
   font-size: clamp(1.8rem, 4vw, 3rem);
   letter-spacing: 0.2em;
@@ -75,7 +87,7 @@
 // .loader {
 //   display: flex;
 //   gap: 1rem;
-  
+
 //   span {
 //     width: 12px;
 //     height: 4px; // Rectangular "data blocks" instead of circles
@@ -90,10 +102,7 @@
 
 /* CUSTOM ANIMATIONS */
 
-@keyframes expandModal {
-  0% { height: 0; opacity: 0; }
-  100% { height: 80%; opacity: 1; }
-}
+// Removed: @keyframes expandModal — GSAP handles this now
 
 // @keyframes glitchText {
 //   0%, 90%, 100% { transform: translate(0); }

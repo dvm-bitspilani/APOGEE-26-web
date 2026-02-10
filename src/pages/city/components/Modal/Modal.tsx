@@ -1,38 +1,74 @@
-import { useCurrentSectionStore, useModalStore, useScrollLockStore } from "../../../../utils/store";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { useRef } from "react";
+import { useCurrentSectionStore, useModalStore } from "../../../../utils/store";
 import ComingSoon from "../../../comingSoon/ComingSoon";
-// import ContactUs from "../../../contactUs/ContactUs";
-// import ContactUs from "../../../contactUs/ContactUs";
 import styles from "./Modal.module.scss";
 
-export default function Modal({children}: {children?: React.ReactNode}) {
+export default function Modal({ children }: { children?: React.ReactNode }) {
+  const isModalOpen = useModalStore((s) => s.isModalOpen);
+  const currentsection = useCurrentSectionStore((s) => s.currentSection);
 
-    const closeModal = useModalStore((s) => s.closeModal);
-    const scrollUnlock = useScrollLockStore((s) => s.unlock);
-    const currentsection= useCurrentSectionStore((s) =>s.currentSection);
-    const proceed = () => {
-        closeModal();
-        scrollUnlock();
-    }
+  const overlayRef = useRef<HTMLDivElement>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
+  const backgroundRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
 
-    return (
-        <div className={styles.modalOverlay}>
-            <div className={styles.modal} onClick={proceed}>
-                {currentsection==="about" ?(<ComingSoon/>):
-                currentsection === "contact" ? (
-        //   <div className={styles.contactus}>
+  // Build and play the opening timeline on mount, reverse on isModalOpen=false
+  useGSAP(() => {
+    const tl = gsap.timeline({
+      defaults: { ease: "power3.out" },
+    });
+
+    // 1. Fade in overlay
+    tl.fromTo(
+      overlayRef.current,
+      { opacity: 0 },
+      { opacity: 1, duration: 0.4 },
+    );
+
+    // 2. Scale up modal container
+    tl.fromTo(
+      modalRef.current,
+      { scale: 0.85, opacity: 0 },
+      { scale: 1, opacity: 1, duration: 0.5 },
+      "<0.1",
+    );
+
+    // 3. Expand the blueprint border
+    tl.fromTo(
+      backgroundRef.current,
+      { height: "0%" },
+      { height: "81%", duration: 0.6 },
+      "<0.15",
+    );
+
+    // 4. Fade in content
+    tl.fromTo(
+      contentRef.current,
+      { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, duration: 0.4 },
+      "-=0.2",
+    );
+  }, []);
+
+  return (
+    <div
+      className={`${styles.modalOverlay} ${isModalOpen ? styles.visible : ""}`}
+      ref={overlayRef}
+    >
+      <div className={styles.modal} ref={modalRef}>
+        <div className={styles.content} ref={contentRef}>
+          {currentsection === "about" ? (
             <ComingSoon />
-        //   </div>
-        ) : (
-          // Otherwise render children if passed
-          children
-        )}
-                {/* <div className={styles.contactus}>
-                <ContactUs/>
-                </div> */}
-                <div className= {styles.backgroundlite}>
-                {/* <ContactUs/> */}
-                </div>
-            </div>
+          ) : currentsection === "contact" ? (
+            <ComingSoon />
+          ) : (
+            children
+          )}
         </div>
-    )
+        <div className={styles.backgroundlite} ref={backgroundRef} />
+      </div>
+    </div>
+  );
 }
