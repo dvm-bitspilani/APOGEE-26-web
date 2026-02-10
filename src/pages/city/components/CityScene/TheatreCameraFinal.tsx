@@ -10,14 +10,14 @@ export default function TheatreCameraFinal() {
   const setTheatreCamera = useTheatreCameraStore((s) => s.setTheatreCamera);
   const { isLaptop } = useDeviceType();
 
-  useHoverCamera({
-    minY: -0.04,
-    maxY: 0.04,
-    minX: -0.04,
-    maxX: 0.04,
-    lerp: 0.03,
-    enabled: isLaptop, 
-  });
+  // useHoverCamera({
+  //   minY: -0.04,
+  //   maxY: 0.04,
+  //   minX: -0.04,
+  //   maxX: 0.04,
+  //   lerp: 0.03,
+  //   enabled: isLaptop, 
+  // });
 
   useEffect(() => {
     if (theatreCameraRef.current) {
