@@ -18,9 +18,9 @@ body {
         transform-origin: 0 0;
         transform: rotateY(20deg);
         border: 2px solid $navbar-accent;
-        padding: 0.6rem 1rem;
+        padding: 2rem 1rem;
         width: 15rem;
-        height:30rem;
+        // height:30rem;
         background-color: color.change(darken($navbar-accent, 50%), $alpha: 15%, $blackness: 60%);
         backdrop-filter: blur(9px);
         box-shadow: inset 0 0 1.5rem color.change($navbar-accent, $alpha: 50%);
@@ -29,7 +29,7 @@ body {
         .titleLogo {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 1rem;
 
             .logo {
                 width: 120%;

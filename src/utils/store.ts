@@ -72,16 +72,16 @@ export const useTheatreCameraStore = create<TheatreCameraStore>((set) => ({
   setTheatreCamera: (camera) => set({ theatreCamera: camera }),
 }))
 
-type pages = ["home", "about", "events", "contact"][number];
+export type Section = ["home", "about", "contact", "transition"][number];
 
-type TargetLocationStore = {
-  targetLocation: pages;
-  setTargetLocation: (location: pages) => void;
+type CurrentSectionStore = {
+  currentSection: Section;
+  setCurrentSection: (section: Section) => void;
 }
 
-export const useTargetLocationStore = create<TargetLocationStore>((set) => ({
-  targetLocation: "home",
-  setTargetLocation: (location: pages) => set({ targetLocation: location }),
+export const useCurrentSectionStore = create<CurrentSectionStore>((set) => ({
+  currentSection: "home",
+  setCurrentSection: (section: Section) => set({ currentSection: section }),
 }));
 
 type ScrollLockStore = {
