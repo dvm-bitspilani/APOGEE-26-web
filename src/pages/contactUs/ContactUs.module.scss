@@ -4,9 +4,11 @@
   display: flex;
   flex-direction: column;
   background: center / cover no-repeat url("/public/img/contacts/bg.png");
+   clip-path: path('M50 10 L150 10 L160 2 L640 2 L650 10 L750 10 L790 50 L790 450 L750 490 L50 490 L10 450 L10 50 L50 10 Z');
+
   align-items: center;
-  width: 80vw;
-  min-height: 80vh;
+  width: 100vw;
+  min-height: 100vh;
 
   .title {
     font-size: 3vw;

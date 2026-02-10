@@ -1,4 +1,5 @@
 import { useModalStore, useScrollLockStore } from "../../../../utils/store";
+import ContactUs from "../../../contactUs/ContactUs";
 // import ContactUs from "../../../contactUs/ContactUs";
 import styles from "./Modal.module.scss";
 
@@ -16,6 +17,9 @@ export default function Modal({children}: {children?: React.ReactNode}) {
         <div className={styles.modalOverlay}>
             <div className={styles.modal} onClick={proceed}>
                 {children}
+                <div className={styles.contactus}>
+                <ContactUs/>
+                </div>
                 <div className= {styles.backgroundlite}>
                 {/* <ContactUs/> */}
                 {/* <svg width="800" height="500" viewBox="0 0 800 500" fill="none" xmlns="http://www.w3.org/2000/svg">

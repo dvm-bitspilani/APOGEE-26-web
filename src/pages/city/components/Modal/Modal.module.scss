@@ -15,17 +15,21 @@
     height: 85%;
     width: 81%;
     background-size: 100% 100%;
+    .contactus{
+        width:10%;
+    }
     // background-image: url("/img/landing/border.png");
     // animation: expandModal 0.6s ease forwards; /* forwards keeps final state */
-    .backgroundlite{
-         height: 0;
-    width: 81%;
-    
-    transform: translate(-50%, -50%);
-    background-size: 100% 100%;
-    background-image: url("/img/landing/border.png");
-    animation: expandModal 0.6s ease forwards;
-
+     .backgroundlite {
+      position: absolute;       /* absolute inside modal */
+      top: 50%;                 /* center vertically */
+      left: 50%;                /* center horizontally */
+      transform: translate(-50%, -50%); /* center origin */
+      width: 81%;
+      height: 0;                /* start squeezed */
+      background-image: url("/img/landing/border.png");
+      background-size: 100% 100%;
+      animation: expandModal 0.6s ease forwards;
     }
   }
 
