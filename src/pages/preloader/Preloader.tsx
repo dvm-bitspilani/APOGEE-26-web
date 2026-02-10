@@ -23,6 +23,21 @@ export default function Preloader({ onLaunch }: PreloaderProps) {
   const splitTextRef = useRef<SplitText | null>(null);
   const timelineRef = useRef<gsap.core.Timeline | null>(null);
 
+
+  const [width, setwidth] = useState(window.innerWidth < 768  && window.innerHeight / window.innerWidth > 1 ? true : false);
+  useEffect(() => {
+    addEventListener("resize", () => {
+      if (window.innerWidth < 768  && window.innerHeight / window.innerWidth > 1) {
+        setwidth(true);
+      } else {
+        setwidth(false);
+      }
+      return () => {
+        removeEventListener("resize", () => {});
+      };
+    });
+  }, []);
+
   useEffect(() => {
     // console.log(`[Preloader] Scene progress: ${sceneProgress.toFixed(1)}%`);
     setProgress(parseFloat(sceneProgress.toFixed(1)));
@@ -139,29 +154,34 @@ export default function Preloader({ onLaunch }: PreloaderProps) {
               className={styles.figlet}
             >
               <br />
-<span className={styles.filgetChild1}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;█████████   ███████████     ███████      █████████  ██████████ ██████████</span><br />
-<span className={styles.filgetChild1}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;███▒▒▒▒▒███ ▒▒███▒▒▒▒▒███  ███▒▒▒▒▒███   ███▒▒▒▒▒███▒▒███▒▒▒▒▒█▒▒███▒▒▒▒▒█</span><br />
-<span className={styles.filgetChild2}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▒███    ▒███  ▒███    ▒███ ███     ▒▒███ ███     ▒▒▒  ▒███  █ ▒  ▒███  █ ▒ </span><br />
-<span className={styles.filgetChild3}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▒███████████  ▒██████████ ▒███      ▒███▒███          ▒██████    ▒██████   </span><br />
-<span className={styles.filgetChild3}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▒███▒▒▒▒▒███  ▒███▒▒▒▒▒▒  ▒███      ▒███▒███    █████ ▒███▒▒█    ▒███▒▒█   </span><br />
-<span className={styles.filgetChild4}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▒███    ▒███  ▒███        ▒▒███     ███ ▒▒███  ▒▒███  ▒███ ▒   █ ▒███ ▒   █</span><br />
-<span className={styles.filgetChild5}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;█████   █████ █████        ▒▒▒███████▒   ▒▒█████████  ██████████ ██████████</span><br />
-<span className={styles.filgetChild5}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▒▒▒▒▒   ▒▒▒▒▒ ▒▒▒▒▒           ▒▒▒▒▒▒▒      ▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒▒▒▒ ▒▒▒▒▒▒▒▒▒▒</span><br />
+<span className={styles.filgetChild1}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;█████████   ███████████     ███████      █████████  ██████████ ██████████</span><br />
+<span className={styles.filgetChild1}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;███▒▒▒▒▒███ ▒▒███▒▒▒▒▒███  ███▒▒▒▒▒███   ███▒▒▒▒▒███▒▒███▒▒▒▒▒█▒▒███▒▒▒▒▒█</span><br />
+<span className={styles.filgetChild2}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▒███    ▒███  ▒███    ▒███ ███     ▒▒███ ███     ▒▒▒  ▒███  █ ▒  ▒███  █ ▒ </span><br />
+<span className={styles.filgetChild3}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▒███████████  ▒██████████ ▒███      ▒███▒███          ▒██████    ▒██████   </span><br />
+<span className={styles.filgetChild3}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▒███▒▒▒▒▒███  ▒███▒▒▒▒▒▒  ▒███      ▒███▒███    █████ ▒███▒▒█    ▒███▒▒█   </span><br />
+<span className={styles.filgetChild4}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▒███    ▒███  ▒███        ▒▒███     ███ ▒▒███  ▒▒███  ▒███ ▒   █ ▒███ ▒   █</span><br />
+<span className={styles.filgetChild5}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;█████   █████ █████        ▒▒▒███████▒   ▒▒█████████  ██████████ ██████████</span><br />
+<span className={styles.filgetChild5}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▒▒▒▒▒   ▒▒▒▒▒ ▒▒▒▒▒           ▒▒▒▒▒▒▒      ▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒▒▒▒ ▒▒▒▒▒▒▒▒▒▒</span><br />
               <br />
             </p>
-            <p className={styles.txtRed}>
+           {!width ? <><p className={styles.txtRed}>
               &nbsp;&nbsp;&nbsp;AN INTERACTIVE AUDIOVISUAL EXPERIENCE BY DVM
             </p>
             <p className={styles.redDesign}>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚
+            </p> </>: <>            <p className={styles.txtRed}>
+              &nbsp;AN INTERACTIVE AUDIOVISUAL EXPERIENCE BY DVM
             </p>
+            <p className={styles.redDesign}>
+              &nbsp;&nbsp;&nbsp;▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚
+            </p></>}
             <p
               className={styles.txtGreen}
             >{`>> INITIATING BOOT SEQUENCE...`}</p>
             <p className={styles.txtWhite}>BUILD VERSION: 10.04.26</p>
             <p className={styles.txtWhite}>SYSTEM MANUFACTURER: BITS PILANI</p>
             <p className={styles.txtWhite}>
-              SYSTEM BOOT TIME: {`<DATE OF OPENING WEBSITE>`}
+              SYSTEM BOOT TIME: {`<SOON>`}
             </p>
             <p className={styles.txtWhite}>OS NAME: THREE.JS</p>
             <p className={styles.txtWhite}>FEST VERSION: 0.44.0</p>
