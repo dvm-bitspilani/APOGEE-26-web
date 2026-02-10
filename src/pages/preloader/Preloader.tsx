@@ -14,27 +14,28 @@ export default function Preloader({ onLaunch }: PreloaderProps) {
   const textRef2 = useRef<HTMLDivElement[]>([]);
   const launchRef = useRef<HTMLDivElement>(null);
   const [animDone, setAnimDone] = useState(false);
+  const [animDone2, setAnimDone2] = useState(false);
+  const [progress, setProgress] = useState(0.0);
+  const [prevIndex, setPrevIndex] = useState(0);
   const sceneLoaded = useSceneLoadedStore((s) => s.loaded);
   const sceneProgress = useSceneLoadedStore((s) => s.progress);
   gsap.registerPlugin(SplitText);
+  const splitTextRef = useRef<SplitText | null>(null);
+  const timelineRef = useRef<gsap.core.Timeline | null>(null);
 
-  // Log progress from the store (consumer side)
   useEffect(() => {
-    console.log(`[Preloader] Scene progress: ${sceneProgress.toFixed(1)}%`);
+    // console.log(`[Preloader] Scene progress: ${sceneProgress.toFixed(1)}%`);
+    setProgress(parseFloat(sceneProgress.toFixed(1)));
   }, [sceneProgress]);
 
-  // Show Launch button only when BOTH text animation is done AND scene is loaded
   useEffect(() => {
-    if (animDone && sceneLoaded && launchRef.current) {
+    if (animDone && sceneLoaded && launchRef.current && animDone2) {
       launchRef.current.style.opacity = "1";
       launchRef.current.style.pointerEvents = "auto";
     }
-  }, [animDone, sceneLoaded]);
+  }, [animDone, sceneLoaded, animDone2]);
 
   useEffect(() => {
-    const tl = gsap.timeline();
-    const tl2 = gsap.timeline();
-
     if (!textRef.current) return;
 
     const split = new SplitText(textRef.current, {
@@ -42,32 +43,31 @@ export default function Preloader({ onLaunch }: PreloaderProps) {
       charsClass: "char",
       reduceWhiteSpace: false,
     });
+    splitTextRef.current = split;
+    const tl = gsap.timeline();
+    timelineRef.current = tl;
 
-    tl.from(split.chars, {
+    // Initially hide all characters
+    gsap.set(split.chars, {
       display: "none",
-      duration: 1,
-      stagger: 0.01,
-      ease: "none",
     });
+
+    const tl2 = gsap.timeline();
+
+    tl2.set([textRef.current, textRef2.current], {
+      display: "block",
+    });
+
     const split2 = new SplitText(textRef2.current, {
       type: "chars",
       charsClass: "char",
       reduceWhiteSpace: false,
     });
 
-    // grab the last span *before* SplitText mutates things
-    const lastSpan = textRef2.current[0].querySelector("#cursor");
-    console.log(lastSpan);
-
-    // only animate chars NOT coming from the last span
-    const charsToAnimate = split2.chars.filter(
-      (char) => !lastSpan || !lastSpan.contains(char),
-    );
-
-    tl2.from(charsToAnimate, {
+    tl2.from(split2.chars, {
       display: "none",
       duration: 1,
-      stagger: 0.03,
+      stagger: 0.023,
       ease: "none",
       onComplete: () => {
         setAnimDone(true);
@@ -75,11 +75,55 @@ export default function Preloader({ onLaunch }: PreloaderProps) {
     });
 
     return () => {
+      split.revert();
       split2.revert();
       tl2.kill();
-      tl.kill();
     };
   }, []);
+
+  useEffect(() => {
+    if (!splitTextRef.current) return;
+
+    const chars = splitTextRef.current.chars;
+    const totalChars = chars.length;
+    const targetIndex = Math.floor((progress / 100) * totalChars);
+    console.log(targetIndex);
+
+    if (targetIndex <= Math.floor(prevIndex)  && targetIndex !== totalChars) {
+      setPrevIndex((prev)=> prev + 0.000001);
+      return;
+    };
+
+    for (let i = Math.floor(prevIndex); i < targetIndex; i++) {
+      const char = chars[i];
+      if (!char) continue;
+
+      timelineRef.current?.to(char, {
+        display: "inline-block",
+        duration: 0.01,
+        ease: "none",
+        delay: i === 592 ? 0.4 : 0,
+        onStart() {
+          // cursorEl.style.left = target.getBoundingClientRect().right + "px";
+          const nextChar = chars[i];
+          if (nextChar) {
+            nextChar.innerHTML += `<span class="${styles.cursor}" id="cursor">█</span>`;
+          }
+        },
+        onComplete() {
+          const cursorEl = document.getElementById("cursor");
+          if (cursorEl && i !== chars.length - 1) {
+            cursorEl.remove();
+          }
+          if (i === totalChars - 1) {
+            setAnimDone2(true);
+          }
+        },
+      });
+    }
+
+    setPrevIndex(targetIndex);
+  }, [prevIndex]);
 
   return (
     <div className={styles.container}>
@@ -95,47 +139,14 @@ export default function Preloader({ onLaunch }: PreloaderProps) {
               className={styles.figlet}
             >
               <br />
-              <span className={styles.filgetChild1}>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;█████████
-                ███████████ ███████ █████████ ██████████ ██████████
-              </span>
-              <br />
-              <span className={styles.filgetChild1}>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;███▒▒▒▒▒███
-                ▒▒███▒▒▒▒▒███ ███▒▒▒▒▒███ ███▒▒▒▒▒███▒▒███▒▒▒▒▒█▒▒███▒▒▒▒▒█
-              </span>
-              <br />
-              <span className={styles.filgetChild2}>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▒███ ▒███ ▒███ ▒███ ███
-                ▒▒███ ███ ▒▒▒ ▒███ █ ▒ ▒███ █ ▒{" "}
-              </span>
-              <br />
-              <span className={styles.filgetChild3}>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▒███████████ ▒██████████
-                ▒███ ▒███▒███ ▒██████ ▒██████{" "}
-              </span>
-              <br />
-              <span className={styles.filgetChild3}>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▒███▒▒▒▒▒███ ▒███▒▒▒▒▒▒ ▒███
-                ▒███▒███ █████ ▒███▒▒█ ▒███▒▒█{" "}
-              </span>
-              <br />
-              <span className={styles.filgetChild4}>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▒███ ▒███ ▒███ ▒▒███ ███
-                ▒▒███ ▒▒███ ▒███ ▒ █ ▒███ ▒ █
-              </span>
-              <br />
-              <span className={styles.filgetChild5}>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;█████ █████ █████
-                ▒▒▒███████▒ ▒▒█████████ ██████████ ██████████
-              </span>
-              <br />
-              <span className={styles.filgetChild5}>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▒▒▒▒▒ ▒▒▒▒▒ ▒▒▒▒▒ ▒▒▒▒▒▒▒
-                ▒▒▒▒▒▒▒▒▒ ▒▒▒▒▒▒▒▒▒▒ ▒▒▒▒▒▒▒▒▒▒
-              </span>
-              <br />
-              <br />
+<span className={styles.filgetChild1}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;█████████   ███████████     ███████      █████████  ██████████ ██████████</span><br />
+<span className={styles.filgetChild1}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;███▒▒▒▒▒███ ▒▒███▒▒▒▒▒███  ███▒▒▒▒▒███   ███▒▒▒▒▒███▒▒███▒▒▒▒▒█▒▒███▒▒▒▒▒█</span><br />
+<span className={styles.filgetChild2}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▒███    ▒███  ▒███    ▒███ ███     ▒▒███ ███     ▒▒▒  ▒███  █ ▒  ▒███  █ ▒ </span><br />
+<span className={styles.filgetChild3}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▒███████████  ▒██████████ ▒███      ▒███▒███          ▒██████    ▒██████   </span><br />
+<span className={styles.filgetChild3}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▒███▒▒▒▒▒███  ▒███▒▒▒▒▒▒  ▒███      ▒███▒███    █████ ▒███▒▒█    ▒███▒▒█   </span><br />
+<span className={styles.filgetChild4}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▒███    ▒███  ▒███        ▒▒███     ███ ▒▒███  ▒▒███  ▒███ ▒   █ ▒███ ▒   █</span><br />
+<span className={styles.filgetChild5}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;█████   █████ █████        ▒▒▒███████▒   ▒▒█████████  ██████████ ██████████</span><br />
+<span className={styles.filgetChild5}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▒▒▒▒▒   ▒▒▒▒▒ ▒▒▒▒▒           ▒▒▒▒▒▒▒      ▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒▒▒▒ ▒▒▒▒▒▒▒▒▒▒</span><br />
               <br />
             </p>
             <p className={styles.txtRed}>

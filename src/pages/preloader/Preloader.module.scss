@@ -29,6 +29,11 @@
   justify-content: center;
   background-color: #190048;
   width: 100vw;
+  top:50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position:absolute;
+  z-index: 10000;
   min-height: 100vh;
   background-image: url("/img/preloader/bg.png");
   background-repeat: repeat;
@@ -179,6 +184,7 @@
       .txtBox {
         width: 100%;
         margin-top: 0.2vw;
+        display: none;
 
         .customDisplay {
           display: inline-block;
@@ -192,7 +198,7 @@
             0px 0px 1px rgb(243, 227, 255),
             0px 0px 10px rgb(243, 227, 255);
           animation: blink 0.7s steps(1) infinite;
-          font-size: var(--terminal-font);
+          font-size: 0.8vw;
           @keyframes blink {
             50% {
               opacity: 0;

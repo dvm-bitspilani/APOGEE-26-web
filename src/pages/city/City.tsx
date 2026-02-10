@@ -22,12 +22,12 @@ import state from "./state6.json";
 // Set up loading progress tracking at module level (before useGLTF.preload() calls complete)
 THREE.DefaultLoadingManager.onProgress = (_url, loaded, total) => {
   const progress = (loaded / total) * 100;
-  console.log(`[Scene Loading] ${progress.toFixed(1)}% (${loaded}/${total})`);
+  // console.log(`[Scene Loading] ${progress.toFixed(1)}% (${loaded}/${total})`);
   useSceneLoadedStore.getState().setProgress(progress);
 };
 
 THREE.DefaultLoadingManager.onLoad = () => {
-  console.log("[Scene Loading] All assets loaded!");
+  // console.log("[Scene Loading] All assets loaded!");
   useSceneLoadedStore.getState().setProgress(100);
   useSceneLoadedStore.getState().setLoaded(true);
 };
