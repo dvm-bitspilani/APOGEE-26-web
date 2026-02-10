@@ -9,7 +9,8 @@ const customStyles: StylesConfig<OptionType, false> = {
     control: (provided, state) => ({
         ...provided,
         backgroundColor: "#000", // $dark-bg
-        border: "none",
+        border: "solid #FFEB00 1px",
+
         boxShadow: "none",
         borderRadius: "0",
         minHeight: "unset",
