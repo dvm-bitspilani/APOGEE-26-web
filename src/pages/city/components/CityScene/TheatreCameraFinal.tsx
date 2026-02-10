@@ -2,13 +2,13 @@ import { PerspectiveCamera } from "@theatre/r3f";
 import { useRef, useEffect } from "react";
 import * as THREE from "three";
 import { useTheatreCameraStore } from "../../../../utils/store";
-import { useHoverCamera } from "../../hooks/useHoverCamera";
-import { useDeviceType } from "../../../../hooks/useDeviceType";
+// import { useHoverCamera } from "../../hooks/useHoverCamera";
+// import { useDeviceType } from "../../../../hooks/useDeviceType";
 
 export default function TheatreCameraFinal() {
   const theatreCameraRef = useRef<THREE.PerspectiveCamera>(null!);
   const setTheatreCamera = useTheatreCameraStore((s) => s.setTheatreCamera);
-  const { isLaptop } = useDeviceType();
+  // const { isLaptop } = useDeviceType();
 
   // useHoverCamera({
   //   minY: -0.04,

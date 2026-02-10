@@ -9,7 +9,7 @@ import ScrollReminder from "./components/ScrollReminder/ScrollReminder";
 import { Environment } from "@react-three/drei";
 import { getProject } from "@theatre/core";
 import { SheetProvider } from "@theatre/r3f";
-import { useEffect, useState } from "react";
+import { useEffect} from "react";
 // import debugFunctions from "../../utils/debug";
 import NavBar from "../components/NavBar/NavBar";
 import RegisterButton from "../components/RegisterButton/RegisterButton";

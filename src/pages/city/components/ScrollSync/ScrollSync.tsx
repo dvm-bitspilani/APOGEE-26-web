@@ -6,7 +6,7 @@ import { getProject } from "@theatre/core";
 import state from "../../state5.json";
 import { useModalStore, useScrollLockStore } from "../../../../utils/store";
 import { useRef } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+// import { useLocation, useNavigate } from "react-router-dom";
 export const project = getProject("City Project", { state });
 export const sheet = project.sheet("Cyber City");
 
