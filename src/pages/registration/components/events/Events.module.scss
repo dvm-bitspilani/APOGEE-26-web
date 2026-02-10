@@ -1,4 +1,4 @@
-@import "../../../../assets/global.scss";
+@use "/src/assets/global.scss" as *;
 
 .eventsContainer {
   display: flex;
@@ -30,14 +30,13 @@
   // User asked for "separate entity", but flex start is usually what they mean by "top".
 
   .heading {
-    font-size: clamp(3.5rem, 4.5vw, 6rem); // Slightly smaller to fit
+    font-size: clamp(3rem, 3.5vw, 5rem);
     font-weight: 500;
     text-transform: uppercase;
     color: $cyber-yellow;
     margin: 0;
     letter-spacing: 2px;
-    font-family: $font-cyberpunks;
-    line-height: 1;
+    font-family: $font-ethnocentric;
   }
 
   img {
@@ -491,7 +490,7 @@
     .mobileHeading {
       text-align: center;
       font-family: $font-cyberpunks;
-      font-size: 3rem;
+      font-size: 2rem;
       color: $cyber-yellow;
       margin-bottom: 1rem;
     }
@@ -590,5 +589,15 @@
 @media (max-width: 750px) {
   .eventsSubContainer {
     width: 90%;
+  }
+}
+
+@media (max-width: 440px) {
+  .mobileDetailsContainer {
+    .mobileDetailsFrame {
+      .mobileHeading {
+        font-size: 1.5rem;
+      }
+    }
   }
 }
