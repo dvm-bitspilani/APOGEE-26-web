@@ -1,6 +1,6 @@
 import { Canvas } from "@react-three/fiber";
 import { ScrollControls, OrbitControls } from "@react-three/drei";
-import { Perf } from "r3f-perf";
+// import { Perf } from "r3f-perf";
 import { useEffect, useRef, useState } from "react";
 import Scene from "./components/Scene/Scene";
 import { OrbitControls as OrbitControlsImpl } from "three-stdlib";
@@ -40,7 +40,7 @@ export default function Landing() {
           minPolarAngle={Math.PI / 2} // allow vertical rotation only between 45° and 135°
           maxPolarAngle={Math.PI / 2}
         />
-        {import.meta.env.DEV && <Perf position="top-left" />}
+        {/* {import.meta.env.DEV && <Perf position="top-left" />} */}
 
         <ScrollControls pages={4} damping={0.2} enabled={phase === "scroll"}>
           <Scene
