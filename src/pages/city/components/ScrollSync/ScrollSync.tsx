@@ -3,28 +3,31 @@ import { useFrame } from "@react-three/fiber";
 // import { sheet } from "../../theatre";
 import { getProject } from "@theatre/core";
 
-import state from "../../state5.json";
-import { useModalStore, useScrollLockStore } from "../../../../utils/store";
-import { useRef } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import state from "../../state6.json";
+import { useModalStore } from "../../../../utils/store";
+import { type Section, useCurrentSectionStore } from "../../../../utils/store";
+// import { useLocation, useNavigate } from "react-router-dom";
 export const project = getProject("City Project", { state });
 export const sheet = project.sheet("Cyber City");
 
-type Section = ["home", "about", "contact"][number];
-
 const stopPoints: Record<Section, [number, number]> = {
-  "home": [0, 1],
-  "about": [5, 8],
-  "contact": [13, 16],
+  "home": [0, 0.25],
+  "about": [4, 8],
+  "contact": [11.75, 16],
+  "transition": [-1, -1],
 }
-const sequenceLength = 20;
+const sequenceLength = 12;
 
 export default function ScrollSync() {
   const scroll = useScroll();
   const openModal = useModalStore((s) => s.openModal);
-  const scrollLock = useScrollLockStore((s) => s.lock);
-  const isScrollLocked = useScrollLockStore((s) => s.locked); 
-  const currentSection = useRef<Section>("home");
+  const closeModal = useModalStore((s) => s.closeModal);
+  const isModalOpen = useModalStore((s) => s.isModalOpen);
+  // const scrollLock = useScrollLockStore((s) => s.lock);
+  // const isScrollLocked = useScrollLockStore((s) => s.locked); 
+  // const currentSection = useRef<Section>("home");
+  const currentSection = useCurrentSectionStore((s) => s.currentSection);
+  const setCurrentSection = useCurrentSectionStore((s) => s.setCurrentSection);
 
   useFrame(() => {
     // Calculate the sequence position based on scroll offset
@@ -32,18 +35,24 @@ export default function ScrollSync() {
     // if that is available and reliable. For now, let's assume we want to map full scroll
     // to to the sequence length.
 
-    if (!isScrollLocked) {
+    if (!isModalOpen) {
       for (const path in stopPoints) {
-        if (path !== currentSection.current && sheet.sequence.position >= stopPoints[path as Section]?.[0] && sheet.sequence.position <= stopPoints[path as Section]?.[1]) {
+        if (path !== currentSection && sheet.sequence.position >= stopPoints[path as Section]?.[0] && sheet.sequence.position <= stopPoints[path as Section]?.[1]) {
           if (path !== "home") {
-            scrollLock();
+            // scrollLock();
             openModal();
           }
-          currentSection.current = path as Section;
+          setCurrentSection(path as Section)
           break;
         }
       }
     }
+    else {
+      if (sheet.sequence.position <= stopPoints[currentSection]?.[0] || sheet.sequence.position >= stopPoints[currentSection]?.[1]) {
+        closeModal();
+        setCurrentSection("transition");
+      }
+    } 
 
     // Update the sequence position
     sheet.sequence.position = scroll.offset * sequenceLength;

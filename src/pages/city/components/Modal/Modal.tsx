@@ -1,5 +1,4 @@
 import { useModalStore, useScrollLockStore } from "../../../../utils/store";
-import ContactUs from "../../../contactUs/ContactUs";
 import styles from "./Modal.module.scss";
 
 export default function Modal({children}: {children?: React.ReactNode}) {
