@@ -1,7 +1,7 @@
 import type { ReactElement } from "react";
 import styles from "./NavButton.module.scss";
 import btnFrame from "/svg/registrations/btnFrame.svg";
-import btnInternal from "/svg/registrations/btnInternal.min.svg";
+import btnInternal from "/svg/registrations/btnInternal.svg";
 
 interface NavButtonProps {
     outerClass?: string;

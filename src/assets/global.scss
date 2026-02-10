@@ -57,6 +57,11 @@
     src: url('/font/Doctor Glitch.otf') format('opentype');
 }
 
+@font-face {
+    font-family: 'Ethnocentric';
+    src: url('/font/Ethnocentric-Regular.otf') format('opentype');
+}
+
 $cyber-yellow: #FFEB00;
 $dark-bg: #000;
 
@@ -66,6 +71,7 @@ $font-blender: 'Blender Pro';
 $font-glitch: 'Doctor Glitch';
 $font-jetBrains: 'JetBrains Mono';
 $font-jetBrainsBold: 'JetBrains Mono Bold';
+$font-ethnocentric: 'Ethnocentric';
 
 // Font Weights
 $weight-blender-thin: 100;

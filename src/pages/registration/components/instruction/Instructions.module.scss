@@ -9,23 +9,17 @@ $dark-bg: #000;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  // padding: 4rem 4rem;
   color: $cyber-yellow;
 
-  // @media (max-width: 1300px) {
-  //   padding: 4rem calc(2.4rem + 0.3vw);
-  // }
-
   .heading {
-    font-family: $font-cyberpunks, "Orbitron", sans-serif;
+    font-family: $font-ethnocentric;
     text-align: center;
-    font-size: clamp(3rem, 5vw, 4rem);
+    font-size: clamp(3rem, 3.5vw, 5rem);
     font-weight: 900;
     margin-bottom: 2rem;
     color: $cyber-yellow;
     text-transform: uppercase;
     letter-spacing: 3px;
-    // text-shadow: 0 0 5px rgba(255, 229, 0, 0.5);
   }
 
   .instructionList {
@@ -46,7 +40,6 @@ $dark-bg: #000;
       padding-left: 1.5rem;
       margin-bottom: 0.8rem;
       line-height: 1.4;
-      // font-family: "Rajdhani", sans-serif;
       font-size: calc(1rem + 0.5vw);
       color: $cyber-yellow;
 
@@ -72,13 +65,8 @@ $dark-bg: #000;
 
   .googleButton {
     margin-top: 2rem;
-    // background-color: $cyber-yellow;
     border: none;
     align-self: center;
-    // border-radius: 8px;
-    // padding: 0.8rem 1rem;
-    // width: fit-content;
-    // box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 
     .googleButtonContent {
       display: flex;
@@ -105,7 +93,23 @@ $dark-bg: #000;
 @media (max-width: 600px) {
   .content {
     .heading {
-      font-size: 2.5rem;
+      font-size: 2rem;
+    }
+  }
+}
+
+@media (max-width: 440px) {
+  .content {
+    .heading {
+      font-size: 1.5rem;
+    }
+  }
+}
+
+@media (max-width: 320px) {
+  .content {
+    .heading {
+      font-size: 1.25rem;
     }
   }
 }
