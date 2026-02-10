@@ -11,6 +11,7 @@
         width: 12rem;
         fill: $cyber-yellow;
         transition: filter 0.2s ease;
+        filter: brightness(30);
     }
 
     .registerText {
@@ -22,11 +23,12 @@
         top: 30%;
         left: 50%;
         transform: translate(-50%, -50%);
+        filter: brightness(2);
+        transition: filter 0.2s ease;
     }
 
     &:hover {
-        .registerIcon {filter: hue-rotate(-135deg) brightness(3);}
-
-        .registerText {color: #faff5dca;}
+        .registerIcon {filter: brightness(2);}
+        .registerText {filter: brightness(1);}
     }
 }

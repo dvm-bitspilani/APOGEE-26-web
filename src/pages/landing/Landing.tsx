@@ -7,7 +7,7 @@ import { OrbitControls as OrbitControlsImpl } from "three-stdlib";
 import { useCameraPhase } from "../../utils/store";
 import styles from "./Landing.module.scss";
 import EnterButton from "./components/EnterButton/EnterButton";
-import { useKeyboardAzimuth } from "./hooks/useKeyboardOrbit";
+// import { useKeyboardAzimuth } from "./hooks/useKeyboardOrbit";
 export default function Landing() {
   // const [introDone, setIntroDone] = useState(false);
   const [page, setPage] = useState(0);
@@ -20,10 +20,10 @@ export default function Landing() {
   useEffect(() => {
     history.replaceState(null, "", pages[page] || "/");
   }, [page]);
-  useKeyboardAzimuth({
-    controlsRef: orbitRef,
-    enabled: phase === "free",
-  });
+  // useKeyboardAzimuth({
+  //   controlsRef: orbitRef,
+  //   enabled: phase === "free",
+  // });
   return (
     <div className={styles.landing}>
       <Canvas
