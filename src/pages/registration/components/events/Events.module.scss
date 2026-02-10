@@ -5,34 +5,39 @@
   flex-direction: column;
   width: 100%;
   height: 100%;
-  // padding: 20% 0;
+  // Remove padding that pushes it down center
+  padding: 0;
   box-sizing: border-box;
   color: $cyber-yellow;
-  font-family: $font-blender; // Use correct font
-  overflow: hidden;
+  font-family: $font-blender;
+  overflow: hidden; 
   position: relative;
-  align-items: center;
-  justify-content: center;
 
-  // Align like details form - Removed to ensure full width coverage
-  // align-items: center;
+  align-items: center;
+  justify-content: flex-start; 
 }
 
 .headingCont {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
-  margin-bottom: 2rem;
+  width: 100%;
+  margin-bottom: 1rem;
+  flex-shrink: 0; // Don't shrink the title
+
+  // Position it absolutely if we want it "separate" from the flow to overlap/custom
+  // But standard flex column is safer for "top".
+  // User asked for "separate entity", but flex start is usually what they mean by "top".
 
   .heading {
-    font-size: clamp(3.2rem, 5vw, 6.5rem);
+    font-size: clamp(3.5rem, 4.5vw, 6rem); // Slightly smaller to fit
     font-weight: 500;
     text-transform: uppercase;
     color: $cyber-yellow;
     margin: 0;
     letter-spacing: 2px;
     font-family: $font-cyberpunks;
+    line-height: 1;
   }
 
   img {
@@ -43,19 +48,20 @@
 .eventsSubContainer {
   display: flex;
   flex-direction: column; // Stack children vertically
-  flex: 1;
-  overflow: hidden;
+  flex: 1; // Take all remaining height
+  overflow: hidden; // Contain scrollable area
   position: relative;
   gap: 1rem;
-  width: 70%;
+  width: 80%; // Increased width for better look
 }
 
 .eventsListCont {
   width: 100%;
   display: flex;
   flex-direction: column;
-  flex: 1; // Take remaining space instead of fixed 100%
-  overflow: hidden;
+  flex: 1; // Grow to fill height
+  overflow: hidden; // Crucial for nested scroll
+  min-height: 0; // Fix for flex child scrolling
 }
 
 .search {
@@ -65,6 +71,7 @@
   padding: 0.5rem 1rem;
   margin-bottom: 1rem;
   background-color: rgba(0, 0, 0, 0.5);
+  flex-shrink: 0; // Don't shrink search bar
 
   input {
     flex: 1;
@@ -80,8 +87,6 @@
       color: $cyber-yellow;
       font-family: $font-blender;
     }
-
-
   }
 
   button {
@@ -104,28 +109,26 @@
     fill: #e2dccb;
   }
 
-  input:focus~svg {
+  input:focus ~ svg {
     display: none;
   }
 
-  input:focus~button {
+  input:focus ~ button {
     display: block;
   }
-
-
 }
 
 .eventsList {
   list-style: none;
   padding: 0;
   margin: 0;
-  flex: 1;
-  max-height: 75%;
-  overflow-y: auto;
+  flex: 1; // Scrollable area expands
+  overflow-y: auto; // Enable scroll here
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
   padding-right: 0.5rem;
+  padding-bottom: 1rem; // Bottom padding inside scroll
 
   &::-webkit-scrollbar {
     width: 4px;
@@ -188,7 +191,7 @@
     text-align: left;
     flex: 1;
     white-space: nowrap;
-    overflow: hidden;
+    overflow: hiddenn;
     text-overflow: ellipsis;
   }
 
@@ -534,7 +537,7 @@
         text-transform: uppercase;
         padding: 0.5rem;
         text-align: center;
-        font-size: 1.2rem;
+        font-size: 1.4rem;
         margin-bottom: 1rem;
         margin-top: 0.5rem;
         width: 100%;
@@ -545,7 +548,7 @@
         overflow-y: auto;
         color: #ededed;
         font-family: $font-blender;
-        font-size: 0.9rem;
+        font-size: 1rem;
         text-align: justify;
         padding-right: 0.5rem;
         margin-bottom: 1rem;
