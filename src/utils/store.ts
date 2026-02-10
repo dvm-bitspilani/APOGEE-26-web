@@ -148,3 +148,13 @@ export const useRegistrationStore = create<RegistrationStore>((set) => ({
   accessToken: "",
   setAccessToken: (token) => set({ accessToken: token }),
 }));
+
+type ScrollVelocityStore = {
+  velocity: number;
+  setVelocity: (v: number) => void;
+};
+
+export const useScrollVelocityStore = create<ScrollVelocityStore>((set) => ({
+  velocity: 0,
+  setVelocity: (v) => set({ velocity: v }),
+}));
