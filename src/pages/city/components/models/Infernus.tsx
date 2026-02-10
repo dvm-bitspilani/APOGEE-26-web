@@ -34,7 +34,7 @@ import { Float, useGLTF } from '@react-three/drei'
 import { type GLTF } from 'three-stdlib'
 import { useEffect, useRef } from 'react'
 import infernusModel from "../../../../assets/3d/landing/car5.0.glb";
-// import { editable as e } from '@theatre/r3f';
+import { editable as e } from '@theatre/r3f';
 import { useInfernusStore } from '../../../../utils/store';
 type GLTFResult = GLTF & {
   nodes: {
@@ -70,11 +70,11 @@ export default function Infernus() {
   const { nodes, materials } = useGLTF(infernusModel) as unknown as GLTFResult
   return (
     <Float floatIntensity={3} rotationIntensity={0.05} speed={5}>
-    <group
+    <e.group
       ref={infernusRef}
       dispose={null}
       position={[0.5, -3, 60]}
-      // theatreKey="infernus"
+      theatreKey="infernus"
       rotation={[0, 0, 0]}
       scale={[6, 6, 6]}
       frustumCulled={false} >
@@ -124,7 +124,7 @@ export default function Infernus() {
         rotation={[Math.PI / 2, 0, 0]}
         scale={1.492}
       />
-    </group>
+    </e.group>
     </Float>
   )
 }

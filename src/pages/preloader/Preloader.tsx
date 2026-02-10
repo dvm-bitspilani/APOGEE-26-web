@@ -24,14 +24,14 @@ export default function Preloader({ onLaunch }: PreloaderProps) {
   gsap.registerPlugin(SplitText);
   const splitTextRef = useRef<SplitText | null>(null);
   const timelineRef = useRef<gsap.core.Timeline | null>(null);
-  const [width, setwidth] = useState(window.innerWidth < 768  && window.innerHeight / window.innerWidth > 1 ? true : false);
+  const [width, setwidth] = useState(window.innerWidth < 768 && window.innerHeight / window.innerWidth > 1 ? true : false);
 
   const assets = assetList["landing"];
 
   const totalAssets = assets.length;
 
   useEffect(() => {
-    if (!assets) return; 
+    if (!assets) return;
 
     let loadedAssets = 0;
 
@@ -53,22 +53,22 @@ export default function Preloader({ onLaunch }: PreloaderProps) {
       .then(() => {
         setAssetloaded(true);
       })
-      // .catch((err) => {
-      //   console.error("Error preloading assets:", err);
-      //   onEnter();
-      // });
+    // .catch((err) => {
+    //   console.error("Error preloading assets:", err);
+    //   onEnter();
+    // });
 
   }, [assets, totalAssets]);
 
   useEffect(() => {
     addEventListener("resize", () => {
-      if (window.innerWidth < 768  && window.innerHeight / window.innerWidth > 1) {
+      if (window.innerWidth < 768 && window.innerHeight / window.innerWidth > 1) {
         setwidth(true);
       } else {
         setwidth(false);
       }
       return () => {
-        removeEventListener("resize", () => {});
+        removeEventListener("resize", () => { });
       };
     });
   }, []);
@@ -138,8 +138,8 @@ export default function Preloader({ onLaunch }: PreloaderProps) {
     const totalChars = chars.length;
     const targetIndex = Math.floor((progress / 100) * totalChars);
 
-    if (targetIndex <= Math.floor(prevIndex)  && targetIndex !== totalChars) {
-      setPrevIndex((prev)=> prev + 0.000001);
+    if (targetIndex <= Math.floor(prevIndex) && targetIndex !== totalChars) {
+      setPrevIndex((prev) => prev + 0.000001);
       return;
     };
 
@@ -188,27 +188,53 @@ export default function Preloader({ onLaunch }: PreloaderProps) {
               className={styles.figlet}
             >
               <br />
-<span className={styles.filgetChild1}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;█████████   ███████████     ███████      █████████  ██████████ ██████████</span><br />
-<span className={styles.filgetChild1}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;███▒▒▒▒▒███ ▒▒███▒▒▒▒▒███  ███▒▒▒▒▒███   ███▒▒▒▒▒███▒▒███▒▒▒▒▒█▒▒███▒▒▒▒▒█</span><br />
-<span className={styles.filgetChild2}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▒███    ▒███  ▒███    ▒███ ███     ▒▒███ ███     ▒▒▒  ▒███  █ ▒  ▒███  █ ▒ </span><br />
-<span className={styles.filgetChild3}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▒███████████  ▒██████████ ▒███      ▒███▒███          ▒██████    ▒██████   </span><br />
-<span className={styles.filgetChild3}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▒███▒▒▒▒▒███  ▒███▒▒▒▒▒▒  ▒███      ▒███▒███    █████ ▒███▒▒█    ▒███▒▒█   </span><br />
-<span className={styles.filgetChild4}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▒███    ▒███  ▒███        ▒▒███     ███ ▒▒███  ▒▒███  ▒███ ▒   █ ▒███ ▒   █</span><br />
-<span className={styles.filgetChild5}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;█████   █████ █████        ▒▒▒███████▒   ▒▒█████████  ██████████ ██████████</span><br />
-<span className={styles.filgetChild5}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▒▒▒▒▒   ▒▒▒▒▒ ▒▒▒▒▒           ▒▒▒▒▒▒▒      ▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒▒▒▒ ▒▒▒▒▒▒▒▒▒▒</span><br />
+              <span className={styles.filgetChild1}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;█████████   ███████████     ███████      █████████  ██████████ ██████████</span><br />
+              <span className={styles.filgetChild1}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;███▒▒▒▒▒███ ▒▒███▒▒▒▒▒███  ███▒▒▒▒▒███   ███▒▒▒▒▒███▒▒███▒▒▒▒▒█▒▒███▒▒▒▒▒█</span><br />
+              <span className={styles.filgetChild2}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▒███    ▒███  ▒███    ▒███ ███     ▒▒███ ███     ▒▒▒  ▒███  █ ▒  ▒███  █ ▒ </span><br />
+              <span className={styles.filgetChild3}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▒███████████  ▒██████████ ▒███      ▒███▒███          ▒██████    ▒██████   </span><br />
+              <span className={styles.filgetChild3}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▒███▒▒▒▒▒███  ▒███▒▒▒▒▒▒  ▒███      ▒███▒███    █████ ▒███▒▒█    ▒███▒▒█   </span><br />
+              <span className={styles.filgetChild4}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▒███    ▒███  ▒███       █ ▒▒███     ███ ▒▒███  ▒▒███  ▒███ ▒   █ ▒███ ▒   █</span><br />
+              <span className={styles.filgetChild5}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;█████   █████ █████        ▒▒▒███████▒   ▒▒█████████  ██████████ ██████████</span><br />
+              <span className={styles.filgetChild5}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▒▒▒▒▒   ▒▒▒▒▒ ▒▒▒▒▒           ▒▒▒▒▒▒▒      ▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒▒▒▒ ▒▒▒▒▒▒▒▒▒▒</span><br />
               <br />
+              <div>
+                                                                              
+                                                           █ 
+                                                          ██
+                                                         ███
+                                                    █    ███
+                                                   ██    ███
+                                                  ███    ███
+                                                  ███    ███
+                                                  ███    ███
+                                                  ███    ███
+                                                  ███    ███
+                                                  ███    ███
+                                                  ███    ███
+                                                  ███    ███
+                                                  ███    ███
+                                                  ███    ███
+                                                ████     ███
+                                              ████      ███
+                                           ████      ████
+                                        ████      ████
+                                     ████      ████
+                                  ████      ████
+
+
+              </div>
             </p>
-           {!width ? <><p className={styles.txtRed}>
+            {!width ? <><p className={styles.txtRed}>
               &nbsp;&nbsp;&nbsp;AN INTERACTIVE AUDIOVISUAL EXPERIENCE BY DVM
             </p>
-            <p className={styles.redDesign}>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚
-            </p> </>: <>            <p className={styles.txtRed}>
-              &nbsp;AN INTERACTIVE AUDIOVISUAL EXPERIENCE BY DVM
-            </p>
-            <p className={styles.redDesign}>
-              &nbsp;&nbsp;&nbsp;▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚
-            </p></>}
+              <p className={styles.redDesign}>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚
+              </p> </> : <>            <p className={styles.txtRed}>
+                &nbsp;AN INTERACTIVE AUDIOVISUAL EXPERIENCE BY DVM
+              </p>
+              <p className={styles.redDesign}>
+                &nbsp;&nbsp;&nbsp;▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚
+              </p></>}
             <p
               className={styles.txtGreen}
             >{`>> INITIATING BOOT SEQUENCE...`}</p>

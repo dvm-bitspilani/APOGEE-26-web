@@ -8,6 +8,8 @@ import ScrollSync from "../ScrollSync/ScrollSync";
 import SceneDevOrProd from "./SceneDevorProd";
 import SceneLights from "./SceneLights";
 import TheatreCameraFinal from "./TheatreCameraFinal";
+import { SheetProvider } from "@theatre/r3f";
+import { introAnimSheet } from "../../City";
 
 export default function CityScene({}: any) {
   const cityRef = useRef<THREE.Group>(null!);
@@ -51,9 +53,10 @@ export default function CityScene({}: any) {
            intensity={0.5} /> */}
 
           {/* The TheatreCameraFinal is a pre-configured camera with the same settings as above, but with added parallax and scroll effects     */}
-
-          <TheatreCameraFinal />
-          <Infernus />
+          <SheetProvider sheet={introAnimSheet}>
+            <TheatreCameraFinal />
+            <Infernus />
+          </SheetProvider>
         </group>
         <ScrollControls pages={6} damping={0.8}>
           {/* Use PivotLeva to roate the city around the car's axis */}

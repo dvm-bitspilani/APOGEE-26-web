@@ -36,6 +36,7 @@ THREE.DefaultLoadingManager.onLoad = () => {
 // import { BlendFunction } from "postprocessing";
 export const project = getProject("City Project", { state });
 export const sheet = project.sheet("Cyber City");
+export const introAnimSheet = project.sheet("Intro Animation");
 // if (import.meta.env.DEV) {
 //   debugFunctions();
 //   studio.initialize();
