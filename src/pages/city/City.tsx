@@ -13,7 +13,7 @@ import { useEffect, useState } from "react";
 // import debugFunctions from "../../utils/debug";
 import * as THREE from "three";
 import { useModalStore, useSceneLoadedStore } from "../../utils/store";
-import NavBar from "../components/NavBar/NavBar";
+// import NavBar from "../components/NavBar/NavBar";
 import RegisterButton from "../components/RegisterButton/RegisterButton";
 import Preloader from "../preloader/Preloader";
 import Modal from "./components/Modal/Modal";
@@ -125,7 +125,7 @@ export default function City() {
           {/* </Html> */}
         </div>
       }
-      <NavBar />
+      {/* <NavBar /> */}
       <RegisterButton />
       {isModalopen && <Modal />}
     </>
