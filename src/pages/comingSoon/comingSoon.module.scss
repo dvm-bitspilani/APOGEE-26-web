@@ -1,5 +1,6 @@
 .wrapper {
   position: absolute;
+  /* inset: 0 ensures it matches the parent modal's boundaries */
   inset: 0;
   display: flex;
   align-items: center;
@@ -9,9 +10,9 @@
 }
 
 .box {
-  /* Using rem for the inner content container to keep it stable */
   width: 79%;
-  height: 80%;
+  /* Starting at 0 to sync with the backgroundlite expansion */
+  height: 0; 
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -19,21 +20,24 @@
   text-align: center;
   color: #ffffff;
   font-family: "Orbitron", sans-serif;
+  overflow: hidden; // Keeps content hidden while height is small
 
-  /* PERCENTAGE-BASED CLIP: This matches your 800x500 path geometry exactly */
-  /* It handles the beveled corners and the top/bottom indents */
-  clip-path: 
-   polygon(5.25% 2%, 18.25% 2%, 19.75% 0%, 81% 0%, 82.5% 2%, 95.05% 2%, 100% 10%, 100% 91%, 95.0% 99%, 5.25% 99%, 0% 90%, 0% 10%);
+  /* The expansion animation matching your modal speed */
+  animation: expandModal 0.6s ease forwards;
 
-  /* Your requested background color */
+  clip-path: polygon(
+    5.25% 2%, 18.25% 2%, 19.75% 0%, 81% 0%, 82.5% 2%, 95.05% 2%, 
+    100% 10%, 100% 91%, 95.0% 99%, 5.25% 99%, 0% 90%, 0% 10%
+  );
+
+  /* Cyberpunk Red Background */
   background: linear-gradient(
     180deg,
-    rgba(153, 0, 0, 0.9), // Deep Red
-    rgba(80, 0, 0, 1)     // Darker Red
+    rgba(153, 0, 0, 0.95),
+    rgba(60, 0, 0, 1)
   );
 
   backdrop-filter: blur(6px);
-  /* Use rem for the gap to avoid it becoming too small on mobile */
   padding: 2rem;
 }
 
@@ -42,7 +46,8 @@
   letter-spacing: 0.15em;
   margin-bottom: 0.5rem;
   text-transform: uppercase;
-  color: #00f3ff; // Cyan text pops better on red
+  color: #00f3ff;
+  text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
 }
 
 .subtitle {
@@ -61,6 +66,7 @@
     height: 0.5rem;
     border-radius: 50%;
     background: #00f3ff;
+    box-shadow: 0 0 8px #00f3ff;
     animation: bounce 1.2s infinite ease-in-out;
   }
 
@@ -68,7 +74,23 @@
   span:nth-child(3) { animation-delay: 0.4s; }
 }
 
-@keyframes bounce {
-  0%, 80%, 100% { transform: translateY(0); opacity: 0.5; }
-  40% { transform: translateY(-0.5rem); opacity: 1; }
+/* SYNCED ANIMATION */
+@keyframes expandModal {
+  0% {
+    height: 0;
+    // opacity: 0;
+  }
+  20% {
+    // opacity: 0; // Keep text hidden for the first 20% of the movement
+  }
+  100% {
+    /* Set this to 80% to fit perfectly inside the 81% backgroundlite */
+    height: 80%; 
+    // opacity: 1;
+  }
 }
+
+// @keyframes bounce {
+//   0%, 80%, 100% { transform: translateY(0); opacity: 0.5; }
+//   40% { transform: translateY(-0.5rem); opacity: 1; }
+// }
