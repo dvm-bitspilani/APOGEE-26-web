@@ -23,12 +23,10 @@
 
   animation: expandModal 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards;
 
-  clip-path: polygon(
-    5.25% 2%, 18.25% 2%, 19.75% 0%, 81% 0%, 82.5% 2%, 95.05% 2%, 
-    100% 10%, 100% 91%, 95.0% 99%, 5.25% 99%, 0% 90%, 0% 10%
-  );
+  clip-path: polygon(5.25% 2%, 18.25% 2%, 19.75% 0%, 81% 0%, 82.5% 2%, 95.05% 2%, 100% 10%, 100% 91%, 95% 98%, 5.25% 98%, 0.40% 90%, 0.40% 10%);
 
   backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   padding: 2rem;
   border: 1px solid rgba(255, 0, 60, 0.3);
 }
