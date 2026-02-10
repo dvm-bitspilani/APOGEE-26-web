@@ -34,7 +34,7 @@ import { Float, useGLTF } from '@react-three/drei'
 import { type GLTF } from 'three-stdlib'
 import { useEffect, useRef } from 'react'
 import infernusModel from "../../../../assets/3d/landing/car5.0.glb";
-import { editable as e } from '@theatre/r3f';
+// import { editable as e } from '@theatre/r3f';
 import { useInfernusStore } from '../../../../utils/store';
 type GLTFResult = GLTF & {
   nodes: {

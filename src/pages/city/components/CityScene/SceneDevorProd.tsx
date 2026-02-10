@@ -1,5 +1,5 @@
 import { Perf } from "r3f-perf";
-import CombinedLeva from "../leva/CombinedLeva";
+// import CombinedLeva from "../leva/CombinedLeva";
 import FinalProdConfig from "../config/FinalProdConfig";
 import debugFunctions from "../../../../utils/debug";
 import extension from "@theatre/r3f/dist/extension";
