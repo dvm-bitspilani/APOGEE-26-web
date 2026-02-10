@@ -4,6 +4,7 @@ import { gsap } from "gsap";
 import SplitText from "gsap/src/SplitText";
 import { useEffect, useRef, useState } from "react";
 import { useSceneLoadedStore } from "../../utils/store";
+import assetList from "../../utils/assetList";
 
 interface PreloaderProps {
   onLaunch?: () => void;
@@ -15,6 +16,7 @@ export default function Preloader({ onLaunch }: PreloaderProps) {
   const launchRef = useRef<HTMLDivElement>(null);
   const [animDone, setAnimDone] = useState(false);
   const [animDone2, setAnimDone2] = useState(false);
+  const [assetloaded, setAssetloaded] = useState(false);
   const [progress, setProgress] = useState(0.0);
   const [prevIndex, setPrevIndex] = useState(0);
   const sceneLoaded = useSceneLoadedStore((s) => s.loaded);
@@ -22,9 +24,42 @@ export default function Preloader({ onLaunch }: PreloaderProps) {
   gsap.registerPlugin(SplitText);
   const splitTextRef = useRef<SplitText | null>(null);
   const timelineRef = useRef<gsap.core.Timeline | null>(null);
-
-
   const [width, setwidth] = useState(window.innerWidth < 768  && window.innerHeight / window.innerWidth > 1 ? true : false);
+
+  const assets = assetList["landing"];
+
+  const totalAssets = assets.length;
+
+  useEffect(() => {
+    if (!assets) return; 
+
+    let loadedAssets = 0;
+
+    const preloadImage = (src: string) => {
+      return new Promise<HTMLImageElement>((resolve, reject) => {
+        const img = new Image();
+        img.src = src;
+        img.onload = () => {
+          loadedAssets++;
+          resolve(img);
+        };
+        img.onerror = reject;
+      });
+    };
+
+    Promise.allSettled([
+      ...(assets.map(preloadImage) || []),
+    ])
+      .then(() => {
+        setAssetloaded(true);
+      })
+      // .catch((err) => {
+      //   console.error("Error preloading assets:", err);
+      //   onEnter();
+      // });
+
+  }, [assets, totalAssets]);
+
   useEffect(() => {
     addEventListener("resize", () => {
       if (window.innerWidth < 768  && window.innerHeight / window.innerWidth > 1) {
@@ -44,11 +79,11 @@ export default function Preloader({ onLaunch }: PreloaderProps) {
   }, [sceneProgress]);
 
   useEffect(() => {
-    if (animDone && sceneLoaded && launchRef.current && animDone2) {
+    if (animDone && sceneLoaded && launchRef.current && animDone2 && assetloaded) {
       launchRef.current.style.opacity = "1";
       launchRef.current.style.pointerEvents = "auto";
     }
-  }, [animDone, sceneLoaded, animDone2]);
+  }, [animDone, sceneLoaded, animDone2, assetloaded]);
 
   useEffect(() => {
     if (!textRef.current) return;
@@ -102,7 +137,6 @@ export default function Preloader({ onLaunch }: PreloaderProps) {
     const chars = splitTextRef.current.chars;
     const totalChars = chars.length;
     const targetIndex = Math.floor((progress / 100) * totalChars);
-    console.log(targetIndex);
 
     if (targetIndex <= Math.floor(prevIndex)  && targetIndex !== totalChars) {
       setPrevIndex((prev)=> prev + 0.000001);
