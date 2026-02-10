@@ -42,6 +42,8 @@
 
 .eventsSubContainer {
   display: flex;
+  flex-direction: column; // Stack children vertically
+  flex: 1;
   overflow: hidden;
   position: relative;
   gap: 1rem;
@@ -52,7 +54,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  flex: 1; // Take remaining space instead of fixed 100%
   overflow: hidden;
 }
 
@@ -68,8 +70,9 @@
     flex: 1;
     background: transparent;
     border: none;
-    color: #e2dccb;
+    color: #ffff00;
     font-size: 1.2rem;
+    font-weight: 700;
     outline: none;
     font-family: $font-blender;
 
@@ -77,6 +80,22 @@
       color: $cyber-yellow;
       font-family: $font-blender;
     }
+
+
+  }
+
+  button {
+    background: transparent;
+    border: none;
+    color: #ffff00;
+    font-size: 1.2rem;
+    font-weight: 700;
+    outline: none;
+    font-family: $font-blender;
+    padding: 0;
+    margin: 0;
+    line-height: 0;
+    display: none;
   }
 
   svg {
@@ -84,6 +103,16 @@
     height: 24px;
     fill: #e2dccb;
   }
+
+  input:focus~svg {
+    display: none;
+  }
+
+  input:focus~button {
+    display: block;
+  }
+
+
 }
 
 .eventsList {
@@ -91,7 +120,7 @@
   padding: 0;
   margin: 0;
   flex: 1;
-  max-height: 65%;
+  max-height: 75%;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
@@ -164,7 +193,7 @@
   }
 
   .actionIcon {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     color: $cyber-yellow;
     width: 24px;
     height: 24px;
@@ -193,11 +222,16 @@
   font-family: inherit;
 
   .confirmButtonContent {
+    font-size: 1.5rem;
     font-weight: 700;
     font-size: 1.2rem;
     color: #dddddd;
     z-index: 1;
     position: relative;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   // &:hover {
@@ -214,6 +248,340 @@
   //   width: 50px;
   //   height: auto;
   // }
+}
+
+.mobileDetailsContainer {
+  display: none; // Hidden by default on desktop
+}
+
+// @media (max-width: 600px) {
+//   .eventsContainer {
+//     width: 100%;
+//     height: 100%;
+//     padding: 2.5rem 1rem !important; // Reduce padding
+//     align-items: center;
+//     justify-content: flex-start;
+//   }
+
+//   .eventsSubContainer {
+//     width: 100%;
+//     flex: 1;
+
+//     // If active event is present, we hide the list
+//     &.hasActiveEvent {
+//       display: none;
+//     }
+//   }
+
+//   // When active event is NOT present, show list
+//   .eventsListCont {
+//     width: 100%;
+//   }
+
+//   .headingCont {
+//     margin-bottom: 2rem;
+//     margin-top: 1rem;
+
+//     .heading {
+//       font-size: 3rem; // Smaller font
+//     }
+//   }
+
+//   .search {
+//     width: 100%;
+//     box-sizing: border-box;
+//   }
+
+//   .eventsList {
+//     width: 100%;
+//     padding-right: 0; // No padding right on mobile
+//   }
+
+//   .confirmButton {
+//     width: 100%;
+//     margin-bottom: 2rem;
+//   }
+
+//   // Mobile Details View
+//   .mobileDetailsContainer {
+//     display: none;
+//     flex-direction: column;
+//     width: 100%;
+//     height: 100%;
+//     position: relative;
+
+//     &.active {
+//       display: flex;
+//     }
+
+//     .mobileHeading {
+//       text-align: center;
+//       font-family: $font-cyberpunks;
+//       font-size: 3rem;
+//       color: $cyber-yellow;
+//       margin-bottom: 1rem;
+//     }
+
+//     .detailsCard {
+//       flex: 1;
+//       width: 100%;
+//       position: relative;
+//       background-image: url("/img/registrations/event-info-panel-mobile.png"); // Use the mobile frame
+//       background-size: 100% 100%;
+//       background-repeat: no-repeat;
+//       display: flex;
+//       flex-direction: column;
+//       padding: 3rem 1.5rem 3rem 1.5rem; // Padding inside the frame
+//       box-sizing: border-box;
+//       overflow: hidden;
+
+//       .mobileCloseButton {
+//         position: absolute;
+//         top: 1rem;
+//         right: 1.5rem;
+//         background: transparent;
+//         border: none;
+//         color: $cyber-yellow;
+//         font-size: 1.5rem;
+//         font-weight: bold;
+//         cursor: pointer;
+//         z-index: 20;
+//         padding: 0.5rem;
+//         line-height: 1;
+//         font-family: sans-serif; // Or use a specific font if needed for 'X'
+
+//         &:hover {
+//           opacity: 0.8;
+//         }
+//       }
+
+//       .eventNameHeader {
+//         background: $cyber-yellow;
+//         color: $dark-bg;
+//         font-family: $font-blender;
+//         font-weight: bold;
+//         text-transform: uppercase;
+//         padding: 0.5rem;
+//         text-align: center;
+//         font-size: 1.2rem;
+//         margin-bottom: 1rem;
+//         margin-top: 0.5rem;
+//         width: 100%;
+//       }
+
+//       .mobileScrollContent {
+//         flex: 1;
+//         overflow-y: auto;
+//         color: #ededed;
+//         font-family: $font-blender;
+//         font-size: 0.9rem;
+//         text-align: justify;
+//         padding-right: 0.5rem;
+//         margin-bottom: 1rem;
+
+//         &::-webkit-scrollbar {
+//           width: 4px;
+//         }
+//         &::-webkit-scrollbar-thumb {
+//           background: $cyber-yellow;
+//           border-radius: 2px;
+//         }
+//       }
+
+//       .mobileAddButton {
+//         border: 1px solid #e2dccb;
+//         background: transparent;
+//         color: #e2dccb;
+//         padding: 0.8rem;
+//         text-transform: uppercase;
+//         cursor: pointer;
+//         font-size: 1.2rem;
+//         font-weight: bold;
+//         width: 100%;
+//         text-align: center;
+//         font-family: inherit;
+//         margin-top: auto;
+
+//         &.selected {
+//           border-color: $cyber-yellow;
+//           background: $cyber-yellow;
+//           color: $dark-bg;
+//         }
+//       }
+//     }
+//   }
+// }
+
+.mobileDetailsContainer {
+  display: none; // Hidden by default on desktop
+}
+
+@media (max-width: 600px) {
+  // .eventsContainer {
+  //   width: 100%;
+  //   height: 100%;
+  //   padding: 2.5rem 1rem !important; // Reduce padding
+  //   align-items: center;
+  //   justify-content: flex-start;
+  // }
+
+  // .eventsSubContainer {
+  //   width: 100%;
+  //   flex: 1;
+
+  //   // If active event is present, we hide the list
+  //   &.hasActiveEvent {
+  //     display: none;
+  //   }
+  // }
+
+  // // When active event is NOT present, show list
+  // .eventsListCont {
+  //   width: 100%;
+  // }
+
+  // .headingCont {
+  //   margin-bottom: 2rem;
+  //   margin-top: 1rem;
+
+  //   .heading {
+  //     font-size: 3rem; // Smaller font
+  //   }
+  // }
+
+  // .search {
+  //   width: 100%;
+  //   box-sizing: border-box;
+  // }
+
+  // .eventsList {
+  //   width: 100%;
+  //   padding-right: 0; // No padding right on mobile
+
+  //   .eventItem {
+  //     padding: 0.8rem;
+  //     border-bottom: 1px solid rgba(255, 255, 0, 0.1);
+
+  //     button {
+  //       font-size: 1.1rem;
+  //     }
+  //   }
+  // }
+
+  // .confirmButton {
+  //   width: 100%;
+  //   margin-bottom: 2rem;
+  // }
+
+  // Mobile Details View
+  .mobileDetailsContainer {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    position: relative;
+
+    &.active {
+      display: flex;
+    }
+
+    .mobileHeading {
+      text-align: center;
+      font-family: $font-cyberpunks;
+      font-size: 3rem;
+      color: $cyber-yellow;
+      margin-bottom: 1rem;
+    }
+
+    .detailsCard {
+      flex: 1;
+      width: 100%;
+      position: relative;
+      background-image: url("/img/registrations/event-info-panel-mobile.png"); // Use the mobile frame
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+      display: flex;
+      flex-direction: column;
+      padding: 3rem 1.5rem 3rem 1.5rem; // Padding inside the frame
+      box-sizing: border-box;
+      overflow: hidden;
+
+      .mobileCloseButton {
+        position: absolute;
+        top: 0.8rem;
+        right: 1rem;
+        background: transparent;
+        border: none;
+        color: $cyber-yellow;
+        font-size: 1.5rem;
+        font-weight: bold;
+        cursor: pointer;
+        z-index: 20;
+        padding: 0.5rem;
+        line-height: 1;
+        font-family: sans-serif; // Or use a specific font if needed for 'X'
+
+        &:hover {
+          opacity: 0.8;
+        }
+      }
+
+      .eventNameHeader {
+        background: $cyber-yellow;
+        color: $dark-bg;
+        font-family: $font-blender;
+        font-weight: bold;
+        text-transform: uppercase;
+        padding: 0.5rem;
+        text-align: center;
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+        margin-top: 0.5rem;
+        width: 100%;
+      }
+
+      .mobileScrollContent {
+        flex: 1;
+        overflow-y: auto;
+        color: #ededed;
+        font-family: $font-blender;
+        font-size: 0.9rem;
+        text-align: justify;
+        padding-right: 0.5rem;
+        margin-bottom: 1rem;
+
+        &::-webkit-scrollbar {
+          width: 4px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          background: $cyber-yellow;
+          border-radius: 2px;
+        }
+      }
+
+      .mobileAddButton {
+        border: 1px solid #e2dccb;
+        background: transparent;
+        color: #e2dccb;
+        padding: 0.5rem;
+        text-transform: uppercase;
+        cursor: pointer;
+        font-size: 1.2rem;
+        font-weight: bold;
+        width: 100%;
+        text-align: center;
+        font-family: inherit;
+        margin-top: auto;
+
+        &.selected {
+          border-color: $cyber-yellow;
+          background: $cyber-yellow;
+          color: $dark-bg;
+        }
+      }
+    }
+  }
 }
 
 @media (max-width: 750px) {

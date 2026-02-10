@@ -37,10 +37,13 @@ $dark-bg: #000;
 
     .bannerText {
       position: absolute;
-      width: 80%;
+      width: 90%;
       object-fit: contain;
       z-index: 1;
       filter: drop-shadow(0 0 10px rgba(255, 230, 0, 0.3));
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .robotFace {
@@ -51,6 +54,7 @@ $dark-bg: #000;
       z-index: 2;
       margin-top: 4%;
       user-select: none;
+
     }
 
     .detailsPanel {
@@ -71,42 +75,65 @@ $dark-bg: #000;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      padding: 4rem 6rem 4rem 4rem; // Increased right padding to keep content away from protrusion
+      padding: 3rem 6rem 3rem 4rem; // Increased right padding to keep content away from protrusion
       box-sizing: border-box;
-      color: #e2dccb;
+      .detailsHeader {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 1rem;
+        flex-shrink: 0;
+        position: relative; // For close button positioning context if needed, but flex works better
 
-      .closeButton {
-        position: absolute;
-        top: -10px;
-        right: 0;
-        background: transparent;
-        border: none;
-        color: $cyber-yellow;
-        font-size: 1.5rem;
-        cursor: pointer;
-        padding: 1rem;
-        line-height: 1;
+        .eventName {
+          color: $cyber-yellow;
+          font-size: 2rem;
+          text-transform: uppercase;
+          // margin-bottom: 1rem; // Handled by header margin
+          display: inline-block;
+          padding-right: 3rem; // Space for close button
+          font-family: $font-blender;
+          margin: 0;
+          line-height: 1.2;
+        }
 
-        &:hover {
-          opacity: 0.8;
+        .closeButton {
+          background: transparent;
+          border: none;
+          color: $cyber-yellow;
+          font-size: 1.5rem;
+          cursor: pointer;
+          padding-top: 0.5rem;
+          line-height: 1;
+          flex-shrink: 0;
+
+          &:hover {
+            opacity: 0.8;
+          }
         }
       }
 
-      .detailsContent {
+      .scrollContainer {
+        position: relative;
         flex: 1;
-        overflow-y: auto;
+        overflow: hidden; // Hide overflow of container
         width: 100%;
-        margin-top: auto;
-        margin-bottom: auto;
         display: flex;
         flex-direction: column;
-        max-height: 70%;
-        position: relative;
+        margin-bottom: 1rem; // Space above action button
+
+        .detailsContent {
+          flex: 1;
+          overflow-y: auto;
+          width: 100%;
+          padding-right: 0.5rem; // Space for scrollbar
 
         // Scrollbar styling for content
         &::-webkit-scrollbar {
           width: 4px;
         }
+
 
         &::-webkit-scrollbar-thumb {
           background: $cyber-yellow;
@@ -124,12 +151,31 @@ $dark-bg: #000;
         font-family: $font-blender; // Or specific font if needed
       }
 
-      .eventDesc {
-        font-size: 1rem;
-        line-height: 1.5;
-        text-align: justify;
-        font-family: $font-blender;
-        padding-right: 1rem;
+          .eventDesc {
+            font-size: 1rem;
+            line-height: 1.5;
+            text-align: justify;
+            font-family: $font-blender;
+            padding-right: 0.5rem;
+            color: #EDEDED;
+            padding-bottom: 2rem; 
+          }
+        }
+
+        .fadeOverlay {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 3rem; // Height of the fade
+          background: linear-gradient(
+            to bottom,
+            transparent,
+            rgba(0, 0, 0, 0.9)
+          ); // Adjust color to match panel bg
+          pointer-events: none; // Allow clicks through
+          z-index: 10;
+        }
       }
 
       .actionButton {
@@ -205,7 +251,7 @@ $dark-bg: #000;
     }
   }
 
-}
+
 
 @media (max-width: 750px) {
   .container {
@@ -224,6 +270,11 @@ $dark-bg: #000;
 
       .bgContainerMobile {
         display: block;
+
+        .bgPanelImage{
+          filter: brightness(0.5);
+        }
+        
       }
     }
   }

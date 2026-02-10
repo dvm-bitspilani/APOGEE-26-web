@@ -6,10 +6,21 @@
   align-items: center;
   justify-content: center;
   min-height: 100%;
+
   width: 100%;
   color: $cyber-yellow;
   // padding: 2rem;
   gap: 1.5rem;
+
+  .error {
+    position: absolute;
+    bottom: -15px;
+    left: 5px;
+    color: red;
+    font-size: 1rem;
+    font-weight: $weight-blender-medium;
+    font-family: $font-blender;
+  }
 
   .title {
     font-family: $font-cyberpunks;
@@ -42,37 +53,54 @@
     align-items: center;
     gap: 0.9rem;
 
-    &.desktopFormContainer {
-      display: none;
-    }
+    // &.desktopFormContainer {
+    //   display: none;
+    // }
   }
 
   .form {
+    overflow: scroll;
     display: flex;
     flex-direction: column;
     gap: 1.2rem;
     width: 100%;
     max-height: 45vh; //? [03:47 AM] A stupid mistake averted...
-    overflow: auto;
+    // overflow: auto;
     @include content-scroller($cyber-yellow);
     // Opacity and display control will be handled by GSAP
-
 
     .inputGroup {
       position: relative;
       width: 100%;
+      margin-bottom: 1rem;
+
+      input[type="number"] {
+        appearance: textfield;
+
+        &::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+        }
+      }
+
+      // Define CSS variables for responsiveness sharing with react-select
+      --input-padding: 0.3rem 1.2rem;
+      --input-font-size: clamp(1.2rem, 1.9vw, 4rem);
+      --input-font-weight: #{$weight-blender-medium};
 
       .input {
+
         width: 100%;
         background: $dark-bg;
         border: none;
         outline: none;
         color: $cyber-yellow;
         font-family: $font-blender;
-        font-weight: $weight-blender-medium;
-        font-size: clamp(1.2rem, 1.9vw, 4rem);
-        // padding: 0.7vw;
-        padding: 0.3rem 1.2rem;
+
+        // Use variables
+        font-weight: var(--input-font-weight);
+        font-size: var(--input-font-size);
+        padding: var(--input-padding);
+
         // text-transform: uppercase;
         cursor: pointer;
         transition: all 0.2s ease-in-out;
@@ -131,6 +159,7 @@
         background-color: $cyber-yellow;
         color: $dark-bg;
       }
+
     }
   }
 }
@@ -144,15 +173,14 @@
         display: block;
       }
 
-      &.mobileFormContainer {
-        display: none;
-      }
+      // &.mobileFormContainer {
+      //   display: none;
+      // }
     }
 
     .form .inputGroup {
-      .input {
-        font-weight: $weight-blender-bold;
-      }
+      // Update variable for this breakpoint
+      --input-font-weight: #{$weight-blender-bold};
     }
   }
 }
@@ -177,12 +205,10 @@
       gap: 1.5vw;
 
       .inputGroup {
-        .input {
-          font-size: clamp(1rem, 1.7vw, 3rem);
-          padding: 0.5vw;
-        }
+        // Update variables for this breakpoint
+        --input-font-size: clamp(1rem, 1.7vw, 3rem);
+        --input-padding: 0.5vw;
       }
-
     }
 
     .customBtnWrapper {

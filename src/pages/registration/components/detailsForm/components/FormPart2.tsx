@@ -1,81 +1,178 @@
-import styles from "../DetailsForm.module.scss"
+import styles from "../DetailsForm.module.scss";
+import Select from "react-select";
+import customStyles from "./customStyles";
+import { useEffect, useState } from "react";
 
-interface FormPart2Props {
-    formData: any,
-    handleChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void, 
-    locationData: {state: string, cities: string[]}[];
+interface FormData {
+    college: string;
+    year: string;
+    state: string;
+    city: string;
 }
 
-export default function FormPart2({formData, handleChange, locationData}: FormPart2Props) {
+interface FormPart2Props {
+    formData: FormData,
+    handleChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void,
+    locationData: { state: string, cities: string[] }[];
+    errors: {
+        college: string;
+        year: string;
+        state: string;
+        city: string;
+    };
+    collegeList: { id: string, name: string }[];
+}
+
+interface OptionType {
+    value: string;
+    label: string;
+}
+
+export default function FormPart2({
+    formData,
+    handleChange,
+    locationData,
+    errors,
+    collegeList,
+}: FormPart2Props) {
+    const [cityOptions, setCityOptions] = useState<OptionType[]>([]);
+    const [collegeName, setCollegeName] = useState<string>("");
+
+    useEffect(() => {
+        if (formData.college) {
+            const selectedCollege = collegeList.find(
+                (c) => c.id === formData.college,
+            );
+            if (selectedCollege) {
+                setCollegeName(selectedCollege.name);
+            }
+        }
+    }, [formData.college, collegeList]);
+
+    useEffect(() => {
+        if (formData.state) {
+            const selectedStateData = locationData.find(
+                (s) => s.state === formData.state,
+            );
+            if (selectedStateData) {
+                setCityOptions(
+                    selectedStateData.cities.map((city) => ({
+                        value: city,
+                        label: city,
+                    })),
+                );
+            } else {
+                setCityOptions([]);
+            }
+        } else {
+            setCityOptions([]);
+        }
+    }, [formData.state, locationData]);
+
+    const stateOptions: OptionType[] = locationData.map((s) => ({
+        value: s.state,
+        label: s.state,
+    }));
+
+    const handleSelectChange = (name: string, option: OptionType | null) => {
+        // Create a synthetic event to pass to the parent's handleChange
+        const e = {
+            target: {
+                name,
+                value: option ? option.value : "",
+            },
+        } as unknown as React.ChangeEvent<HTMLSelectElement>; // Type casting carefully
+        handleChange(e);
+    };
+
     return (
         <>
-            <div className={styles.inputGroup}>
-                <input
-                    type="text"
+            <div className={styles.inputGroup} >
+                <Select
                     name="college"
+                    options={collegeList.map((college) => ({ value: college.id, label: college.name }))}
+                    value={
+                        formData.college
+                            ? { value: formData.college, label: collegeName }
+                            : null
+                    }
+                    onChange={(option) => handleSelectChange("college", option)}
                     placeholder="[College]"
-                    value={formData.college}
-                    onChange={handleChange}
-                    className={styles.input}
-                    autoComplete="off"
+                    styles={customStyles}
+                    isSearchable
+                    menuPlacement="auto"
+                    menuPortalTarget={document.body}
+                    className={styles.selectContainer}
                 />
+                {errors.college && <p className={styles.error}>{errors.college}</p>}
             </div>
 
-            <div className={styles.inputGroup}>
-                <select
+            < div className={styles.inputGroup} >
+                <Select
                     name="year"
-                    value={formData.year}
-                    onChange={handleChange}
-                    className={`${styles.input} ${styles.select}`}
-                >
-                    <option value="" disabled hidden>
-                        [Year of study]
-                    </option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                </select>
+                    options={[
+                        { value: "1", label: "1" },
+                        { value: "2", label: "2" },
+                        { value: "3", label: "3" },
+                        { value: "4", label: "4" },
+                        { value: "5", label: "5" },
+                    ]}
+                    value={
+                        formData.year
+                            ? { value: formData.year, label: formData.year }
+                            : null
+                    }
+                    onChange={(option) => handleSelectChange("year", option)}
+                    placeholder="[Year of study]"
+                    styles={customStyles}
+                    isSearchable
+                    menuPlacement="auto"
+                    menuPortalTarget={document.body}
+                    className={styles.selectContainer}
+                />
+                {errors.year && <p className={styles.error}>{errors.year}</p>}
             </div>
 
-            <div className={styles.inputGroup}>
-                <select
+            < div className={styles.inputGroup} >
+                <Select
                     name="state"
-                    value={formData.state}
-                    onChange={handleChange}
-                    className={`${styles.input} ${styles.select}`}
-                >
-                    <option value="" disabled hidden>
-                        [State]
-                    </option>
-                    {/* Placeholder options */}
-                    {
-                        locationData.map((state, i) =>
-                            <option value={state.state} key={i}>{state.state}</option>
-                        )
+                    options={stateOptions}
+                    value={
+                        formData.state
+                            ? { value: formData.state, label: formData.state }
+                            : null
                     }
-                </select>
+                    onChange={(option) => handleSelectChange("state", option)}
+                    placeholder="[State]"
+                    styles={customStyles}
+                    isSearchable
+                    menuPlacement="auto"
+                    menuPortalTarget={document.body}
+                    className={styles.selectContainer}
+                />
+                {errors.state && <p className={styles.error}>{errors.state}</p>}
             </div>
 
-            <div className={styles.inputGroup}>
-                <select
+            < div className={styles.inputGroup} >
+                <Select
                     name="city"
-                    value={formData.city}
-                    onChange={handleChange}
-                    className={`${styles.input} ${styles.select}`}
-                >
-                    <option value="" disabled hidden>
-                        [City]
-                    </option>
-                    {/* Placeholder options */}
-                    {
-                        locationData.find((state) => state.state === formData.state)?.cities.map((city, _i) =>
-                            <option value={city} key={_i}>{city}</option>
-                        )
+                    options={cityOptions}
+                    value={
+                        formData.city
+                            ? { value: formData.city, label: formData.city }
+                            : null
                     }
-                </select>
+                    onChange={(option) => handleSelectChange("city", option)}
+                    placeholder="[City]"
+                    styles={customStyles}
+                    isSearchable
+                    isDisabled={!formData.state}
+                    noOptionsMessage={() => "Select a state first"}
+                    menuPlacement="auto"
+                    menuPortalTarget={document.body}
+                />
+                {errors.city && <p className={styles.error}>{errors.city}</p>}
             </div>
         </>
-    )
+    );
 }

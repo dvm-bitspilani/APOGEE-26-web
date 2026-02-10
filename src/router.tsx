@@ -3,7 +3,9 @@ import { createBrowserRouter } from "react-router-dom";
 import Registration from "./pages/registration/Registration";
 // import Instructions from "./pages/registration/components/Instructions";
 // import Instructions from "./pages/registration/components/detailsForm/DetailsForm"
-import Landing from "./pages/landing/Landing";
+import City from "./pages/city/City";
+import ContactUs from "./pages/contactUs/ContactUs";
+import Preloader from "./pages/preloader/Preloader";
 type page = {
   url: string;
 
@@ -14,13 +16,27 @@ const pages: page[] = [
   {
     url: "/",
 
-    component: Landing,
+    component: City,
   },
 
   {
     url: "/registration",
 
     component: Registration,
+  },
+  {
+    url: '/city',
+    component: City,
+  },
+  {
+    url: "/contact",
+
+    component: ContactUs,
+  },
+  {
+    url: "/loader",
+
+    component: Preloader,
   },
 ];
 

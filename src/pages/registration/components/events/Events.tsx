@@ -1,86 +1,84 @@
-import { useState, useEffect } from "react";
-// import axios from "axios";
-import { useRegistrationStore, type Event } from "../../../../utils/store";
+import { useState, useEffect, useRef } from "react";
+import { useRegistrationStore } from "../../../../utils/store";
 import styles from "./Events.module.scss";
 import NavButton from "../navButton/NavButton";
-
-// Dummy Data until API is ready
-const DUMMY_EVENTS: Event[] = [
-  {
-    id: 1,
-    name: "Event One",
-    about:
-      "Oasis, The Annual Cultural Extravaganza Of Birla Institute Of Technology And Science, Pilani, Has Been A Vibrant Part Of India's Cultural Tapestry Since 1971. Managed Entirely By Students, It's A Dazzling Showcase Of Talent In Dance, Drama, Literature, Comedy, Fashion, And Music. Oasis, The Annual Cultural Extravaganza Of Birla Institute Of Technology And Science, Pilani, Has Been A Vibrant Part Of India's Cultural Tapestry Since 1971. Managed Entirely By Students, It's A Dazzling Showcase Of Talent In Dance, Drama, Literature, Comedy, Fashion, And Music.Oasis, The Annual Cultural Extravaganza Of Birla Institute Of Technology And Science, Pilani, Has Been A Vibrant Part Of India's Cultural Tapestry Since 1971. Managed Entirely By Students, It's A Dazzling Showcase Of Talent In Dance, Drama, Literature, Comedy, Fashion, And Music.Oasis, The Annual Cultural Extravaganza Of Birla Institute Of Technology And Science, Pilani, Has Been A Vibrant Part Of India's Cultural Tapestry Since 1971. Managed Entirely By Students, It's A Dazzling Showcase Of Talent In Dance, Drama, Literature, Comedy, Fashion, And Music.Oasis, The Annual Cultural Extravaganza Of Birla Institute Of Technology And Science, Pilani, Has Been A Vibrant Part Of India's Cultural Tapestry Since 1971. Managed Entirely By Students, It's A Dazzling Showcase Of Talent In Dance, Drama, Literature, Comedy, Fashion, And Music.Oasis, The Annual Cultural Extravaganza Of Birla Institute Of Technology And Science, Pilani, Has Been A Vibrant Part Of India's Cultural Tapestry Since 1971. Managed Entirely By Students, It's A Dazzling Showcase Of Talent In Dance, Drama, Literature, Comedy, Fashion, And Music.Oasis, The Annual Cultural Extravaganza Of Birla Institute Of Technology And Science, Pilani, Has Been A Vibrant Part Of India's Cultural Tapestry Since 1971. Managed Entirely By Students, It's A Dazzling Showcase Of Talent In Dance, Drama, Literature, Comedy, Fashion, And Music.",
-  },
-  {
-    id: 2,
-    name: "Event Two",
-    about: "Description for Event Two. A competitive coding marathon.",
-  },
-  {
-    id: 3,
-    name: "Event Three",
-    about: "Description for Event Three. A robotics showcase.",
-  },
-  {
-    id: 4,
-    name: "Event Four",
-    about: "Description for Event Four. Battle of the bands.",
-  },
-  {
-    id: 5,
-    name: "Event Five",
-    about: "Description for Event Five. Fashion show.",
-  },
-  {
-    id: 6,
-    name: "Event Six",
-    about: "Description for Event Six. Drama competition.",
-  },
-  {
-    id: 7,
-    name: "Event Seven",
-    about: "Description for Event Seven. Debate tournament.",
-  },
-  {
-    id: 8,
-    name: "Event Eight",
-    about: "Description for Event Eight. Quiz competition.",
-  },
-];
+import axios from "axios";
+import redirectWithPost from "../../redirectWithPost";
 
 const Events = () => {
-  const { events, setEvents, selectedEvents, toggleEvent, setActiveEvent } =
-    useRegistrationStore();
+  const {
+    events,
+    selectedEvents,
+    toggleEvent,
+    setActiveEvent,
+    activeEvent,
+    userData,
+    accessToken,
+  } = useRegistrationStore();
+
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const [search, setSearch] = useState("");
-
-  useEffect(() => {
-    // Simulate API call
-    setEvents(DUMMY_EVENTS);
-  }, [setEvents]);
 
   const filteredEvents = events.filter((event) =>
     event.name.toLowerCase().includes(search.toLowerCase()),
   );
 
+  useEffect(() => {
+    if (search && inputRef.current) {
+      inputRef.current.focus();
+      inputRef.current.value = search;
+    }
+  }, [search]);
+
   const isSelected = (id: number) => selectedEvents.some((e) => e.id === id);
+
+  const register = () => {
+    const submissionData = {
+      access_token: accessToken,
+      email_id: userData?.email,
+      phone: userData?.phone,
+      name: userData?.name,
+      gender: userData?.gender,
+      college_id: userData?.college,
+      year: userData?.year,
+      city: userData?.city,
+      events: selectedEvents.map((e) => e.id),
+    }
+    console.log(submissionData);
+    axios.post("https://bits-apogee.org/2026/main/registrations/register/",
+      submissionData
+    ).then((res) => {
+      console.log(res.data);
+      redirectWithPost(
+        "https://bits-apogee.org/2026/main/registrations/",
+
+        {
+          token: res.data.tokens.access,
+        },
+      );
+    }).catch((err) => {
+      alert("Error in registration. Try Again. " + err.response.data.message);
+      console.log(err);
+    })
+  }
 
   return (
     <div className={styles.eventsContainer}>
-      <div className={styles.headingCont}>
-        {/* <img src="/svgs/registration/leftarr.svg" alt="left" /> */}
-        <h3 className={styles.heading}>EVENTS</h3>
-        {/* <img src="/svgs/registration/rightarr.svg" alt="right" /> */}
-      </div>
+      <div
+        className={`${styles.eventsSubContainer} ${activeEvent ? styles.hasActiveEvent : ""}`}
+      >
+        <div className={styles.headingCont}>
+          <h3 className={styles.heading}>EVENTS</h3>
+        </div>
 
-      <div className={styles.eventsSubContainer}>
         <div className={styles.eventsListCont}>
           <div className={styles.search}>
             <input
               type="text"
               placeholder="[SEARCH EVENTS]"
               value={search}
+              ref={inputRef}
               onChange={(e) => setSearch(e.target.value)}
             />
             <svg
@@ -94,6 +92,17 @@ const Events = () => {
                 fill="currentColor"
               />
             </svg>
+            <button
+              onMouseDown={(e) => {
+                e.preventDefault();
+                setSearch("");
+                inputRef.current?.focus();
+              }}
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </button>
           </div>
 
           <ul className={styles.eventsList}>
@@ -155,14 +164,38 @@ const Events = () => {
             )}
           </ul>
 
-          {/* <button
-            className={styles.confirmButton}
-            onClick={() => console.log("Submit", selectedEvents)}
-          >
-            CONFIRM SELECTION
-          </button> */}
-          <NavButton outerClass={styles.confirmButton} innerClass={styles.confirmButtonContent}>Confirm Selection</NavButton>
+          <NavButton onClick={register} outerClass={styles.confirmButton} innerClass={styles.confirmButtonContent}>Register</NavButton>
         </div>
+      </div>
+
+      <div
+        className={`${styles.mobileDetailsContainer} ${activeEvent ? styles.active : ""}`}
+      >
+        <h3 className={styles.mobileHeading}>EVENTS</h3>
+
+        {activeEvent && (
+          <div className={styles.detailsCard}>
+            <button
+              className={styles.mobileCloseButton}
+              onClick={() => {
+                setActiveEvent(null);
+                useRegistrationStore.getState().setStickyEvent(null);
+              }}
+            >
+              ✕
+            </button>
+            <div className={styles.eventNameHeader}>{activeEvent.name}</div>
+            <div className={styles.mobileScrollContent}>
+              {activeEvent.description}
+            </div>
+            <button
+              className={`${styles.mobileAddButton} ${isSelected(activeEvent.id) ? styles.selected : ""}`}
+              onClick={() => toggleEvent(activeEvent)}
+            >
+              {isSelected(activeEvent.id) ? "REMOVE" : "ADD"}
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
