@@ -14,7 +14,7 @@
 
   .error {
     position: absolute;
-    bottom: -15px;
+    bottom: -18px;
     left: 5px;
     color: red;
     font-size: 1rem;
@@ -89,9 +89,9 @@
 
       .input {
 
+        border: solid $cyber-yellow 1px;
         width: 100%;
         background: $dark-bg;
-        border: none;
         outline: none;
         color: $cyber-yellow;
         font-family: $font-blender;

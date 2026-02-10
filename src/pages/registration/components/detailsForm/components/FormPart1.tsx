@@ -60,9 +60,9 @@ export default function FormPart1({ formData, handleChange, errors }: FormPart1P
                     name="email"
                     placeholder="[Enter your e-mail address]"
                     value={formData.email}
-                    onChange={handleChange}
                     className={styles.input}
                     autoComplete="off"
+                    disabled
                 />
                 {errors.email && <p className={styles.error}>{errors.email}</p>}
             </div>

@@ -1,4 +1,4 @@
-import styles from "./ComingSoon.module.scss";
+import styles from "./comingSoon.module.scss";
 
 export default function ComingSoon() {
   return (

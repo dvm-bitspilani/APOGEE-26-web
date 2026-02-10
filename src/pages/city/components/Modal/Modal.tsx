@@ -1,6 +1,6 @@
 import { useCurrentSectionStore, useModalStore, useScrollLockStore } from "../../../../utils/store";
 import ComingSoon from "../../../comingSoon/ComingSoon";
-import ContactUs from "../../../contactUs/ContactUs";
+// import ContactUs from "../../../contactUs/ContactUs";
 // import ContactUs from "../../../contactUs/ContactUs";
 import styles from "./Modal.module.scss";
 
