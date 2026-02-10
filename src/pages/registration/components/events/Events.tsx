@@ -51,7 +51,7 @@ const Events = () => {
     ).then((res) => {
       console.log(res.data);
       redirectWithPost(
-        "https://bits-apogee.org/2026/main/registrations/google-reg/",
+        "https://bits-apogee.org/2026/main/registrations/",
 
         {
           token: res.data.tokens.access,
