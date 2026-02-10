@@ -28,8 +28,44 @@
     }
 
     &:hover {
-        .registerIcon {filter: brightness(2);}
-        .registerText {filter: brightness(1);}
+        .registerIcon {
+            filter: brightness(2);
+        }
+
+        .registerText {
+            filter: brightness(1);
+        }
+    }
+}
+
+.confirmButton {
+    right: 0;
+    bottom: 0;
+    position: fixed;
+    margin: 1.5rem;
+    z-index: 1000;
+
+    margin-top: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    transition: all 0.3s ease;
+    font-family: inherit;
+
+    .confirmButtonContent {
+        font-size: 1.5rem;
+        font-weight: 700;
+        font-size: 1.2rem;
+        color: #dddddd;
+        z-index: 1;
+        position: relative;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     @media (max-width: 750px) {

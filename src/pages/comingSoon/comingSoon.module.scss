@@ -4,10 +4,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 2; 
-  pointer-events: none; 
-  z-index: 2; 
-  pointer-events: none; 
+  z-index: 2;
+  pointer-events: none;
 }
 
 .box {
@@ -23,7 +21,6 @@
   overflow: hidden;
   position: relative;
 
-  animation: expandModal 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards;
   animation: expandModal 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards;
 
   // clip-path: polygon(
@@ -57,7 +54,6 @@
 }
 
 
-
 .title {
   font-size: clamp(1.8rem, 4vw, 3rem);
   letter-spacing: 0.2em;
@@ -82,7 +78,6 @@
 // .loader {
 //   display: flex;
 //   gap: 1rem;
-  
   
 //   span {
 //     width: 12px;

@@ -1,3 +1,6 @@
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { useRef } from "react";
 import { useCurrentSectionStore, useModalStore, useScrollLockStore } from "../../../../utils/store";
 import ComingSoon from "../../../comingSoon/ComingSoon";
 // import ContactUs from "../../../contactUs/ContactUs";
