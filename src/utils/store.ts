@@ -185,3 +185,17 @@ export const useRegistrationStore = create<RegistrationStore>((set) => ({
   accessToken: "",
   setAccessToken: (token) => set({ accessToken: token }),
 }));
+
+type SceneLoadedStore = {
+  loaded: boolean;
+  progress: number;
+  setLoaded: (loaded: boolean) => void;
+  setProgress: (progress: number) => void;
+};
+
+export const useSceneLoadedStore = create<SceneLoadedStore>((set) => ({
+  loaded: false,
+  progress: 0,
+  setLoaded: (loaded) => set({ loaded }),
+  setProgress: (progress) => set({ progress }),
+}));

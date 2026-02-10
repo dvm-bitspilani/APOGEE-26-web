@@ -9,16 +9,31 @@ import ScrollReminder from "./components/ScrollReminder/ScrollReminder";
 import { Environment } from "@react-three/drei";
 import { getProject } from "@theatre/core";
 import { SheetProvider } from "@theatre/r3f";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 // import debugFunctions from "../../utils/debug";
+import * as THREE from "three";
+import { useModalStore, useSceneLoadedStore } from "../../utils/store";
 import NavBar from "../components/NavBar/NavBar";
 import RegisterButton from "../components/RegisterButton/RegisterButton";
-import state from "./state6.json";
+import Preloader from "../preloader/Preloader";
 import Modal from "./components/Modal/Modal";
-import { useModalStore } from "../../utils/store";
+import state from "./state6.json";
+
+// Set up loading progress tracking at module level (before useGLTF.preload() calls complete)
+THREE.DefaultLoadingManager.onProgress = (_url, loaded, total) => {
+  const progress = (loaded / total) * 100;
+  console.log(`[Scene Loading] ${progress.toFixed(1)}% (${loaded}/${total})`);
+  useSceneLoadedStore.getState().setProgress(progress);
+};
+
+THREE.DefaultLoadingManager.onLoad = () => {
+  console.log("[Scene Loading] All assets loaded!");
+  useSceneLoadedStore.getState().setProgress(100);
+  useSceneLoadedStore.getState().setLoaded(true);
+};
+
 // import { EffectComposer, Noise } from "@react-three/postprocessing";
 // import { BlendFunction } from "postprocessing";
-// import * as THREE from "three";
 export const project = getProject("City Project", { state });
 export const sheet = project.sheet("Cyber City");
 // if (import.meta.env.DEV) {
@@ -33,6 +48,8 @@ export const sheet = project.sheet("Cyber City");
 // Theatre documentation often suggests just using it.
 
 export default function City() {
+  const [showPreloader, setShowPreloader] = useState(true);
+
   useEffect(() => {
     project.ready.then(() => {
       sheet.sequence.play({ iterationCount: Infinity });
@@ -49,6 +66,20 @@ export default function City() {
         description="Explore the city of APOGEE 2026."
         url="https://www.bits-apogee.org/city"
       />
+      {showPreloader && (
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100vw",
+            height: "100vh",
+            zIndex: 9999,
+          }}
+        >
+          <Preloader onLaunch={() => setShowPreloader(false)} />
+        </div>
+      )}
       {
         <div className={styles.city}>
           <Canvas

@@ -2,12 +2,12 @@ import { ScrollControls } from "@react-three/drei";
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { useCityStore, usePivotStore } from "../../../../utils/store";
-import ScrollSync from "../ScrollSync/ScrollSync";
 import Constellation from "../Constellation";
 import Infernus from "../models/Infernus";
-import TheatreCameraFinal from "./TheatreCameraFinal";
-import SceneLights from "./SceneLights";
+import ScrollSync from "../ScrollSync/ScrollSync";
 import SceneDevOrProd from "./SceneDevorProd";
+import SceneLights from "./SceneLights";
+import TheatreCameraFinal from "./TheatreCameraFinal";
 
 export default function CityScene({}: any) {
   const cityRef = useRef<THREE.Group>(null!);
@@ -28,7 +28,7 @@ export default function CityScene({}: any) {
   const color = "#3e93be";
   return (
     <>
-      <SceneDevOrProd/>
+      <SceneDevOrProd />
       <SceneLights />
       <fogExp2 attach="fog" args={[color, 0.004]} />
       {/* <fog attach="fog" args={[color, 50, 2000]} />   */}

@@ -1,26 +1,35 @@
 import styles from "./Preloader.module.scss";
 // import figlet from "figlet";
-import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import SplitText from "gsap/src/SplitText";
+import { useEffect, useRef, useState } from "react";
+import { useSceneLoadedStore } from "../../utils/store";
 
-export default function Preloader() {
+interface PreloaderProps {
+  onLaunch?: () => void;
+}
+
+export default function Preloader({ onLaunch }: PreloaderProps) {
   const textRef = useRef<HTMLParagraphElement>(null);
   const textRef2 = useRef<HTMLDivElement[]>([]);
   const launchRef = useRef<HTMLDivElement>(null);
+  const [animDone, setAnimDone] = useState(false);
+  const sceneLoaded = useSceneLoadedStore((s) => s.loaded);
+  const sceneProgress = useSceneLoadedStore((s) => s.progress);
   gsap.registerPlugin(SplitText);
 
-  //   const asciiText = `
-  //         █████████   ███████████     ███████      █████████  ██████████ ██████████
-  //        ███▒▒▒▒▒███ ▒▒███▒▒▒▒▒███  ███▒▒▒▒▒███   ███▒▒▒▒▒███▒▒███▒▒▒▒▒█▒▒███▒▒▒▒▒█
-  //       ▒███    ▒███  ▒███    ▒███ ███     ▒▒███ ███     ▒▒▒  ▒███  █ ▒  ▒███  █ ▒
-  //       ▒███████████  ▒██████████ ▒███      ▒███▒███          ▒██████    ▒██████
-  //       ▒███▒▒▒▒▒███  ▒███▒▒▒▒▒▒  ▒███      ▒███▒███    █████ ▒███▒▒█    ▒███▒▒█
-  //       ▒███    ▒███  ▒███        ▒▒███     ███ ▒▒███  ▒▒███  ▒███ ▒   █ ▒███ ▒   █
-  //       █████   █████ █████        ▒▒▒███████▒   ▒▒█████████  ██████████ ██████████
-  //       ▒▒▒▒▒   ▒▒▒▒▒ ▒▒▒▒▒           ▒▒▒▒▒▒▒      ▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒▒▒▒ ▒▒▒▒▒▒▒▒▒▒
+  // Log progress from the store (consumer side)
+  useEffect(() => {
+    console.log(`[Preloader] Scene progress: ${sceneProgress.toFixed(1)}%`);
+  }, [sceneProgress]);
 
-  // `;
+  // Show Launch button only when BOTH text animation is done AND scene is loaded
+  useEffect(() => {
+    if (animDone && sceneLoaded && launchRef.current) {
+      launchRef.current.style.opacity = "1";
+      launchRef.current.style.pointerEvents = "auto";
+    }
+  }, [animDone, sceneLoaded]);
 
   useEffect(() => {
     const tl = gsap.timeline();
@@ -33,15 +42,6 @@ export default function Preloader() {
       charsClass: "char",
       reduceWhiteSpace: false,
     });
-
-    // // grab the last span *before* SplitText mutates things
-    // const lastSpan = textRef.current.querySelector("#cursor");
-    // console.log(lastSpan);
-
-    // // only animate chars NOT coming from the last span
-    // const charsToAnimate = split.chars.filter((char) =>
-    //   !lastSpan || !lastSpan.contains(char)
-    // );
 
     tl.from(split.chars, {
       display: "none",
@@ -60,21 +60,18 @@ export default function Preloader() {
     console.log(lastSpan);
 
     // only animate chars NOT coming from the last span
-    const charsToAnimate = split2.chars.filter((char) =>
-      !lastSpan || !lastSpan.contains(char)
+    const charsToAnimate = split2.chars.filter(
+      (char) => !lastSpan || !lastSpan.contains(char),
     );
-    
 
     tl2.from(charsToAnimate, {
       display: "none",
       duration: 1,
       stagger: 0.03,
       ease: "none",
-      onComplete: () => {        
-        if (launchRef.current) {
-          launchRef.current.style.opacity = "1";
-          launchRef.current.style.pointerEvents = "auto";
-        }}
+      onComplete: () => {
+        setAnimDone(true);
+      },
     });
 
     return () => {
@@ -84,27 +81,12 @@ export default function Preloader() {
     };
   }, []);
 
-  // useEffect(() => {
-  //   figlet.defaults({
-  //     fontPath: "/font",
-  //   });
-  //   figlet.text("b", { font: "3D-ASCII" }, (err, data) => {
-  //     if (err) {
-  //       console.error(err);
-  //       return;
-  //     }
-  //     setText(data ?? "");
-  //   });
-  // }, []);
-
   return (
     <div className={styles.container}>
       <div className={styles.subContainer}>
         <div className={styles.box}>
           <div className={styles.navbar}>{`>TERMINAL`}</div>
-          <div className={styles.txtBox}
-           ref={textRef}
-           >
+          <div className={styles.txtBox} ref={textRef}>
             <p className={styles.txtWhite}>A-SQUARE&nbsp;CITY&nbsp;--RUN</p>
             <p
               style={{
@@ -113,15 +95,47 @@ export default function Preloader() {
               className={styles.figlet}
             >
               <br />
-<span className={styles.filgetChild1}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;█████████   ███████████     ███████      █████████  ██████████ ██████████</span><br />
-<span className={styles.filgetChild1}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;███▒▒▒▒▒███ ▒▒███▒▒▒▒▒███  ███▒▒▒▒▒███   ███▒▒▒▒▒███▒▒███▒▒▒▒▒█▒▒███▒▒▒▒▒█</span><br />
-<span className={styles.filgetChild2}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▒███    ▒███  ▒███    ▒███ ███     ▒▒███ ███     ▒▒▒  ▒███  █ ▒  ▒███  █ ▒ </span><br />
-<span className={styles.filgetChild3}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▒███████████  ▒██████████ ▒███      ▒███▒███          ▒██████    ▒██████   </span><br />
-<span className={styles.filgetChild3}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▒███▒▒▒▒▒███  ▒███▒▒▒▒▒▒  ▒███      ▒███▒███    █████ ▒███▒▒█    ▒███▒▒█   </span><br />
-<span className={styles.filgetChild4}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▒███    ▒███  ▒███        ▒▒███     ███ ▒▒███  ▒▒███  ▒███ ▒   █ ▒███ ▒   █</span><br />
-<span className={styles.filgetChild5}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;█████   █████ █████        ▒▒▒███████▒   ▒▒█████████  ██████████ ██████████</span><br />
-<span className={styles.filgetChild5}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▒▒▒▒▒   ▒▒▒▒▒ ▒▒▒▒▒           ▒▒▒▒▒▒▒      ▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒▒▒▒ ▒▒▒▒▒▒▒▒▒▒</span><br />
-<br />
+              <span className={styles.filgetChild1}>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;█████████
+                ███████████ ███████ █████████ ██████████ ██████████
+              </span>
+              <br />
+              <span className={styles.filgetChild1}>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;███▒▒▒▒▒███
+                ▒▒███▒▒▒▒▒███ ███▒▒▒▒▒███ ███▒▒▒▒▒███▒▒███▒▒▒▒▒█▒▒███▒▒▒▒▒█
+              </span>
+              <br />
+              <span className={styles.filgetChild2}>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▒███ ▒███ ▒███ ▒███ ███
+                ▒▒███ ███ ▒▒▒ ▒███ █ ▒ ▒███ █ ▒{" "}
+              </span>
+              <br />
+              <span className={styles.filgetChild3}>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▒███████████ ▒██████████
+                ▒███ ▒███▒███ ▒██████ ▒██████{" "}
+              </span>
+              <br />
+              <span className={styles.filgetChild3}>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▒███▒▒▒▒▒███ ▒███▒▒▒▒▒▒ ▒███
+                ▒███▒███ █████ ▒███▒▒█ ▒███▒▒█{" "}
+              </span>
+              <br />
+              <span className={styles.filgetChild4}>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▒███ ▒███ ▒███ ▒▒███ ███
+                ▒▒███ ▒▒███ ▒███ ▒ █ ▒███ ▒ █
+              </span>
+              <br />
+              <span className={styles.filgetChild5}>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;█████ █████ █████
+                ▒▒▒███████▒ ▒▒█████████ ██████████ ██████████
+              </span>
+              <br />
+              <span className={styles.filgetChild5}>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▒▒▒▒▒ ▒▒▒▒▒ ▒▒▒▒▒ ▒▒▒▒▒▒▒
+                ▒▒▒▒▒▒▒▒▒ ▒▒▒▒▒▒▒▒▒▒ ▒▒▒▒▒▒▒▒▒▒
+              </span>
+              <br />
+              <br />
               <br />
             </p>
             <p className={styles.txtRed}>
@@ -145,7 +159,11 @@ export default function Preloader() {
             >{`>> LOADING RESOURCES...`}</p>
             {/* <span className={styles.cursor} id="cursor">█</span> */}
           </div>
-          <div className={styles.launchBtn} ref={launchRef}>{`>>LAUNCH<<`}</div>
+          <div
+            className={styles.launchBtn}
+            ref={launchRef}
+            onClick={onLaunch}
+          >{`>>LAUNCH<<`}</div>
         </div>
         <div className={styles.box}>
           <div className={styles.subBox}>
@@ -179,7 +197,7 @@ export default function Preloader() {
               <span className={styles.txtWhite}>{`>>`}</span>
               <span className={styles.txtBlue}>[99.00%]</span>
               <span className={styles.txtWhite}>Projection Mapping</span>
-               {/* <span className={styles.cursor} id="cursor">█</span> */}
+              {/* <span className={styles.cursor} id="cursor">█</span> */}
             </div>
           </div>
           <div className={styles.subBox}>
