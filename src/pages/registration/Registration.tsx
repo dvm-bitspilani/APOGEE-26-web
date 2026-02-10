@@ -76,7 +76,7 @@ function Registration() {
             // window.location.href = `https://bits-oasis.org/2025/main/registrations?token=${res.data.tokens.access}`;
 
             redirectWithPost(
-              "https://bits-apogee.org/2026/main/registrations/google-reg/",
+              "https://bits-apogee.org/2026/main/registrations/",
 
               {
                 token: res.data.tokens.access,

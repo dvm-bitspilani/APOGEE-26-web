@@ -48,6 +48,11 @@
 }
 
 @font-face {
+    font-family: 'JetBrains Mono Bold';
+    src: url('/font/JetBrainsMono-Bold.ttf') format('opentype');
+}
+
+@font-face {
     font-family: 'Doctor Glitch';
     src: url('/font/Doctor Glitch.otf') format('opentype');
 }
@@ -60,6 +65,7 @@ $font-cyberpunks: 'Cyberpunks';
 $font-blender: 'Blender Pro';
 $font-glitch: 'Doctor Glitch';
 $font-jetBrains: 'JetBrains Mono';
+$font-jetBrainsBold: 'JetBrains Mono Bold';
 
 // Font Weights
 $weight-blender-thin: 100;
