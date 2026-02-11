@@ -5,12 +5,14 @@ import SplitText from "gsap/src/SplitText";
 import { useEffect, useRef, useState } from "react";
 import { useSceneLoadedStore } from "../../utils/store";
 import assetList from "../../utils/assetList";
+import figlet from "figlet";
 
 interface PreloaderProps {
   onLaunch?: () => void;
 }
 
 export default function Preloader({ onLaunch }: PreloaderProps) {
+  const [text, setText] = useState("");
   const textRef = useRef<HTMLParagraphElement>(null);
   const textRef2 = useRef<HTMLDivElement[]>([]);
   const launchRef = useRef<HTMLDivElement>(null);
@@ -24,14 +26,18 @@ export default function Preloader({ onLaunch }: PreloaderProps) {
   gsap.registerPlugin(SplitText);
   const splitTextRef = useRef<SplitText | null>(null);
   const timelineRef = useRef<gsap.core.Timeline | null>(null);
-  const [width, setwidth] = useState(window.innerWidth < 768  && window.innerHeight / window.innerWidth > 1 ? true : false);
+  const [width, setwidth] = useState(
+    window.innerWidth < 768 && window.innerHeight / window.innerWidth > 1
+      ? true
+      : false,
+  );
 
   const assets = assetList["landing"];
 
   const totalAssets = assets.length;
 
   useEffect(() => {
-    if (!assets) return; 
+    if (!assets) return;
 
     let loadedAssets = 0;
 
@@ -47,22 +53,21 @@ export default function Preloader({ onLaunch }: PreloaderProps) {
       });
     };
 
-    Promise.allSettled([
-      ...(assets.map(preloadImage) || []),
-    ])
-      .then(() => {
-        setAssetloaded(true);
-      })
-      // .catch((err) => {
-      //   console.error("Error preloading assets:", err);
-      //   onEnter();
-      // });
-
+    Promise.allSettled([...(assets.map(preloadImage) || [])]).then(() => {
+      setAssetloaded(true);
+    });
+    // .catch((err) => {
+    //   console.error("Error preloading assets:", err);
+    //   onEnter();
+    // });
   }, [assets, totalAssets]);
 
   useEffect(() => {
     addEventListener("resize", () => {
-      if (window.innerWidth < 768  && window.innerHeight / window.innerWidth > 1) {
+      if (
+        window.innerWidth < 768 &&
+        window.innerHeight / window.innerWidth > 1
+      ) {
         setwidth(true);
       } else {
         setwidth(false);
@@ -79,7 +84,13 @@ export default function Preloader({ onLaunch }: PreloaderProps) {
   }, [sceneProgress]);
 
   useEffect(() => {
-    if (animDone && sceneLoaded && launchRef.current && animDone2 && assetloaded) {
+    if (
+      animDone &&
+      sceneLoaded &&
+      launchRef.current &&
+      animDone2 &&
+      assetloaded
+    ) {
       launchRef.current.style.opacity = "1";
       launchRef.current.style.pointerEvents = "auto";
     }
@@ -92,12 +103,13 @@ export default function Preloader({ onLaunch }: PreloaderProps) {
       type: "chars",
       charsClass: "char",
       reduceWhiteSpace: false,
+      tag: "pre",
+      
     });
     splitTextRef.current = split;
     const tl = gsap.timeline();
     timelineRef.current = tl;
 
-    // Initially hide all characters
     gsap.set(split.chars, {
       display: "none",
     });
@@ -138,10 +150,10 @@ export default function Preloader({ onLaunch }: PreloaderProps) {
     const totalChars = chars.length;
     const targetIndex = Math.floor((progress / 100) * totalChars);
 
-    if (targetIndex <= Math.floor(prevIndex)  && targetIndex !== totalChars) {
-      setPrevIndex((prev)=> prev + 0.000001);
+    if (targetIndex <= Math.floor(prevIndex) && targetIndex !== totalChars) {
+      setPrevIndex((prev) => prev + 0.000001);
       return;
-    };
+    }
 
     for (let i = Math.floor(prevIndex); i < targetIndex; i++) {
       const char = chars[i];
@@ -174,14 +186,43 @@ export default function Preloader({ onLaunch }: PreloaderProps) {
     setPrevIndex(targetIndex);
   }, [prevIndex]);
 
+  useEffect(() => {
+    figlet.defaults({
+      fontPath: "/font",
+    });
+    figlet.text("b", { font: "3D-ASCII" }, (err, data) => {
+      if (err) {
+        console.error(err);
+        return;
+      }
+      setText(data ?? "");
+    });
+  }, []);
+
   return (
     <div className={styles.container}>
       <div className={styles.subContainer}>
         <div className={styles.box}>
           <div className={styles.navbar}>{`>TERMINAL`}</div>
+              <pre
+              style={{
+                whiteSpace: "pre",
+              }}
+              className={styles.figlet}
+            >
+              {text}
+            </pre>
           <div className={styles.txtBox} ref={textRef}>
             <p className={styles.txtWhite}>A-SQUARE&nbsp;CITY&nbsp;--RUN</p>
-            <p
+            {/* <pre
+              style={{
+                whiteSpace: "pre",
+              }}
+              className={styles.figlet}
+            >
+              {text}
+            </pre> */}
+            {/* <p
               style={{
                 whiteSpace: "pre",
               }}
@@ -197,26 +238,32 @@ export default function Preloader({ onLaunch }: PreloaderProps) {
 <span className={styles.filgetChild5}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;█████   █████ █████        ▒▒▒███████▒   ▒▒█████████  ██████████ ██████████</span><br />
 <span className={styles.filgetChild5}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▒▒▒▒▒   ▒▒▒▒▒ ▒▒▒▒▒           ▒▒▒▒▒▒▒      ▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒▒▒▒ ▒▒▒▒▒▒▒▒▒▒</span><br />
               <br />
-            </p>
-           {!width ? <><p className={styles.txtRed}>
-              &nbsp;&nbsp;&nbsp;AN INTERACTIVE AUDIOVISUAL EXPERIENCE BY DVM
-            </p>
-            <p className={styles.redDesign}>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚
-            </p> </>: <>            <p className={styles.txtRed}>
-              &nbsp;AN INTERACTIVE AUDIOVISUAL EXPERIENCE BY DVM
-            </p>
-            <p className={styles.redDesign}>
-              &nbsp;&nbsp;&nbsp;▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚
-            </p></>}
+            </p> */}
+            {!width ? (
+              <>
+                <p className={styles.txtRed}>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AN INTERACTIVE AUDIOVISUAL EXPERIENCE BY DVM
+                </p>
+                <p className={styles.redDesign}>
+                  &nbsp;&nbsp;▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚
+                </p>
+              </>
+            ) : (
+              <>
+                <p className={styles.txtRed}>
+                  &nbsp;AN INTERACTIVE AUDIOVISUAL EXPERIENCE BY DVM
+                </p>
+                <p className={styles.redDesign}>
+                  &nbsp;&nbsp;&nbsp;▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚
+                </p>
+              </>
+            )}
             <p
               className={styles.txtGreen}
             >{`>> INITIATING BOOT SEQUENCE...`}</p>
             <p className={styles.txtWhite}>BUILD VERSION: 10.04.26</p>
             <p className={styles.txtWhite}>SYSTEM MANUFACTURER: BITS PILANI</p>
-            <p className={styles.txtWhite}>
-              SYSTEM BOOT TIME: {`<SOON>`}
-            </p>
+            <p className={styles.txtWhite}>SYSTEM BOOT TIME: {`<SOON>`}</p>
             <p className={styles.txtWhite}>OS NAME: THREE.JS</p>
             <p className={styles.txtWhite}>FEST VERSION: 0.44.0</p>
             <p

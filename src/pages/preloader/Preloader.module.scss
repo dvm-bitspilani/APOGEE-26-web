@@ -105,17 +105,17 @@
       .figlet {
         font-family: monospace;
         font-size: 0.8vw;
-        // background: linear-gradient(
-        //   0deg,
-        //   #fe435f,
-        //   #fd308e,
-        //   #e531b5,
-        //   #a936db,
-        //   #653bf7
-        // );
-        // -webkit-background-clip: text;
-        // background-clip: text;
-        // color: transparent;
+        background: linear-gradient(
+          0deg,
+          #fe435f,
+          #fd308e,
+          #e531b5,
+          #a936db,
+          #653bf7
+        );
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
         // text-align: center;
         .filgetChild1 {
           color: #653bf7;
