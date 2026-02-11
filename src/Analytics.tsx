@@ -9,7 +9,7 @@ export default function Analytics() {
 
   // init once
   useEffect(() => {
-    if (window.location.hostname.includes("www.bits-apogee.org")) {
+    if (window.location.hostname.includes("bits-apogee.org")) {
       ReactGA.initialize(TRACKING_ID);
     }
   }, []);
