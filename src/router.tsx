@@ -28,11 +28,11 @@ const pages: page[] = [
   //   url: '/city',
   //   component: City,
   // },
-  {
-    url: "/contact",
+  // {
+  //   url: "/contact",
 
-    component: ContactUs,
-  },
+  //   component: ContactUs,
+  // },
   {
     url: "/loader",
 
