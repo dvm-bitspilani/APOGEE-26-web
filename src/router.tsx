@@ -4,7 +4,7 @@ import Registration from "./pages/registration/Registration";
 // import Instructions from "./pages/registration/components/Instructions";
 // import Instructions from "./pages/registration/components/detailsForm/DetailsForm"
 import City from "./pages/city/City";
-import ContactUs from "./pages/contactUs/ContactUs";
+// import ContactUs from "./pages/contactUs/ContactUs";
 import Preloader from "./pages/preloader/Preloader";
 type page = {
   url: string;
