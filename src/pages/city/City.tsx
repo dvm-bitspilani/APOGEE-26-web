@@ -81,6 +81,10 @@ export default function City() {
       {
         <div className={styles.city}>
           <Canvas
+           gl={{ antialias: true }}
+  onCreated={({ gl }) => {
+    gl.toneMapping = THREE.NoToneMapping
+  }}
             shadows={false}
             camera={{ manual: true }} // {{ position: [0, 2, -2], near: 0.1, far: 1000000, fov: 50 }}
             style={{ width: "100%", height: "100%" }}
