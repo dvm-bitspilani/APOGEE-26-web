@@ -1,51 +1,51 @@
 import helmet from "../../../../../assets/3d/registration/helmet.glb"
-// import helmetNeck from "../../../../../assets/3d/registration/helmetNeck.glb"
+import helmetNeck from "../../../../../assets/3d/registration/necK.glb"
 import { useGLTF } from "@react-three/drei"
 import { Canvas, useFrame, useThree } from "@react-three/fiber"
 // import { useControls } from "leva"
 import { useRef } from "react"
 import * as THREE from "three"
-// import { Center } from "@react-three/drei"
+import { Center } from "@react-three/drei"
 
-// function HelmetNeck() {
-//     const { scene } = useGLTF(helmetNeck);
-//     const colour = useControls({
-//         color1: "#ffffffff",
-//         color2: "#6bffe5",
-//         color3: "#6bffe5",
-//         color4: "#f9ff00",
-//         intensity1: { value: 2, min: 0, max: 10, step: 0.1 },
-//         intensity2: { value: 2, min: 0, max: 10, step: 0.1 },
-//         intensity3: { value: 2, min: 0, max: 10, step: 0.1 },
-//         intensity4: { value: 2, min: 0, max: 10, step: 0.1 },
-//         // intensity: { value: 2, min: 0, max: 10, step: 0.1 },
-//     })
+function HelmetNeck() {
+    const { scene } = useGLTF(helmetNeck);
+    const colour = {
+        color1: "#ffffffff",
+        color2: "#6bffe5",
+        color3: "#6bffe5",
+        color4: "#f9ff00",
+        intensity1: 2,
+        intensity2: 2,
+        intensity3: 2,
+        intensity4: 2,
+        // intensity: { value: 2, min: 0, max: 10, step: 0.1 },
+    }
 
 
-//     return (
-//         <group scale={0.06} position={[0, -1.2, 0]}>
-//             <Center>
-//                 <primitive object={scene} />
-//             </Center>
-//             <ambientLight intensity={colour.intensity1} color={colour.color1} />
-//             <directionalLight
-//                 position={[40, 40, 40]}
-//                 intensity={colour.intensity2}
-//                 color={colour.color2}
-//             />
-//             <directionalLight
-//                 position={[-40, 40, 40]}
-//                 intensity={colour.intensity3}
-//                 color={colour.color3}
-//             />
-//             <directionalLight
-//                 position={[10, 10, -10]}
-//                 intensity={colour.intensity4}
-//                 color={colour.color4}
-//             />
-//         </group>
-//     )
-// }
+    return (
+        <group scale={3.5} rotation={[-Math.PI / 2, 0, 0]} position={[0, -1.4, 0]}>
+            <Center>
+                <primitive object={scene} />
+            </Center>
+            <ambientLight intensity={colour.intensity1} color={colour.color1} />
+            <directionalLight
+                position={[40, 40, 40]}
+                intensity={colour.intensity2}
+                color={colour.color2}
+            />
+            <directionalLight
+                position={[-40, 40, 40]}
+                intensity={colour.intensity3}
+                color={colour.color3}
+            />
+            <directionalLight
+                position={[10, 10, -10]}
+                intensity={colour.intensity4}
+                color={colour.color4}
+            />
+        </group>
+    )
+}
 
 function HelmetModel() {
     const followRef = useRef<THREE.Group>(null!)
@@ -138,7 +138,7 @@ export default function Helmet() {
             }}
         >
             <HelmetModel />
-            {/* <HelmetNeck /> */}
+            <HelmetNeck />
         </Canvas>
     )
 }
