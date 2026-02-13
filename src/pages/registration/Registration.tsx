@@ -17,6 +17,7 @@ import helmetModel from "../../assets/3d/registration/helmet.glb";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 // @ts-ignore
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader";
+import ReactHelmet from "../components/ReactHelmet";
 
 function Registration() {
   const navigate = useNavigate();
@@ -150,7 +151,7 @@ function Registration() {
         .post(
           "https://bits-apogee.org/2026/main/registrations/google-reg/",
           {
-          access_token: response.access_token,
+            access_token: response.access_token,
           },
         )
 
@@ -210,80 +211,87 @@ function Registration() {
   };
 
   return (
-    <div className={styles.container}>
-      {loading && <RegPreLoader loading={true} progress={progress} />}
-      <button className={styles.backButton} onClick={handleBack}>
-        <img src="/svg/registrations/back-button.svg" alt="Back" />
-      </button>
+    <>
+      <ReactHelmet
+        title="APOGEE 2026 | Registration"
+        description="Register for APOGEE 2026."
+        url="https://www.bits-apogee.org/registration"
+      />
+      <div className={styles.container}>
+        {loading && <RegPreLoader loading={true} progress={progress} />}
+        <button className={styles.backButton} onClick={handleBack}>
+          <img src="/svg/registrations/back-button.svg" alt="Back" />
+        </button>
 
-      <div className={styles.leftPanel}>
-        <div className={styles.bannerText}>
-          <GlitchText />
-        </div>
-        <div className={styles.robotFace}>
-          <Helmet />
-        </div>
-
-        {registrationStep === "events" && displayEvent && (
-          <div className={styles.detailsPanel}>
-            {/* Header Section: Fixed at top */}
-            <div className={styles.detailsHeader}>
-              <h2 className={styles.eventName}>[{displayEvent.name}]</h2>
-              <button
-                onClick={() => {
-                  useRegistrationStore.getState().setStickyEvent(null);
-                  useRegistrationStore.getState().setActiveEvent(null);
-                }}
-                className={styles.closeButton}
-              >
-                ✕
-              </button>
-            </div>
-
-            {/* Scrollable Content Section */}
-            <div className={styles.scrollContainer}>
-              <div className={styles.detailsContent}>
-                <p className={styles.eventDesc}>{displayEvent.description}</p>
-              </div>
-              {/* Fade Overlay */}
-              <div className={styles.fadeOverlay}></div>
-            </div>
-
-            {stickyEvent && (
-              <button
-                onClick={() => toggleEvent(displayEvent)}
-                className={`${styles.actionButton} ${isSelected ? styles.selected : ""}`}
-              >
-                {isSelected ? "REMOVE" : "ADD"}
-              </button>
-            )}
+        <div className={styles.leftPanel}>
+          <div className={styles.bannerText}>
+            <GlitchText />
           </div>
-        )}
-      </div>
+          <div className={styles.robotFace}>
+            <Helmet />
+          </div>
 
-      <div className={styles.rightPanel}>
-        <img
-          src="/img/registrations/regBackground.png"
-          alt="Background"
-          className={styles.backgroundImage}
-        />
-        <div className={styles.bgContainerMobile}>
-          <img
-            className={styles.bgPanelImage}
-            src="/img/registrations/instructions-panel-bg-mobile.png"
-          />
-          <img
-            className={styles.bgPanelFrame}
-            src="/img/registrations/instructions-panel-frame-mobile.png"
-          />
+          {registrationStep === "events" && displayEvent && (
+            <div className={styles.detailsPanel}>
+              {/* Header Section: Fixed at top */}
+              <div className={styles.detailsHeader}>
+                <h2 className={styles.eventName}>[{displayEvent.name}]</h2>
+                <button
+                  onClick={() => {
+                    useRegistrationStore.getState().setStickyEvent(null);
+                    useRegistrationStore.getState().setActiveEvent(null);
+                  }}
+                  className={styles.closeButton}
+                >
+                  ✕
+                </button>
+              </div>
+
+              {/* Scrollable Content Section */}
+              <div className={styles.scrollContainer}>
+                <div className={styles.detailsContent}>
+                  <p className={styles.eventDesc}>{displayEvent.description}</p>
+                </div>
+                {/* Fade Overlay */}
+                <div className={styles.fadeOverlay}></div>
+              </div>
+
+              {stickyEvent && (
+                <button
+                  onClick={() => toggleEvent(displayEvent)}
+                  className={`${styles.actionButton} ${isSelected ? styles.selected : ""}`}
+                >
+                  {isSelected ? "REMOVE" : "ADD"}
+                </button>
+              )}
+            </div>
+          )}
         </div>
-        {registrationStep === "instructions" && (
-          <Instructions googleLogin={googleLogin} />
-        )}
-        {registrationStep === "details" && <DetailsForm mail={userEmail} />}
-        {registrationStep === "events" && <Events />}
+
+        <div className={styles.rightPanel}>
+          <img
+            src="/img/registrations/regBackground.png"
+            alt="Background"
+            className={styles.backgroundImage}
+          />
+          <div className={styles.bgContainerMobile}>
+            <img
+              className={styles.bgPanelImage}
+              src="/img/registrations/instructions-panel-bg-mobile.png"
+            />
+            <img
+              className={styles.bgPanelFrame}
+              src="/img/registrations/instructions-panel-frame-mobile.png"
+            />
+          </div>
+          {registrationStep === "instructions" && (
+            <Instructions googleLogin={googleLogin} />
+          )}
+          {registrationStep === "details" && <DetailsForm mail={userEmail} />}
+          {registrationStep === "events" && <Events />}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
