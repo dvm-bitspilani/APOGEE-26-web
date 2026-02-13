@@ -5,7 +5,7 @@ import SplitText from "gsap/src/SplitText";
 import { useEffect, useRef, useState } from "react";
 import { useSceneLoadedStore } from "../../utils/store";
 import assetList from "../../utils/assetList";
-// import SVG from "./Svg";
+import SVG from "./SVG";
 
 interface PreloaderProps {
   onLaunch?: () => void;
@@ -26,7 +26,7 @@ export default function Preloader({ onLaunch }: PreloaderProps) {
   const sceneProgress = useSceneLoadedStore((s) => s.progress);
   const splitTextRef = useRef<SplitText | null>(null);
   const timelineRef = useRef<gsap.core.Timeline | null>(null);
-  // const svgRef = useRef<HTMLDivElement>(null);
+  const svgRef = useRef<HTMLDivElement>(null);
   const [width, setwidth] = useState(
     window.innerWidth < 768 && window.innerHeight / window.innerWidth > 1
       ? true
@@ -105,13 +105,16 @@ export default function Preloader({ onLaunch }: PreloaderProps) {
   useEffect(() => {
     if (!textRef.current) return;
 
-    const split = new SplitText(textRef.current, {
+    const childrenToSplit = Array.from(textRef.current.children).filter(
+      (child) => child !== svgRef.current,
+    );
+    const split = new SplitText(childrenToSplit, {
       type: "chars",
       charsClass: "char",
       reduceWhiteSpace: false,
     });
     splitTextRef.current = split;
-    console.log(split.chars);
+    // console.log(split.chars);
     const tl = gsap.timeline();
     timelineRef.current = tl;
 
@@ -134,7 +137,14 @@ export default function Preloader({ onLaunch }: PreloaderProps) {
     tl2.from(split2.chars, {
       display: "none",
       duration: 1,
-      stagger: 0.008,
+      stagger: {
+        each: 0.008,
+        onStart: function () {
+          textRef2.current.forEach((el) => {
+            if (el) el.scrollTop = el.scrollHeight;
+          });
+        },
+      },
       ease: "none",
       onComplete: () => {
         setAnimDone(true);
@@ -161,14 +171,14 @@ export default function Preloader({ onLaunch }: PreloaderProps) {
     }
 
     for (let i = Math.floor(prevIndex); i < targetIndex; i++) {
-      // if (i == 189) {
-      //   timelineRef.current?.to(svgRef.current, {
-      //     clipPath: "inset(0% 0% 0% 0%)",
-      //     WebkitClipPath: "inset(0% 0% 0% 0%)",
-      //     duration: 0.5,
-      //     ease: "none",
-      //   });
-      // }
+      if (i == 189) {
+        timelineRef.current?.to(svgRef.current, {
+          clipPath: "inset(0% 0% 0% 0%)",
+          WebkitClipPath: "inset(0% 0% 0% 0%)",
+          duration: 0.5,
+          ease: "none",
+        });
+      }
 
       const char = chars[i];
       if (!char) continue;
@@ -178,6 +188,9 @@ export default function Preloader({ onLaunch }: PreloaderProps) {
         duration: 0.008,
         ease: "none",
         onStart() {
+          if (textRef.current) {
+            textRef.current.scrollTop = textRef.current.scrollHeight;
+          }
           // cursorEl.style.left = target.getBoundingClientRect().right + "px";
           const nextChar = chars[i];
           if (nextChar) {
@@ -217,7 +230,11 @@ export default function Preloader({ onLaunch }: PreloaderProps) {
       <div className={styles.subContainer}>
         <div className={styles.box}>
           <div className={styles.navbar}>{`>TERMINAL`}</div>
-          <div className={styles.txtBox} ref={textRef}>
+          <div
+            className={styles.txtBox}
+            ref={textRef}
+            style={{ height: "auto", overflowY: "hidden" }}
+          >
             <p className={styles.txtWhite}>A-SQUARE&nbsp;CITY&nbsp;--RUN</p>
             {/* <pre
               style={{
@@ -278,17 +295,17 @@ export default function Preloader({ onLaunch }: PreloaderProps) {
                 <p className={styles.txtRed}>
                   &nbsp;&nbsp;&nbsp;AN INTERACTIVE AUDIOVISUAL EXPERIENCE BY DVM
                 </p>
-                <p className={styles.redDesign}>
+                {/* <p className={styles.redDesign}>
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-                </p>
+                </p> */}
                 {/* <p className={styles.redDesign}>
                   &nbsp;&nbsp;▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚
                 </p> */}
-                {/* <div className={styles.svgDesign} ref={svgRef}>
+                <div className={styles.svgDesign} ref={svgRef}>
                   {Array.from({ length: 20 }, (_, i) => (
                     <SVG key={i} />
                   ))}
-                </div> */}
+                </div>
               </>
             ) : (
               <>
@@ -301,46 +318,46 @@ export default function Preloader({ onLaunch }: PreloaderProps) {
                   {/* <br /> */}
                   <span
                     className={styles.filgetChild1}
-                  >{`   _____  ______   ____   ____   ____   ____  `}</span>
+                  >{`  _____  ______   ____   ____   ____   ____  `}</span>
                   <br />
                   <span
                     className={styles.filgetChild2}
-                  >{`   \\__  \\ \\____ \\ /  _ \\ / ___\\_/ __ \\_/ __ \\ `}</span>
+                  >{`  \\__  \\ \\____ \\ /  _ \\ / ___\\_/ __ \\_/ __ \\ `}</span>
                   <br />
                   <span
                     className={styles.filgetChild3}
-                  >{`    / __ \\|  |_> >  <_> ) /_/  >  ___/\\  ___/ `}</span>
+                  >{`   / __ \\|  |_> >  <_> ) /_/  >  ___/\\  ___/ `}</span>
                   <br />
                   <span
                     className={styles.filgetChild4}
-                  >{`   (____  /   __/ \\____/\\___  / \\___  >\\___  >`}</span>
+                  >{`  (____  /   __/ \\____/\\___  / \\___  >\\___  >`}</span>
                   <br />
                   <span
                     className={styles.filgetChild5}
-                  >{`         \\/|__|         /_____/      \\/     \\/ `}</span>
+                  >{`       \\/|__|         /_____/      \\/     \\/ `}</span>
                   <br />
                   {/* <br /> */}
                 </p>
                 <p className={styles.txtRed}>
                   &nbsp;{`AN INTERACTIVE AUDIOVISUAL EXPERIENCE BY DVM`}
                 </p>
-                <p className={styles.redDesign}>
+                {/* <p className={styles.redDesign}>
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-                </p>
+                </p> */}
                 {/* <p className={styles.redDesign}>
                   &nbsp;&nbsp;▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚
                 </p> */}
-                {/* <p className={styles.svgDesign} ref={svgRef}>
+                <p className={styles.svgDesign} ref={svgRef}>
                   {Array.from({ length: 20 }, (_, i) => (
                     <SVG key={i} />
                   ))}
-                </p> */}
+                </p>
               </>
             )}
             <p
               className={styles.txtGreen}
             >{`>> INITIATING BOOT SEQUENCE...`}</p>
-            <p className={styles.txtWhite}>BUILD VERSION: 10.04.26</p>
+            <p className={styles.txtWhite}>BUILD VERSION: 11.04.26</p>
             <p className={styles.txtWhite}>SYSTEM MANUFACTURER: BITS PILANI</p>
             <p className={styles.txtWhite}>SYSTEM BOOT TIME: {`<SOON>`}</p>
             <p className={styles.txtWhite}>OS NAME: THREE.JS</p>
