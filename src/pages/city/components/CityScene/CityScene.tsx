@@ -2,7 +2,7 @@ import { ScrollControls } from "@react-three/drei";
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { useCityStore, usePivotStore } from "../../../../utils/store";
-import Constellation from "../Constellation";
+import Constellation2 from "../Constellation2";
 import Infernus from "../models/Infernus";
 import ScrollSync from "../ScrollSync/ScrollSync";
 import SceneDevOrProd from "./SceneDevorProd";
@@ -43,7 +43,7 @@ export default function CityScene({}: any) {
           <group ref={cityRef}>
             {/* <axesHelper args={[200]} /> */}
             {/* <CityGrid /> */}
-            <Constellation />
+            <Constellation2 />
           </group>
         </group>
 

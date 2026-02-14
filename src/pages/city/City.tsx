@@ -1,6 +1,6 @@
 import { Canvas } from "@react-three/fiber";
-// import extension from "@theatre/r3f/dist/extension";
-// import studio from "@theatre/studio";
+import extension from "@theatre/r3f/dist/extension";
+import studio from "@theatre/studio";
 import ReactHelmet from "../components/ReactHelmet";
 import styles from "./City.module.scss";
 import CityScene from "./components/CityScene/CityScene";
@@ -10,7 +10,7 @@ import { Environment } from "@react-three/drei";
 import { getProject } from "@theatre/core";
 import { SheetProvider } from "@theatre/r3f";
 import { useEffect, useState } from "react";
-// import debugFunctions from "../../utils/debug";
+import debugFunctions from "../../utils/debug";
 import * as THREE from "three";
 import { useSceneLoadedStore } from "../../utils/store";
 // import NavBar from "../components/NavBar/NavBar";
@@ -36,11 +36,11 @@ THREE.DefaultLoadingManager.onLoad = () => {
 // import { BlendFunction } from "postprocessing";
 export const project = getProject("City Project", { state });
 export const sheet = project.sheet("Cyber City");
-// if (import.meta.env.DEV) {
-//   debugFunctions();
-//   studio.initialize();
-//   studio.extend(extension);
-// }
+if (import.meta.env.DEV) {
+  debugFunctions();
+  studio.initialize();
+  studio.extend(extension);
+}
 
 // Ensure the sheet is ready before rendering, if necessary, or just rely on React to handle it.
 // await project.ready; // Top level await might be issue if not handled, but usually fine in Vite + standard setups if supported.
