@@ -8,6 +8,7 @@ import ScrollSync from "../ScrollSync/ScrollSync";
 import SceneDevOrProd from "./SceneDevorProd";
 import SceneLights from "./SceneLights";
 import TheatreCameraFinal from "./TheatreCameraFinal";
+// import MatrixRain from "../MatrixRain";
 
 export default function CityScene({}: any) {
   const cityRef = useRef<THREE.Group>(null!);
@@ -28,6 +29,7 @@ export default function CityScene({}: any) {
   const color = "#3e93be";
   return (
     <>
+    {/* <MatrixRain/> */}
       <SceneDevOrProd />
       <SceneLights />
       <fogExp2 attach="fog" args={[color, 0.004]} />
