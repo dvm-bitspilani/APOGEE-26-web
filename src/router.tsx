@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
-
+import Analytics from "./Analytics";
 import Registration from "./pages/registration/Registration";
 // import Instructions from "./pages/registration/components/Instructions";
 // import Instructions from "./pages/registration/components/detailsForm/DetailsForm"
@@ -24,10 +24,10 @@ const pages: page[] = [
 
     component: Registration,
   },
-  {
-    url: '/city',
-    component: City,
-  },
+  // {
+  //   url: '/city',
+  //   component: City,
+  // },
   {
     url: "/contact",
 
@@ -50,6 +50,12 @@ const generateRoutes = (pages: page[]) => {
   });
 };
 
-const router = createBrowserRouter([...generateRoutes(pages)]);
+// const router = createBrowserRouter([...generateRoutes(pages)]);
+const router = createBrowserRouter([
+  {
+    element: <Analytics />, // 👈 GA wrapper
+    children: [...generateRoutes(pages)],
+  },
+]);
 
 export default router;
