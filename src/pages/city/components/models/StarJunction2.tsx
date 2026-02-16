@@ -3,7 +3,7 @@ import { Center, useGLTF } from "@react-three/drei";
 import { useMemo, type JSX } from "react";
 
 export function StarJunction2(props: JSX.IntrinsicElements["group"]) {
-  const gltf = useGLTF("/models/newcity.glb");
+  const gltf = useGLTF("/models/citypakka.glb");
 
   /**
    * SAFE mesh extraction
@@ -43,4 +43,4 @@ export function StarJunction2(props: JSX.IntrinsicElements["group"]) {
   );
 }
 
-useGLTF.preload("/models/newcity.glb");
+useGLTF.preload("/models/citypakka.glb");
