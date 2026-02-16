@@ -42,25 +42,38 @@ export default function Preloader({ onLaunch }: PreloaderProps) {
 
     let loadedAssets = 0;
 
-    const preloadImage = (src: string) => {
-      return new Promise<HTMLImageElement>((resolve, reject) => {
-        const img = new Image();
-        img.src = src;
-        img.onload = () => {
-          loadedAssets++;
-          resolve(img);
-        };
-        img.onerror = reject;
-      });
-    };
+    // const preloadImage = (src: string) => {
+    //   return new Promise<HTMLImageElement>((resolve, reject) => {
+    //     const img = new Image();
+    //     img.src = src;
+    //     img.onload = () => {
+    //       loadedAssets++;
+    //       resolve(img);
+    //     };
+    //     img.onerror = reject;
+    //   });
+    // };
 
-    Promise.allSettled([...(assets.map(preloadImage) || [])]).then(() => {
-      setAssetloaded(true);
-    });
+    // Promise.allSettled([...(assets.map(preloadImage) || [])]).then(() => {
+    //   setAssetloaded(true);
+    // })
     // .catch((err) => {
     //   console.error("Error preloading assets:", err);
-    //   onEnter();
+    //   setAssetloaded(true);
     // });
+    assets.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+      img.onload = () => {
+        console.log(`>> IMAGE LOADED: ${src}`);
+        loadedAssets++;
+      };
+      img.onerror = () => {
+        console.warn(`>> FAILED TO LOAD IMAGE: ${src}`);
+        loadedAssets++; // Count it anyway to avoid partial hang
+      };
+    });
+    setAssetloaded(true);
   }, [assets, totalAssets]);
 
   useEffect(() => {
