@@ -7,7 +7,7 @@ import { useMemo } from "react";
 
 const BLOCKS = 1
 const SPACING = 49.3
-const ypos=0.10;
+const ypos = 0.10;
 const scaleFactor = [1, 1, 1]
 const position = [0, 1, 0]//[-3.6, 274, 456.0]
 const effectivePosition = [-position[0] * scaleFactor[0], -position[1] * scaleFactor[1], -position[2] * scaleFactor[2]]
@@ -83,13 +83,13 @@ type GLTFResult = GLTF & {
 
 export default function Constellation() {
     // const positions: [number, number, number][] = [];
-   const positions = useMemo<[number, number, number][]>(() => {
-  const arr: [number, number, number][] = []
-  for (let block = 0; block < BLOCKS; block++) {
-    arr.push([-block * SPACING, ypos*block, 0])
-  }
-  return arr
-}, [])
+    const positions = useMemo<[number, number, number][]>(() => {
+        const arr: [number, number, number][] = []
+        for (let block = 0; block < BLOCKS; block++) {
+            arr.push([-block * SPACING, ypos * block, 0])
+        }
+        return arr
+    }, [])
 
 
     const { nodes } = useGLTF('/models/citynewest-transformed.glb') as unknown as GLTFResult
@@ -116,7 +116,7 @@ export default function Constellation() {
                                     </Center>
                                 </group>
                             )
-                        }   
+                        }
                     </>
                 )}
             </Merged>

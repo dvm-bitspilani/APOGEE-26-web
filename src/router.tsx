@@ -5,7 +5,7 @@ import Registration from "./pages/registration/Registration";
 // import Instructions from "./pages/registration/components/detailsForm/DetailsForm"
 import City from "./pages/city/City";
 // import ContactUs from "./pages/contactUs/ContactUs";
-import Preloader from "./pages/preloader/Preloader";
+// import Preloader from "./pages/preloader/Preloader";
 type page = {
   url: string;
 
@@ -33,11 +33,11 @@ const pages: page[] = [
 
   //   component: ContactUs,
   // },
-  {
-    url: "/loader",
+  // {
+  //   url: "/loader",
 
-    component: Preloader,
-  },
+  //   component: Preloader,
+  // },
 ];
 
 const generateRoutes = (pages: page[]) => {

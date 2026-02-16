@@ -3,56 +3,73 @@ import { useFrame } from "@react-three/fiber";
 // import { sheet } from "../../theatre";
 import { getProject } from "@theatre/core";
 
+import { useRef } from "react";
+import {
+  type Section,
+  useCurrentSectionStore,
+  useModalStore,
+  useScrollVelocityStore,
+} from "../../../../utils/store";
 import state from "../../state7.json";
-import { useModalStore } from "../../../../utils/store";
-import { type Section, useCurrentSectionStore } from "../../../../utils/store";
 // import { useLocation, useNavigate } from "react-router-dom";
 export const project = getProject("City Project", { state });
 export const sheet = project.sheet("Cyber City");
 
 const stopPoints: Record<Section, [number, number]> = {
-  "home": [0, 0.25],
-  "about": [4, 6],
-  "contact": [10, 16],
-  "transition": [-1, -1],
-}
+  home: [0, 0.25],
+  about: [4, 6],
+  contact: [10, 16],
+  transition: [-1, -1],
+};
 const sequenceLength = 12;
+
+const VELOCITY_SMOOTHING = 0.12;
 
 export default function ScrollSync() {
   const scroll = useScroll();
   const openModal = useModalStore((s) => s.openModal);
   const closeModal = useModalStore((s) => s.closeModal);
   const isModalOpen = useModalStore((s) => s.isModalOpen);
-  // const scrollLock = useScrollLockStore((s) => s.lock);
-  // const isScrollLocked = useScrollLockStore((s) => s.locked); 
-  // const currentSection = useRef<Section>("home");
   const currentSection = useCurrentSectionStore((s) => s.currentSection);
   const setCurrentSection = useCurrentSectionStore((s) => s.setCurrentSection);
 
-  useFrame(() => {
-    // Calculate the sequence position based on scroll offset
-    // Using a fixed sequence length of 10 for consistency, or we can use sheet.sequence.length
-    // if that is available and reliable. For now, let's assume we want to map full scroll
-    // to to the sequence length.
+  const prevOffset = useRef(0);
+  const smoothedVelocity = useRef(0);
 
+  useFrame((_state, delta) => {
+    // ----- Scroll velocity for motion blur -----
+    const rawVelocity =
+      Math.abs(scroll.offset - prevOffset.current) / Math.max(delta, 0.001);
+    prevOffset.current = scroll.offset;
+    smoothedVelocity.current +=
+      (rawVelocity - smoothedVelocity.current) * VELOCITY_SMOOTHING;
+    // Publish via getState to avoid React re-renders
+    useScrollVelocityStore.getState().setVelocity(smoothedVelocity.current);
+
+    // ----- Section / modal logic (unchanged) -----
     if (!isModalOpen) {
       for (const path in stopPoints) {
-        if (path !== currentSection && sheet.sequence.position >= stopPoints[path as Section]?.[0] && sheet.sequence.position <= stopPoints[path as Section]?.[1]) {
+        if (
+          path !== currentSection &&
+          sheet.sequence.position >= stopPoints[path as Section]?.[0] &&
+          sheet.sequence.position <= stopPoints[path as Section]?.[1]
+        ) {
           if (path !== "home") {
-            // scrollLock();
             openModal();
           }
-          setCurrentSection(path as Section)
+          setCurrentSection(path as Section);
           break;
         }
       }
-    }
-    else {
-      if (sheet.sequence.position <= stopPoints[currentSection]?.[0] || sheet.sequence.position >= stopPoints[currentSection]?.[1]) {
+    } else {
+      if (
+        sheet.sequence.position <= stopPoints[currentSection]?.[0] ||
+        sheet.sequence.position >= stopPoints[currentSection]?.[1]
+      ) {
         closeModal();
         setCurrentSection("transition");
       }
-    } 
+    }
 
     // Update the sequence position
     sheet.sequence.position = scroll.offset * sequenceLength;
