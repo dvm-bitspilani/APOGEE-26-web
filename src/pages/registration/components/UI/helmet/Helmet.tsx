@@ -1,5 +1,5 @@
-import helmet from "../../../../../assets/3d/registration/helmet.glb"
-import helmetNeck from "../../../../../assets/3d/registration/necK.glb"
+import helmet from "../../../../../assets/3d/registration/helmet1.glb"
+import helmetNeck from "../../../../../assets/3d/registration/body1.glb"
 import { useGLTF } from "@react-three/drei"
 import { Canvas, useFrame, useThree } from "@react-three/fiber"
 import { useControls } from "leva"
@@ -23,7 +23,7 @@ function HelmetNeck() {
 
 
     return (
-        <group scale={3.5} rotation={[-Math.PI / 2, 0, 0]} position={[0, -1.4, 0]}>
+        <group scale={3.25} rotation={[0, 0, 0]} position={[0, -1, 0]}>
             <Center>
                 <primitive object={scene} />
             </Center>
@@ -103,7 +103,7 @@ function HelmetModel() {
     return (
         <group ref={followRef}>
 
-            <group rotation={[0, Math.PI, 0]} position={[0, 0.3, 0]} scale={0.8}>
+            <group rotation={[0, 0, 0]} position={[0, 0.3, 0]} scale={3.5}>
                 <primitive object={scene} />
                 <ambientLight intensity={colour.intensity1} color={colour.color1} />
                 <directionalLight
