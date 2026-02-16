@@ -3,7 +3,7 @@
 .container {
   display: flex;
   flex-direction: column;
-  background: center / cover no-repeat url("/public/img/contacts/bg.png");
+  // background: center / cover no-repeat url("/public/img/contacts/bg.png");
   //  clip-path: path('M50 10 L150 10 L160 2 L640 2 L650 10 L750 10 L790 50 L790 450 L750 490 L50 490 L10 450 L10 50 L50 10 Z');
   //  clip-path: 
   //    polygon(5.25% 2%, 18.25% 2%, 19.75% 0%, 81% 0%, 82.5% 2%, 95.05% 2%, 100% 10%, 100% 91%, 95.0% 99%, 5.25% 99%, 0% 90%, 0% 10%);
@@ -19,6 +19,16 @@
   left: 50%;
   transform: translate(-50%, -50%);
   overflow: hidden;
+
+  .bgImg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+  }
 
   .title {
     font-size: 2vw;

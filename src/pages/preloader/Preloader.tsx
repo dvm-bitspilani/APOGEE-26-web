@@ -70,7 +70,7 @@ export default function Preloader({ onLaunch }: PreloaderProps) {
       };
       img.onerror = () => {
         console.warn(`>> FAILED TO LOAD IMAGE: ${src}`);
-        loadedAssets++; // Count it anyway to avoid partial hang
+        loadedAssets++;
       };
     });
     setAssetloaded(true);

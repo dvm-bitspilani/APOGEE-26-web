@@ -1,6 +1,7 @@
 import styles from "./Card.module.scss";
 import type { Contact } from "../costaan";
 import cardBorders from "/img/contacts/cardBorder.png";
+import bg from "/img/contacts/cardBG.png";
 
 export default function Card({
   contact,
@@ -11,6 +12,7 @@ export default function Card({
 }) {
   return (
     <div className={`${styles.card} ${classname ?? ""}`}>
+      <img src={bg} alt="card background" className={styles.bgIMG} />
       <img src={cardBorders} alt="card border" className={styles.borderIMG} />
       <img
         src={contact.photo}

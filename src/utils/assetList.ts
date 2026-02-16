@@ -4,7 +4,7 @@ const assetList = {
     "/img/contacts/cardBG.png",
     "/img/contacts/cardBorder.png",
     "/img/contacts/sample.png",
-    "/img/contacts/sample2.png",
+    // "/img/contacts/sample2.png",
   ],
 };
 
