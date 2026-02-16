@@ -5,13 +5,14 @@ import SplitText from "gsap/src/SplitText";
 import { useEffect, useRef, useState } from "react";
 import { useSceneLoadedStore } from "../../utils/store";
 import assetList from "../../utils/assetList";
-// import figlet from "figlet";
+import SVG from "./SVG";
 
 interface PreloaderProps {
   onLaunch?: () => void;
 }
 
 export default function Preloader({ onLaunch }: PreloaderProps) {
+  gsap.registerPlugin(SplitText);
   // const [text, setText] = useState("");
   const textRef = useRef<HTMLParagraphElement>(null);
   const textRef2 = useRef<HTMLDivElement[]>([]);
@@ -23,9 +24,9 @@ export default function Preloader({ onLaunch }: PreloaderProps) {
   const [prevIndex, setPrevIndex] = useState(0);
   const sceneLoaded = useSceneLoadedStore((s) => s.loaded);
   const sceneProgress = useSceneLoadedStore((s) => s.progress);
-  gsap.registerPlugin(SplitText);
   const splitTextRef = useRef<SplitText | null>(null);
   const timelineRef = useRef<gsap.core.Timeline | null>(null);
+  const svgRef = useRef<HTMLDivElement>(null);
   const [width, setwidth] = useState(
     window.innerWidth < 768 && window.innerHeight / window.innerWidth > 1
       ? true
@@ -41,46 +42,60 @@ export default function Preloader({ onLaunch }: PreloaderProps) {
 
     let loadedAssets = 0;
 
-    const preloadImage = (src: string) => {
-      return new Promise<HTMLImageElement>((resolve, reject) => {
-        const img = new Image();
-        img.src = src;
-        img.onload = () => {
-          loadedAssets++;
-          resolve(img);
-        };
-        img.onerror = reject;
-      });
-    };
+    // const preloadImage = (src: string) => {
+    //   return new Promise<HTMLImageElement>((resolve, reject) => {
+    //     const img = new Image();
+    //     img.src = src;
+    //     img.onload = () => {
+    //       loadedAssets++;
+    //       resolve(img);
+    //     };
+    //     img.onerror = reject;
+    //   });
+    // };
 
-    Promise.allSettled([...(assets.map(preloadImage) || [])]).then(() => {
-      setAssetloaded(true);
-    });
+    // Promise.allSettled([...(assets.map(preloadImage) || [])]).then(() => {
+    //   setAssetloaded(true);
+    // })
     // .catch((err) => {
     //   console.error("Error preloading assets:", err);
-    //   onEnter();
+    //   setAssetloaded(true);
     // });
+    assets.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+      img.onload = () => {
+        console.log(`>> IMAGE LOADED: ${src}`);
+        loadedAssets++;
+      };
+      img.onerror = () => {
+        console.warn(`>> FAILED TO LOAD IMAGE: ${src}`);
+        loadedAssets++;
+      };
+    });
+    setAssetloaded(true);
   }, [assets, totalAssets]);
 
-useEffect(() => {
-  const media = window.matchMedia("(max-width: 768px) and (aspect-ratio < 1/1)");
+  useEffect(() => {
+    const media = window.matchMedia(
+      "(max-width: 768px) and (aspect-ratio < 1/1)",
+    );
 
-  const handleChange = (e: MediaQueryList) => {
-    if (e.matches) {
-      setwidth(true);
-      setAnimDone(true);
-      console.log("Mobile mode activated");
-    } else {
-      setwidth(false);
-    }
-  };
+    const handleChange = (e: MediaQueryList) => {
+      if (e.matches) {
+        setwidth(true);
+        setAnimDone(true);
+        console.log("Mobile mode activated");
+      } else {
+        setwidth(false);
+      }
+    };
 
-  handleChange(media); // initial check
-  media.addEventListener("change", ()=> handleChange(media));
+    handleChange(media); // initial check
+    media.addEventListener("change", () => handleChange(media));
 
-  return () => media.removeEventListener("change", ()=> handleChange(media));
-},);
-
+    return () => media.removeEventListener("change", () => handleChange(media));
+  });
 
   useEffect(() => {
     // console.log(`[Preloader] Scene progress: ${sceneProgress.toFixed(1)}%`);
@@ -103,13 +118,16 @@ useEffect(() => {
   useEffect(() => {
     if (!textRef.current) return;
 
-    const split = new SplitText(textRef.current, {
+    const childrenToSplit = Array.from(textRef.current.children).filter(
+      (child) => child !== svgRef.current,
+    );
+    const split = new SplitText(childrenToSplit, {
       type: "chars",
       charsClass: "char",
       reduceWhiteSpace: false,
-      tag: "pre",
     });
     splitTextRef.current = split;
+    // console.log(split.chars);
     const tl = gsap.timeline();
     timelineRef.current = tl;
 
@@ -132,7 +150,14 @@ useEffect(() => {
     tl2.from(split2.chars, {
       display: "none",
       duration: 1,
-      stagger: 0.023,
+      stagger: {
+        each: 0.008,
+        onStart: function () {
+          textRef2.current.forEach((el) => {
+            if (el) el.scrollTop = el.scrollHeight;
+          });
+        },
+      },
       ease: "none",
       onComplete: () => {
         setAnimDone(true);
@@ -159,15 +184,26 @@ useEffect(() => {
     }
 
     for (let i = Math.floor(prevIndex); i < targetIndex; i++) {
+      if (i == 189) {
+        timelineRef.current?.to(svgRef.current, {
+          clipPath: "inset(0% 0% 0% 0%)",
+          WebkitClipPath: "inset(0% 0% 0% 0%)",
+          duration: 0.5,
+          ease: "none",
+        });
+      }
+
       const char = chars[i];
       if (!char) continue;
 
       timelineRef.current?.to(char, {
         display: "inline-block",
-        duration: 0.01,
+        duration: 0.008,
         ease: "none",
-        delay: i === 592 ? 0.4 : 0,
         onStart() {
+          if (textRef.current) {
+            textRef.current.scrollTop = textRef.current.scrollHeight;
+          }
           // cursorEl.style.left = target.getBoundingClientRect().right + "px";
           const nextChar = chars[i];
           if (nextChar) {
@@ -207,25 +243,11 @@ useEffect(() => {
       <div className={styles.subContainer}>
         <div className={styles.box}>
           <div className={styles.navbar}>{`>TERMINAL`}</div>
-          {/* <p
-              style={{
-                whiteSpace: "pre",
-              }}
-              className={styles.figlet}
-            >
-              <br />
-<span className={styles.filgetChild1}>{" "}{" "}{" "}{" "}{" "}{" "}{" "}█████████   ███████████     ███████      █████████  ██████████ ██████████</span><br />
-<span className={styles.filgetChild1}>{" "}{" "}{" "}{" "}{" "}{" "}███▒▒▒▒▒███ ▒▒███▒▒▒▒▒███  ███▒▒▒▒▒███   ███▒▒▒▒▒███▒▒███▒▒▒▒▒█▒▒███▒▒▒▒▒█</span><br />
-<span className={styles.filgetChild2}>{" "}{" "}{" "}{" "}{" "}▒███    ▒███  ▒███    ▒███ ███     ▒▒███ ███     ▒▒▒  ▒███  █ ▒  ▒███  █ ▒ </span><br />
-<span className={styles.filgetChild3}>{" "}{" "}{" "}{" "}{" "}▒███████████  ▒██████████ ▒███      ▒███▒███          ▒██████    ▒██████   </span><br />
-<span className={styles.filgetChild3}>{" "}{" "}{" "}{" "}{" "}▒███▒▒▒▒▒███  ▒███▒▒▒▒▒▒  ▒███      ▒███▒███    █████ ▒███▒▒█    ▒███▒▒█   </span><br />
-<span className={styles.filgetChild4}>{" "}{" "}{" "}{" "}{" "}▒███    ▒███  ▒███        ▒▒███     ███ ▒▒███  ▒▒███  ▒███ ▒   █ ▒███ ▒   █</span><br />
-<span className={styles.filgetChild5}>{" "}{" "}{" "}{" "}{" "}█████   █████ █████        ▒▒▒███████▒   ▒▒█████████  ██████████ ██████████</span><br />
-<span className={styles.filgetChild5}>{" "}{" "}{" "}{" "}{" "}▒▒▒▒▒   ▒▒▒▒▒ ▒▒▒▒▒           ▒▒▒▒▒▒▒      ▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒▒▒▒ ▒▒▒▒▒▒▒▒▒▒</span><br />
-              <br />
-            </p> */}
-
-          <div className={styles.txtBox} ref={textRef}>
+          <div
+            className={styles.txtBox}
+            ref={textRef}
+            style={{ height: "auto", overflowY: "hidden" }}
+          >
             <p className={styles.txtWhite}>A-SQUARE&nbsp;CITY&nbsp;--RUN</p>
             {/* <pre
               style={{
@@ -252,59 +274,103 @@ useEffect(() => {
 <span className={styles.filgetChild5}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▒▒▒▒▒   ▒▒▒▒▒ ▒▒▒▒▒           ▒▒▒▒▒▒▒      ▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒▒▒▒ ▒▒▒▒▒▒▒▒▒▒</span><br />
               <br />
             </p> */}
-            <p
-              style={{
-                whiteSpace: "pre",
-              }}
-              className={styles.figlet}
-            >
-              {/* <br /> */}
-              <span
-                className={styles.filgetChild1}
-              >{` _____  ______   ____   ____   ____   ____  `}</span>
-              <br />
-              <span
-                className={styles.filgetChild2}
-              >{` \\__  \\ \\____ \\ /  _ \\ / ___\\_/ __ \\_/ __ \\ `}</span>
-              <br />
-              <span
-                className={styles.filgetChild3}
-              >{`  / __ \\|  |_> >  <_> ) /_/  >  ___/\\  ___/ `}</span>
-              <br />
-              <span
-                className={styles.filgetChild4}
-              >{` (____  /   __/ \\____/\\___  / \\___  >\\___  >`}</span>
-              <br />
-              <span
-                className={styles.filgetChild5}
-              >{`      \\/|__|         /_____/      \\/     \\/ `}</span>
-              <br />
-              {/* <br /> */}
-            </p>
             {!width ? (
               <>
+                <p
+                  style={{
+                    whiteSpace: "pre",
+                  }}
+                  className={styles.figlet}
+                >
+                  {/* <br /> */}
+                  <span
+                    className={styles.filgetChild1}
+                  >{`    _____  ______   ____   ____   ____   ____  `}</span>
+                  <br />
+                  <span
+                    className={styles.filgetChild2}
+                  >{`    \\__  \\ \\____ \\ /  _ \\ / ___\\_/ __ \\_/ __ \\ `}</span>
+                  <br />
+                  <span
+                    className={styles.filgetChild3}
+                  >{`     / __ \\|  |_> >  <_> ) /_/  >  ___/\\  ___/ `}</span>
+                  <br />
+                  <span
+                    className={styles.filgetChild4}
+                  >{`    (____  /   __/ \\____/\\___  / \\___  >\\___  >`}</span>
+                  <br />
+                  <span
+                    className={styles.filgetChild5}
+                  >{`         \\/|__|         /_____/      \\/     \\/ `}</span>
+                  <br />
+                  {/* <br /> */}
+                </p>
                 <p className={styles.txtRed}>
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AN INTERACTIVE AUDIOVISUAL
-                  EXPERIENCE BY DVM
+                  &nbsp;&nbsp;&nbsp;AN INTERACTIVE AUDIOVISUAL EXPERIENCE BY DVM
                 </p>
-                <p className={styles.redDesign}>
+                {/* <p className={styles.redDesign}>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+                </p> */}
+                {/* <p className={styles.redDesign}>
                   &nbsp;&nbsp;▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚
-                </p>
+                </p> */}
+                <div className={styles.svgDesign} ref={svgRef}>
+                  {Array.from({ length: 20 }, (_, i) => (
+                    <SVG key={i} />
+                  ))}
+                </div>
               </>
             ) : (
               <>
+                <p
+                  style={{
+                    whiteSpace: "pre",
+                  }}
+                  className={styles.figlet}
+                >
+                  {/* <br /> */}
+                  <span
+                    className={styles.filgetChild1}
+                  >{`  _____  ______   ____   ____   ____   ____  `}</span>
+                  <br />
+                  <span
+                    className={styles.filgetChild2}
+                  >{`  \\__  \\ \\____ \\ /  _ \\ / ___\\_/ __ \\_/ __ \\ `}</span>
+                  <br />
+                  <span
+                    className={styles.filgetChild3}
+                  >{`   / __ \\|  |_> >  <_> ) /_/  >  ___/\\  ___/ `}</span>
+                  <br />
+                  <span
+                    className={styles.filgetChild4}
+                  >{`  (____  /   __/ \\____/\\___  / \\___  >\\___  >`}</span>
+                  <br />
+                  <span
+                    className={styles.filgetChild5}
+                  >{`       \\/|__|         /_____/      \\/     \\/ `}</span>
+                  <br />
+                  {/* <br /> */}
+                </p>
                 <p className={styles.txtRed}>
                   &nbsp;{`AN INTERACTIVE AUDIOVISUAL EXPERIENCE BY DVM`}
                 </p>
-                <p className={styles.redDesign}>
+                {/* <p className={styles.redDesign}>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+                </p> */}
+                {/* <p className={styles.redDesign}>
                   &nbsp;&nbsp;▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚
+                </p> */}
+                <p className={styles.svgDesign} ref={svgRef}>
+                  {Array.from({ length: 20 }, (_, i) => (
+                    <SVG key={i} />
+                  ))}
                 </p>
               </>
             )}
             <p
               className={styles.txtGreen}
             >{`>> INITIATING BOOT SEQUENCE...`}</p>
-            <p className={styles.txtWhite}>BUILD VERSION: 10.04.26</p>
+            <p className={styles.txtWhite}>BUILD VERSION: 11.04.26</p>
             <p className={styles.txtWhite}>SYSTEM MANUFACTURER: BITS PILANI</p>
             <p className={styles.txtWhite}>SYSTEM BOOT TIME: {`<SOON>`}</p>
             <p className={styles.txtWhite}>OS NAME: THREE.JS</p>
