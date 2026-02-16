@@ -48,7 +48,7 @@ export const sheet = project.sheet("Cyber City");
 // Theatre documentation often suggests just using it.
 
 export default function City() {
-  const [showPreloader, setShowPreloader] = useState(false);
+  const [showPreloader, setShowPreloader] = useState(true);
 
   useEffect(() => {
     project.ready.then(() => {
