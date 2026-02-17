@@ -65,11 +65,11 @@ export default function Preloader({ onLaunch }: PreloaderProps) {
       const img = new Image();
       img.src = src;
       img.onload = () => {
-        console.log(`>> IMAGE LOADED: ${src}`);
+        // console.log(`>> IMAGE LOADED: ${src}`);
         loadedAssets++;
       };
       img.onerror = () => {
-        console.warn(`>> FAILED TO LOAD IMAGE: ${src}`);
+        // console.warn(`>> FAILED TO LOAD IMAGE: ${src}`);
         loadedAssets++;
       };
     });
@@ -184,6 +184,7 @@ export default function Preloader({ onLaunch }: PreloaderProps) {
     }
 
     for (let i = Math.floor(prevIndex); i < targetIndex; i++) {
+      console.log(`Revealing char ${i} of ${totalChars}`);
       if (i == 189) {
         timelineRef.current?.to(svgRef.current, {
           clipPath: "inset(0% 0% 0% 0%)",
