@@ -1,6 +1,6 @@
 import { useCurrentSectionStore, useModalStore, useScrollLockStore } from "../../../../utils/store";
 import ComingSoon from "../../../comingSoon/ComingSoon";
-import ContactUs from "../../../contactUs/ContactUs";
+// import ContactUs from "../../../contactUs/ContactUs";
 import styles from "./Modal.module.scss";
 
 export default function Modal({ children }: { children?: React.ReactNode }) {
@@ -31,7 +31,7 @@ export default function Modal({ children }: { children?: React.ReactNode }) {
                 </div> */}
                 <div className={styles.modalContent}>
                     {
-                        currentsection === "about" ? (<ContactUs />) :
+                        currentsection === "about" ? (<ComingSoon />) :
                             currentsection === "contact" ? (<ComingSoon />) :
                                 (children)
                     }
