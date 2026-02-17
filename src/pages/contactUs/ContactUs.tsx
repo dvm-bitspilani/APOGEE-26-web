@@ -19,17 +19,26 @@ export default function ContactUs() {
     });
   }, []);
   return (
-    <div className={styles.container}>
-      <img src={bg} alt="bg" className={styles.bgImg}/>
-      <p className={styles.title}>Contact Us</p>
-      <div className={styles.cards}>
-        {costaans.map((costaan, i) => (
-          <Card
-            key={i}
-            contact={costaan}
-            classname={i == (width ? 8 : 5) ? styles.gridBox2 : styles.gridBox}
-          />
-        ))}
+    <div className={`${styles.modalOverlay} ${styles.showModal}`}>
+      <div className={styles.modal}>
+        <div className={styles.modalContent}>
+          <div className={styles.container}>
+            <img src={bg} alt="bg" className={styles.bgImg} />
+            <p className={styles.title}>Contact Us</p>
+            <div className={styles.cards}>
+              {costaans.map((costaan, i) => (
+                <Card
+                  key={i}
+                  contact={costaan}
+                  classname={
+                    i == (width ? 8 : 5) ? styles.gridBox2 : styles.gridBox
+                  }
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+        <div className={styles.backgroundlite} />
       </div>
     </div>
   );
