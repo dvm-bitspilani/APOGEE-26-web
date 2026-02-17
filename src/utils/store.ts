@@ -96,17 +96,27 @@ export const useScrollLockStore = create<ScrollLockStore>((set) => ({
   unlock: () => set({ locked: false }),
 }));
 
-type Modal = {
+type ModalStore = {
   isModalOpen: boolean;
   openModal: () => void;
   closeModal: () => void;
 }
 
-export const useModalStore = create<Modal>((set) => ({
+export const useModalStore = create<ModalStore>((set) => ({
   isModalOpen: false,
   openModal: () => set({ isModalOpen: true }),
   closeModal: () => set({ isModalOpen: false }),
 }));
+
+type PreloaderStateStore = {
+  showPreloader: boolean;
+  setShowPreloader: (state: boolean) => void;
+}
+
+export const usePreloaderStateStore = create<PreloaderStateStore>((set) => ({
+  showPreloader: true,
+  setShowPreloader: (state) => set({ showPreloader: state }),
+}))
 
 export interface Event {
   id: number;
