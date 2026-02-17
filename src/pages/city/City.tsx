@@ -17,7 +17,7 @@ import { useSceneLoadedStore } from "../../utils/store";
 import RegisterButton from "../components/RegisterButton/RegisterButton";
 import Preloader from "../preloader/Preloader";
 import Modal from "./components/Modal/Modal";
-import state from "./state7.json";
+import state from "./new_city_state.json"
 
 // Set up loading progress tracking at module level (before useGLTF.preload() calls complete)
 THREE.DefaultLoadingManager.onProgress = (_url, loaded, total) => {
