@@ -10,6 +10,7 @@ import SceneLights from "./SceneLights";
 import TheatreCameraFinal from "./TheatreCameraFinal";
 import { SheetProvider } from "@theatre/r3f";
 import { introAnimSheet } from "../../City";
+// import MatrixRain from "../MatrixRain";
 
 export default function CityScene({}: any) {
   const cityRef = useRef<THREE.Group>(null!);
@@ -30,6 +31,7 @@ export default function CityScene({}: any) {
   const color = "#3e93be";
   return (
     <>
+    {/* <MatrixRain/> */}
       <SceneDevOrProd />
       <SceneLights />
       <fogExp2 attach="fog" args={[color, 0.004]} />
