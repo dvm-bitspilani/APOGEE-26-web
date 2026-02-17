@@ -30,7 +30,7 @@ export default function TheatreCameraFinal() {
       makeDefault
       ref={theatreCameraRef}
       near={0.1}
-      far={2000}
+      far={1750}
       fov={50}
       theatreKey="TheatreCamera"
       position={[0, 7, 12]}
