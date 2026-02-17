@@ -30,7 +30,6 @@ export default function ScrollSync() {
   const setCurrentSection = useCurrentSectionStore((s) => s.setCurrentSection);
 
   useFrame(() => {
-    return;
     // Calculate the sequence position based on scroll offset
     // Using a fixed sequence length of 10 for consistency, or we can use sheet.sequence.length
     // if that is available and reliable. For now, let's assume we want to map full scroll
@@ -56,7 +55,7 @@ export default function ScrollSync() {
     } 
 
     // Update the sequence position
-    // sheet.sequence.position = scroll.offset * sequenceLength;
+    sheet.sequence.position = scroll.offset * sequenceLength;
   });
 
   return null;
