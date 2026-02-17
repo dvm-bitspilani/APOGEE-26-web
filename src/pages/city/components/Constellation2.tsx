@@ -506,7 +506,7 @@ export default function Constellation2(props: JSX.IntrinsicElements['group']) {
   const { nodes, materials } = useGLTF('/models/citypakka.glb') as unknown as  GLTFResult
   return (
     <e.group theatreKey="Constellation2" >
-     <group {...props} dispose={null}>
+     <group {...props} dispose={null} rotation={[0, Math.PI, 0]} scale={[0.7, 0.7, 0.7]}>
       <mesh
         castShadow
         receiveShadow
