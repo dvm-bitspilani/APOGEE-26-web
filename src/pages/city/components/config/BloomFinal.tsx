@@ -10,7 +10,7 @@ export default function BloomFinal() {
         luminanceSmoothing={0.9}
         mipmapBlur
       />
-      <MotionBlur maxIntensity={1.5} />
+      <MotionBlur maxIntensity={1.75} />
     </EffectComposer>
   );
 }

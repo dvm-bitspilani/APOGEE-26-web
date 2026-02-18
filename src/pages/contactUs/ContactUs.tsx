@@ -20,7 +20,7 @@ export default function ContactUs() {
   }, []);
   return (
     <div className={styles.container}>
-      <img src={bg} alt="bg" className={styles.bgImg}/>
+      <img src={bg} alt="bg" className={styles.bgImg} />
       <p className={styles.title}>Contact Us</p>
       <div className={styles.cards}>
         {costaans.map((costaan, i) => (
