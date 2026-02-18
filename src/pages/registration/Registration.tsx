@@ -115,7 +115,7 @@ function Registration() {
     stickyEvent,
     selectedEvents,
     toggleEvent,
-    setAccessToken,
+    // setAccessToken,
   } = useRegistrationStore();
 
   const displayEvent = stickyEvent || activeEvent;
@@ -222,7 +222,6 @@ function Registration() {
         } else {
           setCookies("user-auth", res.data);
           setUserEmail(res.data.email);
-          setAccessToken(idToken);
 
           if (res.data.email) {
             setRegistrationStep("details");
