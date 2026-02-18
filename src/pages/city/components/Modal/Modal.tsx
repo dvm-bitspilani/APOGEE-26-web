@@ -13,7 +13,7 @@ export default function Modal({ children }: { children?: React.ReactNode }) {
         closeModal();
         scrollUnlock();
     }
-
+    
     return (
         <div className={`${styles.modalOverlay} ${!isModalOpen ? styles.hiddenModal : styles.showModal}`}>
             <div className={styles.modal} onClick={proceed}>
@@ -31,8 +31,8 @@ export default function Modal({ children }: { children?: React.ReactNode }) {
                 </div> */}
                 <div className={styles.modalContent}>
                     {
-                        currentsection === "about" ? (<ContactUs />) :
-                            currentsection === "contact" ? (<ComingSoon />) :
+                        currentsection === "about" ? (<ComingSoon />) :
+                            currentsection === "contact" ? (<ContactUs />) :
                                 (children)
                     }
                 </div>

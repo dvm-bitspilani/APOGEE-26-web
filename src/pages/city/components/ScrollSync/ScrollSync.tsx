@@ -15,13 +15,13 @@ import state from "../../state7.json";
 export const project = getProject("City Project", { state });
 export const sheet = project.sheet("Cyber City");
 
-const stopPoints: Record<Section, [number, number]> = {
+export const stopPoints: Record<Section, [number, number]> = {
   home: [0, 0.25],
   about: [4, 6],
-  contact: [10, 16],
+  contact: [10, 10.5],
   transition: [-1, -1],
 };
-const sequenceLength = 12;
+export const sequenceLength = 10.25;
 
 const VELOCITY_SMOOTHING = 0.12;
 
