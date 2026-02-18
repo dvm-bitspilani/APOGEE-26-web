@@ -151,9 +151,9 @@ interface RegistrationStore {
   userData: UserData;
   setUserData: (data: Partial<UserData>) => void;
 
-  // Access Token
-  accessToken: string;
-  setAccessToken: (token: string) => void;
+  // // Access Token
+  // accessToken: string;
+  // setAccessToken: (token: string) => void;
 }
 
 export const useRegistrationStore = create<RegistrationStore>((set) => ({
@@ -182,8 +182,8 @@ export const useRegistrationStore = create<RegistrationStore>((set) => ({
   userData: { name: "", email: "", phone: "", gender: "", college: "", year: "", state: "", city: "" },
   setUserData: (data) => set((state) => ({ userData: { ...state.userData, ...data } })),
 
-  accessToken: "",
-  setAccessToken: (token) => set({ accessToken: token }),
+  // accessToken: "",
+  // setAccessToken: (token) => set({ accessToken: token }),
 }));
 
 type SceneLoadedStore = {
