@@ -1,5 +1,5 @@
 import { Bloom, EffectComposer } from "@react-three/postprocessing";
-import MotionBlur from "./MotionBlur";
+// import MotionBlur from "./MotionBlur";
 
 export default function BloomFinal() {
   return (
@@ -10,7 +10,7 @@ export default function BloomFinal() {
         luminanceSmoothing={0.9}
         mipmapBlur
       />
-      <MotionBlur maxIntensity={1.75} />
+      {/* <MotionBlur maxIntensity={1.75} /> */}
     </EffectComposer>
   );
 }
