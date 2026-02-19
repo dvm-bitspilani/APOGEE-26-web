@@ -16,12 +16,13 @@ export const project = getProject("City Project", { state });
 export const sheet = project.sheet("Cyber City");
 
 const stopPoints: Record<Section, [number, number]> = {
-  home: [0, 0.25],
-  about: [4, 6],
-  contact: [10, 16],
+  home: [0, 1],
+  about: [4, 9], // Increased duration
+  contact: [12, 15],
+  comingSoon: [18, 21],
   transition: [-1, -1],
 };
-const sequenceLength = 12;
+const sequenceLength = 24;
 
 const VELOCITY_SMOOTHING = 0.12;
 
