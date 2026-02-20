@@ -4,148 +4,13 @@ import { type JSX } from 'react'
 import { useGLTF } from '@react-three/drei'
 import type { GLTF } from 'three-stdlib'
 import { editable as e } from "@theatre/r3f";
+
 type GLTFResult = GLTF & {
   nodes: {
-    Plane: THREE.Mesh
-    Cube087: THREE.Mesh
-    Cube087_1: THREE.Mesh
-    Cube087_2: THREE.Mesh
-    Cube001_1: THREE.Mesh
-    Cube001_2: THREE.Mesh
-    Cube001_3: THREE.Mesh
-    Cube049: THREE.Mesh
-    Cube049_1: THREE.Mesh
-    Cube049_2: THREE.Mesh
-    Cube049_3: THREE.Mesh
-    Cube092: THREE.Mesh
-    Cube092_1: THREE.Mesh
-    Cube092_2: THREE.Mesh
-    Cube092_3: THREE.Mesh
-    Cube092_4: THREE.Mesh
-    Cube092_5: THREE.Mesh
-    Cube003_1: THREE.Mesh
-    Cube003_2: THREE.Mesh
-    Cube003_3: THREE.Mesh
-    Cube003_4: THREE.Mesh
-    Cube003_5: THREE.Mesh
-    Cube022_1: THREE.Mesh
-    Cube022_2: THREE.Mesh
-    Cube022_3: THREE.Mesh
-    utility_box_01_box_low: THREE.Mesh
-    Cube056: THREE.Mesh
-    Cube056_1: THREE.Mesh
-    Cube056_2: THREE.Mesh
-    Cube056_3: THREE.Mesh
-    Cube053: THREE.Mesh
-    Cube053_1: THREE.Mesh
-    Cube052_1: THREE.Mesh
-    Cube052_2: THREE.Mesh
-    Cube011_1: THREE.Mesh
-    Cube011_2: THREE.Mesh
-    Cube011_3: THREE.Mesh
-    Cube004_1: THREE.Mesh
-    Cube004_2: THREE.Mesh
-    Cube004_3: THREE.Mesh
-    Cube004_4: THREE.Mesh
-    Cube008_1: THREE.Mesh
-    Cube008_2: THREE.Mesh
-    Cube009_1: THREE.Mesh
-    Cube009_2: THREE.Mesh
-    Cube010_1: THREE.Mesh
-    Cube010_2: THREE.Mesh
-    Cube010_3: THREE.Mesh
-    BézierCurve019: THREE.Mesh
-    Cube002: THREE.Mesh
-    Cube005: THREE.Mesh
-    Cube014: THREE.Mesh
-    Cube076: THREE.Mesh
-    Cube077: THREE.Mesh
-    Cube093: THREE.Mesh
-    Cube017: THREE.Mesh
-    BézierCurve062: THREE.Mesh
-    BézierCurve065: THREE.Mesh
-    BézierCurve070: THREE.Mesh
-    BézierCurve072: THREE.Mesh
-    BézierCurve073: THREE.Mesh
-    BézierCurve074: THREE.Mesh
-    Cube018: THREE.Mesh
-    Cube019: THREE.Mesh
-    utility_box_01_box_low001: THREE.Mesh
-    utility_box_01_box_low002: THREE.Mesh
-    utility_box_01_box_low003: THREE.Mesh
-    Plane001: THREE.Mesh
-    Object_7: THREE.Mesh
-    BézierCurve111: THREE.Mesh
-    BézierCurve112: THREE.Mesh
-    BézierCurve113: THREE.Mesh
-    BézierCurve114: THREE.Mesh
-    Plane002: THREE.Mesh
-    Plane003: THREE.Mesh
-    Cube001: THREE.Mesh
-    Cube003: THREE.Mesh
-    Plane004: THREE.Mesh
-    utility_box_01_box_low004: THREE.Mesh
-    utility_box_01_box_low005: THREE.Mesh
-    Cube004: THREE.Mesh
-    Cube006: THREE.Mesh
-    Cube012: THREE.Mesh
-    Cube013: THREE.Mesh
-    Cube015: THREE.Mesh
-    Cube016: THREE.Mesh
-    Cube020: THREE.Mesh
-    Cube021: THREE.Mesh
-    Cube022: THREE.Mesh
-    Cube023: THREE.Mesh
-    Cube024: THREE.Mesh
-    Cube025: THREE.Mesh
-    Cube026: THREE.Mesh
-    Cube092_6: THREE.Mesh
-    Cube092_7: THREE.Mesh
-    Cube092_8: THREE.Mesh
-    Cube092_9: THREE.Mesh
-    Cube092_10: THREE.Mesh
-    Cube092_11: THREE.Mesh
-    Cube003_6: THREE.Mesh
-    Cube003_7: THREE.Mesh
-    Cube003_8: THREE.Mesh
-    Cube003_9: THREE.Mesh
-    Cube003_10: THREE.Mesh
-    Cube008: THREE.Mesh
-    Cube027: THREE.Mesh
-    Cube028: THREE.Mesh
-    Cube029: THREE.Mesh
-    Cube030: THREE.Mesh
-    BézierCurve001: THREE.Mesh
-    BézierCurve002: THREE.Mesh
-    Cube031: THREE.Mesh
-    BézierCurve003: THREE.Mesh
-    BézierCurve004: THREE.Mesh
-    BézierCurve005: THREE.Mesh
-    BézierCurve006: THREE.Mesh
-    BézierCurve007: THREE.Mesh
-    Cube032: THREE.Mesh
-    Cube033: THREE.Mesh
-    Cube034: THREE.Mesh
-    Cube035: THREE.Mesh
-    Cube036: THREE.Mesh
-    Cube037: THREE.Mesh
-    Cube038: THREE.Mesh
-    Cube039: THREE.Mesh
-    Cube040: THREE.Mesh
-    Cube041: THREE.Mesh
-    Cube042: THREE.Mesh
-    Cube046: THREE.Mesh
-    BézierCurve008: THREE.Mesh
-    BézierCurve009: THREE.Mesh
-    BézierCurve010: THREE.Mesh
-    BézierCurve011: THREE.Mesh
-    Plane005: THREE.Mesh
-    Plane016: THREE.Mesh
+    Object_11: THREE.Mesh
     Object_11001: THREE.Mesh
     Object_11002: THREE.Mesh
-    Object_11003: THREE.Mesh
     Object_11004: THREE.Mesh
-    Object_11006: THREE.Mesh
     Object_11007: THREE.Mesh
     Object_11008: THREE.Mesh
     Object_11009: THREE.Mesh
@@ -156,357 +21,135 @@ type GLTFResult = GLTF & {
     Object_11014: THREE.Mesh
     Object_11015: THREE.Mesh
     Object_11016: THREE.Mesh
-    Plane017: THREE.Mesh
-    Plane018: THREE.Mesh
-    Plane019: THREE.Mesh
-    Plane020: THREE.Mesh
-    Plane021: THREE.Mesh
-    Plane022: THREE.Mesh
-    Mesh006: THREE.Mesh
-    Mesh006_1: THREE.Mesh
-    Plane091: THREE.Mesh
-    Plane091_1: THREE.Mesh
-    Plane091_2: THREE.Mesh
-    Plane091_3: THREE.Mesh
-    Plane091_4: THREE.Mesh
-    Text001: THREE.Mesh
-    Text002: THREE.Mesh
-    Text003: THREE.Mesh
-    Text004: THREE.Mesh
-    Plane091_5: THREE.Mesh
-    Plane091_6: THREE.Mesh
-    Plane091_7: THREE.Mesh
-    Plane091_8: THREE.Mesh
-    Plane091_9: THREE.Mesh
-    Plane091_10: THREE.Mesh
-    Plane091_11: THREE.Mesh
-    Plane091_12: THREE.Mesh
-    Plane091_13: THREE.Mesh
-    Plane091_14: THREE.Mesh
-    Plane091_15: THREE.Mesh
-    Plane091_16: THREE.Mesh
-    Plane091_17: THREE.Mesh
-    Plane091_18: THREE.Mesh
-    Plane091_19: THREE.Mesh
-    Plane091_20: THREE.Mesh
-    Plane091_21: THREE.Mesh
-    Plane091_22: THREE.Mesh
-    Plane091_23: THREE.Mesh
-    Plane091_24: THREE.Mesh
-    Plane091_25: THREE.Mesh
-    Plane091_26: THREE.Mesh
-    Plane091_27: THREE.Mesh
-    Plane091_28: THREE.Mesh
-    Plane091_29: THREE.Mesh
-    Plane091_30: THREE.Mesh
-    Plane091_31: THREE.Mesh
-    Plane091_32: THREE.Mesh
-    Plane091_33: THREE.Mesh
-    Plane091_34: THREE.Mesh
-    Plane091_35: THREE.Mesh
-    Plane091_36: THREE.Mesh
-    Plane091_37: THREE.Mesh
-    Plane091_38: THREE.Mesh
-    Plane091_39: THREE.Mesh
-    Plane091_40: THREE.Mesh
-    Plane091_41: THREE.Mesh
-    Plane091_42: THREE.Mesh
-    Plane091_43: THREE.Mesh
-    Plane091_44: THREE.Mesh
-    Plane091_45: THREE.Mesh
-    Plane091_46: THREE.Mesh
-    Plane091_47: THREE.Mesh
-    Plane091_48: THREE.Mesh
-    Plane091_49: THREE.Mesh
-    Plane091_50: THREE.Mesh
-    Plane091_51: THREE.Mesh
-    Plane091_52: THREE.Mesh
-    Plane091_53: THREE.Mesh
-    Plane091_54: THREE.Mesh
-    Plane091_55: THREE.Mesh
-    Plane091_56: THREE.Mesh
-    Plane091_57: THREE.Mesh
-    Plane091_58: THREE.Mesh
-    Plane091_59: THREE.Mesh
-    Plane091_60: THREE.Mesh
-    Plane091_61: THREE.Mesh
-    Plane091_62: THREE.Mesh
-    Plane091_63: THREE.Mesh
-    Plane091_64: THREE.Mesh
-    Plane091_65: THREE.Mesh
-    Plane091_66: THREE.Mesh
-    Plane091_67: THREE.Mesh
-    Plane091_68: THREE.Mesh
-    Plane091_69: THREE.Mesh
-    Plane006_1: THREE.Mesh
-    Plane006_2: THREE.Mesh
-    Plane007_1: THREE.Mesh
-    Plane007_2: THREE.Mesh
-    Plane008_1: THREE.Mesh
-    Plane008_2: THREE.Mesh
-    JDM_Body_GEO: THREE.Mesh
-    JDM_Body_GEO_1: THREE.Mesh
-    JDM_Body_GEO_2: THREE.Mesh
-    JDM_Body_GEO_3: THREE.Mesh
-    JDM_Body_GEO_4: THREE.Mesh
-    JDM_Body_GEO_5: THREE.Mesh
-    JDM_Body_GEO_6: THREE.Mesh
-    JDM_Body_GEO_7: THREE.Mesh
-    JDM_Body_GEO_8: THREE.Mesh
-    JDM_Interior: THREE.Mesh
-    GearStick: THREE.Mesh
-    SteeringWheel: THREE.Mesh
-    Plate: THREE.Mesh
-    JDM_Body_GEO_9: THREE.Mesh
-    JDM_Body_GEO_10: THREE.Mesh
-    JDM_Body_GEO_11: THREE.Mesh
-    JDM_Body_GEO_12: THREE.Mesh
-    JDM_Body_GEO_13: THREE.Mesh
-    JDM_Body_GEO_14: THREE.Mesh
-    JDM_Body_GEO_15: THREE.Mesh
-    JDM_Body_GEO_16: THREE.Mesh
-    JDM_Body_GEO_17: THREE.Mesh
-    JDM_Body_GEO_18: THREE.Mesh
-    JDM_Body_GEO_19: THREE.Mesh
-    JDM_Body_GEO_20: THREE.Mesh
-    JDM_Body_GEO_21: THREE.Mesh
-    JDM_Body_GEO_22: THREE.Mesh
-    JDM_Body_GEO_23: THREE.Mesh
-    JDM_Body_GEO_24: THREE.Mesh
-    JDM_Body_GEO_25: THREE.Mesh
-    JDM_Body_GEO_26: THREE.Mesh
-    JDM_Body_GEO_27: THREE.Mesh
-    JDM_Body_GEO_28: THREE.Mesh
-    JDM_Body_GEO_29: THREE.Mesh
-    JDM_Body_GEO_30: THREE.Mesh
-    JDM_Body_GEO_31: THREE.Mesh
-    JDM_Body_GEO_32: THREE.Mesh
-    JDM_Body_GEO_33: THREE.Mesh
-    JDM_Body_GEO_34: THREE.Mesh
-    JDM_Body_GEO_35: THREE.Mesh
-    JDM_Body_GEO_36: THREE.Mesh
-    JDM_Body_GEO_37: THREE.Mesh
-    JDM_Body_GEO_38: THREE.Mesh
-    JDM_Body_GEO_39: THREE.Mesh
-    JDM_Body_GEO_40: THREE.Mesh
-    JDM_Body_GEO_41: THREE.Mesh
-    JDM_Body_GEO_42: THREE.Mesh
-    JDM_Body_GEO_43: THREE.Mesh
-    JDM_Body_GEO_44: THREE.Mesh
-    JDM_Body_GEO_45: THREE.Mesh
-    JDM_Body_GEO_46: THREE.Mesh
-    JDM_Body_GEO_47: THREE.Mesh
-    JDM_Body_GEO_48: THREE.Mesh
-    JDM_Body_GEO_49: THREE.Mesh
-    JDM_Body_GEO_50: THREE.Mesh
-    JDM_Body_GEO_51: THREE.Mesh
-    JDM_Body_GEO_52: THREE.Mesh
-    JDM_Body_GEO_53: THREE.Mesh
-    JDM_Body_GEO_54: THREE.Mesh
-    JDM_Body_GEO_55: THREE.Mesh
-    JDM_Body_GEO_56: THREE.Mesh
-    JDM_Body_GEO_57: THREE.Mesh
-    JDM_Body_GEO_58: THREE.Mesh
-    JDM_Body_GEO_59: THREE.Mesh
-    JDM_Body_GEO_60: THREE.Mesh
-    JDM_Body_GEO_61: THREE.Mesh
-    JDM_Body_GEO_62: THREE.Mesh
-    JDM_Body_GEO_63: THREE.Mesh
-    JDM_Body_GEO_64: THREE.Mesh
-    JDM_Body_GEO_65: THREE.Mesh
-    JDM_Body_GEO_66: THREE.Mesh
-    JDM_Body_GEO_67: THREE.Mesh
-    JDM_Body_GEO_68: THREE.Mesh
-    JDM_Body_GEO_69: THREE.Mesh
-    JDM_Body_GEO_70: THREE.Mesh
-    JDM_Body_GEO_71: THREE.Mesh
-    JDM_Body_GEO_72: THREE.Mesh
-    JDM_Body_GEO_73: THREE.Mesh
-    JDM_Body_GEO_74: THREE.Mesh
-    JDM_Body_GEO_75: THREE.Mesh
-    JDM_Body_GEO_76: THREE.Mesh
-    JDM_Body_GEO_77: THREE.Mesh
-    JDM_Body_GEO_78: THREE.Mesh
-    JDM_Body_GEO_79: THREE.Mesh
-    JDM_Body_GEO_80: THREE.Mesh
-    JDM_Body_GEO_81: THREE.Mesh
-    JDM_Body_GEO_82: THREE.Mesh
-    JDM_Body_GEO_83: THREE.Mesh
-    JDM_Body_GEO_84: THREE.Mesh
-    JDM_Body_GEO_85: THREE.Mesh
-    JDM_Body_GEO_86: THREE.Mesh
-    JDM_Body_GEO_87: THREE.Mesh
-    JDM_Body_GEO_88: THREE.Mesh
-    JDM_Body_GEO_89: THREE.Mesh
-    JDM_Body_GEO_90: THREE.Mesh
-    JDM_Body_GEO_91: THREE.Mesh
-    JDM_Body_GEO_92: THREE.Mesh
-    JDM_Body_GEO_93: THREE.Mesh
-    JDM_Body_GEO_94: THREE.Mesh
-    JDM_Body_GEO_95: THREE.Mesh
-    JDM_Body_GEO_96: THREE.Mesh
-    JDM_Body_GEO_97: THREE.Mesh
-    JDM_Body_GEO_98: THREE.Mesh
-    JDM_Body_GEO_99: THREE.Mesh
-    JDM_Body_GEO_100: THREE.Mesh
-    JDM_Body_GEO_101: THREE.Mesh
-    JDM_Body_GEO_102: THREE.Mesh
-    JDM_Body_GEO_103: THREE.Mesh
-    JDM_Body_GEO_104: THREE.Mesh
-    JDM_Body_GEO_105: THREE.Mesh
-    JDM_Body_GEO_106: THREE.Mesh
-    JDM_Body_GEO_107: THREE.Mesh
-    JDM_Body_GEO_108: THREE.Mesh
-    JDM_Body_GEO_109: THREE.Mesh
-    JDM_Body_GEO_110: THREE.Mesh
-    JDM_Body_GEO_111: THREE.Mesh
-    JDM_Body_GEO_112: THREE.Mesh
-    JDM_Body_GEO_113: THREE.Mesh
-    JDM_Body_GEO_114: THREE.Mesh
-    JDM_Body_GEO_115: THREE.Mesh
-    JDM_Body_GEO_116: THREE.Mesh
-    JDM_Body_GEO_117: THREE.Mesh
-    JDM_Body_GEO_118: THREE.Mesh
-    JDM_Body_GEO_119: THREE.Mesh
-    JDM_Body_GEO_120: THREE.Mesh
-    JDM_Body_GEO_121: THREE.Mesh
-    JDM_Body_GEO_122: THREE.Mesh
-    JDM_Body_GEO_123: THREE.Mesh
-    JDM_Body_GEO_124: THREE.Mesh
-    JDM_Body_GEO_125: THREE.Mesh
-    JDM_Body_GEO_126: THREE.Mesh
-    JDM_Body_GEO_127: THREE.Mesh
-    JDM_Body_GEO_128: THREE.Mesh
-    JDM_Body_GEO_129: THREE.Mesh
-    JDM_Body_GEO_130: THREE.Mesh
-    JDM_Body_GEO_131: THREE.Mesh
-    JDM_Body_GEO_132: THREE.Mesh
-    JDM_Body_GEO_133: THREE.Mesh
-    JDM_Body_GEO_134: THREE.Mesh
-    JDM_Body_GEO_135: THREE.Mesh
-    JDM_Body_GEO_136: THREE.Mesh
-    JDM_Body_GEO_137: THREE.Mesh
-    JDM_Body_GEO_138: THREE.Mesh
-    JDM_Body_GEO_139: THREE.Mesh
-    JDM_Body_GEO_140: THREE.Mesh
-    JDM_Body_GEO_141: THREE.Mesh
-    JDM_Body_GEO_142: THREE.Mesh
-    JDM_Body_GEO_143: THREE.Mesh
-    JDM_Body_GEO_144: THREE.Mesh
-    JDM_Body_GEO_145: THREE.Mesh
-    JDM_Body_GEO_146: THREE.Mesh
-    JDM_Body_GEO_147: THREE.Mesh
-    JDM_Body_GEO_148: THREE.Mesh
-    JDM_Body_GEO_149: THREE.Mesh
-    JDM_Body_GEO_150: THREE.Mesh
-    JDM_Body_GEO_151: THREE.Mesh
-    JDM_Body_GEO_152: THREE.Mesh
-    JDM_Body_GEO_153: THREE.Mesh
-    JDM_Body_GEO_154: THREE.Mesh
-    JDM_Body_GEO_155: THREE.Mesh
-    JDM_Body_GEO_156: THREE.Mesh
-    JDM_Body_GEO_157: THREE.Mesh
-    JDM_Body_GEO_158: THREE.Mesh
-    JDM_Body_GEO_159: THREE.Mesh
-    JDM_Body_GEO_160: THREE.Mesh
-    JDM_Body_GEO_161: THREE.Mesh
-    JDM_Body_GEO_162: THREE.Mesh
-    JDM_Body_GEO_163: THREE.Mesh
-    JDM_Body_GEO_164: THREE.Mesh
-    JDM_Body_GEO_165: THREE.Mesh
-    JDM_Body_GEO_166: THREE.Mesh
-    JDM_Body_GEO_167: THREE.Mesh
-    JDM_Body_GEO_168: THREE.Mesh
-    JDM_Body_GEO_169: THREE.Mesh
-    JDM_Body_GEO_170: THREE.Mesh
-    JDM_Body_GEO_171: THREE.Mesh
-    JDM_Body_GEO_172: THREE.Mesh
-    JDM_Body_GEO_173: THREE.Mesh
-    JDM_Body_GEO_174: THREE.Mesh
-    JDM_Body_GEO_175: THREE.Mesh
-    JDM_Body_GEO_176: THREE.Mesh
-    JDM_Body_GEO_177: THREE.Mesh
-    JDM_Body_GEO_178: THREE.Mesh
-    JDM_Body_GEO_179: THREE.Mesh
+    Object_11017: THREE.Mesh
+    Object_11018: THREE.Mesh
+    Object_11019: THREE.Mesh
+    Object_11020: THREE.Mesh
+    Object_11021: THREE.Mesh
+    Object_11022: THREE.Mesh
+    Object_11023: THREE.Mesh
+    Object_11024: THREE.Mesh
+    Object_11025: THREE.Mesh
+    Object_11026: THREE.Mesh
+    Object_11027: THREE.Mesh
+    Object_11028: THREE.Mesh
+    Object_11029: THREE.Mesh
+    Object_14: THREE.Mesh
+    Object_20: THREE.Mesh
+    Object_17: THREE.Mesh
+    Object_18: THREE.Mesh
+    Object_23: THREE.Mesh
+    Object_26: THREE.Mesh
+    Object_29: THREE.Mesh
+    Object_32: THREE.Mesh
+    Object_35: THREE.Mesh
+    Object_38: THREE.Mesh
+    Object_41: THREE.Mesh
+    Object_44: THREE.Mesh
+    Object_47: THREE.Mesh
+    Object_50: THREE.Mesh
+    Object_68: THREE.Mesh
+    Object_71: THREE.Mesh
+    Object_86: THREE.Mesh
+    Object_89001: THREE.Mesh
+    Object_98001: THREE.Mesh
+    Object_98002: THREE.Mesh
+    Object_98003: THREE.Mesh
+    Object_98004: THREE.Mesh
+    Object_98005: THREE.Mesh
+    Object_98006: THREE.Mesh
+    Object_98007: THREE.Mesh
+    Object_98008: THREE.Mesh
+    Object_98009: THREE.Mesh
+    Object_101: THREE.Mesh
+    Object_104: THREE.Mesh
+    Object_107: THREE.Mesh
+    Object_113: THREE.Mesh
+    Object_110: THREE.Mesh
+    Object_119: THREE.Mesh
+    Object_125: THREE.Mesh
+    Object_122: THREE.Mesh
+    Object_123: THREE.Mesh
+    Object_131: THREE.Mesh
+    Object_128: THREE.Mesh
+    Object_129: THREE.Mesh
+    Object_134: THREE.Mesh
+    Object_141: THREE.Mesh
+    Object_138: THREE.Mesh
+    Object_144: THREE.Mesh
+    Object_153: THREE.Mesh
+    Object_156: THREE.Mesh
+    Object_159: THREE.Mesh
+    Object_165: THREE.Mesh
+    Object_168: THREE.Mesh
+    Object_171: THREE.Mesh
+    Object_180: THREE.Mesh
+    Object_186: THREE.Mesh
+    Object_189: THREE.Mesh
+    Cube029: THREE.Mesh
+    Cube031: THREE.Mesh
+    BézierCurve062: THREE.Mesh
+    Cube046: THREE.Mesh
+    Cube001: THREE.Mesh
+    Cube002: THREE.Mesh
+    Cube003: THREE.Mesh
+    Cube004: THREE.Mesh
+    Cube005: THREE.Mesh
+    BézierCurve001: THREE.Mesh
+    BézierCurve002: THREE.Mesh
+    BézierCurve003: THREE.Mesh
+    BézierCurve004: THREE.Mesh
+    BézierCurve005: THREE.Mesh
+    BézierCurve006: THREE.Mesh
+    BézierCurve007: THREE.Mesh
+    BézierCurve008: THREE.Mesh
+    BézierCurve009: THREE.Mesh
+    BézierCurve010: THREE.Mesh
+    Plane: THREE.Mesh
+    Plane003: THREE.Mesh
+    Object_7: THREE.Mesh
+    Object_8: THREE.Mesh
+    Object_9: THREE.Mesh
+    Plane001: THREE.Mesh
+    Plane002: THREE.Mesh
+    Plane004: THREE.Mesh
+    Plane005: THREE.Mesh
+    Plane006: THREE.Mesh
+    Earth_globe_glowing_hologram: THREE.Mesh
   }
   materials: {
-    ['Worn Road']: THREE.MeshStandardMaterial
-    ['Building 1']: THREE.MeshStandardMaterial
-    Window: THREE.MeshStandardMaterial
-    ['emission windows']: THREE.MeshPhysicalMaterial
-    ['Dark Metal']: THREE.MeshStandardMaterial
-    ['Window.001']: THREE.MeshStandardMaterial
-    ['Building 1.001']: THREE.MeshStandardMaterial
-    ['Bare Metal']: THREE.MeshStandardMaterial
-    ['Building 1.002']: THREE.MeshStandardMaterial
-    ['Window.002']: THREE.MeshStandardMaterial
-    ['Building 3']: THREE.MeshStandardMaterial
-    ['Bare Metal.001']: THREE.MeshStandardMaterial
-    ['AC.002']: THREE.MeshStandardMaterial
-    ['Window.003']: THREE.MeshStandardMaterial
-    ['Building 1.003']: THREE.MeshStandardMaterial
-    ['Building 2']: THREE.MeshStandardMaterial
-    ['Building Dark']: THREE.MeshStandardMaterial
-    ['Building 1.004']: THREE.MeshStandardMaterial
-    ['Window.004']: THREE.MeshStandardMaterial
-    ['Building 3.001']: THREE.MeshStandardMaterial
-    utility_box_01: THREE.MeshStandardMaterial
-    ['Material.009']: THREE.MeshStandardMaterial
-    Store: THREE.MeshStandardMaterial
-    ['Store Glass']: THREE.MeshPhysicalMaterial
-    ['Material.008']: THREE.MeshStandardMaterial
-    ['Neon  signs']: THREE.MeshStandardMaterial
-    ['Dark Metal.003']: THREE.MeshStandardMaterial
+    ['Material.001']: THREE.MeshStandardMaterial
+    chrom: THREE.MeshStandardMaterial
+    glass_01: THREE.MeshStandardMaterial
+    ['Material.006']: THREE.MeshStandardMaterial
+    advertising_screens_texture_01: THREE.MeshStandardMaterial
     ['Material.003']: THREE.MeshStandardMaterial
-    ['Store Emission']: THREE.MeshStandardMaterial
-    ['Material.002']: THREE.MeshStandardMaterial
-    ['Store.001']: THREE.MeshStandardMaterial
-    ['Store Glass.001']: THREE.MeshPhysicalMaterial
+    metal_black: THREE.MeshStandardMaterial
+    metal_gray: THREE.MeshStandardMaterial
+    ['Material.009']: THREE.MeshStandardMaterial
     ['Material.004']: THREE.MeshStandardMaterial
-    ['Neon  signs.001']: THREE.MeshStandardMaterial
-    ['Dark Metal.004']: THREE.MeshStandardMaterial
+    material_0: THREE.MeshStandardMaterial
+    ['Material.008']: THREE.MeshStandardMaterial
     ['Material.005']: THREE.MeshStandardMaterial
-    ['Store Emission.001']: THREE.MeshStandardMaterial
-    ['Material.007']: THREE.MeshStandardMaterial
-    ['traffic cone']: THREE.MeshStandardMaterial
+    ['Material.002']: THREE.MeshStandardMaterial
+    white_neon: THREE.MeshStandardMaterial
+    ['Dark iron']: THREE.MeshPhysicalMaterial
     bridgeUV: THREE.MeshStandardMaterial
-    ['Steel lattice 02']: THREE.MeshStandardMaterial
-    rusty_metal_02: THREE.MeshStandardMaterial
-    ['Rusty Worn Metal']: THREE.MeshStandardMaterial
-    banners: THREE.MeshStandardMaterial
-    ['Material.043']: THREE.MeshStandardMaterial
-    Light_Road_mat: THREE.MeshStandardMaterial
-    Emissive: THREE.MeshStandardMaterial
-    ['Galvanized steel']: THREE.MeshStandardMaterial
-    ['Reflective.Black']: THREE.MeshStandardMaterial
-    ['Reflective.White']: THREE.MeshStandardMaterial
-    ['Rough white metal']: THREE.MeshStandardMaterial
-    ['Panneau.Rouge']: THREE.MeshStandardMaterial
-    ['Reflective.Black']: THREE.MeshStandardMaterial
-    ['Old traffic cone']: THREE.MeshStandardMaterial
-    ['OLD traffic cone base']: THREE.MeshStandardMaterial
-    ['Old traffic cone. 02']: THREE.MeshStandardMaterial
-    ['OLD traffic cone base.02']: THREE.MeshStandardMaterial
-    ['traffic cone base']: THREE.MeshStandardMaterial
-    TailLight: THREE.MeshStandardMaterial
-    Paint: THREE.MeshPhysicalMaterial
-    Mirrors: THREE.MeshStandardMaterial
-    Lamp: THREE.MeshStandardMaterial
-    Carbon: THREE.MeshPhysicalMaterial
-    Glass: THREE.MeshPhysicalMaterial
-    Tire: THREE.MeshPhysicalMaterial
-    Rims: THREE.MeshStandardMaterial
-    Indicator: THREE.MeshStandardMaterial
-    Interiror: THREE.MeshStandardMaterial
-    Plate: THREE.MeshStandardMaterial
+    ['Mystical mesh']: THREE.MeshBasicMaterial
+    ['Braided metal']: THREE.MeshStandardMaterial
+    hologram: THREE.MeshStandardMaterial
+    body: THREE.MeshStandardMaterial
+    material: THREE.MeshStandardMaterial
+    RingMat: THREE.MeshStandardMaterial
+    ['Earth Surface.002']: THREE.MeshStandardMaterial
   }
 }
 
 export default function Constellation2(props: JSX.IntrinsicElements['group']) {
-  const { nodes, materials } = useGLTF('/models/citypakka.glb') as unknown as  GLTFResult
+  const { nodes, materials } = useGLTF('/models/cityy.glb') as unknown as  GLTFResult
   return (
-    <e.group theatreKey="Constellation2" scale={0.7}>
-     <group {...props} dispose={null} rotation={[0, Math.PI, 0]} scale={[0.7, 0.7, 0.7]}>
+    <e.group theatreKey="Constellation2" >
+     {/* <group {...props} dispose={null} rotation={[0, Math.PI, 0]} scale={[0.7, 0.7, 0.7]}>
       <mesh
         castShadow
         receiveShadow
@@ -520,7 +163,7 @@ export default function Constellation2(props: JSX.IntrinsicElements['group']) {
           castShadow
           receiveShadow
           geometry={nodes.Cube087.geometry}
-          material={materials['Building 1']}
+          material={materials['Bui21e1a523b81e2fbdb526ddd0889b62cc60a1d059lding 1']}
         />
         <mesh
           castShadow
@@ -3774,6 +3417,838 @@ export default function Constellation2(props: JSX.IntrinsicElements['group']) {
           position={[-0.001, 0.621, -2.429]}
         />
       </group>
+    </group> */}
+    <group {...props} dispose={null}  scale={[2, 2, 4]} rotation={[Math.PI/2, 0, Math.PI / 2]}>
+      <group position={[0, 0.136, 0.308]} rotation={[Math.PI, 0, 0]}>
+        <group scale={0.001}>
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_11.geometry}
+            material={materials['Material.001']}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_11001.geometry}
+            material={materials['Material.001']}
+            position={[20450.406, 4897.384, 4499.756]}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_11002.geometry}
+            material={materials['Material.001']}
+            position={[-7007.288, -1976.315, 3831.46]}
+            rotation={[0, 0, 1.655]}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_11004.geometry}
+            material={materials['Material.001']}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_11007.geometry}
+            material={materials['Material.001']}
+            position={[-20148.779, 0, 0]}
+            rotation={[0, -0.002, 0]}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_11008.geometry}
+            material={materials['Material.001']}
+            position={[-423.652, -4199.543, 7118.92]}
+            rotation={[0, 0, 2.784]}
+            scale={0.643}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_11009.geometry}
+            material={materials['Material.001']}
+            position={[15788.576, -1441.037, 2614.543]}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_11010.geometry}
+            material={materials['Material.001']}
+            position={[15515.364, 3773.048, 4934.636]}
+            rotation={[0, 0, -Math.PI]}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_11011.geometry}
+            material={materials['Material.001']}
+            position={[14827.472, -1939.864, 6254.369]}
+            rotation={[0, 0, -0.119]}
+            scale={2.897}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_11012.geometry}
+            material={materials['Material.001']}
+            position={[23408.879, 5457.384, 4354.588]}
+            rotation={[0, 0, -2.896]}
+            scale={[1.29, 1.021, 2.182]}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_11013.geometry}
+            material={materials['Material.001']}
+            position={[23408.879, 5457.383, 6970.932]}
+            rotation={[0, 0, -2.896]}
+            scale={[1.29, 1.021, 2.182]}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_11014.geometry}
+            material={materials['Material.001']}
+            position={[-7007.288, -1976.316, 6323.497]}
+            rotation={[0, 0, 1.655]}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_11015.geometry}
+            material={materials['Material.001']}
+            position={[-7007.288, -1976.316, 5026.987]}
+            rotation={[0, 0, 1.655]}
+            scale={0.718}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_11016.geometry}
+            material={materials['Material.001']}
+            position={[18804.201, 4970.419, 5500.791]}
+            rotation={[0, 0, -1.586]}
+            scale={[1.29, 1.021, 2.305]}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_11017.geometry}
+            material={materials['Material.001']}
+            position={[18804.201, 4970.417, 12908.195]}
+            rotation={[0, 0, -1.586]}
+            scale={[1.29, 1.021, 2.305]}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_11018.geometry}
+            material={materials['Material.001']}
+            position={[-423.652, -4199.542, 4395.458]}
+            rotation={[0, 0, 2.784]}
+            scale={0.643}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_11019.geometry}
+            material={materials['Material.001']}
+            position={[-423.652, -4199.544, 10231.396]}
+            rotation={[0, 0, 2.784]}
+            scale={0.643}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_11020.geometry}
+            material={materials['Material.001']}
+            position={[-423.652, -4199.543, 8664.948]}
+            rotation={[0, 0, 2.784]}
+            scale={0.643}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_11021.geometry}
+            material={materials['Material.001']}
+            position={[-8362.127, 2084.71, 6323.498]}
+            rotation={[0, 0, -0.316]}
+            scale={1.621}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_11022.geometry}
+            material={materials['Material.001']}
+            position={[-8362.127, 2084.712, 1003.75]}
+            rotation={[0, 0, -0.316]}
+            scale={1.621}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_11023.geometry}
+            material={materials['Material.001']}
+            position={[18804.201, 4970.418, 9153.967]}
+            rotation={[0, 0, -1.586]}
+            scale={[1.29, 1.021, 2.305]}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_11024.geometry}
+            material={materials['Material.001']}
+            position={[22305.535, -1253.971, 2863.308]}
+            rotation={[0, 0, -0.201]}
+            scale={[0.632, 0.992, 1]}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_11025.geometry}
+            material={materials['Material.001']}
+            position={[22305.535, -1253.971, 4279.289]}
+            rotation={[0, 0, -0.201]}
+            scale={[0.632, 0.992, 1]}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_11026.geometry}
+            material={materials['Material.001']}
+            position={[-7719.906, -1461.478, 6323.497]}
+            rotation={[0, 0, 2.865]}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_11027.geometry}
+            material={materials['Material.001']}
+            position={[-7719.906, -1461.477, 3597.247]}
+            rotation={[0, 0, 2.865]}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_11028.geometry}
+            material={materials['Material.001']}
+            position={[-10197.874, -1461.478, 4559.259]}
+            rotation={[0, 0, 2.865]}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_11029.geometry}
+            material={materials['Material.001']}
+            position={[-17395.922, -1461.478, 4559.259]}
+            rotation={[0, 0, 2.781]}
+            scale={1.646}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_14.geometry}
+            material={materials.chrom}
+            rotation={[Math.PI / 2, 0, 0]}
+            scale={1660.198}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_20.geometry}
+            material={materials.glass_01}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_17.geometry}
+            material={materials['Material.006']}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_18.geometry}
+            material={materials['Material.006']}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_23.geometry}
+            material={materials['Material.001']}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_26.geometry}
+            material={materials.advertising_screens_texture_01}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_29.geometry}
+            material={materials.advertising_screens_texture_01}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_32.geometry}
+            material={materials['Material.003']}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_35.geometry}
+            material={materials.metal_black}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_38.geometry}
+            material={materials.metal_gray}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_41.geometry}
+            material={materials['Material.009']}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_44.geometry}
+            material={materials.advertising_screens_texture_01}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_47.geometry}
+            material={materials['Material.009']}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_50.geometry}
+            material={materials['Material.004']}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_68.geometry}
+            material={materials.material_0}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_71.geometry}
+            material={materials.advertising_screens_texture_01}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_86.geometry}
+            material={materials['Material.001']}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_89001.geometry}
+            material={materials['Material.001']}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_98001.geometry}
+            material={materials['Material.001']}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_98002.geometry}
+            material={materials['Material.001']}
+            position={[-331.258, 1757.439, 4371.71]}
+            rotation={[0, 0, 1.454]}
+            scale={2.424}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_98003.geometry}
+            material={materials['Material.001']}
+            position={[21271.852, 4840.707, 2478.09]}
+            rotation={[0, 0, 1.7]}
+            scale={1.293}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_98004.geometry}
+            material={materials['Material.001']}
+            position={[25387.395, -2359.38, 9911.609]}
+            scale={[1, 1, 2.571]}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_98005.geometry}
+            material={materials['Material.001']}
+            position={[25387.395, -2359.379, 6821.752]}
+            scale={[1, 1, 2.571]}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_98006.geometry}
+            material={materials['Material.001']}
+            position={[25387.395, -2359.378, 3714.916]}
+            scale={[1, 1, 2.571]}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_98007.geometry}
+            material={materials['Material.001']}
+            position={[26084.018, -1691.66, 1326.912]}
+            scale={[1, 1, 1.063]}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_98008.geometry}
+            material={materials['Material.001']}
+            position={[2541.395, 3453.441, 4371.709]}
+            rotation={[0, 0, 3.025]}
+            scale={1.804}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_98009.geometry}
+            material={materials['Material.001']}
+            position={[7597.885, 5419.247, 10340.923]}
+            rotation={[0, 0, -1.688]}
+            scale={[1.804, 1.804, 5.113]}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_101.geometry}
+            material={materials['Material.008']}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_104.geometry}
+            material={materials.metal_gray}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_107.geometry}
+            material={materials.metal_gray}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_113.geometry}
+            material={materials.metal_gray}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_110.geometry}
+            material={materials.metal_gray}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_119.geometry}
+            material={materials.metal_gray}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_125.geometry}
+            material={materials.metal_gray}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_122.geometry}
+            material={materials.metal_gray}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_123.geometry}
+            material={materials.metal_gray}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_131.geometry}
+            material={materials.metal_gray}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_128.geometry}
+            material={materials.material_0}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_129.geometry}
+            material={materials.material_0}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_134.geometry}
+            material={materials.metal_gray}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_141.geometry}
+            material={materials.metal_gray}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_138.geometry}
+            material={materials.metal_gray}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_144.geometry}
+            material={materials.metal_black}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_153.geometry}
+            material={materials.metal_black}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_156.geometry}
+            material={materials.metal_black}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_159.geometry}
+            material={materials.metal_black}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_165.geometry}
+            material={materials.metal_black}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_168.geometry}
+            material={materials.metal_black}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_171.geometry}
+            material={materials.metal_black}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_180.geometry}
+            material={materials['Material.005']}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_186.geometry}
+            material={materials['Material.002']}
+          />
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.Object_189.geometry}
+            material={materials.white_neon}
+          />
+        </group>
+      </group>
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.Cube029.geometry}
+        material={materials['Dark iron']}
+        position={[12.537, 1.935, -0.455]}
+        rotation={[0, Math.PI / 2, 0]}
+        scale={0.222}
+      />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.Cube031.geometry}
+        material={materials.bridgeUV}
+        position={[9.609, 3.666, -0.464]}
+        rotation={[-Math.PI, 0.15, -Math.PI]}
+        scale={[0.237, 0.16, 0.237]}
+      />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.BézierCurve062.geometry}
+        material={materials['Mystical mesh']}
+        position={[8.899, 3.666, 1.167]}
+        rotation={[-3.081, 1.304, -0.041]}
+        scale={[-1.172, -0.974, -0.998]}
+      />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.Cube046.geometry}
+        material={materials['Braided metal']}
+        position={[5.581, 1.088, -0.214]}
+        scale={[0.14, 0.236, 0.14]}
+      />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.Cube001.geometry}
+        material={materials.bridgeUV}
+        position={[-0.454, 3.666, 0.33]}
+        rotation={[Math.PI, -0.339, Math.PI]}
+        scale={[0.237, 0.16, 0.237]}
+      />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.Cube002.geometry}
+        material={materials.bridgeUV}
+        position={[-11.433, 3.666, -0.464]}
+        rotation={[-Math.PI, 0.299, -Math.PI]}
+        scale={[0.237, 0.16, 0.237]}
+      />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.Cube003.geometry}
+        material={materials.bridgeUV}
+        position={[-5.253, 3.666, 3.626]}
+        rotation={[Math.PI, -0.41, Math.PI]}
+        scale={[0.237, 0.16, 0.237]}
+      />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.Cube004.geometry}
+        material={materials['Dark iron']}
+        position={[0.297, 1.935, -0.204]}
+        rotation={[0, Math.PI / 2, 0]}
+        scale={0.222}
+      />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.Cube005.geometry}
+        material={materials['Dark iron']}
+        position={[-9.47, 1.935, -0.204]}
+        rotation={[0, Math.PI / 2, 0]}
+        scale={0.222}
+      />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.BézierCurve001.geometry}
+        material={materials['Mystical mesh']}
+        position={[14.591, 3.666, 1.167]}
+        rotation={[2.894, 1.304, -0.041]}
+        scale={[-1.172, -0.974, -0.998]}
+      />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.BézierCurve002.geometry}
+        material={materials['Mystical mesh']}
+        position={[14.591, 3.666, 1.167]}
+        rotation={[-3.061, 1.304, -0.041]}
+        scale={[-1.172, -0.974, -0.998]}
+      />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.BézierCurve003.geometry}
+        material={materials['Mystical mesh']}
+        position={[9.91, 3.666, 1.167]}
+        rotation={[-3.061, 1.304, -0.041]}
+        scale={[-1.172, -0.974, -0.998]}
+      />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.BézierCurve004.geometry}
+        material={materials['Mystical mesh']}
+        position={[5.55, 2.643, 1.167]}
+        rotation={[-3.061, 1.304, -0.041]}
+        scale={[-1.172, -0.974, -0.998]}
+      />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.BézierCurve005.geometry}
+        material={materials['Mystical mesh']}
+        position={[-0.237, 3.666, 2.694]}
+        rotation={[-3.061, 1.304, -0.041]}
+        scale={[-1.172, -0.974, -0.998]}
+      />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.BézierCurve006.geometry}
+        material={materials['Mystical mesh']}
+        position={[-4.718, 0.848, 1.167]}
+        rotation={[-3.061, 1.304, -0.041]}
+        scale={[-1.172, -0.974, -0.998]}
+      />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.BézierCurve007.geometry}
+        material={materials['Mystical mesh']}
+        position={[-4.718, 3.666, 5.969]}
+        rotation={[-3.061, 1.304, -0.041]}
+        scale={[-0.981, -0.815, -0.835]}
+      />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.BézierCurve008.geometry}
+        material={materials['Mystical mesh']}
+        position={[-9.58, 3.666, 2.955]}
+        rotation={[-3.061, 1.304, -0.041]}
+        scale={[-1.172, -0.974, -0.998]}
+      />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.BézierCurve009.geometry}
+        material={materials['Mystical mesh']}
+        position={[-0.14, 2.643, 3.662]}
+        rotation={[-0.224, 1.5, -2.962]}
+        scale={[-1.172, -0.974, -0.998]}
+      />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.BézierCurve010.geometry}
+        material={materials['Mystical mesh']}
+        position={[-6.678, 0.848, 1.167]}
+        rotation={[-3.113, 0.731, 0.018]}
+        scale={[-1.172, -0.974, -0.998]}
+      />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.Plane.geometry}
+        material={materials.hologram}
+        position={[12.531, 2.332, -0.663]}
+        rotation={[Math.PI / 2, 0, -Math.PI / 2]}
+        scale={[1.041, 0.494, 0.494]}
+      />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.Plane003.geometry}
+        material={materials.hologram}
+        position={[1.257, 0.315, 0.877]}
+        rotation={[Math.PI / 2, 0, -2.014]}
+        scale={[0.431, 0.204, 0.204]}
+      />
+      <group position={[1.298, -0.289, -0.499]} rotation={[-Math.PI, -1.518, 0]} scale={0.095}>
+        <group rotation={[Math.PI / 2, 0, 0]}>
+          <group position={[-8.487, -0.013, 13.654]} rotation={[0, 0.443, 0]} scale={0.452}>
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.Object_7.geometry}
+              material={materials.body}
+            />
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.Object_8.geometry}
+              material={materials.material}
+            />
+            <mesh
+              castShadow
+              receiveShadow
+              geometry={nodes.Object_9.geometry}
+              material={materials.RingMat}
+            />
+          </group>
+        </group>
+      </group>
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.Plane001.geometry}
+        material={materials.hologram}
+        position={[15.336, 3.575, -4.201]}
+        rotation={[0, 0, -Math.PI / 2]}
+        scale={[1.041, 0.494, 0.494]}
+      />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.Plane002.geometry}
+        material={materials.hologram}
+        position={[-0.157, 2.631, 2.307]}
+        rotation={[Math.PI / 2, 0, -2.969]}
+        scale={[1.041, 0.494, 0.494]}
+      />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.Plane004.geometry}
+        material={materials.hologram}
+        position={[-4.135, 2.291, 0.923]}
+        rotation={[Math.PI / 2, 0, -1.905]}
+        scale={[0.635, 0.301, 0.301]}
+      />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.Plane005.geometry}
+        material={materials.hologram}
+        position={[-4.499, -0.432, -3.843]}
+        rotation={[0, -0.065, 0]}
+        scale={[1.013, 0.48, 0.48]}
+      />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.Plane006.geometry}
+        material={materials.hologram}
+        position={[1.674, 2.663, -2.046]}
+        rotation={[0, 0, -Math.PI / 2]}
+        scale={[0.657, 0.311, 0.311]}
+      />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.Earth_globe_glowing_hologram.geometry}
+        material={materials['Earth Surface.002']}
+        position={[7.979, 0.009, -1.155]}
+        rotation={[Math.PI, -0.888, Math.PI]}
+        scale={0.733}
+      />
     </group>
     </e.group>
   )

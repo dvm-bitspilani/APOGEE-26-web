@@ -6,8 +6,12 @@ import infernusModel from "../../../../assets/3d/landing/car5.0.glb";
 import { useInfernusStore } from "../../../../utils/store";
 import { useNeonMaterial } from "../../hooks/useNeonMaterial";
 import { useKonami } from "../../hooks/useKonami";   // ⭐ add this
+<<<<<<< HEAD
 import { editable as e } from "@theatre/r3f";
 
+=======
+import {editable as e } from "@theatre/r3f";
+>>>>>>> c65381cf3929dba03ace709e28d5550a0bd9bfba
 type GLTFResult = GLTF & {
   nodes: {
     meshId5_name: THREE.Mesh;
