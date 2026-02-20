@@ -6,7 +6,7 @@ import infernusModel from "../../../../assets/3d/landing/car5.0.glb";
 import { useInfernusStore } from "../../../../utils/store";
 import { useNeonMaterial } from "../../hooks/useNeonMaterial";
 import { useKonami } from "../../hooks/useKonami";   // ⭐ add this
-
+import {editable as e } from "@theatre/r3f";
 type GLTFResult = GLTF & {
   nodes: {
     meshId5_name: THREE.Mesh;
@@ -49,7 +49,7 @@ export default function Infernus() {
 
   return (
     <Float floatIntensity={3} rotationIntensity={0.05} speed={5}>
-      <group
+      <e.group theatreKey="Car"
         ref={infernusRef}
         dispose={null}
         position={[0.5, -3, 60]}
@@ -111,7 +111,7 @@ export default function Infernus() {
           rotation={[Math.PI / 2, 0, 0]}
           scale={1.492}
         />
-      </group>
+      </e.group>
     </Float>
   );
 }
