@@ -48,7 +48,7 @@ export default function Infernus() {
   const { nodes, materials } = useGLTF(infernusModel) as unknown as GLTFResult;
 
   return (
-    <Float floatIntensity={3} rotationIntensity={0.05} speed={5}>
+    // <Float floatIntensity={3} rotationIntensity={0.05} speed={5}>
       <e.group theatreKey="Car"
         ref={infernusRef}
         dispose={null}
@@ -112,7 +112,7 @@ export default function Infernus() {
           scale={1.492}
         />
       </e.group>
-    </Float>
+    // </Float>
   );
 }
 
