@@ -85,7 +85,7 @@ export default function Preloader({ onLaunch }: PreloaderProps) {
       if (e.matches) {
         setwidth(true);
         setAnimDone(true);
-        console.log("Mobile mode activated");
+        // console.log("Mobile mode activated");
       } else {
         setwidth(false);
       }
@@ -184,7 +184,7 @@ export default function Preloader({ onLaunch }: PreloaderProps) {
     }
 
     for (let i = Math.floor(prevIndex); i < targetIndex; i++) {
-      console.log(`Revealing char ${i} of ${totalChars}`);
+      // console.log(`Revealing char ${i} of ${totalChars}`);
       if (i == 189) {
         timelineRef.current?.to(svgRef.current, {
           clipPath: "inset(0% 0% 0% 0%)",
