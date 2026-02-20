@@ -95,8 +95,8 @@
       .videoContainer {
         display: flex;
         align-items: center;
-        gap: 1rem;
         margin-top: 4rem;
+        gap: 1rem;
 
         .arrow {
           width: 3.5rem;
@@ -114,32 +114,85 @@
 
         .videoPlaceholder {
           position: relative;
+          aspect-ratio: 16/10;
           width: 400px;
-          height: auto;
           display: flex;
           justify-content: center;
           align-items: center;
+          background: #ffcc00; // Frame border color
+          padding: 2.5px; // Frame thickness
+          margin: 1rem 0;
 
-          img {
+          clip-path: polygon(
+            0% 10%,
+            10% 0%,
+            95% 0%,
+            100% 5%,
+            100% 90%,
+            95% 100%,
+            95% 100%,
+            45% 100%,
+            35% 90%,
+            10% 90%,
+            10% 90%,
+            0% 80%
+          );
+
+          .playerWrapper {
+            position: relative; // Reset absolute positioning
             width: 100%;
             height: 100%;
-            object-fit: contain;
-            filter: drop-shadow(0 0 10px rgba(255, 204, 0, 0.3));
+            background: #000;
+            z-index: 1;
+            overflow: hidden;
+            // Apply same clip-path to mask the video content
+            clip-path: polygon(
+              0% 10%,
+              10% 0%,
+              95% 0%,
+              100% 5%,
+              100% 90%,
+              95% 100%,
+              95% 100%,
+              45% 100%,
+              35% 90%,
+              10% 90%,
+              10% 90%,
+              0% 80%
+            );
+
+            cursor: pointer;
+
+            .youtubeFrame {
+              width: 100%;
+              height: 100%;
+              pointer-events: none;
+
+              iframe {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+              }
+            }
           }
 
           .playButton {
             position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             width: 60px;
             height: 60px;
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(0, 0, 0, 0.6);
             border-radius: 50%;
-            border: 2px solid white;
+            border: 2px solid #ffcc00;
             display: flex;
             justify-content: center;
             align-items: center;
             backdrop-filter: blur(4px);
             cursor: pointer;
             transition: all 0.3s;
+            z-index: 10;
 
             &::after {
               content: "";
@@ -147,13 +200,14 @@
               height: 0;
               border-top: 10px solid transparent;
               border-bottom: 10px solid transparent;
-              border-left: 18px solid white;
+              border-left: 18px solid #fff;
               margin-left: 4px;
             }
 
             &:hover {
-              background: rgba(255, 255, 255, 0.4);
-              transform: scale(1.05);
+              background: rgba(255, 204, 0, 0.2);
+              box-shadow: 0 0 15px #ffcc00;
+              transform: translate(-50%, -50%) scale(1.1);
             }
           }
         }

@@ -35,7 +35,10 @@ export default function Modal({ children }: { children?: React.ReactNode }) {
         {/* <div className={styles.contactus}>
                 <ContactUs/>
                 </div> */}
-        <div className={styles.modalContent}>
+        <div
+          className={styles.modalContent}
+          onClick={(e) => e.stopPropagation()}
+        >
           {currentsection === "about" ? (
             <AboutUs />
           ) : currentsection === "contact" ? (
