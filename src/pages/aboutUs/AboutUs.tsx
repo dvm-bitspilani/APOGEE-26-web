@@ -93,7 +93,12 @@ export default function AboutUs() {
           </div>
 
           <div className={styles.socials} onClick={(e) => e.stopPropagation()}>
-            <div className={styles.socialIcon}>
+            <a
+              href="https://www.youtube.com/@APOGEEBITS"
+              target="_blank"
+              rel="noreferrer"
+              className={styles.socialIcon}
+            >
               <img
                 src="/svg/aboutUs/icon-ring.svg"
                 className={styles.ring}
@@ -104,8 +109,13 @@ export default function AboutUs() {
                 className={styles.icon}
                 alt="YouTube"
               />
-            </div>
-            <div className={styles.socialIcon}>
+            </a>
+            <a
+              href="https://www.instagram.com/bitsapogee/"
+              target="_blank"
+              rel="noreferrer"
+              className={styles.socialIcon}
+            >
               <img
                 src="/svg/aboutUs/icon-ring.svg"
                 className={styles.ring}
@@ -116,8 +126,13 @@ export default function AboutUs() {
                 className={styles.icon}
                 alt="Instagram"
               />
-            </div>
-            <div className={styles.socialIcon}>
+            </a>
+            <a
+              href="https://www.linkedin.com/company/apogee-bits-pilani/"
+              target="_blank"
+              rel="noreferrer"
+              className={styles.socialIcon}
+            >
               <img
                 src="/svg/aboutUs/icon-ring.svg"
                 className={styles.ring}
@@ -128,8 +143,13 @@ export default function AboutUs() {
                 className={styles.icon}
                 alt="LinkedIn"
               />
-            </div>
-            <div className={styles.socialIcon}>
+            </a>
+            <a
+              href="https://x.com/BITSApogee"
+              target="_blank"
+              rel="noreferrer"
+              className={styles.socialIcon}
+            >
               <img
                 src="/svg/aboutUs/icon-ring.svg"
                 className={styles.ring}
@@ -140,7 +160,7 @@ export default function AboutUs() {
                 className={styles.icon}
                 alt="Twitter"
               />
-            </div>
+            </a>
           </div>
         </div>
       </div>
