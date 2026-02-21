@@ -6,6 +6,7 @@ import Registration from "./pages/registration/Registration";
 import City from "./pages/city/City";
 // import ContactUs from "./pages/contactUs/ContactUs";
 // import Preloader from "./pages/preloader/Preloader";
+import Ham from "./pages/ham/Ham";
 type page = {
   url: string;
 
@@ -38,6 +39,11 @@ const pages: page[] = [
 
   //   component: Preloader,
   // },
+  {
+    url: "/ham",
+
+    component: Ham,
+  },
 ];
 
 const generateRoutes = (pages: page[]) => {

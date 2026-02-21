@@ -1,0 +1,124 @@
+@use "/src/assets/global.scss" as *;
+
+.container {
+  height: 100vh;
+  width: 100vw;
+  .bgImg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+  }
+  .speedometer {
+    width: 100%;
+    height: 50vh;
+    margin-top: 50vh;
+    position: relative;
+
+    @for $i from 1 through 5 {
+      .dashCircle#{$i} {
+        position: absolute;
+        --dash: calc(1.2deg - 0.1deg * #{$i});
+        --gap: 8deg;
+        --thickness: 68%;
+        --stop: calc(42.5% - 0.2% * #{$i});
+
+        top: 98%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: calc(14vw + 8vw * #{$i});
+        aspect-ratio: 1;
+        border-radius: 50%;
+        clip-path: rect(0% 100% 52% 0%);
+
+        background: repeating-conic-gradient(
+          #b301ff 0deg var(--dash),
+          transparent var(--dash) var(--gap)
+        );
+
+        mask: radial-gradient(
+          circle,
+          transparent 0% 40%,
+          black 40% var(--stop),
+          transparent var(--stop) 100%
+        );
+      }
+    }
+
+    .radialCircle1 {
+      position: absolute;
+      top: 98%;
+      left: 50%;
+      //   transform: translate(-50%, -50%);
+      width: 43vw;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      clip-path: rect(0% 100% 52% 0%);
+      background-color: #b301ff;
+      background: radial-gradient(
+        circle,
+        transparent 50%,
+        #b301ffde 80%,
+        #b301ff 100%
+      );
+      animation: spin2 0.8s linear forwards;
+      @keyframes spin2 {
+        from {
+          transform: translate(-50%, -50%) rotate(-180deg);
+        }
+        to {
+          transform: translate(-50%, -50%) rotate(0deg);
+        }
+      }
+    }
+    .radialCircle2 {
+      position: absolute;
+      top: 98%;
+      left: 50%;
+      width: 43vw;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      clip-path: rect(0% 100% 52% 0%);
+      background-color: #b301ff;
+      background: radial-gradient(
+        circle,
+        transparent 50%,
+        #b301ffde 80%,
+        #b301ff 100%
+      );
+      //   transform: translate(-50%, -50%) rotate(0deg);
+      opacity: 0.5;
+      animation: spin 0.8s linear forwards;
+      @keyframes spin {
+        from {
+          transform: translate(-50%, -50%) rotate(0deg);
+        }
+        to {
+          transform: translate(-50%, -50%) rotate(180deg);
+        }
+      }
+    }
+    .bigDashCircle {
+      position: absolute;
+      --dash: 14deg;
+      --gap: 18deg;
+      --thickness: 70%;
+      --stop: 43%;
+      top: 98%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 46vw;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      clip-path: rect(0% 100% 52% 0%);
+      background: repeating-conic-gradient(
+        #b301ff 0deg var(--dash),
+        transparent var(--dash) var(--gap)
+      );
+      mask: radial-gradient(circle, transparent 0% 69.6%, black 69.6% 100%);
+    }
+  }
+}
