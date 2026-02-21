@@ -1,0 +1,256 @@
+@use "/src/assets/global.scss" as *;
+
+.eventsItemContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    // Animation for fade in
+    animation: fadeIn 0.5s ease forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+.mainLayout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    width: 90%;
+    max-width: 1600px;
+    height: 70vh;
+}
+
+.arrowContainer {
+    cursor: pointer;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+
+    &.hiddenArrow {
+        visibility: hidden;
+        pointer-events: none;
+    }
+
+    .arrowImg {
+        width: 80px; // Scaled up to match 'big arrows' requested in design
+        transition: all 0.2s ease;
+    }
+
+    &:hover {
+        transform: scale(1.1);
+
+        .arrowImg {
+            filter: drop-shadow(0 0 8px rgba(0, 255, 255, 0.8));
+        }
+    }
+}
+
+.contentWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    position: relative;
+}
+
+.imageSection {
+    position: relative;
+    width: 538px;
+    height: 378px;
+    flex-shrink: 0;
+    z-index: 3; // Ensure left frame strictly overlaps right frame EXCEPT for the glow logic, changing layout logic...
+}
+
+.imageClipping {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    clip-path: polygon(41px 20px,
+            19px 45px,
+            19px 308px,
+            56px 355px,
+            278px 355px,
+            288px 339px,
+            464px 339px,
+            477px 355px,
+            507px 355px,
+            518px 341px,
+            518px 26px,
+            509px 16px,
+            449px 15px,
+            176px 15px,
+            164px 32px,
+            71px 32px,
+            61px 20px);
+    background: #111;
+}
+
+.eventImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.frameImg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.detailsSection {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    z-index: 2; // Crucial: must remain under the left frame
+    margin-left: -150px;
+    padding-left: 50px;
+}
+
+.glowBoxWrapper {
+    width: 100%;
+    position: relative;
+    filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.4));
+    display: flex;
+    min-height: 400px;
+}
+
+.glowBox {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #00ffff; // Cyan border
+    z-index: 1;
+    pointer-events: none;
+    // Cross-browser continuous path with a slit to form a hollow donut shape 
+    // Firefox bug fix: Slit entry and exit cannot perfectly overlap.
+    clip-path: polygon(0% 0%,
+            100% 0%,
+            100% calc(100% - 60px),
+            calc(100% - 60px) 100%,
+            0% 100%,
+            0% calc(50% + 1px),
+            3px calc(50% + 1px),
+            3px calc(100% - 3px),
+            calc(100% - 63px) calc(100% - 3px),
+            calc(100% - 3px) calc(100% - 63px),
+            calc(100% - 3px) 3px,
+            3px 3px,
+            3px 50%,
+            0% 50%,
+            0% 0%);
+}
+
+.glowBoxInner {
+    width: 100%;
+    flex: 1;
+    background: rgba(4, 18, 26, 0.2); // Match the dark cyber blue background
+    backdrop-filter: blur(10px);
+    // Snug fit exactly inside the hollow border
+    clip-path: polygon(3px 3px,
+            calc(100% - 3px) 3px,
+            calc(100% - 3px) calc(100% - 63px),
+            calc(100% - 63px) calc(100% - 3px),
+            3px calc(100% - 3px));
+    padding: 3rem 8rem 3rem 6rem; // Leave right padding for Register button
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+}
+
+.title {
+    font-family: $font-blender;
+    color: #ffeb00; // Yellow for title based on standard color
+    font-size: 2.5rem;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    letter-spacing: 2px;
+
+    .bracket {
+        color: #ffeb00; // Yellow brackets matching image
+    }
+}
+
+.desc {
+    font-family: $font-jetBrains;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    color: #ccc;
+    max-width: 600px;
+}
+
+.infoGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    font-size: 0.9rem;
+    color: #ddd;
+}
+
+.infoItem {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+
+    .icon {
+        color: #00ffff;
+        font-size: 1.2rem; // Larger icons
+    }
+}
+
+.actionContainer {
+    position: absolute;
+    bottom: 2rem;
+    right: 5rem;
+}
+
+.registerBtn {
+    background: #fff;
+    border: none;
+    padding: 2px; // White outer border thickness
+    cursor: pointer;
+    clip-path: polygon(15px 0, calc(100% - 15px) 0, 100% 15px, 100% calc(100% - 15px), calc(100% - 15px) 100%, 15px 100%, 0 calc(100% - 15px), 0 15px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .btnInner {
+
+        color: white;
+        font-family: $font-jetBrainsBold;
+        font-size: 1.2rem;
+        padding: 0.8rem 2.5rem;
+        clip-path: polygon(14px 0, calc(100% - 14px) 0, 100% 14px, 100% calc(100% - 14px), calc(100% - 14px) 100%, 14px 100%, 0 calc(100% - 14px), 0 14px);
+        transition: all 0.3s ease;
+
+    }
+}
