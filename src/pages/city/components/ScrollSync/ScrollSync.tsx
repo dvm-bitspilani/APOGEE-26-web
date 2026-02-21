@@ -3,7 +3,7 @@ import { useFrame } from "@react-three/fiber";
 // import { sheet } from "../../theatre";
 import { getProject } from "@theatre/core";
 
-import state from "../../new_city_state.json";
+import state from "../../state9.json";
 import { useModalStore } from "../../../../utils/store";
 import { type Section, useCurrentSectionStore } from "../../../../utils/store";
 // import { useLocation, useNavigate } from "react-router-dom";

@@ -1,17 +1,13 @@
 import * as THREE from "three";
-import { Float, useGLTF } from "@react-three/drei";
+import { useGLTF } from "@react-three/drei";
 import { type GLTF } from "three-stdlib";
 import { useEffect, useRef } from "react";
 import infernusModel from "../../../../assets/3d/landing/car5.0.glb";
 import { useInfernusStore } from "../../../../utils/store";
 import { useNeonMaterial } from "../../hooks/useNeonMaterial";
 import { useKonami } from "../../hooks/useKonami";   // ⭐ add this
-<<<<<<< HEAD
 import { editable as e } from "@theatre/r3f";
 
-=======
-import {editable as e } from "@theatre/r3f";
->>>>>>> c65381cf3929dba03ace709e28d5550a0bd9bfba
 type GLTFResult = GLTF & {
   nodes: {
     meshId5_name: THREE.Mesh;
@@ -53,7 +49,7 @@ export default function Infernus() {
   const { nodes, materials } = useGLTF(infernusModel) as unknown as GLTFResult;
 
   return (
-    <Float floatIntensity={3} rotationIntensity={0.05} speed={5}>
+    // <Float floatIntensity={3} rotationIntensity={0.05} speed={5}>
       <e.group
         theatreKey="UltaRickshaw"
         ref={infernusRef}
@@ -118,7 +114,7 @@ export default function Infernus() {
           scale={1.492}
         />
       </e.group>
-    </Float>
+    // </Float>
   );
 }
 
