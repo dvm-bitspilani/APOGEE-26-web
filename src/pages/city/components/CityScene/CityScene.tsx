@@ -2,12 +2,13 @@ import { ScrollControls } from "@react-three/drei";
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { useCityStore, usePivotStore } from "../../../../utils/store";
-import Constellation3 from "../Constellation3";
 import Infernus from "../models/Infernus";
 import ScrollSync from "../ScrollSync/ScrollSync";
 import SceneDevOrProd from "./SceneDevorProd";
 import SceneLights from "./SceneLights";
 import TheatreCameraFinal from "./TheatreCameraFinal";
+import StarJunction from "../models/StarJunstion3";
+import Constellation from "../Constellation3";
 // import MatrixRain from "../MatrixRain";
 
 export default function CityScene({}: any) {
@@ -43,7 +44,7 @@ export default function CityScene({}: any) {
           <group ref={cityRef}>
             {/* <axesHelper args={[200]} /> */}
             {/* <CityGrid /> */}
-            <Constellation3 />
+            <Constellation />
           </group>
         </group>
 
