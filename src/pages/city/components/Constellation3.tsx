@@ -530,7 +530,7 @@ export default function Constellation3(props: JSX.IntrinsicElements['group']) {
     <e.group theatreKey="Constellation2" >
      
   
-     <group {...props} dispose={null}  rotation={[0, Math.PI/2, 0]}>
+     <group {...props} dispose={null} scale={[1.5,1.5,1.5]}  rotation={[0, Math.PI/2, 0]}>
       <mesh geometry={nodes.Object_11.geometry} material={materials['Material.001']} position={[0, 1.014, -0.568]} rotation={[-Math.PI / 2, 0, 0]} scale={0.001} />
       <mesh geometry={nodes.Object_14.geometry} material={materials.PaletteMaterial001} position={[0, 1.014, -0.568]} />
       <mesh geometry={nodes.Object_17.geometry} material={materials.PaletteMaterial002} position={[0, 1.014, -0.568]} rotation={[-Math.PI / 2, 0, 0]} scale={0.001} />
