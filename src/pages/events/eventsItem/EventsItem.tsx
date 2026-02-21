@@ -61,15 +61,15 @@ export default function EventsItem({ category, events }: EventsItemProps) {
 
                                 <div className={styles.infoGrid}>
                                     <div className={styles.infoItem}>
-                                        <span className={styles.icon}>📍</span>
+                                        <img src="/svg/events/loc.svg" alt="Location" className={styles.icon} />
                                         <span>{currentEvent.location}</span>
                                     </div>
                                     <div className={styles.infoItem}>
-                                        <span className={styles.icon}>🕒</span>
+                                        <img src="/svg/events/time.svg" alt="Time" className={styles.icon} />
                                         <span>{currentEvent.time}</span>
                                     </div>
                                     <div className={styles.infoItem} style={{ gridColumn: "span 2" }}>
-                                        <span className={styles.icon}>📞</span>
+                                        <img src="/svg/events/call.svg" alt="Phone" className={styles.icon} />
                                         <span>{currentEvent.phone}</span>
                                     </div>
                                 </div>
@@ -79,6 +79,7 @@ export default function EventsItem({ category, events }: EventsItemProps) {
                                         <div className={styles.btnInner}>Register</div>
                                     </button> */}
                                     <NavButton
+                                        innerClass={styles.registerBtn}
                                         onClick={() => { }}
                                     >Register
                                     </NavButton>

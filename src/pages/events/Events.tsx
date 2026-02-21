@@ -25,7 +25,7 @@ export default function Events() {
             {/* This div acts as the expanding background originating from the card.
                 If selectedCategory is truthy, it appears and scales up */}
             <div className={`${styles.expandedBg} ${selectedCategory ? styles.show : ""}`}>
-                <img src="/img/events/sample.png" alt="background" />
+                <img src="/img/events/sample3.png" alt="background" />
                 <div className={styles.expandedBgDarken}></div>
             </div>
 
@@ -50,7 +50,7 @@ export default function Events() {
                                 <div className={styles.cardImageContainer}>
                                     {/* We use a sample image for all of them as requested */}
                                     <img
-                                        src="/img/events/sample.png"
+                                        src="/img/events/sample3.png"
                                         alt={category}
                                         className={styles.cardImage}
                                     />

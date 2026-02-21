@@ -144,45 +144,48 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #00ffff; // Cyan border
     z-index: 1;
     pointer-events: none;
-    // Cross-browser continuous path with a slit to form a hollow donut shape 
-    // Firefox bug fix: Slit entry and exit cannot perfectly overlap.
-    clip-path: polygon(0% 0%,
-            100% 0%,
-            100% calc(100% - 60px),
-            calc(100% - 60px) 100%,
-            0% 100%,
-            0% calc(50% + 1px),
-            3px calc(50% + 1px),
-            3px calc(100% - 3px),
-            calc(100% - 63px) calc(100% - 3px),
-            calc(100% - 3px) calc(100% - 63px),
-            calc(100% - 3px) 3px,
-            3px 3px,
-            3px 50%,
-            0% 50%,
-            0% 0%);
+
+    // Completely cross-browser gradient borders that Firefox has no issue with
+    background:
+        linear-gradient(#00ffff, #00ffff) top/100% 3px no-repeat,
+        linear-gradient(#00ffff, #00ffff) left/3px 100% no-repeat,
+        linear-gradient(#00ffff, #00ffff) bottom left/calc(100% - 60px) 3px no-repeat,
+        linear-gradient(#00ffff, #00ffff) top right/3px calc(100% - 60px) no-repeat,
+        linear-gradient(-45deg, transparent 42.4px, #00ffff 42.4px, #00ffff 45.4px, transparent 45.4px) bottom right/64px 64px no-repeat;
 }
 
 .glowBoxInner {
     width: 100%;
     flex: 1;
-    background: rgba(4, 18, 26, 0.2); // Match the dark cyber blue background
-    backdrop-filter: blur(10px);
-    // Snug fit exactly inside the hollow border
-    clip-path: polygon(3px 3px,
-            calc(100% - 3px) 3px,
-            calc(100% - 3px) calc(100% - 63px),
-            calc(100% - 63px) calc(100% - 3px),
-            3px calc(100% - 3px));
+    background: transparent;
     padding: 3rem 8rem 3rem 6rem; // Leave right padding for Register button
     display: flex;
     flex-direction: column;
     justify-content: center;
     position: relative;
     z-index: 2;
+
+    // Moving the clip-path and backdrop filter to a pseudo-element 
+    // prevents Firefox from incorrectly hiding the text content children
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        background: rgba(4, 18, 26, 0.2);
+        backdrop-filter: blur(10px);
+        // Snug fit exactly inside the 3px border
+        clip-path: polygon(3px 3px,
+                calc(100% - 3px) 3px,
+                calc(100% - 3px) calc(100% - 64px),
+                calc(100% - 64px) calc(100% - 3px),
+                3px calc(100% - 3px));
+    }
 }
 
 .title {
@@ -222,8 +225,9 @@
     gap: 0.8rem;
 
     .icon {
-        color: #00ffff;
-        font-size: 1.2rem; // Larger icons
+        width: 1.2rem;
+        height: 1.2rem;
+        object-fit: contain;
     }
 }
 
@@ -234,7 +238,7 @@
 }
 
 .registerBtn {
-    background: #fff;
+    color: #fff;
     border: none;
     padding: 2px; // White outer border thickness
     cursor: pointer;
