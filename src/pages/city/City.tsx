@@ -9,10 +9,10 @@ import ScrollReminder from "./components/ScrollReminder/ScrollReminder";
 import { Environment } from "@react-three/drei";
 import { getProject } from "@theatre/core";
 import { SheetProvider } from "@theatre/r3f";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import debugFunctions from "../../utils/debug";
 import * as THREE from "three";
-import { useSceneLoadedStore } from "../../utils/store";
+import { usePreloaderStateStore, useSceneLoadedStore } from "../../utils/store";
 // import NavBar from "../components/NavBar/NavBar";
 import RegisterButton from "../components/RegisterButton/RegisterButton";
 import Preloader from "../preloader/Preloader";
@@ -48,7 +48,8 @@ if (import.meta.env.DEV) {
 // Theatre documentation often suggests just using it.
 
 export default function City() {
-  const [showPreloader, setShowPreloader] = useState(true);
+  const showPreloader = usePreloaderStateStore((s) => s.showPreloader);
+  // const setShowPreloader = usePreloaderStateStore((s) => s.setShowPreloader);
 
   useEffect(() => {
     project.ready.then(() => {
@@ -75,7 +76,7 @@ export default function City() {
             zIndex: 9999,
           }}
         >
-          <Preloader onLaunch={() => setShowPreloader(false)} />
+          <Preloader />
         </div>
       )}
       {
