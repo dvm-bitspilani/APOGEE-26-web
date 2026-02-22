@@ -130,7 +130,7 @@ export default function City() {
       {/* <NavBar /> */}
       {/* <NavBar /> */}
       <RegisterButton />
-      <Modal />
+      {/* <Modal /> */}
     </>
   );
 }

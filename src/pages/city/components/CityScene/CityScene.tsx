@@ -7,8 +7,9 @@ import ScrollSync from "../ScrollSync/ScrollSync";
 import SceneDevOrProd from "./SceneDevorProd";
 import SceneLights from "./SceneLights";
 import TheatreCameraFinal from "./TheatreCameraFinal";
-import StarJunction from "../models/StarJunstion3";
 import Constellation from "../Constellation3";
+import { SheetProvider } from "@theatre/r3f";
+import CamCar from "../groups/CamCar";
 // import MatrixRain from "../MatrixRain";
 
 export default function CityScene({}: any) {
@@ -54,9 +55,8 @@ export default function CityScene({}: any) {
            intensity={0.5} /> */}
 
           {/* The TheatreCameraFinal is a pre-configured camera with the same settings as above, but with added parallax and scroll effects     */}
-
-          <TheatreCameraFinal />
-          <Infernus />
+          
+          <CamCar />
         </group>
         <ScrollControls pages={6} damping={0.8}>
           {/* Use PivotLeva to roate the city around the car's axis */}
