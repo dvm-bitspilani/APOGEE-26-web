@@ -4,11 +4,11 @@ import { type GLTFResult } from '../../types/starJunction.types';
 
 const BLOCKS = 30;
 const SPACING = 44.1;
-const positions: [number, number, number][] = Array(BLOCKS).fill(0).map((_, i) => [0, 0.01*(i % 2), i * SPACING])
+const positions: [number, number, number][] = Array(BLOCKS).fill(0).map((_, i) => [1,-2+ 0.01*(i % 2), i * SPACING])
 
 export default function StarJunction() {
   // const { nodes, materials } = useGLTF('/models/city10feb-transformed.glb') as unknown as GLTFResult
-  const { scene } = useGLTF('/models/city10feb-transformed.glb') as unknown as GLTFResult
+  const { scene } = useGLTF('/models/citylast-transformed.glb') as unknown as GLTFResult
 
   return (
     positions.map((pos, i) => (
@@ -18,4 +18,4 @@ export default function StarJunction() {
   )
 }
 
-useGLTF.preload('/models/city10feb-transformed.glb')
+useGLTF.preload('/models/citylast-transformed.glb')
