@@ -9,6 +9,7 @@ import SceneLights from "./SceneLights";
 import TheatreCameraFinal from "./TheatreCameraFinal";
 // import StarJunction from "../models/StarJunstion3";
 import Constellation from "../Constellation3";
+import InteractivePlane from "../InteractivePlane";
 // import InteractivePlane from "../InteractivePlane";
 // import MatrixRain from "../MatrixRain";
 
@@ -59,6 +60,7 @@ export default function CityScene({}: any) {
 
           <TheatreCameraFinal />
           <Infernus />
+          {/* <InteractivePlane/> */}
         </group>
         <ScrollControls pages={6} damping={0.8}>
           {/* Use PivotLeva to roate the city around the car's axis */}
