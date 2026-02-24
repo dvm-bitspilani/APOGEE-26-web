@@ -113,37 +113,43 @@
     // No clip path on the outer card, we drop-shadow it when active
     // But wait, drop shadow applies to the child's clip path!
 
-    &:hover {
-        width: 22vw; // Fixed width for hovered item instead of flex-grow to avoid jittering
-        filter: drop-shadow(0 0 8px rgba(183, 0, 255, 0.8)) drop-shadow(0 0 20px rgba(183, 0, 255, 0.4));
-        // box-shadow: inset 0 0 8px rgba(183, 0, 255, 0.8), inset 0 0 20px rgba(183, 0, 255, 0.4);
+    @media (min-width: 769px) {
+        &:hover {
+            width: 22vw; // Fixed width for hovered item instead of flex-grow to avoid jittering
+            filter: drop-shadow(0 0 8px rgba(183, 0, 255, 0.8)) drop-shadow(0 0 20px rgba(183, 0, 255, 0.4));
+            // box-shadow: inset 0 0 8px rgba(183, 0, 255, 0.8), inset 0 0 20px rgba(183, 0, 255, 0.4);
 
-        .cardInner {
-            background-color: #BC6DFF; // Acts as the border color
-            padding: 3px; // Border thickness
-        }
+            .cardInner {
+                background-color: #BC6DFF; // Acts as the border color
+                padding: 3px; // Border thickness
+            }
 
-        .imageOverlay {
-            opacity: 0; // Remove dark overlay on active
-        }
+            .imageOverlay {
+                opacity: 0; // Remove dark overlay on active
+            }
 
-        .cardImage {
-            filter: grayscale(0%); // Full color
-        }
+            .cardImage {
+                filter: grayscale(0%); // Full color
+            }
 
-        .cardTextContainer {
-            justify-content: flex-start;
-            align-items: flex-end;
-            padding: 2rem;
-        }
+            .cardTextContainer {
+                justify-content: flex-start;
+                align-items: flex-end;
+                padding: 2rem;
 
-        .cardText {
-            writing-mode: horizontal-tb;
-            transform: none;
-            color: #fff;
-            font-size: 1.5rem;
-            letter-spacing: 4px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+                &::before {
+                    opacity: 1;
+                }
+            }
+
+            .cardText {
+                writing-mode: horizontal-tb;
+                transform: none;
+                color: #fff;
+                font-size: 1.5rem;
+                letter-spacing: 4px;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            }
         }
     }
 }
@@ -200,12 +206,26 @@
     padding-bottom: 2rem;
     transition: all 0.4s ease;
     pointer-events: none; // Let clicks pass through to the card
+
+    &::before {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 60%;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, transparent 100%);
+        opacity: 0;
+        transition: opacity 0.4s ease;
+        z-index: -1;
+    }
 }
 
 .cardText {
     font-family: $font-jetBrainsBold; // Matching the blocky technical font in design
     color: $cyber-yellow;
-    font-size: 2.5rem;
+    // Base clamp for desktop writing-mode
+    font-size: clamp(1.2rem, 2vw, 2.5rem);
 
     text-shadow: 0 0 10px rgba(255, 247, 0, 0.592), 0 0 20px rgba(242, 255, 0, 0.339);
     white-space: nowrap;
@@ -221,6 +241,85 @@
     }
 }
 
-.card:hover .cardText .bra {
-    opacity: 1;
+@media (min-width: 769px) {
+    .card:hover .cardText .bra {
+        opacity: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .header {
+        padding: 2rem 1.5rem 1rem 1.5rem;
+        transform: translateY(20px);
+    }
+
+    .title {
+        font-size: 2.5rem;
+    }
+
+    .carouselContainer {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-auto-rows: 140px;
+        gap: 1rem;
+        height: calc(100vh - 100px);
+        padding: 1rem 1.5rem 2rem 1.5rem;
+        overflow-y: auto;
+        align-items: start;
+        justify-content: stretch;
+    }
+
+    .card {
+        width: 100%;
+        height: 100%;
+        filter: drop-shadow(0 0 8px rgba(183, 0, 255, 0.8)) drop-shadow(0 0 20px rgba(183, 0, 255, 0.4));
+
+        .cardInner {
+            background-color: #BC6DFF; // Border color
+            padding: 1px; // Border thickness for mobile
+            clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);
+        }
+
+        .cardImageContainer {
+            clip-path: polygon(13px 0, 100% 0, 100% calc(100% - 13px), calc(100% - 13px) 100%, 0 100%, 0 13px);
+        }
+
+        .cardImage {
+            filter: grayscale(0%) blur(0px);
+        }
+
+        .imageOverlay {
+            opacity: 0.4;
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        .cardTextContainer {
+            justify-content: center;
+            align-items: center;
+            padding: 0.5rem;
+
+            &::before {
+                display: none;
+            }
+        }
+
+        .cardText {
+            writing-mode: horizontal-tb;
+            transform: none;
+            color: $cyber-yellow;
+            // Responsive mobile font clamp taking container width roughly into account
+            font-size: clamp(1.2rem, 6vw, 2.2rem);
+            white-space: normal;
+            word-wrap: break-word;
+            word-break: break-word;
+            line-height: 1.1;
+            letter-spacing: 0.5px;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+
+            .bra {
+                opacity: 1;
+            }
+        }
+    }
 }
