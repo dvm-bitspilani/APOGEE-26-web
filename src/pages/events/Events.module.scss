@@ -26,12 +26,11 @@
 }
 
 .expandedBg {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0vw;
-    height: 0vh;
-    transform: translate(-50%, -50%);
+    position: fixed;
+    top: var(--origin-top, 50%);
+    left: var(--origin-left, 50%);
+    width: var(--origin-width, 0px);
+    height: var(--origin-height, 0px);
     z-index: 5;
     opacity: 0;
     transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
@@ -39,16 +38,14 @@
     overflow: hidden;
 
     img {
-        width: 100vw;
-        height: 100vh;
+        width: 100%;
+        height: 100%;
         object-fit: cover;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
     }
 
     &.show {
+        top: 0;
+        left: 0;
         width: 100vw;
         height: 100vh;
         opacity: 1;

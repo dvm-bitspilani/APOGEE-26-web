@@ -16,6 +16,23 @@ const EVENT_CATEGORIES = [
 
 export default function Events() {
     const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+    const [showContent, setShowContent] = useState(false);
+    const [originRect, setOriginRect] = useState<DOMRect | null>(null);
+
+    const handleCategoryClick = (category: string, element: HTMLElement) => {
+        setOriginRect(element.getBoundingClientRect());
+        setSelectedCategory(category);
+
+        // Wait for the background expansion (0.6s) before showing content
+        setTimeout(() => {
+            setShowContent(true);
+        }, 600);
+    };
+
+    const handleClose = () => {
+        setShowContent(false);
+        setSelectedCategory(null);
+    };
 
     return (
         <div className={styles.eventsContainer}>
@@ -24,7 +41,15 @@ export default function Events() {
 
             {/* This div acts as the expanding background originating from the card.
                 If selectedCategory is truthy, it appears and scales up */}
-            <div className={`${styles.expandedBg} ${selectedCategory ? styles.show : ""}`}>
+            <div
+                className={`${styles.expandedBg} ${selectedCategory ? styles.show : ""}`}
+                style={{
+                    "--origin-top": originRect ? `${originRect.top}px` : "50%",
+                    "--origin-left": originRect ? `${originRect.left}px` : "50%",
+                    "--origin-width": originRect ? `${originRect.width}px` : "0px",
+                    "--origin-height": originRect ? `${originRect.height}px` : "0px",
+                } as React.CSSProperties}
+            >
                 <img src="/img/events/sample3.png" alt="background" />
                 <div className={styles.expandedBgDarken}></div>
             </div>
@@ -32,7 +57,7 @@ export default function Events() {
             <div className={styles.header}>
                 <h1
                     className={`${styles.title} ${selectedCategory ? styles.clickableTitle : ""}`}
-                    onClick={() => selectedCategory && setSelectedCategory(null)}
+                    onClick={() => selectedCategory && handleClose()}
                 >
                     EVENTS
                 </h1>
@@ -44,7 +69,7 @@ export default function Events() {
                         <div
                             key={index}
                             className={styles.card}
-                            onClick={() => setSelectedCategory(category)}
+                            onClick={(e) => handleCategoryClick(category, e.currentTarget)}
                         >
                             <div className={styles.cardInner}>
                                 <div className={styles.cardImageContainer}>
@@ -67,7 +92,7 @@ export default function Events() {
             </div>
 
             {/* Subpage implementation component */}
-            {selectedCategory && (
+            {showContent && selectedCategory && (
                 <EventsItem
                     category={selectedCategory}
                     events={DUMMY_EVENTS[selectedCategory] || []}
