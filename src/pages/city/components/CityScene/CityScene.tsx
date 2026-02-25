@@ -2,14 +2,13 @@ import { ScrollControls } from "@react-three/drei";
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { useCityStore, usePivotStore } from "../../../../utils/store";
-import Infernus from "../models/Infernus";
 import ScrollSync from "../ScrollSync/ScrollSync";
 import SceneDevOrProd from "./SceneDevorProd";
 import SceneLights from "./SceneLights";
-import TheatreCameraFinal from "./TheatreCameraFinal";
-// import StarJunction from "../models/StarJunstion3";
 import Constellation from "../Constellation3";
-import InteractivePlane from "../InteractivePlane/InteractivePlane";
+import CamCar from "../groups/CamCar";
+// import StarJunction from "../models/StarJunstion3";
+// import InteractivePlane from "../InteractivePlane";
 // import InteractivePlane from "../InteractivePlane";
 // import MatrixRain from "../MatrixRain";
 
@@ -57,10 +56,8 @@ export default function CityScene({}: any) {
            intensity={0.5} /> */}
 
           {/* The TheatreCameraFinal is a pre-configured camera with the same settings as above, but with added parallax and scroll effects     */}
-
-          <TheatreCameraFinal />
-          <Infernus />
-          <InteractivePlane />
+          
+          <CamCar />
         </group>
         <ScrollControls pages={6} damping={0.8}>
           {/* Use PivotLeva to roate the city around the car's axis */}

@@ -1,14 +1,16 @@
 import { useScroll } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-// import { sheet } from "../../theatre";
 import { getProject } from "@theatre/core";
 
-import state from "../../state9.json";
-import { useModalStore } from "../../../../utils/store";
+import state from "../../state-grace.json";
+import { useModalStore, usePreloaderStateStore } from "../../../../utils/store";
 import { type Section, useCurrentSectionStore } from "../../../../utils/store";
+import { useEffect, useRef } from "react";
+
 // import { useLocation, useNavigate } from "react-router-dom";
 export const project = getProject("City Project", { state });
 export const sheet = project.sheet("Cyber City");
+export const introAnimSheet = project.sheet("Intro Sequence");
 
 const stopPoints: Record<Section, [number, number]> = {
   "home": [0, 0.25],
@@ -20,16 +22,28 @@ const sequenceLength = 12;
 
 export default function ScrollSync() {
   const scroll = useScroll();
+  const introOverRef = useRef<boolean>(false);
   const openModal = useModalStore((s) => s.openModal);
   const closeModal = useModalStore((s) => s.closeModal);
   const isModalOpen = useModalStore((s) => s.isModalOpen);
   // const scrollLock = useScrollLockStore((s) => s.lock);
   // const isScrollLocked = useScrollLockStore((s) => s.locked); 
   // const currentSection = useRef<Section>("home");
+  const showPreloader = usePreloaderStateStore((s) => s.showPreloader);
   const currentSection = useCurrentSectionStore((s) => s.currentSection);
   const setCurrentSection = useCurrentSectionStore((s) => s.setCurrentSection);
 
+  useEffect(() => {
+    
+    sheet.sequence.position = 0;
+    introAnimSheet.sequence.play({iterationCount: 1}).then(() => {
+      if (!showPreloader) introOverRef.current = true;
+    });
+    if (showPreloader) introAnimSheet.sequence.pause();
+  }, [showPreloader])
+
   useFrame(() => {
+    if (!introOverRef.current) return;
     // Calculate the sequence position based on scroll offset
     // Using a fixed sequence length of 10 for consistency, or we can use sheet.sequence.length
     // if that is available and reliable. For now, let's assume we want to map full scroll
