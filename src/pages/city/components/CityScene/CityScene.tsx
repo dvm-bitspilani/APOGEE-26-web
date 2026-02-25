@@ -7,6 +7,7 @@ import SceneDevOrProd from "./SceneDevorProd";
 import SceneLights from "./SceneLights";
 import Constellation from "../Constellation3";
 import CamCar from "../groups/CamCar";
+import { editable as e } from "@theatre/r3f";
 // import StarJunction from "../models/StarJunstion3";
 // import InteractivePlane from "../InteractivePlane";
 // import InteractivePlane from "../InteractivePlane";
@@ -50,7 +51,7 @@ export default function CityScene({}: any) {
           {/* <InteractivePlane/> */}
         </group>
 
-        <group>
+        <e.group theatreKey="CamCar">
           {/* <directionalLight
             position={[0, 10, 0]}
            intensity={0.5} /> */}
@@ -58,7 +59,7 @@ export default function CityScene({}: any) {
           {/* The TheatreCameraFinal is a pre-configured camera with the same settings as above, but with added parallax and scroll effects     */}
           
           <CamCar />
-        </group>
+        </e.group>
         <ScrollControls pages={6} damping={0.8}>
           {/* Use PivotLeva to roate the city around the car's axis */}
           {/* <PivotLeva /> */}

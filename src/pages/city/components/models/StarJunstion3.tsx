@@ -8,7 +8,7 @@ const positions: [number, number, number][] = Array(BLOCKS).fill(0).map((_, i) =
 
 export default function StarJunction() {
   // const { nodes, materials } = useGLTF('/models/city10feb-transformed.glb') as unknown as GLTFResult
-  const { scene } = useGLTF('/models/city10feb-transformed.glb') as unknown as GLTFResult
+  const { scene } = useGLTF('/models/citylast-transformed.glb') as unknown as GLTFResult
 
   return (
     positions.map((pos, i) => (
@@ -18,4 +18,4 @@ export default function StarJunction() {
   )
 }
 
-useGLTF.preload('/models/city10feb-transformed.glb')
+useGLTF.preload('/models/citylast-transformed.glb')

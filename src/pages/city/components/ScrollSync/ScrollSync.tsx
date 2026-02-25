@@ -69,7 +69,7 @@ export default function ScrollSync() {
     } 
 
     // Update the sequence position
-    sheet.sequence.position = scroll.offset * sequenceLength;
+    // sheet.sequence.position = scroll.offset * sequenceLength;
   });
 
   return null;
