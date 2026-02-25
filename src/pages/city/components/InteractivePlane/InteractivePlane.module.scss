@@ -1,0 +1,7 @@
+.myHtmlWrapper{
+    position:fixed!important;
+    overflow:"hidden";
+    pointer-events: none;
+    overscroll-behavior: contain;
+    z-index: 2!important;
+}
