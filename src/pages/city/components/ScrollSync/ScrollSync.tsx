@@ -1,21 +1,16 @@
 import { useScroll } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-// import { sheet } from "../../theatre";
 import { getProject } from "@theatre/core";
 
-<<<<<<< HEAD
-import state from "../../state9.json";
-import { useModalStore } from "../../../../utils/store";
-=======
-import state from "../../state7.json";
+import state from "../../state-grace.json";
 import { useModalStore, usePreloaderStateStore } from "../../../../utils/store";
->>>>>>> introAnim
 import { type Section, useCurrentSectionStore } from "../../../../utils/store";
 import { useEffect, useRef } from "react";
-import { introAnimSheet } from "../../City";
+
 // import { useLocation, useNavigate } from "react-router-dom";
 export const project = getProject("City Project", { state });
 export const sheet = project.sheet("Cyber City");
+export const introAnimSheet = project.sheet("Intro Sequence");
 
 const stopPoints: Record<Section, [number, number]> = {
   "home": [0, 0.25],
@@ -34,14 +29,15 @@ export default function ScrollSync() {
   // const scrollLock = useScrollLockStore((s) => s.lock);
   // const isScrollLocked = useScrollLockStore((s) => s.locked); 
   // const currentSection = useRef<Section>("home");
+  const showPreloader = usePreloaderStateStore((s) => s.showPreloader);
   const currentSection = useCurrentSectionStore((s) => s.currentSection);
   const setCurrentSection = useCurrentSectionStore((s) => s.setCurrentSection);
-  const showPreloader = usePreloaderStateStore((s) => s.showPreloader);
 
   useEffect(() => {
+    
     sheet.sequence.position = 0;
     introAnimSheet.sequence.play({iterationCount: 1}).then(() => {
-      introOverRef.current = true;
+      if (!showPreloader) introOverRef.current = true;
     });
     if (showPreloader) introAnimSheet.sequence.pause();
   }, [showPreloader])

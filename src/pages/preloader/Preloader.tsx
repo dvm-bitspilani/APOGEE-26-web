@@ -43,25 +43,27 @@ export default function Preloader() {
     ? 3: APOGEE logo
     ? 0: Show nothing (for blink)
   */
+
+  //@ts-ignore 
   const [loaderState, setLoaderState] = useState<0 | 1 | 2 | 3>(1);
   const subContainerRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
   const onLaunch = async () => {
-    subContainerRef.current?.style.setProperty("visibility", "hidden");
-    await new Promise((resolve) => setTimeout(resolve, 500));
-    subContainerRef.current?.style.setProperty("visibility", "visible");
-    await new Promise((resolve) => setTimeout(resolve, 300));
-    setLoaderState(0);
-    await new Promise((resolve) => setTimeout(resolve, 500));
-    setLoaderState(2)
-    await new Promise((resolve) => setTimeout(resolve, 750));
-    setLoaderState(0);
-    await new Promise((resolve) => setTimeout(resolve, 500));
-    setLoaderState(3)
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    containerRef.current?.style.setProperty("opacity", "0"); //? easing handled by CSS transition
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    // subContainerRef.current?.style.setProperty("visibility", "hidden");
+    // await new Promise((resolve) => setTimeout(resolve, 500));
+    // subContainerRef.current?.style.setProperty("visibility", "visible");
+    // // await new Promise((resolve) => setTimeout(resolve, 300));
+    // // setLoaderState(0);
+    // // await new Promise((resolve) => setTimeout(resolve, 500));
+    // // setLoaderState(2)
+    // // await new Promise((resolve) => setTimeout(resolve, 750));
+    // // setLoaderState(0);
+    // await new Promise((resolve) => setTimeout(resolve, 500));
+    // setLoaderState(3)
+    // await new Promise((resolve) => setTimeout(resolve, 1000));
+    // containerRef.current?.style.setProperty("opacity", "0"); //? easing handled by CSS transition
+    // await new Promise((resolve) => setTimeout(resolve, 1000));
     setShowPreloader(false);
   };
 
