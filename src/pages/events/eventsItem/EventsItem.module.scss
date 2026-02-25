@@ -155,7 +155,7 @@
 .title {
     font-family: $font-blender;
     color: #ffeb00;
-    font-size: clamp(1.5rem, 3vw, 1.8rem);
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
     margin-top: 0;
     margin-bottom: clamp(0.5rem, 2vh, 1.5rem);
     letter-spacing: 2px;
@@ -170,6 +170,7 @@
     font-size: clamp(0.8rem, 1.5vw, 1rem);
     line-height: clamp(1.2rem, 2.5vw, 1.6rem);
     margin-bottom: clamp(1rem, 3vh, 2rem);
+    font-weight: 500;
     color: #ccc;
     max-width: 600px;
 }
@@ -179,7 +180,7 @@
     grid-template-columns: 1fr 1fr;
     gap: clamp(0.5rem, 1.5vw, 1rem);
     margin-bottom: clamp(1rem, 3vh, 2rem);
-    font-size: clamp(0.75rem, 1.2vw, 0.9rem);
+    font-size: clamp(1rem, 1.2vw, 1.2rem);
     color: #ddd;
 }
 

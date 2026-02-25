@@ -4,14 +4,14 @@ import EventsItem from "./eventsItem/EventsItem";
 import { DUMMY_EVENTS } from "./eventsData";
 
 const EVENT_CATEGORIES = [
-    "CODING",
-    "KERNEL",
-    "EXHIBITIONS",
-    "COMPETITIONS",
-    "ART & CINEMA",
-    "MISCELLANEOUS",
-    "E SUMMIT",
-    "GAMES & QUIZ",
+    { name: "CODING", image: "/img/events/coding.png" },
+    { name: "KERNEL", image: "/img/events/kernel.png" },
+    { name: "EXHIBITIONS", image: "/img/events/exhibition.png" },
+    { name: "COMPETITIONS", image: "/img/events/caseComp.png" },
+    { name: "ART & CINEMA", image: "/img/events/art.png" },
+    { name: "MISCELLANEOUS", image: "/img/events/misc.jpeg" },
+    { name: "E SUMMIT", image: "/img/events/esummit.png" },
+    { name: "GAMES & QUIZ", image: "/img/events/quiz.png" },
 ];
 
 export default function Events() {
@@ -50,7 +50,7 @@ export default function Events() {
                     "--origin-height": originRect ? `${originRect.height}px` : "0px",
                 } as React.CSSProperties}
             >
-                <img src="/img/events/sample3.png" alt="background" />
+                <img src={EVENT_CATEGORIES.find(c => c.name === selectedCategory)?.image || "/img/events/sample3.png"} alt="background" />
                 <div className={styles.expandedBgDarken}></div>
             </div>
 
@@ -69,21 +69,20 @@ export default function Events() {
                         <div
                             key={index}
                             className={styles.card}
-                            onClick={(e) => handleCategoryClick(category, e.currentTarget)}
+                            onClick={(e) => handleCategoryClick(category.name, e.currentTarget)}
                         >
                             <div className={styles.cardInner}>
                                 <div className={styles.cardImageContainer}>
-                                    {/* We use a sample image for all of them as requested */}
                                     <img
-                                        src="/img/events/sample3.png"
-                                        alt={category}
+                                        src={category.image}
+                                        alt={category.name}
                                         className={styles.cardImage}
                                     />
                                     <div className={styles.imageOverlay}></div>
                                 </div>
 
                                 <div className={styles.cardTextContainer}>
-                                    <span className={styles.cardText}><span className={styles.bra}>[</span>{category}<span className={styles.bra}>]</span></span>
+                                    <span className={styles.cardText}><span className={styles.bra}>[</span>{category.name}<span className={styles.bra}>]</span></span>
                                 </div>
                             </div>
                         </div>
