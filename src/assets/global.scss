@@ -67,6 +67,16 @@
     src: url('/font/Zero Hour.otf') format('opentype');
 }
 
+@font-face {
+    font-family: 'Bitsumishi';
+    src: url('/font/Bitsumishi.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Dragrace';
+    src: url('/font/Dragrace.ttf') format('truetype');
+}
+
 $cyber-yellow: #FFEB00;
 $dark-bg: #000;
 
@@ -78,6 +88,8 @@ $font-jetBrains: 'JetBrains Mono';
 $font-jetBrainsBold: 'JetBrains Mono Bold';
 $font-ethnocentric: 'Ethnocentric';
 $font-zeroHour: 'Zero Hour';
+$font-bitsumishi: 'Bitsumishi';
+$font-dragrace: 'Dragrace';
 
 // Font Weights
 $weight-blender-thin: 100;
