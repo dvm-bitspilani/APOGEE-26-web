@@ -71,7 +71,7 @@
 .header {
     position: relative;
     z-index: 20;
-    padding: 4rem 4rem 2rem 6rem;
+    padding: clamp(2rem, 5vh, 4rem) 4rem 2rem clamp(1.5rem, 6vw, 6rem);
     transform: translateY(40px);
     display: flex;
     align-items: center;
@@ -80,7 +80,7 @@
 .title {
     font-family: $font-glitch;
     color: #00ffff; // Cyan color from design
-    font-size: 4rem;
+    font-size: clamp(2rem, 4vw, 3rem);
     margin: 0;
     letter-spacing: 2px;
     text-shadow: 0 0 10px rgba(0, 255, 255, 0.5), 0 0 20px rgba(0, 255, 255, 0.3);
