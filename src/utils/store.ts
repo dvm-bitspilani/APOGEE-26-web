@@ -1,6 +1,5 @@
 import * as THREE from "three";
 import { create } from "zustand";
-import Modal from '../pages/city/components/Modal/Modal';
 type IntroState = {
   introDone: boolean;
   setIntroDone: (done: boolean) => void;

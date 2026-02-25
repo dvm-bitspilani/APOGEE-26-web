@@ -1,4 +1,4 @@
-import { PerspectiveCamera, SheetProvider } from "@theatre/r3f";
+import { PerspectiveCamera } from "@theatre/r3f";
 import { useRef, useEffect } from "react";
 import * as THREE from "three";
 import { useTheatreCameraStore } from "../../../../utils/store";

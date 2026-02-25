@@ -2,14 +2,14 @@ import { ScrollControls } from "@react-three/drei";
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { useCityStore, usePivotStore } from "../../../../utils/store";
-import Infernus from "../models/Infernus";
 import ScrollSync from "../ScrollSync/ScrollSync";
 import SceneDevOrProd from "./SceneDevorProd";
 import SceneLights from "./SceneLights";
-import TheatreCameraFinal from "./TheatreCameraFinal";
 import Constellation from "../Constellation3";
-import { SheetProvider } from "@theatre/r3f";
 import CamCar from "../groups/CamCar";
+// import StarJunction from "../models/StarJunstion3";
+// import InteractivePlane from "../InteractivePlane";
+// import InteractivePlane from "../InteractivePlane";
 // import MatrixRain from "../MatrixRain";
 
 export default function CityScene({}: any) {
@@ -47,6 +47,7 @@ export default function CityScene({}: any) {
             {/* <CityGrid /> */}
             <Constellation />
           </group>
+          {/* <InteractivePlane/> */}
         </group>
 
         <group>
