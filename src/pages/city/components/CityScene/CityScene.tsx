@@ -9,7 +9,8 @@ import Constellation from "../Constellation3";
 import CamCar from "../groups/CamCar";
 // import StarJunction from "../models/StarJunstion3";
 // import InteractivePlane from "../InteractivePlane";
-// import InteractivePlane from "../InteractivePlane";
+import InteractivePlane from "../InteractivePlane/InteractivePlane";
+
 // import MatrixRain from "../MatrixRain";
 
 export default function CityScene({}: any) {
@@ -49,7 +50,7 @@ export default function CityScene({}: any) {
           </group>
           {/* <InteractivePlane/> */}
         </group>
-
+<InteractivePlane/>
         <group>
           {/* <directionalLight
             position={[0, 10, 0]}
