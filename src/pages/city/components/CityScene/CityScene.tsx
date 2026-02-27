@@ -9,8 +9,7 @@ import Constellation from "../Constellation3";
 import CamCar from "../groups/CamCar";
 // import StarJunction from "../models/StarJunstion3";
 // import InteractivePlane from "../InteractivePlane";
-import InteractivePlane from "../InteractivePlane/InteractivePlane";
-
+// import InteractivePlane from "../InteractivePlane/InteractivePlane";
 // import MatrixRain from "../MatrixRain";
 
 export default function CityScene({}: any) {
@@ -48,9 +47,7 @@ export default function CityScene({}: any) {
             {/* <CityGrid /> */}
             <Constellation />
           </group>
-          {/* <InteractivePlane/> */}
         </group>
-<InteractivePlane/>
         <group>
           {/* <directionalLight
             position={[0, 10, 0]}
@@ -60,6 +57,7 @@ export default function CityScene({}: any) {
           
           <CamCar />
         </group>
+        
         <ScrollControls pages={6} damping={0.8}>
           {/* Use PivotLeva to roate the city around the car's axis */}
           {/* <PivotLeva /> */}
@@ -68,6 +66,7 @@ export default function CityScene({}: any) {
           {/* <CityDebug /> */}
           <ScrollSync />
         </ScrollControls>
+{/* <InteractivePlane/> */}
       </group>
     </>
   );
