@@ -14,10 +14,10 @@
   }
   .speedometer {
     width: 100%;
-    height: 50vh;
-    margin-top: 40vh;
+    height: 55vh;
+    margin-top: 35vh;
     position: relative;
-    clip-path: polygon(0% 0%, 100% 0%, 100% 50vh, 0% 50vh);
+    clip-path: polygon(0% 0%, 100% 0%, 100% 55vh, 0% 55vh);
 
     @for $i from 1 through 7 {
       .dashCircle#{$i} {
@@ -27,13 +27,13 @@
         --thickness: 70%;
         --stop: calc(42.5% - 0.2% * #{$i});
 
-        top: 98%;
+        top: 100%;
         left: 50%;
         transform: translate(-50%, -50%);
-        width: calc(14vw + 6.5vw * #{$i});
+        width: calc(22vw + 6.5vw * #{$i});
         aspect-ratio: 1;
         border-radius: 50%;
-        clip-path: rect(0% 100% 52% 0%);
+        clip-path: rect(0% 100% 50% 0%);
         z-index: 5;
 
         background: repeating-conic-gradient(
@@ -49,16 +49,14 @@
         );
       }
     }
-
     .radialCircle1 {
       position: absolute;
-      top: 98%;
+      top: 100%;
       left: 50%;
-      // transform: translate(-50%, -50%);
-      width: 43vw;
+      width: 48vw;
       aspect-ratio: 1;
       border-radius: 50%;
-      clip-path: rect(0% 100% 52% 0%);
+      clip-path: rect(0% 100% 50% 0%);
       background: radial-gradient(
         circle,
         transparent 50%,
@@ -66,24 +64,24 @@
         #b301ffe8 100%
       );
       z-index: 5;
-      animation: spin2 0.8s linear forwards;
-      @keyframes spin2 {
-        from {
-          transform: translate(-50%, -50%) rotate(-180deg);
-        }
-        to {
-          transform: translate(-50%, -50%) rotate(0deg);
-        }
-      }
+      // animation: spin2 0.8s linear forwards;
+      // @keyframes spin2 {
+      //   from {
+      //     transform: translate(-50%, -50%) rotate(-180deg);
+      //   }
+      //   to {
+      //     transform: translate(-50%, -50%) rotate(0deg);
+      //   }
+      // }
     }
     .radialCircle2 {
       position: absolute;
-      top: 98%;
+      top: 100%;
       left: 50%;
-      width: 43vw;
+      width: 48vw;
       aspect-ratio: 1;
       border-radius: 50%;
-      clip-path: rect(0% 100% 49% 0%);
+      clip-path: rect(0% 100% 50% 0%);
       background: radial-gradient(
         circle,
         transparent 50%,
@@ -94,49 +92,15 @@
       transform: translate(-50%, -50%) rotate(0deg);
       opacity: 0.5;
       z-index: 5;
-      animation: spin 0.8s linear forwards;
-      @keyframes spin {
-        from {
-          transform: translate(-50%, -50%) rotate(0deg);
-        }
-        to {
-          transform: translate(-50%, -50%) rotate(180deg);
-        }
-      }
-    }
-    .bigDashCircle {
-      position: absolute;
-      --dash: 105deg;
-      --gap: 108.35deg;
-      --thickness: 69%;
-      --stop: 43%;
-      top: 100%;
-      left: 50%;
-      transform: translate(-50%, -50%) rotate(180deg);
-      width: 48vw;
-      aspect-ratio: 1;
-      border-radius: 50%;
-      // clip-path: polygon(100% 50%, 0% 50%, 80% 100%, 100% 100%);
-      box-shadow: 0px -3px 20px 3px #b301ff;
-      background: repeating-conic-gradient(
-        #b301ff 90deg var(--dash),
-        transparent var(--dash) var(--gap)
-      );
-      // background: repeating-conic-gradient(
-      //   #b301ff 90deg var(--dash),
-      //   transparent var(--dash) var(--gap)
-      // );
-      mask: radial-gradient(circle, transparent 0% 68.2%, black 68.2% 100%);
-      z-index: 4;
-      // animation: spin3 2s linear forwards;
-      @keyframes spin3 {
-        from {
-          transform: translate(-50%, -50%) rotate(0deg);
-        }
-        to {
-          transform: translate(-50%, -50%) rotate(180deg);
-        }
-      }
+      // animation: spin 0.8s linear forwards;
+      // @keyframes spin {
+      //   from {
+      //     transform: translate(-50%, -50%) rotate(0deg);
+      //   }
+      //   to {
+      //     transform: translate(-50%, -50%) rotate(180deg);
+      //   }
+      // }
     }
     .bigDashCircleBehind {
       position: absolute;
@@ -147,7 +111,7 @@
       top: 100%;
       left: 50%;
       transform: translate(-50%, -50%) rotate(180deg);
-      width: 47.6vw;
+      width: 51.5vw;
       aspect-ratio: 1;
       border-radius: 50%;
       clip-path: rect(50% 100% 100% 0%);
@@ -164,18 +128,18 @@
       top: 98%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 38.5vw;
+      width: 43.5vw;
       z-index: 5;
     }
     .speedoDashCircle {
       position: absolute;
-      top: 98%;
+      top: 100%;
       left: 50%;
-      width: 43vw;
+      width: 48vw;
       aspect-ratio: 1;
       border-radius: 50%;
       transform: translate(-50%, -50%);
-      clip-path: rect(0% 100% 52% 0%);
+      clip-path: rect(0% 100% 50% 0%);
       background: repeating-conic-gradient(
         #4df4fc 0deg 0.6deg,
         transparent 0.6deg 6deg
@@ -183,15 +147,21 @@
       mask: radial-gradient(circle, transparent 0% 68.8%, black 68.8% 100%);
       z-index: 5;
     }
+    --afterBG1: #b300ff;
+    --afterBG2: #b300ff;
+    --afterBG3: #b300ff;
+    --afterBG4: #b300ff;
+    --afterBG5: #b300ff;
+    --afterBG6: #b300ff;
     @for $i from 1 through 3 {
       .speedTick#{$i} {
         position: absolute;
         bottom: 0;
         left: 50%;
         transform-origin: bottom center;
-        transform: rotate(calc(-91.875deg + 18.375deg * #{$i}));
+        transform: rotate(calc(-92.175deg + 18.375deg * #{$i}));
         width: 0vw;
-        height: 26vw;
+        height: 29vw;
         z-index: 5;
         &::after {
           content: "";
@@ -201,7 +171,7 @@
           transform: translateX(-50%) rotate(-9deg);
           width: 0.3vw;
           height: 5vw;
-          background-color: #b300ff;
+          background-color: var(--afterBG#{$i});
         }
       }
     }
@@ -211,9 +181,9 @@
         bottom: 0;
         left: 50%;
         transform-origin: bottom center;
-        transform: rotate(calc(-36.75deg + 18.375deg * #{$i}));
+        transform: rotate(calc(-36.35deg + 18.375deg * #{$i}));
         width: 0vw;
-        height: 26vw;
+        height: 29vw;
         z-index: 5;
         &::after {
           content: "";
@@ -223,10 +193,11 @@
           transform: translateX(-50%) rotate(9deg);
           width: 0.3vw;
           height: 5vw;
-          background-color: #b300ff;
+          background-color: var(--afterBG#{$i});
         }
       }
     }
+
     --tick-rotate1: 88.5deg;
     --tick-rotate2: 106.075deg;
     --tick-rotate3: 124.7deg;
@@ -247,7 +218,7 @@
         top: 100%;
         left: 50%;
         transform: translate(-50%, -50%) rotate(var(--tick-rotate#{$i}));
-        width: 48vw;
+        width: 52vw;
         aspect-ratio: 1;
         border-radius: 50%;
         clip-path: polygon(35% 100%, 51% 100%, 51% 50%, 35% 50%);
@@ -257,124 +228,232 @@
         );
         mask: radial-gradient(circle, transparent 0% 68.2%, black 68.2% 100%);
         z-index: 4;
+        opacity: 0;
       }
     }
 
-    --bottom1: 18vw;
-    --width1: 84vw;
-    --left1: calc(50vw - var(--width1) / 2);
+    --bottom1: 21vw;
+    --width1: 43vw;
+    --left1: calc(48vw - var(--width1));
     --taGwidth1: 20vw;
-    --bottom2: 10vw;
-    --width2: 94vw;
-    --left2: calc(50vw - var(--width2) / 2);
+    --taGleft1: 6%;
+    --bottom2: 14vw;
+    --width2: 40vw;
+    --left2: calc(41vw - var(--width2));
     --taGwidth2: 20vw;
-    --bottom3: 3vw;
-    --width3: 90vw;
-    --left3: calc(50vw - var(--width3) / 2);
+    --taGleft2: 6%;
+    --bottom3: 6vw;
+    --width3: 33vw;
+    --left3: calc(35vw - var(--width3));
     --taGwidth3: 13vw;
-
+    --taGleft3: 15%;
     @for $j from 1 through 3 {
-      .nameTagLeft#{$j} {
-        display: flex;
-        flex-direction: column;
-        height: 3.6vw;
-        position: absolute;
-        bottom: var(--bottom#{$j});
-        left: calc(var(--left#{$j}) + 2.5vw);
-        transform: translate(0%, 10%);
-        span {
-          font-size: 2.4vw;
-          font-family: $font-bitsumishi;
-          color: #4df4fc;
-        }
-        img {
-          width: var(--taGwidth#{$j});
-          height: 2.4vw;
-          position: absolute;
-          top: 40%;
-          left: 6%;
-        }
-      }
-      .nameTagRight#{$j} {
-        display: flex;
-        flex-direction: column;
-        height: 3.6vw;
-        position: absolute;
-        bottom: var(--bottom#{$j});
-        right: calc(var(--left#{$j}) + 2.5vw);
-        transform: translate(0%, 10%);
-        span {
-          font-size: 2.4vw;
-          font-family: $font-bitsumishi;
-          color: #4df4fc;
-        }
-        img {
-          width: var(--taGwidth#{$j});
-          position: absolute;
-          height: 2.4vw;
-          top: 40%;
-          right: 6%;
-        }
-      }
-      .nameTagBG#{$j} {
+      .nameTagCont#{$j} {
         position: absolute;
         bottom: var(--bottom#{$j});
         left: var(--left#{$j});
-        transform: translate(0%, 0%);
+        scale: 1;
+        height: 3.6vw;
         width: var(--width#{$j});
-        height: 3.6vw;
-        background-color: #0000004d;
-        clip-path: polygon(
-          calc(var(--width#{$j}) - 2vw) 0,
-          100% 100%,
-          0% 100%,
-          2vw 0%
-        );
-        border: 1px solid #33e7ff;
-        z-index: 2;
-        mask-image: linear-gradient(
-          to right,
-          #000 0%,
-          transparent 35%,
-          transparent 65%,
-          #000 100%
-        );
+        transition: scale 0.15s ease;
+        &:hover {
+          cursor: pointer;
+          scale: 1.05;
+        }
+        .nameTagLeft#{$j} {
+          display: flex;
+          flex-direction: column;
+          height: 3.6vw;
+          position: absolute;
+          bottom: 0;
+          left: 2.5vw;
+          transform: translate(0%, 10%);
+          span {
+            font-size: 2.4vw;
+            font-family: $font-bitsumishi;
+            color: #4df4fc;
+          }
+          img {
+            width: var(--taGwidth#{$j});
+            height: 2.4vw;
+            position: absolute;
+            top: 40%;
+            left: var(--taGleft#{$j});
+          }
+        }
+        .nameTagBG#{$j} {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          transform: translate(0%, 0%);
+          width: var(--width#{$j});
+          height: 3.6vw;
+          background-color: #0000004d;
+          clip-path: polygon(
+            calc(var(--width#{$j}) - 2vw) 0,
+            100% 100%,
+            0% 100%,
+            2vw 0%
+          );
+          border: 1px solid #33e7ff;
+          z-index: 2;
+          mask-image: linear-gradient(
+            to right,
+            #000 0%,
+            transparent 85%,
+            transparent 99%,
+            #000 100%
+          );
+        }
+        .nameTagBorderLeft#{$j} {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          transform: translate(0%, 0%);
+          width: 2vw;
+          height: 3.6vw;
+          background-color: #33e7ff;
+          border: 1px solid #33e7ff;
+          clip-path: polygon(100% 0%, 0.05vw 100%, 0% 100%, 1.95vw 0%);
+          z-index: 1;
+        }
       }
-      .nameTagBorderLeft#{$j} {
-        position: absolute;
-        bottom: var(--bottom#{$j});
-        left: var(--left#{$j});
-        transform: translate(0%, 0%);
-        width: 2vw;
-        height: 3.6vw;
-        background-color: #33e7ff;
-        border: 1px solid #33e7ff;
-        clip-path: polygon(100% 0%, 0.05vw 100%, 0% 100%, 1.95vw 0%);
-        z-index: 1;
-      }
-      .nameTagBorderRight#{$j} {
+    }
+
+    --bottom4: 21vw;
+    --width4: 43vw;
+    --left4: calc(48vw - var(--width4));
+    --taGwidth4: 20vw;
+    --taGleft4: 6%;
+    --bottom5: 14vw;
+    --width5: 40vw;
+    --left5: calc(41vw - var(--width5));
+    --taGwidth5: 20vw;
+    --taGleft5: 6%;
+    --bottom6: 6vw;
+    --width6: 33vw;
+    --left6: calc(35vw - var(--width6));
+    --taGwidth6: 13vw;
+    --taGleft6: 15%;
+    @for $j from 4 through 6 {
+      .nameTagCont#{$j} {
         position: absolute;
         bottom: var(--bottom#{$j});
         right: var(--left#{$j});
-        transform: translate(0%, 0%);
-        width: 2vw;
+        scale: 1;
         height: 3.6vw;
-        background-color: #33e7ff;
-        border: 1px solid #33e7ff;
-        clip-path: polygon(0.05vw 0, 100% 100%, 1.95vw 100%, 0% 0%);
-        z-index: 1;
+        width: var(--width#{$j});
+        transition: scale 0.15s ease;
+        &:hover {
+          cursor: pointer;
+          scale: 1.05;
+        }
+        .nameTagRight#{$j} {
+          display: flex;
+          flex-direction: column;
+          height: 3.6vw;
+          position: absolute;
+          bottom: 0;
+          right: 2.5vw;
+          transform: translate(0%, 10%);
+          span {
+            font-size: 2.4vw;
+            font-family: $font-bitsumishi;
+            color: #4df4fc;
+          }
+          img {
+            width: var(--taGwidth#{$j});
+            position: absolute;
+            height: 2.4vw;
+            top: 40%;
+            right: var(--taGleft#{$j});
+          }
+        }
+        .nameTagBG#{$j} {
+          position: absolute;
+          bottom: 0;
+          right: 0;
+          transform: translate(0%, 0%);
+          width: var(--width#{$j});
+          height: 3.6vw;
+          background-color: #0000004d;
+          clip-path: polygon(
+            calc(var(--width#{$j}) - 2vw) 0,
+            100% 100%,
+            0% 100%,
+            2vw 0%
+          );
+          border: 1px solid #33e7ff;
+          z-index: 2;
+          mask-image: linear-gradient(
+            to left,
+            #000 0%,
+            transparent 85%,
+            transparent 99%,
+            #000 100%
+          );
+        }
+        .nameTagBorderRight#{$j} {
+          position: absolute;
+          bottom: 0;
+          right: 0;
+          transform: translate(0%, 0%);
+          width: 2vw;
+          height: 3.6vw;
+          background-color: #33e7ff;
+          border: 1px solid #33e7ff;
+          clip-path: polygon(0.05vw 0, 100% 100%, 1.95vw 100%, 0% 0%);
+          z-index: 1;
+        }
       }
     }
 
     .speedFont {
       position: absolute;
-      bottom: -4%;
+      bottom: 0%;
       left: 50%;
-      transform: translate(-50%, 0%);
-      font-size: 8vw;
-      font-family: $font-dragrace;
-      color: #4df4fc;
+      transform: translate(-50%, 50%);
+      font-size: 7vw;
       z-index: 6;
+      width: 40vw;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: radial-gradient(
+        circle,
+        transparent 0%,
+        black 10%,
+        black 20%,
+        black 30%,
+        transparent 70%,
+        transparent 100%
+      );
+      span {
+        position: absolute;
+        bottom: 50%;
+        left: 50%;
+        transform: translate(-50%, 0%);
+        font-size: 6.5vw;
+        font-family: $font-dragrace;
+        color: #EEE100;
+      }
+    }
+    .speedDial {
+      position: absolute;
+      transform-origin: bottom center;
+      // transform: translate(-50%, -100%) rotate(40deg);
+      top: 100%;
+      left: 50%;
+      width: 2vw;
+      height: 24vw;
+      z-index: 5;
+      svg {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translate(-50%, 0%);
+        width: 1.5vw;
+        height: 17vw;
+      }
     }
   }
 }
