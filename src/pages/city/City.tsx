@@ -7,17 +7,18 @@ import CityScene from "./components/CityScene/CityScene";
 import ScrollReminder from "./components/ScrollReminder/ScrollReminder";
 // import { sheet } from "./theatre";
 import { Environment } from "@react-three/drei";
-import { getProject } from "@theatre/core";
+// import { getProject } from "@theatre/core";
 import { SheetProvider } from "@theatre/r3f";
 import { useEffect } from "react";
 import debugFunctions from "../../utils/debug";
 import * as THREE from "three";
-import { usePreloaderStateStore, useSceneLoadedStore } from "../../utils/store";
+import { useActiveSheetStore, usePreloaderStateStore, useSceneLoadedStore } from "../../utils/store";
 // import NavBar from "../components/NavBar/NavBar";
 import RegisterButton from "../components/RegisterButton/RegisterButton";
 import Preloader from "../preloader/Preloader";
 import Modal from "./components/Modal/Modal";
-import state from "./state-grace.json"
+import { project } from "./components/ScrollSync/ScrollSync";
+// import state from "./state-grace.json"
 
 // Set up loading progress tracking at module level (before useGLTF.preload() calls complete)
 THREE.DefaultLoadingManager.onProgress = (_url, loaded, total) => {
@@ -34,8 +35,6 @@ THREE.DefaultLoadingManager.onLoad = () => {
 
 // import { EffectComposer, Noise } from "@react-three/postprocessing";
 // import { BlendFunction } from "postprocessing";
-export const project = getProject("City Project", { state });
-export const sheet = project.sheet("Cyber City");
 if (import.meta.env.DEV) {
   debugFunctions();
   studio.initialize();
@@ -49,14 +48,16 @@ if (import.meta.env.DEV) {
 
 export default function City() {
   const showPreloader = usePreloaderStateStore((s) => s.showPreloader);
+  const activeSheet = useActiveSheetStore((s) => s.activeSheet);
   // const setShowPreloader = usePreloaderStateStore((s) => s.setShowPreloader);
 
   useEffect(() => {
+    if (activeSheet !== "Cyber City") return;
     project.ready.then(() => {
-      sheet.sequence.play({ iterationCount: Infinity });
+      project.sheet("Cyber City").sequence.play({ iterationCount: Infinity });
       // remove Infinity if you want play only once
     });
-  }, []);
+  }, [activeSheet]);
 
   return (
     <>
@@ -82,10 +83,10 @@ export default function City() {
       {
         <div className={styles.city}>
           <Canvas
-           gl={{ antialias: true }}
-  onCreated={({ gl }) => {
-    gl.toneMapping = THREE.NoToneMapping
-  }}
+            gl={{ antialias: true }}
+            onCreated={({ gl }) => {
+              gl.toneMapping = THREE.NoToneMapping
+            }}
             shadows={false}
             camera={{ manual: true }} // {{ position: [0, 2, -2], near: 0.1, far: 1000000, fov: 50 }}
             style={{ width: "100%", height: "100%" }}
@@ -102,7 +103,7 @@ export default function City() {
   />
   </EffectComposer> */}
             <Environment preset="city" environmentIntensity={0.1} />
-            <SheetProvider sheet={sheet}>
+            <SheetProvider key={activeSheet} sheet={project.sheet(activeSheet)}>
               {/* <CameraControllerLeva /> */}
               {/* <e.spotLight
               theatreKey="someSpotlight"

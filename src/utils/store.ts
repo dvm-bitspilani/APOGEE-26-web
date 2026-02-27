@@ -1,5 +1,6 @@
 import * as THREE from "three";
 import { create } from "zustand";
+import { introAnimSheet } from '../pages/city/components/ScrollSync/ScrollSync';
 type IntroState = {
   introDone: boolean;
   setIntroDone: (done: boolean) => void;
@@ -115,6 +116,16 @@ type PreloaderStateStore = {
 export const usePreloaderStateStore = create<PreloaderStateStore>((set) => ({
   showPreloader: true,
   setShowPreloader: (state) => set({ showPreloader: state }),
+}))
+
+type Sheet = "Intro Sequence" | "Cyber City"; 
+type ActiveSheetStore = {
+  activeSheet: Sheet;
+  setActiveSheet: (sheet: Sheet) => void;
+}
+export const useActiveSheetStore = create<ActiveSheetStore>((set) => ({
+  activeSheet: "Intro Sequence",
+  setActiveSheet: (sheet) => set({ activeSheet: sheet }),
 }))
 
 export interface Event {

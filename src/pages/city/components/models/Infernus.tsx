@@ -54,8 +54,7 @@ export default function Infernus() {
         theatreKey="UltaRickshaw"
         ref={infernusRef}
         dispose={null}
-        position={[0.5, -3, 60]}
-        rotation={[0, 0, 0]}
+        position={[0.5, -6, 75]}
         scale={[6, 6, 6]}
         frustumCulled={false}
       >

@@ -460,7 +460,7 @@ export default function Preloader() {
                 </span>
                 <br />
                 <span className={styles.txtWhite}>{`>>`}</span>
-                <span className={styles.txtBlue}>[VIDEO]</span>
+                <span className={styles.txtBlue}>[3D MODELLING]</span>
                 <span className={styles.txtWhite}>Jotswroop Tejasvi</span>
                 <br />
                 <span className={styles.txtWhite}>{`>>`}</span>

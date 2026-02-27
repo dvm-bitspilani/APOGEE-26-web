@@ -8,13 +8,12 @@ const positions: [number, number, number][] = Array(BLOCKS).fill(0).map((_, i) =
 
 export default function StarJunction() {
   // const { nodes, materials } = useGLTF('/models/city10feb-transformed.glb') as unknown as GLTFResult
-  const { scene } = useGLTF('/models/citylast-transformed.glb') as unknown as GLTFResult
+  const { scene } = useGLTF('/models/city10feb-transformed.glb') as unknown as GLTFResult
 
   return (
     positions.map((pos, i) => (
       <Clone key={i} object={scene} dispose={null} scale={[1.5, 1.5, 1.5]} rotation={[0, Math.PI / 2, 0]} position={pos} />
     ))
-    
   )
 }
 
