@@ -83,12 +83,18 @@ export default function City() {
         <div className={styles.city}>
           <Canvas
            gl={{ antialias: true }}
-  onCreated={({ gl }) => {
-    gl.toneMapping = THREE.NoToneMapping
-  }}
+  // onCreated={({ gl }) => {
+  //   gl.toneMapping = THREE.NoToneMapping
+  // }}
             shadows={false}
             camera={{ manual: true }} // {{ position: [0, 2, -2], near: 0.1, far: 1000000, fov: 50 }}
             style={{ width: "100%", height: "100%" }}
+            onCreated={({ camera,gl }) => {
+    camera.layers.enable(1); // car
+    camera.layers.enable(2); // city
+    
+    gl.toneMapping = THREE.NoToneMapping
+  }}
           >
             {/* <mesh rotation={[-Math.PI ,Math.PI/4, 0]} position={[-20, 5, 100]}>
   <planeGeometry args={[100, 10]} />
@@ -101,7 +107,7 @@ export default function City() {
     blendFunction={BlendFunction.ADD} // blend mode
   />
   </EffectComposer> */}
-            <Environment preset="city" environmentIntensity={0.1} />
+            {/* <Environment preset="city" environmentIntensity={0.1}  /> */}
             <SheetProvider sheet={sheet}>
               {/* <CameraControllerLeva /> */}
               {/* <e.spotLight

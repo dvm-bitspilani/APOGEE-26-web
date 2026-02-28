@@ -7,6 +7,7 @@ import { useInfernusStore } from "../../../../utils/store";
 import { useNeonMaterial } from "../../hooks/useNeonMaterial";
 import { useKonami } from "../../hooks/useKonami"; // ⭐ add this
 import { editable as e } from "@theatre/r3f";
+import StudioEnvironment from "../StudioEnviroment";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -44,12 +45,21 @@ export default function Infernus() {
       setInfernus(infernusRef.current);
     }
   }, [setInfernus]);
+  useEffect(() => {
+  const car = infernusRef.current
+  if (!car) return
+
+  car.traverse((child: THREE.Object3D) => {
+    child.layers.enable(1) // put entire car on layer 1
+  })
+}, [])
 
   const { nodes, materials } = useGLTF(infernusModel) as unknown as GLTFResult;
     const leftTrailRef = useRef<THREE.Object3D>(null!);
     const rightTrailRef = useRef<THREE.Object3D>(null!);
-  return (
-    // <Float floatIntensity={3} rotationIntensity={0.05} speed={5}>
+  return (<group layers={1}> 
+     {/* <Float floatIntensity={3} rotationIntensity={0.05} speed={5}> */}
+     <StudioEnvironment  />
     <e.group
       theatreKey="UltaRickshaw"
       ref={infernusRef}
@@ -155,7 +165,8 @@ export default function Infernus() {
         scale={1.492}
       />
     </e.group>
-    // </Float>
+    {/* </Float> */}
+    </group>
   );
 }
 
