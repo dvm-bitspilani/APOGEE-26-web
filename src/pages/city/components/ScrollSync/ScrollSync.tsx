@@ -2,7 +2,7 @@ import { useScroll } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { getProject } from "@theatre/core";
 
-import state from "../../state-grace.json";
+import state from "../../state-carnival.json";
 import { useActiveSheetStore, useModalStore, usePreloaderStateStore } from "../../../../utils/store";
 import { type Section, useCurrentSectionStore } from "../../../../utils/store";
 import { useEffect, useRef } from "react";
@@ -18,7 +18,7 @@ const stopPoints: Record<Section, [number, number]> = {
   "contact": [10, 16],
   "transition": [-1, -1],
 }
-const sequenceLength = 12;
+const sequenceLength = 15;
 
 export default function ScrollSync() {
   const scroll = useScroll();

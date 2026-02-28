@@ -53,17 +53,17 @@ export default function Preloader() {
     // subContainerRef.current?.style.setProperty("visibility", "hidden");
     // await new Promise((resolve) => setTimeout(resolve, 500));
     // subContainerRef.current?.style.setProperty("visibility", "visible");
-    // // await new Promise((resolve) => setTimeout(resolve, 300));
-    // // setLoaderState(0);
-    // // await new Promise((resolve) => setTimeout(resolve, 500));
-    // // setLoaderState(2)
-    // // await new Promise((resolve) => setTimeout(resolve, 750));
-    // // setLoaderState(0);
+    // await new Promise((resolve) => setTimeout(resolve, 300));
+    // setLoaderState(0);
     // await new Promise((resolve) => setTimeout(resolve, 500));
-    // setLoaderState(3)
-    // await new Promise((resolve) => setTimeout(resolve, 1000));
-    // containerRef.current?.style.setProperty("opacity", "0"); //? easing handled by CSS transition
-    // await new Promise((resolve) => setTimeout(resolve, 1000));
+    // setLoaderState(2)
+    // await new Promise((resolve) => setTimeout(resolve, 750));
+    // setLoaderState(0);
+    // await new Promise((resolve) => setTimeout(resolve, 500));
+    setLoaderState(3)
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+    containerRef.current?.style.setProperty("opacity", "0"); //? transition duration handled in SCSS file
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     setShowPreloader(false);
   };
 
