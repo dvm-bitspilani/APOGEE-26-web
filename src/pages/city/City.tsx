@@ -9,7 +9,7 @@ import ScrollReminder from "./components/ScrollReminder/ScrollReminder";
 import { Environment } from "@react-three/drei";
 // import { getProject } from "@theatre/core";
 import { SheetProvider } from "@theatre/r3f";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import debugFunctions from "../../utils/debug";
 import * as THREE from "three";
 import { useActiveSheetStore, usePreloaderStateStore, useSceneLoadedStore } from "../../utils/store";
@@ -19,7 +19,6 @@ import Preloader from "../preloader/Preloader";
 import Modal from "./components/Modal/Modal";
 import { project } from "./components/ScrollSync/ScrollSync";
 // import state from "./state-grace.json"
-
 // Set up loading progress tracking at module level (before useGLTF.preload() calls complete)
 THREE.DefaultLoadingManager.onProgress = (_url, loaded, total) => {
   const progress = (loaded / total) * 100;
@@ -47,6 +46,8 @@ if (import.meta.env.DEV) {
 // Theatre documentation often suggests just using it.
 
 export default function City() {
+  
+const [insideMode, setInsideMode] = useState(false)
   const showPreloader = usePreloaderStateStore((s) => s.showPreloader);
   const activeSheet = useActiveSheetStore((s) => s.activeSheet);
   // const setShowPreloader = usePreloaderStateStore((s) => s.setShowPreloader);
@@ -82,6 +83,22 @@ export default function City() {
       )}
       {
         <div className={styles.city}>
+          <button
+    onClick={() => setInsideMode(prev => !prev)}
+    style={{
+      position: "fixed",
+      top: 20,
+      right: 20,
+      zIndex: 9999,
+      fontSize: 26,
+      background: "black",
+      color: "white",
+      padding: "10px 14px",
+      cursor: "pointer"
+    }}
+  >
+    ☰
+  </button>
           <Canvas
            gl={{ antialias: true }}
   // onCreated={({ gl }) => {
@@ -127,7 +144,9 @@ export default function City() {
               // distance={0.5}
               intensity={0} /> */}
               {/* <OrbitControls/> */}
-              <CityScene />
+              <CityScene 
+  insideMode={insideMode}
+  setInsideMode={setInsideMode} />
               {/* <BloomLeva /> */}
               {/* <FogPlane /> */}
             </SheetProvider>

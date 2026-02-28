@@ -1,7 +1,7 @@
 import * as THREE from "three";
-import { Trail, useGLTF } from "@react-three/drei";
+import { Float, Trail, useGLTF } from "@react-three/drei";
 import { type GLTF } from "three-stdlib";
-import { useEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef } from "react";
 import infernusModel from "../../../../assets/3d/landing/car5.0.glb";
 import { useInfernusStore } from "../../../../utils/store";
 import { useNeonMaterial } from "../../hooks/useNeonMaterial";
@@ -45,21 +45,42 @@ export default function Infernus() {
       setInfernus(infernusRef.current);
     }
   }, [setInfernus]);
-  useEffect(() => {
-  const car = infernusRef.current
-  if (!car) return
+//   useEffect(() => {
+//   const car = infernusRef.current
+//   if (!car) return
 
-  car.traverse((child: THREE.Object3D) => {
-    child.layers.enable(1) // put entire car on layer 1
-  })
-}, [])
+//   car.traverse((child: THREE.Object3D) => {
+//     child.layers.enable(1) // put entire car on layer 1
+//   })
+// }, [])
+ const { nodes, materials } = useGLTF(infernusModel) as unknown as GLTFResult;
+  
+useLayoutEffect(() => {
+  const car = infernusRef.current;
+  if (!car) return;
 
-  const { nodes, materials } = useGLTF(infernusModel) as unknown as GLTFResult;
-    const leftTrailRef = useRef<THREE.Object3D>(null!);
+  car.traverse((child) => {
+    if ((child as THREE.Mesh).isMesh) {
+      child.layers.enable(1); // Ensure Layer 1 is active
+      
+      const mesh = child as THREE.Mesh;
+      const mat = mesh.material as THREE.MeshStandardMaterial;
+
+      // Force reflections to be "on"
+      if (mat) {
+        mat.envMapIntensity = 1.5; // Boost the StudioEnvironment
+        mat.needsUpdate = true;
+      }
+    }
+  });
+}, [ nodes,neonActive]);
+
+   const leftTrailRef = useRef<THREE.Object3D>(null!);
     const rightTrailRef = useRef<THREE.Object3D>(null!);
   return (<group layers={1}> 
-     <Float floatIntensity={3} rotationIntensity={0.05} speed={5}>
-     <StudioEnvironment  />
+   <StudioEnvironment  />
+     <Float floatIntensity={0.3} rotationIntensity={0.005} speed={5}>
+    
     <e.group
       theatreKey="UltaRickshaw"
       ref={infernusRef}

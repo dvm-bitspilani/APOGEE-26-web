@@ -17,16 +17,25 @@ const InteractivePlane = () => {
   // Test distance
   const vec = new THREE.Vector3()
   const theatreCamera = useTheatreCameraStore((s) => s.theatreCamera);
-
+const camWorldPos = new THREE.Vector3(); // Create these once outside useFrame to save memory
+const meshWorldPos = new THREE.Vector3();
   useFrame(() => {
     if (!ref.current || !theatreCamera) return;
 
-    const distance = theatreCamera.position.distanceTo(
-      ref.current.getWorldPosition(vec)
-    );
+    // const distance = theatreCamera.position.distanceTo(
+    //   ref.current.getWorldPosition(vec)
+    // );
+    ref.current.getWorldPosition(meshWorldPos);
 
-    const range = distance <= 450;
+  // 2. Get the Camera's position in the entire world (ignoring the 'camCar' parent)
+  theatreCamera.getWorldPosition(camWorldPos);
 
+  // 3. Calculate distance between two points in the same coordinate space
+  const distance = camWorldPos.distanceTo(meshWorldPos);
+    // const distance = theatreCamera.position.distanceTo(ref.current.position);
+
+    const range = distance <= 300;
+console.log(distance)
     if (range !== isInRange) {
       setInRange(range);
     }
@@ -35,13 +44,14 @@ const InteractivePlane = () => {
   return (
     <EditableMesh theatreKey="interactivePlane"
       ref={ref}
-      position={[33.5, 19, 570]}
+      position={[50,0,875]}
       rotation={[Math.PI, 0, Math.PI]}
+      scale={[1.6,1.5,1.5]}
     // style={{position:"fixed"}}
     // style={{pointerEvents:"none"}}
     >
       <planeGeometry args={[19, 19]} />
-      <meshBasicMaterial color="black" side={THREE.DoubleSide}
+      <meshBasicMaterial color="transparent" side={THREE.DoubleSide}
         depthTest
         depthWrite />
 
@@ -49,21 +59,22 @@ const InteractivePlane = () => {
         as="div"
         distanceFactor={8}
         transform
+        center
         style={{
           opacity: isInRange ? 1 : 0,
           transition: "opacity 0.2s ease",
           pointerEvents: isInRange ? "auto" : "none",
           overflow: "hidden",
-          height: "800px",
-          width: "800px",
+          height: "60rem",
+          width: "70rem",
         }}
       >
         <div
           onWheel={(e) => e.stopPropagation()}
           onPointerDown={(e) => e.stopPropagation()}
           style={{
-            width: "1200px",
-            height: "600px",
+            width: "70rem",
+            height: "60rem",
             overflow: "hidden",
             background: "white",
 
