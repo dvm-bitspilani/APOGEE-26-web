@@ -14,7 +14,6 @@ export default function StarJunction() {
     positions.map((pos, i) => (
       <Clone key={i} object={scene} dispose={null} scale={[1.5, 1.5, 1.5]} rotation={[0, Math.PI / 2, 0]} position={pos} />
     ))
-    
   )
 }
 

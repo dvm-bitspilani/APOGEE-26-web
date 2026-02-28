@@ -58,31 +58,29 @@ export default function Infernus() {
     const leftTrailRef = useRef<THREE.Object3D>(null!);
     const rightTrailRef = useRef<THREE.Object3D>(null!);
   return (<group layers={1}> 
-     {/* <Float floatIntensity={3} rotationIntensity={0.05} speed={5}> */}
+     <Float floatIntensity={3} rotationIntensity={0.05} speed={5}>
      <StudioEnvironment  />
     <e.group
       theatreKey="UltaRickshaw"
       ref={infernusRef}
       dispose={null}
-      position={[0.5, -3, 60]}
-      rotation={[0, 0, 0]}
+      position={[0.5, -6, 75]}
       scale={[6, 6, 6]}
       frustumCulled={false}
     >
       <group rotation={[Math.PI / 2, 0, 0]} scale={1.492}>
-        {/* switch material based on konami */}
 
-  <group position={[-0.3, 0, 0]} ref={leftTrailRef} />
-  
-  {/* Right trail target */}
-  <group position={[0.3, 0, 0]} ref={rightTrailRef} />
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.meshId5_name.geometry}
-            material={neonActive ? neon : materials["white light"]}
-          />
-          
+        <group position={[-0.3, 0, 0]} ref={leftTrailRef} />
+
+        {/* Right trail target */}
+        <group position={[0.3, 0, 0]} ref={rightTrailRef} />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.meshId5_name.geometry}
+          material={neonActive ? neon : materials["white light"]}
+        />
+
 
         <mesh
           castShadow
@@ -123,37 +121,37 @@ export default function Infernus() {
           target={undefined} // Optional target. This object will produce the trail.
           attenuation={(width) => width} // A function to define the width in each point along it.
         >
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.meshId5_name_5.geometry}
-          material={neonActive ? neon : materials.blue}
-        />
-        
+          <mesh
+            castShadow
+            receiveShadow
+            geometry={nodes.meshId5_name_5.geometry}
+            material={neonActive ? neon : materials.blue}
+          />
+
         </Trail>
         {/* Left trail */}
-<Trail
-  width={4}
-  length={2}
-  decay={0.2}
-  target={leftTrailRef}
-  local={false}
-  color={"#40ccef"}
->
-  <mesh geometry={nodes.meshId5_name_5.geometry}  material={neonActive ? neon : materials.blue} />
-</Trail>
+        <Trail
+          width={4}
+          length={2}
+          decay={0.2}
+          target={leftTrailRef}
+          local={false}
+          color={"#40ccef"}
+        >
+          <mesh geometry={nodes.meshId5_name_5.geometry} material={neonActive ? neon : materials.blue} />
+        </Trail>
 
-{/* Right trail */}
-<Trail
-  width={4}
-  length={2}
-  decay={0.2}
-  target={rightTrailRef}
-  local={false}
-  color={"#40ccef"}
->
-  <mesh geometry={nodes.meshId5_name_5.geometry} material={neonActive ? neon : materials.blue} />
-</Trail>
+        {/* Right trail */}
+        <Trail
+          width={4}
+          length={2}
+          decay={0.2}
+          target={rightTrailRef}
+          local={false}
+          color={"#40ccef"}
+        >
+          <mesh geometry={nodes.meshId5_name_5.geometry} material={neonActive ? neon : materials.blue} />
+        </Trail>
       </group>
 
       <mesh
@@ -165,7 +163,7 @@ export default function Infernus() {
         scale={1.492}
       />
     </e.group>
-    {/* </Float> */}
+    </Float>
     </group>
   );
 }

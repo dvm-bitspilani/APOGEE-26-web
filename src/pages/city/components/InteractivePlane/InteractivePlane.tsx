@@ -11,12 +11,12 @@ const EditableMesh = e.mesh;
 const InteractivePlane = () => {
   const ref = useRef<any>(null)
   // This holds the local occluded state
-  const [isOccluded, setOccluded] = useState(false)
+  // const [isOccluded, setOccluded] = useState(false)
   const [isInRange, setInRange] = useState(false)
-  const isVisible = isInRange && !isOccluded
+  // const isVisible = isInRange && !isOccluded
   // Test distance
   const vec = new THREE.Vector3()
- const theatreCamera = useTheatreCameraStore((s) => s.theatreCamera);
+  const theatreCamera = useTheatreCameraStore((s) => s.theatreCamera);
 
   useFrame(() => {
     if (!ref.current || !theatreCamera) return;
@@ -33,19 +33,19 @@ const InteractivePlane = () => {
   });
 
   return (
-   <EditableMesh  theatreKey="interactivePlane"
-   ref={ref}
-  position={[33.5, 19, 570]}
-  rotation={[Math.PI,0, Math.PI]}
-  // style={{position:"fixed"}}
-  // style={{pointerEvents:"none"}}
->
-  <planeGeometry args={[19, 19]} />
-      <meshBasicMaterial color="black" side={THREE.DoubleSide} 
-  depthTest
-  depthWrite />
+    <EditableMesh theatreKey="interactivePlane"
+      ref={ref}
+      position={[33.5, 19, 570]}
+      rotation={[Math.PI, 0, Math.PI]}
+    // style={{position:"fixed"}}
+    // style={{pointerEvents:"none"}}
+    >
+      <planeGeometry args={[19, 19]} />
+      <meshBasicMaterial color="black" side={THREE.DoubleSide}
+        depthTest
+        depthWrite />
 
-  <Html   wrapperClass={styles.myHtmlWrapper}
+      <Html wrapperClass={styles.myHtmlWrapper}
         as="div"
         distanceFactor={8}
         transform
@@ -57,22 +57,22 @@ const InteractivePlane = () => {
           height: "800px",
           width: "800px",
         }}
-        >
-    <div
-    onWheel={(e) => e.stopPropagation()}
-    onPointerDown={(e) => e.stopPropagation()}
-      style={{
-        width: "1200px",
-        height: "600px",
-        overflow: "hidden",
-        background: "white",
+      >
+        <div
+          onWheel={(e) => e.stopPropagation()}
+          onPointerDown={(e) => e.stopPropagation()}
+          style={{
+            width: "1200px",
+            height: "600px",
+            overflow: "hidden",
+            background: "white",
 
-      overscrollBehavior: "none"
-      }}
-    >
-      <ContactUs />
-      "Hello 
-      h1
+            overscrollBehavior: "none"
+          }}
+        >
+          <ContactUs />
+          "Hello
+          h1
         </div>
       </Html>
     </EditableMesh>
