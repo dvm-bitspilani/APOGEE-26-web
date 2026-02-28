@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import { create } from "zustand";
-import { introAnimSheet } from '../pages/city/components/ScrollSync/ScrollSync';
+// import { introAnimSheet } from '../pages/city/components/ScrollSync/ScrollSync';
 type IntroState = {
   introDone: boolean;
   setIntroDone: (done: boolean) => void;
