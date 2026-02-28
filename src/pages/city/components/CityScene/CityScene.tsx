@@ -10,7 +10,7 @@ import CamCar from "../groups/CamCar";
 import { editable as e } from "@theatre/r3f";
 // import StarJunction from "../models/StarJunstion3";
 // import InteractivePlane from "../InteractivePlane";
-// import InteractivePlane from "../InteractivePlane";
+// import InteractivePlane from "../InteractivePlane/InteractivePlane";
 // import MatrixRain from "../MatrixRain";
 
 export default function CityScene({}: any) {
@@ -32,7 +32,7 @@ export default function CityScene({}: any) {
   const color = "#3e93be";
   return (
     <>
-    {/* <MatrixRain/> */}
+      {/* <MatrixRain/> */}
       <SceneDevOrProd />
       <SceneLights />
       <fogExp2 attach="fog" args={[color, 0.001]} />
@@ -48,7 +48,6 @@ export default function CityScene({}: any) {
             {/* <CityGrid /> */}
             <Constellation />
           </group>
-          {/* <InteractivePlane/> */}
         </group>
 
         <e.group theatreKey="CamCar">
@@ -68,6 +67,7 @@ export default function CityScene({}: any) {
           {/* <CityDebug /> */}
           <ScrollSync />
         </ScrollControls>
+{/* <InteractivePlane/> */}
       </group>
     </>
   );
