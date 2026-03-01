@@ -12,6 +12,7 @@ import { editable as e } from "@theatre/r3f";
 // import StarJunction from "../models/StarJunstion3";
 // import InteractivePlane from "../InteractivePlane";
 import InteractivePlane from "../InteractivePlane/InteractivePlane";
+// import CountdownPlane from "../Countdown/CountdownPlane";
 // import MatrixRain from "../MatrixRain";
 
 type Props = {
@@ -61,7 +62,10 @@ const normalCamPos = useRef(new THREE.Vector3())
 //   if (!theatreCamera) return
 //   if (activeSheet !== "Cyber City") return
 
-  const sheet = project.sheet("Cyber City")
+const sheet = useMemo(() => {
+  if (activeSheet !== "Cyber City") return null
+  return project.sheet(activeSheet)
+}, [activeSheet])
 
 //   if (!insideMode) {
 //     // ENTER
@@ -94,7 +98,7 @@ useEffect(() => {
   if (!theatreCamera) return
   if (activeSheet !== "Cyber City") return
 
-
+if(!sheet) return
   if (insideMode) {
     normalCamPos.current.copy(theatreCamera.position)
     normalCamQuat.current.copy(theatreCamera.quaternion)
@@ -168,10 +172,10 @@ useFrame(() => {
 
     const rotDone =
       theatreCamera.quaternion.angleTo(normalCamQuat.current) < 0.001
-
+   if(!sheet ) return
     if (posDone && rotDone) {
-      theatreCamera.position.copy(normalCamPos.current)
-      theatreCamera.quaternion.copy(normalCamQuat.current)
+      // theatreCamera.position.copy(normalCamPos.current)
+      // theatreCamera.quaternion.copy(normalCamQuat.current)
 sheet.sequence.position = savedSequencePos.current
 sheet.sequence.play({ iterationCount:1 })
 setReturning(false)
@@ -215,6 +219,7 @@ setReturning(false)
   </ScrollControls>
 )}
 <InteractivePlane/>
+{/* <CountdownPlane /> */}
       </group>
     </>
   );
