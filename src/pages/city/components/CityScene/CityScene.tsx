@@ -174,10 +174,10 @@ useFrame(() => {
       theatreCamera.quaternion.angleTo(normalCamQuat.current) < 0.001
    if(!sheet ) return
     if (posDone && rotDone) {
-      // theatreCamera.position.copy(normalCamPos.current)
-      // theatreCamera.quaternion.copy(normalCamQuat.current)
+      theatreCamera.position.copy(normalCamPos.current)
+      theatreCamera.quaternion.copy(normalCamQuat.current)
 sheet.sequence.position = savedSequencePos.current
-sheet.sequence.play({ iterationCount:1 })
+sheet.sequence.play({ iterationCount:Infinity })
 setReturning(false)
     }
   }
