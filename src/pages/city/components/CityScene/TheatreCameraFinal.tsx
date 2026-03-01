@@ -37,6 +37,7 @@ export default function TheatreCameraFinal() {
       near={0.1}
       far={1750}
       theatreKey="TheatreCamera"
+      name="TheatreCamera"
     />
   );
 }

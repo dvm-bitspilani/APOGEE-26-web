@@ -9,15 +9,16 @@ import ScrollReminder from "./components/ScrollReminder/ScrollReminder";
 // import { Environment } from "@react-three/drei";
 // import { getProject } from "@theatre/core";
 import { SheetProvider } from "@theatre/r3f";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import debugFunctions from "../../utils/debug";
 import * as THREE from "three";
-import { useActiveSheetStore, usePreloaderStateStore, useSceneLoadedStore } from "../../utils/store";
+import { useActiveSheetStore, useNavStateStore, usePreloaderStateStore, useSceneLoadedStore } from "../../utils/store";
 // import NavBar from "../components/NavBar/NavBar";
 import RegisterButton from "../components/RegisterButton/RegisterButton";
 import Preloader from "../preloader/Preloader";
 import Modal from "./components/Modal/Modal";
 import { project } from "./components/ScrollSync/ScrollSync";
+import { EnterDashboard, ExitDashboard } from "../../utils/navViewSwitching";
 // import state from "./state-grace.json"
 // Set up loading progress tracking at module level (before useGLTF.preload() calls complete)
 THREE.DefaultLoadingManager.onProgress = (_url, loaded, total) => {
@@ -46,17 +47,21 @@ if (import.meta.env.DEV) {
 // Theatre documentation often suggests just using it.
 
 export default function City() {
-  
-const [insideMode, setInsideMode] = useState(false)
+
   const showPreloader = usePreloaderStateStore((s) => s.showPreloader);
   const activeSheet = useActiveSheetStore((s) => s.activeSheet);
+  const setNavState = useNavStateStore((s) => s.setNavState);
   // const setShowPreloader = usePreloaderStateStore((s) => s.setShowPreloader);
 
   useEffect(() => {
     if (activeSheet !== "Cyber City") return;
     console.log("Playing sheet animation");
     project.ready.then(() => {
-      project.sheet("Cyber City").sequence.play({ iterationCount: 1 });
+      project.sheet("Cyber City").sequence.play({ iterationCount: Infinity });
+      window.addEventListener("keydown", (e) => {
+        if (e.key === "k") setNavState("opening");
+        if (e.key === "l") setNavState("closing");
+      })
       // remove Infinity if you want play only once
     });
   }, [activeSheet]);
@@ -85,36 +90,35 @@ const [insideMode, setInsideMode] = useState(false)
       {
         <div className={styles.city}>
           <button
-    onClick={() => setInsideMode(prev => !prev)}
-    style={{
-      position: "fixed",
-      top: 20,
-      right: 20,
-      zIndex: 9999,
-      fontSize: 26,
-      background: "black",
-      color: "white",
-      padding: "10px 14px",
-      cursor: "pointer"
-    }}
-  >
-    ☰
-  </button>
+            style={{
+              position: "fixed",
+              top: 20,
+              right: 20,
+              zIndex: 9999,
+              fontSize: 26,
+              background: "black",
+              color: "white",
+              padding: "10px 14px",
+              cursor: "pointer"
+            }}
+          >
+            ☰
+          </button>
           <Canvas
-           gl={{ antialias: true }}
-          dpr={[1, 1.5]}
-  // onCreated={({ gl }) => {
-  //   gl.toneMapping = THREE.NoToneMapping
-  // }}
+            gl={{ antialias: true }}
+            dpr={[1, 1.5]}
+            // onCreated={({ gl }) => {
+            //   gl.toneMapping = THREE.NoToneMapping
+            // }}
             shadows={false}
             camera={{ manual: true }} // {{ position: [0, 2, -2], near: 0.1, far: 1000000, fov: 50 }}
             style={{ width: "100%", height: "100%" }}
-            onCreated={({ camera,gl }) => {
-    camera.layers.enable(1); // car
-    camera.layers.enable(2); // city
-    
-    gl.toneMapping = THREE.NoToneMapping
-  }}
+            onCreated={({ camera, gl }) => {
+              camera.layers.enable(1); // car
+              camera.layers.enable(2); // city
+
+              gl.toneMapping = THREE.NoToneMapping
+            }}
           >
             {/* <mesh rotation={[-Math.PI ,Math.PI/4, 0]} position={[-20, 5, 100]}>
   <planeGeometry args={[100, 10]} />
@@ -146,9 +150,9 @@ const [insideMode, setInsideMode] = useState(false)
               // distance={0.5}
               intensity={0} /> */}
               {/* <OrbitControls/> */}
-              <CityScene 
-  insideMode={insideMode}
-  setInsideMode={setInsideMode} />
+              <EnterDashboard />
+              <ExitDashboard />
+              <CityScene />
               {/* <BloomLeva /> */}
               {/* <FogPlane /> */}
             </SheetProvider>
