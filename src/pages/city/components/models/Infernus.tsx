@@ -51,6 +51,7 @@ export default function Infernus() {
   return (
     // <Float floatIntensity={3} rotationIntensity={0.05} speed={5}>
     <e.group
+      name="infernus"
       theatreKey="UltaRickshaw"
       ref={infernusRef}
       dispose={null}

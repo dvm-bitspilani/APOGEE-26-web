@@ -2,8 +2,8 @@ import { useScroll } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { getProject } from "@theatre/core";
 
-import state from "../../state-carnival.json";
-import { useActiveSheetStore, useModalStore, usePreloaderStateStore } from "../../../../utils/store";
+import state from "../../state-wild.json";
+import { useActiveSheetStore, useModalStore, useNavStateStore, usePreloaderStateStore } from "../../../../utils/store";
 import { type Section, useCurrentSectionStore } from "../../../../utils/store";
 import { useEffect, useRef } from "react";
 
@@ -14,11 +14,11 @@ export const introAnimSheet = project.sheet("Intro Sequence");
 
 const stopPoints: Record<Section, [number, number]> = {
   "home": [0, 0.25],
-  "about": [4, 6],
-  "contact": [10, 16],
+  "about": [6.2, 7.8],
+  "contact": [14.8, 16],
   "transition": [-1, -1],
 }
-const sequenceLength = 15;
+const sequenceLength = 15.5;
 
 export default function ScrollSync() {
   const scroll = useScroll();
@@ -29,8 +29,8 @@ export default function ScrollSync() {
   const showPreloader = usePreloaderStateStore((s) => s.showPreloader);
   const currentSection = useCurrentSectionStore((s) => s.currentSection);
   const setCurrentSection = useCurrentSectionStore((s) => s.setCurrentSection);
-  // const activeSheet = useActiveSheetStore((s) => s.activeSheet);
   const setActiveSheet = useActiveSheetStore((s) => s.setActiveSheet);
+  const navState = useNavStateStore((s) => s.navState);
 
   useEffect(() => {
     scrollSheet.sequence.position = 0;
@@ -44,7 +44,7 @@ export default function ScrollSync() {
   }, [showPreloader])
 
   useFrame(() => {
-    if (!introOverRef.current) return;
+    if (!introOverRef.current || navState !== "off") return;
 
     if (!isModalOpen) {
       for (const path in stopPoints) {

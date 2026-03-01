@@ -128,6 +128,18 @@ export const useActiveSheetStore = create<ActiveSheetStore>((set) => ({
   setActiveSheet: (sheet) => set({ activeSheet: sheet }),
 }))
 
+// affects functioning in useFrame in navViewSeitching.tsx' custom hooks
+type NavState = "off" | "opening" | "closing"
+type NavStateStore = {
+  navState: NavState;
+  setNavState: (open: NavState) => void;
+}
+
+export const useNavStateStore = create<NavStateStore>((set) => ({
+  navState: "off",
+  setNavState: (state) => set({ navState: state }),
+}))
+
 export interface Event {
   id: number;
   name: string;

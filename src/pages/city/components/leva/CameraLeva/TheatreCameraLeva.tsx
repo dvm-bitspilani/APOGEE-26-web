@@ -1,3 +1,4 @@
+//@ts-nocheck //! This file won't be used anyway
 import { useFrame } from "@react-three/fiber";
 import { useControls } from "leva";
 import * as THREE from "three";
@@ -24,16 +25,16 @@ export default function TheatreCameraLeva() {
     rotZ: { value: 0, min: -180, max: 180, step: 1 },
   });
 
-  useFrame(() => {
-    if (!camera) return;
-    console.log(camera);
-    camera.position.set(debug.posX, debug.posY, debug.posZ);
-    camera.rotation.set(
-      THREE.MathUtils.degToRad(debug.rotX),
-      THREE.MathUtils.degToRad(debug.rotY),
-      THREE.MathUtils.degToRad(debug.rotZ),
-    );
-  });
+  // useFrame(() => {
+  //   if (!camera) return;
+  //   console.log(camera);
+  //   camera.position.set(debug.posX, debug.posY, debug.posZ);
+  //   camera.rotation.set(
+  //     THREE.MathUtils.degToRad(debug.rotX),
+  //     THREE.MathUtils.degToRad(debug.rotY),
+  //     THREE.MathUtils.degToRad(debug.rotZ),
+  //   );
+  // });
 
   return null;
 }

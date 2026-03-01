@@ -12,12 +12,13 @@ import { SheetProvider } from "@theatre/r3f";
 import { useEffect } from "react";
 import debugFunctions from "../../utils/debug";
 import * as THREE from "three";
-import { useActiveSheetStore, usePreloaderStateStore, useSceneLoadedStore } from "../../utils/store";
+import { useActiveSheetStore, useNavStateStore, usePreloaderStateStore, useSceneLoadedStore } from "../../utils/store";
 // import NavBar from "../components/NavBar/NavBar";
 import RegisterButton from "../components/RegisterButton/RegisterButton";
 import Preloader from "../preloader/Preloader";
 import Modal from "./components/Modal/Modal";
 import { project } from "./components/ScrollSync/ScrollSync";
+import { EnterDashboard, ExitDashboard } from "../../utils/navViewSwitching";
 // import state from "./state-grace.json"
 
 // Set up loading progress tracking at module level (before useGLTF.preload() calls complete)
@@ -49,12 +50,17 @@ if (import.meta.env.DEV) {
 export default function City() {
   const showPreloader = usePreloaderStateStore((s) => s.showPreloader);
   const activeSheet = useActiveSheetStore((s) => s.activeSheet);
+  const setNavState = useNavStateStore((s) => s.setNavState);
   // const setShowPreloader = usePreloaderStateStore((s) => s.setShowPreloader);
 
   useEffect(() => {
     if (activeSheet !== "Cyber City") return;
     project.ready.then(() => {
       project.sheet("Cyber City").sequence.play({ iterationCount: Infinity });
+      window.addEventListener("keydown", (e) => {
+        if (e.key === "k") setNavState("opening");  
+        if (e.key === "l") setNavState("closing");  
+      })
       // remove Infinity if you want play only once
     });
   }, [activeSheet]);
@@ -119,6 +125,8 @@ export default function City() {
               // distance={0.5}
               intensity={0} /> */}
               {/* <OrbitControls/> */}
+              <EnterDashboard />
+              <ExitDashboard />
               <CityScene />
               {/* <BloomLeva /> */}
               {/* <FogPlane /> */}

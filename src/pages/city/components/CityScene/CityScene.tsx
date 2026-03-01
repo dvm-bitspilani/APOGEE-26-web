@@ -7,18 +7,17 @@ import SceneDevOrProd from "./SceneDevorProd";
 import SceneLights from "./SceneLights";
 import Constellation from "../Constellation3";
 import CamCar from "../groups/CamCar";
-import { editable as e } from "@theatre/r3f";
+import { editable as e } from "@theatre/r3f"
 // import StarJunction from "../models/StarJunstion3";
 // import InteractivePlane from "../InteractivePlane";
 // import InteractivePlane from "../InteractivePlane/InteractivePlane";
 // import MatrixRain from "../MatrixRain";
 
-export default function CityScene({}: any) {
+export default function CityScene({ }: any) {
   const cityRef = useRef<THREE.Group>(null!);
   const setCity = useCityStore((s) => s.setCity);
   const setPivot = usePivotStore((s) => s.setPivot);
   const carPivotRef = useRef<THREE.Group>(null!);
-
   useEffect(() => {
     if (cityRef.current) {
       setCity(cityRef.current);
@@ -29,6 +28,7 @@ export default function CityScene({}: any) {
       setPivot(carPivotRef.current);
     }
   }, [setPivot]);
+
   const color = "#3e93be";
   return (
     <>
@@ -56,7 +56,7 @@ export default function CityScene({}: any) {
            intensity={0.5} /> */}
 
           {/* The TheatreCameraFinal is a pre-configured camera with the same settings as above, but with added parallax and scroll effects     */}
-          
+
           <CamCar />
         </e.group>
         <ScrollControls pages={6} damping={0.8}>
@@ -67,7 +67,7 @@ export default function CityScene({}: any) {
           {/* <CityDebug /> */}
           <ScrollSync />
         </ScrollControls>
-{/* <InteractivePlane/> */}
+        {/* <InteractivePlane /> */}
       </group>
     </>
   );

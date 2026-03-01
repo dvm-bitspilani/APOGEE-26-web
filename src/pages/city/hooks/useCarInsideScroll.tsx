@@ -7,7 +7,7 @@ import * as THREE from "three"
 export default function useCarInsideScroll() {
   const city = useCityStore((s) => s.city)
   const pivot = usePivotStore((s) => s.pivot)
-   const { camera } = useThree();
+  const { camera } = useThree();
   const scroll = useScroll()
   const hasStartedScroll = useRef(false)
 
