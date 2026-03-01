@@ -77,8 +77,11 @@ useLayoutEffect(() => {
 
    const leftTrailRef = useRef<THREE.Object3D>(null!);
     const rightTrailRef = useRef<THREE.Object3D>(null!);
-  return (<group layers={1}> 
+  return (
+    <>
+    
    <StudioEnvironment  />
+  <group layers={1}> 
      <Float floatIntensity={0.3} rotationIntensity={0.005} speed={5}>
     
     <e.group
@@ -186,6 +189,7 @@ useLayoutEffect(() => {
     </e.group>
     </Float>
     </group>
+    </>
   );
 }
 

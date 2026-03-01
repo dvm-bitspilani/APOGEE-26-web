@@ -14,7 +14,7 @@ export const introAnimSheet = project.sheet("Intro Sequence");
 
 const stopPoints: Record<Section, [number, number]> = {
   "home": [0, 0.25],
-  "about": [4, 6],
+  "about": [6, 6],
   "contact": [10, 16],
   "transition": [-1, -1],
 }

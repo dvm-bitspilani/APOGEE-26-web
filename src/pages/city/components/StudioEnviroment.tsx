@@ -3,7 +3,7 @@ import { Environment, Lightformer } from "@react-three/drei"
 
 export default function StudioEnvironment() {
   return (
-    <Environment resolution={1024} >
+    <Environment resolution={512} >
       {/* Key Light */}
       <Lightformer
         intensity={10}

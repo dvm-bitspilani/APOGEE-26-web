@@ -1,5 +1,5 @@
-import { Environment, Html, ScrollControls, useEnvironment } from "@react-three/drei";
-import { useEffect, useRef, useState } from "react";
+import { Environment, ScrollControls, useEnvironment } from "@react-three/drei";
+import { useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
 import { useActiveSheetStore, useCityStore, useInfernusStore, usePivotStore, useTheatreCameraStore } from "../../../../utils/store";
 import ScrollSync, { project } from "../ScrollSync/ScrollSync";
@@ -7,11 +7,8 @@ import SceneDevOrProd from "./SceneDevorProd";
 import SceneLights from "./SceneLights";
 import Constellation from "../Constellation3";
 import CamCar from "../groups/CamCar";
-import StudioEnvironment from "../StudioEnviroment";
-import { useFrame, useThree } from "@react-three/fiber";
+import { useFrame } from "@react-three/fiber";
 import { editable as e } from "@theatre/r3f";
-import HamburgerButton from "../HamburgerButton";
-
 // import StarJunction from "../models/StarJunstion3";
 // import InteractivePlane from "../InteractivePlane";
 import InteractivePlane from "../InteractivePlane/InteractivePlane";
@@ -22,14 +19,14 @@ type Props = {
   setInsideMode: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export default function CityScene({ insideMode, setInsideMode }: Props){
+export default function CityScene({ insideMode}: Props){
   const cityRef = useRef<THREE.Group>(null!);
   const setCity = useCityStore((s) => s.setCity);
   const setPivot = usePivotStore((s) => s.setPivot);
   const carPivotRef = useRef<THREE.Group>(null!);
 // inside CityScene
 const cityEnv = useEnvironment({ preset: "city" })
-const { scene } = useThree();
+// const { scene } = useThree();
 useEffect(() => {
   if (!cityRef.current) return
   cityRef.current.traverse((child) => {
@@ -55,11 +52,10 @@ useEffect(() => {
   }, [setPivot]);
 
    const activeSheet = useActiveSheetStore((s) => s.activeSheet);
-// const [insideMode, setInsideMode] = useState(false)
+
   const theatreCamera = useTheatreCameraStore((s) => s.theatreCamera);
 const infernus = useInfernusStore((s) => s.infernus)
 const normalCamPos = useRef(new THREE.Vector3())
-const normalLookTarget = useRef(new THREE.Vector3())
 
 // const handleClick = () => {
 //   if (!theatreCamera) return
@@ -107,18 +103,13 @@ useEffect(() => {
     sheet.sequence.pause()
   } else {
     setReturning(true)
+    // setInsideMode()
   }
 
 }, [insideMode])
-const localInteriorOffset = new THREE.Vector3(0,5,-5)
-const interiorWorld = new THREE.Vector3()
-const interiorLook = new THREE.Vector3()
 const normalCamQuat = useRef(new THREE.Quaternion())
 const [returning, setReturning] = useState(false)
 const camCarRef = useRef<THREE.Group>(null!)
-
-const forward = new THREE.Vector3()
-const tempQuat = new THREE.Quaternion()
 const savedSequencePos = useRef(0)
 const enteredCamBasePos = useRef<THREE.Vector3 | null>(null)
 
@@ -128,6 +119,14 @@ useEffect(() => {
     enteredCamBasePos.current = basePos
   }
 }, [insideMode])
+// 🔹 Pre-allocate once
+const tempVec1 = useMemo(() => new THREE.Vector3(), [])
+const tempVec2 = useMemo(() => new THREE.Vector3(), [])
+const tempQuat1 = useMemo(() => new THREE.Quaternion(), [])
+const tempQuat2 = useMemo(() => new THREE.Quaternion(), [])
+const tempEuler = useMemo(() => new THREE.Euler(), [])
+const offset = useMemo(() => new THREE.Vector3(0, 4, 0), [])
+
 useFrame(() => {
   if (!theatreCamera) return
   if (activeSheet !== "Cyber City") return
@@ -135,67 +134,47 @@ useFrame(() => {
   const anchor = camCarRef.current?.getObjectByName("CameraAnchor")
   if (!anchor) return
 
-  if (insideMode&&infernus) {
-    const camCarWorldPos = new THREE.Vector3()
-  camCarRef.current.getWorldPosition(camCarWorldPos)
-const localPos = infernus.position.clone()
-  const carWorldPos = new THREE.Vector3()
-  infernus.getWorldPosition(carWorldPos)
+  if (insideMode && infernus) {
 
-  // 2️⃣ Compute final camera position = camCar + car + offset
-  // const offset = new THREE.Vector3(0, -2, -12)
-  const offset = new THREE.Vector3(0, 4, 0)
-  const finalCamPos = localPos.clone().add(offset)
+    // reuse vectors instead of creating
+    infernus.getWorldPosition(tempVec1)
 
-  // Smooth lerp for camera movement
-  theatreCamera.position.lerp(finalCamPos, 0.08)
+    // finalCamPos = tempVec1 + offset
+    tempVec2.copy(infernus.position).add(offset)
 
-  // 3️⃣ Camera rotation = only car rotation
-  const carQuat = camCarRef.current.getWorldQuaternion(new THREE.Quaternion())
-  const infQuat= infernus.getWorldQuaternion(new THREE.Quaternion())
-  const forward = new THREE.Vector3(0, 2, 10).applyQuaternion(carQuat) // car forward
-  // const lookAtPos = localPos.clone().add(forward)
-  // theatreCamera.lookAt(lookAtPos)
-  // Suppose you have a quaternion from the car
-  // const carQuat = infernus.quaternion.clone() // original quaternion
+    theatreCamera.position.lerp(tempVec2, 0.08)
 
-// Convert to Euler
-const euler = new THREE.Euler().setFromQuaternion(infQuat, "YXZ")
+    // reuse quaternion
+    infernus.getWorldQuaternion(tempQuat1)
 
-// Negate specific axis (e.g., Y axis)
-euler.y = +euler.y + Math.PI
-euler.x= -euler.x
-euler.z=-euler.z
-// Convert back to quaternion
-const newQuat = new THREE.Quaternion().setFromEuler(euler)
+    // convert to euler without new object
+    tempEuler.setFromQuaternion(tempQuat1, "YXZ")
 
-// Apply to camera
-theatreCamera.quaternion.copy(newQuat)// smooth rotation
+    tempEuler.y = tempEuler.y + Math.PI
+    tempEuler.x = -tempEuler.x
+    tempEuler.z = -tempEuler.z
+
+    tempQuat2.setFromEuler(tempEuler)
+
+    theatreCamera.quaternion.copy(tempQuat2)
+
   } else if (returning) {
 
     theatreCamera.position.lerp(normalCamPos.current, 0.08)
     theatreCamera.quaternion.slerp(normalCamQuat.current, 0.08)
 
     const posDone =
-      theatreCamera.position.distanceTo(normalCamPos.current) ===0 
+      theatreCamera.position.distanceTo(normalCamPos.current) < 0.001
 
     const rotDone =
-      theatreCamera.quaternion.angleTo(normalCamQuat.current) ===0
+      theatreCamera.quaternion.angleTo(normalCamQuat.current) < 0.001
 
     if (posDone && rotDone) {
-      theatreCamera.position.copy(normalCamPos.current)
-      theatreCamera.quaternion.copy(normalCamQuat.current)
-
-      // setReturning(false)
-
-      // const sheet = project.sheet("Cyber City")
-      sheet.sequence.position = savedSequencePos.current
-      console.log(savedSequencePos.current)
-      requestAnimationFrame(() => {
-    sheet.sequence.play({
-  iterationCount: Infinity,
-})
-})
+      // theatreCamera.position.copy(normalCamPos.current)
+      // theatreCamera.quaternion.copy(normalCamQuat.current)
+sheet.sequence.position = savedSequencePos.current
+sheet.sequence.play({ iterationCount:1 })
+setReturning(false)
     }
   }
 })

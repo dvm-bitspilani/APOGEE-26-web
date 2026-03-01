@@ -15,7 +15,7 @@ const InteractivePlane = () => {
   const [isInRange, setInRange] = useState(false)
   // const isVisible = isInRange && !isOccluded
   // Test distance
-  const vec = new THREE.Vector3()
+  // const vec = new THREE.Vector3()
   const theatreCamera = useTheatreCameraStore((s) => s.theatreCamera);
 const camWorldPos = new THREE.Vector3(); // Create these once outside useFrame to save memory
 const meshWorldPos = new THREE.Vector3();
@@ -34,7 +34,7 @@ const meshWorldPos = new THREE.Vector3();
   const distance = camWorldPos.distanceTo(meshWorldPos);
     // const distance = theatreCamera.position.distanceTo(ref.current.position);
 
-    const range = distance <= 300;
+    const range = distance <= 72.8;
 console.log(distance)
     if (range !== isInRange) {
       setInRange(range);
@@ -44,7 +44,7 @@ console.log(distance)
   return (
     <EditableMesh theatreKey="interactivePlane"
       ref={ref}
-      position={[50,0,875]}
+      position={[46.5,8,875]}
       rotation={[Math.PI, 0, Math.PI]}
       scale={[1.6,1.5,1.5]}
     // style={{position:"fixed"}}

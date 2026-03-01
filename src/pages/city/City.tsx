@@ -6,7 +6,7 @@ import styles from "./City.module.scss";
 import CityScene from "./components/CityScene/CityScene";
 import ScrollReminder from "./components/ScrollReminder/ScrollReminder";
 // import { sheet } from "./theatre";
-import { Environment } from "@react-three/drei";
+// import { Environment } from "@react-three/drei";
 // import { getProject } from "@theatre/core";
 import { SheetProvider } from "@theatre/r3f";
 import { useEffect, useState } from "react";
@@ -54,8 +54,9 @@ const [insideMode, setInsideMode] = useState(false)
 
   useEffect(() => {
     if (activeSheet !== "Cyber City") return;
+    console.log("Playing sheet animation");
     project.ready.then(() => {
-      project.sheet("Cyber City").sequence.play({ iterationCount: Infinity });
+      project.sheet("Cyber City").sequence.play({ iterationCount: 1 });
       // remove Infinity if you want play only once
     });
   }, [activeSheet]);
