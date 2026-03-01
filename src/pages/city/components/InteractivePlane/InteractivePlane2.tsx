@@ -8,7 +8,7 @@ import { useFrame } from "@react-three/fiber";
 import { useTheatreCameraStore } from "../../../../utils/store";
 const EditableMesh = e.mesh;
 
-const InteractivePlane = () => {
+const InteractivePlane2 = () => {
   const ref = useRef<any>(null)
   // This holds the local occluded state
   // const [isOccluded, setOccluded] = useState(false)
@@ -34,19 +34,19 @@ const meshWorldPos = new THREE.Vector3();
   const distance = camWorldPos.distanceTo(meshWorldPos);
     // const distance = theatreCamera.position.distanceTo(ref.current.position);
 
-    const range = distance <= 72.8;
-// console.log(distance)
+    const range = distance <= 113;
+console.log(distance)
     if (range !== isInRange) {
       setInRange(range);
     }
   });
 
   return (
-    <EditableMesh theatreKey="interactivePlane"
+    <EditableMesh theatreKey="interactivePlane2"
       ref={ref}
-      position={[46.5,8,875]}
-      rotation={[Math.PI, 0, Math.PI]}
-      scale={[1.6,1.5,1.5]}
+      position={[80,15,1320]}
+      rotation={[Math.PI, -Math.PI/2, Math.PI]}
+      scale={[3,3,3]}
     // style={{position:"fixed"}}
     // style={{pointerEvents:"none"}}
     >
@@ -90,4 +90,4 @@ const meshWorldPos = new THREE.Vector3();
   );
 };
 
-export default InteractivePlane;
+export default InteractivePlane2;

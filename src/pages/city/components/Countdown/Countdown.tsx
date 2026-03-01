@@ -41,7 +41,7 @@ const Countdown = ({ targetDate }: CountdownProps) => {
         textAlign: "center",
         color:"red",
         background: "transparent",
-        zIndex: 10,
+        // zIndex: 10000,
       }}
     >
       <div>

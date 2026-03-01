@@ -12,7 +12,8 @@ import { editable as e } from "@theatre/r3f";
 // import StarJunction from "../models/StarJunstion3";
 // import InteractivePlane from "../InteractivePlane";
 import InteractivePlane from "../InteractivePlane/InteractivePlane";
-// import CountdownPlane from "../Countdown/CountdownPlane";
+import CountdownPlane from "../Countdown/CountdownPlane";
+import InteractivePlane2 from "../InteractivePlane/InteractivePlane2";
 // import MatrixRain from "../MatrixRain";
 
 type Props = {
@@ -174,8 +175,12 @@ useFrame(() => {
       theatreCamera.quaternion.angleTo(normalCamQuat.current) < 0.001
    if(!sheet ) return
     if (posDone && rotDone) {
+      
+        console.log(theatreCamera.position, theatreCamera.quaternion  )
       theatreCamera.position.copy(normalCamPos.current)
       theatreCamera.quaternion.copy(normalCamQuat.current)
+      console.log("Returned to normal cam position and rotation")
+      console.log(theatreCamera.position, theatreCamera.quaternion  )
 sheet.sequence.position = savedSequencePos.current
 sheet.sequence.play({ iterationCount:Infinity })
 setReturning(false)
@@ -219,7 +224,8 @@ setReturning(false)
   </ScrollControls>
 )}
 <InteractivePlane/>
-{/* <CountdownPlane /> */}
+<CountdownPlane />
+<InteractivePlane2/>
       </group>
     </>
   );
