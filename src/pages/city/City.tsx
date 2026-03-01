@@ -102,6 +102,7 @@ const [insideMode, setInsideMode] = useState(false)
   </button>
           <Canvas
            gl={{ antialias: true }}
+          dpr={[1, 1.5]}
   // onCreated={({ gl }) => {
   //   gl.toneMapping = THREE.NoToneMapping
   // }}
