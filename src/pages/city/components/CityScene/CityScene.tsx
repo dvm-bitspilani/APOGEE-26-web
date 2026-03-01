@@ -1,4 +1,4 @@
-import { ScrollControls } from "@react-three/drei";
+import { Environment, ScrollControls, useEnvironment } from "@react-three/drei";
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { useCityStore, usePivotStore } from "../../../../utils/store";
@@ -8,9 +8,8 @@ import SceneLights from "./SceneLights";
 import Constellation from "../Constellation3";
 import CamCar from "../groups/CamCar";
 import { editable as e } from "@theatre/r3f"
-// import StarJunction from "../models/StarJunstion3";
-// import InteractivePlane from "../InteractivePlane";
 // import InteractivePlane from "../InteractivePlane/InteractivePlane";
+// import CountdownPlane from "../Countdown/CountdownPlane";
 // import MatrixRain from "../MatrixRain";
 
 export default function CityScene({ }: any) {
@@ -18,6 +17,22 @@ export default function CityScene({ }: any) {
   const setCity = useCityStore((s) => s.setCity);
   const setPivot = usePivotStore((s) => s.setPivot);
   const carPivotRef = useRef<THREE.Group>(null!);
+  // inside CityScene
+  const cityEnv = useEnvironment({ preset: "city" })
+  // const { scene } = useThree();
+  useEffect(() => {
+    if (!cityRef.current) return
+    cityRef.current.traverse((child) => {
+      if ((child as THREE.Mesh).isMesh) {
+        const mesh = child as THREE.Mesh
+        const mat = mesh.material as THREE.MeshStandardMaterial
+        mat.envMap = cityEnv
+        mat.envMapIntensity = 0.1
+        mat.needsUpdate = true
+        child.layers.disable(1);
+      }
+    })
+  }, [cityEnv])
   useEffect(() => {
     if (cityRef.current) {
       setCity(cityRef.current);
@@ -43,9 +58,10 @@ export default function CityScene({ }: any) {
       <group>
         <group ref={carPivotRef} position={[0, 0, 0]}>
           {/* <ambientLight intensity={0.5} /> */}
-          <group ref={cityRef}>
+          <group ref={cityRef} layers={2}>
             {/* <axesHelper args={[200]} /> */}
             {/* <CityGrid /> */}
+            <Environment preset="city" environmentIntensity={0.1} />
             <Constellation />
           </group>
         </group>

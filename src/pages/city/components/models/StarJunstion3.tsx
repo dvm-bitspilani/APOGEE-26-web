@@ -2,7 +2,7 @@
 import { Clone, useGLTF } from '@react-three/drei'
 import { type GLTFResult } from '../../types/starJunction.types';
 
-const BLOCKS = 4;
+const BLOCKS = 40;
 const SPACING = 44.1;
 const positions: [number, number, number][] = Array(BLOCKS).fill(0).map((_, i) => [0, 0.01*(i % 2), i * SPACING])
 

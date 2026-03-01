@@ -6,7 +6,7 @@ import styles from "./City.module.scss";
 import CityScene from "./components/CityScene/CityScene";
 import ScrollReminder from "./components/ScrollReminder/ScrollReminder";
 // import { sheet } from "./theatre";
-import { Environment } from "@react-three/drei";
+// import { Environment } from "@react-three/drei";
 // import { getProject } from "@theatre/core";
 import { SheetProvider } from "@theatre/r3f";
 import { useEffect } from "react";
@@ -20,7 +20,6 @@ import Modal from "./components/Modal/Modal";
 import { project } from "./components/ScrollSync/ScrollSync";
 import { EnterDashboard, ExitDashboard } from "../../utils/navViewSwitching";
 // import state from "./state-grace.json"
-
 // Set up loading progress tracking at module level (before useGLTF.preload() calls complete)
 THREE.DefaultLoadingManager.onProgress = (_url, loaded, total) => {
   const progress = (loaded / total) * 100;
@@ -48,6 +47,7 @@ if (import.meta.env.DEV) {
 // Theatre documentation often suggests just using it.
 
 export default function City() {
+
   const showPreloader = usePreloaderStateStore((s) => s.showPreloader);
   const activeSheet = useActiveSheetStore((s) => s.activeSheet);
   const setNavState = useNavStateStore((s) => s.setNavState);
@@ -55,11 +55,12 @@ export default function City() {
 
   useEffect(() => {
     if (activeSheet !== "Cyber City") return;
+    console.log("Playing sheet animation");
     project.ready.then(() => {
       project.sheet("Cyber City").sequence.play({ iterationCount: Infinity });
       window.addEventListener("keydown", (e) => {
-        if (e.key === "k") setNavState("opening");  
-        if (e.key === "l") setNavState("closing");  
+        if (e.key === "k") setNavState("opening");
+        if (e.key === "l") setNavState("closing");
       })
       // remove Infinity if you want play only once
     });
@@ -88,14 +89,36 @@ export default function City() {
       )}
       {
         <div className={styles.city}>
+          <button
+            style={{
+              position: "fixed",
+              top: 20,
+              right: 20,
+              zIndex: 9999,
+              fontSize: 26,
+              background: "black",
+              color: "white",
+              padding: "10px 14px",
+              cursor: "pointer"
+            }}
+          >
+            ☰
+          </button>
           <Canvas
             gl={{ antialias: true }}
-            onCreated={({ gl }) => {
-              gl.toneMapping = THREE.NoToneMapping
-            }}
+            dpr={[1, 1.5]}
+            // onCreated={({ gl }) => {
+            //   gl.toneMapping = THREE.NoToneMapping
+            // }}
             shadows={false}
             camera={{ manual: true }} // {{ position: [0, 2, -2], near: 0.1, far: 1000000, fov: 50 }}
             style={{ width: "100%", height: "100%" }}
+            onCreated={({ camera, gl }) => {
+              camera.layers.enable(1); // car
+              camera.layers.enable(2); // city
+
+              gl.toneMapping = THREE.NoToneMapping
+            }}
           >
             {/* <mesh rotation={[-Math.PI ,Math.PI/4, 0]} position={[-20, 5, 100]}>
   <planeGeometry args={[100, 10]} />
@@ -108,7 +131,9 @@ export default function City() {
     blendFunction={BlendFunction.ADD} // blend mode
   />
   </EffectComposer> */}
-            <Environment preset="city" environmentIntensity={0.1} />
+            {/* <Environment preset="city" environmentIntensity={0.1}  /> */}
+            {/* <SheetProvider sheet={sheet}> */}
+            {/* <Environment preset="city" environmentIntensity={0.1} /> */}
             <SheetProvider key={activeSheet} sheet={project.sheet(activeSheet)}>
               {/* <CameraControllerLeva /> */}
               {/* <e.spotLight

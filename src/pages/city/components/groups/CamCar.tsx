@@ -3,7 +3,7 @@ import TheatreCameraFinal from '../CityScene/TheatreCameraFinal';
 
 export default function CamCar() {
     return (
-        <group>
+        <group name="CameraAnchor" >
             <Infernus />
             <TheatreCameraFinal />
         </group>

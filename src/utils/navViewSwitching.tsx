@@ -15,7 +15,7 @@ export const EnterDashboard = () => {
     useFrame(() => {
         if (navState !== "opening" || !camera || !infernus) return
 
-        targetPos.set(infernus.position.x, infernus.position.y + 2, infernus.position.z - 5);
+        targetPos.set(infernus.position.x, infernus.position.y + 3.6, infernus.position.z - 2);
         targetRot.set(infernus.rotation.x - Math.PI, infernus.rotation.y, infernus.rotation.z + Math.PI)
 
         carQuaternion.setFromEuler(targetRot)
