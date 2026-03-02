@@ -4,11 +4,8 @@ import {
   useScrollLockStore,
 } from "../../../../utils/store";
 import ComingSoon from "../../../comingSoon/ComingSoon";
-<<<<<<< HEAD
-=======
 import ContactUs from "../../../contactUs/ContactUs";
 import AboutUs from "../../../aboutUs/AboutUs";
->>>>>>> main
 import styles from "./Modal.module.scss";
 
 export default function Modal({ children }: { children?: React.ReactNode }) {
@@ -46,8 +43,8 @@ export default function Modal({ children }: { children?: React.ReactNode }) {
             <AboutUs />
           ) : currentsection === "contact" ? (
             <ContactUs />
-          ) : currentsection === "comingSoon" ? (
-            <ComingSoon />
+          // ) : currentsection === "contact" ? (
+          //   <ComingSoon />
           ) : (
             children
           )}

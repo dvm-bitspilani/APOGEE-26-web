@@ -72,7 +72,7 @@ export const useTheatreCameraStore = create<TheatreCameraStore>((set) => ({
   setTheatreCamera: (camera) => set({ theatreCamera: camera }),
 }))
 
-export type Section = ["home", "about", "contact", "comingSoon", "transition"][number];
+export type Section = ["home", "about", "contact", "transition"][number];
 
 type CurrentSectionStore = {
   currentSection: Section;
@@ -118,7 +118,7 @@ export const usePreloaderStateStore = create<PreloaderStateStore>((set) => ({
   setShowPreloader: (state) => set({ showPreloader: state }),
 }))
 
-type Sheet = "Intro Sequence" | "Cyber City"; 
+type Sheet = "Intro Sequence" | "Cyber City";
 type ActiveSheetStore = {
   activeSheet: Sheet;
   setActiveSheet: (sheet: Sheet) => void;

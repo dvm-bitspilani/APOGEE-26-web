@@ -11,13 +11,7 @@ import SVG from "./SVG";
 //   onLaunch?: () => void;
 // }
 
-<<<<<<< HEAD
 export default function Preloader() {
-=======
-export default function Preloader({ onLaunch }: PreloaderProps) {
-  gsap.registerPlugin(SplitText);
-  // const [text, setText] = useState("");
->>>>>>> main
   const textRef = useRef<HTMLParagraphElement>(null);
   const textRef2 = useRef<HTMLDivElement[]>([]);
   const launchRef = useRef<HTMLDivElement>(null);
@@ -28,11 +22,8 @@ export default function Preloader({ onLaunch }: PreloaderProps) {
   const [prevIndex, setPrevIndex] = useState(0);
   const sceneLoaded = useSceneLoadedStore((s) => s.loaded);
   const sceneProgress = useSceneLoadedStore((s) => s.progress);
-<<<<<<< HEAD
   const setShowPreloader = usePreloaderStateStore((s) => s.setShowPreloader);
   gsap.registerPlugin(SplitText);
-=======
->>>>>>> main
   const splitTextRef = useRef<SplitText | null>(null);
   const timelineRef = useRef<gsap.core.Timeline | null>(null);
   const svgRef = useRef<HTMLDivElement>(null);
@@ -117,23 +108,13 @@ export default function Preloader({ onLaunch }: PreloaderProps) {
   }, [assets, totalAssets]);
 
   useEffect(() => {
-<<<<<<< HEAD
     const media = window.matchMedia("(max-width: 768px) and (aspect-ratio < 1/1)");
-=======
-    const media = window.matchMedia(
-      "(max-width: 768px) and (aspect-ratio < 1/1)",
-    );
->>>>>>> main
 
     const handleChange = (e: MediaQueryList) => {
       if (e.matches) {
         setwidth(true);
         setAnimDone(true);
-<<<<<<< HEAD
-        console.log("Mobile mode activated");
-=======
         // console.log("Mobile mode activated");
->>>>>>> main
       } else {
         setwidth(false);
       }
@@ -141,12 +122,6 @@ export default function Preloader({ onLaunch }: PreloaderProps) {
 
     handleChange(media); // initial check
     media.addEventListener("change", () => handleChange(media));
-<<<<<<< HEAD
-
-    return () => media.removeEventListener("change", () => handleChange(media));
-  },);
-=======
->>>>>>> main
 
     return () => media.removeEventListener("change", () => handleChange(media));
   });
@@ -294,47 +269,19 @@ export default function Preloader({ onLaunch }: PreloaderProps) {
   // }, []);
 
   return (
-<<<<<<< HEAD
     <div className={styles.container} ref={containerRef}>
       {
         loaderState == 1 &&
         <div className={styles.subContainer} ref={subContainerRef}>
           <div className={styles.box}>
             <div className={styles.navbar}>{`>TERMINAL`}</div>
-            {/* <p
-              style={{
-                whiteSpace: "pre",
-              }}
-              className={styles.figlet}
+            <div
+              className={styles.txtBox}
+              ref={textRef}
+              style={{ height: "auto", overflowY: "hidden" }}
             >
-              <br />
-<span className={styles.filgetChild1}>{" "}{" "}{" "}{" "}{" "}{" "}{" "}█████████   ███████████     ███████      █████████  ██████████ ██████████</span><br />
-<span className={styles.filgetChild1}>{" "}{" "}{" "}{" "}{" "}{" "}███▒▒▒▒▒███ ▒▒███▒▒▒▒▒███  ███▒▒▒▒▒███   ███▒▒▒▒▒███▒▒███▒▒▒▒▒█▒▒███▒▒▒▒▒█</span><br />
-<span className={styles.filgetChild2}>{" "}{" "}{" "}{" "}{" "}▒███    ▒███  ▒███    ▒███ ███     ▒▒███ ███     ▒▒▒  ▒███  █ ▒  ▒███  █ ▒ </span><br />
-<span className={styles.filgetChild3}>{" "}{" "}{" "}{" "}{" "}▒███████████  ▒██████████ ▒███      ▒███▒███          ▒██████    ▒██████   </span><br />
-<span className={styles.filgetChild3}>{" "}{" "}{" "}{" "}{" "}▒███▒▒▒▒▒███  ▒███▒▒▒▒▒▒  ▒███      ▒███▒███    █████ ▒███▒▒█    ▒███▒▒█   </span><br />
-<span className={styles.filgetChild4}>{" "}{" "}{" "}{" "}{" "}▒███    ▒███  ▒███        ▒▒███     ███ ▒▒███  ▒▒███  ▒███ ▒   █ ▒███ ▒   █</span><br />
-<span className={styles.filgetChild5}>{" "}{" "}{" "}{" "}{" "}█████   █████ █████        ▒▒▒███████▒   ▒▒█████████  ██████████ ██████████</span><br />
-<span className={styles.filgetChild5}>{" "}{" "}{" "}{" "}{" "}▒▒▒▒▒   ▒▒▒▒▒ ▒▒▒▒▒           ▒▒▒▒▒▒▒      ▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒▒▒▒ ▒▒▒▒▒▒▒▒▒▒</span><br />
-              <br />
-            </p> */}
-
-            <div className={styles.txtBox} ref={textRef}>
               <p className={styles.txtWhite}>A-SQUARE&nbsp;CITY&nbsp;--RUN</p>
               {/* <pre
-=======
-    <div className={styles.container}>
-      <div className={styles.subContainer}>
-        <div className={styles.box}>
-          <div className={styles.navbar}>{`>TERMINAL`}</div>
-          <div
-            className={styles.txtBox}
-            ref={textRef}
-            style={{ height: "auto", overflowY: "hidden" }}
-          >
-            <p className={styles.txtWhite}>A-SQUARE&nbsp;CITY&nbsp;--RUN</p>
-            {/* <pre
->>>>>>> main
               style={{
                 whiteSpace: "pre",
               }}
@@ -359,60 +306,103 @@ export default function Preloader({ onLaunch }: PreloaderProps) {
 <span className={styles.filgetChild5}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▒▒▒▒▒   ▒▒▒▒▒ ▒▒▒▒▒           ▒▒▒▒▒▒▒      ▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒▒▒▒ ▒▒▒▒▒▒▒▒▒▒</span><br />
               <br />
             </p> */}
-<<<<<<< HEAD
-              <p
-                style={{
-                  whiteSpace: "pre",
-                }}
-                className={styles.figlet}
-              >
-                {/* <br /> */}
-                <span
-                  className={styles.filgetChild1}
-                >{` _____  ______   ____   ____   ____   ____  `}</span>
-                <br />
-                <span
-                  className={styles.filgetChild2}
-                >{` \\__  \\ \\____ \\ /  _ \\ / ___\\_/ __ \\_/ __ \\ `}</span>
-                <br />
-                <span
-                  className={styles.filgetChild3}
-                >{`  / __ \\|  |_> >  <_> ) /_/  >  ___/\\  ___/ `}</span>
-                <br />
-                <span
-                  className={styles.filgetChild4}
-                >{` (____  /   __/ \\____/\\___  / \\___  >\\___  >`}</span>
-                <br />
-                <span
-                  className={styles.filgetChild5}
-                >{`      \\/|__|         /_____/      \\/     \\/ `}</span>
-                <br />
-                {/* <br /> */}
-              </p>
               {!width ? (
                 <>
+                  <p
+                    style={{
+                      whiteSpace: "pre",
+                    }}
+                    className={styles.figlet}
+                  >
+                    {/* <br /> */}
+                    <span
+                      className={styles.filgetChild1}
+                    >{`    _____  ______   ____   ____   ____   ____  `}</span>
+                    <br />
+                    <span
+                      className={styles.filgetChild2}
+                    >{`    \\__  \\ \\____ \\ /  _ \\ / ___\\_/ __ \\_/ __ \\ `}</span>
+                    <br />
+                    <span
+                      className={styles.filgetChild3}
+                    >{`     / __ \\|  |_> >  <_> ) /_/  >  ___/\\  ___/ `}</span>
+                    <br />
+                    <span
+                      className={styles.filgetChild4}
+                    >{`    (____  /   __/ \\____/\\___  / \\___  >\\___  >`}</span>
+                    <br />
+                    <span
+                      className={styles.filgetChild5}
+                    >{`         \\/|__|         /_____/      \\/     \\/ `}</span>
+                    <br />
+                    {/* <br /> */}
+                  </p>
                   <p className={styles.txtRed}>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AN INTERACTIVE AUDIOVISUAL
-                    EXPERIENCE BY DVM
+                    &nbsp;&nbsp;&nbsp;AN INTERACTIVE AUDIOVISUAL EXPERIENCE BY DVM
                   </p>
-                  <p className={styles.redDesign}>
-                    &nbsp;&nbsp;▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚
-                  </p>
+                  {/* <p className={styles.redDesign}>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+                </p> */}
+                  {/* <p className={styles.redDesign}>
+                  &nbsp;&nbsp;▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚
+                </p> */}
+                  <div className={styles.svgDesign} ref={svgRef}>
+                    {Array.from({ length: 20 }, (_, i) => (
+                      <SVG key={i} />
+                    ))}
+                  </div>
                 </>
               ) : (
                 <>
+                  <p
+                    style={{
+                      whiteSpace: "pre",
+                    }}
+                    className={styles.figlet}
+                  >
+                    {/* <br /> */}
+                    <span
+                      className={styles.filgetChild1}
+                    >{`  _____  ______   ____   ____   ____   ____  `}</span>
+                    <br />
+                    <span
+                      className={styles.filgetChild2}
+                    >{`  \\__  \\ \\____ \\ /  _ \\ / ___\\_/ __ \\_/ __ \\ `}</span>
+                    <br />
+                    <span
+                      className={styles.filgetChild3}
+                    >{`   / __ \\|  |_> >  <_> ) /_/  >  ___/\\  ___/ `}</span>
+                    <br />
+                    <span
+                      className={styles.filgetChild4}
+                    >{`  (____  /   __/ \\____/\\___  / \\___  >\\___  >`}</span>
+                    <br />
+                    <span
+                      className={styles.filgetChild5}
+                    >{`       \\/|__|         /_____/      \\/     \\/ `}</span>
+                    <br />
+                    {/* <br /> */}
+                  </p>
                   <p className={styles.txtRed}>
                     &nbsp;{`AN INTERACTIVE AUDIOVISUAL EXPERIENCE BY DVM`}
                   </p>
-                  <p className={styles.redDesign}>
-                    &nbsp;&nbsp;▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚
+                  {/* <p className={styles.redDesign}>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+                </p> */}
+                  {/* <p className={styles.redDesign}>
+                  &nbsp;&nbsp;▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚
+                </p> */}
+                  <p className={styles.svgDesign} ref={svgRef}>
+                    {Array.from({ length: 20 }, (_, i) => (
+                      <SVG key={i} />
+                    ))}
                   </p>
                 </>
               )}
               <p
                 className={styles.txtGreen}
               >{`>> INITIATING BOOT SEQUENCE...`}</p>
-              <p className={styles.txtWhite}>BUILD VERSION: 10.04.26</p>
+              <p className={styles.txtWhite}>BUILD VERSION: 11.04.26</p>
               <p className={styles.txtWhite}>SYSTEM MANUFACTURER: BITS PILANI</p>
               <p className={styles.txtWhite}>SYSTEM BOOT TIME: {`<SOON>`}</p>
               <p className={styles.txtWhite}>OS NAME: THREE.JS</p>
@@ -420,152 +410,6 @@ export default function Preloader({ onLaunch }: PreloaderProps) {
               <p
                 className={styles.txtGreen + " " + styles.customMargin}
               >{`>> LOADING RESOURCES...`}</p>
-=======
-            {!width ? (
-              <>
-                <p
-                  style={{
-                    whiteSpace: "pre",
-                  }}
-                  className={styles.figlet}
-                >
-                  {/* <br /> */}
-                  <span
-                    className={styles.filgetChild1}
-                  >{`    _____  ______   ____   ____   ____   ____  `}</span>
-                  <br />
-                  <span
-                    className={styles.filgetChild2}
-                  >{`    \\__  \\ \\____ \\ /  _ \\ / ___\\_/ __ \\_/ __ \\ `}</span>
-                  <br />
-                  <span
-                    className={styles.filgetChild3}
-                  >{`     / __ \\|  |_> >  <_> ) /_/  >  ___/\\  ___/ `}</span>
-                  <br />
-                  <span
-                    className={styles.filgetChild4}
-                  >{`    (____  /   __/ \\____/\\___  / \\___  >\\___  >`}</span>
-                  <br />
-                  <span
-                    className={styles.filgetChild5}
-                  >{`         \\/|__|         /_____/      \\/     \\/ `}</span>
-                  <br />
-                  {/* <br /> */}
-                </p>
-                <p className={styles.txtRed}>
-                  &nbsp;&nbsp;&nbsp;AN INTERACTIVE AUDIOVISUAL EXPERIENCE BY DVM
-                </p>
-                {/* <p className={styles.redDesign}>
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-                </p> */}
-                {/* <p className={styles.redDesign}>
-                  &nbsp;&nbsp;▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚
-                </p> */}
-                <div className={styles.svgDesign} ref={svgRef}>
-                  {Array.from({ length: 20 }, (_, i) => (
-                    <SVG key={i} />
-                  ))}
-                </div>
-              </>
-            ) : (
-              <>
-                <p
-                  style={{
-                    whiteSpace: "pre",
-                  }}
-                  className={styles.figlet}
-                >
-                  {/* <br /> */}
-                  <span
-                    className={styles.filgetChild1}
-                  >{`  _____  ______   ____   ____   ____   ____  `}</span>
-                  <br />
-                  <span
-                    className={styles.filgetChild2}
-                  >{`  \\__  \\ \\____ \\ /  _ \\ / ___\\_/ __ \\_/ __ \\ `}</span>
-                  <br />
-                  <span
-                    className={styles.filgetChild3}
-                  >{`   / __ \\|  |_> >  <_> ) /_/  >  ___/\\  ___/ `}</span>
-                  <br />
-                  <span
-                    className={styles.filgetChild4}
-                  >{`  (____  /   __/ \\____/\\___  / \\___  >\\___  >`}</span>
-                  <br />
-                  <span
-                    className={styles.filgetChild5}
-                  >{`       \\/|__|         /_____/      \\/     \\/ `}</span>
-                  <br />
-                  {/* <br /> */}
-                </p>
-                <p className={styles.txtRed}>
-                  &nbsp;{`AN INTERACTIVE AUDIOVISUAL EXPERIENCE BY DVM`}
-                </p>
-                {/* <p className={styles.redDesign}>
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-                </p> */}
-                {/* <p className={styles.redDesign}>
-                  &nbsp;&nbsp;▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚▚
-                </p> */}
-                <p className={styles.svgDesign} ref={svgRef}>
-                  {Array.from({ length: 20 }, (_, i) => (
-                    <SVG key={i} />
-                  ))}
-                </p>
-              </>
-            )}
-            <p
-              className={styles.txtGreen}
-            >{`>> INITIATING BOOT SEQUENCE...`}</p>
-            <p className={styles.txtWhite}>BUILD VERSION: 11.04.26</p>
-            <p className={styles.txtWhite}>SYSTEM MANUFACTURER: BITS PILANI</p>
-            <p className={styles.txtWhite}>SYSTEM BOOT TIME: {`<SOON>`}</p>
-            <p className={styles.txtWhite}>OS NAME: THREE.JS</p>
-            <p className={styles.txtWhite}>FEST VERSION: 0.44.0</p>
-            <p
-              className={styles.txtGreen + " " + styles.customMargin}
-            >{`>> LOADING RESOURCES...`}</p>
-            {/* <span className={styles.cursor} id="cursor">█</span> */}
-          </div>
-          <div
-            className={styles.launchBtn}
-            ref={launchRef}
-            onClick={onLaunch}
-          >{`>>LAUNCH<<`}</div>
-        </div>
-        <div className={styles.box}>
-          <div className={styles.subBox}>
-            <div className={styles.navbar}>{`>EVENTS`}</div>
-            <div
-              className={styles.txtBox}
-              ref={(el) => {
-                if (el) textRef2.current[0] = el;
-              }}
-            >
-              <span className={styles.txtWhite}>{`>>`}</span>
-              <span className={styles.txtBlue}>[11.04%]</span>
-              <span className={styles.txtWhite}>Mini Fest</span>
-              <br />
-              <span className={styles.txtWhite}>{`>>`}</span>
-              <span className={styles.txtBlue}>[12.73%]</span>
-              <span className={styles.txtWhite}>Inauguration</span>
-              <br />
-              <span className={styles.txtWhite}>{`>>`}</span>
-              <span className={styles.txtBlue}>[20.31%]</span>
-              <span className={styles.txtWhite}>Aarohan</span>
-              <br />
-              <span className={styles.txtWhite}>{`>>`}</span>
-              <span className={styles.txtBlue}>[27.00%]</span>
-              <span className={styles.txtWhite}>Paper Presentation</span>
-              <br />
-              <span className={styles.txtWhite}>{`>>`}</span>
-              <span className={styles.txtBlue}>[53.00%]</span>
-              <span className={styles.txtWhite}>MicroMouse</span>
-              <br />
-              <span className={styles.txtWhite}>{`>>`}</span>
-              <span className={styles.txtBlue}>[99.00%]</span>
-              <span className={styles.txtWhite}>Projection Mapping</span>
->>>>>>> main
               {/* <span className={styles.cursor} id="cursor">█</span> */}
             </div>
             <div
@@ -696,7 +540,7 @@ export default function Preloader({ onLaunch }: PreloaderProps) {
               </div>
             </div>
           </div>
-        </div>
+        </div >
       }
       {
         loaderState == 2 &&
@@ -710,6 +554,6 @@ export default function Preloader({ onLaunch }: PreloaderProps) {
           <img className={styles.apogeeLogo} src="/img/apogee26.png" alt="APOGEE Logo" />
         </div>
       }
-    </div>
+    </div >
   );
 }

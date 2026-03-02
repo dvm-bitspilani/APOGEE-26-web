@@ -37,13 +37,8 @@
   min-height: 100vh;
   background-image: url("/img/preloader/bg.png");
   background-repeat: repeat;
-<<<<<<< HEAD
-  animation: flicker 0.5s infinite;
-  transition: opacity 1s ease;
-=======
   backdrop-filter: blur(30px);
   // animation: flicker 0.5s infinite;
->>>>>>> main
 
   // @keyframes flicker {
   //   0% {
