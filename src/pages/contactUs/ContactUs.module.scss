@@ -1,11 +1,97 @@
 @use "/src/assets/global.scss" as *;
 
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  .modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    // height: 85%;
+    width: 81vw;
+    background-size: 100% 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: visible;
+    height: 0;
+    transition:
+      height 0.6s ease,
+      visibility 0.6s ease;
+
+    .modalContent {
+      position: relative;
+      z-index: 1000;
+      width: 98%;
+      height: 99%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      clip-path: polygon(
+        5.25% 2%,
+        18.25% 2%,
+        19.75% 0%,
+        81% 0%,
+        82.5% 2%,
+        95.05% 2%,
+        100% 10%,
+        100% 91%,
+        95% 99%,
+        5.25% 99%,
+        0% 90%,
+        0% 10%
+      );
+      backdrop-filter: blur(6px);
+      background-color: #00f0fd0e;
+    }
+    // .backgroundlite {
+    //   position: absolute;
+    //   top: 50%;
+    //   left: 50%;
+    //   transform: translate(-50%, -50%);
+    //   width: 100%;
+    //   height: 100%;
+    //   z-index: 1000;
+    //   background-image: url("/img/landing/border.png");
+    //   background-size: 100% 100%;
+    //   filter: drop-shadow(0 0 3px #00f2fd);
+    // }
+  }
+
+  &.hiddenModal {
+    visibility: hidden;
+    transition: background-color 0.3s 0.3s;
+    background-color: #00000000;
+
+    .modal {
+      height: 0px;
+    }
+  }
+
+  &.showModal {
+    visibility: visible;
+    transition: background-color 0.3s;
+    background-color: #00000080;
+
+    .modal {
+      height: 85vh;
+    }
+  }
+}
+
 .container {
+  pointer-events: all;
+  z-index: 10000;
   display: flex;
   flex-direction: column;
-  background: center / cover no-repeat url("/public/img/contacts/bg.png");
+  // background: center / cover no-repeat url("/public/img/contacts/bg.png");
   //  clip-path: path('M50 10 L150 10 L160 2 L640 2 L650 10 L750 10 L790 50 L790 450 L750 490 L50 490 L10 450 L10 50 L50 10 Z');
-  //  clip-path: 
+  //  clip-path:
   //    polygon(5.25% 2%, 18.25% 2%, 19.75% 0%, 81% 0%, 82.5% 2%, 95.05% 2%, 100% 10%, 100% 91%, 95.0% 99%, 5.25% 99%, 0% 90%, 0% 10%);
 
   align-items: center;
@@ -20,25 +106,39 @@
   transform: translate(-50%, -50%);
   overflow: hidden;
 
+  .bgImg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+  }
+
   .title {
-    font-size: 2vw;
+    font-size: 3vw;
     font-weight: 600;
     color: #4df4fc;
     text-align: center;
-    margin: 3vw 0 1.5vw 0;
+    margin: 0.6vw 0 1.5vw 0;
     font-family: $font-glitch;
     letter-spacing: 3px;
     position: fixed;
-    top: 2rem;
+    top: 2vw;
     z-index: 1;
   }
 
   .cards {
-    margin-top: 3vw;
+    margin-top: 11vh;
     display: grid;
-    grid-template-columns: repeat(10, 5.5vw);
-    grid-template-rows: repeat(2, calc(351 / 244 * 13.5vw));
-    gap: 1.5vw;
+    grid-template-columns: repeat(10, 4.2vw);
+    grid-template-rows: repeat(2, calc(351 / 244 * 10.5vw));
+    gap: 2vw;
+    row-gap: 2.3vw;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding: 2vw;
 
     .gridBox {
       grid-column: span 2;
@@ -66,7 +166,7 @@
 @media screen and (max-width: 550px) {
   .container {
     .title {
-      font-size: 9vw;
+      font-size: 7vw;
       margin: 10vw 0 6vw 0;
     }
 
@@ -75,6 +175,7 @@
       grid-template-columns: repeat(4, 15vw);
       grid-template-rows: repeat(5, calc(351 / 244 * 35vw));
       gap: 5vw;
+      padding: 4vw;
 
       .gridBox {
         grid-column: span 2;

@@ -72,7 +72,7 @@ export const useTheatreCameraStore = create<TheatreCameraStore>((set) => ({
   setTheatreCamera: (camera) => set({ theatreCamera: camera }),
 }))
 
-export type Section = ["home", "about", "contact", "transition"][number];
+export type Section = ["home", "about", "contact", "comingSoon", "transition"][number];
 
 type CurrentSectionStore = {
   currentSection: Section;
@@ -183,9 +183,9 @@ interface RegistrationStore {
   userData: UserData;
   setUserData: (data: Partial<UserData>) => void;
 
-  // Access Token
-  accessToken: string;
-  setAccessToken: (token: string) => void;
+  // // Access Token
+  // accessToken: string;
+  // setAccessToken: (token: string) => void;
 }
 
 export const useRegistrationStore = create<RegistrationStore>((set) => ({
@@ -214,8 +214,8 @@ export const useRegistrationStore = create<RegistrationStore>((set) => ({
   userData: { name: "", email: "", phone: "", gender: "", college: "", year: "", state: "", city: "" },
   setUserData: (data) => set((state) => ({ userData: { ...state.userData, ...data } })),
 
-  accessToken: "",
-  setAccessToken: (token) => set({ accessToken: token }),
+  // accessToken: "",
+  // setAccessToken: (token) => set({ accessToken: token }),
 }));
 
 type SceneLoadedStore = {
@@ -231,3 +231,19 @@ export const useSceneLoadedStore = create<SceneLoadedStore>((set) => ({
   setLoaded: (loaded) => set({ loaded }),
   setProgress: (progress) => set({ progress }),
 }));
+
+/**
+ * Stores the current scroll velocity for cross-component access.
+ * Updated by ScrollSync (inside ScrollControls) and consumed by
+ * MotionBlur (outside ScrollControls, inside EffectComposer).
+ */
+type ScrollVelocityStore = {
+  velocity: number;
+  setVelocity: (v: number) => void;
+};
+
+export const useScrollVelocityStore = create<ScrollVelocityStore>((set) => ({
+  velocity: 0,
+  setVelocity: (v) => set({ velocity: v }),
+}));
+

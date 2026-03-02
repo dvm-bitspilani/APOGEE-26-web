@@ -1,7 +1,8 @@
-import NavButton from "../navButton/NavButton";
+// import NavButton from "../navButton/NavButton";
 import styles from "./Instructions.module.scss";
+import { GoogleLogin } from "@react-oauth/google";
 
-const Instructions = ({ googleLogin }: { googleLogin: () => void }) => {
+const Instructions = ({ googleLogin }: { googleLogin: (response: any) => void }) => {
   return (
     <div className={styles.content} id="registration-content">
       <h1 className={styles.heading}>INSTRUCTIONS</h1>
@@ -14,13 +15,27 @@ const Instructions = ({ googleLogin }: { googleLogin: () => void }) => {
         <li>Upon successful payment, a confirmation email will be sent to your registered email ID.</li>
       </ul>
 
-      <NavButton outerClass={styles.googleButton} innerClass={styles.googleButtonContent} onClick={googleLogin}>
+      {/* <GoogleLogin onSuccess={googleLogin} /> */}
+      <div className={styles.googleButton}>
+
+        <GoogleLogin
+          onSuccess={googleLogin}
+          onError={() => console.log('Login Failed')}
+          theme="filled_blue" // Options: "outline", "filled_blue", "filled_black"
+          shape="pill"        // Options: "square", "circle", "pill", "rectangular"
+          size="large"        // Options: "small", "medium", "large"
+          text="signin_with"  // Options: "signin_with", "signup_with", "continue_with"
+          width={window.innerWidth < 500 ? "200" : "350"}
+        />
+      </div>
+
+      {/* <NavButton outerClass={styles.googleButton} innerClass={styles.googleButtonContent} onClick={googleLogin}>
         <img
           src="/svg/registrations/sign-in-google.svg"
           alt="Sign in with Google"
         />
         <span>Sign in with Google</span>
-      </NavButton>
+      </NavButton> */}
     </div>
   );
 };

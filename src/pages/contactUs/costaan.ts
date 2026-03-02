@@ -1,4 +1,13 @@
-import sample from "/img/contacts/sample.png"
+// import sample from "/img/contacts/sample.png"
+import pcra from "/img/contacts/Anagha_Sharma_PCrA.png"
+import dvm from "/img/contacts/Atharv_Agarwal_-_Department_of_Visual_Media.png"
+import controls from "/img/contacts/Shreyak_Shintre_-_Controls.png"
+import adp from "/img/contacts/Aurvind_Mohanty_Art_Design___Publicity.png"
+import pep from "/img/contacts/Ishita_Sethi_Department_of_Paper_Evaluation_and_Presentation.png"
+import spons from "/img/contacts/Shivansh_Rastogi_-_Department_of_Sponsorship___Marketing.png"
+import recn from "/img/contacts/Shreya_Karnwal_RecNAcc.png"
+import aditya from "/img/contacts/aditya.png"
+import sajal from "/img/contacts/sajal.png"
 
 interface Contact {
     name: string;
@@ -10,67 +19,75 @@ interface Contact {
 
 const costaans: Contact[] = [
     {
-        name: "Navneet Singh",
-        dept: "SPONSORSHIPS & COMPANY COLLABORATION",
+        name: "Atharv Agarwal",
+        dept: "Website, App and Payments",
         phone: "+91 9876543210",
-        email: "something@something.com",
-        photo: sample,
+        email: "webmaster@bits-apogee.org",
+        // photo: sample,
+        photo: dvm,
     },
     {
-        name: "Navneet Singh",
-        dept: "The Eastern Outlook",
+        name: "Anagha Sharma",
+        dept: "Registrations and Correspondence",
         phone: "+91 9876543210",
-        email: "something@something.com",
-        photo: sample,
+        email: "recnacc@bits-apogee.org",
+        // photo: sample,
+        photo: pcra,
     },
     {
-        name: "Navneet Singh",
-        dept: "The Eastern Outlook",
+        name: "Shreyak Shintre",
+        dept: "Logistics and Operations",
         phone: "+91 9876543210",
-        email: "something@something.com",
-        photo: sample,
+        email: "controls@bits-apogee.org",
+        // photo: sample,
+        photo: controls,
     },
     {
-        name: "Navneet Singh",
-        dept: "The Eastern Outlook",
+        name: "Shivansh Rastogi",
+        dept: "Sponsorships and Company Collaborations",
         phone: "+91 9876543210",
-        email: "something@something.com",
-        photo: sample,
+        email: "shivansh@bits-apogee.org",
+        // photo: sample,
+        photo: spons,
     },
     {
-        name: "Navneet Singh",
-        dept: "The Eastern Outlook",
+        name: "Shreya Karnwal",
+        dept: "Reception and Accommodation",
         phone: "+91 9876543210",
-        email: "something@something.com",
-        photo: sample,
+        email: "recnacc@bits-apogee.org",
+        // photo: sample,
+        photo: recn,
     },
     {
-        name: "Navneet Singh",
-        dept: "The Eastern Outlook",
+        name: "Aurvind Mohanty",
+        dept: "Online Collaborations and Publicity",
         phone: "+91 9876543210",
-        email: "something@something.com",
-        photo: sample,
+        email: "adp@bits-apogee.org",
+        // photo: sample,
+        photo: adp,
     },
     {
-        name: "Navneet Singh",
-        dept: "The Eastern Outlook",
+        name: "Ishita Sethi",
+        dept: "Guest Lectures and Paper Presentation",
         phone: "+91 9876543210",
-        email: "something@something.com",
-        photo: sample,
+        email: "pep@bits-apogee.org",
+        // photo: sample,
+        photo: pep,
     },
     {
-        name: "Navneet Singh",
-        dept: "The Eastern Outlook",
+        name: "Aditya Khandelwal",
+        dept: "General Secretary, Students' Union",
         phone: "+91 9876543210",
-        email: "something@something.com",
-        photo: sample,
+        email: "gensec@pilani.bits-pilani.ac.in",
+        photo: aditya,
+        // photo: sample,
     },
     {
-        name: "Navneet Singh",
-        dept: "The Eastern Outlook",
+        name: "Sajal Yadav",
+        dept: "President, Students' Union",
         phone: "+91 9876543210",
-        email: "something@something.com",
-        photo: sample,
+        email: "president@pilani.bits-pilani.ac.in",
+        photo: sajal,
     },
 ]
 

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import styles from "./ContactUs.module.scss";
 import costaans from "./costaan";
 import Card from "./UI/Card";
+import bg from "/img/contacts/bg.png";
 
 export default function ContactUs() {
   const [width, setwidth] = useState(window.innerWidth < 550 ? true : false);
@@ -19,6 +20,7 @@ export default function ContactUs() {
   }, []);
   return (
     <div className={styles.container}>
+      <img src={bg} alt="bg" className={styles.bgImg} />
       <p className={styles.title}>Contact Us</p>
       <div className={styles.cards}>
         {costaans.map((costaan, i) => (
