@@ -3,7 +3,7 @@ import {
   useModalStore,
   useScrollLockStore,
 } from "../../../../utils/store";
-import ComingSoon from "../../../comingSoon/ComingSoon";
+// import ComingSoon from "../../../comingSoon/ComingSoon";
 import ContactUs from "../../../contactUs/ContactUs";
 import AboutUs from "../../../aboutUs/AboutUs";
 import styles from "./Modal.module.scss";

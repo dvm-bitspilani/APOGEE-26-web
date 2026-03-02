@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import styles from "./Countdown.module.scss"
 interface CountdownProps {
   targetDate: string; // pass ISO string
 }
@@ -10,14 +10,14 @@ const Countdown = ({ targetDate }: CountdownProps) => {
       new Date(targetDate).getTime() - new Date().getTime();
 
     if (difference <= 0) {
-      return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+      return { days: 0, hours: 0, minutes: 0};
     }
 
     return {
       days: Math.floor(difference / (1000 * 60 * 60 * 24)),
       hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
       minutes: Math.floor((difference / 1000 / 60) % 60),
-      seconds: Math.floor((difference / 1000) % 60),
+      // seconds: Math.floor((difference / 1000) % 60),
     };
   };
 
@@ -32,35 +32,26 @@ const Countdown = ({ targetDate }: CountdownProps) => {
   }, [targetDate]);
 
   return (
-    <div
-      style={{
-        display: "flex",
-        gap: "2rem",
-        fontSize: "3rem",
-        fontWeight: 600,
-        textAlign: "center",
-        color:"#ffe204",
-        background: "transparent",
-        // zIndex: 10000,
-      }}
-    >
-      <div>
-        {timeLeft.days}
-        <div style={{ fontSize: "4rem",
-        }}>Days</div>
+    <div className={styles.countdown}>
+      <div className={styles.item}>
+        <span className={styles.value}>{timeLeft.days}</span>
+        <span className={styles.label}>Days</span>
       </div>
-      <div>
-        {timeLeft.hours}
-        <div style={{ fontSize: "4rem" }}>Hours</div>
+
+      <div className={styles.item}>
+        <span className={styles.value}>{timeLeft.hours}</span>
+        <span className={styles.label}>Hours</span>
       </div>
-      <div>
-        {timeLeft.minutes}
-        <div style={{ fontSize: "4rem" }}>Minutes</div>
+
+      <div className={styles.item}>
+        <span className={styles.value}>{timeLeft.minutes}</span>
+        <span className={styles.label}>Minutes</span>
       </div>
-      <div>
-        {timeLeft.seconds}
-        <div style={{ fontSize: "4rem" }}>Seconds</div>
-      </div>
+
+      {/* <div className={styles.item}>
+        <span className={styles.value}>{timeLeft.seconds}</span>
+        <span className={styles.label}>Seconds</span>
+      </div> */}
     </div>
   );
 };

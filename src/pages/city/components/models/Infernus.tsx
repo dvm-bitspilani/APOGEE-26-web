@@ -80,7 +80,7 @@ export default function Infernus() {
   return (
     <>
       {/* <StudioEnvironment /> */}
-      <group layers={1}>
+      <group >
         <Float floatIntensity={0.3} rotationIntensity={0.005} speed={5}>
           <e.group
             name="infernus"
