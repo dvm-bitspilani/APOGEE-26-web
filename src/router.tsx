@@ -5,6 +5,7 @@ import Registration from "./pages/registration/Registration";
 // import Instructions from "./pages/registration/components/detailsForm/DetailsForm"
 import City from "./pages/city/City";
 import Events from "./pages/events/Events";
+import Speakers from "./pages/speakers/Speakers";
 // import ContactUs from "./pages/contactUs/ContactUs";
 // import Preloader from "./pages/preloader/Preloader";
 type page = {
@@ -29,6 +30,11 @@ const pages: page[] = [
     url: "/events",
 
     component: Events,
+  },
+  {
+    url: "/speakers",
+
+    component: Speakers,
   },
   // {
   //   url: '/city',

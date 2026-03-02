@@ -1,0 +1,240 @@
+@use "/src/assets/global.scss" as *;
+
+.speakersContainer {
+    position: relative;
+    width: 100vw;
+    height: 100svh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    font-family: $font-cyberpunks;
+}
+
+.backgroundOverlay {
+    position: absolute;
+    top: -30px;
+    left: -30px;
+    right: -30px;
+    bottom: -30px;
+    background-image: url("/img/speakers/speakerBg.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: blur(20px);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.header {
+    position: relative;
+    z-index: 20;
+    padding: clamp(2rem, 3svh, 3rem) 4rem 2rem clamp(1.5rem, 6vw, 6rem);
+    transform: translateY(40px);
+    display: flex;
+    align-items: center;
+}
+
+.title {
+    font-family: $font-glitch;
+    color: #00ffff; // Cyan color from design
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin: 0;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.5), 0 0 20px rgba(0, 255, 255, 0.3);
+}
+
+@media (max-width: 768px) {
+    .header {
+        padding: 2rem 1.5rem 1rem 1.5rem;
+        transform: translateY(20px);
+    }
+
+    .title {
+        font-size: 2.5rem;
+    }
+}
+
+.wheelContainer {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: clamp(250px, 35vw, 400px);
+    height: 100svh;
+    display: flex;
+    align-items: center;
+    z-index: 10;
+    pointer-events: none; // Let clicks pass through if needed, except on interactable items
+}
+
+.wheelFrameBg {
+    height: 100%;
+    width: auto;
+    object-fit: cover;
+    object-position: left center;
+    position: absolute;
+    left: -5%; // Push slightly off-screen to match design
+    top: 0;
+    opacity: 0.5;
+}
+
+.yearsWrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    transform-origin: left center;
+    transition: transform 0.5s ease;
+    scale: 1.5;
+    // The center point of the arc is somewhere to the left off-screen
+}
+
+.yearNode {
+    position: absolute;
+    // Base circle positioning
+    left: 0%; // Shift center leftwards
+    width: 15rem; // Adjust based on yearFrame.svg width
+    height: 6rem; // Adjust based on yearFrame.svg height
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform-origin: -8vw 80px;
+    pointer-events: auto;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    // Default tint/darkening for inactive items
+    filter: brightness(0.6) opacity(0.8);
+
+    &.active {
+        filter: brightness(1.2) drop-shadow(0 0 15px rgba(0, 255, 255, 0.5));
+        z-index: 5;
+
+        .yearText {
+            font-size: 2rem;
+            color: #00ffff;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+        }
+    }
+}
+
+.yearBg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    z-index: -1;
+    transform: rotate(22deg);
+}
+
+.yearText {
+    font-family: $font-cyberpunks;
+    color: #ffffff;
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+    z-index: 1;
+    transform: translateX(20%); // Offset slightly to fit inside the frame nicely
+    transition: all 0.3s ease;
+}
+
+.speakerLabelWrapper {
+    position: absolute;
+    // Align left edge of SVG (which is where the circle is) to the right edge of year node
+    left: calc(100% - 1.5rem);
+    top: 50%;
+    // Transform origin: the SVG's circle center is at "cx=13 cy=81.3" or roughly left center
+    // We want the reverse rotation to pivot around exactly where this wrapper's left edge is + 13px
+    transform-origin: 13px center;
+    display: flex;
+    align-items: center;
+    z-index: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+
+    &.activeLabel {
+        z-index: 10;
+        filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.3));
+    }
+}
+
+.speakerLabelBg {
+    // Default to the inactive size.
+    // Inactive SVG viewBox is 474x101.
+    height: clamp(40px, 6vh, 60px);
+    width: auto;
+    object-fit: contain;
+    object-position: left center;
+}
+
+.activeLabel .speakerLabelBg {
+    // Active SVG viewBox is 535x161 (due to glow padding).
+    // It should be 161/101 (~1.59x) taller to match the intrinsic visual scale.
+    height: clamp(64px, 9.5vh, 95px);
+}
+
+.speakerNameText {
+    position: absolute;
+    // Center the text inside the bracket of the SVG using percentages.
+    // Inactive SVG: viewBox 474x101. Bracket is x=141 to 470.
+    // Left = 141 / 474 = 29.7%. Width = (470-141) / 474 = 69.4%.
+    left: 29.7%;
+    width: 69.4%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: $font-blender;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: clamp(0.75rem, 1.1vw, 1.0rem);
+    letter-spacing: 2px;
+    z-index: 1;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+    // Visually center text better inside the box 
+    transform: translateY(-2px);
+}
+
+.activeLabel .speakerNameText {
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    // Active text needs slightly different alignment due to glow padding
+    // Active SVG: viewBox 535x161. Bracket is x=143 to 507.
+    // Left = 143 / 535 = 26.7%. Width = (507-143) / 535 = 68.0%.
+    left: 26.7%;
+    width: 68.0%;
+    font-size: clamp(0.85rem, 1.25vw, 1.15rem);
+}
+
+// Rotations and translations to map to the arc
+// The SVG for yearFrame is natively angled as the "25" item (index 1), so pos1 is 0deg.
+// The origin represents the center of the arc.
+// 2026 should be rotated further downwards (+) to make it horizontal on the right.
+.pos0 {
+    transform: rotate(-45deg);
+}
+
+// "24" (above "25")
+.pos1 {
+    transform: rotate(-22deg);
+}
+
+// "25"
+.pos2 {
+    transform: rotate(0deg);
+    scale: 1.1;
+
+}
+
+// "2026" (horizontalish)
+.pos3 {
+    transform: rotate(22deg);
+}
+
+// "82"
+.pos4 {
+    transform: rotate(44deg);
+    filter: brightness(0.3);
+}
+
+// "83"
