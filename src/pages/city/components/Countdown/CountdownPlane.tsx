@@ -7,7 +7,7 @@ import { useFrame } from "@react-three/fiber";
 import { useTheatreCameraStore } from "../../../../utils/store";
 import Countdown from "./Countdown"; // 👈 adjust path if needed
 
-const EditableMesh = e.mesh;
+// const EditableMesh = e.mesh;
 
 const InteractivePlane = () => {
   const ref = useRef<any>(null);
@@ -79,7 +79,7 @@ const InteractivePlane = () => {
             overscrollBehavior: "none",
           }}
         >          {/* ✅ Countdown */}
-          <Countdown targetDate="2026-03-27T00:00:00" />
+          <Countdown targetDate="2026-04-01T00:00:00+05:30" />
         </div>
       </Html>
     </mesh>

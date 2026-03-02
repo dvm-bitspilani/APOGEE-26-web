@@ -89,7 +89,7 @@ export default function City() {
       )}
       {
         <div className={styles.city}>
-          <button
+          {/* <button
             style={{
               position: "fixed",
               top: 20,
@@ -103,7 +103,7 @@ export default function City() {
             }}
           >
             ☰
-          </button>
+          </button> */}
           <Canvas
             gl={{ antialias: true }}
             dpr={[1, 1.5]}
