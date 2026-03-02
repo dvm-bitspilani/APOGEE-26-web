@@ -12,6 +12,7 @@ type page = {
 
   component: React.ComponentType<any>;
 };
+import Error404 from "./pages/error404/Error404";
 
 const pages: page[] = [
   {
@@ -29,6 +30,10 @@ const pages: page[] = [
     url: "/events",
 
     component: Events,
+  },
+  {
+    url: "*",
+    component: Error404,
   },
   // {
   //   url: '/city',
