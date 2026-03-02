@@ -39,7 +39,7 @@ const Countdown = ({ targetDate }: CountdownProps) => {
         fontSize: "3rem",
         fontWeight: 600,
         textAlign: "center",
-        color:"red",
+        color:"#ffe204",
         background: "transparent",
         // zIndex: 10000,
       }}
@@ -47,7 +47,7 @@ const Countdown = ({ targetDate }: CountdownProps) => {
       <div>
         {timeLeft.days}
         <div style={{ fontSize: "4rem",
-        color:"black" }}>Days</div>
+        }}>Days</div>
       </div>
       <div>
         {timeLeft.hours}

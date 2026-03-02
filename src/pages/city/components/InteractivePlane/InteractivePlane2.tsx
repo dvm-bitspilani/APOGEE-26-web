@@ -9,16 +9,16 @@ import { useTheatreCameraStore } from "../../../../utils/store";
 const EditableMesh = e.mesh;
 
 const InteractivePlane2 = () => {
-  const ref = useRef<any>(null)
+  const ref = useRef<any>(null);
   // This holds the local occluded state
   // const [isOccluded, setOccluded] = useState(false)
-  const [isInRange, setInRange] = useState(false)
+  const [isInRange, setInRange] = useState(false);
   // const isVisible = isInRange && !isOccluded
   // Test distance
   // const vec = new THREE.Vector3()
   const theatreCamera = useTheatreCameraStore((s) => s.theatreCamera);
-const camWorldPos = new THREE.Vector3(); // Create these once outside useFrame to save memory
-const meshWorldPos = new THREE.Vector3();
+  const camWorldPos = new THREE.Vector3(); // Create these once outside useFrame to save memory
+  const meshWorldPos = new THREE.Vector3();
   useFrame(() => {
     if (!ref.current || !theatreCamera) return;
 
@@ -27,35 +27,40 @@ const meshWorldPos = new THREE.Vector3();
     // );
     ref.current.getWorldPosition(meshWorldPos);
 
-  // 2. Get the Camera's position in the entire world (ignoring the 'camCar' parent)
-  theatreCamera.getWorldPosition(camWorldPos);
+    // 2. Get the Camera's position in the entire world (ignoring the 'camCar' parent)
+    theatreCamera.getWorldPosition(camWorldPos);
 
-  // 3. Calculate distance between two points in the same coordinate space
-  const distance = camWorldPos.distanceTo(meshWorldPos);
+    // 3. Calculate distance between two points in the same coordinate space
+    const distance = camWorldPos.distanceTo(meshWorldPos);
     // const distance = theatreCamera.position.distanceTo(ref.current.position);
 
     const range = distance <= 113;
-console.log(distance)
+    console.log(distance);
     if (range !== isInRange) {
       setInRange(range);
     }
   });
 
   return (
-    <EditableMesh theatreKey="interactivePlane2"
+    <EditableMesh
+      theatreKey="interactivePlane2"
       ref={ref}
-      position={[80,15,1320]}
-      rotation={[Math.PI, -Math.PI/2, Math.PI]}
-      scale={[3,3,3]}
-    // style={{position:"fixed"}}
-    // style={{pointerEvents:"none"}}
+      position={[67.34, 15, 1252]}
+      rotation={[Math.PI, -Math.PI / 2, Math.PI]}
+      scale={[3, 3, 3]}
+      // style={{position:"fixed"}}
+      // style={{pointerEvents:"none"}}
     >
       <planeGeometry args={[19, 19]} />
-      <meshBasicMaterial color="transparent" side={THREE.DoubleSide}
+      <meshBasicMaterial
+        color="transparent"
+        side={THREE.DoubleSide}
         depthTest
-        depthWrite />
+        depthWrite
+      />
 
-      <Html wrapperClass={styles.myHtmlWrapper}
+      <Html
+        wrapperClass={styles.myHtmlWrapper}
         as="div"
         distanceFactor={8}
         transform
@@ -78,12 +83,11 @@ console.log(distance)
             overflow: "hidden",
             background: "white",
 
-            overscrollBehavior: "none"
+            overscrollBehavior: "none",
           }}
         >
           <ContactUs />
-          "Hello
-          h1
+          "Hello h1
         </div>
       </Html>
     </EditableMesh>

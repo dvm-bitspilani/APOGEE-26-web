@@ -8,7 +8,9 @@ import SceneLights from "./SceneLights";
 import Constellation from "../Constellation3";
 import CamCar from "../groups/CamCar";
 import { editable as e } from "@theatre/r3f"
-// import InteractivePlane from "../InteractivePlane/InteractivePlane";
+import InteractivePlane from "../InteractivePlane/InteractivePlane";
+import InteractivePlane2 from "../InteractivePlane/InteractivePlane2";
+import CountdownPlane from "../Countdown/CountdownPlane";
 // import CountdownPlane from "../Countdown/CountdownPlane";
 // import MatrixRain from "../MatrixRain";
 
@@ -83,7 +85,9 @@ export default function CityScene({ }: any) {
           {/* <CityDebug /> */}
           <ScrollSync />
         </ScrollControls>
-        {/* <InteractivePlane /> */}
+        <InteractivePlane />
+        <InteractivePlane2/>
+        <CountdownPlane/>
       </group>
     </>
   );
