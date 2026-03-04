@@ -79,7 +79,7 @@ const InteractivePlane = () => {
             overscrollBehavior: "none",
           }}
         >          {/* ✅ Countdown */}
-          <Countdown targetDate="2026-04-01T00:00:00+05:30" />
+          <Countdown targetDate="2026-04-11T00:00:00+05:30" />
         </div>
       </Html>
     </mesh>
