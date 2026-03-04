@@ -39,7 +39,7 @@ export default function TheatreCameraFinal() {
         theatreKey="ActualCamera"
         ref={theatreCameraRef}
         near={0.1}
-        far={750}
+        far={1000}
         // theatreKey="TheatreCamera"
         name="TheatreCamera"
       />

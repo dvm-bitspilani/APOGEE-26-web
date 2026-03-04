@@ -52,7 +52,7 @@ export default function CityScene({ }: any) {
       {/* <MatrixRain/> */}
       <SceneDevOrProd />
       <SceneLights />
-      <fogExp2 attach="fog" args={[color, 0.001]} />
+      <fogExp2 attach="fog" args={[color, 0.0018]} />
       {/* <fog attach="fog" args={[color, 50, 2000]} />   */}
       {/* <TheatreCameraLeva  /> //?: Not yet working... */}
       <color attach="background" args={[color]} />

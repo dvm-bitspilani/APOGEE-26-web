@@ -360,10 +360,7 @@
       height: auto;
     }
     .apogeeLogo {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) scaleY(1.1);
+      // transform: scaleY(1.1);
       width: 83.6vw;
       animation: logoFadeIn 1s ease forwards;
     }

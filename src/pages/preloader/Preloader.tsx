@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { usePreloaderStateStore, useSceneLoadedStore } from "../../utils/store";
 import assetList from "../../utils/assetList";
 import SVG from "./SVG";
+import { PowerGlitch } from "powerglitch";
 
 // interface PreloaderProps {
 //   onLaunch?: () => void;
@@ -49,6 +50,7 @@ export default function Preloader() {
   const [loaderState, setLoaderState] = useState<0 | 1 | 2 | 3>(1);
   const subContainerRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const apogeeLogoRef = useRef<HTMLImageElement>(null);
 
   const onLaunch = async () => {
     // subContainerRef.current?.style.setProperty("visibility", "hidden");
@@ -67,6 +69,40 @@ export default function Preloader() {
     await new Promise((resolve) => setTimeout(resolve, 1000));
     setShowPreloader(false);
   };
+
+  useEffect(() => {
+    //? Handles glitch for apogee logo
+    if (!apogeeLogoRef.current || loaderState !== 3) return;
+
+    const glitch = PowerGlitch.glitch(apogeeLogoRef.current, {
+      playMode: "always",
+      hideOverflow: true,
+
+      timing: {
+        duration: 1000,
+        iterations: 1,
+      },
+
+      // 👇 Most glitch happens early
+      glitchTimeSpan: {
+        start: 0,
+        end: 0.6,
+      },
+
+      shake: {
+        velocity: 30,
+        amplitudeX: 0.35,
+        amplitudeY: 0.35,
+      },
+
+      slice: {
+        count: 8,
+        velocity: 25,
+      },
+    });
+
+    return () => glitch.stopGlitch();
+  })
 
   useEffect(() => {
     if (!assets) return;
@@ -551,7 +587,7 @@ export default function Preloader() {
       {
         loaderState == 3 &&
         <div className={styles.logoContainer}>
-          <img src="apogee26logo.png" className={styles.apogeeLogo} />
+          <img src="apogee26logo.png" className={styles.apogeeLogo} ref={apogeeLogoRef} />
         </div>
       }
     </div >
