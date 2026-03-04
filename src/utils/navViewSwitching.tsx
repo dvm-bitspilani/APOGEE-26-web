@@ -39,7 +39,7 @@ export const ExitDashboard = () => {
     const cameraConfig = {
         near: 0.1,
         far: 1750,
-        fov: 36,
+        fov: 60,
         zoom: 1,
         position: { x: 0, y: 7, z: -31 },
         rotation: { x: -3.141, y: 0, z: 3.141 },

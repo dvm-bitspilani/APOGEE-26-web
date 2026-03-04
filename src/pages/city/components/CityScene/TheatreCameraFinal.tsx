@@ -2,6 +2,8 @@ import { PerspectiveCamera } from "@theatre/r3f";
 import { useRef, useEffect } from "react";
 import * as THREE from "three";
 import { useTheatreCameraStore } from "../../../../utils/store";
+import ResponsiveCamera from "../ResponiveCamera";
+import { editable as e } from "@theatre/r3f";
 // import { useHoverCamera } from "../../hooks/useHoverCamera";
 // import { useDeviceType } from "../../../../hooks/useDeviceType";
 
@@ -31,13 +33,17 @@ export default function TheatreCameraFinal() {
   }, [setTheatreCamera]);
 
   return (
-    <PerspectiveCamera
-      makeDefault
-      ref={theatreCameraRef}
-      near={0.1}
-      far={1750}
-      theatreKey="TheatreCamera"
-      name="TheatreCamera"
-    />
+    <e.group theatreKey="TheatreCamera">
+      <PerspectiveCamera
+        makeDefault
+        theatreKey="ActualCamera"
+        ref={theatreCameraRef}
+        near={0.1}
+        far={1750}
+        // theatreKey="TheatreCamera"
+        name="TheatreCamera"
+      />
+      <ResponsiveCamera />
+    </e.group>
   );
 }

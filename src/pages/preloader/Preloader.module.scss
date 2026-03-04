@@ -299,8 +299,8 @@
 
   .logoContainer {
     position: absolute;
-    top: 50%;
-    left: 50%;
+    top: 50svh;
+    left: 50svw;
     transform: translate(-50%, -50%);
     display: flex;
     align-items: center;
@@ -315,11 +315,11 @@
       height: auto;
     }
     .apogeeLogo {
-      width: 30vw;
-      max-height: 75vh;
-      max-width: 75vw;
-      aspect-ratio: 7/3;
-      height: auto;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scaleY(1.1);
+      width: 83.6vw;
       animation: logoFadeIn 1s ease forwards;
     }
 
