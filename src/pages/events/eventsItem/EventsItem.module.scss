@@ -1,0 +1,334 @@
+@use "/src/assets/global.scss" as *;
+
+.eventsItemContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100svh;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.mainLayout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(1rem, 3vw, 2rem);
+    width: clamp(90%, 95vw, 1600px);
+    height: clamp(60svh, 75svh, 900px);
+    max-height: 90svh;
+}
+
+.arrowContainer {
+    cursor: pointer;
+    padding: clamp(0.5rem, 2vw, 1rem);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+
+    &.hiddenArrow {
+        visibility: hidden;
+        pointer-events: none;
+    }
+
+    .arrowImg {
+        width: clamp(20px, 5vw, 80px);
+        transition: all 0.2s ease;
+    }
+
+    &:hover {
+        transform: scale(1.1);
+
+        .arrowImg {
+            filter: drop-shadow(0 0 8px rgba(0, 255, 255, 0.8));
+        }
+    }
+}
+
+.contentWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    position: relative;
+    width: 100%;
+}
+
+.imageSection {
+    position: relative;
+    width: clamp(250px, 40vw, 538px);
+    aspect-ratio: 538 / 378;
+    flex-shrink: 0;
+    z-index: 3;
+}
+
+.imageClipping {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    clip-path: polygon(7.6% 5.3%, 3.5% 11.9%, 3.5% 81.5%, 10.4% 93.9%, 51.7% 93.9%, 53.5% 89.7%, 86.2% 89.7%, 88.7% 93.9%, 94.2% 93.9%, 96.3% 90.2%, 96.3% 6.9%, 94.6% 4.2%, 83.5% 4.0%, 32.7% 4.0%, 30.5% 8.5%, 13.2% 8.5%, 11.3% 5.3%);
+    background: #111;
+}
+
+.eventImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.frameImg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.detailsSection {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    z-index: 2;
+    margin-left: clamp(-150px, -10vw, -40px);
+    padding-left: clamp(20px, 5vw, 50px);
+}
+
+.glowBoxWrapper {
+    width: 100%;
+    position: relative;
+    filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.4));
+    display: flex;
+    min-height: clamp(300px, 40svh, 400px);
+}
+
+.glowBox {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+    background:
+        linear-gradient(#00ffff, #00ffff) top/100% 3px no-repeat,
+        linear-gradient(#00ffff, #00ffff) left/3px 100% no-repeat,
+        linear-gradient(#00ffff, #00ffff) bottom left/calc(100% - 60px) 3px no-repeat,
+        linear-gradient(#00ffff, #00ffff) top right/3px calc(100% - 60px) no-repeat,
+        linear-gradient(-45deg, transparent 42.4px, #00ffff 42.4px, #00ffff 45.4px, transparent 45.4px) bottom right/64px 64px no-repeat;
+}
+
+.glowBoxInner {
+    width: 100%;
+    flex: 1;
+    background: transparent;
+    padding: clamp(1.5rem, 4svh, 3rem) clamp(2rem, 6vw, 8rem) clamp(1.5rem, 4svh, 3rem) clamp(3rem, 6vw, 6rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        background: rgba(4, 18, 26, 0.2);
+        backdrop-filter: blur(10px);
+        clip-path: polygon(3px 3px, calc(100% - 3px) 3px, calc(100% - 3px) calc(100% - 64px), calc(100% - 64px) calc(100% - 3px), 3px calc(100% - 3px));
+    }
+}
+
+.title {
+    font-family: $font-blender;
+    color: #ffeb00;
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    margin-top: 0;
+    margin-bottom: clamp(0.5rem, 2svh, 1.5rem);
+    letter-spacing: 2px;
+
+    .bracket {
+        color: #ffeb00;
+    }
+}
+
+.desc {
+    font-family: $font-jetBrains;
+    font-size: clamp(0.8rem, 1.5vw, 1rem);
+    line-height: clamp(1.2rem, 2.5vw, 1.6rem);
+    margin-bottom: clamp(1rem, 3svh, 2rem);
+    font-weight: 500;
+    color: #ccc;
+    max-width: 600px;
+}
+
+.infoGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(0.5rem, 1.5vw, 1rem);
+    margin-bottom: clamp(1rem, 3svh, 2rem);
+    font-size: clamp(1rem, 1.2vw, 1.2rem);
+    color: #ddd;
+}
+
+.infoItem {
+    display: flex;
+    align-items: center;
+    gap: clamp(0.4rem, 1vw, 0.8rem);
+
+    .icon {
+        width: clamp(16px, 2vw, 24px);
+        height: clamp(16px, 2vw, 24px);
+        object-fit: contain;
+    }
+}
+
+.actionContainer {
+    align-self: flex-end;
+    /* Pin to the right of the flex container */
+    margin-top: auto;
+    /* Push to the very bottom */
+}
+
+.registerBtn {
+    color: #fff;
+    border: none;
+    padding: 2px;
+    cursor: pointer;
+    clip-path: polygon(15px 0, calc(100% - 15px) 0, 100% 15px, 100% calc(100% - 15px), calc(100% - 15px) 100%, 15px 100%, 0 calc(100% - 15px), 0 15px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .btnInner {
+        color: white;
+        font-family: $font-jetBrainsBold;
+        font-size: clamp(0.9rem, 1.5vw, 1.2rem);
+        padding: clamp(0.5rem, 1.5svh, 0.8rem) clamp(1.2rem, 3vw, 2.5rem);
+        clip-path: polygon(14px 0, calc(100% - 14px) 0, 100% 14px, 100% calc(100% - 14px), calc(100% - 14px) 100%, 14px 100%, 0 calc(100% - 14px), 0 14px);
+        transition: all 0.3s ease;
+    }
+}
+
+@media (max-width: 768px) {
+    .mainLayout {
+        flex-direction: column;
+        justify-content: flex-start;
+        padding-top: clamp(7rem, 15svh, 9rem);
+        height: 100svh;
+        max-height: 100svh;
+        width: 100%;
+        overflow-y: auto;
+        overflow-x: hidden;
+        gap: 0;
+    }
+
+    .contentWrapper {
+        flex-direction: column;
+        width: 100%;
+        padding: 0 1rem;
+    }
+
+    .arrowContainer {
+        position: absolute;
+        /* Calculate absolute top distance targeting exact center of dynamically scaled image */
+        top: calc(clamp(7rem, 15svh, 9rem) + 1rem + (min(85vw, 320px) * 378 / 1076));
+        transform: translateY(-50%);
+        z-index: 10;
+        padding: 0.5rem;
+
+        .arrowImg {
+            width: clamp(15px, 6vw, 40px);
+        }
+
+        &:hover {
+            transform: translateY(-50%) scale(1.1);
+        }
+    }
+
+    .arrowContainer:first-child {
+        left: 0;
+    }
+
+    .arrowContainer:last-child {
+        right: 0;
+    }
+
+    .imageSection {
+        width: 85%;
+        max-width: 320px;
+        margin: 0 auto;
+        margin-top: 1rem;
+    }
+
+    .detailsSection {
+        margin-left: 0;
+        padding-left: 0;
+        margin-top: clamp(-100px, -15vw, -60px);
+        width: 100%;
+    }
+
+    .glowBoxWrapper {
+        min-height: auto;
+    }
+
+    .glowBoxInner {
+        padding: clamp(6rem, 15svh, 8rem) clamp(1rem, 4vw, 1.5rem) clamp(1.5rem, 5svh, 2rem) clamp(1rem, 4vw, 1.5rem);
+        align-items: center;
+        // text-align: center;
+    }
+
+    .title {
+        font-size: clamp(1.6rem, 6vw, 2.2rem);
+        text-align: center;
+    }
+
+    .desc {
+        font-size: clamp(0.85rem, 3.5vw, 1rem);
+        line-height: clamp(1.3rem, 4.5vw, 1.6rem);
+    }
+
+    .infoGrid {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        gap: 0.5rem;
+    }
+
+    .infoItem:last-child {
+        grid-column: span 1 !important;
+    }
+
+    .actionContainer {
+        position: relative;
+        bottom: 0;
+        right: 0;
+        margin-top: 1.5rem;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .registerBtn {
+        width: max-content;
+        margin: 0 auto;
+        // text-align: left;
+
+        .btnInner {
+            padding: 0.6rem 1.5rem;
+            font-size: clamp(0.9rem, 4vw, 1.1rem);
+        }
+    }
+}

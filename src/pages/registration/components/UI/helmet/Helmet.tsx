@@ -1,51 +1,52 @@
-import helmet from "../../../../../assets/3d/registration/helmet.glb"
-// import helmetNeck from "../../../../../assets/3d/registration/helmetNeck.glb"
+import helmet from "../../../../../assets/3d/registration/helmet6.glb"
+import helmetNeck from "../../../../../assets/3d/registration/body1.glb"
 import { useGLTF } from "@react-three/drei"
 import { Canvas, useFrame, useThree } from "@react-three/fiber"
-// import { useControls } from "leva"
+import { useControls } from "leva"
 import { useRef, useEffect } from "react"
 import * as THREE from "three"
-// import { Center } from "@react-three/drei"
+import { Center } from "@react-three/drei"
+import { Environment } from "@react-three/drei"
 
-// function HelmetNeck() {
-//     const { scene } = useGLTF(helmetNeck);
-//     const colour = useControls({
-//         color1: "#ffffffff",
-//         color2: "#6bffe5",
-//         color3: "#6bffe5",
-//         color4: "#f9ff00",
-//         intensity1: { value: 2, min: 0, max: 10, step: 0.1 },
-//         intensity2: { value: 2, min: 0, max: 10, step: 0.1 },
-//         intensity3: { value: 2, min: 0, max: 10, step: 0.1 },
-//         intensity4: { value: 2, min: 0, max: 10, step: 0.1 },
-//         // intensity: { value: 2, min: 0, max: 10, step: 0.1 },
-//     })
+function HelmetNeck() {
+    const { scene } = useGLTF(helmetNeck);
+    const colour = useControls({
+        color1: "#ffffffff",
+        color2: "#6bffe5",
+        color3: "#6bffe5",
+        color4: "#f9ff00",
+        intensity1: { value: 2, min: 0, max: 10, step: 0.1 },
+        intensity2: { value: 2, min: 0, max: 10, step: 0.1 },
+        intensity3: { value: 2, min: 0, max: 10, step: 0.1 },
+        intensity4: { value: 2, min: 0, max: 10, step: 0.1 },
+        // intensity: { value: 2, min: 0, max: 10, step: 0.1 },
+    })
 
 
-//     return (
-//         <group scale={0.06} position={[0, -1.2, 0]}>
-//             <Center>
-//                 <primitive object={scene} />
-//             </Center>
-//             <ambientLight intensity={colour.intensity1} color={colour.color1} />
-//             <directionalLight
-//                 position={[40, 40, 40]}
-//                 intensity={colour.intensity2}
-//                 color={colour.color2}
-//             />
-//             <directionalLight
-//                 position={[-40, 40, 40]}
-//                 intensity={colour.intensity3}
-//                 color={colour.color3}
-//             />
-//             <directionalLight
-//                 position={[10, 10, -10]}
-//                 intensity={colour.intensity4}
-//                 color={colour.color4}
-//             />
-//         </group>
-//     )
-// }
+    return (
+        <group scale={3.25} rotation={[0, 0, 0]} position={[0, -1, 0]}>
+            <Center>
+                <primitive object={scene} />
+            </Center>
+            <ambientLight intensity={colour.intensity1} color={colour.color1} />
+            <directionalLight
+                position={[40, 40, 40]}
+                intensity={colour.intensity2}
+                color={colour.color2}
+            />
+            <directionalLight
+                position={[-40, 40, 40]}
+                intensity={colour.intensity3}
+                color={colour.color3}
+            />
+            <directionalLight
+                position={[10, 10, -10]}
+                intensity={colour.intensity4}
+                color={colour.color4}
+            />
+        </group>
+    )
+}
 
 function HelmetModel() {
     const followRef = useRef<THREE.Group>(null!)
@@ -103,7 +104,7 @@ function HelmetModel() {
     return (
         <group ref={followRef}>
 
-            <group rotation={[0, Math.PI, 0]} position={[0, 0.3, 0]} scale={0.8}>
+            <group rotation={[0, 0, 0]} position={[0, 0.3, 0]} scale={3.5}>
                 <primitive object={scene} />
                 <ambientLight intensity={colour.intensity1} color={colour.color1} />
                 <directionalLight
@@ -137,8 +138,10 @@ export default function Helmet() {
                 backgroundColor: "transparent",
             }}
         >
+            <Environment preset="night" environmentIntensity={1} />
+
             <HelmetModel />
-            {/* <HelmetNeck /> */}
+            <HelmetNeck />
         </Canvas>
     )
 }

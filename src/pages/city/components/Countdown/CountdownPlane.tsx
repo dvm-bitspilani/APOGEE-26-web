@@ -1,5 +1,5 @@
 import { Html } from "@react-three/drei";
-import { editable as e } from "@theatre/r3f";
+// import { editable as e } from "@theatre/r3f";
 import * as THREE from "three";
 import styles from "../InteractivePlane/InteractivePlane.module.scss";
 import { useRef, useState } from "react";
@@ -7,7 +7,7 @@ import { useFrame } from "@react-three/fiber";
 import { useTheatreCameraStore } from "../../../../utils/store";
 import Countdown from "./Countdown"; // 👈 adjust path if needed
 
-const EditableMesh = e.mesh;
+// const EditableMesh = e.mesh;
 
 const InteractivePlane = () => {
   const ref = useRef<any>(null);
@@ -24,7 +24,7 @@ const InteractivePlane = () => {
     theatreCamera.getWorldPosition(camWorldPos);
 
     const distance = camWorldPos.distanceTo(meshWorldPos);
-    const range = distance <= 72.8;
+    const range = distance <= 200;
 
     if (range !== isInRange) {
       setInRange(range);
@@ -32,16 +32,16 @@ const InteractivePlane = () => {
   });
 
   return (
-    <EditableMesh
-      theatreKey="CountdownPlane"
+    <mesh
+      // theatreKey="CountdownPlane"
       ref={ref}
-      position={[-15,21,173]}
-      rotation={[2.95, -0.02, Math.PI]}
+      position={[-15,25,173]}
+      rotation={[2.6, 0, Math.PI]}
       scale={[1.6, 1.5, 1.5]}
     >
-      <planeGeometry args={[19, 19]} />
+      <planeGeometry args={[0, 0]} />
       <meshBasicMaterial
-        color="transparent"
+        // transparent
         side={THREE.DoubleSide}
         depthTest
         depthWrite
@@ -57,32 +57,32 @@ const InteractivePlane = () => {
           transition: "opacity 0.2s ease",
           pointerEvents: isInRange ? "auto" : "none",
           overflow: "hidden",
-          height:"30px",
-          background: "transparent",
-          width: "60px",
+          width:"1000px",
+          // background: "transparent",
+          background: "transparent"
         }}
       >
         <div
           onWheel={(e) => e.stopPropagation()}
           onPointerDown={(e) => e.stopPropagation()}
           style={{
-            width: "70rem",
-            height: "60rem",
+  width: "1000px",
+  height: "400px",
             overflow: "hidden",
             background: "transparent",
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
-            gap: "3rem",
-            padding: "2rem",
+            // gap: "3rem",
+            // padding: "2rem",
             overscrollBehavior: "none",
           }}
         >          {/* ✅ Countdown */}
-          <Countdown targetDate="2026-03-27T00:00:00" />
+          <Countdown targetDate="2026-04-11T00:00:00+05:30" />
         </div>
       </Html>
-    </EditableMesh>
+    </mesh>
   );
 };
 

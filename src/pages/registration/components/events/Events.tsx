@@ -4,6 +4,7 @@ import styles from "./Events.module.scss";
 import NavButton from "../navButton/NavButton";
 import axios from "axios";
 import redirectWithPost from "../../redirectWithPost";
+import { useCookies } from "react-cookie";
 
 const Events = () => {
   const {
@@ -13,8 +14,10 @@ const Events = () => {
     setActiveEvent,
     activeEvent,
     userData,
-    accessToken,
+    // accessToken,
   } = useRegistrationStore();
+
+  const [cookies, _setCookie] = useCookies(['id_token']);
 
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -35,7 +38,7 @@ const Events = () => {
 
   const register = () => {
     const submissionData = {
-      access_token: accessToken,
+      id_token: cookies["id_token"],
       email_id: userData?.email,
       phone: userData?.phone,
       name: userData?.name,

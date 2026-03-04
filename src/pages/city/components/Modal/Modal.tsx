@@ -1,10 +1,14 @@
-import { useCurrentSectionStore, useModalStore, useScrollLockStore } from "../../../../utils/store";
-import ComingSoon from "../../../comingSoon/ComingSoon";
+import {
+    useCurrentSectionStore,
+    useModalStore,
+    useScrollLockStore,
+} from "../../../../utils/store";
+// import ComingSoon from "../../../comingSoon/ComingSoon";
 import ContactUs from "../../../contactUs/ContactUs";
+import AboutUs from "../../../aboutUs/AboutUs";
 import styles from "./Modal.module.scss";
 
 export default function Modal({ children }: { children?: React.ReactNode }) {
-
     const closeModal = useModalStore((s) => s.closeModal);
     const isModalOpen = useModalStore((s) => s.isModalOpen);
     const scrollUnlock = useScrollLockStore((s) => s.unlock);
@@ -12,10 +16,12 @@ export default function Modal({ children }: { children?: React.ReactNode }) {
     const proceed = () => {
         closeModal();
         scrollUnlock();
-    }
+    };
 
     return (
-        <div className={`${styles.modalOverlay} ${!isModalOpen ? styles.hiddenModal : styles.showModal}`}>
+        <div
+            className={`${styles.modalOverlay} ${!isModalOpen ? styles.hiddenModal : styles.showModal}`}
+        >
             <div className={styles.modal} onClick={proceed}>
                 {/* {currentsection === "about" ? (<ComingSoon />) :
                     currentsection === "contact" ? (
@@ -29,15 +35,22 @@ export default function Modal({ children }: { children?: React.ReactNode }) {
                 {/* <div className={styles.contactus}>
                 <ContactUs/>
                 </div> */}
-                <div className={styles.modalContent}>
-                    {
-                        currentsection === "about" ? (<ComingSoon />) :
-                            currentsection === "contact" ? (<ContactUs />) :
-                                (children)
-                    }
+                <div
+                    className={styles.modalContent}
+                    onClick={(e) => e.stopPropagation()}
+                >
+                    {currentsection === "about" ? (
+                        <AboutUs />
+                    ) : currentsection === "contact" ? (
+                        <ContactUs />
+                        // ) : currentsection === "contact" ? (
+                        //   <ComingSoon />
+                    ) : (
+                        children
+                    )}
                 </div>
                 <div className={styles.backgroundlite} />
             </div>
         </div>
-    )
+    );
 }

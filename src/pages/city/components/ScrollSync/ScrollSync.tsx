@@ -44,26 +44,42 @@ export default function ScrollSync() {
   }, [showPreloader])
 
   useFrame(() => {
-    if (!introOverRef.current || navState !== "off") return;
+    if (!introOverRef.current || navState !== "off") return;})
 
+  useFrame((_state) => {
+    // ----- Scroll velocity for motion blur -----
+    // const rawVelocity =
+    //   Math.abs(scroll.offset - prevOffset.current) / Math.max(delta, 0.001);
+    // prevOffset.current = scroll.offset;
+    // smoothedVelocity.current +=
+    //   (rawVelocity - smoothedVelocity.current) * VELOCITY_SMOOTHING;
+    // // Publish via getState to avoid React re-renders
+    // useScrollVelocityStore.getState().setVelocity(smoothedVelocity.current);
+
+    // ----- Section / modal logic (unchanged) -----
     if (!isModalOpen) {
       for (const path in stopPoints) {
-        if (path !== currentSection && scrollSheet.sequence.position >= stopPoints[path as Section]?.[0] && scrollSheet.sequence.position <= stopPoints[path as Section]?.[1]) {
+        if (
+          path !== currentSection &&
+          scrollSheet.sequence.position >= stopPoints[path as Section]?.[0] &&
+          scrollSheet.sequence.position <= stopPoints[path as Section]?.[1]
+        ) {
           if (path !== "home") {
-            // scrollLock();
             openModal();
           }
-          setCurrentSection(path as Section)
+          setCurrentSection(path as Section);
           break;
         }
       }
-    }
-    else {
-      if (scrollSheet.sequence.position <= stopPoints[currentSection]?.[0] || scrollSheet.sequence.position >= stopPoints[currentSection]?.[1]) {
+    } else {
+      if (
+        scrollSheet.sequence.position <= stopPoints[currentSection]?.[0] ||
+        scrollSheet.sequence.position >= stopPoints[currentSection]?.[1]
+      ) {
         closeModal();
         setCurrentSection("transition");
       }
-    } 
+    }
 
     // Update the sequence position
     scrollSheet.sequence.position = scroll.offset * sequenceLength;

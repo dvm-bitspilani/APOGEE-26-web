@@ -10,11 +10,11 @@ import { editable as e } from "@theatre/r3f";
 export default function TheatreCameraFinal() {
   const theatreCameraRef = useRef<THREE.PerspectiveCamera>(null!);
   const setTheatreCamera = useTheatreCameraStore((s) => s.setTheatreCamera);
-  useEffect(() => {
-  if (!theatreCameraRef.current) return;
-  theatreCameraRef.current.layers.enable(1); // car
-  theatreCameraRef.current.layers.enable(2); // city
-}, []);
+//   useEffect(() => {
+//   if (!theatreCameraRef.current) return;
+//   theatreCameraRef.current.layers.enable(1); // car
+//   theatreCameraRef.current.layers.enable(2); // city
+// }, []);
   // const { isLaptop } = useDeviceType();
 
   // useHoverCamera({
@@ -39,7 +39,7 @@ export default function TheatreCameraFinal() {
         theatreKey="ActualCamera"
         ref={theatreCameraRef}
         near={0.1}
-        far={1750}
+        far={750}
         // theatreKey="TheatreCamera"
         name="TheatreCamera"
       />

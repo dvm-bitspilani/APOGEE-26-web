@@ -1,4 +1,4 @@
-import { Environment, ScrollControls, useEnvironment } from "@react-three/drei";
+import { Environment, ScrollControls } from "@react-three/drei";
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { useCityStore, usePivotStore } from "../../../../utils/store";
@@ -9,6 +9,8 @@ import Constellation from "../Constellation3";
 import CamCar from "../groups/CamCar";
 import { editable as e } from "@theatre/r3f"
 // import InteractivePlane from "../InteractivePlane/InteractivePlane";
+// import InteractivePlane2 from "../InteractivePlane/InteractivePlane2";
+import CountdownPlane from "../Countdown/CountdownPlane";
 // import CountdownPlane from "../Countdown/CountdownPlane";
 // import MatrixRain from "../MatrixRain";
 
@@ -18,21 +20,21 @@ export default function CityScene({ }: any) {
   const setPivot = usePivotStore((s) => s.setPivot);
   const carPivotRef = useRef<THREE.Group>(null!);
   // inside CityScene
-  const cityEnv = useEnvironment({ preset: "city" })
+  // const cityEnv = useEnvironment({ preset: "city" })
   // const { scene } = useThree();
-  useEffect(() => {
-    if (!cityRef.current) return
-    cityRef.current.traverse((child) => {
-      if ((child as THREE.Mesh).isMesh) {
-        const mesh = child as THREE.Mesh
-        const mat = mesh.material as THREE.MeshStandardMaterial
-        mat.envMap = cityEnv
-        mat.envMapIntensity = 0.1
-        mat.needsUpdate = true
-        child.layers.disable(1);
-      }
-    })
-  }, [cityEnv])
+  // useEffect(() => {
+  //   if (!cityRef.current) return
+  //   cityRef.current.traverse((child) => {
+  //     if ((child as THREE.Mesh).isMesh) {
+  //       const mesh = child as THREE.Mesh
+  //       const mat = mesh.material as THREE.MeshStandardMaterial
+  //       mat.envMap = cityEnv
+  //       mat.envMapIntensity = 0.1
+  //       mat.needsUpdate = true
+  //       child.layers.disable(1);
+  //     }
+  //   })
+  // }, [cityEnv])
   useEffect(() => {
     if (cityRef.current) {
       setCity(cityRef.current);
@@ -58,7 +60,7 @@ export default function CityScene({ }: any) {
       <group>
         <group ref={carPivotRef} position={[0, 0, 0]}>
           {/* <ambientLight intensity={0.5} /> */}
-          <group ref={cityRef} layers={2}>
+          <group ref={cityRef}>
             {/* <axesHelper args={[200]} /> */}
             {/* <CityGrid /> */}
             <Environment preset="city" environmentIntensity={0.1} />
@@ -84,6 +86,8 @@ export default function CityScene({ }: any) {
           <ScrollSync />
         </ScrollControls>
         {/* <InteractivePlane /> */}
+        {/* <InteractivePlane2/> */}
+        <CountdownPlane/>
       </group>
     </>
   );

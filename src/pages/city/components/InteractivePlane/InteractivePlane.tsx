@@ -35,7 +35,7 @@ const meshWorldPos = new THREE.Vector3();
     // const distance = theatreCamera.position.distanceTo(ref.current.position);
 
     const range = distance <= 72.8;
-console.log(distance)
+// console.log(distance)
     if (range !== isInRange) {
       setInRange(range);
     }

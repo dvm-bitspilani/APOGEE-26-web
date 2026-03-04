@@ -4,7 +4,7 @@ import Instructions from "./components/instruction/Instructions";
 import Events from "./components/events/Events";
 import DetailsForm from "./components/detailsForm/DetailsForm";
 import { useRegistrationStore } from "../../utils/store";
-import { useGoogleLogin } from "@react-oauth/google";
+// import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import { useCookies } from "react-cookie";
 import { useState, useEffect } from "react";
@@ -17,6 +17,7 @@ import helmetModel from "../../assets/3d/registration/helmet.glb";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 // @ts-ignore
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader";
+import ReactHelmet from "../components/ReactHelmet";
 
 function Registration() {
   const navigate = useNavigate();
@@ -114,7 +115,7 @@ function Registration() {
     stickyEvent,
     selectedEvents,
     toggleEvent,
-    setAccessToken,
+    // setAccessToken,
   } = useRegistrationStore();
 
   const displayEvent = stickyEvent || activeEvent;
@@ -127,7 +128,7 @@ function Registration() {
 
     "user-auth",
 
-    "Access_token",
+    "id_token",
   ]);
 
   const [userEmail, setUserEmail] = useState("");
@@ -143,61 +144,95 @@ function Registration() {
       });
   };
 
-  const googleLogin = useGoogleLogin({
-    onSuccess: (response) => {
-      axios
+  // const googleLogin = useGoogleLogin({
+  //   onSuccess: (response) => {
+  //     axios
 
-        .post(
-          "https://bits-apogee.org/2026/main/registrations/google-reg/",
-          {
-          access_token: response.access_token,
-          },
-        )
+  //       .post(
+  //         "https://bits-apogee.org/2026/main/registrations/google-reg/",
+  //         {
+  //           access_token: response.access_token,
+  //         },
+  //       )
 
-        .then((res) => {
-          setCookies("Access_token", response.access_token);
+  //       .then((res) => {
+  //         setCookies("Access_token", response.access_token);
 
-          if (res.data.exists) {
-            setCookies("user-auth", res.data);
+  //         if (res.data.exists) {
+  //           setCookies("user-auth", res.data);
 
-            setCookies("Authorization", res.data.tokens.access);
+  //           setCookies("Authorization", res.data.tokens.access);
 
-            // window.location.href = `https://bits-oasis.org/2025/main/registrations?token=${res.data.tokens.access}`;
+  //           // window.location.href = `https://bits-oasis.org/2025/main/registrations?token=${res.data.tokens.access}`;
 
-            redirectWithPost(
-              "https://bits-apogee.org/2026/main/registrations/",
+  //           redirectWithPost(
+  //             "https://bits-apogee.org/2026/main/registrations/",
 
-              {
-                token: res.data.tokens.access,
-              },
-            );
+  //             {
+  //               token: res.data.tokens.access,
+  //             },
+  //           );
 
-            setUserEmail(res.data.email);
-          } else {
-            setCookies("user-auth", res.data);
+  //           setUserEmail(res.data.email);
+  //         } else {
+  //           setCookies("user-auth", res.data);
 
-            setUserEmail(res.data.email);
+  //           setUserEmail(res.data.email);
 
-            setAccessToken(response.access_token);
+  //           setAccessToken(response.access_token);
 
-            if (res.data.email) {
-              setRegistrationStep("details");
-              getEvents();
-            }
+  //           if (res.data.email) {
+  //             setRegistrationStep("details");
+  //             getEvents();
+  //           }
+  //         }
+  //       })
+
+  //       .catch((err) => {
+  //         console.log(err);
+  //       });
+  //   },
+
+  //   // onFailure: () => {
+
+  //   //   console.error("Login failed");
+
+  //   // },
+  // });
+
+  const handleSuccess = (response: any) => {
+    const idToken = response.credential; // This is your ID Token
+
+    axios
+      .post("https://bits-apogee.org/2026/main/registrations/google-reg/", {
+        id_token: idToken,
+      })
+      .then((res) => {
+        setCookies("id_token", idToken);
+
+        if (res.data.exists) {
+          setCookies("user-auth", res.data);
+          setCookies("Authorization", res.data.tokens.access);
+
+          redirectWithPost("https://bits-apogee.org/2026/main/registrations/", {
+            token: res.data.tokens.access,
+          });
+
+          setUserEmail(res.data.email);
+        } else {
+          setCookies("user-auth", res.data);
+          setUserEmail(res.data.email);
+
+          if (res.data.email) {
+            setRegistrationStep("details");
+            getEvents();
           }
-        })
-
-        .catch((err) => {
-          console.log(err);
-        });
-    },
-
-    // onFailure: () => {
-
-    //   console.error("Login failed");
-
-    // },
-  });
+        }
+      })
+      .catch((err) => {
+        console.log("Backend Error:", err);
+      });
+  };
 
   const handleBack = () => {
     if (registrationStep === "events") {
@@ -210,80 +245,87 @@ function Registration() {
   };
 
   return (
-    <div className={styles.container}>
-      {loading && <RegPreLoader loading={true} progress={progress} />}
-      <button className={styles.backButton} onClick={handleBack}>
-        <img src="/svg/registrations/back-button.svg" alt="Back" />
-      </button>
+    <>
+      <ReactHelmet
+        title="APOGEE 2026 | Registration"
+        description="Register for APOGEE 2026."
+        url="https://www.bits-apogee.org/registration"
+      />
+      <div className={styles.container}>
+        {loading && <RegPreLoader loading={true} progress={progress} />}
+        <button className={styles.backButton} onClick={handleBack}>
+          <img src="/svg/registrations/back-button.svg" alt="Back" />
+        </button>
 
-      <div className={styles.leftPanel}>
-        <div className={styles.bannerText}>
-          <GlitchText />
-        </div>
-        <div className={styles.robotFace}>
-          <Helmet />
-        </div>
-
-        {registrationStep === "events" && displayEvent && (
-          <div className={styles.detailsPanel}>
-            {/* Header Section: Fixed at top */}
-            <div className={styles.detailsHeader}>
-              <h2 className={styles.eventName}>[{displayEvent.name}]</h2>
-              <button
-                onClick={() => {
-                  useRegistrationStore.getState().setStickyEvent(null);
-                  useRegistrationStore.getState().setActiveEvent(null);
-                }}
-                className={styles.closeButton}
-              >
-                ✕
-              </button>
-            </div>
-
-            {/* Scrollable Content Section */}
-            <div className={styles.scrollContainer}>
-              <div className={styles.detailsContent}>
-                <p className={styles.eventDesc}>{displayEvent.description}</p>
-              </div>
-              {/* Fade Overlay */}
-              <div className={styles.fadeOverlay}></div>
-            </div>
-
-            {stickyEvent && (
-              <button
-                onClick={() => toggleEvent(displayEvent)}
-                className={`${styles.actionButton} ${isSelected ? styles.selected : ""}`}
-              >
-                {isSelected ? "REMOVE" : "ADD"}
-              </button>
-            )}
+        <div className={styles.leftPanel}>
+          <div className={styles.bannerText}>
+            <GlitchText />
           </div>
-        )}
-      </div>
+          <div className={styles.robotFace}>
+            <Helmet />
+          </div>
 
-      <div className={styles.rightPanel}>
-        <img
-          src="/img/registrations/regBackground.png"
-          alt="Background"
-          className={styles.backgroundImage}
-        />
-        <div className={styles.bgContainerMobile}>
-          <img
-            className={styles.bgPanelImage}
-            src="/img/registrations/instructions-panel-bg-mobile.png"
-          />
-          <img
-            className={styles.bgPanelFrame}
-            src="/img/registrations/instructions-panel-frame-mobile.png"
-          />
+          {registrationStep === "events" && displayEvent && (
+            <div className={styles.detailsPanel}>
+              {/* Header Section: Fixed at top */}
+              <div className={styles.detailsHeader}>
+                <h2 className={styles.eventName}>[{displayEvent.name}]</h2>
+                <button
+                  onClick={() => {
+                    useRegistrationStore.getState().setStickyEvent(null);
+                    useRegistrationStore.getState().setActiveEvent(null);
+                  }}
+                  className={styles.closeButton}
+                >
+                  ✕
+                </button>
+              </div>
+
+              {/* Scrollable Content Section */}
+              <div className={styles.scrollContainer}>
+                <div className={styles.detailsContent}>
+                  <p className={styles.eventDesc}>{displayEvent.description}</p>
+                </div>
+                {/* Fade Overlay */}
+                <div className={styles.fadeOverlay}></div>
+              </div>
+
+              {stickyEvent && (
+                <button
+                  onClick={() => toggleEvent(displayEvent)}
+                  className={`${styles.actionButton} ${isSelected ? styles.selected : ""}`}
+                >
+                  {isSelected ? "REMOVE" : "ADD"}
+                </button>
+              )}
+            </div>
+          )}
         </div>
-        {registrationStep === "instructions" && (
-          <Instructions googleLogin={googleLogin} />
-        )}
-        {registrationStep === "details" && <DetailsForm mail={userEmail} />}
-        {registrationStep === "events" && <Events />}
+
+        <div className={styles.rightPanel}>
+          <img
+            src="/img/registrations/regBackground.png"
+            alt="Background"
+            className={styles.backgroundImage}
+          />
+          <div className={styles.bgContainerMobile}>
+            <img
+              className={styles.bgPanelImage}
+              src="/img/registrations/instructions-panel-bg-mobile.png"
+            />
+            <img
+              className={styles.bgPanelFrame}
+              src="/img/registrations/instructions-panel-frame-mobile.png"
+            />
+          </div>
+          {registrationStep === "instructions" && (
+            <Instructions googleLogin={handleSuccess} />
+          )}
+          {registrationStep === "details" && <DetailsForm mail={userEmail} />}
+          {registrationStep === "events" && <Events />}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
