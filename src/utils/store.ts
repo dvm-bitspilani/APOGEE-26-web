@@ -72,7 +72,7 @@ export const useTheatreCameraStore = create<TheatreCameraStore>((set) => ({
   setTheatreCamera: (camera) => set({ theatreCamera: camera }),
 }))
 
-export type Section = ["home", "about", "contact", "transition"][number];
+export type Section = ["home", "about", "contact", "comingSoon", "transition"][number];
 
 type CurrentSectionStore = {
   currentSection: Section;
