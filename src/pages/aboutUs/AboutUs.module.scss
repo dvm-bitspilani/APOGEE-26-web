@@ -1,0 +1,439 @@
+@use "/src/assets/global.scss" as *;
+
+.container {
+  pointer-events: all;
+  z-index: 10000;
+  display: flex;
+  flex-direction: column; // Changed to match ContactUs, but kept flex-direction: column as strictly it was anyway
+  align-items: center;
+  justify-content: center; // Kept this for centering content
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  overflow: hidden;
+
+  .bgImg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    opacity: 0.9;
+  }
+
+  .contentWrapper {
+    display: flex;
+    width: 70vw;
+    height: 60vh;
+    gap: 4rem;
+    align-items: center;
+    z-index: 1;
+
+    .leftColumn {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      color: white;
+      text-align: left;
+
+      .title {
+        font-family: $font-glitch; // Assuming this variable exists from global.scss or similar
+        font-size: clamp(2.5rem, 4vw, 4.5rem);
+        color: #00f0fd;
+        font-weight: 500;
+        margin-bottom: clamp(0.5rem, 1vw, 1.5rem);
+        letter-spacing: 0.05em;
+        text-shadow: 0 0 10px rgba(0, 240, 253, 0.5);
+      }
+
+      .subtitle {
+        font-family: $font-blender; // Fallback or imported font
+        font-size: clamp(1.2rem, 2.2vw, 2rem);
+        color: $cyber-yellow; // Yellowish
+        margin-bottom: clamp(1rem, 1.5vw, 2rem);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        font-weight: 700;
+        text-shadow: 0 0 5px rgba(255, 204, 0, 0.4);
+      }
+
+      .textBlock {
+        font-family: "Rajdhani", sans-serif; // Tech font
+        font-size: clamp(1.1rem, 1.2vw, 1.4rem);
+        line-height: 1.6;
+        color: #e0e0e0;
+        margin-bottom: 1rem;
+
+        p {
+          margin-bottom: 1rem;
+          font-family: $font-blender;
+        }
+      }
+
+      // .yellowLine {
+      //   width: 50px;
+      //   height: 4px;
+      //   background-color: #ffcc00;
+      //   box-shadow: 0 0 8px #ffcc00;
+      // }
+    }
+
+    .rightColumn {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3rem;
+
+      .videoContainer {
+        display: flex;
+        align-items: center;
+        margin-top: 4rem;
+        gap: 1rem;
+        width: 100%;
+        justify-content: center;
+
+        .arrowsContainer {
+          display: contents;
+          @media (max-width: 600px) {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            gap: 10vw;
+            width: 100%;
+            order: 1;
+          }
+        }
+
+        .arrow {
+          width: 3.5rem;
+          cursor: pointer;
+          transition: transform 0.2s;
+          flex-shrink: 0;
+
+          @media (max-width: 1200px) {
+            width: 5vw;
+            max-width: 30px;
+          }
+
+          @media (max-width: 600px) {
+            width: 8vw;
+            max-width: 40px;
+            margin: 0 !important;
+            order: unset;
+          }
+
+          &:hover {
+            filter: drop-shadow(0 0 5px #ffcc00);
+          }
+
+          &.leftArrow {
+            order: -1;
+          }
+
+          &.rightArrow {
+            order: 1;
+            transform: rotate(180deg);
+          }
+        }
+
+        .videoPlaceholder {
+          order: 0;
+          @media (max-width: 1200px) {
+            width: 85%;
+            aspect-ratio: 16/10;
+            max-width: none;
+            min-height: auto;
+            height: auto;
+            margin: 0;
+          }
+          @media (max-width: 600px) {
+            width: 100%;
+            flex: unset;
+            order: 0;
+            margin-bottom: 0;
+          }
+          position: relative;
+          aspect-ratio: 16/10;
+          flex: 1;
+          max-width: 400px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background: #ffcc00; // Frame border color
+          padding: 2.5px; // Frame thickness
+          margin: 1rem 0;
+
+          clip-path: polygon(
+            0% 10%,
+            10% 0%,
+            95% 0%,
+            100% 5%,
+            100% 90%,
+            95% 100%,
+            95% 100%,
+            45% 100%,
+            35% 90%,
+            10% 90%,
+            10% 90%,
+            0% 80%
+          );
+
+          .playerWrapper {
+            position: relative; // Reset absolute positioning
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 1;
+            overflow: hidden;
+            // Apply same clip-path to mask the video content
+            clip-path: polygon(
+              0% 10%,
+              10% 0%,
+              95% 0%,
+              100% 5%,
+              100% 90%,
+              95% 100%,
+              95% 100%,
+              45% 100%,
+              35% 90%,
+              10% 90%,
+              10% 90%,
+              0% 80%
+            );
+
+            cursor: pointer;
+
+            .youtubeFrame {
+              width: 100%;
+              height: 100%;
+              pointer-events: none;
+
+              iframe {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+              }
+            }
+          }
+
+          .playButton {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 50%;
+            border: 2px solid #ffcc00;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(4px);
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 10;
+
+            &::after {
+              content: "";
+              width: 0;
+              height: 0;
+              border-top: 10px solid transparent;
+              border-bottom: 10px solid transparent;
+              border-left: 18px solid #fff;
+              margin-left: 4px;
+            }
+
+            &:hover {
+              background: rgba(255, 204, 0, 0.2);
+              box-shadow: 0 0 15px #ffcc00;
+              transform: translate(-50%, -50%) scale(1.1);
+            }
+          }
+        }
+      }
+
+      .socials {
+        display: flex;
+        gap: 2rem;
+
+        .socialIcon {
+          position: relative;
+          width: 3rem;
+          height: 3rem;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          cursor: pointer;
+          transition: transform 0.3s;
+
+          &:hover {
+            transform: scale(1.1);
+
+            .ring {
+              filter: drop-shadow(0 0 5px #ffcc00);
+            }
+          }
+
+          .ring {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            animation: spin 10s linear infinite;
+          }
+
+          .icon {
+            width: 50%;
+            height: 50%;
+            z-index: 1;
+          }
+        }
+      }
+    }
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.mobileText {
+  display: none;
+}
+
+@media (max-width: 1200px) {
+  .container {
+    overflow: hidden;
+    justify-content: center;
+    padding: 0;
+
+    .bgImg {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .contentWrapper {
+    width: 100%;
+    height: 75dvh !important;
+    // padding: 3vh 2vw;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0 !important; // Removed gap to allow specific margins to control spacing between sections
+
+    overflow-y: auto;
+    overflow-x: hidden;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    .desktopText {
+      display: none;
+    }
+
+    .mobileText {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 90%;
+      margin-top: 1vh;
+      margin-bottom: 3vh;
+
+      p {
+        font-family: $font-blender;
+        font-size: clamp(14px, 3.6vw, 24px); // Scale text like the example
+        line-height: 1.5;
+        color: #e0e0e0;
+        text-align: center;
+        width: 100%;
+      }
+    }
+
+    .leftColumn {
+      width: 100%;
+      text-align: center;
+      margin-top: 2vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .title {
+        font-size: clamp(30px, 8vw, 60px); // Proportional title
+        margin-top: 0;
+        margin-bottom: 0.5vh; // Reduced gap
+      }
+
+      .subtitle {
+        font-size: clamp(14px, 3.5vw, 24px);
+        margin-bottom: 1vh; // Reduced gap
+        letter-spacing: 0.15em;
+      }
+
+      .yellowLine {
+        display: none;
+      }
+    }
+
+    .rightColumn {
+      width: 100%;
+      gap: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .videoContainer {
+        margin-top: 0; // Removed margin to pull it flush with subtitle
+        margin-bottom: 2vh;
+        width: 100%;
+        display: flex;
+        flex-direction: row; // Base orientation
+        justify-content: center;
+        align-items: center;
+        gap: 2vw; // Base gap
+
+        @media (max-width: 600px) {
+          flex-direction: column; // Mobile column view
+          gap: 2vh;
+        }
+      }
+
+      .socials {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 6vw;
+        margin-bottom: 1vh;
+        margin-top: 1vh;
+        width: 100%;
+
+        .socialIcon {
+          width: 10vw; // Proportional icons
+          max-width: 45px;
+          height: 10vw;
+          max-height: 45px;
+          flex-shrink: 0;
+        }
+      }
+    }
+  }
+}

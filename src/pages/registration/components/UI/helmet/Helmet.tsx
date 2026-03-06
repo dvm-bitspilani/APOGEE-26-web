@@ -1,4 +1,4 @@
-import helmet from "../../../../../assets/3d/registration/helmet1.glb"
+import helmet from "../../../../../assets/3d/registration/helmet6.glb"
 import helmetNeck from "../../../../../assets/3d/registration/body1.glb"
 import { useGLTF } from "@react-three/drei"
 import { Canvas, useFrame, useThree } from "@react-three/fiber"
@@ -6,6 +6,7 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber"
 import { useRef } from "react"
 import * as THREE from "three"
 import { Center } from "@react-three/drei"
+import { Environment } from "@react-three/drei"
 
 function HelmetNeck() {
     const { scene } = useGLTF(helmetNeck);
@@ -137,6 +138,8 @@ export default function Helmet() {
                 backgroundColor: "transparent",
             }}
         >
+            <Environment preset="night" environmentIntensity={1} />
+
             <HelmetModel />
             <HelmetNeck />
         </Canvas>

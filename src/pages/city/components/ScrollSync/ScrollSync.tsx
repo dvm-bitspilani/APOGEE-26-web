@@ -1,58 +1,68 @@
 import { useScroll } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-// import { sheet } from "../../theatre";
 import { getProject } from "@theatre/core";
 
-import { useRef } from "react";
-import {
-  type Section,
-  useCurrentSectionStore,
-  useModalStore,
-  useScrollVelocityStore,
-} from "../../../../utils/store";
-import state from "../../state7.json";
+import state from "../../state-prodigal.json";
+import { useActiveSheetStore, useModalStore, useNavStateStore, usePreloaderStateStore } from "../../../../utils/store";
+import { type Section, useCurrentSectionStore } from "../../../../utils/store";
+import { useEffect, useRef } from "react";
+
 // import { useLocation, useNavigate } from "react-router-dom";
 export const project = getProject("City Project", { state });
-export const sheet = project.sheet("Cyber City");
+export const scrollSheet = project.sheet("Cyber City");
+export const introAnimSheet = project.sheet("Intro Sequence");
 
-export const stopPoints: Record<Section, [number, number]> = {
-  home: [0, 0.25],
-  about: [4, 6],
-  contact: [10, 10.5],
-  transition: [-1, -1],
-};
-export const sequenceLength = 10.25;
-
-const VELOCITY_SMOOTHING = 0.12;
+const stopPoints: Record<Section, [number, number]> = {
+  "home": [0, 0.25],
+  "about": [6.2, 7.8],
+  "contact": [14.8, 16],
+  "transition": [-1, -1],
+}
+const sequenceLength = 15.5;
 
 export default function ScrollSync() {
   const scroll = useScroll();
+  const introOverRef = useRef<boolean>(false);
   const openModal = useModalStore((s) => s.openModal);
   const closeModal = useModalStore((s) => s.closeModal);
   const isModalOpen = useModalStore((s) => s.isModalOpen);
+  const showPreloader = usePreloaderStateStore((s) => s.showPreloader);
   const currentSection = useCurrentSectionStore((s) => s.currentSection);
   const setCurrentSection = useCurrentSectionStore((s) => s.setCurrentSection);
+  const setActiveSheet = useActiveSheetStore((s) => s.setActiveSheet);
+  const navState = useNavStateStore((s) => s.navState);
 
-  const prevOffset = useRef(0);
-  const smoothedVelocity = useRef(0);
+  useEffect(() => {
+    scrollSheet.sequence.position = 0;
+    introAnimSheet.sequence.play({iterationCount: 1}).then(() => {
+      if (!showPreloader) {
+        introOverRef.current = true;
+        setActiveSheet("Cyber City");
+      }
+    });
+    if (showPreloader) introAnimSheet.sequence.pause();
+  }, [showPreloader])
 
-  useFrame((_state, delta) => {
+  useFrame(() => {
+    if (!introOverRef.current || navState !== "off") return;})
+
+  useFrame((_state) => {
     // ----- Scroll velocity for motion blur -----
-    const rawVelocity =
-      Math.abs(scroll.offset - prevOffset.current) / Math.max(delta, 0.001);
-    prevOffset.current = scroll.offset;
-    smoothedVelocity.current +=
-      (rawVelocity - smoothedVelocity.current) * VELOCITY_SMOOTHING;
-    // Publish via getState to avoid React re-renders
-    useScrollVelocityStore.getState().setVelocity(smoothedVelocity.current);
+    // const rawVelocity =
+    //   Math.abs(scroll.offset - prevOffset.current) / Math.max(delta, 0.001);
+    // prevOffset.current = scroll.offset;
+    // smoothedVelocity.current +=
+    //   (rawVelocity - smoothedVelocity.current) * VELOCITY_SMOOTHING;
+    // // Publish via getState to avoid React re-renders
+    // useScrollVelocityStore.getState().setVelocity(smoothedVelocity.current);
 
     // ----- Section / modal logic (unchanged) -----
     if (!isModalOpen) {
       for (const path in stopPoints) {
         if (
           path !== currentSection &&
-          sheet.sequence.position >= stopPoints[path as Section]?.[0] &&
-          sheet.sequence.position <= stopPoints[path as Section]?.[1]
+          scrollSheet.sequence.position >= stopPoints[path as Section]?.[0] &&
+          scrollSheet.sequence.position <= stopPoints[path as Section]?.[1]
         ) {
           if (path !== "home") {
             openModal();
@@ -63,8 +73,8 @@ export default function ScrollSync() {
       }
     } else {
       if (
-        sheet.sequence.position <= stopPoints[currentSection]?.[0] ||
-        sheet.sequence.position >= stopPoints[currentSection]?.[1]
+        scrollSheet.sequence.position <= stopPoints[currentSection]?.[0] ||
+        scrollSheet.sequence.position >= stopPoints[currentSection]?.[1]
       ) {
         closeModal();
         setCurrentSection("transition");
@@ -72,7 +82,7 @@ export default function ScrollSync() {
     }
 
     // Update the sequence position
-    sheet.sequence.position = scroll.offset * sequenceLength;
+    scrollSheet.sequence.position = scroll.offset * sequenceLength;
   });
 
   return null;

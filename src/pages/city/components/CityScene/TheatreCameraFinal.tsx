@@ -2,12 +2,19 @@ import { PerspectiveCamera } from "@theatre/r3f";
 import { useRef, useEffect } from "react";
 import * as THREE from "three";
 import { useTheatreCameraStore } from "../../../../utils/store";
+import ResponsiveCamera from "../ResponiveCamera";
+import { editable as e } from "@theatre/r3f";
 // import { useHoverCamera } from "../../hooks/useHoverCamera";
 // import { useDeviceType } from "../../../../hooks/useDeviceType";
 
 export default function TheatreCameraFinal() {
   const theatreCameraRef = useRef<THREE.PerspectiveCamera>(null!);
   const setTheatreCamera = useTheatreCameraStore((s) => s.setTheatreCamera);
+//   useEffect(() => {
+//   if (!theatreCameraRef.current) return;
+//   theatreCameraRef.current.layers.enable(1); // car
+//   theatreCameraRef.current.layers.enable(2); // city
+// }, []);
   // const { isLaptop } = useDeviceType();
 
   // useHoverCamera({
@@ -26,15 +33,17 @@ export default function TheatreCameraFinal() {
   }, [setTheatreCamera]);
 
   return (
-    <PerspectiveCamera
-      makeDefault
-      ref={theatreCameraRef}
-      near={0.1}
-      far={2000}
-      fov={50}
-      theatreKey="TheatreCamera"
-      position={[0, 7, 12]}
-      rotation={[0, -Math.PI, 0]}
-    />
+    <e.group theatreKey="TheatreCamera">
+      <PerspectiveCamera
+        makeDefault
+        theatreKey="ActualCamera"
+        ref={theatreCameraRef}
+        near={0.1}
+        far={1000}
+        // theatreKey="TheatreCamera"
+        name="TheatreCamera"
+      />
+      <ResponsiveCamera />
+    </e.group>
   );
 }

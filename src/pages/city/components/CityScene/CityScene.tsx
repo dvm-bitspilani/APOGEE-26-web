@@ -1,21 +1,41 @@
-import { ScrollControls } from "@react-three/drei";
+import { Environment, ScrollControls } from "@react-three/drei";
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { useCityStore, usePivotStore } from "../../../../utils/store";
-import Constellation from "../Constellation";
-import Infernus from "../models/Infernus";
 import ScrollSync from "../ScrollSync/ScrollSync";
 // import SceneDevOrProd from "./SceneDevorProd";
 import SceneLights from "./SceneLights";
-import TheatreCameraFinal from "./TheatreCameraFinal";
 import FinalProdConfig from "../config/FinalProdConfig";
+import Constellation from "../Constellation3";
+import CamCar from "../groups/CamCar";
+import { editable as e } from "@theatre/r3f"
+// import InteractivePlane from "../InteractivePlane/InteractivePlane";
+// import InteractivePlane2 from "../InteractivePlane/InteractivePlane2";
+import CountdownPlane from "../Countdown/CountdownPlane";
+// import CountdownPlane from "../Countdown/CountdownPlane";
+// import MatrixRain from "../MatrixRain";
 
-export default function CityScene({}: any) {
+export default function CityScene({ }: any) {
   const cityRef = useRef<THREE.Group>(null!);
   const setCity = useCityStore((s) => s.setCity);
   const setPivot = usePivotStore((s) => s.setPivot);
   const carPivotRef = useRef<THREE.Group>(null!);
-
+  // inside CityScene
+  // const cityEnv = useEnvironment({ preset: "city" })
+  // const { scene } = useThree();
+  // useEffect(() => {
+  //   if (!cityRef.current) return
+  //   cityRef.current.traverse((child) => {
+  //     if ((child as THREE.Mesh).isMesh) {
+  //       const mesh = child as THREE.Mesh
+  //       const mat = mesh.material as THREE.MeshStandardMaterial
+  //       mat.envMap = cityEnv
+  //       mat.envMapIntensity = 0.1
+  //       mat.needsUpdate = true
+  //       child.layers.disable(1);
+  //     }
+  //   })
+  // }, [cityEnv])
   useEffect(() => {
     if (cityRef.current) {
       setCity(cityRef.current);
@@ -26,13 +46,14 @@ export default function CityScene({}: any) {
       setPivot(carPivotRef.current);
     }
   }, [setPivot]);
+
   const color = "#3e93be";
   return (
     <>
       {/* <SceneDevOrProd /> */}
       <FinalProdConfig/>
       <SceneLights />
-      <fogExp2 attach="fog" args={[color, 0.004]} />
+      <fogExp2 attach="fog" args={[color, 0.0018]} />
       {/* <fog attach="fog" args={[color, 50, 2000]} />   */}
       {/* <TheatreCameraLeva  /> //?: Not yet working... */}
       <color attach="background" args={[color]} />
@@ -43,20 +64,20 @@ export default function CityScene({}: any) {
           <group ref={cityRef}>
             {/* <axesHelper args={[200]} /> */}
             {/* <CityGrid /> */}
+            <Environment preset="city" environmentIntensity={0.1} />
             <Constellation />
           </group>
         </group>
 
-        <group>
+        <e.group theatreKey="CamCar">
           {/* <directionalLight
             position={[0, 10, 0]}
            intensity={0.5} /> */}
 
           {/* The TheatreCameraFinal is a pre-configured camera with the same settings as above, but with added parallax and scroll effects     */}
 
-          <TheatreCameraFinal />
-          <Infernus />
-        </group>
+          <CamCar />
+        </e.group>
         <ScrollControls pages={6} damping={0.8}>
           {/* Use PivotLeva to roate the city around the car's axis */}
           {/* <PivotLeva /> */}
@@ -65,6 +86,9 @@ export default function CityScene({}: any) {
           {/* <CityDebug /> */}
           <ScrollSync />
         </ScrollControls>
+        {/* <InteractivePlane /> */}
+        {/* <InteractivePlane2/> */}
+        <CountdownPlane/>
       </group>
     </>
   );
