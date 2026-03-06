@@ -12,7 +12,7 @@ import { SheetProvider } from "@theatre/r3f";
 import { useEffect } from "react";
 import debugFunctions from "../../utils/debug";
 import * as THREE from "three";
-import { useActiveSheetStore, useNavStateStore, usePreloaderStateStore, useSceneLoadedStore } from "../../utils/store";
+import { useActiveSheetStore, usePreloaderStateStore, useSceneLoadedStore } from "../../utils/store";
 // import NavBar from "../components/NavBar/NavBar";
 import RegisterButton from "../components/RegisterButton/RegisterButton";
 import Preloader from "../preloader/Preloader";
@@ -50,7 +50,7 @@ export default function City() {
 
   const showPreloader = usePreloaderStateStore((s) => s.showPreloader);
   const activeSheet = useActiveSheetStore((s) => s.activeSheet);
-  const setNavState = useNavStateStore((s) => s.setNavState);
+  // const setNavState = useNavStateStore((s) => s.setNavState);
   // const setShowPreloader = usePreloaderStateStore((s) => s.setShowPreloader);
 
   useEffect(() => {
