@@ -170,6 +170,7 @@
           background: #ffcc00; // Frame border color
           padding: 2.5px; // Frame thickness
           margin: 1rem 0;
+          transition: clip-path 0.4s ease-in-out;
 
           clip-path: polygon(
             0% 10%,
@@ -186,6 +187,40 @@
             0% 80%
           );
 
+          &.playing {
+            clip-path: polygon(
+              0% 0%,
+              0% 0%,
+              100% 0%,
+              100% 0%,
+              100% 100%,
+              100% 100%,
+              100% 100%,
+              100% 100%,
+              0% 100%,
+              0% 100%,
+              0% 100%,
+              0% 100%
+            );
+
+            .playerWrapper {
+              clip-path: polygon(
+                0% 0%,
+                0% 0%,
+                100% 0%,
+                100% 0%,
+                100% 100%,
+                100% 100%,
+                100% 100%,
+                100% 100%,
+                0% 100%,
+                0% 100%,
+                0% 100%,
+                0% 100%
+              );
+            }
+          }
+
           .playerWrapper {
             position: relative; // Reset absolute positioning
             width: 100%;
@@ -193,6 +228,7 @@
             background: #000;
             z-index: 1;
             overflow: hidden;
+            transition: clip-path 0.4s ease-in-out;
             // Apply same clip-path to mask the video content
             clip-path: polygon(
               0% 10%,

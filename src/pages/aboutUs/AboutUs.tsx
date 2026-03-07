@@ -45,7 +45,11 @@ export default function AboutUs() {
 
         <div className={styles.rightColumn}>
           <div className={styles.videoContainer}>
-            <div className={styles.videoPlaceholder}>
+            <div
+              className={`${styles.videoPlaceholder} ${
+                isPlaying ? styles.playing : ""
+              }`}
+            >
               {/* Render the container for YouTube Player */}
               <div
                 className={styles.playerWrapper}
