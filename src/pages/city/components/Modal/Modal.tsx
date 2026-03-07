@@ -22,7 +22,7 @@ export default function Modal({ children }: { children?: React.ReactNode }) {
         <div
             className={`${styles.modalOverlay} ${!isModalOpen ? styles.hiddenModal : styles.showModal}`}
         >
-            <div className={styles.modal} onClick={proceed}>
+            <div className={styles.modal}>
                 {/* {currentsection === "about" ? (<ComingSoon />) :
                     currentsection === "contact" ? (
                         //   <div className={styles.contactus}>
@@ -37,7 +37,7 @@ export default function Modal({ children }: { children?: React.ReactNode }) {
                 </div> */}
                 <div
                     className={styles.modalContent}
-                    onClick={(e) => e.stopPropagation()}
+                    onClick={(e) => {e.stopPropagation(); proceed()}}
                 >
                     {currentsection === "about" ? (
                         <AboutUs />
