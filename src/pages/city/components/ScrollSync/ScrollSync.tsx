@@ -77,7 +77,7 @@ export default function ScrollSync() {
         scrollSheet.sequence.position >= stopPoints[currentSection]?.[1]
       ) {
         closeModal();
-        setCurrentSection("transition");
+        setTimeout(() => setCurrentSection("transition"), 500)
       }
     }
 
