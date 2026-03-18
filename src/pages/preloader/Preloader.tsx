@@ -593,7 +593,7 @@ export default function Preloader() {
       {
         loaderState == 3 &&
         <div className={styles.logoContainer}>
-          <img src="apogee26logo.png" className={styles.apogeeLogo} ref={apogeeLogoRef} />
+          <img src="apogee26logo.png" className={styles.apogeeLogo} ref={apogeeLogoRef} alt="ApogeeLogo"/>
         </div>
       }
     </div >

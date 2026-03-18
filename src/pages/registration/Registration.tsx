@@ -56,6 +56,7 @@ function Registration() {
     images.forEach((src) => {
       const img = new Image();
       img.src = src;
+      img.alt="Assets"
       img.onload = () => {
         console.log(`>> IMAGE LOADED: ${src}`);
         imagesLoaded++;
