@@ -45,16 +45,11 @@ export default function AboutUs() {
 
         <div className={styles.rightColumn}>
           <div className={styles.videoContainer}>
-            <img
-              src="/svg/aboutUs/arrow.svg"
-              className={`${styles.arrow} ${styles.leftArrow}`}
-              alt="Previous"
-              onClick={(e) => {
-                e.stopPropagation();
-                prevVideo();
-              }}
-            />
-            <div className={styles.videoPlaceholder}>
+            <div
+              className={`${styles.videoPlaceholder} ${
+                isPlaying ? styles.playing : ""
+              }`}
+            >
               {/* Render the container for YouTube Player */}
               <div
                 className={styles.playerWrapper}
@@ -78,15 +73,27 @@ export default function AboutUs() {
                 ></div>
               )}
             </div>
-            <img
-              src="/svg/aboutUs/arrow.svg"
-              className={`${styles.arrow} ${styles.rightArrow}`}
-              alt="Next"
-              onClick={(e) => {
-                e.stopPropagation();
-                nextVideo();
-              }}
-            />
+
+            <div className={styles.arrowsContainer}>
+              <img
+                src="/svg/aboutUs/arrow.svg"
+                className={`${styles.arrow} ${styles.leftArrow}`}
+                alt="Previous"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  prevVideo();
+                }}
+              />
+              <img
+                src="/svg/aboutUs/arrow.svg"
+                className={`${styles.arrow} ${styles.rightArrow}`}
+                alt="Next"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  nextVideo();
+                }}
+              />
+            </div>
           </div>
 
           <div className={styles.socials} onClick={(e) => e.stopPropagation()}>
