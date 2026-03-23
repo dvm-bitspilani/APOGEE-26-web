@@ -38,6 +38,7 @@
   background-image: url("/img/preloader/bg.png");
   background-repeat: repeat;
   backdrop-filter: blur(30px);
+  transition: opacity 1s ease;
   // animation: flicker 0.5s infinite;
 
   // @keyframes flicker {
@@ -338,6 +339,35 @@
           // margin: 0.5vw 0 1vw 0;
         }
       }
+    }
+  }
+
+  .logoContainer {
+    position: absolute;
+    top: 50svh;
+    left: 50svw;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.9;
+
+    .dvmLogo {
+      width: 30vw;
+      max-height: 75vh;
+      max-width: 75vw;
+      aspect-ratio: 1/1;
+      height: auto;
+    }
+    .apogeeLogo {
+      // transform: scaleY(1.1);
+      width: 83.6vw;
+      animation: logoFadeIn 1s ease forwards;
+    }
+
+    @keyframes logoFadeIn {
+      0% {opacity: 0;}
+      100% {opacity: 1;}
     }
   }
 }
