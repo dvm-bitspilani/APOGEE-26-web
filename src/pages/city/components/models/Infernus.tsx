@@ -10,6 +10,8 @@ import { editable as e } from "@theatre/r3f";
 import { useFrame } from "@react-three/fiber";
 // import StudioEnvironment from "../StudioEnviroment";
 import { useState, useMemo } from "react";
+import { useNeonMaterial2 } from "../../hooks/useNeonMaterial2";
+import { useNeonMaterial3 } from "../../hooks/useNeonMaterial3";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -41,6 +43,10 @@ const smoothedIntensity = useRef(3.5);
 
   // neon shader depends on konami
   const neon = useNeonMaterial(true);
+  const neon2 = useNeonMaterial2(true);
+  const neon3 = useNeonMaterial3(true);
+  neon3.uniforms.uRoughness.value = 0.2; // glossy
+// try 0.6–0.8 for rough
 
   const infernusRef = useRef<THREE.Group>(null!);
   const setInfernus = useInfernusStore((s) => s.setInfernus);
@@ -132,6 +138,9 @@ smoothedIntensity.current = THREE.MathUtils.lerp(
 const trailColor = useMemo(() => {
   return new THREE.Color("#40ccef").multiplyScalar(trailIntensity);
 }, [trailIntensity]);
+const trailColor2 = useMemo(() => {
+  return new THREE.Color("#f3ff0f").multiplyScalar(trailIntensity);
+}, [trailIntensity]);
 
   return (
     <>
@@ -157,7 +166,7 @@ const trailColor = useMemo(() => {
                 receiveShadow
                 geometry={nodes.meshId5_name.geometry}
                 // material={neonActive ? neon : materials["white light"]}
-                material={neon}
+                material={neon2}
               />
 
               <mesh
@@ -178,7 +187,8 @@ const trailColor = useMemo(() => {
                 castShadow
                 receiveShadow
                 geometry={nodes.meshId5_name_3.geometry}
-                material={materials.mirror}
+                material={neon3}
+                // material={materials.mirror}
               />
 
               <mesh
@@ -186,13 +196,13 @@ const trailColor = useMemo(() => {
                 receiveShadow
                 geometry={nodes.meshId5_name_4.geometry}
                 // material={neonActive ? neon : materials["red light"]}
-                material={neon}
+                material={neon2}
               />
 
               <Trail
                 width={8} // Width of the line
                 // color={new THREE.Color("#40ccef").multiplyScalar(3.5)}
-                color={trailColor}
+                color={trailColor2}
                 length={1.5} // Length of the line
                 decay={0.2} // How fast the line fades away
                 local={false} // Wether to use the target's world or local positions
@@ -206,7 +216,7 @@ const trailColor = useMemo(() => {
                   receiveShadow
                   geometry={nodes.meshId5_name_5.geometry}
                   // material={neonActive ? neon : materials.blue}
-                  material={neon}
+                  material={neon2}
                 />
               </Trail>
               {/* Left trail */}
@@ -222,7 +232,7 @@ const trailColor = useMemo(() => {
                 <mesh
                   geometry={nodes.meshId5_name_5.geometry}
                   // material={neonActive ? neon : materials.blue}
-                  material={neon}
+                  material={neon3}
                 />
               </Trail>
 
