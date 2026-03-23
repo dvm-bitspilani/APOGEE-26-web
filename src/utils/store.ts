@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import { create } from "zustand";
-import Modal from '../pages/city/components/Modal/Modal';
+// import { introAnimSheet } from '../pages/city/components/ScrollSync/ScrollSync';
 type IntroState = {
   introDone: boolean;
   setIntroDone: (done: boolean) => void;
@@ -72,7 +72,7 @@ export const useTheatreCameraStore = create<TheatreCameraStore>((set) => ({
   setTheatreCamera: (camera) => set({ theatreCamera: camera }),
 }))
 
-export type Section = ["home", "about", "contact", "comingSoon", "transition"][number];
+export type Section = ["home", "about", "contact", "transition"][number];
 
 type CurrentSectionStore = {
   currentSection: Section;
@@ -96,17 +96,49 @@ export const useScrollLockStore = create<ScrollLockStore>((set) => ({
   unlock: () => set({ locked: false }),
 }));
 
-type Modal = {
+type ModalStore = {
   isModalOpen: boolean;
   openModal: () => void;
   closeModal: () => void;
 }
 
-export const useModalStore = create<Modal>((set) => ({
+export const useModalStore = create<ModalStore>((set) => ({
   isModalOpen: false,
   openModal: () => set({ isModalOpen: true }),
   closeModal: () => set({ isModalOpen: false }),
 }));
+
+type PreloaderStateStore = {
+  showPreloader: boolean;
+  setShowPreloader: (state: boolean) => void;
+}
+
+export const usePreloaderStateStore = create<PreloaderStateStore>((set) => ({
+  showPreloader: true,
+  setShowPreloader: (state) => set({ showPreloader: state }),
+}))
+
+type Sheet = "Intro Sequence" | "Cyber City";
+type ActiveSheetStore = {
+  activeSheet: Sheet;
+  setActiveSheet: (sheet: Sheet) => void;
+}
+export const useActiveSheetStore = create<ActiveSheetStore>((set) => ({
+  activeSheet: "Intro Sequence",
+  setActiveSheet: (sheet) => set({ activeSheet: sheet }),
+}))
+
+// affects functioning in useFrame in navViewSeitching.tsx' custom hooks
+type NavState = "off" | "opening" | "closing"
+type NavStateStore = {
+  navState: NavState;
+  setNavState: (open: NavState) => void;
+}
+
+export const useNavStateStore = create<NavStateStore>((set) => ({
+  navState: "off",
+  setNavState: (state) => set({ navState: state }),
+}))
 
 export interface Event {
   id: number;
