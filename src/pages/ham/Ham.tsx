@@ -300,8 +300,8 @@ export default function Ham() {
                 gradientTransform="matrix(135.231 -458.637 410.007 120.942 30.6524 441.535)"
                 gradientUnits="userSpaceOnUse"
               >
-                <stop offset="0.389672" stop-color="#EEE100" />
-                <stop offset="0.950824" stop-color="#B301FF" />
+                <stop offset="0.389672" stopColor="#EEE100" />
+                <stop offset="0.950824" stopColor="#B301FF" />
               </radialGradient>
             </defs>
           </svg>
