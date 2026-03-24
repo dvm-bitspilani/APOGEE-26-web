@@ -7,11 +7,12 @@ import { useInfernusStore } from "../../../../utils/store";
 import { useNeonMaterial } from "../../hooks/useNeonMaterial";
 // import { useKonami } from "../../hooks/useKonami"; // ⭐ add this
 import { editable as e } from "@theatre/r3f";
-import { useFrame } from "@react-three/fiber";
+// import { useFrame } from "@react-three/fiber";
 // import StudioEnvironment from "../StudioEnviroment";
-import { useState, useMemo } from "react";
+import {  useMemo } from "react";
 import { useNeonMaterial2 } from "../../hooks/useNeonMaterial2";
 import { useNeonMaterial3 } from "../../hooks/useNeonMaterial3";
+import { useTrailIntensity } from "../../hooks/useTrailIntensity";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -36,8 +37,8 @@ type GLTFResult = GLTF & {
 
 export default function Infernus() {
 
-const [trailIntensity, setTrailIntensity] = useState(3.5);
-const smoothedIntensity = useRef(3.5);
+// const [trailIntensity, setTrailIntensity] = useState(3.5);
+// const smoothedIntensity = useRef(3.5);
   // 🔑 konami state
   // const neonActive = useKonami();
 
@@ -45,11 +46,12 @@ const smoothedIntensity = useRef(3.5);
   const neon = useNeonMaterial(true);
   const neon2 = useNeonMaterial2(true);
   const neon3 = useNeonMaterial3(true);
-  neon3.uniforms.uRoughness.value = 0.2; // glossy
 // try 0.6–0.8 for rough
 
   const infernusRef = useRef<THREE.Group>(null!);
   const setInfernus = useInfernusStore((s) => s.setInfernus);
+
+const trailIntensity = useTrailIntensity(infernusRef);
 
   useEffect(() => {
     if (infernusRef.current) {
@@ -89,8 +91,8 @@ const smoothedIntensity = useRef(3.5);
   const leftTrailRef = useRef<THREE.Object3D>(null!);
   const rightTrailRef = useRef<THREE.Object3D>(null!);
 
-const prevPos = useRef(new THREE.Vector3());
-const speed = useRef(0);
+// const prevPos = useRef(new THREE.Vector3());
+// const speed = useRef(0);
 
 // useFrame(() => {
 //   if (!infernusRef.current) return;
@@ -105,6 +107,7 @@ const speed = useRef(0);
 
 //   setTrailIntensity(intensity);
 // });
+/*
 useFrame((_, delta) => {
   if (!infernusRef.current) return;
 
@@ -123,18 +126,19 @@ useFrame((_, delta) => {
     5 * delta // smoothing factor (tweak this)
   );
 
-  setTrailIntensity(smoothedIntensity.current);
-  const lerpFactor =
-  targetIntensity > smoothedIntensity.current
-    ? 8 * delta   // speed up quickly
-    : 2 * delta;  // slow fade out
+//   const lerpFactor =
+//   targetIntensity > smoothedIntensity.current
+//     ? 8 * delta   // speed up quickly
+//     : 2 * delta;  // slow fade out
 
-smoothedIntensity.current = THREE.MathUtils.lerp(
-  smoothedIntensity.current,
-  targetIntensity,
-  lerpFactor
-);
-});
+// smoothedIntensity.current = THREE.MathUtils.lerp(
+//   smoothedIntensity.current,
+//   targetIntensity,
+//   lerpFactor
+// );
+
+  setTrailIntensity(smoothedIntensity.current);
+});*/
 const trailColor = useMemo(() => {
   return new THREE.Color("#40ccef").multiplyScalar(trailIntensity);
 }, [trailIntensity]);
@@ -252,6 +256,7 @@ const trailColor2 = useMemo(() => {
                   material={neon}
                 />
               </Trail>
+              
             </group>
 
             <mesh
