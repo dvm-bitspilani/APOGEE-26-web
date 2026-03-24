@@ -31,20 +31,22 @@ const Countdown = ({ targetDate }: CountdownProps) => {
     return () => clearInterval(timer);
   }, [targetDate]);
 
+  const padZero = (num: number) => num.toString().padStart(2, "0");
+
   return (
     <div className={styles.countdown}>
       <div className={styles.item}>
-        <span className={styles.value}>{timeLeft.days}</span>
+        <span className={styles.value}>{padZero(timeLeft.days)}</span>
         <span className={styles.label}>Days</span>
       </div>
 
       <div className={styles.item}>
-        <span className={styles.value}>{timeLeft.hours}</span>
+        <span className={styles.value}>{padZero(timeLeft.hours)}</span>
         <span className={styles.label}>Hours</span>
       </div>
 
       <div className={styles.item}>
-        <span className={styles.value}>{timeLeft.minutes}</span>
+        <span className={styles.value}>{padZero(timeLeft.minutes)}</span>
         <span className={styles.label}>Minutes</span>
       </div>
 

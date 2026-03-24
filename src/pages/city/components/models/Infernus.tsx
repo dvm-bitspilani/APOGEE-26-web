@@ -3,7 +3,7 @@ import { Float, Trail, useGLTF } from "@react-three/drei";
 import { type GLTF } from "three-stdlib";
 import { useEffect, useRef } from "react";
 import infernusModel from "../../../../assets/3d/landing/car5.0-transformed.glb";
-import { useInfernusStore } from "../../../../utils/store";
+import { useInfernusStore, useNavStateStore } from "../../../../utils/store";
 import { useNeonMaterial } from "../../hooks/useNeonMaterial";
 import { useKonami } from "../../hooks/useKonami"; // ⭐ add this
 import { editable as e } from "@theatre/r3f";
@@ -77,11 +77,12 @@ export default function Infernus() {
 
   const leftTrailRef = useRef<THREE.Object3D>(null!);
   const rightTrailRef = useRef<THREE.Object3D>(null!);
+  const navState = useNavStateStore((s) => s.navState);
   return (
     <>
       {/* <StudioEnvironment /> */}
       <group >
-        <Float floatIntensity={0.3} rotationIntensity={0.005} speed={5}>
+        <Float floatIntensity={0.3} rotationIntensity={0.005} speed={navState === "off" ?  5 : 0}>
           <e.group
             name="infernus"
             theatreKey="UltaRickshaw"
