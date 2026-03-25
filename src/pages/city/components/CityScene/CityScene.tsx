@@ -11,6 +11,7 @@ import { editable as e } from "@theatre/r3f"
 // import InteractivePlane from "../InteractivePlane/InteractivePlane";
 // import InteractivePlane2 from "../InteractivePlane/InteractivePlane2";
 import CountdownPlane from "../Countdown/CountdownPlane";
+import Globe from "../models/Globe";
 // import CountdownPlane from "../Countdown/CountdownPlane";
 // import MatrixRain from "../MatrixRain";
 import FinalProdConfig from "../config/FinalProdConfig";
@@ -67,9 +68,17 @@ export default function CityScene({ }: any) {
             <Environment files="/environment/city.hdr" environmentIntensity={0.1} />
             <Constellation />
 
-        {/* <e.group theatreKey="GLobe">
-            <Globe/>
-            </e.group> */}
+            <e.group position={[-0.9, -1, -8]} scale={1.25} rotation={[0, 0, 0.22]}
+              theatreKey="Globe"
+              // onClick={(e: any) => {
+              //   e.stopPropagation();
+              //   window.open("https://bits-apogee.org", "_blank");
+              // }}
+              // onPointerOver={() => (document.body.style.cursor = "pointer")}
+              // onPointerOut={() => (document.body.style.cursor = "default")}
+            >
+              <Globe />
+            </e.group>
           </group>
         </group>
 
@@ -92,7 +101,7 @@ export default function CityScene({ }: any) {
         </ScrollControls>
         {/* <InteractivePlane /> */}
         {/* <InteractivePlane2/> */}
-        <CountdownPlane/>
+        <CountdownPlane />
       </group>
     </>
   );
