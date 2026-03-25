@@ -69,9 +69,9 @@ export default function City() {
   return (
     <>
       <ReactHelmet
-        title="APOGEE 2026 | Home"
+        title="APOGEE '26 | Under the Steel Skies | Home"
         description="Explore the city of APOGEE 2026."
-        url="https://www.bits-apogee.org/city"
+        url="https://www.bits-apogee.org/"
       />
       {showPreloader && (
         <div

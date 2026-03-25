@@ -5,9 +5,14 @@ import { useEffect, useRef } from "react";
 import infernusModel from "../../../../assets/3d/landing/car5.0-transformed.glb";
 import { useInfernusStore, useNavStateStore } from "../../../../utils/store";
 import { useNeonMaterial } from "../../hooks/useNeonMaterial";
-import { useKonami } from "../../hooks/useKonami"; // ⭐ add this
+// import { useKonami } from "../../hooks/useKonami"; // ⭐ add this
 import { editable as e } from "@theatre/r3f";
+// import { useFrame } from "@react-three/fiber";
 // import StudioEnvironment from "../StudioEnviroment";
+import {  useMemo } from "react";
+import { useNeonMaterial2 } from "../../hooks/useNeonMaterial2";
+import { useNeonMaterial3 } from "../../hooks/useNeonMaterial3";
+import { useTrailIntensity } from "../../hooks/useTrailIntensity";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -31,14 +36,22 @@ type GLTFResult = GLTF & {
 };
 
 export default function Infernus() {
+
+// const [trailIntensity, setTrailIntensity] = useState(3.5);
+// const smoothedIntensity = useRef(3.5);
   // 🔑 konami state
-  const neonActive = useKonami();
+  // const neonActive = useKonami();
 
   // neon shader depends on konami
-  const neon = useNeonMaterial(neonActive);
+  const neon = useNeonMaterial(true);
+  const neon2 = useNeonMaterial2(true);
+  const neon3 = useNeonMaterial3(true);
+// try 0.6–0.8 for rough
 
   const infernusRef = useRef<THREE.Group>(null!);
   const setInfernus = useInfernusStore((s) => s.setInfernus);
+
+const trailIntensity = useTrailIntensity(infernusRef);
 
   useEffect(() => {
     if (infernusRef.current) {
@@ -78,6 +91,62 @@ export default function Infernus() {
   const leftTrailRef = useRef<THREE.Object3D>(null!);
   const rightTrailRef = useRef<THREE.Object3D>(null!);
   const navState = useNavStateStore((s) => s.navState);
+
+// const prevPos = useRef(new THREE.Vector3());
+// const speed = useRef(0);
+
+// useFrame(() => {
+//   if (!infernusRef.current) return;
+
+//   const currentPos = new THREE.Vector3();
+//   infernusRef.current.getWorldPosition(currentPos);
+
+//   speed.current = currentPos.distanceTo(prevPos.current);
+//   prevPos.current.copy(currentPos);
+
+//   const intensity = THREE.MathUtils.clamp(speed.current *1, 1, 200);
+
+//   setTrailIntensity(intensity);
+// });
+/*
+useFrame((_, delta) => {
+  if (!infernusRef.current) return;
+
+  const currentPos = new THREE.Vector3();
+  infernusRef.current.getWorldPosition(currentPos);
+
+  speed.current = currentPos.distanceTo(prevPos.current);
+  prevPos.current.copy(currentPos);
+
+  const targetIntensity = THREE.MathUtils.clamp(speed.current * 0.5, 3.5, 200);
+
+  // 🔥 smooth transition (THIS is the key)
+  smoothedIntensity.current = THREE.MathUtils.lerp(
+    smoothedIntensity.current,
+    targetIntensity,
+    5 * delta // smoothing factor (tweak this)
+  );
+
+//   const lerpFactor =
+//   targetIntensity > smoothedIntensity.current
+//     ? 8 * delta   // speed up quickly
+//     : 2 * delta;  // slow fade out
+
+// smoothedIntensity.current = THREE.MathUtils.lerp(
+//   smoothedIntensity.current,
+//   targetIntensity,
+//   lerpFactor
+// );
+
+  setTrailIntensity(smoothedIntensity.current);
+});*/
+const trailColor = useMemo(() => {
+  return new THREE.Color("#40ccef").multiplyScalar(trailIntensity);
+}, [trailIntensity]);
+const trailColor2 = useMemo(() => {
+  return new THREE.Color("#f3ff0f").multiplyScalar(trailIntensity);
+}, [trailIntensity]);
+
   return (
     <>
       {/* <StudioEnvironment /> */}
@@ -101,7 +170,8 @@ export default function Infernus() {
                 castShadow
                 receiveShadow
                 geometry={nodes.meshId5_name.geometry}
-                material={neonActive ? neon : materials["white light"]}
+                // material={neonActive ? neon : materials["white light"]}
+                material={neon2}
               />
 
               <mesh
@@ -122,19 +192,22 @@ export default function Infernus() {
                 castShadow
                 receiveShadow
                 geometry={nodes.meshId5_name_3.geometry}
-                material={materials.mirror}
+                material={neon3}
+                // material={materials.mirror}
               />
 
               <mesh
                 castShadow
                 receiveShadow
                 geometry={nodes.meshId5_name_4.geometry}
-                material={neonActive ? neon : materials["red light"]}
+                // material={neonActive ? neon : materials["red light"]}
+                material={neon2}
               />
 
               <Trail
                 width={8} // Width of the line
-                color={new THREE.Color("#40ccef").multiplyScalar(3.5)}
+                // color={new THREE.Color("#40ccef").multiplyScalar(3.5)}
+                color={trailColor2}
                 length={1.5} // Length of the line
                 decay={0.2} // How fast the line fades away
                 local={false} // Wether to use the target's world or local positions
@@ -147,7 +220,8 @@ export default function Infernus() {
                   castShadow
                   receiveShadow
                   geometry={nodes.meshId5_name_5.geometry}
-                  material={neonActive ? neon : materials.blue}
+                  // material={neonActive ? neon : materials.blue}
+                  material={neon2}
                 />
               </Trail>
               {/* Left trail */}
@@ -157,11 +231,13 @@ export default function Infernus() {
                 decay={0.2}
                 target={leftTrailRef}
                 local={false}
-                color={new THREE.Color("#40ccef").multiplyScalar(3.5)}
+                // color={new THREE.Color("#40ccef").multiplyScalar(3.5)}
+                color={trailColor}
               >
                 <mesh
                   geometry={nodes.meshId5_name_5.geometry}
-                  material={neonActive ? neon : materials.blue}
+                  // material={neonActive ? neon : materials.blue}
+                  material={neon3}
                 />
               </Trail>
 
@@ -172,13 +248,16 @@ export default function Infernus() {
                 decay={0.2}
                 target={rightTrailRef}
                 local={false}
-                color={new THREE.Color("#40ccef").multiplyScalar(3.5)}
+                // color={new THREE.Color("#40ccef").multiplyScalar(3.5)}
+                color={trailColor}
               >
                 <mesh
                   geometry={nodes.meshId5_name_5.geometry}
-                  material={neonActive ? neon : materials.blue}
+                  // material={neonActive ? neon : materials.blue}
+                  material={neon}
                 />
               </Trail>
+              
             </group>
 
             <mesh

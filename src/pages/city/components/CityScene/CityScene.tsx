@@ -52,7 +52,7 @@ export default function CityScene({ }: any) {
       {/* <MatrixRain/> */}
       <SceneDevOrProd />
       <SceneLights />
-      <fogExp2 attach="fog" args={[color, 0.0018]} />
+      <fogExp2 attach="fog" args={[color, 0.001]} />
       {/* <fog attach="fog" args={[color, 50, 2000]} />   */}
       {/* <TheatreCameraLeva  /> //?: Not yet working... */}
       <color attach="background" args={[color]} />
@@ -63,8 +63,12 @@ export default function CityScene({ }: any) {
           <group ref={cityRef}>
             {/* <axesHelper args={[200]} /> */}
             {/* <CityGrid /> */}
-            <Environment preset="city" environmentIntensity={0.1} />
+            <Environment files="/environment/city.hdr" environmentIntensity={0.1} />
             <Constellation />
+
+        {/* <e.group theatreKey="GLobe">
+            <Globe/>
+            </e.group> */}
           </group>
         </group>
 

@@ -168,17 +168,23 @@ export default function Preloader() {
   }, [sceneProgress]);
 
   useEffect(() => {
-    if (
-      animDone &&
-      sceneLoaded &&
-      launchRef.current &&
-      animDone2 &&
-      assetloaded
-    ) {
-      launchRef.current.style.opacity = "1";
-      launchRef.current.style.pointerEvents = "auto";
-    }
-  }, [animDone, sceneLoaded, animDone2, assetloaded]);
+  const isReady = animDone && sceneLoaded && animDone2 && assetloaded;
+
+  if (isReady && launchRef.current) {
+    launchRef.current.style.opacity = "1";
+    launchRef.current.style.pointerEvents = "auto";
+    // Added Enter button functionality after everything is done
+    const handleGlobalKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Enter") {
+        onLaunch();
+      }
+    };
+    window.addEventListener("keydown", handleGlobalKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleGlobalKeyDown);
+    };
+  }
+}, [animDone, sceneLoaded, animDone2, assetloaded]);
 
   useEffect(() => {
     if (!textRef.current) return;
@@ -587,7 +593,7 @@ export default function Preloader() {
       {
         loaderState == 3 &&
         <div className={styles.logoContainer}>
-          <img src="apogee26logo.png" className={styles.apogeeLogo} ref={apogeeLogoRef} />
+          <img src="apogee26logo.png" className={styles.apogeeLogo} ref={apogeeLogoRef} alt="ApogeeLogo"/>
         </div>
       }
     </div >

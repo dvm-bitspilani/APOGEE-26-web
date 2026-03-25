@@ -34,7 +34,7 @@ export default function ScrollSync() {
 
   useEffect(() => {
     scrollSheet.sequence.position = 0;
-    introAnimSheet.sequence.play({iterationCount: 1}).then(() => {
+    introAnimSheet.sequence.play({ iterationCount: 1 }).then(() => {
       if (!showPreloader) {
         introOverRef.current = true;
         setActiveSheet("Cyber City");
@@ -42,9 +42,32 @@ export default function ScrollSync() {
     });
     if (showPreloader) introAnimSheet.sequence.pause();
   }, [showPreloader])
+  // Added to control front movement by up arrow and back mpovement by down arrow
+  useEffect(() => {
+    const scrollContainer = scroll.el;
+    const scrollStep = 400;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (isModalOpen || showPreloader) return;
 
+      if (event.key === "ArrowUp") {
+        scrollContainer.scrollBy({
+          top: scrollStep,
+          behavior: "smooth",
+        });
+      } else if (event.key === "ArrowDown") {
+        scrollContainer.scrollBy({
+          top: -scrollStep,
+          behavior: "smooth",
+        });
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [scroll.el, isModalOpen, showPreloader]);
   useFrame(() => {
-    if (!introOverRef.current || navState !== "off") return;})
+    if (!introOverRef.current || navState !== "off") return;
+  })
 
   useFrame((_state) => {
     // ----- Scroll velocity for motion blur -----
