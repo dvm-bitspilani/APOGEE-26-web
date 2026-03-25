@@ -166,7 +166,7 @@ export default function City() {
       }
       {/* <NavBar /> */}
       {/* <NavBar /> */}
-      <RegisterButton />
+      {activeSheet === "Cyber City"  && <RegisterButton />}
       <Modal />
     </>
   );
