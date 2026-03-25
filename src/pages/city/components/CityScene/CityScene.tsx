@@ -15,6 +15,7 @@ import Globe from "../models/Globe";
 // import CountdownPlane from "../Countdown/CountdownPlane";
 // import MatrixRain from "../MatrixRain";
 import FinalProdConfig from "../config/FinalProdConfig";
+ import { Perf } from "r3f-perf";
 
 export default function CityScene({ }: any) {
   const cityRef = useRef<THREE.Group>(null!);
@@ -52,6 +53,7 @@ export default function CityScene({ }: any) {
   return (
     <>
       {/* <SceneDevOrProd /> */}
+       {import.meta.env.DEV && <Perf position="bottom-left" />}
       <FinalProdConfig/>
       <SceneLights />
       <fogExp2 attach="fog" args={[color, 0.001]} />
