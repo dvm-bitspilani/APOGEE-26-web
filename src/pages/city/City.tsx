@@ -12,7 +12,7 @@ import { SheetProvider } from "@theatre/r3f";
 import { useEffect } from "react";
 import debugFunctions from "../../utils/debug";
 import * as THREE from "three";
-import { useActiveSheetStore, usePreloaderStateStore, useSceneLoadedStore } from "../../utils/store";
+import { useActiveSheetStore, useNavStateStore, usePreloaderStateStore, useSceneLoadedStore } from "../../utils/store";
 // import NavBar from "../components/NavBar/NavBar";
 import RegisterButton from "../components/RegisterButton/RegisterButton";
 import Preloader from "../preloader/Preloader";
@@ -50,7 +50,7 @@ export default function City() {
 
   const showPreloader = usePreloaderStateStore((s) => s.showPreloader);
   const activeSheet = useActiveSheetStore((s) => s.activeSheet);
-  // const setNavState = useNavStateStore((s) => s.setNavState);
+  const setNavState = useNavStateStore((s) => s.setNavState);
   // const setShowPreloader = usePreloaderStateStore((s) => s.setShowPreloader);
 
   useEffect(() => {
@@ -58,10 +58,12 @@ export default function City() {
     console.log("Playing sheet animation");
     project.ready.then(() => {
       project.sheet("Cyber City").sequence.play({ iterationCount: Infinity });
-      // window.addEventListener("keydown", (e) => {
-      //   if (e.key === "k") setNavState("opening");
-      //   if (e.key === "l") setNavState("closing");
-      // })
+      window.addEventListener("keydown", (e) => {
+        if (import.meta.env.DEV) {
+          if (e.key === "k") setNavState("opening");
+          if (e.key === "l") setNavState("closing");
+        }
+      })
       // remove Infinity if you want play only once
     });
   }, [activeSheet]);
@@ -69,7 +71,7 @@ export default function City() {
   return (
     <>
       <ReactHelmet
-        title="APOGEE '26 | Under the Steel Skies | Home"
+        title="APOGEE '26 | Under Steel Skies | Home"
         description="Explore the city of APOGEE 2026."
         url="https://www.bits-apogee.org/"
       />

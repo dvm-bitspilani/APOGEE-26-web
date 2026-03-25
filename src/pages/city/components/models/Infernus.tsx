@@ -3,13 +3,13 @@ import { Float, Trail, useGLTF } from "@react-three/drei";
 import { type GLTF } from "three-stdlib";
 import { useEffect, useRef } from "react";
 import infernusModel from "../../../../assets/3d/landing/car5.0-transformed.glb";
-import { useInfernusStore } from "../../../../utils/store";
+import { useInfernusStore, useNavStateStore } from "../../../../utils/store";
 import { useNeonMaterial } from "../../hooks/useNeonMaterial";
 // import { useKonami } from "../../hooks/useKonami"; // ⭐ add this
 import { editable as e } from "@theatre/r3f";
 // import { useFrame } from "@react-three/fiber";
 // import StudioEnvironment from "../StudioEnviroment";
-import {  useMemo } from "react";
+import { useMemo } from "react";
 import { useNeonMaterial2 } from "../../hooks/useNeonMaterial2";
 import { useNeonMaterial3 } from "../../hooks/useNeonMaterial3";
 import { useTrailIntensity } from "../../hooks/useTrailIntensity";
@@ -37,8 +37,8 @@ type GLTFResult = GLTF & {
 
 export default function Infernus() {
 
-// const [trailIntensity, setTrailIntensity] = useState(3.5);
-// const smoothedIntensity = useRef(3.5);
+  // const [trailIntensity, setTrailIntensity] = useState(3.5);
+  // const smoothedIntensity = useRef(3.5);
   // 🔑 konami state
   // const neonActive = useKonami();
 
@@ -46,27 +46,19 @@ export default function Infernus() {
   const neon = useNeonMaterial(true);
   const neon2 = useNeonMaterial2(true);
   const neon3 = useNeonMaterial3(true);
-// try 0.6–0.8 for rough
+  // try 0.6–0.8 for rough
 
   const infernusRef = useRef<THREE.Group>(null!);
   const setInfernus = useInfernusStore((s) => s.setInfernus);
 
-const trailIntensity = useTrailIntensity(infernusRef);
+  const trailIntensity = useTrailIntensity(infernusRef);
 
   useEffect(() => {
     if (infernusRef.current) {
       setInfernus(infernusRef.current);
     }
   }, [setInfernus]);
-  //   useEffect(() => {
-  //   const car = infernusRef.current
-  //   if (!car) return
-
-  //   car.traverse((child: THREE.Object3D) => {
-  //     child.layers.enable(1) // put entire car on layer 1
-  //   })
-  // }, [])
-  const { nodes, materials } = useGLTF(infernusModel,true) as unknown as GLTFResult;
+  const { nodes, materials } = useGLTF(infernusModel, true) as unknown as GLTFResult;
 
   // useLayoutEffect(() => {
   //   const car = infernusRef.current;
@@ -90,6 +82,7 @@ const trailIntensity = useTrailIntensity(infernusRef);
 
   const leftTrailRef = useRef<THREE.Object3D>(null!);
   const rightTrailRef = useRef<THREE.Object3D>(null!);
+  const navState = useNavStateStore((s) => s.navState);
 
 // const prevPos = useRef(new THREE.Vector3());
 // const speed = useRef(0);
@@ -150,7 +143,7 @@ const trailColor2 = useMemo(() => {
     <>
       {/* <StudioEnvironment /> */}
       <group >
-        <Float floatIntensity={0.3} rotationIntensity={0.005} speed={5}>
+        <Float floatIntensity={0.3} rotationIntensity={0.005} speed={navState === "off" ?  5 : 0}>
           <e.group
             name="infernus"
             theatreKey="UltaRickshaw"
@@ -192,7 +185,7 @@ const trailColor2 = useMemo(() => {
                 receiveShadow
                 geometry={nodes.meshId5_name_3.geometry}
                 material={neon3}
-                // material={materials.mirror}
+              // material={materials.mirror}
               />
 
               <mesh
@@ -256,7 +249,7 @@ const trailColor2 = useMemo(() => {
                   material={neon}
                 />
               </Trail>
-              
+
             </group>
 
             <mesh

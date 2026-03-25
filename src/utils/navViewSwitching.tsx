@@ -8,7 +8,7 @@ import type { ISheetObject } from "@theatre/core";
 export const EnterDashboard = () => {
     const navState = useNavStateStore((s) => s.navState)
     const infernus = useInfernusStore((s) => s.infernus)
-    const camera = useTheatreCameraStore((s) => s.theatreCamera)
+    const camera = useTheatreCameraStore((s) => s.theatreCamera)?.parent
     const carQuaternion = useMemo(() => new THREE.Quaternion(), [])
     const targetPos = useMemo(() => new THREE.Vector3(), [])
     const targetRot = useMemo(() => new THREE.Euler(), [])
@@ -20,8 +20,8 @@ export const EnterDashboard = () => {
 
         carQuaternion.setFromEuler(targetRot)
 
-        camera.position.lerp(targetPos, 0.05)
-        camera.quaternion.slerp(carQuaternion, 0.05)
+        camera.position.lerp(targetPos, 0.1)
+        camera.quaternion.slerp(carQuaternion, 0.1)
     })
 
     return null;
@@ -31,7 +31,7 @@ export const ExitDashboard = () => {
     const navState = useNavStateStore((s) => s.navState)
     const setNavState = useNavStateStore((s) => s.setNavState)
     const cameraObjRef = useRef<ISheetObject<typeof cameraConfig> | null>(null);
-    const camera = useTheatreCameraStore((s) => s.theatreCamera)
+    const camera = useTheatreCameraStore((s) => s.theatreCamera)?.parent;
     const targetPos = useMemo(() => new THREE.Vector3(), [])
     const targetRot = useMemo(() => new THREE.Euler(), [])
     const CamQuaternion = useMemo(() => new THREE.Quaternion(), [])

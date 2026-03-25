@@ -2,7 +2,7 @@ import { useScroll } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { getProject } from "@theatre/core";
 
-import state from "../../state-prodigal.json";
+import state from "../../state-undone.json";
 import { useActiveSheetStore, useModalStore, useNavStateStore, usePreloaderStateStore } from "../../../../utils/store";
 import { type Section, useCurrentSectionStore } from "../../../../utils/store";
 import { useEffect, useRef } from "react";
@@ -14,11 +14,11 @@ export const introAnimSheet = project.sheet("Intro Sequence");
 
 const stopPoints: Record<Section, [number, number]> = {
   "home": [0, 0.25],
-  "about": [6.2, 7.8],
-  "contact": [14.8, 16],
+  "about": [6.2, 9.8],
+  "contact": [16.8, 19],
   "transition": [-1, -1],
 }
-const sequenceLength = 15.5;
+const sequenceLength = 19;
 
 export default function ScrollSync() {
   const scroll = useScroll();
