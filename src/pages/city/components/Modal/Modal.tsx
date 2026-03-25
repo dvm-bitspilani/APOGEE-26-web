@@ -1,56 +1,46 @@
 import {
-    useCurrentSectionStore,
-    useModalStore,
-    useScrollLockStore,
+	useCurrentSectionStore,
+	useModalStore,
 } from "../../../../utils/store";
 // import ComingSoon from "../../../comingSoon/ComingSoon";
 import ContactUs from "../../../contactUs/ContactUs";
 import AboutUs from "../../../aboutUs/AboutUs";
+import ModalUI from "./ModalUI";
+import { useEffect, useState } from "react";
 import styles from "./Modal.module.scss";
+import NavButton from "../../../registration/components/navButton/NavButton";
 
-export default function Modal({ children }: { children?: React.ReactNode }) {
-    const closeModal = useModalStore((s) => s.closeModal);
-    const isModalOpen = useModalStore((s) => s.isModalOpen);
-    const scrollUnlock = useScrollLockStore((s) => s.unlock);
-    const currentsection = useCurrentSectionStore((s) => s.currentSection);
-    const proceed = () => {
-        closeModal();
-        scrollUnlock();
-    };
+export default function Modal() {
+	const isModalOpen = useModalStore((s) => s.isModalOpen);
+	const currentsection = useCurrentSectionStore((s) => s.currentSection);
+	const [isModalActive, setIsModalActive] = useState(true);
 
-    return (
-        <div
-            className={`${styles.modalOverlay} ${!isModalOpen ? styles.hiddenModal : styles.showModal}`}
-        >
-            <div className={styles.modal} onClick={proceed}>
-                {/* {currentsection === "about" ? (<ComingSoon />) :
-                    currentsection === "contact" ? (
-                        //   <div className={styles.contactus}>
-                        <ContactUs />
-                        //   </div>
-                    ) : (
-                        // Otherwise render children if passed
-                        children
-                    )} */}
-                {/* <div className={styles.contactus}>
-                <ContactUs/>
-                </div> */}
-                <div
-                    className={styles.modalContent}
-                    onClick={(e) => e.stopPropagation()}
-                >
-                    {currentsection === "about" ? (
-                        <AboutUs />
-                    ) : currentsection === "contact" ? (
-                        <ContactUs />
-                        // ) : currentsection === "contact" ? (
-                        //   <ComingSoon />
-                    ) : (
-                        children
-                    )}
-                </div>
-                <div className={styles.backgroundlite} />
-            </div>
-        </div>
-    );
+	useEffect(() => {
+		setIsModalActive(true); //? So that next time user lands on a modal section, it activates the modal (uhh, I messed up the naming ik)
+		console.log("Current section changed to", currentsection, "isModalOpen:", isModalOpen);
+	}, [currentsection])
+
+	return (
+		<>
+			<ModalUI isModalActive={isModalActive && isModalOpen} setModalActive={setIsModalActive}>
+				{
+					currentsection === "about" ? (
+						<AboutUs />
+					) : currentsection === "contact" ? (
+						<ContactUs />
+					) : null
+				}
+			</ModalUI>
+			<NavButton 
+				outerClass={(!isModalOpen || isModalActive) ? styles.buttonClosed : styles.openModalButtonOuter} 
+				innerClass={styles.openModalButtonInner} 
+				onClick={() => setIsModalActive(true)}>
+				{
+					currentsection === "about" ? ("Open About")
+						: currentsection === "contact" ? ("Open Contact")
+							: "Open Modal"
+				}
+			</NavButton>
+		</>
+	);
 }

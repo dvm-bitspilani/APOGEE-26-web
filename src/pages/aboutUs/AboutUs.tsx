@@ -106,7 +106,7 @@ export default function AboutUs() {
               <img
                 src="/svg/aboutUs/icon-ring.svg"
                 className={styles.ring}
-                alt=""
+                alt="Rings"
               />
               <img
                 src="/svg/aboutUs/youtube.svg"
@@ -123,7 +123,7 @@ export default function AboutUs() {
               <img
                 src="/svg/aboutUs/icon-ring.svg"
                 className={styles.ring}
-                alt=""
+                alt="Rings"
               />
               <img
                 src="/svg/aboutUs/instagram.svg"
@@ -140,7 +140,7 @@ export default function AboutUs() {
               <img
                 src="/svg/aboutUs/icon-ring.svg"
                 className={styles.ring}
-                alt=""
+                alt="Rings"
               />
               <img
                 src="/svg/aboutUs/linkedin.svg"
@@ -157,7 +157,7 @@ export default function AboutUs() {
               <img
                 src="/svg/aboutUs/icon-ring.svg"
                 className={styles.ring}
-                alt=""
+                alt="Rings"
               />
               <img
                 src="/svg/aboutUs/twitter.svg"

@@ -1,3 +1,5 @@
+@use "../../../../assets/global.scss" as *;
+
 .modalOverlay {
     position: fixed;
     top: 0;
@@ -23,6 +25,10 @@
         height: 0;
         transition: height 0.6s ease, visibility 0.6s ease;
 
+        @media (max-width: 750px) {
+            width: 90vw;
+        }
+
         .modalContent {
             position: relative;
             z-index: 1;
@@ -35,6 +41,51 @@
             clip-path: polygon(5.5% 2%, 18.25% 2%, 19.5% 0.25%, 80.5% 0.25%, 81.75% 2%, 94.5% 2%, 99.5% 9.5%, 99.5% 90.5%, 94.75% 98%, 5.5% 98%, 0.5% 90%, 0.5% 10%);
             backdrop-filter: blur(6px);
             background-color: #00f0fd0e;
+
+            .modalCloseButton {
+                position: absolute;
+                top: 3rem;
+                right: 3rem;
+                width: 2rem;
+                height: 2rem;
+                cursor: pointer;
+                z-index: 10000;
+                pointer-events: all;
+
+                @media (max-width: 750px) {
+                    top: 1.8rem;
+                    right: 1.8rem;
+                }
+
+                &:before,
+                &:after {
+                    content: "";
+                    position: absolute;
+                    left: 50%;
+                    top: 50%;
+                    width: 100%;
+                    height: 2px;
+                    background-color: #00f0fd;
+                    transform-origin: center;
+                    transition: background-color 0.3s ease;
+                }
+
+                &:before {
+                    transform: translate(-50%, -50%) rotate(45deg);
+                }
+
+                &:after {
+                    transform: translate(-50%, -50%) rotate(-45deg);
+                }
+
+                &:hover {
+
+                    &:before,
+                    &:after {
+                        background-color: #00f2fdcc;
+                    }
+                }
+            }
         }
 
         // background-image: url("/img/landing/border.png");
@@ -46,10 +97,21 @@
             transform: translate(-50%, -50%);
             width: 100%;
             height: 100%;
-            z-index: 1000;
-            background-image: url("/img/landing/border.png");
+            z-index: 10; //? I did this???!
+            background-image: url("/img/landing/modal_border.png");
             background-size: 100% 100%;
+            pointer-events: none;
             filter: drop-shadow(0 0 3px #00f2fd);
+        }
+
+        @media (aspect-ratio < 1) {
+            .backgroundlite {
+                background-image: url("/img/landing/modal_border_mobile.png");
+            }
+
+            .modalContent {
+                clip-path: polygon(1% 94.75%, 1% 81.75%, 0% 80.25%, 0% 19%, 1% 17.5%, 1% 6%, 9.5% 1%, 91% 1%, 99% 6%, 99% 94.5%, 90.75% 99%, 9% 99%);
+            }
         }
     }
 
@@ -58,7 +120,9 @@
         transition: background-color 0.3s 0.3s;
         background-color: #00000000;
 
-        .modal {height: 0px;}
+        .modal {
+            height: 0px;
+        }
     }
 
     &.showModal {
@@ -66,6 +130,44 @@
         transition: background-color 0.3s;
         background-color: #00000080;
 
-        .modal {height: 85vh;}
+        .modal {
+            height: 85vh;
+        }
     }
+}
+
+.openModalButtonOuter {
+    opacity: 1;
+    position: fixed;
+    bottom: 3rem;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 1000;
+    filter: hue-rotate(90deg) drop-shadow(0 0 3px cyan);
+    transition: filter 0.3s ease, opacity 0.3s 0.3s ease;
+    user-select: none;
+
+    &:hover {
+        filter: hue-rotate(90deg) drop-shadow(0 0 5px cyan);
+    }
+
+    .openModalButtonInner {
+        position: relative;
+        z-index: 10;
+        font-family: $font-cyberpunks;
+        color: #000000;
+        text-align: center;
+
+    }
+
+    @media (max-width: 750px) {
+        font-size: 1.2rem;
+        bottom: 5rem;
+    }
+}
+
+.buttonClosed {
+    opacity: 0;
 }
