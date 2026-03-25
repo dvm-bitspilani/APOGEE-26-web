@@ -7,6 +7,7 @@ import type { ISheetObject } from "@theatre/core";
 
 export const EnterDashboard = () => {
     const navState = useNavStateStore((s) => s.navState)
+    const setNavState = useNavStateStore((s) => s.setNavState)
     const infernus = useInfernusStore((s) => s.infernus)
     const camera = useTheatreCameraStore((s) => s.theatreCamera)?.parent
     const carQuaternion = useMemo(() => new THREE.Quaternion(), [])
@@ -20,8 +21,14 @@ export const EnterDashboard = () => {
 
         carQuaternion.setFromEuler(targetRot)
 
-        camera.position.lerp(targetPos, 0.1)
-        camera.quaternion.slerp(carQuaternion, 0.1)
+        camera.position.lerp(targetPos, 0.15)
+        camera.quaternion.slerp(carQuaternion, 0.15)
+
+        if (camera.position.distanceTo(targetPos) < 0.01) {
+            camera.position.copy(targetPos)
+            camera.rotation.copy(targetRot)
+            setNavState("open")
+        }
     })
 
     return null;
@@ -60,8 +67,8 @@ export const ExitDashboard = () => {
 
         CamQuaternion.setFromEuler(targetRot);
 
-        camera.position.lerp(targetPos, 0.05);
-        camera.quaternion.slerp(CamQuaternion, 0.05)
+        camera.position.lerp(targetPos, 0.1);
+        camera.quaternion.slerp(CamQuaternion, 0.1)
 
         if (camera.position.distanceTo(targetPos) < 0.1) {
             camera.position.copy(targetPos)

@@ -3,11 +3,14 @@ import styles from "./Ham.module.scss";
 import bg from "/img/ham/bg.png";
 import dott from "/img/ham/dott.png";
 import textBottom from "/img/ham/textBottom.png";
+import luv from "/img/ham/luv_dvm.png";
 import gsap from "gsap";
+import HamMobile from "./HamMobile";
 
 export default function Ham() {
   const [speedText, setspeedText] = useState(0);
   const [totalPurple, settotalPurple] = useState(0);
+  const [width, setwidth] = useState(window.innerWidth < 650 ? false : true);
   const [totalSpeedPurple, settotalSpeedPurple] = useState(6);
   const hoverTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const speedDashTicksRef = useRef<HTMLDivElement[]>([]);
@@ -15,6 +18,19 @@ export default function Ham() {
   const radialCircle1Ref = useRef<HTMLDivElement>(null);
   const radialCircle2Ref = useRef<HTMLDivElement>(null);
   const speedDial = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    addEventListener("resize", () => {
+      if (window.innerWidth < 650) {
+        setwidth(false);
+      } else {
+        setwidth(true);
+      }
+      return () => {
+        removeEventListener("resize", () => {});
+      };
+    });
+  }, []);
 
   const onUpdate = (duration: number, speedTicks?: number) => {
     const rot = gsap.getProperty(
@@ -62,7 +78,6 @@ export default function Ham() {
     });
     settotalSpeedPurple(toPurple);
   };
-
 
   const nameTags = [
     {
@@ -226,7 +241,7 @@ export default function Ham() {
       .to(radialCircle2Ref.current, { rotation: 180, duration: 0.5 });
   }, []);
 
-  return (
+  return width ? (
     <div className={styles.container}>
       <img src={bg} alt="Ham" className={styles.bgImg} />
       <div className={styles.speedometer}>
@@ -339,6 +354,11 @@ export default function Ham() {
           </div>
         ))}
       </div>
+      <div className={styles.luvBar}>
+        Made with <img src={luv} alt="love" /> by DVM
+      </div>
     </div>
+  ) : (
+    <HamMobile />
   );
 }

@@ -456,6 +456,23 @@
       }
     }
   }
+  .luvBar {
+    position: absolute;
+    bottom: 2%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    font-family: $font-bitsumishi;
+    color: #fff;
+    font-size: 2vw;
+    filter: drop-shadow(3px 1px 16.8px #1C0998);
+    padding: 0.5vw 1vw;
+    z-index: 10;
+    img{
+      width: 3vw;
+      height: 3vw;
+      transform: translateY(30%);
+    }
+  }
 }
 
 @media screen and (max-width: 650px) {
