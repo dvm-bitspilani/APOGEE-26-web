@@ -4,13 +4,13 @@ import EventsItem from "./eventsItem/EventsItem";
 import { DUMMY_EVENTS } from "./eventsData";
 
 const EVENT_CATEGORIES = [
-    { name: "CODING", image: "/img/events/coding.png" },
+    { name: "CODING", image: "/img/events/coding1.png" },
     { name: "KERNEL", image: "/img/events/kernel.png" },
-    { name: "EXHIBITIONS", image: "/img/events/exhibition.png" },
+    { name: "EXHIBITIONS", image: "/img/events/esummit1.png" },
     { name: "COMPETITIONS", image: "/img/events/caseComp.png" },
     { name: "ART & CINEMA", image: "/img/events/art.png" },
-    { name: "MISCELLANEOUS", image: "/img/events/misc.jpeg" },
-    { name: "E SUMMIT", image: "/img/events/esummit.png" },
+    { name: "MISCELLANEOUS", image: "/img/events/misc1.png" },
+    { name: "E SUMMIT", image: "/img/events/exhibition1.png" },
     { name: "GAMES & QUIZ", image: "/img/events/quiz.png" },
 ];
 
