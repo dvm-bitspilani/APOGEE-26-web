@@ -35,7 +35,7 @@ const InteractivePlane = () => {
     <mesh
       // theatreKey="CountdownPlane"
       ref={ref}
-      position={[-15,25,173]}
+      position={[-15, 25, 173]}
       rotation={[2.6, 0, Math.PI]}
       scale={[1.6, 1.5, 1.5]}
     >
@@ -57,7 +57,7 @@ const InteractivePlane = () => {
           transition: "opacity 0.2s ease",
           pointerEvents: isInRange ? "auto" : "none",
           overflow: "hidden",
-          width:"1000px",
+          width: "1000px",
           // background: "transparent",
           background: "transparent"
         }}
@@ -66,8 +66,8 @@ const InteractivePlane = () => {
           onWheel={(e) => e.stopPropagation()}
           onPointerDown={(e) => e.stopPropagation()}
           style={{
-  width: "1000px",
-  height: "400px",
+            width: "1000px",
+            height: "400px",
             overflow: "hidden",
             background: "transparent",
             display: "flex",
@@ -79,7 +79,7 @@ const InteractivePlane = () => {
             overscrollBehavior: "none",
           }}
         >          {/* ✅ Countdown */}
-          <Countdown targetDate="2026-04-11T00:00:00+05:30" />
+          <Countdown targetDate="2026-04-10T19:00:00+05:30" />
         </div>
       </Html>
     </mesh>
