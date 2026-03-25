@@ -1,8 +1,8 @@
 @use "../../../assets/global.scss" as *;
 
 .registerButton {
-    right: 0;
-    bottom: 0;
+    right: 4%;
+    bottom: 2%;
     position: fixed;
     margin-bottom: 1.5rem;
     cursor: pointer;
@@ -15,10 +15,10 @@
     }
     
     .registerIcon {
-        width: 12rem;
-        fill: $cyber-yellow;
-        transition: filter 0.2s ease;
-        filter: brightness(30);
+        width: 16vw;
+        // fill: $cyber-yellow;
+        transition: scale 0.2s ease;
+        // filter: brightness(30);
     }
 
     .registerText {
@@ -36,7 +36,8 @@
 
     &:hover {
         .registerIcon {
-            filter: brightness(2);
+            // filter: brightness(2);
+            scale: 1.05;
         }
 
         .registerText {

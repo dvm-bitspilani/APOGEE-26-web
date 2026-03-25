@@ -1,0 +1,45 @@
+@use "/src/assets/global.scss" as *;
+
+.container {
+  height: 100vh;
+  width: 100vw;
+  .bgImg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+  }
+  .mainBox {
+    position: absolute;
+    bottom: 14%;
+    left: 55%;
+    transform: translate(-50%, 0%);
+    // width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 6vw;
+  }
+  .luvBar {
+    width: max-content;
+    position: absolute;
+    bottom: 2%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    font-family: $font-bitsumishi;
+    color: #fff;
+    font-size: 7vw;
+    filter: drop-shadow(3px 1px 16.8px #1C0998);
+    padding: 0.5vw 1vw;
+    z-index: 10;
+    img{
+      width: 8.5vw;
+      height: 8.5vw;
+      transform: translateY(30%);
+    }
+  }
+}

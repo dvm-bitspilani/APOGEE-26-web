@@ -8,10 +8,10 @@ export default function RegisterButton() {
         <div className={styles.registerButton} onClick={() => navigate("/registration")}>
             <img
                 className={styles.registerIcon}
-                src="/img/landing/reg_portal.png"
+                src="/img/landing/reg_btn.png"
                 alt="Register Image"
             />
-            <div className={styles.registerText}>Register</div>
+            {/* <div className={styles.registerText}>Register</div> */}
         </div>
     );
 }
