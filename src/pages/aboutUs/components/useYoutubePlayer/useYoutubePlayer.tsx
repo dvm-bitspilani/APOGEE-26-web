@@ -5,10 +5,15 @@ declare global {
     YT?: any;
     onYouTubeIframeAPIReady?: () => void;
   }
+
+  interface YTVideo {
+    title: string;
+    videoId: string;
+  }
 }
 
 export const useYouTubePlayer = (
-  videos: string[],
+  videos: YTVideo[],
   containerRef: React.RefObject<HTMLDivElement | null>,
 ) => {
   const playerRef = useRef<any>(null);
@@ -32,7 +37,7 @@ export const useYouTubePlayer = (
       player = new window.YT.Player(containerRef.current, {
         height: "100%",
         width: "100%",
-        videoId: videos[0],
+        videoId: videos[0].videoId,
         playerVars: { autoplay: 0, controls: 0, rel: 0, modestbranding: 1 },
         events: {
           onReady: (e: any) => {
@@ -83,7 +88,7 @@ export const useYouTubePlayer = (
   const loadByIndex = (i: number) => {
     if (!playerRef.current) return;
     setCurrent(i);
-    playerRef.current.loadVideoById(videos[i]);
+    playerRef.current.loadVideoById(videos[i].videoId);
   };
 
   const nextVideo = () => loadByIndex((current + 1) % videos.length);

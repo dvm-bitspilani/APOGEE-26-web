@@ -2,11 +2,16 @@ import { useRef } from "react";
 import styles from "./AboutUs.module.scss";
 import { useYouTubePlayer } from "./components/useYoutubePlayer/useYoutubePlayer";
 
-const videos = ["ezk2p6KSj8M"];
+const videos: YTVideo[] = [
+  {
+    title: "[APOGEE Theme Reveal]",
+    videoId: "ezk2p6KSj8M"
+  }
+];
 
 export default function AboutUs() {
   const playerContainerRef = useRef<HTMLDivElement | null>(null);
-  const { isPlaying, nextVideo, prevVideo, togglePlayPause } = useYouTubePlayer(
+  const { isPlaying, nextVideo, prevVideo, togglePlayPause, current } = useYouTubePlayer(
     videos,
     playerContainerRef,
   );
@@ -36,7 +41,7 @@ export default function AboutUs() {
       <div className={styles.contentWrapper}>
         <div className={styles.leftColumn}>
           <h1 className={styles.title}>ABOUT US</h1>
-          <h2 className={styles.subtitle}>[APOGEE CURTAIN RAISER]</h2>
+          <h2 className={styles.subtitle}>{videos[current].title}</h2>
           <div className={`${styles.textBlock} ${styles.desktopText}`}>
             {textualContent}
           </div>
@@ -45,7 +50,11 @@ export default function AboutUs() {
 
         <div className={styles.rightColumn}>
           <div className={styles.videoContainer}>
-            <div className={styles.videoPlaceholder}>
+            <div
+              className={`${styles.videoPlaceholder} ${
+                isPlaying ? styles.playing : ""
+              }`}
+            >
               {/* Render the container for YouTube Player */}
               <div
                 className={styles.playerWrapper}
@@ -69,27 +78,30 @@ export default function AboutUs() {
                 ></div>
               )}
             </div>
-
-            <div className={styles.arrowsContainer}>
-              <img
-                src="/svg/aboutUs/arrow.svg"
-                className={`${styles.arrow} ${styles.leftArrow}`}
-                alt="Previous"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  prevVideo();
-                }}
-              />
-              <img
-                src="/svg/aboutUs/arrow.svg"
-                className={`${styles.arrow} ${styles.rightArrow}`}
-                alt="Next"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  nextVideo();
-                }}
-              />
-            </div>
+            
+            {
+              videos.length > 1 &&
+              <div className={styles.arrowsContainer}>
+                <img
+                  src="/svg/aboutUs/arrow.svg"
+                  className={`${styles.arrow} ${styles.leftArrow}`}
+                  alt="Previous"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    prevVideo();
+                  }}
+                />
+                <img
+                  src="/svg/aboutUs/arrow.svg"
+                  className={`${styles.arrow} ${styles.rightArrow}`}
+                  alt="Next"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    nextVideo();
+                  }}
+                />
+              </div>
+            }
           </div>
 
           <div className={styles.socials} onClick={(e) => e.stopPropagation()}>

@@ -94,12 +94,12 @@ function HelmetModel() {
         )
     })
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        const handleResize = () => window.location.reload()
-        window.addEventListener("resize", handleResize)
-        return () => window.removeEventListener("resize", handleResize)
-    }, [])
+    //     const handleResize = () => window.location.reload()
+    //     window.addEventListener("resize", handleResize)
+    //     return () => window.removeEventListener("resize", handleResize)
+    // }, [])
 
     return (
         <group ref={followRef}>
@@ -132,7 +132,7 @@ export default function Helmet() {
         <Canvas
             camera={{ position: [0, 0, 5], fov: 60 }}
             style={{
-                width: "100%",
+                width: "calc(100vw - 72vh)",
                 height: "100%",
                 zIndex: 100,
                 backgroundColor: "transparent",

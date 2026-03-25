@@ -3,7 +3,7 @@ import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { useCityStore, usePivotStore } from "../../../../utils/store";
 import ScrollSync from "../ScrollSync/ScrollSync";
-import SceneDevOrProd from "./SceneDevorProd";
+// import SceneDevOrProd from "./SceneDevorProd";
 import SceneLights from "./SceneLights";
 import Constellation from "../Constellation3";
 import CamCar from "../groups/CamCar";
@@ -13,6 +13,7 @@ import { editable as e } from "@theatre/r3f"
 import CountdownPlane from "../Countdown/CountdownPlane";
 // import CountdownPlane from "../Countdown/CountdownPlane";
 // import MatrixRain from "../MatrixRain";
+import FinalProdConfig from "../config/FinalProdConfig";
 
 export default function CityScene({ }: any) {
   const cityRef = useRef<THREE.Group>(null!);
@@ -49,8 +50,8 @@ export default function CityScene({ }: any) {
   const color = "#3e93be";
   return (
     <>
-      {/* <MatrixRain/> */}
-      <SceneDevOrProd />
+      {/* <SceneDevOrProd /> */}
+      <FinalProdConfig/>
       <SceneLights />
       <fogExp2 attach="fog" args={[color, 0.001]} />
       {/* <fog attach="fog" args={[color, 50, 2000]} />   */}
