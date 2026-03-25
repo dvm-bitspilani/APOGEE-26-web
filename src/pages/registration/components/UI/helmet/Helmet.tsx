@@ -2,25 +2,25 @@ import helmet from "../../../../../assets/3d/registration/helmet6.glb"
 import helmetNeck from "../../../../../assets/3d/registration/body1.glb"
 import { useGLTF } from "@react-three/drei"
 import { Canvas, useFrame, useThree } from "@react-three/fiber"
-import { useControls } from "leva"
-import { useRef, useEffect } from "react"
+// import { useControls } from "leva"
+import { useRef } from "react"
 import * as THREE from "three"
 import { Center } from "@react-three/drei"
 import { Environment } from "@react-three/drei"
 
 function HelmetNeck() {
     const { scene } = useGLTF(helmetNeck);
-    const colour = useControls({
+    const colour = {
         color1: "#ffffffff",
         color2: "#6bffe5",
         color3: "#6bffe5",
         color4: "#f9ff00",
-        intensity1: { value: 2, min: 0, max: 10, step: 0.1 },
-        intensity2: { value: 2, min: 0, max: 10, step: 0.1 },
-        intensity3: { value: 2, min: 0, max: 10, step: 0.1 },
-        intensity4: { value: 2, min: 0, max: 10, step: 0.1 },
+        intensity1: 2,
+        intensity2: 2,
+        intensity3: 2,
+        intensity4: 2,
         // intensity: { value: 2, min: 0, max: 10, step: 0.1 },
-    })
+    }
 
 
     return (

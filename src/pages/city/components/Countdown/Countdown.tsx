@@ -41,8 +41,18 @@ const Countdown = ({ targetDate }: CountdownProps) => {
       </div>
 
       <div className={styles.item}>
+        <span className={styles.value}>:</span>
+        <span className={styles.label} style={{opacity: 0}}>f</span>
+      </div>
+
+      <div className={styles.item}>
         <span className={styles.value}>{padZero(timeLeft.hours)}</span>
         <span className={styles.label}>Hours</span>
+      </div>
+
+      <div className={styles.item}>
+        <span className={styles.value}>:</span>
+        <span className={styles.label} style={{opacity: 0}}>f</span>
       </div>
 
       <div className={styles.item}>

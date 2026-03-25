@@ -7,6 +7,7 @@ import City from "./pages/city/City";
 // import Events from "./pages/events/Events";
 // import ContactUs from "./pages/contactUs/ContactUs";
 // import Preloader from "./pages/preloader/Preloader";
+import Ham from "./pages/ham/Ham";
 type page = {
   url: string;
 
@@ -43,6 +44,11 @@ const pages: page[] = [
   //   url: "/loader",
 
   //   component: Preloader,
+  // },
+  // {
+  //   url: "/ham",
+
+  //   component: Ham,
   // },
 ];
 

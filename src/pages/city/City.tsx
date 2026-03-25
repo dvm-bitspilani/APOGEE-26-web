@@ -59,8 +59,10 @@ export default function City() {
     project.ready.then(() => {
       project.sheet("Cyber City").sequence.play({ iterationCount: Infinity });
       window.addEventListener("keydown", (e) => {
-        if (e.key === "k") setNavState("opening");
-        if (e.key === "l") setNavState("closing");
+        if (import.meta.env.DEV) {
+          if (e.key === "k") setNavState("opening");
+          if (e.key === "l") setNavState("closing");
+        }
       })
       // remove Infinity if you want play only once
     });
