@@ -248,7 +248,7 @@ function Registration() {
   return (
     <>
       <ReactHelmet
-        title="APOGEE '26 | Under the Steel Skies | Registration"
+        title="APOGEE '26 | Under Steel Skies | Registration"
         description="Register for APOGEE 2026."
         url="https://www.bits-apogee.org/registration"
       />
