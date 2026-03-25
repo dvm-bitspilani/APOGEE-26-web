@@ -13,7 +13,7 @@ export default function ReactHelmet({
   description,
   url,
   image = "https://www.bits-apogee.org/logo2.png",
-  siteName = "APOGEE 2026 | Under the Steel Skies",
+  siteName = "APOGEE 2026 | Under Steel Skies",
 }: SEOProps) {
   return (
     <Helmet>
