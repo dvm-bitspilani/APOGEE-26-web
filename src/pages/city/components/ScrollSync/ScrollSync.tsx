@@ -2,7 +2,7 @@ import { useScroll } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { getProject } from "@theatre/core";
 
-import state from "../../state-prodigal.json";
+import state from "../../state-undone.json";
 import { useActiveSheetStore, useModalStore, useNavStateStore, usePreloaderStateStore } from "../../../../utils/store";
 import { type Section, useCurrentSectionStore } from "../../../../utils/store";
 import { useEffect, useRef } from "react";
@@ -14,11 +14,11 @@ export const introAnimSheet = project.sheet("Intro Sequence");
 
 const stopPoints: Record<Section, [number, number]> = {
   "home": [0, 0.25],
-  "about": [6.2, 7.8],
-  "contact": [14.8, 16],
+  "about": [6.2, 9.8],
+  "contact": [16.8, 19],
   "transition": [-1, -1],
 }
-const sequenceLength = 15.5;
+const sequenceLength = 19;
 
 export default function ScrollSync() {
   const scroll = useScroll();
@@ -34,7 +34,7 @@ export default function ScrollSync() {
 
   useEffect(() => {
     scrollSheet.sequence.position = 0;
-    introAnimSheet.sequence.play({iterationCount: 1}).then(() => {
+    introAnimSheet.sequence.play({ iterationCount: 1 }).then(() => {
       if (!showPreloader) {
         introOverRef.current = true;
         setActiveSheet("Cyber City");
@@ -42,9 +42,32 @@ export default function ScrollSync() {
     });
     if (showPreloader) introAnimSheet.sequence.pause();
   }, [showPreloader])
+  // Added to control front movement by up arrow and back mpovement by down arrow
+  useEffect(() => {
+    const scrollContainer = scroll.el;
+    const scrollStep = 400;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (isModalOpen || showPreloader) return;
 
+      if (event.key === "ArrowUp") {
+        scrollContainer.scrollBy({
+          top: scrollStep,
+          behavior: "smooth",
+        });
+      } else if (event.key === "ArrowDown") {
+        scrollContainer.scrollBy({
+          top: -scrollStep,
+          behavior: "smooth",
+        });
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [scroll.el, isModalOpen, showPreloader]);
   useFrame(() => {
-    if (!introOverRef.current || navState !== "off") return;})
+    if (!introOverRef.current || navState !== "off") return;
+  })
 
   useFrame((_state) => {
     // ----- Scroll velocity for motion blur -----
@@ -77,7 +100,7 @@ export default function ScrollSync() {
         scrollSheet.sequence.position >= stopPoints[currentSection]?.[1]
       ) {
         closeModal();
-        setCurrentSection("transition");
+        setTimeout(() => setCurrentSection("transition"), 500)
       }
     }
 

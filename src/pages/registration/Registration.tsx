@@ -56,6 +56,7 @@ function Registration() {
     images.forEach((src) => {
       const img = new Image();
       img.src = src;
+      img.alt="Assets"
       img.onload = () => {
         console.log(`>> IMAGE LOADED: ${src}`);
         imagesLoaded++;
@@ -247,7 +248,7 @@ function Registration() {
   return (
     <>
       <ReactHelmet
-        title="APOGEE 2026 | Registration"
+        title="APOGEE '26 | Under the Steel Skies | Registration"
         description="Register for APOGEE 2026."
         url="https://www.bits-apogee.org/registration"
       />
