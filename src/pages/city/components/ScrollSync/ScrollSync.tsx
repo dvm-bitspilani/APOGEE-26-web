@@ -84,8 +84,8 @@ export default function ScrollSync() {
       for (const path in stopPoints) {
         if (
           path !== currentSection &&
-          scrollSheet.sequence.position > stopPoints[path as Section]?.[0] &&
-          scrollSheet.sequence.position < stopPoints[path as Section]?.[1]
+          scrollSheet.sequence.position >= stopPoints[path as Section]?.[0] &&
+          scrollSheet.sequence.position <= stopPoints[path as Section]?.[1]
         ) {
           if (path !== "home") {
             openModal();
