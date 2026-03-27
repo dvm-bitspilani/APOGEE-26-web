@@ -11,6 +11,7 @@ import { editable as e } from "@theatre/r3f";
 // import StudioEnvironment from "../StudioEnviroment";
 import { useMemo } from "react";
 import { useTrailIntensity } from "../../hooks/useTrailIntensity";
+import { useCyberpunkFogMaterial } from "../../hooks/useCyberPunkFogMaterial";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -44,9 +45,9 @@ export default function Infernus() {
   // const neon = useNeonMaterial(true);
   // const neon2 = useNeonMaterial2(true);
   // const neon3 = useNeonMaterial3(true);
-  const neon = useNeonMaterial(true, [0, 1, 0.8], 1);   // cyan
-const neon2 = useNeonMaterial(true, [1, 0.5, 0], 1.5);    // red
-const neon3 = useNeonMaterial(true, [1, 0.5, 0], 1.25);  // purple
+  const neon = useNeonMaterial(true, [0, 1, 0.8], 1);  
+const neon2 = useNeonMaterial(true, [1, 0.5, 0], 1.5);    
+const neon3 = useNeonMaterial(true, [1, 0.5, 0], 1.25);  
   // try 0.6–0.8 for rough
 
   const infernusRef = useRef<THREE.Group>(null!);
@@ -149,6 +150,7 @@ const trailColor = useMemo(() => {
 const trailColor2 = useMemo(() => {
   return new THREE.Color("#f3ff0f").multiplyScalar(trailIntensity);
 }, [trailIntensity]);
+const mat = useCyberpunkFogMaterial();
 
   return (
     <>
@@ -181,7 +183,7 @@ const trailColor2 = useMemo(() => {
                 castShadow
                 receiveShadow
                 geometry={nodes.meshId5_name_1.geometry}
-                material={materials.ex}
+                material={mat}
               />
 
               <mesh
