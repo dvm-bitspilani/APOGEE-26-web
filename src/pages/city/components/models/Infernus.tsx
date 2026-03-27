@@ -12,6 +12,7 @@ import { editable as e } from "@theatre/r3f";
 import { useMemo } from "react";
 import { useTrailIntensity } from "../../hooks/useTrailIntensity";
 import { useCyberpunkFogMaterial } from "../../hooks/useCyberPunkFogMaterial";
+import { useHolographicMaterial } from "../../hooks/useHolographicMaterial";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -151,6 +152,7 @@ const trailColor2 = useMemo(() => {
   return new THREE.Color("#f3ff0f").multiplyScalar(trailIntensity);
 }, [trailIntensity]);
 const mat = useCyberpunkFogMaterial();
+// const mat = useHolographicMaterial(true, [0, 1, 0.8], 1);
 
   return (
     <>

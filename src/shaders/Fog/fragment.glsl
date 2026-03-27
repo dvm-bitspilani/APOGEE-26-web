@@ -96,7 +96,7 @@ fogFactor = clamp(fogFactor, 0.0, 1.0);
   // -------------------------
   // 🎯 Alpha
   // -------------------------
-  float alpha = smoke * fogFactor*0.5;
+  float alpha = smoke * fogFactor*0.9;
 
   // optional top fade (you had this originally)
   alpha *= smoothstep(1.0, 0.2, vUv.y);

@@ -13,6 +13,7 @@ export function useTrailIntensity(
 
   useFrame((_, delta) => {
     if (!ref.current) return;
+     delta = Math.min(delta, 0.05);
 
     const currentPos = new THREE.Vector3();
     ref.current.getWorldPosition(currentPos);
