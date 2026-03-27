@@ -16,6 +16,8 @@ import Globe from "../models/Globe";
 // import MatrixRain from "../MatrixRain";
 import FinalProdConfig from "../config/FinalProdConfig";
  import { Perf } from "r3f-perf";
+// import { useCyberpunkFogMaterial } from "../../hooks/useCyberPunkFogMaterial";
+import { Logo } from "../models/Logo";
 
 export default function CityScene({ }: any) {
   const cityRef = useRef<THREE.Group>(null!);
@@ -50,6 +52,7 @@ export default function CityScene({ }: any) {
   }, [setPivot]);
 
   const color = "#3e93be";
+  // const mat = useCyberpunkFogMaterial();
   return (
     <>
       {/* <SceneDevOrProd /> */}
@@ -80,6 +83,18 @@ export default function CityScene({ }: any) {
               // onPointerOut={() => (document.body.style.cursor = "default")}
             >
               <Globe />
+            </e.group>
+
+            <e.group position={[1.75, -0.5, 13]}  scale={[0.5, 0.5,1.25]}
+              theatreKey="Logo"
+              onClick={(e: any) => {
+                e.stopPropagation();
+                window.open("https://bits-dvm.org", "_blank");
+              }}
+              // onPointerOver={() => (document.body.style.cursor = "pointer")}
+              // onPointerOut={() => (document.body.style.cursor = "default")}
+            >
+              <Logo />
             </e.group>
           </group>
         </group>
