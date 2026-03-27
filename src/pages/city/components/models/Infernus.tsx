@@ -60,6 +60,16 @@ const neon3 = useNeonMaterial(true, [1, 0.5, 0], 1.25);  // purple
     }
   }, [setInfernus]);
   const { nodes, materials } = useGLTF(infernusModel, true) as unknown as GLTFResult;
+  useEffect(() => {
+  const unused = ["white light", "mirror", "red light", "blue"];
+
+  unused.forEach((key) => {
+    const mat = materials[key as keyof typeof materials];
+    if (mat) {
+      mat.dispose();
+    }
+  });
+}, [materials]);
 
   // useLayoutEffect(() => {
   //   const car = infernusRef.current;

@@ -96,8 +96,8 @@ export default function ScrollSync() {
       }
     } else {
       if (
-        scrollSheet.sequence.position <= stopPoints[currentSection]?.[0] ||
-        scrollSheet.sequence.position >= stopPoints[currentSection]?.[1]
+        scrollSheet.sequence.position < stopPoints[currentSection]?.[0] ||
+        scrollSheet.sequence.position > stopPoints[currentSection]?.[1]
       ) {
         closeModal();
         setTimeout(() => setCurrentSection("transition"), 500)
