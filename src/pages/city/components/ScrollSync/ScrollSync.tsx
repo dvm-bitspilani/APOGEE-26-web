@@ -2,7 +2,7 @@ import { useScroll } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { getProject } from "@theatre/core";
 
-import state from "../../state-undone.json";
+import state from "../../state-stray.json";
 import { useActiveSheetStore, useModalStore, useNavStateStore, usePreloaderStateStore } from "../../../../utils/store";
 import { type Section, useCurrentSectionStore } from "../../../../utils/store";
 import { useEffect, useRef } from "react";
@@ -96,8 +96,8 @@ export default function ScrollSync() {
       }
     } else {
       if (
-        scrollSheet.sequence.position <= stopPoints[currentSection]?.[0] ||
-        scrollSheet.sequence.position >= stopPoints[currentSection]?.[1]
+        scrollSheet.sequence.position < stopPoints[currentSection]?.[0] ||
+        scrollSheet.sequence.position > stopPoints[currentSection]?.[1]
       ) {
         closeModal();
         setTimeout(() => setCurrentSection("transition"), 500)

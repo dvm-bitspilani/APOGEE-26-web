@@ -70,7 +70,7 @@ export default function CityScene({ }: any) {
             <Environment files="/environment/city.hdr" environmentIntensity={0.1} />
             <Constellation />
 
-            <e.group position={[-0.9, -1, -8]} scale={1.25} rotation={[0, 0, 0.22]}
+            <e.group position={[-1.75, -1.8, -3]} scale={1.5} rotation={[0, 0, 0.22]}
               theatreKey="Globe"
               // onClick={(e: any) => {
               //   e.stopPropagation();

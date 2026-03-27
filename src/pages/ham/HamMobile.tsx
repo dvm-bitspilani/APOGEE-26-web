@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "./HamMobile.module.scss";
-import bg from "/img/ham/bg.png";
+// import bg from "/img/ham/bg.png";
 import luv from "/img/ham/luv_dvm.png";
 import textBottom from "/img/ham/textBottom.png";
 import gsap from "gsap";
@@ -201,7 +201,7 @@ export default function Ham() {
   return (
     <div className={styles.container}>
       <div className={styles.scanlineoverlay}></div>
-      <img src={bg} alt="Ham" className={styles.bgImg} />
+      {/* <img src={bg} alt="Ham" className={styles.bgImg} /> */}
       <div className={styles.innerCont} ref={mainSpeedRef}>
         <div className={styles.mainBox}>
           {nameTOBar.map((item, i) => (

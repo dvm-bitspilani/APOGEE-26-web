@@ -17,8 +17,10 @@ import { useActiveSheetStore, useNavStateStore, usePreloaderStateStore, useScene
 import RegisterButton from "../components/RegisterButton/RegisterButton";
 import Preloader from "../preloader/Preloader";
 import Modal from "./components/Modal/Modal";
+import Ham from '../ham/Ham';
 import { project } from "./components/ScrollSync/ScrollSync";
 import { EnterDashboard, ExitDashboard } from "../../utils/navViewSwitching";
+
 // import state from "./state-grace.json"
 // Set up loading progress tracking at module level (before useGLTF.preload() calls complete)
 THREE.DefaultLoadingManager.onProgress = (_url, loaded, total) => {
@@ -50,7 +52,9 @@ export default function City() {
 
   const showPreloader = usePreloaderStateStore((s) => s.showPreloader);
   const activeSheet = useActiveSheetStore((s) => s.activeSheet);
+  const navState = useNavStateStore((s) => s.navState);
   const setNavState = useNavStateStore((s) => s.setNavState);
+
   // const setShowPreloader = usePreloaderStateStore((s) => s.setShowPreloader);
 
   useEffect(() => {
@@ -166,7 +170,8 @@ export default function City() {
       }
       {/* <NavBar /> */}
       {/* <NavBar /> */}
-      <RegisterButton />
+      {activeSheet === "Cyber City"  && <RegisterButton />}
+      {navState === "open" && <Ham/>}
       <Modal />
     </>
   );
