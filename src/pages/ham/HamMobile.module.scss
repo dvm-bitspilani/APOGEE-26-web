@@ -12,33 +12,182 @@
     object-fit: cover;
     z-index: -1;
   }
-  .mainBox {
-    position: absolute;
-    bottom: 14%;
-    left: 55%;
-    transform: translate(-50%, 0%);
-    // width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    gap: 6vw;
+  .scanlineoverlay {
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+      to bottom,
+      transparent 0px,
+      transparent 3px,
+      rgba(0, 0, 0, 0.07) 3px,
+      rgba(0, 0, 0, 0.07) 4px
+    );
+    pointer-events: none;
+    z-index: 100000;
+  }
+  .innerCont {
+    height: 100vh;
+    width: 100vw;
+    .mainBox {
+      position: absolute;
+      bottom: 11%;
+      left: 55%;
+      transform: translate(-35%, 0%);
+      width: 64vw;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column-reverse;
+      gap: 4vh;
+      .box {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        transform: translateX(105%);
+        svg {
+          width: 100%;
+          height: auto;
+        }
+        span {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          font-family: $font-bitsumishi;
+          color: #4df4fc;
+          font-size: 6vw;
+          width: max-content;
+        }
+        img {
+          position: absolute;
+          bottom: -25%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 50vw;
+          height: 6vw;
+        }
+      }
+    }
+    .sideBox {
+      position: absolute;
+      bottom: 11%;
+      left: 7%;
+      width: 20vw;
+      height: 100%;
+      .lowerStyles {
+        position: absolute;
+        bottom: 0;
+        left: 30%;
+        width: 100%;
+        height: calc(83vw + 22vh);
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: flex-end;
+        align-items: left;
+        gap: 1vw;
+        .bar {
+          width: 60%;
+          height: 2vw;
+          background-color: #252727;
+          // background-color: #b301ff;
+          // box-shadow: 0px 0px 15px 0.5px #b301ff;
+        }
+        .whitebar {
+          width: 60%;
+          height: 0.7vw;
+          background-color: #ffffff;
+          position: absolute;
+          left: 0;
+          span {
+            position: absolute;
+            top: -2.5vw;
+            left: -6.5vw;
+            transform: translate(-50%, 0%);
+            font-family: $font-bitsumishi;
+            color: #fff;
+            font-size: 6vw;
+          }
+        }
+        .sideBar {
+          position: absolute;
+          right: 31%;
+          bottom: 0;
+          width: 0.7vw;
+          height: 100%;
+          // background-color: #b301ff;
+          background: linear-gradient(to top, #b301ff 50%, #252727 50%);
+          background-size: 100% 200%;
+          background-position: 0% 0%;
+        }
+        .sideBarGrey {
+          position: absolute;
+          right: 20%;
+          bottom: 0;
+          width: 10vw;
+          height: 94%;
+          background-color: transparent;
+          border: 0.4vw solid rgba(255, 255, 255, 0.5);
+          border-radius: 5px;
+          z-index: -1;
+          clip-path: polygon(100% 0%, 100% 100%, 80% 100%, 80% 0%);
+        }
+      }
+      .upperStyles {
+        position: absolute;
+        bottom: calc(83vw + 22vh);
+        left: 30%;
+        width: 100%;
+        height: 20vh;
+        .barsContainer {
+          position: absolute;
+          bottom: 0;
+          right: 30%;
+          width: 30%;
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-end;
+          align-items: left;
+          gap: 0.5vw;
+          rotate: 20deg;
+          .bar {
+            width: 100%;
+            height: 1vw;
+            background-color: #252727;
+            rotate: 20deg;
+          }
+        }
+        .angleBar {
+          position: absolute;
+          right: 31%;
+          bottom: 0;
+          width: 0.7vw;
+          height: 100%;
+          background: linear-gradient(to top, #b301ff 50%, #252727 50%);
+          background-size: 100% 200%;
+          background-position: 0% 0%;
+          transform: translateY(0.5px) rotate(20deg);
+          transform-origin: bottom center;
+        }
+      }
+    }
   }
   .luvBar {
     width: max-content;
     position: absolute;
-    bottom: 2%;
+    bottom: 3.5%;
     left: 50%;
     transform: translate(-50%, 0%);
     font-family: $font-bitsumishi;
     color: #fff;
-    font-size: 7vw;
-    filter: drop-shadow(3px 1px 16.8px #1C0998);
+    font-size: 4vw;
+    filter: drop-shadow(3px 1px 16.8px #1c0998);
     padding: 0.5vw 1vw;
     z-index: 10;
-    img{
-      width: 8.5vw;
-      height: 8.5vw;
+    img {
+      width: 5.5vw;
+      height: 5vw;
       transform: translateY(30%);
     }
   }
