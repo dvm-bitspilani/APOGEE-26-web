@@ -3,6 +3,7 @@ import  { useRef, type JSX } from 'react'
 import { Center, useGLTF } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
 import type { GLTF } from 'three-stdlib'
+// import { useCyberpunkFogMaterial } from '../../hooks/useCyberPunkFogMaterial'
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -17,6 +18,7 @@ type GLTFResult = GLTF & {
 
 export function Logo(props: JSX.IntrinsicElements['group']) {
   const { nodes, materials } = useGLTF('/models/dvmlogowide-v1.glb') as unknown as GLTFResult
+  // const mat = useCyberpunkFogMaterial()
 
   // 🔥 separate refs
   const mesh1Ref = useRef<THREE.Mesh>(null!)

@@ -4,7 +4,7 @@ varying vec2 vUv;
         uniform float uActive;
         uniform float uBaseIntensity;
         void main() {
-          float glow = sin(uTime * 2.0) * 0.5 + uBaseIntensity;
+          float glow = sin( 2.0) * 0.5 + uBaseIntensity;
           vec3 neon = uColor;
           vec3 base = vec3(0.02, 0.02, 0.03);
 

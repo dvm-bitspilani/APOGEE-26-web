@@ -4,32 +4,34 @@ import * as THREE from "three";
 import styles from "../InteractivePlane/InteractivePlane.module.scss";
 import { useRef, useState } from "react";
 import { useFrame } from "@react-three/fiber";
-import { useTheatreCameraStore } from "../../../../utils/store";
+import { useNavStateStore, useTheatreCameraStore } from "../../../../utils/store";
 import Countdown from "./Countdown"; // 👈 adjust path if needed
 
 // const EditableMesh = e.mesh;
-
 const InteractivePlane = () => {
   const ref = useRef<any>(null);
   const [isInRange, setInRange] = useState(false);
+
+const navState = useNavStateStore((s) => s.navState);
   const theatreCamera = useTheatreCameraStore((s) => s.theatreCamera);
 
   const camWorldPos = new THREE.Vector3();
   const meshWorldPos = new THREE.Vector3();
 
   useFrame(() => {
-    if (!ref.current || !theatreCamera) return;
+  if (!ref.current || !theatreCamera) return;
 
-    ref.current.getWorldPosition(meshWorldPos);
-    theatreCamera.getWorldPosition(camWorldPos);
+  ref.current.getWorldPosition(meshWorldPos);
+  theatreCamera.getWorldPosition(camWorldPos);
 
-    const distance = camWorldPos.distanceTo(meshWorldPos);
-    const range = distance <= 200;
+  const distance = camWorldPos.distanceTo(meshWorldPos);
 
-    if (range !== isInRange) {
-      setInRange(range);
-    }
-  });
+  const range = distance <= 200 && navState === "off";
+
+  if (range !== isInRange) {
+    setInRange(range);
+  }
+});
 
   return (
     <mesh
