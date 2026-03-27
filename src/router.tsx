@@ -4,8 +4,15 @@ import Registration from "./pages/registration/Registration";
 // import Instructions from "./pages/registration/components/Instructions";
 // import Instructions from "./pages/registration/components/detailsForm/DetailsForm"
 import City from "./pages/city/City";
+<<<<<<< HEAD
 // import Events from "./pages/events/Events";
 // import ContactUs from "./pages/contactUs/ContactUs";
+=======
+import Events from "./pages/events/Events";
+import Sponsors from "./pages/sponsors/Sponsors";
+import MediaPartners from "./pages/mediaPartners/MediaPartners";
+// import ContactUs from "./pages/contactUs/ContactUs"; 
+>>>>>>> 4b3d25f (sponsor and media)
 // import Preloader from "./pages/preloader/Preloader";
 // import Ham from "./pages/ham/Ham";
 type page = {
@@ -29,8 +36,23 @@ const pages: page[] = [
   // {
   //   url: "/events",
 
+<<<<<<< HEAD
   //   component: Events,
   // },
+=======
+    component: Events,
+  },
+  {
+    url: "/sponsors",
+
+    component: Sponsors,
+  },
+    {
+    url: "/mediaPartners",
+
+    component: MediaPartners,
+  },
+>>>>>>> 4b3d25f (sponsor and media)
   // {
   //   url: '/city',
   //   component: City,

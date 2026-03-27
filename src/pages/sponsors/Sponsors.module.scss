@@ -1,0 +1,251 @@
+@use "/src/assets/global.scss" as *;
+
+* {
+  box-sizing: border-box;
+  font-family: $font-cyberpunks;
+}
+
+.Wrapper {
+  min-height: 100vh;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  a {
+    text-decoration: none;
+  }
+
+  .backgroundImage {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100%;
+   
+
+    z-index: -1;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: left;
+      filter: brightness(30%);
+    }
+  }
+
+  .heading {
+    position: fixed;
+    top: 5%;
+    left: 5%;
+    z-index: 2;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: auto;
+
+    h1{
+      color:  #00ffff;
+      font-family: $font-glitch;
+      width: clamp(300px, 50vw, 800px);
+      height: 50%;
+      z-index: 19;
+      font-size: 3rem;
+    }
+
+
+  }
+
+  .sponsors {
+    margin-top: clamp(100px, 15vh, 160px);
+    padding: 10px 15px;
+
+    width: 100%;
+    max-width: 1100px;
+
+    height: calc(100vh - 140px);
+    overflow-y: auto;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    z-index: 2;
+    font-family: $font-cyberpunks;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .sponsors::-webkit-scrollbar {
+    display: none;
+  }
+
+  .titleSponsor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 30px;
+    padding: 30px; 
+
+
+    img {
+      width: clamp(220px, 70vw, 450px);
+      max-width: 100%;
+    }
+
+    .sponsName {
+      font-size: 28px;
+    }
+
+    .head {
+      font-size: 32px;
+    }
+
+    @media (max-width: 650px) {
+      .sponsName {
+        font-size: 24px;
+      }
+
+      .head {
+        font-size: 28px;
+      }
+    }
+
+    @media (max-width: 550px) {
+      gap: 10px;
+      padding: 20px;
+    }
+  }
+
+  .otherSponsors {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    width: 100%;
+    margin-top: 20px;
+
+    @media (max-width: 550px) {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+  }
+
+  .otherSponsor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0;
+    padding: 30px 15px;
+
+
+
+    img {
+      height: 100px;
+      max-width: 100%;
+      object-fit: contain;
+    }
+
+    .sponsName {
+      font-size: 22px;
+
+    }
+
+    .head {
+      font-size: 26px;
+      color: white;
+      text-align: center;
+      min-height: 60px;
+    }
+
+    @media (max-width: 650px) {
+      img {
+        height: 80px;
+      }
+
+      .sponsName {
+        font-size: 20px;
+      }
+
+      .head {
+        font-size: 22px;
+      }
+    }
+
+    @media (max-width: 550px) {
+      padding: 20px 10px;
+    }
+
+    @media (max-width: 400px) {
+      img {
+        width: 100%;
+      }
+    }
+  }
+
+  .sponsName {
+    color: #00f0ff;
+    font-family: $font-cyberpunks;
+    text-shadow: 0 0 2px #00f0ff;
+    letter-spacing: 7px;
+    font-weight: 600;
+    text-align: center;
+    margin-top: 8px;
+  }
+
+  .head {
+    color: white;
+    font-family: $font-jetBrainsBold;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  .scrollBarContainer {
+    height: 80vh;
+    width: 50px;
+    position: fixed;
+    right: 40px;
+    top: 10vh;
+
+    display: flex;
+    justify-content: center;
+
+    z-index: 3; 
+
+    @media (max-width: 1100px) {
+      display: none;
+    }
+  }
+
+  .scrollBar {
+    width: 4px;
+    height: 100%;
+    border-radius: 10px;
+    background: linear-gradient(180deg, #00f0ff );
+    box-shadow: 0 0 20px #00f0ff;
+  }
+
+  .scrollBarContainer img {
+    position: absolute;
+    top: 0;
+    height: 100px;
+    transform: translateY(-50%) ;
+    cursor: grab;
+    user-select: none;
+    
+  }
+
+  @media (max-width: 550px) {
+    .head {
+      font-size: 20px !important;
+    }
+
+    .sponsName {
+      font-size: 18px !important;
+    }
+  }
+}
