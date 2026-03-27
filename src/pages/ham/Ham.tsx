@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "./Ham.module.scss";
-import bg from "/img/ham/bg.png";
+// import bg from "/img/ham/bg.png";
 import dott from "/img/ham/dott.png";
 import textBottom from "/img/ham/textBottom.png";
 import luv from "/img/ham/luv_dvm.png";
@@ -243,7 +243,7 @@ export default function Ham() {
 
   return width ? (
     <div className={styles.container}>
-      <img src={bg} alt="Ham" className={styles.bgImg} />
+      {/* <img src={bg} alt="Ham" className={styles.bgImg} /> */}
       <div className={styles.speedometer}>
         {/* Inner dash dash lines jo multiple hai */}
         {Array.from({ length: 7 }).map((_, i) => (
