@@ -96,7 +96,7 @@ export default function Ham() {
             onUpdate: () => onUpdate(3, 3),
           });
           gsap.to(radialCircle1Ref.current, { rotation: -127, duration: 0.5 });
-          gsap.to(radialCircle2Ref.current, { rotation: 55, duration: 0.5 });
+          // gsap.to(radialCircle2Ref.current, { rotation: 55, duration: 0.5 });
           // bigDashTicksUpdate(3);
           // speedDashTicksUpdate(3);
         },
@@ -116,7 +116,7 @@ export default function Ham() {
             rotation: -145.5,
             duration: 0.5,
           });
-          gsap.to(radialCircle2Ref.current, { rotation: 36.5, duration: 0.5 });
+          // gsap.to(radialCircle2Ref.current, { rotation: 36.5, duration: 0.5 });
           // bigDashTicksUpdate(2);
           // speedDashTicksUpdate(2);
         },
@@ -133,7 +133,7 @@ export default function Ham() {
             onUpdate: () => onUpdate(1, 1),
           });
           gsap.to(radialCircle1Ref.current, { rotation: -164, duration: 0.5 });
-          gsap.to(radialCircle2Ref.current, { rotation: 18, duration: 0.5 });
+          // gsap.to(radialCircle2Ref.current, { rotation: 18, duration: 0.5 });
           // bigDashTicksUpdate(1);
           // speedDashTicksUpdate(1);
         },
@@ -150,7 +150,7 @@ export default function Ham() {
             onUpdate: () => onUpdate(7, 4),
           });
           gsap.to(radialCircle1Ref.current, { rotation: -55, duration: 0.5 });
-          gsap.to(radialCircle2Ref.current, { rotation: 126, duration: 0.5 });
+          // gsap.to(radialCircle2Ref.current, { rotation: 126, duration: 0.5 });
           // bigDashTicksUpdate(7);
           // speedDashTicksUpdate(4);
         },
@@ -167,7 +167,7 @@ export default function Ham() {
             onUpdate: () => onUpdate(8, 5),
           });
           gsap.to(radialCircle1Ref.current, { rotation: -36, duration: 0.5 });
-          gsap.to(radialCircle2Ref.current, { rotation: 145, duration: 0.5 });
+          // gsap.to(radialCircle2Ref.current, { rotation: 145, duration: 0.5 });
           // bigDashTicksUpdate(8);
           // speedDashTicksUpdate(5);
         },
@@ -184,7 +184,7 @@ export default function Ham() {
             onUpdate: () => onUpdate(9, 6),
           });
           gsap.to(radialCircle1Ref.current, { rotation: -18, duration: 0.5 });
-          gsap.to(radialCircle2Ref.current, { rotation: 161, duration: 0.5 });
+          // gsap.to(radialCircle2Ref.current, { rotation: 161, duration: 0.5 });
           // bigDashTicksUpdate(10);
           // speedDashTicksUpdate(6);
         },
@@ -254,18 +254,18 @@ export default function Ham() {
         .to(speedDialRef.current, { rotation: -30, duration: mainDuration })
         .to(speedDialRef.current, { rotation: 90, duration: mainDuration });
 
-      gsap
-        .timeline({ defaults: { ease: "power1.inOut" } })
-        .fromTo(
-          radialCircle2Ref.current,
-          { xPercent: -50, yPercent: -50, rotation: 0 },
-          { rotation: 110, duration: mainDuration },
-        )
-        .to(radialCircle2Ref.current, { rotation: 60, duration: mainDuration })
-        .to(radialCircle2Ref.current, {
-          rotation: 180,
-          duration: mainDuration,
-        });
+      // gsap
+      //   .timeline({ defaults: { ease: "power1.inOut" } })
+      //   .fromTo(
+      //     radialCircle2Ref.current,
+      //     { xPercent: -50, yPercent: -50, rotation: 0 },
+      //     { rotation: 110, duration: mainDuration },
+      //   )
+      //   .to(radialCircle2Ref.current, { rotation: 60, duration: mainDuration })
+      //   .to(radialCircle2Ref.current, {
+      //     rotation: 180,
+      //     duration: mainDuration,
+      //   });
     };
     gsap
       .timeline({ defaults: { ease: "power1.inOut" }, onComplete: startAnim })
