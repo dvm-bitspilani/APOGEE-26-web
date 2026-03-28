@@ -51,14 +51,32 @@ export default function ScrollSync() {
 
   useEffect(() => {
     scrollSheet.sequence.position = 0;
-    introAnimSheet.sequence.play({ iterationCount: 1 }).then(() => {
-      if (!showPreloader) {
-        introOverRef.current = true;
-        setActiveSheet("Cyber City");
+
+    const checkPlayState = () => {
+      if (showPreloader || document.hidden) {
+        introAnimSheet.sequence.pause();
+      } else if (!introOverRef.current) {
+        introAnimSheet.sequence.play({ iterationCount: 1 }).then((completed) => {
+          // completed is false if interrupted / paused
+          if (completed !== false && !showPreloader) {
+            introOverRef.current = true;
+            setActiveSheet("Cyber City");
+          }
+        });
       }
-    });
-    if (showPreloader) introAnimSheet.sequence.pause();
-  }, [showPreloader])
+    };
+
+    checkPlayState();
+
+    const handleVisibilityChange = () => {
+      checkPlayState();
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, [showPreloader, setActiveSheet]);
   // Added to control front movement by up arrow and back mpovement by down arrow
   useEffect(() => {
     const scrollContainer = scroll.el;
@@ -117,7 +135,7 @@ export default function ScrollSync() {
         scrollSheet.sequence.position > stopPoints[currentSection]?.[1]
       ) {
         closeModal();
-        setTimeout(() => setCurrentSection("transition"), 500)
+        // setTimeout(() => setCurrentSection("transition"), 500)
       }
     }
 
@@ -137,7 +155,7 @@ export default function ScrollSync() {
     }
 
     // Update the sequence position
-    console.log(currentOffset);
+    // console.log(currentOffset);
     scrollSheet.sequence.position = currentOffset * sequenceLength;
   });
 
