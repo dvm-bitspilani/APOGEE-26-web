@@ -88,10 +88,12 @@ fogFactor = clamp(fogFactor, 0.0, 1.0);
   // -------------------------
   // 🌈 Cyan → Purple
   // -------------------------
-  vec3 fogColor = mix(u_purple, u_cyan, uv.y);
+  //vec3 fogColor = mix(u_purple, u_cyan, uv.y);
+  vec3 fogColor = u_cyan;
+
 
   // 🔥 ORIGINAL GREEN TINT (restored)
-  fogColor += n * u_noiseStrength;
+  fogColor += n * u_noiseStrength *0.5;
 
   // -------------------------
   // 🎯 Alpha
@@ -106,6 +108,6 @@ fogFactor = clamp(fogFactor, 0.0, 1.0);
   // -------------------------
   float glow = pow(alpha, 1.5);
   vec3 finalColor = fogColor * (1.0 + glow *0.005* u_glowStrength);
-finalColor = clamp(finalColor, 0.0, 0.5);
-  gl_FragColor = vec4(finalColor, alpha);
+finalColor = clamp(finalColor, 0.0, 10.5);
+  gl_FragColor = vec4(finalColor, alpha * 1.0);
 }

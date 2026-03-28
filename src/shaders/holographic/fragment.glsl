@@ -12,7 +12,7 @@ void main()
    //     normal *= - 1.0;
 
     // Stripes
-    float stripes = mod((vPosition.y - uTime * 0.5) * 2.0, 1.3);
+    float stripes = mod((vPosition.y - uTime * 0.5) * 2.0, 1.8);
    // stripes = pow(stripes, 3.0);
    stripes = stripes * stripes * stripes;
 
@@ -23,12 +23,12 @@ void main()
 
     // Falloff
    // float falloff = smoothstep(0.9, 0.8, fresnel);
-   float falloff = 0.8;
+  // float falloff = 0.8;
 
     // Holographic
     float holographic = stripes * fresnel;
-    holographic += fresnel * 0.25;
-    holographic *= falloff ;
+    holographic += fresnel * 0.55;
+    holographic *= 0.8 ;
 
     // Final color
     gl_FragColor = vec4(uColor, holographic);

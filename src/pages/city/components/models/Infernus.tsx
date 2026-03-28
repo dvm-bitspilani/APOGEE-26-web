@@ -46,9 +46,9 @@ export default function Infernus() {
   // const neon = useNeonMaterial(true);
   // const neon2 = useNeonMaterial2(true);
   // const neon3 = useNeonMaterial3(true);
-  const neon = useNeonMaterial(true, [0, 1, 0.8], 1);  
-const neon2 = useNeonMaterial(true, [1, 0.5, 0], 1.5);    
-const neon3 = useNeonMaterial(true, [1, 0.5, 0], 1.25);  
+  const neon = useNeonMaterial([0, 1, 0.8], 1);  
+const neon2 = useNeonMaterial([1, 0.5, 0], 1.5);    
+const neon3 = useNeonMaterial( [1, 0.5, 0], 1.25);  
   // try 0.6–0.8 for rough
 
   const infernusRef = useRef<THREE.Group>(null!);
