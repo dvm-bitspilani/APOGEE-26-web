@@ -22,7 +22,7 @@ const sequenceLength = 19;
 
 export default function ScrollSync() {
   const scroll = useScroll();
-  const introOverRef = useRef<boolean>(false);
+  const introOverRef = useRef<boolean>(useActiveSheetStore.getState().activeSheet === "Cyber City");
   const openModal = useModalStore((s) => s.openModal);
   const closeModal = useModalStore((s) => s.closeModal);
   const isModalOpen = useModalStore((s) => s.isModalOpen);
@@ -100,11 +100,8 @@ export default function ScrollSync() {
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [scroll.el, isModalOpen, showPreloader]);
-  useFrame(() => {
-    if (!introOverRef.current || navState !== "off") return;
-  })
-
   useFrame((_state) => {
+    if (navState !== "off") return;
     // ----- Scroll velocity for motion blur -----
     // const rawVelocity =
     //   Math.abs(scroll.offset - prevOffset.current) / Math.max(delta, 0.001);

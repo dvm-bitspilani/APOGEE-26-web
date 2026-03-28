@@ -61,7 +61,7 @@ export default function City() {
     if (activeSheet !== "Cyber City") return;
     console.log("Playing sheet animation");
     project.ready.then(() => {
-      project.sheet("Cyber City").sequence.play({ iterationCount: Infinity });
+      // project.sheet("Cyber City").sequence.play({ iterationCount: Infinity });
       window.addEventListener("keydown", (e) => {
         if (import.meta.env.DEV) {
           if (e.key === "k") setNavState("opening");
