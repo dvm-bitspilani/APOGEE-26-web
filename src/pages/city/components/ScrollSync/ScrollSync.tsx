@@ -32,6 +32,23 @@ export default function ScrollSync() {
   const setActiveSheet = useActiveSheetStore((s) => s.setActiveSheet);
   const navState = useNavStateStore((s) => s.navState);
 
+  const isSpaceLockActive = useRef<boolean>(true);
+  const targetLockOffset = 0.3275432613875172;
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      // Use code 'Space' to accurately catch the spacebar
+      if (event.code === "Space") {
+        event.preventDefault(); // Prevents page from jumping down
+        isSpaceLockActive.current = false;
+        console.log("Spacebar lock removed!");
+      }
+    };
+    // Use capture phase or just regular event listener
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
   useEffect(() => {
     scrollSheet.sequence.position = 0;
     introAnimSheet.sequence.play({ iterationCount: 1 }).then(() => {
@@ -47,7 +64,7 @@ export default function ScrollSync() {
     const scrollContainer = scroll.el;
     const scrollStep = 400;
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (isModalOpen || showPreloader) return;
+      if (isModalOpen || showPreloader || !introOverRef.current) return;
 
       if (event.key === "ArrowUp") {
         scrollContainer.scrollBy({
@@ -104,8 +121,24 @@ export default function ScrollSync() {
       }
     }
 
+    // Apply spacebar scroll lock
+    let currentOffset = scroll.offset;
+
+    // Block scroll until sheet switches
+    if (!introOverRef.current) {
+      scroll.el.scrollTop = 0;
+      currentOffset = 0;
+    } else if (isSpaceLockActive.current && currentOffset > targetLockOffset) {
+      // Force DOM scroll back so they don't jump when unlocking
+      const maxScroll = scroll.el.scrollHeight - scroll.el.clientHeight;
+      scroll.el.scrollTop = targetLockOffset * maxScroll;
+      // Clamp for smooth 3D scene updating
+      currentOffset = targetLockOffset;
+    }
+
     // Update the sequence position
-    scrollSheet.sequence.position = scroll.offset * sequenceLength;
+    console.log(currentOffset);
+    scrollSheet.sequence.position = currentOffset * sequenceLength;
   });
 
   return null;
