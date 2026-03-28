@@ -10,7 +10,7 @@ import Countdown from "./Countdown"; // 👈 adjust path if needed
 // const EditableMesh = e.mesh;
 const InteractivePlane = () => {
   const ref = useRef<any>(null);
-  const [isInRange] = useState(false);
+  const [isInRange, setInRange] = useState(false);
 
 const navState = useNavStateStore((s) => s.navState);
   const theatreCamera = useTheatreCameraStore((s) => s.theatreCamera);
@@ -18,7 +18,7 @@ const navState = useNavStateStore((s) => s.navState);
   const camWorldPos = new THREE.Vector3();
   const meshWorldPos = new THREE.Vector3();
 const htmlRef = useRef<HTMLDivElement>(null);
-const isInRangeRef = useRef(false);
+// const isInRangeRef = useRef(false);
 const navStateRef = useRef(navState);
 
 useEffect(() => {
@@ -34,8 +34,8 @@ useFrame(() => {
   const distance = camWorldPos.distanceTo(meshWorldPos);
   const range = distance <= 200 && navStateRef.current === "off";
 
-  if (range !== isInRangeRef.current) {
-    isInRangeRef.current = range;
+  if (range !== isInRange) {
+    setInRange(range);
 
     htmlRef.current.style.opacity = range ? "1" : "0";
     htmlRef.current.style.pointerEvents = range ? "auto" : "none";
