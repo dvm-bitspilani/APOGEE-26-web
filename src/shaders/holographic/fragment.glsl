@@ -7,26 +7,28 @@ varying vec3 vNormal;
 void main()
 {
     // Normal
-    vec3 normal = normalize(vNormal);
-    if(!gl_FrontFacing)
-        normal *= - 1.0;
+   // vec3 normal = normalize(vNormal);
+  //  if(!gl_FrontFacing)
+   //     normal *= - 1.0;
 
     // Stripes
     float stripes = mod((vPosition.y - uTime * 0.5) * 2.0, 1.3);
-    stripes = pow(stripes, 3.0);
+   // stripes = pow(stripes, 3.0);
+   stripes = stripes * stripes * stripes;
 
     // Fresnel
-    vec3 viewDirection = normalize(vPosition - cameraPosition);
+   // vec3 viewDirection = normalize(vPosition - cameraPosition);
     float fresnel = 0.8;
     fresnel = pow(fresnel, 1.0);
 
     // Falloff
-    float falloff = smoothstep(0.9, 0.8, fresnel);
+   // float falloff = smoothstep(0.9, 0.8, fresnel);
+   float falloff = 0.8;
 
     // Holographic
     float holographic = stripes * fresnel;
     holographic += fresnel * 0.25;
-    holographic *= falloff;
+    holographic *= falloff ;
 
     // Final color
     gl_FragColor = vec4(uColor, holographic);

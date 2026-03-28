@@ -1,6 +1,7 @@
 
 import { Clone, useGLTF } from '@react-three/drei'
 import { type GLTFResult } from '../../types/starJunction.types';
+// import { CityModel } from './Citywithoutglobe';
 
 const BLOCKS = 10;
 const SPACING = 44.1;
@@ -16,5 +17,13 @@ export default function StarJunction() {
     ))
   )
 }
-
-useGLTF.preload('/models/citybest.glb')
+// export default function StarJunction() {
+//   return (
+//     <>
+//       {positions.map((pos, i) => (
+//         <CityModel key={i} position={pos} scale={1.5} rotation={[0, Math.PI / 2, 0]}/>
+//       ))}
+//     </>
+//   )
+// }
+// useGLTF.preload('/models/citybest.glb')

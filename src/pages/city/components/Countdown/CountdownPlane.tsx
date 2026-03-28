@@ -10,7 +10,7 @@ import Countdown from "./Countdown"; // 👈 adjust path if needed
 // const EditableMesh = e.mesh;
 const InteractivePlane = () => {
   const ref = useRef<any>(null);
-  const [isInRange, setInRange] = useState(false);
+  const [isInRange] = useState(false);
 
 const navState = useNavStateStore((s) => s.navState);
   const theatreCamera = useTheatreCameraStore((s) => s.theatreCamera);

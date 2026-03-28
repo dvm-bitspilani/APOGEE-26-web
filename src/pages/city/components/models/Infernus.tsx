@@ -12,7 +12,7 @@ import { editable as e } from "@theatre/r3f";
 import { useMemo } from "react";
 import { useTrailIntensity } from "../../hooks/useTrailIntensity";
 import { useCyberpunkFogMaterial } from "../../hooks/useCyberPunkFogMaterial";
-import { useHolographicMaterial } from "../../hooks/useHolographicMaterial";
+// import { useHolographicMaterial } from "../../hooks/useHolographicMaterial";
 
 type GLTFResult = GLTF & {
   nodes: {
