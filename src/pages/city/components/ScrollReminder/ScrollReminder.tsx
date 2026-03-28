@@ -27,13 +27,11 @@ export default function ScrollReminder() {
     window.addEventListener("scroll", resetTimer, { passive: true });
     window.addEventListener("wheel", resetTimer, { passive: true });
     window.addEventListener("touchmove", resetTimer, { passive: true });
-    window.addEventListener("keydown", resetTimer);
 
     return () => {
       window.removeEventListener("scroll", resetTimer);
       window.removeEventListener("wheel", resetTimer);
       window.removeEventListener("touchmove", resetTimer);
-      window.removeEventListener("keydown", resetTimer);
 
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);
@@ -64,7 +62,7 @@ export default function ScrollReminder() {
   <div className={styles.scrollReminder}>
     <div className={styles.scrollLabel}>
       
-      <h1 className={styles.scrollText}>Scroll</h1>   {/* 👈 move here */}
+      <h1 className={styles.scrollText}>SCROLL</h1>   {/* 👈 move here */}
 
       <div className={styles.scrollArrows}>
         {

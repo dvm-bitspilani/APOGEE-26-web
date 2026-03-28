@@ -4,7 +4,7 @@ import studio from "@theatre/studio";
 import ReactHelmet from "../components/ReactHelmet";
 import styles from "./City.module.scss";
 import CityScene from "./components/CityScene/CityScene";
-// import ScrollReminder from "./components/ScrollReminder/ScrollReminder";
+import ScrollReminder from "./components/ScrollReminder/ScrollReminder";
 // import { sheet } from "./theatre";
 // import { Environment } from "@react-three/drei";
 // import { getProject } from "@theatre/core";
@@ -164,7 +164,7 @@ export default function City() {
             </SheetProvider>
           </Canvas>
           {/* <Html> */}
-          {/* <ScrollReminder /> */}
+          <ScrollReminder />
           {/* </Html> */}
         </div>
       }

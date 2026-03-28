@@ -85,14 +85,14 @@ export default function CityScene({ }: any) {
               <Globe />
             </e.group>
 
-            <e.group position={[1.75, -0.5, 13]}  scale={[0.5, 0.5,1.25]}
+            <e.group position={[1.785, -1.45, 12.35]} scale={[0.25,0.25,0.625]} 
               theatreKey="Logo"
               onClick={(e: any) => {
                 e.stopPropagation();
                 window.open("https://bits-dvm.org", "_blank");
               }}
-              // onPointerOver={() => (document.body.style.cursor = "pointer")}
-              // onPointerOut={() => (document.body.style.cursor = "default")}
+              onPointerOver={() => (document.body.style.cursor = "pointer")}
+              onPointerOut={() => (document.body.style.cursor = "default")}
             >
               <Logo />
             </e.group>
