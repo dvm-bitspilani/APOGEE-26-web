@@ -3,7 +3,7 @@ uniform float uTime;
 
 varying vec3 vPosition;
 varying vec3 vNormal;
-
+uniform float uStripes;
 void main()
 {
     // Normal
@@ -12,7 +12,7 @@ void main()
    //     normal *= - 1.0;
 
     // Stripes
-    float stripes = mod((vPosition.y - uTime * 0.5) * 2.0, 1.8);
+    float stripes = mod((vPosition.y ) * uStripes, 1.8);
    // stripes = pow(stripes, 3.0);
    stripes = stripes * stripes * stripes;
 

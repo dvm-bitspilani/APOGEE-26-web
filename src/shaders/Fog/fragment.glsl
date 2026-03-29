@@ -37,7 +37,8 @@ float fbm(vec2 p) {
   float v = 0.0;
   float a = 0.5;
 
-  for (int i = 0; i < 5; i++) {
+  // 3 layers instead of 5 for better performance on slower GPUs
+  for (int i = 0; i < 3; i++) {
     v += a * noise(p);
     p *= 2.0;
     a *= 0.5;
@@ -52,13 +53,13 @@ void main() {
   // -------------------------
   // 💨 Smoke motion
   // -------------------------
-  uv.y += u_time *0.05;
-  uv.x += sin(uv.y * 2.0 + u_time) * 0.1;
+  uv.y += u_time * 0.05;
+  uv.x += sin(uv.y * 2.0 + u_time) * 0.08; // slightly smaller warp
 
   float n = fbm(uv * 3.0);
 
   // smooth smoke blobs
-  float smoke = smoothstep(0.3, 0.7, n);
+  float smoke = smoothstep(0.35, 0.75, n); // tighter range reduces noise clutter
 
   // -------------------------
   // 🌫️ Depth fog (Z)
