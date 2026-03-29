@@ -14,9 +14,13 @@ export function useHolographicMaterial(
   const material = useMemo(() => {
     return new THREE.ShaderMaterial({
       transparent: true,
-
+      depthTest: true,
       depthWrite: false,
       blending: THREE.AdditiveBlending,
+      // avoid z-fighting / artifacting by writing depth in a less aggressive way
+      polygonOffset: true,
+      polygonOffsetFactor: 1,
+      polygonOffsetUnits: 1,
       uniforms: {
         // uTime: { value: 0 },
         // uActive: { value: 0 },
