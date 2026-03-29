@@ -82,22 +82,20 @@ export default function Ham() {
     });
     settotalSpeedPurple(toPurple);
   };
-  const onClickNameTag = (callback?: () => void) => {
+  const onClickNameTag = (callback: () => void, duration: number) => {
     gsap.to(speedDialRef.current, {
       rotation: 90,
-      duration: 0.6,
+      duration: duration,
       onUpdate: () => onUpdate(0.02),
     });
     gsap.to(radialCircle1Ref.current, {
       rotation: 0,
-      duration: 0.6,
-      onComplete: () => {
-        if (callback) callback();
-      },
+      duration: duration,
+      onComplete: callback,
     });
     gsap.to(radialCircleDummyRef.current, {
       rotation: 0,
-      duration: 0.6,
+      duration: duration,
     });
   };
 
@@ -125,8 +123,8 @@ export default function Ham() {
         },
         onClick: () => {
           onClickNameTag(() => {
-            window.open("https://www.mappls.com/2W7UBK", "_blank");
-          });
+            window.location.href = "/getting-to-pilani";
+          }, 0.6);
         },
       },
       {
@@ -152,6 +150,11 @@ export default function Ham() {
           // bigDashTicksUpdate(2);
           // speedDashTicksUpdate(2);
         },
+        onClick: () => {
+          onClickNameTag(() => {
+            window.location.href = "/contact-us";
+          }, 0.6);
+        },
       },
       {
         id: 3,
@@ -172,6 +175,11 @@ export default function Ham() {
           // gsap.to(radialCircle2Ref.current, { rotation: 18, duration: 0.5 });
           // bigDashTicksUpdate(1);
           // speedDashTicksUpdate(1);
+        },
+        onClick: () => {
+          onClickNameTag(() => {
+            window.location.href = "/developers";
+          }, 0.6);
         },
       },
       {
@@ -194,6 +202,11 @@ export default function Ham() {
           // bigDashTicksUpdate(7);
           // speedDashTicksUpdate(4);
         },
+        onClick: () => {
+          onClickNameTag(() => {
+            window.location.href = "/media-partners";
+          }, 0.4);
+        },
       },
       {
         id: 5,
@@ -215,6 +228,11 @@ export default function Ham() {
           // bigDashTicksUpdate(8);
           // speedDashTicksUpdate(5);
         },
+        onClick: () => {
+          onClickNameTag(() => {
+            window.location.href = "/sponsors";
+          }, 0.4);
+        },
       },
       {
         id: 6,
@@ -235,6 +253,11 @@ export default function Ham() {
           // gsap.to(radialCircle2Ref.current, { rotation: 161, duration: 0.5 });
           // bigDashTicksUpdate(10);
           // speedDashTicksUpdate(6);
+        },
+        onClick: () => {
+          onClickNameTag(() => {
+            window.location.href = "/events";
+          }, 0.2);
         },
       },
     ];
