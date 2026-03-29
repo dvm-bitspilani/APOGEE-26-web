@@ -6,15 +6,18 @@ import {
 import ContactUs from "../../../contactUs/ContactUs";
 import AboutUs from "../../../aboutUs/AboutUs";
 import ModalUI from "./ModalUI";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./Modal.module.scss";
 import NavButton from "../../../registration/components/navButton/NavButton";
+import DirectionalUnlock from "./DirectionlUnlock";
 
 export default function Modal() {
 	const isModalOpen = useModalStore((s) => s.isModalOpen);
 	const currentsection = useCurrentSectionStore((s) => s.currentSection);
 	const [isModalActive, setIsModalActive] = useState(true);
-
+	const modalUIRef = useRef<HTMLDivElement>(null);
+	const containerRef = useRef<HTMLDivElement>(null);
+	
 	useEffect(() => {
 		setIsModalActive(true); //? So that next time user lands on a modal section, it activates the modal (uhh, I messed up the naming ik)
 		console.log("Current section changed to", currentsection, "isModalOpen:", isModalOpen);
@@ -22,18 +25,21 @@ export default function Modal() {
 
 	return (
 		<>
-			<ModalUI isModalActive={isModalActive && isModalOpen} setModalActive={setIsModalActive}>
+			<ModalUI
+				isModalActive={isModalActive && isModalOpen}
+				setModalActive={setIsModalActive}
+				ref={modalUIRef}>
 				{
 					currentsection === "about" ? (
-						<AboutUs />
+						<AboutUs containerRef={containerRef} />
 					) : currentsection === "contact" ? (
-						<ContactUs />
+						<ContactUs containerRef={containerRef} />
 					) : null
 				}
 			</ModalUI>
-			<NavButton 
-				outerClass={(!isModalOpen || isModalActive) ? styles.buttonClosed : styles.openModalButtonOuter} 
-				innerClass={styles.openModalButtonInner} 
+			<NavButton
+				outerClass={(!isModalOpen || isModalActive) ? styles.buttonClosed : styles.openModalButtonOuter}
+				innerClass={styles.openModalButtonInner}
 				onClick={() => setIsModalActive(true)}>
 				{
 					currentsection === "about" ? ("Open About")
@@ -41,6 +47,7 @@ export default function Modal() {
 							: "Open Modal"
 				}
 			</NavButton>
+			<DirectionalUnlock containerRef={containerRef} modalUIRef={modalUIRef} />
 		</>
 	);
 }

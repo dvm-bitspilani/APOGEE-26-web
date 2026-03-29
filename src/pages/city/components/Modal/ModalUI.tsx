@@ -1,3 +1,4 @@
+import { forwardRef } from "react";
 import ComingSoon from "../../../comingSoon/ComingSoon";
 import styles from "./Modal.module.scss";
 
@@ -8,9 +9,9 @@ interface ModalUIProps {
     onClick?: () => void;
 }
 
-export default function ModalUI({ children, isModalActive, setModalActive, onClick }: ModalUIProps) {
+const ModalUI = forwardRef(function ({ children, isModalActive, setModalActive, onClick }: ModalUIProps, ref?: React.Ref<HTMLDivElement>) {
     return (
-        <div className={`${styles.modalOverlay} ${!isModalActive ? styles.hiddenModal : styles.showModal}`}>
+        <div className={`${styles.modalOverlay} ${!isModalActive ? styles.hiddenModal : styles.showModal}`} ref={ref}>
             <div className={styles.modal}>
                 <div className={styles.modalContent} onClick={onClick}>
                     {children || <ComingSoon />}
@@ -20,4 +21,6 @@ export default function ModalUI({ children, isModalActive, setModalActive, onCli
             </div>
         </div>
     )
-}
+})
+
+export default ModalUI;

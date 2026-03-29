@@ -20,6 +20,7 @@ import Modal from "./components/Modal/Modal";
 import Ham from '../ham/Ham';
 import { project } from "./components/ScrollSync/ScrollSync";
 import { EnterDashboard, ExitDashboard } from "../../utils/navViewSwitching";
+import ScrollTracker from "./components/ScrollTracker/ScrollTracker";
 
 // import state from "./state-grace.json"
 // Set up loading progress tracking at module level (before useGLTF.preload() calls complete)
@@ -173,6 +174,7 @@ export default function City() {
       {activeSheet === "Cyber City"  && <RegisterButton />}
       {navState === "open" && <Ham/>}
       <Modal />
+      <ScrollTracker />
     </>
   );
 }

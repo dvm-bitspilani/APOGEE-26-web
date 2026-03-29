@@ -108,7 +108,7 @@ export default function CityScene({ }: any) {
 
           <CamCar />
         </e.group>
-        <ScrollControls pages={6} damping={0.8}>
+        <ScrollControls pages={6} damping={0.8} maxSpeed={0.2}>
           {/* Use PivotLeva to roate the city around the car's axis */}
           {/* <PivotLeva /> */}
           {/* <PivotFinal /> */}
