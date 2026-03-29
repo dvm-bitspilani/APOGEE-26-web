@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import styles from "./NavBar.module.scss";
 import { useModalStore } from "../../../utils/store";
 import navBG from "/img/landing/navBG.png";
+import titleImg from "/img/apogee26.png";
 
 function NavLink({ to, label }: { to: string; label: string }) {
   const navigate = useNavigate();
@@ -9,52 +10,6 @@ function NavLink({ to, label }: { to: string; label: string }) {
   return (
     <a className={styles.navLink} onClick={() => navigate(to)}>
       {/* <svg
-        width="232"
-        height="54"
-        viewBox="0 0 232 54"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M27.618 12.8773V2.50498C27.618 2.06102 27.0825 1.83727 26.7666 2.14925L2.14864 26.4647C2.05353 26.5587 2 26.6868 2 26.8205V50.8083C2 51.0845 2.22386 51.3083 2.5 51.3083H205.022C205.159 51.3083 205.289 51.2527 205.384 51.1542L229.861 25.5913C229.95 25.4982 230 25.3744 230 25.2455V13.8773C230 13.6012 229.776 13.3773 229.5 13.3773H28.118C27.8418 13.3773 27.618 13.1535 27.618 12.8773Z"
-          stroke="#18B0A1"
-          stroke-width="3"
-        />
-      </svg> */}
-      {/* <svg
-        width="231"
-        height="53"
-        viewBox="0 0 231 53"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <foreignObject x="-10" y="-10" width="251" height="72.3074">
-          <div
-            // xmlns="http://www.w3.org/1999/xhtml"
-            style={{
-              backdropFilter: "blur(5px)",
-              clipPath: "url(#bgblur_0_676_239_clip_path)",
-              height: "100%",
-              width: "100%",
-            }}
-          ></div>
-        </foreignObject>
-        <path
-          data-figma-bg-blur-radius="10"
-          d="M27.118 12.3763V2.00401C27.118 1.56004 26.5825 1.33629 26.2666 1.64827L1.64864 25.9637C1.55353 26.0577 1.5 26.1858 1.5 26.3195V50.3074C1.5 50.5835 1.72386 50.8074 2 50.8074H204.522C204.659 50.8074 204.789 50.7517 204.884 50.6532L229.361 25.0903C229.45 24.9973 229.5 24.8734 229.5 24.7445V13.3763C229.5 13.1002 229.276 12.8763 229 12.8763H27.618C27.3418 12.8763 27.118 12.6525 27.118 12.3763Z"
-          stroke="#18B0A1"
-          stroke-width="3"
-        />
-        <defs>
-          <clipPath
-            id="bgblur_0_676_239_clip_path"
-            transform="translate(10 10)"
-          >
-            <path d="M27.118 12.3763V2.00401C27.118 1.56004 26.5825 1.33629 26.2666 1.64827L1.64864 25.9637C1.55353 26.0577 1.5 26.1858 1.5 26.3195V50.3074C1.5 50.5835 1.72386 50.8074 2 50.8074H204.522C204.659 50.8074 204.789 50.7517 204.884 50.6532L229.361 25.0903C229.45 24.9973 229.5 24.8734 229.5 24.7445V13.3763C229.5 13.1002 229.276 12.8763 229 12.8763H27.618C27.3418 12.8763 27.118 12.6525 27.118 12.3763Z" />
-          </clipPath>
-        </defs>
-      </svg> */}
-      <svg
         width="251"
         height="73"
         viewBox="0 0 251 73"
@@ -125,9 +80,24 @@ function NavLink({ to, label }: { to: string; label: string }) {
             <path d="M37.118 18.3763V8.00401C37.118 7.56004 36.5825 7.33629 36.2666 7.64827L11.6486 31.9637C11.5535 32.0577 11.5 32.1858 11.5 32.3195V56.3074C11.5 56.5835 11.7239 56.8074 12 56.8074H214.522C214.659 56.8074 214.789 56.7517 214.884 56.6532L239.361 31.0903C239.45 30.9973 239.5 30.8734 239.5 30.7445V19.3763C239.5 19.1002 239.276 18.8763 239 18.8763H37.618C37.3418 18.8763 37.118 18.6525 37.118 18.3763Z" />
           </clipPath>
         </defs>
-      </svg>
-
+      </svg> */}
+      {/* <svg
+        width="360"
+        height="810"
+        viewBox="0 0 360 810"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M295.5 2.5H351.558L356.5 807.5H290.5C274.747 801.802 267.311 795.306 257.5 776.5V743C251.268 719.982 244.059 709.728 218.5 700.5H54.5C19.7345 692.081 9.31589 677.601 2.5 639V152.5C6.9637 129.476 14.4703 107.312 37.5 100.5L218.5 100.5C246.068 94.3113 256.291 85.3754 258.5 52.5C262.859 27.8366 271.267 9.02376 295.5 2.5Z"
+          stroke="#18B0A1"
+          stroke-width="5"
+          stroke-linecap="round"
+        />
+      </svg> */}
+      <span>{`[`}</span>
       {label}
+      <span>{`]`}</span>
     </a>
   );
 }
@@ -144,12 +114,13 @@ export default function NavBar() {
       <div
         className={`${styles.navbar} ${isModalOpen ? styles.hiddenNavbar : ""}`}
       >
+        <img src={titleImg} alt="Apogee 26" />
         <div className={styles.navlinks}>
-          <NavLink to="/" label="Home" />
-          <NavLink to="/about" label="About" />
-          <NavLink to="/events" label="Events" />
-          <NavLink to="/contact" label="Contact   Us" />
-          <NavLink to="/speakers" label="Speakers" />
+          <NavLink to="/" label="HOME" />
+          <NavLink to="/about" label="ABOUT" />
+          <NavLink to="/events" label="EVENTS" />
+          <NavLink to="/contact" label="CONTACT   US" />
+          <NavLink to="/speakers" label="SPEAKERS" />
         </div>
       </div>
     </div>

@@ -8,6 +8,8 @@ import City from "./pages/city/City";
 // import ContactUs from "./pages/contactUs/ContactUs";
 // import Preloader from "./pages/preloader/Preloader";
 // import Ham from "./pages/ham/Ham";
+import GettingToPilani from "./pages/GettingToPilani/GettingToPilani";
+
 type page = {
   url: string;
 
@@ -50,6 +52,10 @@ const pages: page[] = [
 
   //   component: Ham,
   // },
+  {
+    url: "/getting-to-pilani",
+    component: GettingToPilani,
+  }
 ];
 
 const generateRoutes = (pages: page[]) => {
