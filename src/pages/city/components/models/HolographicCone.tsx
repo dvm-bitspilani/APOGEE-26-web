@@ -1,5 +1,5 @@
 import * as THREE from 'three'
-import React, { useRef, type JSX } from 'react'
+import {  type JSX } from 'react'
 import { useGLTF } from '@react-three/drei'
 import type { GLTF } from 'three-stdlib'
 import { useHolographicMaterial } from '../../hooks/useHolographicMaterial'
@@ -14,7 +14,7 @@ type GLTFResult = GLTF & {
 }
 
 export default function Cone(props: JSX.IntrinsicElements['group']) {
-  const { nodes, materials } = useGLTF('/public/models/cone.glb') as unknown as GLTFResult
+  const { nodes } = useGLTF('/public/models/cone.glb') as unknown as GLTFResult
   const mat = useHolographicMaterial([0, 0.8, 0.9], 0.5,0.85);
   return (
     <group {...props} dispose={null}>
