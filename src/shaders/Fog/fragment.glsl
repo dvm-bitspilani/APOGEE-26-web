@@ -14,7 +14,9 @@ uniform float u_heightFalloff;
 // --- Noise ---
 //
 float hash(vec2 p) {
-  return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
+  p = fract(p * vec2(123.34, 345.45));
+  p += dot(p, p + 34.345);
+  return fract(p.x * p.y);
 }
 
 float noise(vec2 p) {
@@ -37,7 +39,8 @@ float fbm(vec2 p) {
   float v = 0.0;
   float a = 0.5;
 
-  for (int i = 0; i < 5; i++) {
+  // 3 layers instead of 5 for better performance on slower GPUs
+  for (int i = 0; i < 4; i++) {
     v += a * noise(p);
     p *= 2.0;
     a *= 0.5;
@@ -52,13 +55,13 @@ void main() {
   // -------------------------
   // 💨 Smoke motion
   // -------------------------
-  uv.y += u_time *0.05;
-  uv.x += sin(uv.y * 2.0 + u_time) * 0.1;
+  uv.y += u_time * 0.05;
+  uv.x += sin(uv.y * 2.0 + u_time) * 0.08; // slightly smaller warp
 
   float n = fbm(uv * 3.0);
 
   // smooth smoke blobs
-  float smoke = smoothstep(0.3, 0.7, n);
+  float smoke = smoothstep(0.35, 0.75, n); // tighter range reduces noise clutter
 
   // -------------------------
   // 🌫️ Depth fog (Z)
@@ -66,32 +69,34 @@ void main() {
  // -------------------------
 // 🌫️ Depth fog (Z - main)
 // -------------------------
-float fogZ = 1.0 - exp(-vDepth * u_density);
-fogZ = clamp(fogZ, 0.0, 1.0);
+float fogZ = vDepth * u_density;
+fogZ = fogZ / (1.0 + fogZ); // cheap approx of exp falloff
 
-
-float fogY = exp(-abs(vWorldY) * 2.8);
+float fogY = 1.0 / (1.0 + abs(vWorldY) * 2.8);
 
 // clamp just in case
-fogY = clamp(fogY, 0.0, 100.0);
+//fogY = clamp(fogY, 0.0, 100.0);
 
 // -------------------------
 // 🔥 Combine (Z dominates)
 // -------------------------
 // simulate thickness using view depth
-float thickness = smoothstep(0.0, 20.0, vDepth);
+float thickness = clamp(vDepth / 20.0, 0.0, 1.0);
 
 // combine with fog
-float fogFactor = fogZ * 0.6 + fogY * 0.2 + thickness * 0.2;
+float fogFactor = fogZ * 0.6 + (fogY + thickness) * 0.2;
 fogFactor = clamp(fogFactor, 0.0, 1.0);
 
   // -------------------------
   // 🌈 Cyan → Purple
   // -------------------------
-  vec3 fogColor = mix(u_purple, u_cyan, uv.y);
+  //vec3 fogColor = mix(u_purple, u_cyan, uv.y);
+  vec3 fogColor = u_cyan;
+
 
   // 🔥 ORIGINAL GREEN TINT (restored)
-  fogColor += n * u_noiseStrength;
+
+  fogColor += n * u_noiseStrength *0.5;
 
   // -------------------------
   // 🎯 Alpha
@@ -101,11 +106,13 @@ fogFactor = clamp(fogFactor, 0.0, 1.0);
   // optional top fade (you had this originally)
   alpha *= smoothstep(1.0, 0.2, vUv.y);
 
+alpha = max(alpha, 0.01);
+
   // -------------------------
   // ✨ Glow
   // -------------------------
-  float glow = pow(alpha, 1.5);
+  float glow = alpha * sqrt(alpha);
   vec3 finalColor = fogColor * (1.0 + glow *0.005* u_glowStrength);
-finalColor = clamp(finalColor, 0.0, 0.5);
-  gl_FragColor = vec4(finalColor, alpha);
+finalColor = clamp(finalColor, 0.0, 10.5);
+  gl_FragColor = vec4(finalColor, alpha * 1.0);
 }

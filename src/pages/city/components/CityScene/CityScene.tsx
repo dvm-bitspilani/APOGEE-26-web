@@ -1,5 +1,5 @@
 import { Environment, ScrollControls } from "@react-three/drei";
-import { useEffect, useRef } from "react";
+import { Suspense, useEffect, useRef } from "react";
 import * as THREE from "three";
 import { useCityStore, usePivotStore } from "../../../../utils/store";
 import ScrollSync from "../ScrollSync/ScrollSync";
@@ -18,6 +18,7 @@ import FinalProdConfig from "../config/FinalProdConfig";
  import { Perf } from "r3f-perf";
 // import { useCyberpunkFogMaterial } from "../../hooks/useCyberPunkFogMaterial";
 import { Logo } from "../models/Logo";
+import Cone from "../models/HolographicCone";
 
 export default function CityScene({ }: any) {
   const cityRef = useRef<THREE.Group>(null!);
@@ -83,19 +84,32 @@ export default function CityScene({ }: any) {
               // onPointerOut={() => (document.body.style.cursor = "default")}
             >
               <Globe />
-            </e.group>
-
-            <e.group position={[1.75, -0.5, 13]}  scale={[0.5, 0.5,1.25]}
-              theatreKey="Logo"
-              onClick={(e: any) => {
-                e.stopPropagation();
-                window.open("https://bits-dvm.org", "_blank");
-              }}
+              </e.group>
+              <e.group position={[1.84, -1.98, 12.48]} scale={2.3} rotation={[0, 0, 0]}
+              theatreKey="Cone"
+              // onClick={(e: any) => {
+              //   e.stopPropagation();
+              //   window.open("https://bits-apogee.org", "_blank");
+              // }}
               // onPointerOver={() => (document.body.style.cursor = "pointer")}
               // onPointerOut={() => (document.body.style.cursor = "default")}
             >
-              <Logo />
+              <Cone />
             </e.group>
+
+            <Suspense fallback={null}>
+              <e.group position={[1.785, -1.45, 12.35]} scale={[0.25,0.25,0.625]} 
+                theatreKey="Logo"
+                onClick={(e: any) => {
+                  e.stopPropagation();
+                  window.open("https://bits-dvm.org", "_blank");
+                }}
+                onPointerOver={() => (document.body.style.cursor = "pointer")}
+                onPointerOut={() => (document.body.style.cursor = "default")}
+              >
+                <Logo />
+              </e.group>
+            </Suspense>
           </group>
         </group>
 

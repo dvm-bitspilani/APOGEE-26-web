@@ -12,4 +12,6 @@ void main() {
   gl_Position = projectionMatrix * mvPosition;
 
   vDepth = -mvPosition.z;
+
+  
 }

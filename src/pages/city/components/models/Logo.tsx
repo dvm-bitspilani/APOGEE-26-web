@@ -21,7 +21,7 @@ type GLTFResult = GLTF & {
 export function Logo(props: JSX.IntrinsicElements['group']) {
   const { nodes } = useGLTF('/models/dvmlogowide-v1.glb') as unknown as GLTFResult
   // const mat = useCyberpunkFogMaterial()
-  const mat = useHolographicMaterial(true, [0, 0.8, 0.9], 1);
+  const mat = useHolographicMaterial([0, 0.8, 0.9], 1,2.0);
 
   // 🔥 separate refs
   const mesh1Ref = useRef<THREE.Mesh>(null!)
