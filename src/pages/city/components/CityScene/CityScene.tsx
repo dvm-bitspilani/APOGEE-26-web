@@ -18,6 +18,7 @@ import FinalProdConfig from "../config/FinalProdConfig";
  import { Perf } from "r3f-perf";
 // import { useCyberpunkFogMaterial } from "../../hooks/useCyberPunkFogMaterial";
 import { Logo } from "../models/Logo";
+import Cone from "../models/HolographicCone";
 
 export default function CityScene({ }: any) {
   const cityRef = useRef<THREE.Group>(null!);
@@ -83,6 +84,17 @@ export default function CityScene({ }: any) {
               // onPointerOut={() => (document.body.style.cursor = "default")}
             >
               <Globe />
+              </e.group>
+              <e.group position={[1.84, -1.98, 12.48]} scale={2.3} rotation={[0, 0, 0]}
+              theatreKey="Cone"
+              // onClick={(e: any) => {
+              //   e.stopPropagation();
+              //   window.open("https://bits-apogee.org", "_blank");
+              // }}
+              // onPointerOver={() => (document.body.style.cursor = "pointer")}
+              // onPointerOut={() => (document.body.style.cursor = "default")}
+            >
+              <Cone />
             </e.group>
 
             <Suspense fallback={null}>

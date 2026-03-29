@@ -40,7 +40,7 @@ float fbm(vec2 p) {
   float a = 0.5;
 
   // 3 layers instead of 5 for better performance on slower GPUs
-  for (int i = 0; i < 3; i++) {
+  for (int i = 0; i < 4; i++) {
     v += a * noise(p);
     p *= 2.0;
     a *= 0.5;
@@ -81,10 +81,10 @@ float fogY = 1.0 / (1.0 + abs(vWorldY) * 2.8);
 // 🔥 Combine (Z dominates)
 // -------------------------
 // simulate thickness using view depth
-float thickness = smoothstep(0.0, 20.0, vDepth);
+float thickness = clamp(vDepth / 20.0, 0.0, 1.0);
 
 // combine with fog
-float fogFactor = fogZ * 0.6 + fogY * 0.2 + thickness * 0.2;
+float fogFactor = fogZ * 0.6 + (fogY + thickness) * 0.2;
 fogFactor = clamp(fogFactor, 0.0, 1.0);
 
   // -------------------------
@@ -106,7 +106,7 @@ fogFactor = clamp(fogFactor, 0.0, 1.0);
   // optional top fade (you had this originally)
   alpha *= smoothstep(1.0, 0.2, vUv.y);
 
-if(alpha < 0.01) discard;
+alpha = max(alpha, 0.01);
 
   // -------------------------
   // ✨ Glow

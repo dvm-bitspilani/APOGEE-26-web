@@ -12,7 +12,7 @@ void main()
    //     normal *= - 1.0;
 
     // Stripes
-    float stripes = mod((vPosition.y ) * uStripes, 1.8);
+    float stripes = fract((vPosition.y * uStripes) / 1.8) * 1.8;
    // stripes = pow(stripes, 3.0);
    stripes = stripes * stripes * stripes;
 
@@ -27,7 +27,8 @@ void main()
 
     // Holographic
     float holographic = stripes * 0.81;
-    holographic += 0.81 * 0.55;
+    // holographic += 0.81 * 0.55;
+    holographic += 0.4455;
     holographic *= 0.8 ;
 
     // Final color
