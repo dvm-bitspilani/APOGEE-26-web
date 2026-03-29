@@ -7,8 +7,9 @@ import City from "./pages/city/City";
 import Events from "./pages/events/Events";
 // import ContactUs from "./pages/contactUs/ContactUs";
 // import Preloader from "./pages/preloader/Preloader";
-// import Ham from "./pages/ham/Ham";
+import Ham from "./pages/ham/Ham";
 import GettingToPilani from "./pages/GettingToPilani/GettingToPilani";
+import Brochure from "./pages/brochure/Brochure";
 
 type page = {
   url: string;
@@ -47,15 +48,19 @@ const pages: page[] = [
 
   //   component: Preloader,
   // },
-  // {
-  //   url: "/ham",
+  {
+    url: "/ham",
 
-  //   component: Ham,
-  // },
+    component: Ham,
+  },
   {
     url: "/getting-to-pilani",
     component: GettingToPilani,
-  }
+  },
+  {
+    url: "/brochure",
+    component: Brochure,
+  },
 ];
 
 const generateRoutes = (pages: page[]) => {
