@@ -170,7 +170,7 @@ const mat = useCyberpunkFogMaterial();
             dispose={null}
             position={[0.5, -6, 75]}
             scale={[6, 6, 6]}
-            frustumCulled={false}
+            // frustumCulled={false}
           >
             <group rotation={[Math.PI / 2, 0, 0]} scale={1.492}>
               <group position={[-0.3, 0, 0]} ref={leftTrailRef} />
@@ -232,7 +232,7 @@ const mat = useCyberpunkFogMaterial();
                   receiveShadow
                   geometry={nodes.meshId5_name_5.geometry}
                   // material={neonActive ? neon : materials.blue}
-                  material={neon2}
+                  material={neon}
                 />
               </Trail>
               {/* Left trail */}
@@ -245,11 +245,11 @@ const mat = useCyberpunkFogMaterial();
                 // color={new THREE.Color("#40ccef").multiplyScalar(3.5)}
                 color={trailColor}
               >
-                <mesh
+                {/* <mesh
                   geometry={nodes.meshId5_name_5.geometry}
                   // material={neonActive ? neon : materials.blue}
-                  material={neon3}
-                />
+                  material={neon3} */}
+                {/* /> */}
               </Trail>
 
               {/* Right trail */}
@@ -262,11 +262,11 @@ const mat = useCyberpunkFogMaterial();
                 // color={new THREE.Color("#40ccef").multiplyScalar(3.5)}
                 color={trailColor}
               >
-                <mesh
+                {/* <mesh
                   geometry={nodes.meshId5_name_5.geometry}
                   // material={neonActive ? neon : materials.blue}
                   material={neon}
-                />
+                /> */}
               </Trail>
 
             </group>

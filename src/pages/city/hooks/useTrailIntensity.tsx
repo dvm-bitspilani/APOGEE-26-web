@@ -24,7 +24,7 @@ export function useTrailIntensity(
     const targetIntensity = THREE.MathUtils.clamp(
       speed.current * 0.5,
       3.5,
-      10
+      15
     );
 
     // SAME smoothing as your code

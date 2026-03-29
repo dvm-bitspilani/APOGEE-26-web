@@ -18,16 +18,16 @@ void main()
 
     // Fresnel
    // vec3 viewDirection = normalize(vPosition - cameraPosition);
-    float fresnel = 0.8;
-    fresnel = pow(fresnel, 1.0);
+   // float fresnel = 0.81;
+   // fresnel = pow(fresnel, 1.0);
 
     // Falloff
    // float falloff = smoothstep(0.9, 0.8, fresnel);
   // float falloff = 0.8;
 
     // Holographic
-    float holographic = stripes * fresnel;
-    holographic += fresnel * 0.55;
+    float holographic = stripes * 0.81;
+    holographic += 0.81 * 0.55;
     holographic *= 0.8 ;
 
     // Final color

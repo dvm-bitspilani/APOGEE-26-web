@@ -125,6 +125,7 @@ export default function City() {
 
               gl.toneMapping = THREE.NoToneMapping
             }}
+            
           >
             {/* <mesh rotation={[-Math.PI ,Math.PI/4, 0]} position={[-20, 5, 100]}>
   <planeGeometry args={[100, 10]} />

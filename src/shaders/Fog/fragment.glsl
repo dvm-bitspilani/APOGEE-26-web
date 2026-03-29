@@ -14,7 +14,9 @@ uniform float u_heightFalloff;
 // --- Noise ---
 //
 float hash(vec2 p) {
-  return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
+  p = fract(p * vec2(123.34, 345.45));
+  p += dot(p, p + 34.345);
+  return fract(p.x * p.y);
 }
 
 float noise(vec2 p) {
@@ -67,14 +69,13 @@ void main() {
  // -------------------------
 // 🌫️ Depth fog (Z - main)
 // -------------------------
-float fogZ = 1.0 - exp(-vDepth * u_density);
-fogZ = clamp(fogZ, 0.0, 1.0);
+float fogZ = vDepth * u_density;
+fogZ = fogZ / (1.0 + fogZ); // cheap approx of exp falloff
 
-
-float fogY = exp(-abs(vWorldY) * 2.8);
+float fogY = 1.0 / (1.0 + abs(vWorldY) * 2.8);
 
 // clamp just in case
-fogY = clamp(fogY, 0.0, 100.0);
+//fogY = clamp(fogY, 0.0, 100.0);
 
 // -------------------------
 // 🔥 Combine (Z dominates)
@@ -94,6 +95,7 @@ fogFactor = clamp(fogFactor, 0.0, 1.0);
 
 
   // 🔥 ORIGINAL GREEN TINT (restored)
+
   fogColor += n * u_noiseStrength *0.5;
 
   // -------------------------
@@ -104,10 +106,12 @@ fogFactor = clamp(fogFactor, 0.0, 1.0);
   // optional top fade (you had this originally)
   alpha *= smoothstep(1.0, 0.2, vUv.y);
 
+if(alpha < 0.01) discard;
+
   // -------------------------
   // ✨ Glow
   // -------------------------
-  float glow = pow(alpha, 1.5);
+  float glow = alpha * sqrt(alpha);
   vec3 finalColor = fogColor * (1.0 + glow *0.005* u_glowStrength);
 finalColor = clamp(finalColor, 0.0, 10.5);
   gl_FragColor = vec4(finalColor, alpha * 1.0);
