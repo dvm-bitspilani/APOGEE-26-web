@@ -27,7 +27,6 @@ export default function Modal() {
 		<>
 			<ModalUI
 				isModalActive={isModalActive && isModalOpen}
-				setModalActive={setIsModalActive}
 				ref={modalUIRef}>
 				{
 					currentsection === "about" ? (
