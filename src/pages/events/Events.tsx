@@ -1,16 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./Events.module.scss";
 import EventsItem from "./eventsItem/EventsItem";
-import { DUMMY_EVENTS } from "./eventsData";
+import { fetchEvents } from "./eventsService";
+import type { EventData } from "./eventsItem/EventsItem";
 
 const EVENT_CATEGORIES = [
     { name: "CODING", image: "/img/events/coding1.png" },
-    { name: "KERNEL", image: "/img/events/kernel.png" },
+    { name: "STALLS", image: "/img/events/kernel.png" },
     { name: "EXHIBITIONS", image: "/img/events/esummit1.png" },
     { name: "COMPETITIONS", image: "/img/events/caseComp.png" },
     { name: "ART & CINEMA", image: "/img/events/art.png" },
     { name: "MISCELLANEOUS", image: "/img/events/misc1.png" },
-    { name: "E SUMMIT", image: "/img/events/exhibition1.png" },
+    { name: "TALKS & WORKSHOPS", image: "/img/events/exhibition1.png" },
     { name: "GAMES & QUIZ", image: "/img/events/quiz.png" },
 ];
 
@@ -18,8 +19,22 @@ export default function Events() {
     const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
     const [showContent, setShowContent] = useState(false);
     const [originRect, setOriginRect] = useState<DOMRect | null>(null);
+    const [eventsData, setEventsData] = useState<Record<string, EventData[]>>({});
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const loadEvents = async () => {
+            const data = await fetchEvents();
+            console.log("Events data loaded in component:", data);
+            setEventsData(data);
+            setLoading(false);
+        };
+        loadEvents();
+    }, []);
 
     const handleCategoryClick = (category: string, element: HTMLElement) => {
+        console.log("Category clicked:", category);
+        console.log("Events for this category:", eventsData[category]);
         setOriginRect(element.getBoundingClientRect());
         setSelectedCategory(category);
 
@@ -38,6 +53,12 @@ export default function Events() {
         <div className={styles.eventsContainer}>
             {/* The base page background */}
             <div className={styles.backgroundOverlay}></div>
+
+            {loading && (
+                <div className={styles.loaderContainer}>
+                    <div className={styles.loader}></div>
+                </div>
+            )}
 
             {/* This div acts as the expanding background originating from the card.
                 If selectedCategory is truthy, it appears and scales up */}
@@ -82,7 +103,9 @@ export default function Events() {
                                 </div>
 
                                 <div className={styles.cardTextContainer}>
-                                    <span className={styles.cardText}><span className={styles.bra}>[</span>{category.name}<span className={styles.bra}>]</span></span>
+                                    <span className={`${styles.cardText} ${category.name.length > 12 ? styles.longText : ""}`}>
+                                        <span className={styles.bra}>[</span>{category.name}<span className={styles.bra}>]</span>
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -94,7 +117,7 @@ export default function Events() {
             {showContent && selectedCategory && (
                 <EventsItem
                     category={selectedCategory}
-                    events={DUMMY_EVENTS[selectedCategory] || []}
+                    events={eventsData[selectedCategory] || []}
                 />
             )}
         </div>

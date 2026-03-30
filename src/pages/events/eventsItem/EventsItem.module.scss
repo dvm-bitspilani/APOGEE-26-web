@@ -106,7 +106,7 @@
 .glowBoxWrapper {
     width: 100%;
     position: relative;
-    filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.4));
+    // filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.4)); // Moved to glowBox inner
     display: flex;
     min-height: clamp(300px, 40svh, 400px);
 }
@@ -119,12 +119,25 @@
     height: 100%;
     z-index: 1;
     pointer-events: none;
+    filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.4));
     background:
         linear-gradient(#00ffff, #00ffff) top/100% 3px no-repeat,
         linear-gradient(#00ffff, #00ffff) left/3px 100% no-repeat,
         linear-gradient(#00ffff, #00ffff) bottom left/calc(100% - 60px) 3px no-repeat,
         linear-gradient(#00ffff, #00ffff) top right/3px calc(100% - 60px) no-repeat,
         linear-gradient(-45deg, transparent 42.4px, #00ffff 42.4px, #00ffff 45.4px, transparent 45.4px) bottom right/64px 64px no-repeat;
+}
+
+.glowBoxBg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: rgba(4, 18, 26, 0.2);
+    backdrop-filter: blur(10px);
+    clip-path: polygon(3px 3px, calc(100% - 3px) 3px, calc(100% - 3px) calc(100% - 64px), calc(100% - 64px) calc(100% - 3px), 3px calc(100% - 3px));
 }
 
 .glowBoxInner {
@@ -137,19 +150,6 @@
     justify-content: center;
     position: relative;
     z-index: 2;
-
-    &::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: -1;
-        background: rgba(4, 18, 26, 0.2);
-        backdrop-filter: blur(10px);
-        clip-path: polygon(3px 3px, calc(100% - 3px) 3px, calc(100% - 3px) calc(100% - 64px), calc(100% - 64px) calc(100% - 3px), 3px calc(100% - 3px));
-    }
 }
 
 .title {
@@ -173,6 +173,13 @@
     font-weight: 500;
     color: #ccc;
     max-width: 600px;
+
+    // Truncate to max 10 lines
+    display: -webkit-box;
+    -webkit-line-clamp: 10;
+    line-clamp: 10;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .infoGrid {
