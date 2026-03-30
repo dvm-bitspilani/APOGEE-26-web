@@ -1,12 +1,13 @@
-import { useHideOnScroll } from "../hooks/useHideHamburger";
+import { useHamburgerStore } from "../../../utils/store";
+// import { useHideOnScroll } from "../hooks/useHideHamburger";
 
 type Props = {
   onClick: () => void;
-  ranges: [number, number][];
+  // ranges: [number, number][];
 };
 
-export default function HamburgerButton({ onClick, ranges }: Props) {
-  const isHidden = useHideOnScroll(ranges);
+export default function HamburgerButton({ onClick}: Props) {
+  const isHidden = useHamburgerStore((s) => s.isHidden);
 
   return (
     <button
