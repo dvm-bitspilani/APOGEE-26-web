@@ -6,35 +6,38 @@ type Props = {
   maxTranslate?: number;
 };
 
-export default function NavBarScroll({ children, maxTranslate = 1100}: Props) {
+export default function NavBarScroll({ children, maxTranslate = 800}: Props) {
   const scroll = useScrollStore((s) => s.scroll);
   const ref = useRef<HTMLDivElement>(null);
   const lockedValue = useRef(0);
 
-  useEffect(() => {
-    let frame: number;
+useEffect(() => {
+  let frame: number;
 
-    const animate = () => {
-      if (ref.current) {
-        const next = Math.min(scroll.offset * maxTranslate, maxTranslate);
-        console.log(scroll.offset,next)
-        // 🚨 one-way lock (like your GSAP pull)
-        lockedValue.current = Math.min(
-  Math.max(lockedValue.current, next),
-  260
-);
+  const animate = () => {
+    const offset = scroll?.offset;
 
-        ref.current.style.transform = `translateX(-${lockedValue.current}px)`;
+    if (ref.current && typeof offset === "number") {
+      const next = Math.min(offset * maxTranslate, maxTranslate);
+
+      // smooth interpolation (GSAP-like)
+      if(next>lockedValue.current){
+      lockedValue.current += (next - lockedValue.current) * 0.1;
       }
 
-      frame = requestAnimationFrame(animate);
-    };
+      // one-way clamp
+      lockedValue.current = Math.min(lockedValue.current, 260);
+
+      ref.current.style.transform = `translateX(-${lockedValue.current}px)`;
+    }
 
     frame = requestAnimationFrame(animate);
+  };
 
-    return () => cancelAnimationFrame(frame);
-  }, [scroll.offset, maxTranslate]);
+  frame = requestAnimationFrame(animate);
 
+  return () => cancelAnimationFrame(frame);
+}, [scroll, maxTranslate]);
   return (
     <div
       ref={ref}
