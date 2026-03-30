@@ -148,7 +148,15 @@ export const useScrollStore = create<ScrollStore>((set) => ({
   scroll: null,
   setScroll: (scroll) => set({ scroll }),
 }))
+type HamburgerStore = {
+  isHidden: boolean;
+  setIsHidden: (value: boolean) => void;
+};
 
+export const useHamburgerStore = create<HamburgerStore>((set) => ({
+  isHidden: false,
+  setIsHidden: (value) => set({ isHidden: value }),
+}));
 // * "Whenever you're stuck, make a new store!" :)
 type PullProgressStore = {
   pullProgress: number;

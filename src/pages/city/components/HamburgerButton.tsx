@@ -1,8 +1,13 @@
-type Props = {
-  onClick: () => void
-}
+import { useHideOnScroll } from "../hooks/useHideHamburger";
 
-export default function HamburgerButton({ onClick }: Props) {
+type Props = {
+  onClick: () => void;
+  ranges: [number, number][];
+};
+
+export default function HamburgerButton({ onClick, ranges }: Props) {
+  const isHidden = useHideOnScroll(ranges);
+
   return (
     <button
       onClick={onClick}
@@ -15,10 +20,12 @@ export default function HamburgerButton({ onClick }: Props) {
         color: "white",
         padding: "10px 14px",
         cursor: "pointer",
-        zIndex: 9999
+        zIndex: 9999,
+        opacity: isHidden ? 0 : 1,
+        pointerEvents: isHidden ? "none" : "auto",
       }}
     >
       ☰
     </button>
-  )
+  );
 }

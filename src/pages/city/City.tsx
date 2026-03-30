@@ -22,6 +22,7 @@ import Ham from '../ham/Ham';
 import { project } from "./components/ScrollSync/ScrollSync";
 import { EnterDashboard, ExitDashboard } from "../../utils/navViewSwitching";
 import ScrollTracker from "./components/ScrollTracker/ScrollTracker";
+import HamburgerButton from "./components/HamburgerButton";
 
 // import state from "./state-grace.json"
 // Set up loading progress tracking at module level (before useGLTF.preload() calls complete)
@@ -172,6 +173,16 @@ export default function City() {
           {/* </Html> */}
         </div>
       }
+      <HamburgerButton
+  onClick={() => {
+    setNavState("opening")
+  }}
+  ranges={[
+    // [0.2, 100],
+    [0.41, 15.55],
+    [0.77, 0.99]
+  ]}
+/>
       {/*activeSheet === "Cyber City"  && <NavBar />*/}
       {activeSheet === "Cyber City"  && <RegisterButton />}
       {navState === "open" && <Ham/>}
