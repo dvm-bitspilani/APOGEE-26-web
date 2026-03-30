@@ -2,7 +2,7 @@ import { useScroll } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { getProject } from "@theatre/core";
 
-import state from "../../state-stray.json";
+import state from "../../state-walk.json";
 import { useActiveSheetStore, useModalStore, useNavStateStore, usePreloaderStateStore, useScrollStore } from "../../../../utils/store";
 import { type Section, useCurrentSectionStore } from "../../../../utils/store";
 import { useEffect, useRef } from "react";
