@@ -92,7 +92,6 @@ export default function DirectionalUnlock({ containerRef, modalUIRef }: Directio
 
         const handleTouchMove = (e: TouchEvent) => {
             if (!containerRef.current) return;
-
             const currentTouchY = e.touches[0].clientY;
             const { scrollTop, scrollHeight, clientHeight } = containerRef.current;
             const isAtTop = !(scrollHeight - clientHeight) || scrollTop <= 2;
@@ -102,7 +101,7 @@ export default function DirectionalUnlock({ containerRef, modalUIRef }: Directio
 
             // Check if at boundary AND swiping past it
             if ((isAtTop && deltaY < 0) || (isAtBottom && deltaY > 0)) {
-                if (isAtBottom && stopPoints[currentSection] === maxSequenceLength) return;
+                if (deltaY > 0 && isAtBottom && stopPoints[currentSection] === maxSequenceLength) return;
 
                 e.preventDefault();
                 touchOverscrollRef.current += Math.abs(deltaY);
@@ -141,7 +140,7 @@ export default function DirectionalUnlock({ containerRef, modalUIRef }: Directio
             el.removeEventListener("touchmove", handleTouchMove);
             el.removeEventListener("touchend", handleTouchEnd);
         };
-    }, [isModalOpen, pullProgress]);
+    }, [isModalOpen, pullProgress, currentSection]);
 
     // Trigger the actual close when threshold is met
     useEffect(() => {
