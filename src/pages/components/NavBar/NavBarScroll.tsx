@@ -19,7 +19,10 @@ export default function NavBarScroll({ children, maxTranslate = 800}: Props) {
         const next = Math.min(scroll.offset * maxTranslate, maxTranslate);
         console.log(scroll.offset,next)
         // 🚨 one-way lock (like your GSAP pull)
-        lockedValue.current = Math.max(lockedValue.current, next);
+        lockedValue.current = Math.min(
+  Math.max(lockedValue.current, next),
+  260
+);
 
         ref.current.style.transform = `translateX(-${lockedValue.current}px)`;
       }

@@ -38,10 +38,9 @@ export default function ScrollSync() {
 
   const sequenceLength = activeSheet === "Intro Sequence" ? 0 : maxSequenceLength;
 
- useFrame(() => {
-  if (!scroll) return;
-  useScrollStore.getState().setScroll(scroll);
-});
+  useEffect(() => {
+    setScroll(scroll);
+  }, [scroll])
 
   useEffect(() => {
     scrollSheet.sequence.position = 0;
