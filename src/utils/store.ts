@@ -150,12 +150,18 @@ export const useScrollStore = create<ScrollStore>((set) => ({
 }))
 type HamburgerStore = {
   isHidden: boolean;
-  setIsHidden: (value: boolean) => void;
+  setIsHidden: (v: boolean) => void;
+
+  manualHidden: boolean;
+  setManualHidden: (v: boolean) => void;
 };
 
 export const useHamburgerStore = create<HamburgerStore>((set) => ({
   isHidden: false,
-  setIsHidden: (value) => set({ isHidden: value }),
+  setIsHidden: (v) => set({ isHidden: v }),
+
+  manualHidden: false,
+  setManualHidden: (v) => set({ manualHidden: v }),
 }));
 // * "Whenever you're stuck, make a new store!" :)
 type PullProgressStore = {
