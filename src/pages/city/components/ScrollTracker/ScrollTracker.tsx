@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { usePullProgressStore, useScrollStore } from "../../../../utils/store";
 import { maxSequenceLength, stopPoints } from "../ScrollSync/ScrollSync";
 import styles from "./ScrollTracker.module.scss";
-import { THRESHOLD } from "../Modal/DirectionlUnlock";
+import { THRESHOLD, MOBILE_THRESHOLD, isMobileDevice } from "../Modal/DirectionlUnlock";
 
 export default function ScrollTracker() {
     const scroll = useScrollStore((s) => s.scroll);
@@ -17,7 +17,7 @@ export default function ScrollTracker() {
             if (trackerRef.current && forceMeterRef.current) {
                 console.log(pullProgress)
                 trackerRef.current.style.width = `${scroll?.offset * 100}%`;
-                forceMeterRef.current.style.width = `${(pullProgress/THRESHOLD) * 100}%`;
+                forceMeterRef.current.style.width = `${(pullProgress/(isMobileDevice() ? MOBILE_THRESHOLD : THRESHOLD)) * 100}%`;
             }
             frameId = requestAnimationFrame(loop);
         };
