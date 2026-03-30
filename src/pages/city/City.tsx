@@ -178,12 +178,12 @@ export default function City() {
           <ScrollReminder />
           {/* </Html> */}
         </div>
-      }
+      }{activeSheet === "Cyber City"  && 
       <HamburgerButton   onClick={() => {
-    setNavState("opening")
-  }}
+    setNavState("opening")}
+  }
   
-/>
+/>}
       {/*activeSheet === "Cyber City"  && <NavBar />*/}
       {activeSheet === "Cyber City"  && <RegisterButton />}
       {navState === "open" && <Ham/>}
