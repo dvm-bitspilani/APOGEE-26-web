@@ -14,7 +14,7 @@ import { useEffect } from "react";
 import debugFunctions from "../../utils/debug";
 import * as THREE from "three";
 import { useActiveSheetStore, useNavStateStore, usePreloaderStateStore, useSceneLoadedStore } from "../../utils/store";
-// import NavBar from "../components/NavBar/NavBar";
+import NavBar from "../components/NavBar/NavBar";
 import RegisterButton from "../components/RegisterButton/RegisterButton";
 import Preloader from "../preloader/Preloader";
 import Modal from "./components/Modal/Modal";
@@ -24,6 +24,7 @@ import { EnterDashboard, ExitDashboard } from "../../utils/navViewSwitching";
 import ScrollTracker from "./components/ScrollTracker/ScrollTracker";
 import HamburgerButton from "./components/HamburgerButton";
 import { ScrollWatcher } from "./components/Countdown/ScrollWatcher";
+import NavBarScroll from "../components/NavBar/NavBarScroll";
 
 // import state from "./state-grace.json"
 // Set up loading progress tracking at module level (before useGLTF.preload() calls complete)
@@ -184,7 +185,9 @@ export default function City() {
   }
   
 />}
-      {/*activeSheet === "Cyber City"  && <NavBar />*/}
+{activeSheet === "Cyber City"  && <NavBarScroll>
+      <NavBar />
+      </NavBarScroll>}
       {activeSheet === "Cyber City"  && <RegisterButton />}
       {navState === "open" && <Ham/>}
       <Modal />
