@@ -1,10 +1,11 @@
 import { Canvas } from "@react-three/fiber";
+import { Environment } from "@react-three/drei";
 import extension from "@theatre/r3f/dist/extension";
 import studio from "@theatre/studio";
 import ReactHelmet from "../components/ReactHelmet";
 import styles from "./City.module.scss";
 import CityScene from "./components/CityScene/CityScene";
-// import ScrollReminder from "./components/ScrollReminder/ScrollReminder";
+import ScrollReminder from "./components/ScrollReminder/ScrollReminder";
 // import { sheet } from "./theatre";
 // import { Environment } from "@react-three/drei";
 // import { getProject } from "@theatre/core";
@@ -20,6 +21,7 @@ import Modal from "./components/Modal/Modal";
 import Ham from '../ham/Ham';
 import { project } from "./components/ScrollSync/ScrollSync";
 import { EnterDashboard, ExitDashboard } from "../../utils/navViewSwitching";
+import ScrollTracker from "./components/ScrollTracker/ScrollTracker";
 
 // import state from "./state-grace.json"
 // Set up loading progress tracking at module level (before useGLTF.preload() calls complete)
@@ -61,7 +63,7 @@ export default function City() {
     if (activeSheet !== "Cyber City") return;
     console.log("Playing sheet animation");
     project.ready.then(() => {
-      project.sheet("Cyber City").sequence.play({ iterationCount: Infinity });
+      // project.sheet("Cyber City").sequence.play({ iterationCount: Infinity });
       window.addEventListener("keydown", (e) => {
         if (import.meta.env.DEV) {
           if (e.key === "k") setNavState("opening");
@@ -125,6 +127,7 @@ export default function City() {
 
               gl.toneMapping = THREE.NoToneMapping
             }}
+            
           >
             {/* <mesh rotation={[-Math.PI ,Math.PI/4, 0]} position={[-20, 5, 100]}>
   <planeGeometry args={[100, 10]} />
@@ -138,6 +141,7 @@ export default function City() {
   />
   </EffectComposer> */}
             {/* <Environment preset="city" environmentIntensity={0.1}  /> */}
+            <Environment files="/environment/city.hdr" environmentIntensity={0.1} />
             {/* <SheetProvider sheet={sheet}> */}
             {/* <Environment preset="city" environmentIntensity={0.1} /> */}
             <SheetProvider key={activeSheet} sheet={project.sheet(activeSheet)}>
@@ -164,7 +168,7 @@ export default function City() {
             </SheetProvider>
           </Canvas>
           {/* <Html> */}
-          {/* <ScrollReminder /> */}
+          <ScrollReminder />
           {/* </Html> */}
         </div>
       }
@@ -172,6 +176,7 @@ export default function City() {
       {activeSheet === "Cyber City"  && <RegisterButton />}
       {navState === "open" && <Ham/>}
       <Modal />
+      <ScrollTracker />
     </>
   );
 }

@@ -3,6 +3,9 @@ import  { useRef, type JSX } from 'react'
 import { Center, useGLTF } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
 import type { GLTF } from 'three-stdlib'
+import { useHolographicMaterial } from '../../hooks/useHolographicMaterial'
+// import { materialAlphaTest } from 'three/src/nodes/TSL.js'
+// import { useCyberpunkFogMaterial } from '../../hooks/useCyberPunkFogMaterial'
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -16,7 +19,9 @@ type GLTFResult = GLTF & {
 }
 
 export function Logo(props: JSX.IntrinsicElements['group']) {
-  const { nodes, materials } = useGLTF('/models/dvmlogowide-v1.glb') as unknown as GLTFResult
+  const { nodes } = useGLTF('/models/dvmlogowide-v1.glb') as unknown as GLTFResult
+  // const mat = useCyberpunkFogMaterial()
+  const mat = useHolographicMaterial([0, 0.8, 0.9], 1,2.0);
 
   // 🔥 separate refs
   const mesh1Ref = useRef<THREE.Mesh>(null!)
@@ -38,10 +43,10 @@ useFrame((_, delta) => {
   <mesh
     ref={mesh1Ref}
     geometry={nodes.Plane001.geometry}
-    material={materials['Material.002']}
+    material={mat}
     position={[-0.35, -0.125, -0.56]}
     rotation={[Math.PI / 2, 0, 0]}
-    scale={0.064}
+    scale={[0.064,0.064*2,0.064]}
   />
 </group>
 
@@ -49,10 +54,10 @@ useFrame((_, delta) => {
   <mesh
     ref={mesh2Ref}
     geometry={nodes.Plane002.geometry}
-    material={materials['Material.003']}
+    material={mat}
     position={[0.616, 0.125, -0.56]}
     rotation={[Math.PI / 2, 0, 0]}
-    scale={[0.088, 0.087, 0.087]}
+    scale={[0.088, 0.087*2, 0.087]}
   />
 
 </group>

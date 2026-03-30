@@ -12,6 +12,7 @@ import { editable as e } from "@theatre/r3f";
 import { useMemo } from "react";
 import { useTrailIntensity } from "../../hooks/useTrailIntensity";
 import { useCyberpunkFogMaterial } from "../../hooks/useCyberPunkFogMaterial";
+// import { useHolographicMaterial } from "../../hooks/useHolographicMaterial";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -45,9 +46,13 @@ export default function Infernus() {
   // const neon = useNeonMaterial(true);
   // const neon2 = useNeonMaterial2(true);
   // const neon3 = useNeonMaterial3(true);
-  const neon = useNeonMaterial(true, [0, 1, 0.8], 1);  
-const neon2 = useNeonMaterial(true, [1, 0.5, 0], 1.5);    
-const neon3 = useNeonMaterial(true, [1, 0.5, 0], 1.25);  
+  const neonColor = useMemo<[number, number, number]>(() => [0, 1, 0.8], []);
+  const neonColor2 = useMemo<[number, number, number]>(() => [1, 0.5, 0], []);
+  const neonColor3 = useMemo<[number, number, number]>(() => [1, 0.5, 0], []);
+
+  const neon = useNeonMaterial(neonColor, 1);
+  const neon2 = useNeonMaterial(neonColor2, 1.5);
+  const neon3 = useNeonMaterial(neonColor3, 1.25);
   // try 0.6–0.8 for rough
 
   const infernusRef = useRef<THREE.Group>(null!);
@@ -151,6 +156,7 @@ const trailColor2 = useMemo(() => {
   return new THREE.Color("#f3ff0f").multiplyScalar(trailIntensity);
 }, [trailIntensity]);
 const mat = useCyberpunkFogMaterial();
+// const mat = useHolographicMaterial(true, [0, 1, 0.8], 1);
 
   return (
     <>
@@ -164,7 +170,7 @@ const mat = useCyberpunkFogMaterial();
             dispose={null}
             position={[0.5, -6, 75]}
             scale={[6, 6, 6]}
-            frustumCulled={false}
+            // frustumCulled={false}
           >
             <group rotation={[Math.PI / 2, 0, 0]} scale={1.492}>
               <group position={[-0.3, 0, 0]} ref={leftTrailRef} />
@@ -226,7 +232,7 @@ const mat = useCyberpunkFogMaterial();
                   receiveShadow
                   geometry={nodes.meshId5_name_5.geometry}
                   // material={neonActive ? neon : materials.blue}
-                  material={neon2}
+                  material={neon}
                 />
               </Trail>
               {/* Left trail */}
@@ -239,11 +245,11 @@ const mat = useCyberpunkFogMaterial();
                 // color={new THREE.Color("#40ccef").multiplyScalar(3.5)}
                 color={trailColor}
               >
-                <mesh
+                {/* <mesh
                   geometry={nodes.meshId5_name_5.geometry}
                   // material={neonActive ? neon : materials.blue}
-                  material={neon3}
-                />
+                  material={neon3} */}
+                {/* /> */}
               </Trail>
 
               {/* Right trail */}
@@ -256,11 +262,11 @@ const mat = useCyberpunkFogMaterial();
                 // color={new THREE.Color("#40ccef").multiplyScalar(3.5)}
                 color={trailColor}
               >
-                <mesh
+                {/* <mesh
                   geometry={nodes.meshId5_name_5.geometry}
                   // material={neonActive ? neon : materials.blue}
                   material={neon}
-                />
+                /> */}
               </Trail>
 
             </group>

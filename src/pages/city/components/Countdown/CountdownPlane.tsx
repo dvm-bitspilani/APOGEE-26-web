@@ -2,34 +2,45 @@ import { Html } from "@react-three/drei";
 // import { editable as e } from "@theatre/r3f";
 import * as THREE from "three";
 import styles from "../InteractivePlane/InteractivePlane.module.scss";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useFrame } from "@react-three/fiber";
-import { useTheatreCameraStore } from "../../../../utils/store";
+import { useNavStateStore, useTheatreCameraStore } from "../../../../utils/store";
 import Countdown from "./Countdown"; // 👈 adjust path if needed
 
 // const EditableMesh = e.mesh;
-
 const InteractivePlane = () => {
   const ref = useRef<any>(null);
-  const [isInRange, setInRange] = useState(false);
+  const [isInRange, setInRange] = useState(true);
+
+const navState = useNavStateStore((s) => s.navState);
   const theatreCamera = useTheatreCameraStore((s) => s.theatreCamera);
 
   const camWorldPos = new THREE.Vector3();
   const meshWorldPos = new THREE.Vector3();
+const htmlRef = useRef<HTMLDivElement>(null);
+// const isInRangeRef = useRef(false);
+const navStateRef = useRef(navState);
 
-  useFrame(() => {
-    if (!ref.current || !theatreCamera) return;
+useEffect(() => {
+  navStateRef.current = navState;
+}, [navState]);
 
-    ref.current.getWorldPosition(meshWorldPos);
-    theatreCamera.getWorldPosition(camWorldPos);
+useFrame(() => {
+  if (!ref.current || !theatreCamera || !htmlRef.current) {
+    return};
 
-    const distance = camWorldPos.distanceTo(meshWorldPos);
-    const range = distance <= 200;
+  ref.current.getWorldPosition(meshWorldPos);
+  theatreCamera.getWorldPosition(camWorldPos);
 
-    if (range !== isInRange) {
-      setInRange(range);
-    }
-  });
+  const distance = camWorldPos.distanceTo(meshWorldPos);
+  const range = distance <= 200 && navStateRef.current === "off";
+  if (range !== isInRange) {
+    setInRange(range);
+
+    htmlRef.current.style.opacity = range ? "1" : "0";
+    htmlRef.current.style.pointerEvents = range ? "auto" : "none";
+  }
+});
 
   return (
     <mesh
@@ -49,6 +60,7 @@ const InteractivePlane = () => {
 
       <Html
         wrapperClass={styles.myHtmlWrapper}
+        ref={htmlRef}
         transform
         center
         distanceFactor={8}

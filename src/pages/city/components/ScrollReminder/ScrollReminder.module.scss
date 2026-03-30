@@ -1,6 +1,6 @@
 @use '../../../../assets/global.scss' as *;
 
-$numberOfArrows: 4;
+$numberOfArrows: 2;
 
 :export {
     numberOfArrows: $numberOfArrows;
@@ -9,7 +9,7 @@ $numberOfArrows: 4;
   color: rgb(234, 234, 234);
   font-size: 1.5rem;
   margin-left:0.6rem;
-  margin-bottom: 5rem;   // controls gap between text and arrows
+  margin-bottom: -0.25rem;   // controls gap between text and arrows
 //   text-align: center;
   @media (max-width: 768px){
     margin-bottom:0;
@@ -30,7 +30,7 @@ $numberOfArrows: 4;
 
     display: flex;
     flex-direction: column;
-    // align-items: center;
+    align-items: center;
     
     .scrollArrows {
         padding: 20px;
@@ -89,8 +89,8 @@ $numberOfArrows: 4;
     }
 }
 
-.scrollReminder{
+// .scrollReminder{
     // position: fixed;
     // right: -15px;
     // bottom: 15px;
-}
+// }

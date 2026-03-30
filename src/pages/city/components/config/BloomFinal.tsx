@@ -3,12 +3,12 @@ import { Bloom, EffectComposer } from "@react-three/postprocessing";
 
 export default function BloomFinal() {
   return (
-    <EffectComposer multisampling={0}>
+    <EffectComposer multisampling={0} >
       <Bloom
         intensity={2.61}
         luminanceThreshold={1.34}
         luminanceSmoothing={0.9}
-        mipmapBlur
+        // mipmapBlur
       />
       {/* <MotionBlur maxIntensity={1.75} /> */}
     </EffectComposer>
