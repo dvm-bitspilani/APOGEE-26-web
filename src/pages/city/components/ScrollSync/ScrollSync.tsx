@@ -54,27 +54,42 @@ export default function ScrollSync() {
   }, [showPreloader])
   // Added to control front movement by up arrow and back mpovement by down arrow
   useEffect(() => {
-    const scrollContainer = scroll.el;
-    const scrollStep = 400;
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (isModalOpen || showPreloader) return;
+  const scrollContainer = scroll.el;
+  const scrollStep = 400;
 
-      if (event.key === "ArrowUp") {
+  const handleKeyDown = (event: KeyboardEvent) => {
+    if (isModalOpen || showPreloader) return;
+
+    // 🔥 prevent default scroll (important)
+    if (event.code === "ArrowUp" || event.code === "ArrowDown") {
+      event.preventDefault();
+    }
+
+    switch (event.code) {
+      case "KeyS":
+      case "ArrowDown":
         scrollContainer.scrollBy({
-          top: scrollStep,
+          top: -scrollStep, // ⬆️ up = negative
           behavior: "smooth",
         });
-      } else if (event.key === "ArrowDown") {
+        break;
+
+      case "KeyW":
+      case "ArrowUp":
         scrollContainer.scrollBy({
-          top: -scrollStep,
+          top: scrollStep, // ⬇️ down = positive
           behavior: "smooth",
         });
-      }
-    };
+        break;
+    }
+  };
 
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [scroll.el, isModalOpen, showPreloader]);
+  window.addEventListener("keydown", handleKeyDown);
+
+  return () => {
+    window.removeEventListener("keydown", handleKeyDown);
+  };
+}, [scroll.el, isModalOpen, showPreloader]);
 
   useEffect(() => {
     console.log(currentSection,  stopPoints[currentSection] * scroll.el.scrollHeight / sequenceLength)

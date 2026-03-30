@@ -10,7 +10,7 @@ import Countdown from "./Countdown"; // 👈 adjust path if needed
 // const EditableMesh = e.mesh;
 const InteractivePlane = () => {
   const ref = useRef<any>(null);
-  const [isInRange, setInRange] = useState(false);
+  const [isInRange, setInRange] = useState(true);
 
 const navState = useNavStateStore((s) => s.navState);
   const theatreCamera = useTheatreCameraStore((s) => s.theatreCamera);
@@ -26,14 +26,14 @@ useEffect(() => {
 }, [navState]);
 
 useFrame(() => {
-  if (!ref.current || !theatreCamera || !htmlRef.current) return;
+  if (!ref.current || !theatreCamera || !htmlRef.current) {
+    return};
 
   ref.current.getWorldPosition(meshWorldPos);
   theatreCamera.getWorldPosition(camWorldPos);
 
   const distance = camWorldPos.distanceTo(meshWorldPos);
   const range = distance <= 200 && navStateRef.current === "off";
-
   if (range !== isInRange) {
     setInRange(range);
 

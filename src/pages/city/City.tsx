@@ -1,4 +1,5 @@
 import { Canvas } from "@react-three/fiber";
+import { Environment } from "@react-three/drei";
 import extension from "@theatre/r3f/dist/extension";
 import studio from "@theatre/studio";
 import ReactHelmet from "../components/ReactHelmet";
@@ -140,6 +141,7 @@ export default function City() {
   />
   </EffectComposer> */}
             {/* <Environment preset="city" environmentIntensity={0.1}  /> */}
+            <Environment files="/environment/city.hdr" environmentIntensity={0.1} />
             {/* <SheetProvider sheet={sheet}> */}
             {/* <Environment preset="city" environmentIntensity={0.1} /> */}
             <SheetProvider key={activeSheet} sheet={project.sheet(activeSheet)}>
