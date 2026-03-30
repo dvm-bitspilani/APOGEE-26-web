@@ -14,7 +14,7 @@ type GLTFResult = GLTF & {
 }
 
 export default function Cone(props: JSX.IntrinsicElements['group']) {
-  const { nodes } = useGLTF('/public/models/cone.glb') as unknown as GLTFResult
+  const { nodes } = useGLTF('/models/cone.glb') as unknown as GLTFResult
   const mat = useHolographicMaterial([0, 0.8, 0.9], 0.5,0.85);
   return (
     <group {...props} dispose={null}>
@@ -30,5 +30,5 @@ export default function Cone(props: JSX.IntrinsicElements['group']) {
   )
 }
 
-useGLTF.preload('/public/models/cone.glb')
+useGLTF.preload('/models/cone.glb')
 

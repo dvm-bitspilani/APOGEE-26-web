@@ -1,5 +1,5 @@
-import { Environment, ScrollControls } from "@react-three/drei";
-import { Suspense, useEffect, useRef } from "react";
+import {ScrollControls } from "@react-three/drei";
+import { Suspense, useEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
 import { useCityStore, usePivotStore } from "../../../../utils/store";
 import ScrollSync from "../ScrollSync/ScrollSync";
@@ -54,6 +54,45 @@ export default function CityScene({ }: any) {
 
   const color = "#3e93be";
   // const mat = useCyberpunkFogMaterial();
+
+  const memoConstellation = useMemo(() => <Constellation key="Constellation" />, []);
+  const memoGlobe = useMemo(
+    () => (
+      <e.group position={[-1.75, -1.8, -3]} scale={1.5} rotation={[0, 0, 0.22]} theatreKey="Globe">
+        <Globe />
+      </e.group>
+    ),
+    []
+  );
+  const memoCone = useMemo(
+    () => (
+      <e.group position={[1.84, -1.98, 12.48]} scale={2.3} rotation={[0, 0, 0]} theatreKey="Cone">
+        <Cone />
+      </e.group>
+    ),
+    []
+  );
+  const memoLogo = useMemo(
+    () => (
+      <Suspense fallback={null}>
+        <e.group
+          position={[1.785, -1.45, 12.35]}
+          scale={[0.25, 0.25, 0.625]}
+          theatreKey="Logo"
+          onClick={(e: any) => {
+            e.stopPropagation();
+            window.open("https://bits-dvm.org", "_blank");
+          }}
+          onPointerOver={() => (document.body.style.cursor = "pointer")}
+          onPointerOut={() => (document.body.style.cursor = "default")}
+        >
+          <Logo />
+        </e.group>
+      </Suspense>
+    ),
+    []
+  );
+
   return (
     <>
       {/* <SceneDevOrProd /> */}
@@ -71,45 +110,11 @@ export default function CityScene({ }: any) {
           <group ref={cityRef}>
             {/* <axesHelper args={[200]} /> */}
             {/* <CityGrid /> */}
-            <Environment files="/environment/city.hdr" environmentIntensity={0.1} />
-            <Constellation />
-
-            <e.group position={[-1.75, -1.8, -3]} scale={1.5} rotation={[0, 0, 0.22]}
-              theatreKey="Globe"
-              // onClick={(e: any) => {
-              //   e.stopPropagation();
-              //   window.open("https://bits-apogee.org", "_blank");
-              // }}
-              // onPointerOver={() => (document.body.style.cursor = "pointer")}
-              // onPointerOut={() => (document.body.style.cursor = "default")}
-            >
-              <Globe />
-              </e.group>
-              <e.group position={[1.84, -1.98, 12.48]} scale={2.3} rotation={[0, 0, 0]}
-              theatreKey="Cone"
-              // onClick={(e: any) => {
-              //   e.stopPropagation();
-              //   window.open("https://bits-apogee.org", "_blank");
-              // }}
-              // onPointerOver={() => (document.body.style.cursor = "pointer")}
-              // onPointerOut={() => (document.body.style.cursor = "default")}
-            >
-              <Cone />
-            </e.group>
-
-            <Suspense fallback={null}>
-              <e.group position={[1.785, -1.45, 12.35]} scale={[0.25,0.25,0.625]} 
-                theatreKey="Logo"
-                onClick={(e: any) => {
-                  e.stopPropagation();
-                  window.open("https://bits-dvm.org", "_blank");
-                }}
-                onPointerOver={() => (document.body.style.cursor = "pointer")}
-                onPointerOut={() => (document.body.style.cursor = "default")}
-              >
-                <Logo />
-              </e.group>
-            </Suspense>
+            {/* <Environment files="/environment/city.hdr" environmentIntensity={0.1} /> */}
+            {memoConstellation}
+            {memoGlobe}
+            {memoCone}
+            {memoLogo}
           </group>
         </group>
 
@@ -129,10 +134,11 @@ export default function CityScene({ }: any) {
           {/* Use CItyDebug for position x y and z if by chance u rotate here whole city will be rotated around its axis */}
           {/* <CityDebug /> */}
           <ScrollSync />
+
+        <CountdownPlane />
         </ScrollControls>
         {/* <InteractivePlane /> */}
         {/* <InteractivePlane2/> */}
-        <CountdownPlane />
       </group>
     </>
   );

@@ -15,6 +15,7 @@ export default function Ham() {
   const speedDashTicksRef = useRef<HTMLDivElement[]>([]);
   const bigDashTicksRef = useRef<HTMLDivElement[]>([]);
   const nameTagRef = useRef<HTMLDivElement[]>([]);
+  const radialCircleDummyRef = useRef<HTMLDivElement>(null);
   const radialCircle1Ref = useRef<HTMLDivElement>(null);
   const radialCircle2Ref = useRef<HTMLDivElement>(null);
   const speedDialRef = useRef<HTMLDivElement>(null);
@@ -81,13 +82,29 @@ export default function Ham() {
     });
     settotalSpeedPurple(toPurple);
   };
+  const onClickNameTag = (callback: () => void, duration: number) => {
+    gsap.to(speedDialRef.current, {
+      rotation: 90,
+      duration: duration,
+      onUpdate: () => onUpdate(0.02),
+    });
+    gsap.to(radialCircle1Ref.current, {
+      rotation: 0,
+      duration: duration,
+      onComplete: callback,
+    });
+    gsap.to(radialCircleDummyRef.current, {
+      rotation: 0,
+      duration: duration,
+    });
+  };
 
   const nameTags = useMemo(() => {
     return [
       {
         id: 1,
         animId: 3,
-        label: "<\u00A0 developers",
+        label: "< getting to pilani",
         side: "Left",
         mouseEnter: () => {
           gsap.to(speedDialRef.current, {
@@ -96,9 +113,18 @@ export default function Ham() {
             onUpdate: () => onUpdate(3, 3),
           });
           gsap.to(radialCircle1Ref.current, { rotation: -127, duration: 0.5 });
+          gsap.to(radialCircleDummyRef.current, {
+            rotation: -127,
+            duration: 0.5,
+          });
           // gsap.to(radialCircle2Ref.current, { rotation: 55, duration: 0.5 });
           // bigDashTicksUpdate(3);
           // speedDashTicksUpdate(3);
+        },
+        onClick: () => {
+          onClickNameTag(() => {
+            window.location.href = "/getting-to-pilani";
+          }, 0.6);
         },
       },
       {
@@ -116,15 +142,24 @@ export default function Ham() {
             rotation: -145.5,
             duration: 0.5,
           });
+          gsap.to(radialCircleDummyRef.current, {
+            rotation: -145.5,
+            duration: 0.5,
+          });
           // gsap.to(radialCircle2Ref.current, { rotation: 36.5, duration: 0.5 });
           // bigDashTicksUpdate(2);
           // speedDashTicksUpdate(2);
+        },
+        onClick: () => {
+          onClickNameTag(() => {
+            window.location.href = "/contact-us";
+          }, 0.6);
         },
       },
       {
         id: 3,
         animId: 1,
-        label: "<\u00A0\u00A0 state",
+        label: "<\u00A0 developers",
         side: "Left",
         mouseEnter: () => {
           gsap.to(speedDialRef.current, {
@@ -133,9 +168,18 @@ export default function Ham() {
             onUpdate: () => onUpdate(1, 1),
           });
           gsap.to(radialCircle1Ref.current, { rotation: -164, duration: 0.5 });
+          gsap.to(radialCircleDummyRef.current, {
+            rotation: -164,
+            duration: 0.5,
+          });
           // gsap.to(radialCircle2Ref.current, { rotation: 18, duration: 0.5 });
           // bigDashTicksUpdate(1);
           // speedDashTicksUpdate(1);
+        },
+        onClick: () => {
+          onClickNameTag(() => {
+            window.location.href = "/developers";
+          }, 0.6);
         },
       },
       {
@@ -150,9 +194,18 @@ export default function Ham() {
             onUpdate: () => onUpdate(7, 4),
           });
           gsap.to(radialCircle1Ref.current, { rotation: -55, duration: 0.5 });
+          gsap.to(radialCircleDummyRef.current, {
+            rotation: -55,
+            duration: 0.5,
+          });
           // gsap.to(radialCircle2Ref.current, { rotation: 126, duration: 0.5 });
           // bigDashTicksUpdate(7);
           // speedDashTicksUpdate(4);
+        },
+        onClick: () => {
+          onClickNameTag(() => {
+            window.location.href = "/media-partners";
+          }, 0.4);
         },
       },
       {
@@ -167,9 +220,18 @@ export default function Ham() {
             onUpdate: () => onUpdate(8, 5),
           });
           gsap.to(radialCircle1Ref.current, { rotation: -36, duration: 0.5 });
+          gsap.to(radialCircleDummyRef.current, {
+            rotation: -36,
+            duration: 0.5,
+          });
           // gsap.to(radialCircle2Ref.current, { rotation: 145, duration: 0.5 });
           // bigDashTicksUpdate(8);
           // speedDashTicksUpdate(5);
+        },
+        onClick: () => {
+          onClickNameTag(() => {
+            window.location.href = "/sponsors";
+          }, 0.4);
         },
       },
       {
@@ -184,9 +246,18 @@ export default function Ham() {
             onUpdate: () => onUpdate(9, 6),
           });
           gsap.to(radialCircle1Ref.current, { rotation: -18, duration: 0.5 });
+          gsap.to(radialCircleDummyRef.current, {
+            rotation: -18,
+            duration: 0.5,
+          });
           // gsap.to(radialCircle2Ref.current, { rotation: 161, duration: 0.5 });
           // bigDashTicksUpdate(10);
           // speedDashTicksUpdate(6);
+        },
+        onClick: () => {
+          onClickNameTag(() => {
+            window.location.href = "/events";
+          }, 0.2);
         },
       },
     ];
@@ -243,6 +314,23 @@ export default function Ham() {
           duration: mainDuration,
         })
         .to(radialCircle1Ref.current, { rotation: 0, duration: mainDuration });
+      gsap
+        .timeline({
+          defaults: { ease: "power1.inOut" },
+        })
+        .fromTo(
+          radialCircleDummyRef.current,
+          { xPercent: -50, yPercent: -50, rotation: -180 },
+          { rotation: -70, duration: mainDuration },
+        )
+        .to(radialCircleDummyRef.current, {
+          rotation: -120,
+          duration: mainDuration,
+        })
+        .to(radialCircleDummyRef.current, {
+          rotation: 0,
+          duration: mainDuration,
+        });
 
       gsap
         .timeline({ defaults: { ease: "power1.inOut" } })
@@ -271,7 +359,7 @@ export default function Ham() {
       .timeline({ defaults: { ease: "power1.inOut" }, onComplete: startAnim })
       .fromTo(
         mainSpeedometerRef.current,
-        { scale: 0, opacity: 0 },
+        { scale: 1, opacity: 0 },
         { scale: 1, opacity: 1, duration: 0.3 },
       )
       .fromTo(
@@ -285,6 +373,20 @@ export default function Ham() {
     <div className={styles.container}>
       <div className={styles.scanlineoverlay}></div>
       {/* <img src={bg} alt="Ham" className={styles.bgImg} /> */}
+      <svg
+        width="101"
+        height="59"
+        viewBox="0 0 101 59"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className={styles.goBack}
+      >
+        <path
+          d="M0.000376701 58.1818V1.90735e-05H13.4549V4.45457H5.09129V53.7273H13.4549V58.1818H0.000376701ZM46.1642 48.7273L25.8006 28.3637L46.1642 8.00002L49.6642 11.4546L35.2551 25.8637H72.5733V30.8637H35.2551L49.6642 45.2273L46.1642 48.7273ZM100.021 1.90735e-05V58.1818H86.5667V53.7273H94.9304V4.45457H86.5667V1.90735e-05H100.021Z"
+          fill="#FFF100"
+        />
+      </svg>
+
       <div className={styles.speedometer} ref={mainSpeedometerRef}>
         {/* Inner dash dash lines jo multiple hai */}
         {Array.from({ length: 7 }).map((_, i) => (
@@ -294,6 +396,11 @@ export default function Ham() {
         {/* Speedometer speed */}
         <div className={styles.speedFont}>
           <span>{speedText}</span>
+        </div>
+
+        {/* Dummy Glow circle */}
+        <div className={styles.radialCircleDummy} ref={radialCircleDummyRef}>
+          <div className={styles.radialCircleDummyInner}></div>
         </div>
 
         {/* Actual speedometer coloured bar */}
@@ -364,12 +471,13 @@ export default function Ham() {
         </div>
 
         {/* Name tags saare */}
-        {nameTags.map(({ id, label, side, mouseEnter, animId }) => (
+        {nameTags.map(({ id, label, side, mouseEnter, animId, onClick }) => (
           <div
             ref={(el) => {
               if (el) nameTagRef.current[animId] = el;
             }}
             key={id}
+            onClick={onClick}
             className={styles[`nameTagCont${id}`]}
             onMouseEnter={() => {
               if (mouseEnter && startHovering) {

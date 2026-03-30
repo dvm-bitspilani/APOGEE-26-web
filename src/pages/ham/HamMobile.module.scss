@@ -1,11 +1,13 @@
 @use "/src/assets/global.scss" as *;
+@import url("https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap");
 
 .container {
   height: 100vh;
   width: 100vw;
   position: fixed;
   top: 0;
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px) brightness(0.5);
+
   .bgImg {
     position: absolute;
     top: 0;
@@ -28,20 +30,74 @@
     pointer-events: none;
     z-index: 100000;
   }
+  .goBack {
+    position: absolute;
+    top: 2%;
+    left: 5%;
+    width: 14vw;
+    cursor: pointer;
+  }
   .innerCont {
     height: 100vh;
     width: 100vw;
+
+    .statCards {
+      position: absolute;
+      top: 27vw;
+      left: 58%;
+      transform: translate(-35%, 0%);
+      width: 43vw;
+      display: flex;
+      align-items: stretch;
+      gap: 3vw;
+
+      .statCard {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        padding: 2vw 3vw 2vw;
+        background-color: #252727;
+        width: 20vw;
+        border-left: 2px solid #cc5fcf;
+
+        &:first-child {
+          border-left: 2px solid #7ee8c8;
+        }
+
+        &_Label {
+          font-family: "Share Tech Mono", monospace;
+          font-size: 2vw;
+          letter-spacing: 0.12em;
+          color: #6b6b75;
+          text-transform: uppercase;
+        }
+
+        &Value {
+          font-family: "Share Tech Mono", monospace;
+          font-size: 6vw;
+          font-weight: 400;
+          line-height: 1;
+
+          &Cyan {
+            color: #7ee8c8;
+          }
+          &Pink {
+            color: #cc5fcf;
+          }
+        }
+      }
+    }
     .mainBox {
       position: absolute;
       bottom: 11%;
       left: 55%;
       transform: translate(-35%, 0%);
-      width: 64vw;
+      width: 63vw;
       display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: column-reverse;
-      gap: 4vh;
+      gap: 3vh;
       .box {
         width: 100%;
         display: flex;
@@ -84,11 +140,11 @@
         bottom: 0;
         left: 30%;
         width: 100%;
-        height: calc(83vw + 22vh);
+        height: calc(78vw + 17vh);
         display: flex;
         flex-direction: column-reverse;
         justify-content: flex-end;
-        align-items: left;
+        align-items: flex-start;
         gap: 1vw;
         .bar {
           width: 60%;
@@ -139,39 +195,57 @@
       }
       .upperStyles {
         position: absolute;
-        bottom: calc(83vw + 22vh);
+        bottom: calc(78vw + 17vh);
         left: 30%;
         width: 100%;
         height: 20vh;
-        .barsContainer {
+        .svgBars {
           position: absolute;
-          bottom: 0;
-          right: 30%;
-          width: 30%;
-          display: flex;
-          flex-direction: column;
-          justify-content: flex-end;
-          align-items: left;
-          gap: 0.5vw;
-          rotate: 20deg;
-          .bar {
-            width: 100%;
-            height: 1vw;
-            background-color: #252727;
-            rotate: 20deg;
-          }
+          bottom: 1vw;
+          left: -0.5vw;
+          width: auto;
+          height: 30vw;
         }
         .angleBar {
           position: absolute;
           right: 31%;
           bottom: 0;
           width: 0.7vw;
-          height: 100%;
+          height: 28.1vw;
           background: linear-gradient(to top, #b301ff 50%, #252727 50%);
           background-size: 100% 200%;
           background-position: 0% 0%;
-          transform: translateY(0.5px) rotate(20deg);
+          transform: rotate(27deg) translateY(0.5px);
           transform-origin: bottom center;
+        }
+        .angleBarDummy {
+          position: absolute;
+          right: 31%;
+          bottom: 0;
+          width: 0.7vw;
+          height: 14.05vw;
+          background: linear-gradient(to top, #b301ff 50%, #e54640 50%);
+          background-size: 100% 200%;
+          background-position: 0% 0%;
+          transform: rotate(27deg) translateY(-100%);
+          transform-origin: bottom center;
+          box-shadow: 0px 0px 3px 0.5px #e54640;
+        }
+        .angleTopBarCont {
+          position: absolute;
+          left: 87%;
+          bottom: 25.6vw;
+          display: flex;
+          gap: 0.53vw;
+          // box-shadow: 0px 0px 15px 0.5px #b301ff;
+          // backdrop-filter: drop-shadow(0px 0px 15px #b301ff);
+
+          .angleTopBar {
+            width: 0.7vw;
+            height: 4vw;
+            background-color: #e54640;
+            box-shadow: 0px 0px 3px 0.5px #e54640;
+          }
         }
       }
     }

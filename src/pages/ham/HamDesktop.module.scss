@@ -5,7 +5,15 @@
   width: 100vw;
   position: fixed;
   top: 0;
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px) brightness(0.6);
+
+  .goBack {
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    width: 5vw;
+    cursor: pointer;
+  }
 
   .bgImg {
     position: absolute;
@@ -52,17 +60,51 @@
         border-radius: 50%;
         clip-path: rect(0% 100% 50% 0%);
         z-index: 5;
+        pointer-events: none;
+        background: repeating-conic-gradient(
+          #4df4fc 0deg var(--dash),
+          transparent var(--dash) var(--gap)
+        );
 
-        background: repeating-conic-gradient(#4df4fc 0deg var(--dash),
-            transparent var(--dash) var(--gap));
-
-        mask: radial-gradient(circle,
-            transparent 0% 39.5%,
-            black 39.5% var(--stop),
-            transparent var(--stop) 100%);
+        mask: radial-gradient(
+          circle,
+          transparent 0% 39.5%,
+          black 39.5% var(--stop),
+          transparent var(--stop) 100%
+        );
       }
     }
 
+    .radialCircleDummy {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      width: 62vw;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      clip-path: rect(0% 100% 50% 0%);
+      // background: radial-gradient(
+      //   circle,
+      //   transparent 50%,
+      //   #b301ffe8 80%,
+      //   #b301ffe8 100%
+      // );
+      // transform: translate(-50%, -50%);
+      z-index: 5;
+      pointer-events: none;
+      .radialCircleDummyInner {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: calc(52vw - 5px);
+        aspect-ratio: 1;
+        border-radius: 50%;
+        // background-color: #000;
+        box-shadow: 0px 0px 57px 0px #b301ffce;
+        backdrop-filter: blur(10px);
+      }
+    }
     .radialCircle1 {
       position: absolute;
       top: 100%;
@@ -71,11 +113,14 @@
       aspect-ratio: 1;
       border-radius: 50%;
       clip-path: rect(0% 100% 50% 0%);
-      background: radial-gradient(circle,
-          transparent 50%,
-          #b301ffe8 80%,
-          #b301ffe8 100%);
+      background: radial-gradient(
+        circle,
+        transparent 50%,
+        #b301ffe8 80%,
+        #b301ffe8 100%
+      );
       z-index: 5;
+      pointer-events: none;
       // animation: spin2 0.8s linear forwards;
       // @keyframes spin2 {
       //   from {
@@ -95,14 +140,17 @@
       aspect-ratio: 1;
       border-radius: 50%;
       clip-path: rect(0% 100% 50% 0%);
-      background: radial-gradient(circle,
-          transparent 50%,
-          #0000003a 60%,
-          #b301ffd5 80%,
-          #b301ff 100%);
+      background: radial-gradient(
+        circle,
+        transparent 50%,
+        #0000003a 60%,
+        #b301ffd5 80%,
+        #b301ff 100%
+      );
       transform: translate(-50%, -50%) rotate(0deg);
       opacity: 0.5;
       z-index: 5;
+      pointer-events: none;
       // animation: spin 0.8s linear forwards;
       // @keyframes spin {
       //   from {
@@ -127,11 +175,14 @@
       aspect-ratio: 1;
       border-radius: 50%;
       clip-path: rect(50% 100% 100% 0%);
-      background: repeating-conic-gradient(#4df4fc 99deg var(--dash),
-          transparent var(--dash) var(--gap));
+      background: repeating-conic-gradient(
+        #4df4fc 99deg var(--dash),
+        transparent var(--dash) var(--gap)
+      );
       mask: radial-gradient(circle, transparent 0% 69.5%, black 69.5% 100%);
       opacity: 0.2;
       z-index: 5;
+      pointer-events: none;
     }
 
     .dottedIMG {
@@ -141,6 +192,7 @@
       transform: translate(-50%, -50%);
       width: 43.5vw;
       z-index: 5;
+      pointer-events: none;
     }
 
     .speedoDashCircle {
@@ -152,10 +204,13 @@
       border-radius: 50%;
       transform: translate(-50%, -50%);
       clip-path: rect(0% 100% 50% 0%);
-      background: repeating-conic-gradient(#4df4fc 0deg 0.6deg,
-          transparent 0.6deg 6deg);
+      background: repeating-conic-gradient(
+        #4df4fc 0deg 0.6deg,
+        transparent 0.6deg 6deg
+      );
       mask: radial-gradient(circle, transparent 0% 68.8%, black 68.8% 100%);
       z-index: 5;
+      pointer-events: none;
     }
 
     --afterBG1: #b300ff;
@@ -175,6 +230,7 @@
         width: 0vw;
         height: 29vw;
         z-index: 5;
+        pointer-events: none;
 
         &::after {
           content: "";
@@ -199,6 +255,7 @@
         width: 0vw;
         height: 29vw;
         z-index: 5;
+        pointer-events: none;
 
         &::after {
           content: "";
@@ -238,11 +295,14 @@
         aspect-ratio: 1;
         border-radius: 50%;
         clip-path: polygon(35% 100%, 51% 100%, 51% 50%, 35% 50%);
-        background: repeating-conic-gradient(#b301ff 90deg var(--dash),
-            transparent var(--dash) var(--gap));
+        background: repeating-conic-gradient(
+          #b301ff 90deg var(--dash),
+          transparent var(--dash) var(--gap)
+        );
         mask: radial-gradient(circle, transparent 0% 68.2%, black 68.2% 100%);
         z-index: 4;
         opacity: 0;
+        pointer-events: none;
       }
     }
 
@@ -310,17 +370,21 @@
           width: var(--width#{$j});
           height: 100%;
           background-color: #0000004d;
-          clip-path: polygon(calc(var(--width#{$j}) - 2vw) 0,
+          clip-path: polygon(
+            calc(var(--width#{$j}) - 2vw) 0,
             100% 100%,
             0% 100%,
-            2vw 0%);
+            2vw 0%
+          );
           border: 1px solid #33e7ff;
           z-index: 2;
-          mask-image: linear-gradient(to right,
-              #000 0%,
-              transparent 85%,
-              transparent 99%,
-              #000 100%);
+          mask-image: linear-gradient(
+            to right,
+            #000 0%,
+            transparent 85%,
+            transparent 99%,
+            #000 100%
+          );
         }
 
         .nameTagBorderLeft#{$j} {
@@ -402,17 +466,21 @@
           width: var(--width#{$j});
           height: 100%;
           background-color: #0000004d;
-          clip-path: polygon(calc(var(--width#{$j}) - 2vw) 0,
+          clip-path: polygon(
+            calc(var(--width#{$j}) - 2vw) 0,
             100% 100%,
             0% 100%,
-            2vw 0%);
+            2vw 0%
+          );
           border: 1px solid #33e7ff;
           z-index: 2;
-          mask-image: linear-gradient(to left,
-              #000 0%,
-              transparent 85%,
-              transparent 99%,
-              #000 100%);
+          mask-image: linear-gradient(
+            to left,
+            #000 0%,
+            transparent 85%,
+            transparent 99%,
+            #000 100%
+          );
         }
 
         .nameTagBorderRight#{$j} {
@@ -440,13 +508,15 @@
       width: 40vw;
       aspect-ratio: 1;
       border-radius: 50%;
-      background: radial-gradient(circle,
-          transparent 0%,
-          black 10%,
-          black 20%,
-          black 30%,
-          transparent 70%,
-          transparent 100%);
+      background: radial-gradient(
+        circle,
+        transparent 0%,
+        black 10%,
+        black 20%,
+        black 30%,
+        transparent 70%,
+        transparent 100%
+      );
 
       span {
         position: absolute;
@@ -468,6 +538,7 @@
       width: 2vw;
       height: 24vw;
       z-index: 5;
+      pointer-events: none;
 
       svg {
         position: absolute;
