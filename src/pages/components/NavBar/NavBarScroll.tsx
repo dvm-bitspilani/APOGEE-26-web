@@ -6,7 +6,7 @@ type Props = {
   maxTranslate?: number;
 };
 
-export default function NavBarScroll({ children, maxTranslate = 800}: Props) {
+export default function NavBarScroll({ children, maxTranslate = 1100}: Props) {
   const scroll = useScrollStore((s) => s.scroll);
   const ref = useRef<HTMLDivElement>(null);
   const lockedValue = useRef(0);
