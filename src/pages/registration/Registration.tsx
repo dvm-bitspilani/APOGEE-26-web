@@ -56,7 +56,7 @@ function Registration() {
     images.forEach((src) => {
       const img = new Image();
       img.src = src;
-      img.alt="Assets"
+      img.alt = "Assets"
       img.onload = () => {
         console.log(`>> IMAGE LOADED: ${src}`);
         imagesLoaded++;
@@ -136,7 +136,7 @@ function Registration() {
 
   const getEvents = () => {
     axios
-      .get("https://bits-apogee.org/2026/main/registrations/web_events/")
+      .get("https://bits-apogee.org/2026/main/registrations/events/")
       .then((res) => {
         setEvents(res.data);
       })
