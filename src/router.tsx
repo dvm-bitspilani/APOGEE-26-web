@@ -7,7 +7,7 @@ import City from "./pages/city/City";
 import Events from "./pages/events/Events";
 // import ContactUs from "./pages/contactUs/ContactUs";
 // import Preloader from "./pages/preloader/Preloader";
-import Ham from "./pages/ham/Ham";
+// import Ham from "./pages/ham/Ham";
 import GettingToPilani from "./pages/GettingToPilani/GettingToPilani";
 import Brochure from "./pages/brochure/Brochure";
 
@@ -48,11 +48,11 @@ const pages: page[] = [
 
   //   component: Preloader,
   // },
-  {
-    url: "/ham",
+  // {
+  //   url: "/ham",
 
-    component: Ham,
-  },
+  //   component: Ham,
+  // },
   {
     url: "/getting-to-pilani",
     component: GettingToPilani,
