@@ -13,7 +13,7 @@ import { useEffect } from "react";
 import debugFunctions from "../../utils/debug";
 import * as THREE from "three";
 import { useActiveSheetStore, useNavStateStore, usePreloaderStateStore, useSceneLoadedStore } from "../../utils/store";
-import NavBar from "../components/NavBar/NavBar";
+// import NavBar from "../components/NavBar/NavBar";
 import RegisterButton from "../components/RegisterButton/RegisterButton";
 import Preloader from "../preloader/Preloader";
 import Modal from "./components/Modal/Modal";
@@ -168,7 +168,7 @@ export default function City() {
           {/* </Html> */}
         </div>
       }
-      {activeSheet === "Cyber City"  && <NavBar />}
+      {/*activeSheet === "Cyber City"  && <NavBar />*/}
       {activeSheet === "Cyber City"  && <RegisterButton />}
       {navState === "open" && <Ham/>}
       <Modal />
