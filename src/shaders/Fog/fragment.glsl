@@ -1,6 +1,6 @@
 uniform float u_time;
 uniform float u_density;
-uniform float u_glowStrength;
+// uniform float u_glowStrength;
 uniform float u_noiseStrength;
 
 uniform vec3 u_purple;
@@ -8,7 +8,7 @@ uniform vec3 u_cyan;
 varying float vWorldY;
 varying vec2 vUv;
 varying float vDepth;
-uniform float u_heightFalloff;
+// uniform float u_heightFalloff;
 
 //
 // --- Noise ---
@@ -96,7 +96,7 @@ fogFactor = clamp(fogFactor, 0.0, 1.0);
 
   // 🔥 ORIGINAL GREEN TINT (restored)
 
-  fogColor += n * u_noiseStrength *0.5;
+  fogColor += n * u_noiseStrength ;
 
   // -------------------------
   // 🎯 Alpha
@@ -111,8 +111,9 @@ alpha = max(alpha, 0.01);
   // -------------------------
   // ✨ Glow
   // -------------------------
-  float glow = alpha * sqrt(alpha);
-  vec3 finalColor = fogColor * (1.0 + glow *0.005* u_glowStrength);
-finalColor = clamp(finalColor, 0.0, 10.5);
-  gl_FragColor = vec4(finalColor, alpha * 1.0);
+  float glow = alpha ;
+//  vec3 finalColor = fogColor * (1.0 + glow *0.005* u_glowStrength);
+//finalColor = clamp(finalColor, 0.0, 10.5);
+
+  gl_FragColor = vec4(fogColor, alpha * 1.0);
 }
