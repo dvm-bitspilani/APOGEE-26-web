@@ -5,7 +5,7 @@ import dott from "/img/ham/dott.png";
 import textBottom from "/img/ham/textBottom.png";
 import luv from "/img/ham/luv_dvm.png";
 import gsap from "gsap";
-import { useHamburgerStore, useNavStateStore } from "../../utils/store";
+// import { useNavStateStore } from "../../utils/store";
 
 export default function Ham() {
   const [speedText, setspeedText] = useState(0);
@@ -22,7 +22,7 @@ export default function Ham() {
   const speedDialRef = useRef<HTMLDivElement>(null);
   const mainSpeedometerRef = useRef<HTMLDivElement>(null);
   const luvRef = useRef<HTMLDivElement>(null);
-  const setNavState = useNavStateStore((s) => s.setNavState);
+  // const setNavState = useNavStateStore((s) => s.setNavState);
 
   const onUpdate = (duration: number, speedTicks?: number) => {
     const rot = gsap.getProperty(
@@ -370,10 +370,10 @@ export default function Ham() {
         { scale: 1, opacity: 1, y: 0, duration: 0.2 },
       );
   }, []);
-  const handleOpenNav = () => {
-  setNavState("closing");
-  useHamburgerStore.getState().setManualHidden(false);
-};
+//   const handleOpenNav = () => {
+//   setNavState("closing");
+//   useHamburgerStore.getState().setManualHidden(false);
+// };
 
   return (
     <div className={styles.container}>
