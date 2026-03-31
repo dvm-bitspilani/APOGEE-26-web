@@ -138,7 +138,7 @@ export default function City() {
              <ScrollWatcher ranges={[
     // [0.2, 100],
     [0.41, 0.55],
-    [0.77, 1.00]
+    [0.77, 1.01]
   ]}/>
             {/* <mesh rotation={[-Math.PI ,Math.PI/4, 0]} position={[-20, 5, 100]}>
   <planeGeometry args={[100, 10]} />
