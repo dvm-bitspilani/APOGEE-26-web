@@ -115,6 +115,9 @@ export default function City() {
           >
             ☰
           </button> */}
+          <h1 style={{ opacity: 0 ,height:0}}>
+  APOGEE 2026 HOME
+</h1>
           <Canvas
             gl={{ antialias: true }}
             dpr={[1, 1.5]}
