@@ -69,6 +69,7 @@ export default function DirectionalUnlock({ containerRef, modalUIRef }: Directio
             },
             onStop: () => {
                 if (pullProgress > 0 && pullProgress < THRESHOLD) {
+                    decayTimer.current && clearTimeout(decayTimer.current);
                     decayTimer.current = setTimeout(() => {
                         snapAnim.current = gsap.to({ val: pullProgress }, {
                             val: 0,
@@ -116,6 +117,7 @@ export default function DirectionalUnlock({ containerRef, modalUIRef }: Directio
 
         const handleTouchEnd = () => {
             if (pullProgress > 0 && pullProgress < THRESHOLD) {
+                decayTimer.current && clearTimeout(decayTimer.current);
                 decayTimer.current = setTimeout(() => {
                     snapAnim.current = gsap.to({ val: pullProgress }, {
                         val: 0,
