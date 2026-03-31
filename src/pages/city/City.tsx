@@ -13,13 +13,13 @@ import { SheetProvider } from "@theatre/r3f";
 import { useEffect } from "react";
 import debugFunctions from "../../utils/debug";
 import * as THREE from "three";
-import { useActiveSheetStore, useNavStateStore, usePreloaderStateStore, useSceneLoadedStore } from "../../utils/store";
+import { useActiveSheetStore, useNavStateStore, usePreloaderStateStore, useSceneLoadedStore, useScrollStore } from "../../utils/store";
 import NavBar from "../components/NavBar/NavBar";
 import RegisterButton from "../components/RegisterButton/RegisterButton";
 import Preloader from "../preloader/Preloader";
 import Modal from "./components/Modal/Modal";
 import Ham from '../ham/Ham';
-import { project } from "./components/ScrollSync/ScrollSync";
+import { project } from './components/ScrollSync/ScrollSync';
 import { EnterDashboard, ExitDashboard } from "../../utils/navViewSwitching";
 import ScrollTracker from "./components/ScrollTracker/ScrollTracker";
 import HamburgerButton from "./components/HamburgerButton";
@@ -52,9 +52,8 @@ if (import.meta.env.DEV) {
 // await project.ready; // Top level await might be issue if not handled, but usually fine in Vite + standard setups if supported.
 // Actually, usually we don't await at module level for React components unless Suspense is involved.
 // Theatre documentation often suggests just using it.
-
 export default function City() {
-
+  const scroll = useScrollStore((s) => s.scroll);
   const showPreloader = usePreloaderStateStore((s) => s.showPreloader);
   const activeSheet = useActiveSheetStore((s) => s.activeSheet);
   const navState = useNavStateStore((s) => s.navState);
@@ -115,9 +114,9 @@ export default function City() {
           >
             ☰
           </button> */}
-          <h1 style={{ opacity: 0 ,height:0}}>
-  APOGEE 2026 HOME
-</h1>
+          <h1 style={{ opacity: 0, height: 0 }}>
+            APOGEE 2026 HOME
+          </h1>
           <Canvas
             gl={{ antialias: true }}
             dpr={[1, 1.5]}
@@ -133,13 +132,13 @@ export default function City() {
 
               gl.toneMapping = THREE.NoToneMapping
             }}
-            
+
           >
-             <ScrollWatcher ranges={[
-    // [0.2, 100],
-    [0.41, 0.55],
-    [0.77, 1.01]
-  ]}/>
+            <ScrollWatcher ranges={[
+              // [0.2, 100],
+              [0.41, 0.55],
+              [0.77, 1.01]
+            ]} />
             {/* <mesh rotation={[-Math.PI ,Math.PI/4, 0]} position={[-20, 5, 100]}>
   <planeGeometry args={[100, 10]} />
   <meshBasicMaterial color="red" side={THREE.DoubleSide} />
@@ -182,17 +181,22 @@ export default function City() {
           <ScrollReminder />
           {/* </Html> */}
         </div>
-      }{activeSheet === "Cyber City"  && 
-      <HamburgerButton   onClick={() => {
-    setNavState("opening")}
-  }
-  
-/>}
-{activeSheet === "Cyber City"  && <NavBarScroll>
-      <NavBar />
+      }{activeSheet === "Cyber City" &&
+        <HamburgerButton onClick={() => {
+          const scrollOffset = scroll?.offset || 0;
+          scroll.el.scrollTo({
+            top: scrollOffset * (scroll.el.scrollHeight - scroll.el.clientHeight),
+            behavior: "instant"
+          });
+          setNavState("opening")
+        }
+        }
+        />}
+      {activeSheet === "Cyber City" && <NavBarScroll>
+        <NavBar />
       </NavBarScroll>}
-      {activeSheet === "Cyber City"  && <RegisterButton />}
-      {navState === "open" && <Ham/>}
+      {activeSheet === "Cyber City" && <RegisterButton />}
+      {navState === "open" && <Ham />}
       <Modal />
       <ScrollTracker />
     </>
