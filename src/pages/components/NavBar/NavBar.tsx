@@ -4,6 +4,7 @@
 // import navBG from "/img/landing/navBG.png";
 // import titleImg from "/img/apogee26.png";
 
+import { useHamburgerStore } from "../../../utils/store";
 import GlassSlab from "./GlassSlab";
 
 
@@ -107,6 +108,7 @@ import GlassSlab from "./GlassSlab";
 
 export default function NavBar() {
   // const isModalOpen = useModalStore((s) => s.isModalOpen);
+  const manualHidden = useHamburgerStore((s) => s.manualHidden);
   return (
     // <div className={styles.navbarContainer}>
     //   <img
@@ -127,6 +129,14 @@ export default function NavBar() {
     //     </div>
     //   </div>
     // </div>
+    <div
+      style={{
+        opacity: manualHidden ? 0 : 1,
+        pointerEvents: manualHidden ? "none" : "auto",
+        transition: "opacity 0.3s ease",
+      }}
+    >
     <GlassSlab />
+    </div>
   );
 }
