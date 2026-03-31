@@ -92,7 +92,6 @@ export default function ScrollSync() {
 }, [scroll.el, isModalOpen, showPreloader]);
 
   useEffect(() => {
-    console.log(currentSection,  stopPoints[currentSection] * scroll.el.scrollHeight / sequenceLength)
     if (scroll && isModalOpen) {
       gsap.set(scroll.el, { scrollTop: (stopPoints[currentSection]) * (scroll.el.scrollHeight - scroll.el.clientHeight) / sequenceLength });
     }
@@ -145,46 +144,3 @@ export default function ScrollSync() {
 
   return null;
 }
-
-// const stopPoints = {
-//   "home": [0, 0],
-//   "about": [5, 8],
-//   "contact": [13, 16],
-// }
-// const sequenceLength = 20;
-
-// export default function ScrollSync() {
-
-//   const scroll = useScroll();
-//   const targetPosition = useRef<number>(0);
-//   const location = useLocation();
-//   const navigate = useNavigate();
-//   const scrollLock = useScrollLockStore((s) => s.lock);
-//   const openModal = useModalStore((s) => s.openModal);
-//   const isScrollLocked = useScrollLockStore((s) => s.locked);
-//   const getCurrentPage = (path: string) => {
-//     if (path === "/") return "home";
-//     return path.slice(1);
-//   }
-
-//   const maxVelocity = 5;
-//   const acceleration = 0.1;
-//   const threshold = 0.8; //? point to start decelerating
-
-//   useFrame(() => {
-
-//     targetPosition.current = scroll.offset * sequenceLength;
-//     if (!isScrollLocked) {
-//       for (let path in stopPoints) {
-//         path = getCurrentPage(path);
-//         if (path !== location.pathname && targetPosition.current >= stopPoints[path]?.[0] && targetPosition.current <= stopPoints[path]?.[1]) {
-//           scrollLock();
-//           openModal();
-//           navigate(path);
-//           break;
-//         }
-//       }
-//     }
-
-//   })
-// }

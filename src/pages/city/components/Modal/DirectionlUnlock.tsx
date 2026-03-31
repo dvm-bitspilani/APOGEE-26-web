@@ -102,7 +102,7 @@ export default function DirectionalUnlock({ containerRef, modalUIRef }: Directio
             // Check if at boundary AND swiping past it
             if ((isAtTop && deltaY < 0) || (isAtBottom && deltaY > 0)) {
                 if (deltaY > 0 && isAtBottom && stopPoints[currentSection] === maxSequenceLength) return;
-
+                console.log(isAtTop, isAtBottom, scrollHeight, clientHeight)
                 e.preventDefault();
                 touchOverscrollRef.current += Math.abs(deltaY);
                 setPullProgress(Math.min(pullProgress + touchOverscrollRef.current, THRESHOLD + 20));

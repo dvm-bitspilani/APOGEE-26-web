@@ -15,7 +15,6 @@ export default function ScrollTracker() {
 
         const loop = () => {
             if (trackerRef.current && forceMeterRef.current) {
-                console.log(pullProgress)
                 trackerRef.current.style.width = `${scroll?.offset * 100}%`;
                 forceMeterRef.current.style.width = `${(pullProgress/(isMobileDevice() ? MOBILE_THRESHOLD : THRESHOLD)) * 100}%`;
             }
