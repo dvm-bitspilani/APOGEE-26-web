@@ -7,37 +7,38 @@ type Props = {
 };
 
 export default function NavBarScroll({ children, maxTranslate = 800}: Props) {
-  const scroll = useScrollStore((s) => s.scroll);
+  //const scroll = useScrollStore((s) => s.scroll);
   const ref = useRef<HTMLDivElement>(null);
   const lockedValue = useRef(0);
 
+  const prevTime = useRef(performance.now());
 useEffect(() => {
-  let frame: number;
 
-  const animate = () => {
-    const offset = scroll?.offset;
+const animate = (time: number) => {
+  const delta = time - prevTime.current;
+  prevTime.current = time;
 
-    if (ref.current && typeof offset === "number") {
-      const next = Math.min(offset * maxTranslate, maxTranslate);
+  const offset = useScrollStore.getState().scroll?.offset;
 
-      // smooth interpolation (GSAP-like)
-      if(next>lockedValue.current){
-      lockedValue.current += (next - lockedValue.current) * 0.1;
-      }
+  if (ref.current && typeof offset === "number") {
+    const next = Math.min(offset * maxTranslate, maxTranslate);
 
-      // one-way clamp
-      lockedValue.current = Math.min(lockedValue.current, 260);
+    const speed = 0.01 * delta; // adjust smoothing
 
-      ref.current.style.transform = `translateX(-${lockedValue.current}px)`;
-    }
+    lockedValue.current += (next - lockedValue.current) * speed;
 
-    frame = requestAnimationFrame(animate);
-  };
+    lockedValue.current = Math.min(lockedValue.current, 260);
 
-  frame = requestAnimationFrame(animate);
+    ref.current.style.transform = `translate3d(-${lockedValue.current}px, 0, 0)`;
+  }
 
-  return () => cancelAnimationFrame(frame);
-}, [scroll, maxTranslate]);
+  requestAnimationFrame(animate);
+};
+
+requestAnimationFrame(animate);
+
+  // return () => cancelAnimationFrame(frame);
+}, [maxTranslate]);
   return (
     <div
       ref={ref}
