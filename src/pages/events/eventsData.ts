@@ -3,7 +3,7 @@ import type { EventData } from "./eventsItem/EventsItem";
 const dummyDesc = "BITS Pilani, India is back with the 43rd edition of APOGEE (A Professions Oriented Gathering over Educational Experiences), the institute's annual technical extravaganza, from 28th March to 31st this March 2025.";
 const dummyLoc = "LTC 5106";
 const dummyTime = "2nd April, 6-8 pm";
-const dummyPhone = "Madhur Jain: 9381337967";
+const dummyPhone = "TBA";
 
 export const DUMMY_EVENTS: Record<string, EventData[]> = {
     "CODING": [
