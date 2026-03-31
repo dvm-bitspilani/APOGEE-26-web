@@ -19,7 +19,7 @@ import RegisterButton from "../components/RegisterButton/RegisterButton";
 import Preloader from "../preloader/Preloader";
 import Modal from "./components/Modal/Modal";
 import Ham from '../ham/Ham';
-import { project} from './components/ScrollSync/ScrollSync';
+import { project } from './components/ScrollSync/ScrollSync';
 import { EnterDashboard, ExitDashboard } from "../../utils/navViewSwitching";
 import ScrollTracker from "./components/ScrollTracker/ScrollTracker";
 import HamburgerButton from "./components/HamburgerButton";
@@ -137,7 +137,7 @@ export default function City() {
             <ScrollWatcher ranges={[
               // [0.2, 100],
               [0.41, 0.55],
-              [0.77, 0.99]
+              [0.77, 1.00]
             ]} />
             {/* <mesh rotation={[-Math.PI ,Math.PI/4, 0]} position={[-20, 5, 100]}>
   <planeGeometry args={[100, 10]} />

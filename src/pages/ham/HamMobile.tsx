@@ -4,6 +4,7 @@ import styles from "./HamMobile.module.scss";
 import luv from "/img/ham/luv_dvm.png";
 import textBottom from "/img/ham/textBottom.png";
 import gsap from "gsap";
+import useNavVisibility from "../../hooks/useNavVisibility";
 
 function SvgEl() {
   return (
@@ -308,7 +309,7 @@ export default function Ham() {
         { scale: 1, opacity: 1, y: 0, duration: 0.2 },
       );
   }, []);
-
+const { closeNav } = useNavVisibility();
   return (
     <div className={styles.container}>
       <div className={styles.scanlineoverlay}></div>
@@ -320,6 +321,7 @@ export default function Ham() {
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         className={styles.goBack}
+        onClick={closeNav}
       >
         <path
           d="M0.000376701 58.1818V1.90735e-05H13.4549V4.45457H5.09129V53.7273H13.4549V58.1818H0.000376701ZM46.1642 48.7273L25.8006 28.3637L46.1642 8.00002L49.6642 11.4546L35.2551 25.8637H72.5733V30.8637H35.2551L49.6642 45.2273L46.1642 48.7273ZM100.021 1.90735e-05V58.1818H86.5667V53.7273H94.9304V4.45457H86.5667V1.90735e-05H100.021Z"
