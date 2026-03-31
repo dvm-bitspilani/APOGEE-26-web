@@ -101,6 +101,20 @@
     transform: translateY(40px);
     display: flex;
     align-items: center;
+    gap: 1.5rem;
+}
+
+.backBtn {
+    width: clamp(25px, 5vw, 60px);
+    height: auto;
+    cursor: pointer;
+    transition: transform 0.2s ease, filter 0.2s ease;
+    z-index: 21;
+
+    &:hover {
+        transform: scale(1.1);
+        filter: drop-shadow(0 0 8px rgba(0, 255, 255, 0.8));
+    }
 }
 
 .title {

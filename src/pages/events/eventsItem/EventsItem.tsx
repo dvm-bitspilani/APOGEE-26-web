@@ -96,11 +96,14 @@ export default function EventsItem({ category, events }: EventsItemProps) {
                                 <div className={styles.glowBox}></div>
                                 <div className={styles.glowBoxInner}>
                                     <div className={styles.glowBoxBg}></div>
-                                    <h2 className={styles.title}>
-                                        <span className={styles.bracket}>[</span>
-                                        {category} - {currentEvent.name}
-                                        <span className={styles.bracket}>]</span>
-                                    </h2>
+                                    <div className={styles.titleContainer}>
+
+                                        <h2 className={styles.title}>
+                                            <span className={styles.bracket}>[</span>
+                                            {currentEvent.name}
+                                            <span className={styles.bracket}>]</span>
+                                        </h2>
+                                    </div>
                                     <p className={styles.desc}>{currentEvent.description}</p>
 
                                     <div className={styles.infoGrid}>

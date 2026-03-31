@@ -15,7 +15,7 @@ export interface ApiEvent {
 }
 
 const CATEGORY_MAPPING: Record<string, string> = {
-    "STALL EVENTS": "STALLS",
+    "STALL EVENTS": "CLUB EVENTS",
     "TALKS & WORKSHOP": "TALKS & WORKSHOPS",
     "ARTS & CINEMA": "ART & CINEMA",
     "GAMES & QUIZ": "GAMES & QUIZ",

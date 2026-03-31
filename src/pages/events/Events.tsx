@@ -6,7 +6,7 @@ import type { EventData } from "./eventsItem/EventsItem";
 
 const EVENT_CATEGORIES = [
     { name: "CODING", image: "/img/events/coding1.png" },
-    { name: "STALLS", image: "/img/events/kernel.png" },
+    { name: "CLUB EVENTS", image: "/img/events/kernel.png" },
     { name: "EXHIBITIONS", image: "/img/events/esummit1.png" },
     { name: "COMPETITIONS", image: "/img/events/caseComp.png" },
     { name: "ART & CINEMA", image: "/img/events/art.png" },
@@ -76,6 +76,14 @@ export default function Events() {
             </div>
 
             <div className={styles.header}>
+                {selectedCategory && (
+                    <img
+                        src="/img/events/backBtn.png"
+                        alt="Back"
+                        className={styles.backBtn}
+                        onClick={handleClose}
+                    />
+                )}
                 <h1
                     className={`${styles.title} ${selectedCategory ? styles.clickableTitle : ""}`}
                     onClick={() => selectedCategory && handleClose()}
@@ -118,6 +126,7 @@ export default function Events() {
                 <EventsItem
                     category={selectedCategory}
                     events={eventsData[selectedCategory] || []}
+
                 />
             )}
         </div>
