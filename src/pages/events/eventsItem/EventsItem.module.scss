@@ -100,7 +100,7 @@
     align-items: center;
     z-index: 2;
     margin-left: clamp(-150px, -10vw, -40px);
-    padding-left: clamp(20px, 5vw, 50px);
+    padding-left: clamp(20px, 6vw, 70px);
 }
 
 .glowBoxWrapper {
@@ -108,7 +108,7 @@
     position: relative;
     // filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.4)); // Moved to glowBox inner
     display: flex;
-    min-height: clamp(300px, 40svh, 400px);
+    min-height: clamp(300px, 50svh, 600px);
 }
 
 .glowBox {

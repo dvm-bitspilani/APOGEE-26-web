@@ -8,7 +8,7 @@ import EventPreLoader from "./components/eventPreLoader/EventPreLoader";
 
 const EVENT_CATEGORIES = [
     { name: "CODING", image: "/img/events/coding1.png" },
-    { name: "CLUB EVENTS", image: "/img/events/kernel.png" },
+    { name: "KERNEL", image: "/img/events/kernel.png" },
     { name: "EXHIBITIONS", image: "/img/events/esummit1.png" },
     { name: "COMPETITIONS", image: "/img/events/caseComp.png" },
     { name: "ART & CINEMA", image: "/img/events/art.png" },
