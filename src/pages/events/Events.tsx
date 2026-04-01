@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./Events.module.scss";
 import EventsItem from "./eventsItem/EventsItem";
 import { fetchEvents } from "./eventsService";
 import type { EventData } from "./eventsItem/EventsItem";
+import EventPreLoader from "./components/eventPreLoader/EventPreLoader";
 
 const EVENT_CATEGORIES = [
     { name: "CODING", image: "/img/events/coding1.png" },
@@ -15,21 +17,71 @@ const EVENT_CATEGORIES = [
     { name: "GAMES & QUIZ", image: "/img/events/quiz.png" },
 ];
 
+const PRELOAD_IMAGES = [
+    "/img/events/bg.png",
+    "/img/events/backBtn.png",
+    "/img/events/sample3.png",
+    "/img/events/sutt.jpeg",
+    "/svg/events/arrows.svg",
+    "/svg/events/frame.svg",
+    "/svg/events/loc.svg",
+    "/svg/events/time.svg",
+    "/svg/events/call.svg",
+    ...EVENT_CATEGORIES.map(c => c.image)
+];
+
 export default function Events() {
+    const navigate = useNavigate();
     const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
     const [showContent, setShowContent] = useState(false);
     const [originRect, setOriginRect] = useState<DOMRect | null>(null);
     const [eventsData, setEventsData] = useState<Record<string, EventData[]>>({});
     const [loading, setLoading] = useState(true);
+    const [progress, setProgress] = useState(0);
 
     useEffect(() => {
-        const loadEvents = async () => {
-            const data = await fetchEvents();
-            console.log("Events data loaded in component:", data);
-            setEventsData(data);
-            setLoading(false);
+        const loadAll = async () => {
+            const totalItems = PRELOAD_IMAGES.length + 1; // +1 for API call
+            let loadedItems = 0;
+
+            const incrementProgress = () => {
+                loadedItems++;
+                setProgress((loadedItems / totalItems) * 100);
+            };
+
+            // 1. Fetch Events Data
+            const dataPromise = fetchEvents().then((data) => {
+                console.log("Events data loaded in component:", data);
+                setEventsData(data);
+                incrementProgress();
+                return data;
+            });
+
+            // 2. Preload Images
+            const imagePromises = PRELOAD_IMAGES.map((src) => {
+                return new Promise((resolve) => {
+                    const img = new Image();
+                    img.src = src;
+                    img.onload = () => {
+                        incrementProgress();
+                        resolve(src);
+                    };
+                    img.onerror = () => {
+                        incrementProgress(); // Count even if it fails to avoid getting stuck
+                        resolve(src);
+                    };
+                });
+            });
+
+            await Promise.all([dataPromise, ...imagePromises]);
+            
+            // Artificial delay to show "ACESS GRANTED" state if sequence is too fast
+            setTimeout(() => {
+                setLoading(false);
+            }, 600);
         };
-        loadEvents();
+
+        loadAll();
     }, []);
 
     const handleCategoryClick = (category: string, element: HTMLElement) => {
@@ -54,11 +106,7 @@ export default function Events() {
             {/* The base page background */}
             <div className={styles.backgroundOverlay}></div>
 
-            {loading && (
-                <div className={styles.loaderContainer}>
-                    <div className={styles.loader}></div>
-                </div>
-            )}
+            {loading && <EventPreLoader loading={loading} progress={progress} />}
 
             {/* This div acts as the expanding background originating from the card.
                 If selectedCategory is truthy, it appears and scales up */}
@@ -76,14 +124,12 @@ export default function Events() {
             </div>
 
             <div className={styles.header}>
-                {selectedCategory && (
-                    <img
-                        src="/img/events/backBtn.png"
-                        alt="Back"
-                        className={styles.backBtn}
-                        onClick={handleClose}
-                    />
-                )}
+                <img
+                    src="/img/events/backBtn.png"
+                    alt="Back"
+                    className={styles.backBtn}
+                    onClick={selectedCategory ? handleClose : () => navigate("/")}
+                />
                 <h1
                     className={`${styles.title} ${selectedCategory ? styles.clickableTitle : ""}`}
                     onClick={() => selectedCategory && handleClose()}
@@ -132,3 +178,4 @@ export default function Events() {
         </div>
     );
 }
+

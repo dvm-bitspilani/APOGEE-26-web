@@ -147,7 +147,11 @@
     padding: clamp(1.5rem, 4svh, 3rem) clamp(2rem, 6vw, 8rem) clamp(1.5rem, 4svh, 3rem) clamp(3rem, 6vw, 6rem);
     display: flex;
     flex-direction: column;
+
     justify-content: center;
+
+
+
     position: relative;
     z-index: 2;
 }
@@ -192,7 +196,7 @@
     color: #ccc;
     max-width: 600px;
 
-    // Truncate to max 10 lines
+    // Truncate to max 10 lines on larger screens
     display: -webkit-box;
     -webkit-line-clamp: 10;
     line-clamp: 10;
@@ -256,15 +260,16 @@
         height: 100svh;
         max-height: 100svh;
         width: 100%;
-        overflow-y: auto;
-        overflow-x: hidden;
+        overflow: hidden;
         gap: 0;
     }
 
     .contentWrapper {
         flex-direction: column;
         width: 100%;
+        height: 100%;
         padding: 0 1rem;
+        overflow: hidden;
     }
 
     .arrowContainer {
@@ -304,16 +309,29 @@
         padding-left: 0;
         margin-top: clamp(-100px, -15vw, -60px);
         width: 100%;
+        flex: 1;
+        min-height: 0;
+        align-items: stretch;
     }
 
     .glowBoxWrapper {
-        min-height: auto;
+        min-height: 0;
+        height: clamp(360px, 58svh, 520px);
+        max-height: 58svh;
     }
 
     .glowBoxInner {
-        padding: clamp(6rem, 15svh, 8rem) clamp(1rem, 4vw, 1.5rem) clamp(1.5rem, 5svh, 2rem) clamp(1rem, 4vw, 1.5rem);
+        padding: clamp(5rem, 10svh, 6.5rem) clamp(1rem, 4vw, 1.5rem) clamp(1.2rem, 3.5svh, 1.6rem) clamp(1rem, 4vw, 1.5rem);
         align-items: center;
+        width: 100%;
+        height: 100%;
+        min-height: 0;
+        justify-content: flex-start !important;
         // text-align: center;
+    }
+
+    .backBtn {
+        width: clamp(28px, 6vw, 38px);
     }
 
     .title {
@@ -324,6 +342,32 @@
     .desc {
         font-size: clamp(0.85rem, 3.5vw, 1rem);
         line-height: clamp(1.3rem, 4.5vw, 1.6rem);
+        width: 100%;
+        max-height: clamp(130px, 20svh, 230px);
+        margin-bottom: 1rem;
+        padding-right: 0.4rem;
+        overflow-y: auto;
+        overflow-x: hidden;
+        -webkit-line-clamp: unset;
+        line-clamp: unset;
+        -webkit-box-orient: initial;
+        display: block;
+
+        scrollbar-width: thin;
+        scrollbar-color: rgba(0, 255, 255, 0.8) transparent;
+
+        &::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        &::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: rgba(0, 255, 255, 0.8);
+            border-radius: 999px;
+        }
     }
 
     .infoGrid {
@@ -340,7 +384,7 @@
         position: relative;
         bottom: 0;
         right: 0;
-        margin-top: 1.5rem;
+        margin-top: 1rem;
         width: 100%;
         display: flex;
         justify-content: center;
