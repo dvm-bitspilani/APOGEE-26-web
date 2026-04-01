@@ -103,7 +103,7 @@
       bottom: 9%;
       left: 55%;
       transform: translate(-35%, 0%);
-      width: 63vw;
+      width: 66vw;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -124,7 +124,7 @@
           position: absolute;
           top: 50%;
           left: 50%;
-          transform: translate(-50%, -50%);
+          transform: translate(-50%, -60%);
           font-family: $font-bitsumishi;
           color: #4df4fc;
           font-size: 6vw;
@@ -134,7 +134,7 @@
           position: absolute;
           bottom: -25%;
           left: 50%;
-          transform: translate(-50%, -50%);
+          transform: translate(-50%, -60%);
           width: 50vw;
           height: 6vw;
         }

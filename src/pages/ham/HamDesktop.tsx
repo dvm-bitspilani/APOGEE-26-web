@@ -377,7 +377,7 @@ export default function Ham() {
 // };
 const { closeNav } = useNavVisibility();
   return (
-    <div className={styles.container} onClick={closeNav}>
+    <div className={styles.container}>
       <div className={styles.scanlineoverlay}></div>
       {/* <img src={bg} alt="Ham" className={styles.bgImg} /> */}
       <svg

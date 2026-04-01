@@ -59,9 +59,8 @@ export default function NavBarScroll({ children, maxTranslate = 18000 }: Props) 
       style={{
         position: "fixed",
         top: "50%",
-
         left: 0,
-        zIndex: 9999,
+        zIndex: 999,
         willChange: "transform",
       }}
     >
