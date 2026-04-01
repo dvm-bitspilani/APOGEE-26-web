@@ -606,7 +606,13 @@ export default function Ham() {
         </div>
       </div>
 
-      <div className={styles.luvBar} ref={luvRef}>
+      <div
+        className={styles.luvBar}
+        ref={luvRef}
+        onClick={() => {
+          window.open("https://bits-dvm.org", "_blank");
+        }}
+      >
         Made with <img src={luv} alt="love" /> by DVM
       </div>
     </div>
