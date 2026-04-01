@@ -151,7 +151,7 @@ const nameTOBar: Array<{ name: string; bar: number; url: string }> = [
   { name: "sponsors", bar: 11, url: "/sponsors" },
   { name: "media partners", bar: 21, url: "/media-partners" },
   { name: "getting to pilani", bar: 28, url: "/getting-to-pilani" },
-  { name: "brochure", bar: 37, url: "/contact-us" },
+  { name: "brochure", bar: 37, url: "/brochure" },
   { name: "events", bar: 45, url: "/events" },
   { name: "speakers", bar: 53, url: "/speakers" },
 ];

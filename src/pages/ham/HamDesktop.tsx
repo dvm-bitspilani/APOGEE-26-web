@@ -133,7 +133,7 @@ export default function Ham() {
       {
         id: 2,
         animId: 2,
-        label: "<\u00A0 contact us",
+        label: "<\u00A0 brochure",
         side: "Left",
         mouseEnter: () => {
           gsap.to(speedDialRef.current, {
@@ -155,7 +155,7 @@ export default function Ham() {
         },
         onClick: () => {
           onClickNameTag(() => {
-            window.location.href = "/contact-us";
+            window.location.href = "/brochure";
           }, 0.6);
         },
       },

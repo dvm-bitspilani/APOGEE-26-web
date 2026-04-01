@@ -10,6 +10,7 @@ import Events from "./pages/events/Events";
 // import Ham from "./pages/ham/Ham";
 import GettingToPilani from "./pages/GettingToPilani/GettingToPilani";
 import Brochure from "./pages/brochure/Brochure";
+import ComingSoon from "./pages/comingSoon/ComingSoon";
 
 type page = {
   url: string;
@@ -34,10 +35,10 @@ const pages: page[] = [
 
     component: Events,
   },
-  // {
-  //   url: '/city',
-  //   component: City,
-  // },
+    // {
+    //   url: '/city',
+    //   component: City,
+    // },
   // {
   //   url: "/contact",
 
@@ -60,6 +61,10 @@ const pages: page[] = [
   {
     url: "/brochure",
     component: Brochure,
+  },
+  {
+    url: "/developers",
+    component: ComingSoon,
   },
 ];
 
