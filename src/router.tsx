@@ -5,6 +5,8 @@ import Registration from "./pages/registration/Registration";
 // import Instructions from "./pages/registration/components/detailsForm/DetailsForm"
 import City from "./pages/city/City";
 import Events from "./pages/events/Events";
+import ComingSoon from "./pages/comingSoon/ComingSoon";
+
 // import ContactUs from "./pages/contactUs/ContactUs";
 // import Preloader from "./pages/preloader/Preloader";
 // import Ham from "./pages/ham/Ham";
@@ -66,7 +68,13 @@ const generateRoutes = (pages: page[]) => {
 const router = createBrowserRouter([
   {
     element: <Analytics />, // 👈 GA wrapper
-    children: [...generateRoutes(pages)],
+    children: [
+      ...generateRoutes(pages),
+      {
+        path: "*",
+        element: <ComingSoon />,
+      },
+    ],
   },
 ]);
 
