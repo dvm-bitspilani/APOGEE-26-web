@@ -66,6 +66,18 @@ const pages: page[] = [
     url: "/developers",
     component: ComingSoon,
   },
+  {
+    url:"/media-partners",
+    component: ComingSoon,
+  },
+  {
+    url:"/sponsors",
+    component: ComingSoon,
+  },
+  {
+    url:"/media-partners",
+    component: ComingSoon,
+  }
 ];
 
 const generateRoutes = (pages: page[]) => {
