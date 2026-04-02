@@ -13,7 +13,7 @@ export default function RegisterButton() {
       }}>
             <img
                 className={styles.registerIcon}
-                src="/img/landing/reg_btn.png"
+                src="/img/landing/reg_btn22.png"
                 alt="Register Image"
             />
             {/* <div className={styles.registerText}>Register</div> */}

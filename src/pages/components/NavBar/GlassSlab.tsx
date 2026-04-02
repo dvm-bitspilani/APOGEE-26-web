@@ -32,32 +32,36 @@ const GlassSlab: React.FC = () => {
         <div className="gs-inner-text">
           <img src={titleImg} alt="Apogee 26" />
           <div className="gs-navLinks">
-            <div className="gs-link">
-              <span>{`[`}</span>
-              HOME
-              <span>{`]`}</span>
-            </div>
-            <Link to="/events" className="gs-link">
-              <span>{`[`}</span>
-              EVENTS
-              <span>{`]`}</span>
-            </Link>
-            <div className="gs-link">
-              <span>{`[`}</span>
-              SPEAKERS
-              <span>{`]`}</span>
-            </div>
-            <div className="gs-link">
-              <span>{`[`}</span>
-              ABOUT US
-              <span>{`]`}</span>
-            </div>
-            <div className="gs-link">
-              <span>{`[`}</span>
-              CONTACT US
-              <span>{`]`}</span>
-            </div>
-          </div>
+  <Link to="/" className="gs-link">
+    <span>[</span>
+    HOME
+    <span>]</span>
+  </Link>
+
+  <Link to="/events" className="gs-link">
+    <span>[</span>
+    EVENTS
+    <span>]</span>
+  </Link>
+
+  <Link to="/speakers" className="gs-link">
+    <span>[</span>
+    SPEAKERS
+    <span>]</span>
+  </Link>
+
+  <Link to="/about" className="gs-link">
+    <span>[</span>
+    ABOUT US
+    <span>]</span>
+  </Link>
+
+  <Link to="/contact" className="gs-link">
+    <span>[</span>
+    CONTACT US
+    <span>]</span>
+  </Link>
+</div>
           {/* <span className="gs-inner-text__tag">SYS_BUILD :: v4.2.0</span>
           <h2 className="gs-inner-text__heading">NEONPULSE</h2>
           <p className="gs-inner-text__sub">ANNUAL TECH FESTIVAL</p>
