@@ -2,6 +2,7 @@ import React from "react";
 import "./GlassSlab.scss";
 import titleImg from "/img/apogee26_theme.png";
 import { Link } from "react-router-dom";
+import { useScrollToSectionStore } from "../../../utils/store";
 
 const GlassSlab: React.FC = () => {
   return (
@@ -32,7 +33,7 @@ const GlassSlab: React.FC = () => {
         <div className="gs-inner-text">
           <img src={titleImg} alt="Apogee 26" />
           <div className="gs-navLinks">
-            <div className="gs-link">
+            <div className="gs-link" onClick={() => useScrollToSectionStore.getState().scrollToSection("home")}>
               <span>{`[`}</span>
               HOME
               <span>{`]`}</span>
@@ -42,17 +43,17 @@ const GlassSlab: React.FC = () => {
               EVENTS
               <span>{`]`}</span>
             </Link>
-            <div className="gs-link">
+            <Link to="/speakers" className="gs-link">
               <span>{`[`}</span>
               SPEAKERS
               <span>{`]`}</span>
-            </div>
-            <div className="gs-link">
+            </Link>
+            <div className="gs-link" onClick={() => useScrollToSectionStore.getState().scrollToSection("about")}>
               <span>{`[`}</span>
               ABOUT US
               <span>{`]`}</span>
             </div>
-            <div className="gs-link">
+            <div className="gs-link" onClick={() => useScrollToSectionStore.getState().scrollToSection("contact")}>
               <span>{`[`}</span>
               CONTACT US
               <span>{`]`}</span>

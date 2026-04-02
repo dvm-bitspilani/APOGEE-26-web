@@ -66,6 +66,10 @@ const pages: page[] = [
     url: "/developers",
     component: ComingSoon,
   },
+  {
+    url: "/speakers",
+    component: ComingSoon, //! @rm -rf ~/, here :)
+  }
 ];
 
 const generateRoutes = (pages: page[]) => {

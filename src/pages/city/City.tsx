@@ -181,7 +181,7 @@ export default function City() {
             </SheetProvider>
           </Canvas>
           {/* <Html> */}
-          <ScrollReminder />
+          {activeSheet === "Cyber City" && <ScrollReminder />}
           {/* </Html> */}
         </div>
       }{activeSheet === "Cyber City" &&
