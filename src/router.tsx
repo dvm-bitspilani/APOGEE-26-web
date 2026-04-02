@@ -5,11 +5,13 @@ import Registration from "./pages/registration/Registration";
 // import Instructions from "./pages/registration/components/detailsForm/DetailsForm"
 import City from "./pages/city/City";
 import Events from "./pages/events/Events";
-import ComingSoon from "./pages/comingSoon/ComingSoon";
-
 // import ContactUs from "./pages/contactUs/ContactUs";
 // import Preloader from "./pages/preloader/Preloader";
 // import Ham from "./pages/ham/Ham";
+import GettingToPilani from "./pages/GettingToPilani/GettingToPilani";
+import Brochure from "./pages/brochure/Brochure";
+import ComingSoon from "./pages/comingSoon/ComingSoon";
+
 type page = {
   url: string;
 
@@ -33,17 +35,17 @@ const pages: page[] = [
 
     component: Events,
   },
-  // {
-  //   url: '/city',
-  //   component: City,
-  // },
+    // {
+    //   url: '/city',
+    //   component: City,
+    // },
   // {
   //   url: "/contact",
 
   //   component: ContactUs,
   // },
   // {
-  //   url: "/loader",
+  //   url: "/loader",Coming Soon
 
   //   component: Preloader,
   // },
@@ -52,6 +54,18 @@ const pages: page[] = [
 
   //   component: Ham,
   // },
+  {
+    url: "/getting-to-pilani",
+    component: GettingToPilani,
+  },
+  {
+    url: "/brochure",
+    component: Brochure,
+  },
+  {
+    url: "/developers",
+    component: ComingSoon,
+  },
 ];
 
 const generateRoutes = (pages: page[]) => {

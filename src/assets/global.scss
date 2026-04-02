@@ -77,6 +77,11 @@
     src: url('/font/Dragrace.ttf') format('truetype');
 }
 
+@font-face {
+    font-family: 'Orbitron';
+    src: url('/font/Orbitron-Regular.ttf') format('truetype');
+}
+
 $cyber-yellow: #FFEB00;
 $dark-bg: #000;
 
@@ -90,6 +95,7 @@ $font-ethnocentric: 'Ethnocentric';
 $font-zeroHour: 'Zero Hour';
 $font-bitsumishi: 'Bitsumishi';
 $font-dragrace: 'Dragrace';
+$font-orbitron: 'Orbitron';
 
 // Font Weights
 $weight-blender-thin: 100;

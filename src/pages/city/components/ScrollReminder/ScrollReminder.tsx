@@ -3,11 +3,12 @@ import styles from "./ScrollReminder.module.scss";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import gsap from "gsap";
+import { useHamburgerStore } from "../../../../utils/store";
 export default function ScrollReminder() {
   const delay = 2000;
   const [isIdle, setIsIdle] = useState(false);
   const timeoutRef = useRef<number | null>(null);
-
+  const manualHidden = useHamburgerStore((s) => s.manualHidden);
   useEffect(() => {
     const resetTimer = () => {
       setIsIdle(false);
@@ -27,13 +28,11 @@ export default function ScrollReminder() {
     window.addEventListener("scroll", resetTimer, { passive: true });
     window.addEventListener("wheel", resetTimer, { passive: true });
     window.addEventListener("touchmove", resetTimer, { passive: true });
-    window.addEventListener("keydown", resetTimer);
 
     return () => {
       window.removeEventListener("scroll", resetTimer);
       window.removeEventListener("wheel", resetTimer);
       window.removeEventListener("touchmove", resetTimer);
-      window.removeEventListener("keydown", resetTimer);
 
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);
@@ -41,43 +40,62 @@ export default function ScrollReminder() {
     };
   }, []);
   useGSAP(() => {
-        gsap.registerPlugin(ScrollTrigger);
-        const scrollLabelAnim = gsap.to(`.${styles.scrollLabel}`, {
-            scrollTrigger: {
-                trigger: document.scrollingElement,
-                start: 'top top',
-                end: '+=300',
-                scrub: true,
-                onLeave: () => {
-                    scrollLabelAnim.kill()
-
-                },
-            },
-            alpha: 0,
-            y: -90,
-            ease: `power1.out`,
-        })
-    })
+    if (manualHidden) return;
+    gsap.registerPlugin(ScrollTrigger);
+    const scrollLabelAnim = gsap.to(`.${styles.scrollLabel}`, {
+      scrollTrigger: {
+        trigger: document.scrollingElement,
+        start: "top top",
+        end: "+=300",
+        scrub: true,
+        onLeave: () => {
+          scrollLabelAnim.kill();
+        },
+      },
+      alpha: 0,
+      y: -90,
+      ease: `power1.out`,
+    });
+  });
   if (!isIdle) return null;
-
+  if (manualHidden) return null;
   return (
-  <div className={styles.scrollReminder}>
-    <div className={styles.scrollLabel}>
-      
-      <h1 className={styles.scrollText}>Scroll</h1>   {/* 👈 move here */}
-
-      <div className={styles.scrollArrows}>
-        {
-          Array(parseInt(styles.numberOfArrows))
-            .fill(null)
-            .map((_, index) => (
-              <div key={index} className={styles.scrollArrow} />
-            ))
-        }
+    <div className={styles.scrollReminder}>
+      <div className={styles.scrollLabel}>
+        <h6 className={styles.scrollText}>SCROLL TO MOVE</h6>
+        <svg
+          width="22"
+          height="67"
+          viewBox="0 0 22 67"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M9.84035 17.6462C12.48 17.3251 15.3971 18.3058 17.4713 20.0055C19.7049 21.8217 21.1503 24.4841 21.489 27.4059C21.6307 28.6669 21.6039 31.0271 21.5816 32.3899C21.5437 34.6762 21.7679 37.9166 21.2703 40.0711C20.9022 41.664 20.198 43.1525 19.2083 44.4294C17.3138 46.8779 14.7557 48.2315 11.7712 48.5695C9.01863 48.8566 6.17798 47.9255 4.03167 46.1284C1.78305 44.2499 0.360602 41.5102 0.0862073 38.5296C-0.051294 37.1052 0.02019 34.8472 0.0237339 33.3362C0.034011 28.9554 -0.448155 25.325 2.48084 21.6744C4.38074 19.3064 6.90103 17.9535 9.84035 17.6462ZM10.8858 46.0418C13.1802 45.9846 15.1819 45.1385 16.7843 43.406C17.7862 42.3248 18.499 40.9912 18.8518 39.5368C19.1986 38.1081 19.1267 36.1851 19.104 34.6814C19.0731 32.6423 19.1597 30.5498 19.1019 28.5197C19.0351 26.2107 18.0783 24.0258 16.4451 22.4543C14.8908 20.9557 12.8384 20.1366 10.7162 20.1677C8.43096 20.2419 6.37947 21.0895 4.7932 22.8329C3.79864 23.9179 3.0923 25.2516 2.74313 26.7039C2.35751 28.3253 2.51633 31.427 2.50281 33.2344C2.49294 34.5607 2.46054 36.4879 2.50742 37.7691C2.59176 40.0706 3.56055 42.2419 5.19785 43.7986C6.78676 45.3044 8.74125 46.0575 10.8858 46.0418Z"
+            fill="#4DF4FC"
+          />
+          <path
+            d="M10.6337 23.1437C10.8721 23.1322 11.0949 23.1616 11.3146 23.2646C11.588 23.3926 11.8355 23.6382 11.9353 23.9362C12.1246 24.5032 12.1368 28.6057 11.875 29.1082C11.6862 29.4695 11.3895 29.6404 11.0204 29.7517C10.5101 29.8061 9.7401 29.5094 9.65252 28.9325C9.45887 27.6634 9.60392 26.2776 9.56443 24.9877C9.53552 24.0404 9.65809 23.4143 10.6337 23.1437Z"
+            fill="#EEE100"
+          />
+          <path
+            d="M6.4663 53.2191C7.13816 53.1939 7.37266 53.3299 7.84724 53.8201C8.8348 54.8409 9.81756 55.867 10.8017 56.8905L12.8714 54.7281C13.5791 53.9912 14.6569 52.5101 15.7221 53.5655C15.9687 53.8101 16.1079 54.1481 16.1084 54.5019C16.1043 55.1574 15.5004 55.6576 15.0695 56.0911L12.9043 58.3469C12.4481 58.8209 11.9601 59.4491 11.4077 59.7918C11.1475 59.953 10.6934 59.9782 10.4074 59.8895C10.2226 59.8317 10.0859 59.722 9.94059 59.5934C9.34375 59.067 5.80568 55.445 5.5896 54.9538C5.46693 54.6751 5.47529 54.2867 5.58763 54.0064C5.75788 53.5818 6.07501 53.3813 6.4663 53.2191Z"
+            fill="#EEE100"
+          />
+          <path
+            d="M10.4494 6.29951C10.9065 6.24089 11.3191 6.27458 11.6664 6.62098C12.9286 7.88015 14.1557 9.1822 15.3951 10.4657C15.7039 10.804 16.1276 11.1902 16.0998 11.6924C16.0173 13.1886 14.4701 13.4189 13.6738 12.305C13.5887 12.1857 13.2754 11.8872 13.1706 11.7784L10.9916 9.51968L10.8493 9.39975C10.3967 9.44636 8.09009 12.3895 7.28918 12.8448C7.00739 13.0049 6.68116 13.0717 6.36991 12.9667C6.05299 12.8599 5.75809 12.5711 5.6175 12.2599C5.47752 11.9499 5.47985 11.578 5.59932 11.2619C5.79297 10.7492 9.31409 7.16767 9.94767 6.61022C10.1031 6.47324 10.2636 6.38485 10.4494 6.29951Z"
+            fill="#EEE100"
+          />
+          <path
+            d="M10.5476 0.00266881C10.8863 -0.00756578 11.3181 -0.00131967 11.5814 0.265829C13.0384 1.74565 14.5284 3.22735 15.911 4.7807C16.239 5.14972 16.0973 5.93296 15.7915 6.29337C15.5596 6.56304 15.229 6.7185 14.8807 6.72128C14.66 6.72328 14.4438 6.65946 14.2575 6.53743C13.892 6.30072 13.2136 5.55349 12.881 5.20593L10.9384 3.18547L10.8605 3.11104C10.5086 3.11236 7.91629 6.32114 7.16753 6.61316C5.70301 7.18436 5.2378 5.32891 5.64251 4.86714C6.40691 3.99489 9.72593 0.247722 10.5476 0.00266881Z"
+            fill="#EEE100"
+          />
+          <path
+            d="M6.37993 59.5252C7.4322 59.342 8.0422 60.2978 8.72803 61.0142L10.8048 63.1698L12.9022 60.9796C13.2171 60.6515 13.8844 59.9215 14.2383 59.6869C14.421 59.563 14.6326 59.4942 14.8503 59.4879C15.7935 59.458 16.4709 60.629 15.9003 61.4446C15.6376 61.8199 15.3389 62.0959 15.0189 62.4161L12.8632 64.6572C11.2705 66.3157 10.8605 67.0384 9.06166 64.9831C7.95613 63.7392 6.57094 62.5945 5.59319 61.2504C5.1656 60.6626 5.81742 59.8055 6.37993 59.5252Z"
+            fill="#EEE100"
+          />
+        </svg>
       </div>
-
     </div>
-  </div>
-);
-
+  );
 }

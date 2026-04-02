@@ -140,6 +140,39 @@ export const useNavStateStore = create<NavStateStore>((set) => ({
   setNavState: (state) => set({ navState: state }),
 }))
 
+type ScrollStore = {
+  scroll: any,
+  setScroll: (scroll: any) => void;
+}
+export const useScrollStore = create<ScrollStore>((set) => ({
+  scroll: null,
+  setScroll: (scroll) => set({ scroll }),
+}))
+type HamburgerStore = {
+  isHidden: boolean;
+  setIsHidden: (v: boolean) => void;
+
+  manualHidden: boolean;
+  setManualHidden: (v: boolean) => void;
+};
+
+export const useHamburgerStore = create<HamburgerStore>((set) => ({
+  isHidden: false,
+  setIsHidden: (v) => set({ isHidden: v }),
+
+  manualHidden: false,
+  setManualHidden: (v) => set({ manualHidden: v }),
+}));
+// * "Whenever you're stuck, make a new store!" :)
+type PullProgressStore = {
+  pullProgress: number;
+  setPullProgress: (progress: number) => void;
+}
+export const usePullProgressStore = create<PullProgressStore>((set) => ({
+  pullProgress: 0,
+  setPullProgress: (pullProgress) => set({ pullProgress }),
+}))
+
 export interface Event {
   id: number;
   name: string;
@@ -155,7 +188,7 @@ interface UserData {
   year: string;
   state: string;
   city: string;
-  // Add other fields as needed
+// Add other fields as needed
 }
 
 interface RegistrationStore {

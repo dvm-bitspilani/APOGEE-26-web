@@ -1,0 +1,312 @@
+@use "/src/assets/global.scss" as *;
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap");
+
+// ─── PAGE ──────────────────────────────────────────────────────────────────
+.gs-page {
+  min-height: 70vh;
+  width: 30vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  // background: radial-gradient(ellipse at 40% 40%, #1a0a3c 0%, #08001f 50%, #000510 100%);
+  // background-color: #08001f;
+  overflow: hidden;
+  position: fixed;
+  top: 50%;
+  left: 0%;
+  transform: translateY(-50%) translateX(0px);
+  // animation: temp 2s ease-out 0.2s forwards;
+
+  @keyframes temp {
+    from {
+      // opacity: 1;
+      transform: translateY(-50%) translateX(0px) rotateX(0deg);
+    }
+    to {
+      // opacity: 0;
+      transform: translateY(-50%) translateX(-130%) rotateX(-90deg);
+    }
+  }
+
+  // perspective: 200px;
+
+  // Atmospheric glow blobs
+  // &::before,
+  // &::after {
+  //   content: "";
+  //   position: absolute;
+  //   border-radius: 50%;
+  //   filter: blur(80px);
+  //   pointer-events: none;
+  // }
+
+  // &::before {
+  //   width: 100px;
+  //   height: 100px;
+  //   background: rgba(35, 13, 75, 0.297);
+  //   top: 10%;
+  //   left: 15%;
+  // }
+
+  // &::after {
+  //   width: 300px;
+  //   height: 300px;
+  //   background: rgba(35, 13, 75, 0.297);
+  //   bottom: 15%;
+  //   right: 18%;
+  // }
+}
+@media screen and (aspect-ratio < 0.6) {
+  .gs-page {
+    display: none;
+  }
+}
+
+// ─── SCENE ─────────────────────────────────────────────────────────────────
+.gs-scene {
+  position: relative;
+  width: 19vw;
+  height: 26vw;
+  // Subtle tilt — just enough to reveal edges
+  transform: perspective(55vw) rotateY(17deg) rotateX(-2deg);
+  transform-style: preserve-3d;
+}
+
+// ─── SLAB BASE ─────────────────────────────────────────────────────────────
+.gs-slab {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  pointer-events: none;
+
+  // Thickness of each slab (depth dimension)
+  $depth: 0.2vw;
+
+  &--back {
+    transform: translate3d(-0.05vw, 0, -2.5vw) scale(1.04);
+  }
+  &--front {
+    transform: translateZ(1.4vw);
+  }
+  // &--right {
+  //   transform: translate3d(-5.5px, 0px, -4) rotateY(7deg) scale(1.02);
+  //   // inset: 20px;
+  //   width: 55px;
+  // }
+
+  // The main glass face
+  &__face--front {
+    position: absolute;
+    inset: 0;
+    border-radius: 1.2vw;
+    // Frosted glass feel
+    // background: linear-gradient(
+    //   135deg,
+    //   rgba(160, 120, 255, 0.13) 0%,
+    //   rgba(80, 160, 255, 0.10) 40%,
+    //   rgba(200, 100, 255, 0.08) 100%
+    // );
+    border: 1px solid rgb(0, 0, 0);
+    backdrop-filter: blur(6px) saturate(1.4) brightness(0.85);
+    -webkit-backdrop-filter: blur(6px) saturate(1.4) brightness(0.85);
+     filter: blur(6px); 
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.18),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.04),
+      inset 1px 0 0 rgba(255, 255, 255, 0.1),
+      0 0 40px rgba(120, 60, 255, 0.25),
+      0 0 80px rgba(0, 160, 255, 0.12);
+
+    // Internal light shimmer
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 10%;
+      right: 40%;
+      height: 1px;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.55),
+        transparent
+      );
+      border-radius: 50%;
+    }
+
+    // Neon edge glow top
+    &::after {
+      content: "";
+      position: absolute;
+      top: -1px;
+      left: 20px;
+      right: 20px;
+      height: 2px;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(180, 100, 255, 0.9),
+        rgba(0, 200, 255, 0.7),
+        transparent
+      );
+      border-radius: 50%;
+      filter: blur(2px);
+    }
+  }
+
+  // Right depth edge
+  &__edge--right {
+    position: absolute;
+    top: 18px;
+    bottom: 18px;
+    right: -$depth;
+    width: $depth;
+    background: linear-gradient(
+      to right,
+      rgba(130, 80, 255, 0.25),
+      rgba(80, 60, 180, 0.12)
+    );
+    border-right: 1px solid rgba(150, 100, 255, 0.2);
+    transform: rotateY(90deg);
+    transform-origin: left center;
+  }
+
+  // Bottom depth edge
+  &__edge--bottom {
+    position: absolute;
+    bottom: -$depth;
+    left: 18px;
+    right: 18px;
+    height: $depth;
+    background: linear-gradient(
+      to bottom,
+      rgba(100, 60, 220, 0.22),
+      rgba(60, 40, 140, 0.1)
+    );
+    border-bottom: 1px solid rgba(120, 80, 220, 0.18);
+    transform: rotateX(-90deg);
+    transform-origin: top center;
+  }
+}
+
+// ─── TEXT LAYER (between the slabs) ────────────────────────────────────────
+.gs-inner-text {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  // gap: 6px;
+  z-index: 100; // sits above back slab, below front
+  // padding: 0 28px;
+  transform: translate3d(-0.05vw, 0, 1.4vw) scale(1.04);
+
+  img {
+    width: 90%;
+    height: auto;
+    position: absolute;
+    top: 2%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .gs-navLinks {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9vw;
+    // padding: 0.5rem;
+    margin-top: 4.2vw;
+    // border-radius: 0.5rem;
+
+    .gs-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      cursor: pointer;
+      // padding: 0.25rem 0.3rem;
+      text-transform: capitalize;
+      font-family: $font-orbitron;
+      font-weight: 600;
+      font-size: 1.3vw;
+      color: #00f8ff;
+      position: relative;
+      scale: 1;
+      transition: scale 0.2s ease;
+
+      span {
+        font-size: 1.9vw;
+        font-weight: 100;
+      }
+
+      &:hover {
+        color: #fdea1c;
+        scale: 1.04;
+      }
+    }
+  }
+
+  &__tag {
+    font-family: "Share Tech Mono", monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.25em;
+    color: rgba(130, 200, 255, 0.55);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  &__heading {
+    font-family: "Orbitron", monospace;
+    font-weight: 900;
+    font-size: 2rem;
+    letter-spacing: 0.12em;
+    color: rgba(230, 210, 255, 0.92);
+    text-shadow:
+      0 0 12px rgba(180, 100, 255, 0.8),
+      0 0 30px rgba(100, 160, 255, 0.5),
+      0 0 60px rgba(160, 60, 255, 0.3);
+    line-height: 1;
+    text-align: center;
+  }
+
+  &__sub {
+    font-family: "Share Tech Mono", monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    color: rgba(160, 120, 255, 0.65);
+    text-align: center;
+    margin-bottom: 2px;
+  }
+
+  &__divider {
+    width: 60%;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(180, 100, 255, 0.6),
+      rgba(0, 200, 255, 0.5),
+      transparent
+    );
+    margin: 8px 0;
+  }
+
+  &__date {
+    font-family: "Orbitron", monospace;
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    color: rgba(200, 230, 255, 0.75);
+    text-shadow: 0 0 10px rgba(0, 180, 255, 0.5);
+  }
+
+  &__loc {
+    font-family: "Share Tech Mono", monospace;
+    font-size: 0.5rem;
+    letter-spacing: 0.2em;
+    color: rgba(130, 100, 200, 0.5);
+    text-align: center;
+    margin-top: 2px;
+  }
+}

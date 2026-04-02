@@ -1,96 +1,40 @@
-@use '../../../../assets/global.scss' as *;
+@use "../../../../assets/global.scss" as *;
 
-$numberOfArrows: 4;
-
-:export {
-    numberOfArrows: $numberOfArrows;
-}
-.scrollText {
-  color: rgb(234, 234, 234);
-  font-size: 1.5rem;
-  margin-left:0.6rem;
-  margin-bottom: 5rem;   // controls gap between text and arrows
-//   text-align: center;
-  @media (max-width: 768px){
-    margin-bottom:0;
+@keyframes flashPulse {
+  0% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05) translateY(-5px);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
   }
 }
 
-.scrollLabel {
-    @media (max-width: 768px) {$numberOfArrows: 2;}
-
-    position: fixed;
-    bottom: 0.3rem;
-    width: 100%;
-    // margin: auto;
-    z-index: 100;
-    pointer-events: none;
-
-    // @media (max-width: 768px) {margin-right: auto;}
-
-    display: flex;
-    flex-direction: column;
-    // align-items: center;
-    
-    .scrollArrows {
-        padding: 20px;
-        padding-top: 0px;
-        display: flex;
-        flex-direction: column;
-        position: relative;
-        margin: 1rem;
-
-        .scrollArrow {
-            $borderWidth: 3px;
-
-            position: absolute;
-            transform-origin: center;
-            transform: rotateZ(45deg);
-            border-width: 0 $borderWidth $borderWidth 0;
-            border-style: solid;
-            border-color: rgb(234, 234, 234);
-            width: 15px;
-            height: 15px;
-        }
-
-        @for $i from 1 through $numberOfArrows {
-            .scrollArrow:nth-child(#{$i}) {
-                bottom: ($i - 1) * 0.81rem;
-                opacity: 1;
-                animation: arrowAnim (($numberOfArrows + 1) * 0.3s) infinite alternate;
-                animation-delay: 1.5 - ($i - 1) * 0.3s;
-
-                @if $i > 2 {@media (max-width: 768px) {visibility: hidden;}}
-            }
-
-            @keyframes arrowAnim {
-                from {
-                    opacity: 1;
-                    transform: translateY(3px) rotateZ(45deg);
-                }
-                to {
-                    opacity: 0.3;
-                    transform: translateY(0px) rotateZ(45deg);
-                }
-            }
-        }
-    }
-
-    .labelText {
-        // font-family: $primaryFont;
-        color: rgb(234, 234, 234);
-        font-size: 1.2rem;
-    }
-
-    @media (max-width: 768px) {
-        // bottom: 96px;
-
-        .labelText {font-size: 0.9rem;}
-    }
+.scrollText {
+  color: #4df4fc;
+  font-size: 1.5rem;
+  font-family: $font-blender;
+  font-weight: 500;
+  margin-right: 0.6rem;
 }
 
-.scrollReminder{
-    // position: fixed;
-    // right: -15px;
-    // bottom: 15px;
+.scrollLabel {
+  position: fixed;
+  bottom: 0.8rem;
+  width: 100%;
+  z-index: 100;
+  pointer-events: none;
+  display: flex;
+  //   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  animation: flashPulse 1.5s ease-in-out infinite;
+  @media (max-width: 768px) {
+    // bottom: 96px;
+  }
 }
