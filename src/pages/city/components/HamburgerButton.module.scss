@@ -3,6 +3,8 @@
   height: 5vw;
   position: relative;
   border-radius: 50%;
+  left: 3vw;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
 
   @for $i from 1 through 45 {
     .hamLine#{$i} {
@@ -13,7 +15,7 @@
       transform-origin: 2.5vw 50%;
       width: 0.6vw;
       height: 0.2vw;
-      box-shadow: 0 0 2px #4df3fca0;
+      box-shadow: 0 0 2px #00F5FFaa;
 
       span {
         position: absolute;
@@ -22,7 +24,7 @@
         transform: translate(-50%, -50%);
         width: 0.6vw;
         height: 0.2vw;
-        background-color: #4df4fc;
+        background-color: #00f7ff;
         clip-path: polygon(100% 15%, 100% 85%, 0% 100%, 0 0%);
       }
     }
@@ -61,7 +63,7 @@
     span {
       width: 2.2vw;
       height: 0.25vw;
-      background-color: #4df4fc;
+      background-color: #00F5FF;
     }
   }
 

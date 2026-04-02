@@ -15,7 +15,7 @@
     }
     
     .registerIcon {
-        width: 16vw;
+        width: 20vw;
         // fill: $cyber-yellow;
         transition: scale 0.2s ease;
         // filter: brightness(30);
@@ -49,7 +49,9 @@
         margin: 0.5rem;
 
         .registerIcon {
-            width: 11rem;
+            margin-top:-2.5rem;
+
+            width: 18rem;
         }
 
         .registerText {

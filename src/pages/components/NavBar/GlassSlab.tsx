@@ -7,6 +7,7 @@ import { useScrollToSectionStore } from "../../../utils/store";
 const GlassSlab: React.FC = () => {
   return (
     <div className="gs-page">
+       {/* <div className="gs-blur-layer" /> */}
       <div className="gs-scene">
         {/* Back slab */}
         <div className="gs-slab gs-slab--back">

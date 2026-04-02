@@ -24,7 +24,7 @@ export default function NavBarScroll({ children, maxTranslate = 18000 }: Props) 
         let next = 0;
 
         if (!isHovered.current && typeof offset === "number") {
-          next = Math.min(offset * maxTranslate, 260);
+          next = Math.min(offset * maxTranslate, 360);
         }
         // const speed = 0.01 * delta; // adjust smoothing
         const k = isHovered.current ? 12 : 8; // faster on hover
@@ -35,7 +35,7 @@ export default function NavBarScroll({ children, maxTranslate = 18000 }: Props) 
         // lockedValue.current += (next- lockedValue.current) * alpha;
         // lockedValue.current += (next - lockedValue.current) * speed;
 
-        lockedValue.current = Math.min(lockedValue.current, 260);
+        lockedValue.current = Math.min(lockedValue.current, 360);
 
         ref.current.style.transform = `translate3d(-${lockedValue.current}px, 0, 0)`;
       }
