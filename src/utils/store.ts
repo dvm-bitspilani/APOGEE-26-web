@@ -173,6 +173,14 @@ export const usePullProgressStore = create<PullProgressStore>((set) => ({
   setPullProgress: (pullProgress) => set({ pullProgress }),
 }))
 
+type ScrollToSectionStore = {
+  scrollToSection: (section: Section) => void;
+}
+
+export const useScrollToSectionStore = create<ScrollToSectionStore>(() => ({
+  scrollToSection: () => {}, // placeholder, will be overridden
+}));
+
 export interface Event {
   id: number;
   name: string;

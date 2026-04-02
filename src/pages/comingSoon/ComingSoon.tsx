@@ -28,6 +28,11 @@ export default function ComingSoon() {
 
   return (
     <div className={styles.wrapper}>
+      <img
+              src="/img/aboutUs/about-us-bg.png"
+              alt="About Us Background"
+              className={styles.bgImg}
+            />
       <div className={styles.box} ref={boxRef}>
         <h1 className={styles.title} ref={titleRef}>
           Coming Soon
