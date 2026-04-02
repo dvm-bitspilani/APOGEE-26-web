@@ -13,7 +13,7 @@ import { SheetProvider } from "@theatre/r3f";
 import { useEffect } from "react";
 import debugFunctions from "../../utils/debug";
 import * as THREE from "three";
-import { useActiveSheetStore, useNavStateStore, usePreloaderStateStore, useSceneLoadedStore, useScrollStore } from "../../utils/store";
+import { useActiveSheetStore, useNavStateStore, usePreloaderStateStore, useSceneLoadedStore, useScrollStore, useScrollToSectionStore } from "../../utils/store";
 import NavBar from "../components/NavBar/NavBar";
 import RegisterButton from "../components/RegisterButton/RegisterButton";
 import Preloader from "../preloader/Preloader";
@@ -70,6 +70,9 @@ export default function City() {
         if (import.meta.env.DEV) {
           if (e.key === "k") setNavState("opening");
           if (e.key === "l") setNavState("closing");
+          if (e.key === "1") useScrollToSectionStore.getState().scrollToSection("home");
+          if (e.key === "2") useScrollToSectionStore.getState().scrollToSection("about");
+          if (e.key === "3") useScrollToSectionStore.getState().scrollToSection("contact"); 
         }
       })
       // remove Infinity if you want play only once
@@ -183,11 +186,11 @@ export default function City() {
         </div>
       }{activeSheet === "Cyber City" &&
         <HamburgerButton onClick={() => {
-          const scrollOffset = scroll?.offset || 0;
           scroll.el.scrollTo({
-            top: scrollOffset * (scroll.el.scrollHeight - scroll.el.clientHeight),
+            top: scroll.offset * (scroll.el.scrollHeight - scroll.el.clientHeight),
             behavior: "instant"
           });
+          // gsap.set(scroll.el, { scrollTop: scroll.offset * (scroll.el.scrollHeight - scroll.el.clientHeight) });
           setNavState("opening")
         }
         }
