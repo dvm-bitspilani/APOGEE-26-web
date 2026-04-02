@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const GlassSlab: React.FC = () => {
   return (
     <div className="gs-page">
-       <div className="gs-blur-layer" />
+       {/* <div className="gs-blur-layer" /> */}
       <div className="gs-scene">
         {/* Back slab */}
         <div className="gs-slab gs-slab--back">
