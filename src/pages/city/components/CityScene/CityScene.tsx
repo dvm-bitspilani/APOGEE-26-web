@@ -3,20 +3,14 @@ import { Suspense, useEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
 import { useCityStore, usePivotStore } from "../../../../utils/store";
 import ScrollSync from "../ScrollSync/ScrollSync";
-// import SceneDevOrProd from "./SceneDevorProd";
 import SceneLights from "./SceneLights";
 import Constellation from "../Constellation3";
 import CamCar from "../groups/CamCar";
 import { editable as e } from "@theatre/r3f"
-// import InteractivePlane from "../InteractivePlane/InteractivePlane";
-// import InteractivePlane2 from "../InteractivePlane/InteractivePlane2";
 import CountdownPlane from "../Countdown/CountdownPlane";
 import Globe from "../models/Globe";
-// import CountdownPlane from "../Countdown/CountdownPlane";
-// import MatrixRain from "../MatrixRain";
 import FinalProdConfig from "../config/FinalProdConfig";
  import { Perf } from "r3f-perf";
-// import { useCyberpunkFogMaterial } from "../../hooks/useCyberPunkFogMaterial";
 import { Logo } from "../models/Logo";
 import Cone from "../models/HolographicCone";
 
@@ -53,8 +47,6 @@ export default function CityScene({ }: any) {
   }, [setPivot]);
 
   const color = "#3e93be";
-  // const mat = useCyberpunkFogMaterial();
-
   const memoConstellation = useMemo(() => <Constellation key="Constellation" />, []);
   const memoGlobe = useMemo(
     () => (

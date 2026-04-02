@@ -6,7 +6,6 @@ import * as THREE from "three";
 export default function Globe(props: any) {
   const { scene } = useGLTF("/models/onlyglobe-v1.glb");
   const ref = useRef<THREE.Group>(null!);
-//   ref.current.rotation.z=-0.15;
   useFrame((_, delta) => {
   if (ref.current) {
     ref.current.rotation.y += delta * 0.75; 

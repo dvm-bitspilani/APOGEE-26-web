@@ -1,7 +1,7 @@
 @use "/src/assets/global.scss" as *;
 
 .container {
-  height: 100vh;
+  height: 100svh;
   width: 100vw;
   position: fixed;
   top: 0;
@@ -39,10 +39,10 @@
   }
   .speedometer {
     width: 100%;
-    height: 55vh;
-    margin-top: 35vh;
+    height: 55svh;
+    margin-top: 35svh;
     position: relative;
-    clip-path: polygon(0% 0%, 100% 0%, 100% 55vh, 0% 55vh);
+    clip-path: polygon(0% 0%, 100% 0%, 100% 55svh, 0% 55svh);
 
     @for $i from 1 through 7 {
       .dashCircle#{$i} {
@@ -314,8 +314,8 @@
     --bottom2: 14vw;
     --width2: 40vw;
     --left2: calc(41vw - var(--width2));
-    --taGwidth2: 20vw;
-    --taGleft2: 6%;
+    --taGwidth2: 15vw;
+    --taGleft2: 15%;
     --bottom3: 6vw;
     --width3: 33vw;
     --left3: calc(35vw - var(--width3));

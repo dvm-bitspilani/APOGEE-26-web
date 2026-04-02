@@ -1,0 +1,101 @@
+.hamButton {
+  width: 5vw;
+  height: 5vw;
+  position: relative;
+  border-radius: 50%;
+
+  @for $i from 1 through 45 {
+    .hamLine#{$i} {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%) rotate(calc((#{$i} - 1) * 8deg));
+      transform-origin: 2.5vw 50%;
+      width: 0.6vw;
+      height: 0.2vw;
+      box-shadow: 0 0 2px #4df3fca0;
+
+      span {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 0.6vw;
+        height: 0.2vw;
+        background-color: #4df4fc;
+        clip-path: polygon(100% 15%, 100% 85%, 0% 100%, 0 0%);
+      }
+    }
+  }
+  @for $i from 1 through 45 {
+    .hamLineGrey#{$i} {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%) rotate(calc((#{$i} - 1) * 8deg));
+      transform-origin: 2.5vw 50%;
+      width: 0.6vw;
+      height: 0.2vw;
+
+      span {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 0.6vw;
+        height: 0.2vw;
+        background-color: rgb(43, 45, 45);
+        clip-path: polygon(100% 15%, 100% 85%, 0% 100%, 0 0%);
+      }
+    }
+  }
+  .hamBars {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    gap: 0.4vw;
+
+    span {
+      width: 2.2vw;
+      height: 0.25vw;
+      background-color: #4df4fc;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 12vw;
+    height: 12vw;
+
+    @for $i from 1 through 45 {
+      .hamLine#{$i} {
+        transform-origin: 6vw 50%;
+        width: 1.6vw;
+        height: 0.4vw;
+        span {
+          width: 1.6vw;
+          height: 0.4vw;
+        }
+      }
+      .hamLineGrey#{$i} {
+        transform-origin: 6vw 50%;
+        width: 1.6vw;
+        height: 0.4vw;
+        span {
+          width: 1.6vw;
+          height: 0.4vw;
+        }
+      }
+    }
+
+    .hamBars {
+      gap: 0.9vw;
+      span {
+        width: 5.5vw;
+        height: 0.65vw;
+      }
+    }
+  }
+}

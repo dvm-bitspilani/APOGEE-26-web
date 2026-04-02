@@ -35,7 +35,8 @@ const TRANSPORT_MODES: TransportMode[] = [
     id: "transit",
     icon: "⊡",
     title: "PUBLIC TRANSIT",
-    description: "Nearest hubs: Loharu, Bhiwani, Jaipur (bus/train to Loharu + cab)",
+    description:
+      "Nearest hubs: Loharu, Bhiwani, Jaipur (bus/train to Loharu + cab)",
     tag: "Last-mile cab / auto recommended",
   },
   {
@@ -65,6 +66,13 @@ const GettingToPilani: React.FC = () => {
     // Glitch effect needs the text as a data attribute
     if (titleRef.current) {
       titleRef.current.setAttribute("data-text", titleRef.current.innerText);
+    }
+  }, []);
+
+  useEffect(() => {
+    const documentRoot = document.getElementById("root");
+    if (documentRoot) {
+      documentRoot.style.overflowY = "scroll";
     }
   }, []);
 

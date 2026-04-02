@@ -1,6 +1,6 @@
 import React from "react";
 import "./GlassSlab.scss";
-import titleImg from "/img/apogee26.png";
+import titleImg from "/img/apogee26_theme.png";
 import { Link } from "react-router-dom";
 
 const GlassSlab: React.FC = () => {
