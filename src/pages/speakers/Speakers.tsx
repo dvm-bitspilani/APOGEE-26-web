@@ -6,6 +6,7 @@ import { PowerGlitch } from "powerglitch";
 import mobileYearFrame from "/svg/speakers/mobileYearFrame.svg";
 import gsap from "gsap";
 import SpeakerPreLoader from "./components/speakerPreLoader/SpeakerPreLoader";
+import ReactHelmet from "../components/ReactHelmet";
 
 // Extract all speaker image paths for preloading
 const ALL_SPEAKER_IMAGES = speakersData.flatMap(year => year.speakers.map(s => s.img));
@@ -505,6 +506,12 @@ export default function Speakers() {
     };
 
     return (
+        <>
+            <ReactHelmet
+                title="APOGEE '26 | Under Steel Skies | Speakers"
+                description="Discover the lineup of speakers at APOGEE 2026."
+                url="https://www.bits-apogee.org/speakers"
+            />
         <div className={styles.speakersContainer}>
             {loading && <SpeakerPreLoader loading={loading} progress={progress} />}
             <div className={styles.backgroundOverlay}></div>
@@ -678,5 +685,6 @@ export default function Speakers() {
                 </div>
             )}
         </div>
+        </>
     );
 }
