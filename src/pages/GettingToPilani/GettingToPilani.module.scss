@@ -134,6 +134,7 @@
   padding: 2.5rem 2rem .5rem;
   text-align: center;
   animation: fadeUp 0.8s ease both;
+  position: relative;
 }
 
 .heroEyebrow {
@@ -206,6 +207,19 @@
   margin-bottom: 0.3rem;
 }
 
+.goBack{
+  position: absolute;
+  left: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4rem;
+  @media (max-width: 650px) {
+    top: 40%;
+    left: 1rem;
+    width: 3rem;
+  }
+}
+
 .badge {
   font-family: var(--mono);
   font-size: 10px;
@@ -242,9 +256,9 @@
   gap: 2rem;
   align-items: start;
 
-  @media (max-width: 860px) {
-    grid-template-columns: 1fr;
-  }
+    @media (max-width: 860px) {
+      grid-template-columns: 1fr;
+    }
 }
 
 // ─── Section Header ───────────────────────────────────────────────────────────
