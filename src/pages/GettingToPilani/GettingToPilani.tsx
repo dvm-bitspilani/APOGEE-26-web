@@ -124,7 +124,7 @@ const GettingToPilani: React.FC = () => {
                 height="280px"
               />
               {/* Replace with actual MapMyIndia branding once integrated */}
-              <div className={styles.mapBrand}>MAPMYINDIA · LIVE</div>
+              {/* <div className={styles.mapBrand}>MAPMYINDIA · LIVE</div> */}
             </div>
             <div className={styles.mapCoords}>
               <span className={styles.mapCoordsText}>
