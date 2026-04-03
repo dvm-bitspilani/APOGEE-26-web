@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  
+
   <!-- Home -->
   <url>
     <loc>https://www.bits-apogee.org/</loc>
-    <lastmod>2026-02-10</lastmod>
+    <lastmod>2026-04-04</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -12,9 +12,49 @@
   <!-- Registration -->
   <url>
     <loc>https://www.bits-apogee.org/registration</loc>
-    <lastmod>2026-02-10</lastmod>
+    <lastmod>2026-04-04</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
+  </url>
+
+  <!-- Events -->
+  <url>
+    <loc>https://www.bits-apogee.org/events</loc>
+    <lastmod>2026-04-04</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Getting to Pilani -->
+  <url>
+    <loc>https://www.bits-apogee.org/getting-to-pilani</loc>
+    <lastmod>2026-04-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Brochure -->
+  <url>
+    <loc>https://www.bits-apogee.org/brochure</loc>
+    <lastmod>2026-04-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Developers -->
+  <!-- <url>
+    <loc>https://www.bits-apogee.org/developers</loc>
+    <lastmod>2026-04-04</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url> -->
+
+  <!-- Speakers -->
+  <url>
+    <loc>https://www.bits-apogee.org/speakers</loc>
+    <lastmod>2026-04-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
 
 </urlset>
