@@ -82,6 +82,12 @@
     src: url('/font/Orbitron-Regular.ttf') format('truetype');
 }
 
+@font-face {
+    font-family: 'Avapore';
+    src: url('/font/Avapore.ttf') format('truetype');
+}
+
+
 $cyber-yellow: #FFEB00;
 $dark-bg: #000;
 
@@ -96,6 +102,7 @@ $font-zeroHour: 'Zero Hour';
 $font-bitsumishi: 'Bitsumishi';
 $font-dragrace: 'Dragrace';
 $font-orbitron: 'Orbitron';
+$font-avapore: 'Avapore';
 
 // Font Weights
 $weight-blender-thin: 100;
