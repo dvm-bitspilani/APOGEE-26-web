@@ -5,6 +5,29 @@ import speakersData from "./speakerData";
 import { PowerGlitch } from "powerglitch";
 import mobileYearFrame from "/svg/speakers/mobileYearFrame.svg";
 import gsap from "gsap";
+import SpeakerPreLoader from "./components/speakerPreLoader/SpeakerPreLoader";
+
+// Extract all speaker image paths for preloading
+const ALL_SPEAKER_IMAGES = speakersData.flatMap(year => year.speakers.map(s => s.img));
+
+const PRELOAD_IMAGES = [
+    "/img/speakers/speakerBg.png",
+    "/img/speakers/backBtn.png",
+    "/img/speakers/mobileWheel.png",
+    "/svg/speakers/frameEvents.svg",
+    "/svg/speakers/mobileYearFrame.svg",
+    "/svg/speakers/first.svg",
+    "/svg/speakers/second.svg",
+    "/svg/speakers/third.svg",
+    "/svg/speakers/fourth.svg",
+    "/svg/speakers/fifth.svg",
+    "/svg/speakers/speakerName.svg",
+    "/svg/speakers/activeSpeakerName.svg",
+    "/img/speakers/imageFrame.png",
+    "/svg/speakers/arrows.svg",
+    "/svg/speakers/mobileNameFrame.svg",
+    ...ALL_SPEAKER_IMAGES
+];
 
 // Position coordinates for each of the 5 year node slots
 const YEAR_POSITIONS = [
@@ -50,8 +73,44 @@ export default function Speakers() {
     const [activeYearIndex, setActiveYearIndex] = useState(0);
     const [virtualSpeakerIndex, setVirtualSpeakerIndex] = useState(0);
     const [isMobile, setIsMobile] = useState(false);
+    const [loading, setLoading] = useState(true);
+    const [progress, setProgress] = useState(0);
 
     useEffect(() => {
+        const loadAll = async () => {
+            const totalItems = PRELOAD_IMAGES.length;
+            let loadedItems = 0;
+
+            const incrementProgress = () => {
+                loadedItems++;
+                setProgress((loadedItems / totalItems) * 100);
+            };
+
+            const imagePromises = PRELOAD_IMAGES.map((src) => {
+                return new Promise((resolve) => {
+                    const img = new Image();
+                    img.src = src;
+                    img.onload = () => {
+                        incrementProgress();
+                        resolve(src);
+                    };
+                    img.onerror = () => {
+                        console.warn(`Failed to load image: ${src}`);
+                        incrementProgress(); // Avoid getting stuck
+                        resolve(src);
+                    };
+                });
+            });
+
+            await Promise.all(imagePromises);
+            
+            setTimeout(() => {
+                setLoading(false);
+            }, 600);
+        };
+
+        loadAll();
+
         const mediaQuery = window.matchMedia("(max-aspect-ratio: 1/1)");
         setIsMobile(mediaQuery.matches);
         const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
@@ -447,6 +506,7 @@ export default function Speakers() {
 
     return (
         <div className={styles.speakersContainer}>
+            {loading && <SpeakerPreLoader loading={loading} progress={progress} />}
             <div className={styles.backgroundOverlay}></div>
 
             <div className={styles.header}>
