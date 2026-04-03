@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 import Analytics from "./Analytics";
 import Registration from "./pages/registration/Registration";
 // import Instructions from "./pages/registration/components/Instructions";
@@ -12,6 +12,10 @@ import GettingToPilani from "./pages/GettingToPilani/GettingToPilani";
 import Brochure from "./pages/brochure/Brochure";
 import ComingSoon from "./pages/comingSoon/ComingSoon";
 import Speakers from "./pages/speakers/Speakers";
+
+const RedirectToHome = () => {
+  return <Navigate to="/" replace />;
+};
 
 type page = {
   url: string;
@@ -70,7 +74,11 @@ const pages: page[] = [
   {
     url: "/speakers",
     component: Speakers, //! @rm -rf ~/, here :)
-  }
+  },
+  {
+  url: "/index.html",
+  component: RedirectToHome,
+}
 ];
 
 const generateRoutes = (pages: page[]) => {
