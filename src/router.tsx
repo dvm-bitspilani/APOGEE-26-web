@@ -11,6 +11,7 @@ import Events from "./pages/events/Events";
 import GettingToPilani from "./pages/GettingToPilani/GettingToPilani";
 import Brochure from "./pages/brochure/Brochure";
 import ComingSoon from "./pages/comingSoon/ComingSoon";
+import Speakers from "./pages/speakers/Speakers";
 
 type page = {
   url: string;
@@ -35,10 +36,10 @@ const pages: page[] = [
 
     component: Events,
   },
-    // {
-    //   url: '/city',
-    //   component: City,
-    // },
+  // {
+  //   url: '/city',
+  //   component: City,
+  // },
   // {
   //   url: "/contact",
 
@@ -68,7 +69,7 @@ const pages: page[] = [
   },
   {
     url: "/speakers",
-    component: ComingSoon, //! @rm -rf ~/, here :)
+    component: Speakers, //! @rm -rf ~/, here :)
   }
 ];
 
