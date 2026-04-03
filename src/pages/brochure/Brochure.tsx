@@ -1,15 +1,22 @@
+import ReactHelmet from "../components/ReactHelmet";
 import styles from "./Brochure.module.scss";
-import pdfFile from "/src/assets/apogee 2026 brochure.pdf";
+import pdfFile from "/src/assets/apogee-2026-brochure.pdf";
 import { FaDownload } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 
 export default function Brochure() {
   return (
-    <div className={styles.brochurePageBg}>
-      <div className={styles.brochurePage}>
-        <div className={styles.header}>
-          <div className={styles.title}>Brochure</div>
-          <Link to={"/"} className={styles.goBack}>
+    <>
+      <ReactHelmet
+        title="APOGEE '26 | Under Steel Skies | Brochure"
+        description="Download the official brochure for APOGEE 2026."
+        url="https://www.bits-apogee.org/brochure"
+      />
+      <div className={styles.brochurePageBg}>
+        <div className={styles.brochurePage}>
+          <div className={styles.header}>
+            <div className={styles.title}>Brochure</div>
+            <Link to={"/"} className={styles.goBack}>
             <svg
               width="101"
               height="59"
@@ -44,5 +51,6 @@ export default function Brochure() {
         </div>
       </div>
     </div>
+    </>
   );
 }
