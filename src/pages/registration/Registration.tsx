@@ -313,10 +313,12 @@ function Registration() {
             <img
               className={styles.bgPanelImage}
               src="/img/registrations/instructions-panel-bg-mobile.png"
+              alt="Instructions Panel Background"
             />
             <img
               className={styles.bgPanelFrame}
               src="/img/registrations/instructions-panel-frame-mobile.png"
+              alt="Instructions Panel Frame"
             />
           </div>
           {registrationStep === "instructions" && (
