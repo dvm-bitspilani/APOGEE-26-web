@@ -20,7 +20,7 @@ interface MapplsMapProps {
 const MAP_CONTAINER_ID = "mappls-map-container";
 
 const MapplsMap: React.FC<MapplsMapProps> = ({
-  center = [28.364012339660572, 75.58693005559708], // BITS Pilani Hyderabad default
+  center = [28.364012339660572, 75.58693005559708],
   zoom = 15,
   marker,
   markerIconUrl = "https://apis.mappls.com/map_v3/1.png",
@@ -65,7 +65,8 @@ const MapplsMap: React.FC<MapplsMapProps> = ({
     isScriptLoaded.current = true;
 
     const script = document.createElement("script");
-    script.src = `https://apis.mappls.com/advancedmaps/api/${apiKey}/map_sdk?layer=vector&v=3.0&callback=initMap`;
+    script.src = `https://sdk.mappls.com/map/sdk/web?v=3.0&access_token=${apiKey}&callback=initMap`;
+    // script.src = `https://apis.mappls.com/advancedmaps/api/${apiKey}/map_sdk?layer=vector&v=3.0&callback=initMap`;
     script.defer = true;
     script.async = true;
     document.head.appendChild(script);

@@ -34,9 +34,9 @@ export default function ComingSoon() {
               className={styles.bgImg}
             />
       <div className={styles.box} ref={boxRef}>
-        <h1 className={styles.title} ref={titleRef}>
+        <h2 className={styles.title} ref={titleRef}>
           Coming Soon
-        </h1>
+        </h2>
       </div>
     </div>
   );

@@ -202,7 +202,7 @@ const DetailsForm = ({ mail = "" }: { mail: string }) => {
   });
 
   useEffect(() => {
-    axios.get("https://merge.bits-apogee.org/2026/main/registrations/get_college/")
+    axios.get("https://bits-apogee.org/2026/main/registrations/get_college/")
       .then((res) => {
         setCollegeList(res.data);
       })

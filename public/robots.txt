@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+Disallow: /coming-soon
+Disallow: /gamblingmaths/*
+Disallow: /register
+Sitemap: https://www.bits-apogee.org/sitemap.xml

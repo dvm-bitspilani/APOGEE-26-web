@@ -9,6 +9,7 @@ export interface EventData {
     location: string;
     time: string;
     phone: string;
+    unstop_url: string;
 }
 
 interface EventsItemProps {
@@ -85,7 +86,7 @@ export default function EventsItem({ category, events }: EventsItemProps) {
                     <div className={styles.contentWrapper} ref={contentRef}>
                         <div className={styles.imageSection}>
                             <div className={styles.imageClipping}>
-                                <img src="/img/events/sample2.jpg" alt="Event" className={styles.eventImg} />
+                                <img src="/img/events/sutt.jpeg" alt="Event" className={styles.eventImg} />
                             </div>
                             <img src="/svg/events/frame.svg" alt="Frame" className={styles.frameImg} />
                         </div>
@@ -94,11 +95,15 @@ export default function EventsItem({ category, events }: EventsItemProps) {
                             <div className={styles.glowBoxWrapper}>
                                 <div className={styles.glowBox}></div>
                                 <div className={styles.glowBoxInner}>
-                                    <h2 className={styles.title}>
-                                        <span className={styles.bracket}>[</span>
-                                        {category} - {currentEvent.name}
-                                        <span className={styles.bracket}>]</span>
-                                    </h2>
+                                    <div className={styles.glowBoxBg}></div>
+                                    <div className={styles.titleContainer}>
+
+                                        <h2 className={styles.title}>
+                                            <span className={styles.bracket}>[</span>
+                                            {currentEvent.name}
+                                            <span className={styles.bracket}>]</span>
+                                        </h2>
+                                    </div>
                                     <p className={styles.desc}>{currentEvent.description}</p>
 
                                     <div className={styles.infoGrid}>
@@ -117,14 +122,16 @@ export default function EventsItem({ category, events }: EventsItemProps) {
                                     </div>
 
                                     <div className={styles.actionContainer}>
-                                        {/* <button className={styles.registerBtn}>
-                                            <div className={styles.btnInner}>Register</div>
-                                        </button> */}
-                                        <NavButton
-                                            innerClass={styles.registerBtn}
-                                            onClick={() => { }}
-                                        >Register
-                                        </NavButton>
+                                        {currentEvent.unstop_url && (
+                                            <NavButton
+                                                innerClass={styles.registerBtn}
+                                                onClick={() => {
+                                                    window.open(currentEvent.unstop_url, "_blank", "noopener,noreferrer");
+                                                }}
+                                            >
+                                                Register
+                                            </NavButton>
+                                        )}
                                     </div>
                                 </div>
                             </div>

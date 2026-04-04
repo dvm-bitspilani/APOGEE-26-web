@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 import Analytics from "./Analytics";
 import Registration from "./pages/registration/Registration";
 // import Instructions from "./pages/registration/components/Instructions";
@@ -11,6 +11,11 @@ import Events from "./pages/events/Events";
 import GettingToPilani from "./pages/GettingToPilani/GettingToPilani";
 import Brochure from "./pages/brochure/Brochure";
 import ComingSoon from "./pages/comingSoon/ComingSoon";
+import Speakers from "./pages/speakers/Speakers";
+
+const RedirectToHome = () => {
+  return <Navigate to="/" replace />;
+};
 
 type page = {
   url: string;
@@ -35,17 +40,17 @@ const pages: page[] = [
 
     component: Events,
   },
-    // {
-    //   url: '/city',
-    //   component: City,
-    // },
+  // {
+  //   url: '/city',
+  //   component: City,
+  // },
   // {
   //   url: "/contact",
 
   //   component: ContactUs,
   // },
   // {
-  //   url: "/loader",
+  //   url: "/loader",Coming Soon
 
   //   component: Preloader,
   // },
@@ -68,8 +73,12 @@ const pages: page[] = [
   },
   {
     url: "/speakers",
-    component: ComingSoon, //! @rm -rf ~/, here :)
-  }
+    component: Speakers, //! @rm -rf ~/, here :)
+  },
+  {
+  url: "/index.html",
+  component: RedirectToHome,
+}
 ];
 
 const generateRoutes = (pages: page[]) => {
@@ -86,7 +95,13 @@ const generateRoutes = (pages: page[]) => {
 const router = createBrowserRouter([
   {
     element: <Analytics />, // 👈 GA wrapper
-    children: [...generateRoutes(pages)],
+    children: [
+      ...generateRoutes(pages),
+      {
+        path: "*",
+        element: <ComingSoon />,
+      },
+    ],
   },
 ]);
 
