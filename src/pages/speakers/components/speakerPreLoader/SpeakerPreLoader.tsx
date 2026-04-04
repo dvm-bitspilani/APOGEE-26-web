@@ -51,9 +51,9 @@ export default function SpeakerPreLoader({
       <div className={styles.background}></div>
       <div className={styles.content}>
         <div className={styles.textContainer}>
-          <h1 className={styles.title}>
+          <h6 className={styles.title}>
             {type === "enter" ? "ARCHIVE ACCESS" : "INTEL SECURED"}
-          </h1>
+          </h6>
           <div className={styles.subtitle}>
             Speaker {type === "enter" ? "Manifest" : "Initialization"} Protocol
           </div>

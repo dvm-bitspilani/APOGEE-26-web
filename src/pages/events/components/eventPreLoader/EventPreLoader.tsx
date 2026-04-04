@@ -51,9 +51,9 @@ export default function EventPreLoader({
       <div className={styles.background}></div>
       <div className={styles.content}>
         <div className={styles.textContainer}>
-          <h1 className={styles.title}>
+          <h6 className={styles.title}>
             {type === "enter" ? "UPLOADING INTEL" : "ACCESS GRANTED"}
-          </h1>
+          </h6>
           <div className={styles.subtitle}>
             Event {type === "enter" ? "Manifest" : "Initialization"} Protocol
           </div>
