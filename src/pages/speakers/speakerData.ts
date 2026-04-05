@@ -68,18 +68,18 @@ const speakersData: YearData[] = [
                 "name": "Dr. V. Anantha Nageswaran",
                 "img": "/img/speakers/2025/Dr. V. Anantha Nageswaran.png"
             },
+            // {
+            //     "id": "2025-6",
+            //     "name": "IMG-20250401-WA0149",
+            //     "img": "/img/speakers/2025/IMG-20250401-WA0149.jpg"
+            // },
             {
                 "id": "2025-6",
-                "name": "IMG-20250401-WA0149",
-                "img": "/img/speakers/2025/IMG-20250401-WA0149.jpg"
-            },
-            {
-                "id": "2025-7",
                 "name": "Mr Abhay Kumar",
                 "img": "/img/speakers/2025/Mr Abhay Kumar.jpg"
             },
             {
-                "id": "2025-8",
+                "id": "2025-7",
                 "name": "Ms Nidhi Bansal",
                 "img": "/img/speakers/2025/Ms Nidhi Bansal.jpg"
             }
