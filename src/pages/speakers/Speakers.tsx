@@ -104,7 +104,7 @@ export default function Speakers() {
             });
 
             await Promise.all(imagePromises);
-            
+
             setTimeout(() => {
                 setLoading(false);
             }, 600);
@@ -350,28 +350,35 @@ export default function Speakers() {
             if (isMobile) {
                 const tl = gsap.timeline({
                     onComplete: () => {
+                        // 1. Update React FIRST
                         setActiveYearIndex(targetOriginalIndex);
                         setVirtualSpeakerIndex(0);
 
-                        yearNodeRefs.current.forEach((node) => {
-                            if (node)
-                                gsap.set(node, {
-                                    clearProps:
-                                        "left,top,bottom,right,transform,width,height,filter,zIndex,opacity,display",
-                                });
-                        });
-                        frameImgRefs.current.forEach((nodeFrames) => {
-                            nodeFrames.forEach((img) => {
-                                if (img) gsap.set(img, { clearProps: "opacity" });
+                        // 2. Wait 1 frame so new DOM is committed
+                        requestAnimationFrame(() => {
+                            yearNodeRefs.current.forEach((node) => {
+                                if (node)
+                                    gsap.set(node, {
+                                        clearProps: "left,top,bottom,right,transform,width,height,filter,zIndex,opacity,display",
+                                    });
                             });
+
+                            frameImgRefs.current.forEach((nodeFrames) => {
+                                nodeFrames.forEach((img) => {
+                                    if (img) gsap.set(img, { clearProps: "opacity" });
+                                });
+                            });
+
+                            yearTextShortRefs.current.forEach((el) => {
+                                if (el) gsap.set(el, { clearProps: "opacity" });
+                            });
+
+                            yearTextFullRefs.current.forEach((el) => {
+                                if (el) gsap.set(el, { clearProps: "opacity,font-size" });
+                            });
+
+                            isAnimating.current = false;
                         });
-                        yearTextShortRefs.current.forEach((el) => {
-                            if (el) gsap.set(el, { clearProps: "opacity" });
-                        });
-                        yearTextFullRefs.current.forEach((el) => {
-                            if (el) gsap.set(el, { clearProps: "opacity,font-size" });
-                        });
-                        isAnimating.current = false;
                     },
                 });
 
@@ -512,179 +519,179 @@ export default function Speakers() {
                 description="Discover the lineup of speakers at APOGEE 2026."
                 url="https://www.bits-apogee.org/speakers"
             />
-        <div className={styles.speakersContainer}>
-            {loading && <SpeakerPreLoader loading={loading} progress={progress} />}
-            <div className={styles.backgroundOverlay}></div>
+            <div className={styles.speakersContainer}>
+                {loading && <SpeakerPreLoader loading={loading} progress={progress} />}
+                <div className={styles.backgroundOverlay}></div>
 
-            <div className={styles.header}>
-                <img
-                    src="/img/speakers/backBtn.png"
-                    alt="Back"
-                    className={styles.backBtn}
-                    onClick={() => navigate("/")}
-                />
-                <h1 className={styles.title}>SPEAKERS</h1>
-            </div>
+                <div className={styles.header}>
+                    <img
+                        src="/img/speakers/backBtn.png"
+                        alt="Back"
+                        className={styles.backBtn}
+                        onClick={() => navigate("/")}
+                    />
+                    <h1 className={styles.title}>SPEAKERS</h1>
+                </div>
 
-            <div className={styles.wheelContainer}>
-                <img
-                    src={isMobile ? "/img/speakers/mobileWheel.png" : "/svg/speakers/frameEvents.svg"}
-                    alt="Wheel Frame"
-                    className={styles.wheelFrameBg}
-                />
+                <div className={styles.wheelContainer}>
+                    <img
+                        src={isMobile ? "/img/speakers/mobileWheel.png" : "/svg/speakers/frameEvents.svg"}
+                        alt="Wheel Frame"
+                        className={styles.wheelFrameBg}
+                    />
 
-                <div className={styles.yearsWrapper}>
-                    {isMobile && (
-                        <img src={mobileYearFrame} alt="Mobile Year Frame" className={styles.mobileActiveYearBox} />
-                    )}
-                    {[0, 1, 2, 3, 4].map((posIndex) => {
-                        const isActive = posIndex === 2;
-                        const yearData = displayedYears[posIndex];
+                    <div className={styles.yearsWrapper}>
+                        {isMobile && (
+                            <img src={mobileYearFrame} alt="Mobile Year Frame" className={styles.mobileActiveYearBox} />
+                        )}
+                        {[0, 1, 2, 3, 4].map((posIndex) => {
+                            const isActive = posIndex === 2;
+                            const yearData = displayedYears[posIndex];
 
-                        return (
-                            <div
-                                // Stable key — React reuses the same DOM node across year
-                                // changes so the FLIP animation has a persistent element to
-                                // INVERT and PLAY on.
-                                key={`slot-${posIndex}`}
-                                ref={(el) => { yearNodeRefs.current[posIndex] = el; }}
-                                className={`${styles.yearNode} ${isActive ? styles.active : ''} ${styles[`slot${posIndex}`]}`}
-                                onClick={() => yearData && handleYearClick(yearData.originalIndex)}
-                            >
-                                {/* All 5 frame SVGs stacked — only current slot visible (Removed for mobile) */}
-                                {!isMobile && SVG_FRAMES.map((frameName, frameIdx) => {
-                                    const isCurrentFrame = frameIdx === posIndex;
-                                    return (
-                                        <img
-                                            key={frameName}
-                                            ref={(el) => {
-                                                if (!frameImgRefs.current[posIndex]) {
-                                                    frameImgRefs.current[posIndex] = [];
-                                                }
-                                                frameImgRefs.current[posIndex][frameIdx] = el;
-                                            }}
-                                            src={`/svg/speakers/${frameName}.svg`}
-                                            alt="Year Frame"
-                                            className={styles.yearBg}
-                                            style={{
-                                                opacity: isCurrentFrame ? 1 : 0,
-                                            }}
-                                        />
-                                    );
-                                })}
+                            return (
+                                <div
+                                    // Stable key — React reuses the same DOM node across year
+                                    // changes so the FLIP animation has a persistent element to
+                                    // INVERT and PLAY on.
+                                    key={`slot-${posIndex}`}
+                                    ref={(el) => { yearNodeRefs.current[posIndex] = el; }}
+                                    className={`${styles.yearNode} ${isActive ? styles.active : ''} ${styles[`slot${posIndex}`]}`}
+                                    onClick={() => yearData && handleYearClick(yearData.originalIndex)}
+                                >
+                                    {/* All 5 frame SVGs stacked — only current slot visible (Removed for mobile) */}
+                                    {!isMobile && SVG_FRAMES.map((frameName, frameIdx) => {
+                                        const isCurrentFrame = frameIdx === posIndex;
+                                        return (
+                                            <img
+                                                key={frameName}
+                                                ref={(el) => {
+                                                    if (!frameImgRefs.current[posIndex]) {
+                                                        frameImgRefs.current[posIndex] = [];
+                                                    }
+                                                    frameImgRefs.current[posIndex][frameIdx] = el;
+                                                }}
+                                                src={`/svg/speakers/${frameName}.svg`}
+                                                alt="Year Frame"
+                                                className={styles.yearBg}
+                                                style={{
+                                                    opacity: isCurrentFrame ? 1 : 0,
+                                                }}
+                                            />
+                                        );
+                                    })}
 
-                                {isMobile ? (
-                                    <>
-                                        <span
-                                            className={styles.yearTextFull}
-                                            ref={(el) => { yearTextFullRefs.current[posIndex] = el; }}
-                                        >
-                                            {yearData ? yearData.item.year.toString() : ''}
-                                        </span>
-                                    </>
-                                ) : (
-                                    <>
-                                        <span
-                                            ref={(el) => { yearTextShortRefs.current[posIndex] = el; }}
-                                            className={styles.yearText}
-                                            style={{ opacity: isActive ? 0 : 1 }}
-                                        >
-                                            {yearData ? yearData.item.year.toString().slice(-2) : ''}
-                                        </span>
-                                        <span
-                                            ref={(el) => { yearTextFullRefs.current[posIndex] = el; }}
-                                            className={`${styles.yearText} ${styles.yearTextFull}`}
-                                            style={{ opacity: isActive ? 1 : 0 }}
-                                        >
-                                            {yearData ? yearData.item.year.toString() : ''}
-                                        </span>
-                                    </>
-                                )}
+                                    {isMobile ? (
+                                        <>
+                                            <span
+                                                className={styles.yearTextFull}
+                                                ref={(el) => { yearTextFullRefs.current[posIndex] = el; }}
+                                            >
+                                                {yearData ? yearData.item.year.toString() : ''}
+                                            </span>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <span
+                                                ref={(el) => { yearTextShortRefs.current[posIndex] = el; }}
+                                                className={styles.yearText}
+                                                style={{ opacity: isActive ? 0 : 1 }}
+                                            >
+                                                {yearData ? yearData.item.year.toString().slice(-2) : ''}
+                                            </span>
+                                            <span
+                                                ref={(el) => { yearTextFullRefs.current[posIndex] = el; }}
+                                                className={`${styles.yearText} ${styles.yearTextFull}`}
+                                                style={{ opacity: isActive ? 1 : 0 }}
+                                            >
+                                                {yearData ? yearData.item.year.toString() : ''}
+                                            </span>
+                                        </>
+                                    )}
+                                </div>
+                            );
+                        })}
+
+                        {/* Virtual speaker positions */}
+                        {len > 0 && Array.from({ length: 9 }).map((_, i) => {
+                            const offset = i - 4;
+                            const v_index = virtualSpeakerIndex + offset;
+                            const physicalIndex = ((v_index % len) + len) % len;
+                            const speakerData = speakersList[physicalIndex];
+                            const posIndex = offset + 2;
+                            const isVisible = posIndex >= 0 && posIndex <= 4;
+                            const isActiveSpeaker = offset === 0;
+
+                            let assignedClass = styles[`speakerPos${posIndex}`];
+                            if (posIndex < 0) assignedClass = styles.speakerPosOffTop;
+                            if (posIndex > 4) assignedClass = styles.speakerPosOffBottom;
+
+                            return (
+                                <div
+                                    key={`v-speaker-${v_index}`}
+                                    className={`${styles.speakerLabelWrapper} ${isActiveSpeaker ? styles.activeLabel : ''} ${assignedClass}`}
+                                    onClick={() => handleSpeakerClick(v_index)}
+                                    style={{
+                                        opacity: isVisible ? 1 : 0,
+                                        pointerEvents: isVisible ? 'auto' : 'none'
+                                    }}
+                                >
+                                    <img
+                                        src="/svg/speakers/speakerName.svg"
+                                        alt="Speaker Frame"
+                                        className={`${styles.speakerLabelBg} ${styles.inactiveSvg} ${isActiveSpeaker ? styles.fadeOut : ''}`}
+                                    />
+                                    <img
+                                        src="/svg/speakers/activeSpeakerName.svg"
+                                        alt="Active Frame"
+                                        className={`${styles.speakerLabelBg} ${styles.activeSvg} ${isActiveSpeaker ? styles.fadeIn : ''}`}
+                                    />
+                                    <span className={styles.speakerNameText}>
+                                        {speakerData.name.toUpperCase()}
+                                    </span>
+                                </div>
+                            );
+                        })}
+                    </div>
+                </div>
+
+                {activeSpeaker && (
+                    <div className={isMobile ? styles.mobileSpeakerProfileUnit : ''}>
+                        <div className={styles.speakerImageContainer}>
+                            <img src="/img/speakers/imageFrame.png" alt="Image Frame" className={styles.speakerImageFrame} />
+                            <div key={`img-${activeSpeaker.id}`} className={styles.speakerImagePos}>
+                                <div className={styles.glitchTarget} ref={imageRef}>
+                                    <img src={activeSpeaker.img} alt={activeSpeaker.name} className={styles.speakerImage} />
+                                </div>
                             </div>
-                        );
-                    })}
+                        </div>
 
-                    {/* Virtual speaker positions */}
-                    {len > 0 && Array.from({ length: 9 }).map((_, i) => {
-                        const offset = i - 4;
-                        const v_index = virtualSpeakerIndex + offset;
-                        const physicalIndex = ((v_index % len) + len) % len;
-                        const speakerData = speakersList[physicalIndex];
-                        const posIndex = offset + 2;
-                        const isVisible = posIndex >= 0 && posIndex <= 4;
-                        const isActiveSpeaker = offset === 0;
-
-                        let assignedClass = styles[`speakerPos${posIndex}`];
-                        if (posIndex < 0) assignedClass = styles.speakerPosOffTop;
-                        if (posIndex > 4) assignedClass = styles.speakerPosOffBottom;
-
-                        return (
-                            <div
-                                key={`v-speaker-${v_index}`}
-                                className={`${styles.speakerLabelWrapper} ${isActiveSpeaker ? styles.activeLabel : ''} ${assignedClass}`}
-                                onClick={() => handleSpeakerClick(v_index)}
-                                style={{
-                                    opacity: isVisible ? 1 : 0,
-                                    pointerEvents: isVisible ? 'auto' : 'none'
-                                }}
+                        <div className={styles.mobileSpeakerNav}>
+                            <button
+                                className={styles.mobileArrow}
+                                onClick={() => setVirtualSpeakerIndex(virtualSpeakerIndex - 1)}
+                                aria-label="Previous speaker"
                             >
-                                <img
-                                    src="/svg/speakers/speakerName.svg"
-                                    alt="Speaker Frame"
-                                    className={`${styles.speakerLabelBg} ${styles.inactiveSvg} ${isActiveSpeaker ? styles.fadeOut : ''}`}
-                                />
-                                <img
-                                    src="/svg/speakers/activeSpeakerName.svg"
-                                    alt="Active Frame"
-                                    className={`${styles.speakerLabelBg} ${styles.activeSvg} ${isActiveSpeaker ? styles.fadeIn : ''}`}
-                                />
-                                <span className={styles.speakerNameText}>
-                                    {speakerData.name.toUpperCase()}
+                                <img src="/svg/speakers/arrows.svg" alt="Previous" className={styles.mobileArrowLeft} />
+                            </button>
+
+                            <div className={styles.mobileNameContainer}>
+                                {!isMobile && <img src="/svg/speakers/mobileNameFrame.svg" alt="Name Frame" className={styles.mobileNameFrameImg} />}
+                                <span className={styles.mobileNameText}>
+                                    {activeSpeaker.name.toUpperCase()}
                                 </span>
                             </div>
-                        );
-                    })}
-                </div>
+
+                            <button
+                                className={styles.mobileArrow}
+                                onClick={() => setVirtualSpeakerIndex(virtualSpeakerIndex + 1)}
+                                aria-label="Next speaker"
+                            >
+                                <img src="/svg/speakers/arrows.svg" alt="Next" className={styles.mobileArrowRight} />
+                            </button>
+                        </div>
+                    </div>
+                )}
             </div>
-
-            {activeSpeaker && (
-                <div className={isMobile ? styles.mobileSpeakerProfileUnit : ''}>
-                    <div className={styles.speakerImageContainer}>
-                        <img src="/img/speakers/imageFrame.png" alt="Image Frame" className={styles.speakerImageFrame} />
-                        <div key={`img-${activeSpeaker.id}`} className={styles.speakerImagePos}>
-                            <div className={styles.glitchTarget} ref={imageRef}>
-                                <img src={activeSpeaker.img} alt={activeSpeaker.name} className={styles.speakerImage} />
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className={styles.mobileSpeakerNav}>
-                        <button
-                            className={styles.mobileArrow}
-                            onClick={() => setVirtualSpeakerIndex(virtualSpeakerIndex - 1)}
-                            aria-label="Previous speaker"
-                        >
-                            <img src="/svg/speakers/arrows.svg" alt="Previous" className={styles.mobileArrowLeft} />
-                        </button>
-
-                        <div className={styles.mobileNameContainer}>
-                            {!isMobile && <img src="/svg/speakers/mobileNameFrame.svg" alt="Name Frame" className={styles.mobileNameFrameImg} />}
-                            <span className={styles.mobileNameText}>
-                                {activeSpeaker.name.toUpperCase()}
-                            </span>
-                        </div>
-
-                        <button
-                            className={styles.mobileArrow}
-                            onClick={() => setVirtualSpeakerIndex(virtualSpeakerIndex + 1)}
-                            aria-label="Next speaker"
-                        >
-                            <img src="/svg/speakers/arrows.svg" alt="Next" className={styles.mobileArrowRight} />
-                        </button>
-                    </div>
-                </div>
-            )}
-        </div>
         </>
     );
 }
