@@ -6,7 +6,7 @@ const SPACING = 44.1;
 const positions: [number, number, number][] = Array(BLOCKS).fill(0).map((_, i) => [0, 0.01 * (i % 2), i * SPACING])
 export default function StarJunction() {
   // const { nodes, materials } = useGLTF('/models/city10feb-transformed.glb') as unknown as GLTFResult
-  const { scene } = useGLTF('/models/city34-transformed.glb') as unknown as GLTFResult
+  const { scene } = useGLTF('/models/starjunction-transformed.glb') as unknown as GLTFResult
 // useEffect(() => {
 //     scene.traverse((obj) => {
 //       console.log(obj)
@@ -21,4 +21,4 @@ export default function StarJunction() {
     ))
   )
 }
-useGLTF.preload('/models/city34-transformed.glb')
+useGLTF.preload('/models/starjunction-transformed.glb')
