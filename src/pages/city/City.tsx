@@ -72,7 +72,7 @@ export default function City() {
           if (e.key === "l") setNavState("closing");
           if (e.key === "1") useScrollToSectionStore.getState().scrollToSection("home");
           if (e.key === "2") useScrollToSectionStore.getState().scrollToSection("about");
-          if (e.key === "3") useScrollToSectionStore.getState().scrollToSection("contact"); 
+          if (e.key === "3") useScrollToSectionStore.getState().scrollToSection("contact");
         }
       })
       // remove Infinity if you want play only once
