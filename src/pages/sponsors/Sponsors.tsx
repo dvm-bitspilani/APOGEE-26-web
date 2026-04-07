@@ -1,5 +1,5 @@
 import { useRef, useEffect } from "react";
-import styles from "./sponsors.module.scss";
+import styles from "./Sponsors.module.scss";
 
 import background from "../../assets/sponsors/background_sponsPage.png";
 import wheel from "../../assets/sponsors/wheel.png";
