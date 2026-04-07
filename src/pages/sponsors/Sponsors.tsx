@@ -29,21 +29,96 @@ const sponsorsData = {
     link: "https://www.mapmyindia.com/",
   },
   otherSponsors: [
-    { head: "Official Fashion Partner", img: myntraImg, name: "Myntra", link: "https://www.myntra.com/" },
-    { head: "Official Talent Partner", img: eightImg, name: "Eightfold.ai", link: "https://eightfold.ai/" },
-    { head: "Official Gold Sponsor", img: rungtaImg, name: "Rungta Mines", link: "https://www.therungtagroup.com/" },
-    { head: "Official Gold Sponsor", img: rtcImg, name: "RTC", link: "https://rtctek.com/" },
-    { head: "Official Gold Sponsor", img: hmelImg, name: "HMEL", link: "https://www.hmel.in/" },
-    { head: "Official Banking Partner", img: kotakImg, name: "Kotak Mahindra Bank", link: "https://www.kotak811.bank.in/" },
-    { head: "Official Material Innovation Sponsor", img: pluss, name: "Pluss Technologies", link: "https://www.pluss.co.in/" },
-    { head: "Official Energy Drink Partner", img: monster, name: "Monster Energy", link: "https://www.monsterenergy.com/" },
-    { head: "Official Sponsor", img: atlassianImg, name: "Atlassian", link: "https://www.atlassian.com/" },
-    { head: "Official Silver Sponsor", img: armor, name: "ArmorIQ", link: "https://armoriq.ai/" },
-    { head: "Official Sponsor", img: uiv, name: "Unicorn India Ventures", link: "https://unicornivc.com/" },
-    { head: "Official Sponsor", img: posterWah, name: "Posterwah", link: "https://posterwa.com/?srsltid=AfmBOor_T-6KxMJNFl8Eg3CVk3PaLe08godP0VRyukefymoIvRPs9ReQ" },
-    { head: "Official Travel Partner", img: emt, name: "Easemytrip", link: "https://www.easemytrip.com/" },
-    { head: "Official Hair Colour & Care Partner", img: twoImg, name: "2.oh!", link: "https://www.2pointoh.in/" },
-    { head: "Official Bus Booking Partner ", img: abhiBus, name: "Abhibus", link: "https://www.abhibus.com/" },
+    {
+      head: "Official Fashion Partner",
+      img: myntraImg,
+      name: "Myntra",
+      link: "https://www.myntra.com/",
+    },
+    {
+      head: "Official Talent Partner",
+      img: eightImg,
+      name: "Eightfold.ai",
+      link: "https://eightfold.ai/",
+    },
+    {
+      head: "Official Gold Sponsor",
+      img: rungtaImg,
+      name: "Rungta Mines",
+      link: "https://www.therungtagroup.com/",
+    },
+    {
+      head: "Official Gold Sponsor",
+      img: rtcImg,
+      name: "RTC",
+      link: "https://rtctek.com/",
+    },
+    {
+      head: "Official Gold Sponsor",
+      img: hmelImg,
+      name: "HMEL",
+      link: "https://www.hmel.in/",
+    },
+    {
+      head: "Official Banking Partner",
+      img: kotakImg,
+      name: "Kotak Mahindra Bank",
+      link: "https://www.kotak811.bank.in/",
+    },
+    {
+      head: "Official Material Innovation Sponsor",
+      img: pluss,
+      name: "Pluss Technologies",
+      link: "https://www.pluss.co.in/",
+    },
+    {
+      head: "Official Energy Drink Partner",
+      img: monster,
+      name: "Monster Energy",
+      link: "https://www.monsterenergy.com/",
+    },
+    {
+      head: "Official Sponsor",
+      img: atlassianImg,
+      name: "Atlassian",
+      link: "https://www.atlassian.com/",
+    },
+    {
+      head: "Official Silver Sponsor",
+      img: armor,
+      name: "ArmorIQ",
+      link: "https://armoriq.ai/",
+    },
+    {
+      head: "Official Sponsor",
+      img: uiv,
+      name: "Unicorn India Ventures",
+      link: "https://unicornivc.com/",
+    },
+    {
+      head: "Official Sponsor",
+      img: posterWah,
+      name: "Posterwah",
+      link: "https://posterwa.com/?srsltid=AfmBOor_T-6KxMJNFl8Eg3CVk3PaLe08godP0VRyukefymoIvRPs9ReQ",
+    },
+    {
+      head: "Official Travel Partner",
+      img: emt,
+      name: "Easemytrip",
+      link: "https://www.easemytrip.com/",
+    },
+    {
+      head: "Official Hair Colour & Care Partner",
+      img: twoImg,
+      name: "2.oh!",
+      link: "https://www.2pointoh.in/",
+    },
+    {
+      head: "Official Bus Booking Partner ",
+      img: abhiBus,
+      name: "Abhibus",
+      link: "https://www.abhibus.com/",
+    },
   ],
 };
 
@@ -85,8 +160,7 @@ const Sponsors = () => {
     const maxScroll = container.scrollHeight - container.clientHeight;
     if (maxScroll <= 0) return;
 
-    const percent =
-      ((e.clientY - track.offsetTop) / track.clientHeight) * 100;
+    const percent = ((e.clientY - track.offsetTop) / track.clientHeight) * 100;
 
     container.scrollTop = (percent / 100) * maxScroll;
   };
@@ -103,7 +177,6 @@ const Sponsors = () => {
 
   return (
     <div className={styles.Wrapper}>
-      
       {/* Background */}
       <div className={styles.backgroundImage}>
         <img src={background} alt="background" draggable={false} />
@@ -111,6 +184,20 @@ const Sponsors = () => {
 
       {/* Heading */}
       <div className={styles.heading}>
+        <svg
+          width="101"
+          height="59"
+          viewBox="0 0 101 59"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className={styles.goBack}
+          onClick={() => window.history.back()}
+        >
+          <path
+            d="M0.000376701 58.1818V1.90735e-05H13.4549V4.45457H5.09129V53.7273H13.4549V58.1818H0.000376701ZM46.1642 48.7273L25.8006 28.3637L46.1642 8.00002L49.6642 11.4546L35.2551 25.8637H72.5733V30.8637H35.2551L49.6642 45.2273L46.1642 48.7273ZM100.021 1.90735e-05V58.1818H86.5667V53.7273H94.9304V4.45457H86.5667V1.90735e-05H100.021Z"
+            fill="#00e5ff"
+          />
+        </svg>
         <h1>SPONSORS</h1>
       </div>
 
@@ -130,15 +217,10 @@ const Sponsors = () => {
       <div className={styles.sponsors} ref={mainRef}>
         <a href={sponsorsData.title.link} target="_blank" rel="noreferrer">
           <div className={styles.titleSponsor}>
-            <div className={styles.head}>
-              {sponsorsData.title.head}
-            </div>
+            <div className={styles.head}>{sponsorsData.title.head}</div>
 
             <div className={styles.titleSponsImage}>
-              <img
-                src={sponsorsData.title.img}
-                alt={sponsorsData.title.name}
-              />
+              <img src={sponsorsData.title.img} alt={sponsorsData.title.name} />
             </div>
 
             <div className={`${styles.titleSponsName} ${styles.sponsName}`}>
