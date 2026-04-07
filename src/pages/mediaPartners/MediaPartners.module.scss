@@ -2,7 +2,7 @@
 
 * {
   box-sizing: border-box;
-  font-family: $font-cyberpunks;
+  font-family: $font-jetBrainsBold;
 }
 
 .Wrapper {
@@ -50,12 +50,42 @@
     h1{
       color:  #00ffff;
       font-family: $font-glitch;
-      width: clamp(180px, 30vw, 500px);
+      width: clamp(180px, 40vw, 500px);
       height: 50%;
       z-index: 19;
       font-size: 3rem;
+      margin-left: calc(50vw - 290px);
+    }
+    @media (max-width: 1200px) {
+      h1 {
+
+         margin-left: calc(50vw - 230px);
+        font-size: 2.2rem;
+        width: 90vw; /* give more horizontal space */
+        }
     }
 
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.6rem;
+        width: 95vw;
+      }
+    }    
+    @media screen and (max-width: 728px) {
+      h1 {
+        margin-left: calc(50vw - 195px);
+      }
+    }
+    @media screen and (max-width:  480px) and (min-width: 337px) {
+      h1 {
+        margin-left: calc(50vw - 160px);
+      }
+    }
+    @media screen and (max-width:  350px) {
+      h1 {
+        margin-left: calc(50vw - 135px);
+      }
+    }
 
   }
 
@@ -74,7 +104,7 @@
     align-items: center;
 
     z-index: 2;
-    font-family: $font-cyberpunks;
+    font-family: $font-jetBrainsBold;
     scrollbar-width: none;
     -ms-overflow-style: none;
   }
@@ -189,7 +219,7 @@
 
   .sponsName {
     color: #00f0ff;
-    font-family: $font-cyberpunks;
+    font-family: $font-jetBrainsBold;
     text-shadow: 0 0 2px #00f0ff;
     letter-spacing: 7px;
     font-weight: 600;
