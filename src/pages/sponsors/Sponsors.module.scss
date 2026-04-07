@@ -2,7 +2,7 @@
 
 * {
   box-sizing: border-box;
-  font-family: $font-cyberpunks;
+  font-family: $font-jetBrainsBold;
 }
 
 .Wrapper {
@@ -80,7 +80,7 @@
     align-items: center;
 
     z-index: 2;
-    font-family: $font-cyberpunks;
+    font-family: $font-jetBrainsBold;
     scrollbar-width: none;
     -ms-overflow-style: none;
   }
@@ -195,7 +195,7 @@
 
   .sponsName {
     color: #00f0ff;
-    font-family: $font-cyberpunks;
+    font-family: $font-jetBrainsBold;
     text-shadow: 0 0 2px #00f0ff;
     letter-spacing: 7px;
     font-weight: 600;

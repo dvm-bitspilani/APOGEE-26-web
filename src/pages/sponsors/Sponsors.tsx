@@ -2,34 +2,48 @@ import { useRef, useEffect } from "react";
 import styles from "./sponsors.module.scss";
 
 import background from "../../assets/sponsors/background_sponsPage.png";
-import titleImg from "../../assets/sponsors/TitleSponsor.png";
 import wheel from "../../assets/sponsors/wheel.png";
+import myntraImg from "../../assets/sponsors/myntraImg.png";
+import kotakImg from "../../assets/sponsors/kotak.png";
+import rtcImg from "../../assets/sponsors/rtc.png";
+import rungtaImg from "../../assets/sponsors/rungta.png";
+import hmelImg from "../../assets/sponsors/hmel.png";
+import eightImg from "../../assets/sponsors/eightfoldImg.png";
+import twoImg from "../../assets/sponsors/2.oh!.png";
+import atlassianImg from "../../assets/sponsors/atlassian.jpg";
+import emt from "../../assets/sponsors/emt.png";
+import uiv from "../../assets/sponsors/uiv.png";
+import abhiBus from "../../assets/sponsors/AbhiBus.png";
+import posterWah from "../../assets/sponsors/posterwah_org.png";
+import armor from "../../assets/sponsors/armor.png";
+import pluss from "../../assets/sponsors/pluss.png";
+import monster from "../../assets/sponsors/monster.png";
+import mapmyIndia from "../../assets/sponsors/mapmyindia.png";
 
 // ✅ Data
 const sponsorsData = {
   title: {
-    head: "Official Title Sponsor",
-    img: titleImg,
-    name: "L&T",
-    link: "https://www.larsentoubro.com/",
+    head: " Powered By",
+    img: mapmyIndia,
+    name: "MapmyIndia",
+    link: "https://www.mapmyindia.com/",
   },
   otherSponsors: [
-    { head: "Official Powered by Sponsor", img: titleImg, name: "Micron", link: "https://www.micron.com/" },
-    { head: "Official Technology Partner", img: titleImg, name: "Arcesium", link: "https://www.arcesium.com/" },
-    { head: "Official Platinum Partner", img: titleImg, name: "QSW", link: "https://quicksmartwash.com/" },
-    { head: "Official Bath and Body Care Partner", img: titleImg, name: "Plum", link: "https://plumgoodness.com/" },
-    { head: "Official Music Streaming Partner", img: titleImg, name: "JioSaavn", link: "https://www.jiosaavn.com/" },
-    { head: "", img: titleImg, name: "Unicorn India", link: "https://www.unicornivc.com/" },
-    { head: "", img: titleImg, name: "IIC", link: "https://iic.mic.gov.in/login" },
-    { head: "", img: titleImg, name: "XTCY", link: "https://drinkxtcy.com/" },
-    { head: "", img: titleImg, name: "ICICI Bank", link: "https://www.icicibank.com/" },
-    { head: "", img: titleImg, name: "EaseMyTrip", link: "https://www.easemytrip.com/" },
-    { head: "", img: titleImg, name: "Umeed", link: "https://umeedfoundation.co.in/" },
-    { head: "", img: titleImg, name: "Unstop", link: "https://unstop.com/" },
-    { head: "", img: titleImg, name: "StockGro", link: "https://www.stockgro.club/" },
-    { head: "Official Assessment Partner", img: titleImg, name: "Languify", link: "https://www.languify.in/" },
-    { head: "Campus Ambassador Partner", img: titleImg, name: "Etasha", link: "https://www.etashasociety.org/" },
-    { head: "Official Savings Partner", img: titleImg, name: "GrabOn", link: "https://www.grabon.in/" },
+    { head: "Official Fashion Partner", img: myntraImg, name: "Myntra", link: "https://www.myntra.com/" },
+    { head: "Official Talent Partner", img: eightImg, name: "Eightfold.ai", link: "https://eightfold.ai/" },
+    { head: "Official Gold Sponsor", img: rungtaImg, name: "Rungta Mines", link: "https://www.therungtagroup.com/" },
+    { head: "Official Gold Sponsor", img: rtcImg, name: "RTC", link: "https://rtctek.com/" },
+    { head: "Official Gold Sponsor", img: hmelImg, name: "HMEL", link: "https://www.hmel.in/" },
+    { head: "Official Banking Partner", img: kotakImg, name: "Kotak Mahindra Bank", link: "https://www.kotak811.bank.in/" },
+    { head: "Official Material Innovation Sponsor", img: pluss, name: "Pluss Technologies", link: "https://www.pluss.co.in/" },
+    { head: "Official Energy Drink Partner", img: monster, name: "Monster Energy", link: "https://www.monsterenergy.com/" },
+    { head: "Official Sponsor", img: atlassianImg, name: "Atlassian", link: "https://www.atlassian.com/" },
+    { head: "Official Silver Sponsor", img: armor, name: "ArmorIQ", link: "https://armoriq.ai/" },
+    { head: "Official Sponsor", img: uiv, name: "Unicorn India Ventures", link: "https://unicornivc.com/" },
+    { head: "Official Sponsor", img: posterWah, name: "Posterwah", link: "https://posterwa.com/?srsltid=AfmBOor_T-6KxMJNFl8Eg3CVk3PaLe08godP0VRyukefymoIvRPs9ReQ" },
+    { head: "Official Travel Partner", img: emt, name: "Easemytrip", link: "https://www.easemytrip.com/" },
+    { head: "Official Hair Colour & Care Partner", img: twoImg, name: "2.oh!", link: "https://www.2pointoh.in/" },
+    { head: "Official Bus Booking Partner ", img: abhiBus, name: "Abhibus", link: "https://www.abhibus.com/" },
   ],
 };
 
