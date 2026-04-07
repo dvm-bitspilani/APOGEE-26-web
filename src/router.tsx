@@ -12,6 +12,7 @@ import GettingToPilani from "./pages/GettingToPilani/GettingToPilani";
 import Brochure from "./pages/brochure/Brochure";
 import ComingSoon from "./pages/comingSoon/ComingSoon";
 import Speakers from "./pages/speakers/Speakers";
+import Sponsors from "./pages/sponsors/Sponsors";
 
 const RedirectToHome = () => {
   return <Navigate to="/" replace />;
@@ -76,9 +77,13 @@ const pages: page[] = [
     component: Speakers, //! @rm -rf ~/, here :)
   },
   {
-  url: "/index.html",
-  component: RedirectToHome,
-}
+    url: "/sponsors",
+    component: Sponsors,
+  },
+  {
+    url: "/index.html",
+    component: RedirectToHome,
+  },
 ];
 
 const generateRoutes = (pages: page[]) => {
