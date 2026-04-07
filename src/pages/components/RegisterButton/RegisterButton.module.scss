@@ -9,13 +9,13 @@
 
     @media (max-width: 750px) {
         margin-bottom: 0.5rem;
-        right: auto;
-        left: 50%;
-    transform: translateX(-50%);
+        right: 0%;
+        top: 20px;
+        bottom: auto;
     }
     
     .registerIcon {
-        width: 16vw;
+        width: 20vw;
         // fill: $cyber-yellow;
         transition: scale 0.2s ease;
         // filter: brightness(30);
@@ -46,10 +46,12 @@
     }
 
     @media (max-width: 750px) {
-        margin: 0.5rem;
 
         .registerIcon {
-            width: 8rem;
+            margin-top:-1rem;
+            margin-bottom: 0;
+
+            width: 50vw;
         }
 
         .registerText {

@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 import Analytics from "./Analytics";
 import Registration from "./pages/registration/Registration";
 // import Instructions from "./pages/registration/components/Instructions";
@@ -10,6 +10,15 @@ import MediaPartners from "./pages/mediaPartners/MediaPartners";
 // import ContactUs from "./pages/contactUs/ContactUs"; 
 // import Preloader from "./pages/preloader/Preloader";
 // import Ham from "./pages/ham/Ham";
+import GettingToPilani from "./pages/GettingToPilani/GettingToPilani";
+import Brochure from "./pages/brochure/Brochure";
+import ComingSoon from "./pages/comingSoon/ComingSoon";
+import Speakers from "./pages/speakers/Speakers";
+
+const RedirectToHome = () => {
+  return <Navigate to="/" replace />;
+};
+
 type page = {
   url: string;
 
@@ -29,7 +38,7 @@ const pages: page[] = [
     component: Registration,
   },
   {
-   url: "/events",
+    url: "/events",
 
     component: Events,
   },
@@ -53,7 +62,7 @@ const pages: page[] = [
   //   component: ContactUs,
   // },
   // {
-  //   url: "/loader",
+  //   url: "/loader",Coming Soon
 
   //   component: Preloader,
   // },
@@ -62,6 +71,26 @@ const pages: page[] = [
 
   //   component: Ham,
   // },
+  {
+    url: "/getting-to-pilani",
+    component: GettingToPilani,
+  },
+  {
+    url: "/brochure",
+    component: Brochure,
+  },
+  {
+    url: "/developers",
+    component: ComingSoon,
+  },
+  {
+    url: "/speakers",
+    component: Speakers, //! @rm -rf ~/, here :)
+  },
+  {
+  url: "/index.html",
+  component: RedirectToHome,
+}
 ];
 
 const generateRoutes = (pages: page[]) => {
@@ -78,7 +107,13 @@ const generateRoutes = (pages: page[]) => {
 const router = createBrowserRouter([
   {
     element: <Analytics />, // 👈 GA wrapper
-    children: [...generateRoutes(pages)],
+    children: [
+      ...generateRoutes(pages),
+      {
+        path: "*",
+        element: <ComingSoon />,
+      },
+    ],
   },
 ]);
 

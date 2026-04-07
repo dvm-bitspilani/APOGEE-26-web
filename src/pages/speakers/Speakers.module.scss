@@ -1,0 +1,840 @@
+@use "/src/assets/global.scss" as *;
+
+// ─── Page shell ───────────────────────────────────────────────────────────────
+
+.speakersContainer {
+    position: relative;
+    width: 100vw;
+    height: 100svh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    font-family: $font-cyberpunks;
+}
+
+.backgroundOverlay {
+    position: absolute;
+    top: -30px;
+    left: -30px;
+    right: -30px;
+    bottom: -30px;
+    background-image: url("/img/speakers/speakerBg.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: blur(20px);
+    background-color: rgba(0, 0, 0, 0.5);
+    background-blend-mode: multiply;
+    z-index: 1;
+    pointer-events: none;
+}
+
+// ─── Header ───────────────────────────────────────────────────────────────────
+
+.header {
+    position: relative;
+    z-index: 20;
+    padding: clamp(1.5rem, 3svh, 2.5rem) 4rem 1.5rem clamp(1.5rem, 5vw, 5rem);
+    display: flex;
+    align-items: center;
+    background: linear-gradient(to bottom, 
+        rgba(0, 0, 0, 0.9) 0%, 
+        rgba(0, 0, 0, 0.7) 30%, 
+        rgba(0, 0, 0, 0) 100%
+    );
+}
+
+.backBtn {
+    width: clamp(25px, 4vw, 45px);
+    height: auto;
+    cursor: pointer;
+    margin-right: clamp(1rem, 2vw, 1.5rem);
+    transition: transform 0.2s ease, filter 0.2s ease;
+    z-index: 30;
+
+    &:hover {
+        transform: scale(1.1);
+        filter: brightness(1.2) drop-shadow(0 0 10px rgba(0, 255, 255, 0.6));
+    }
+
+    &:active {
+        transform: scale(0.95);
+    }
+}
+
+.title {
+    font-family: $font-glitch;
+    color: #00ffff;
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin: 0;
+    letter-spacing: 2px;
+    text-shadow:
+        0 0 10px rgba(0, 255, 255, 0.5),
+        0 0 20px rgba(0, 255, 255, 0.3);
+}
+
+// ─── Wheel container ──────────────────────────────────────────────────────────
+
+.wheelContainer {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: clamp(280px, 40vw, 520px);
+    height: 100svh;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.wheelFrameBg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: clamp(280px, 41svh, 27.5vw);
+    // min-height: fit-content;
+
+    // object-fit: cover;
+    object-position: left center;
+    opacity: 0.5;
+}
+
+// ─── Years wrapper ────────────────────────────────────────────────────────────
+
+.yearsWrapper {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+// ─── Year node — base ─────────────────────────────────────────────────────────
+
+.yearNode {
+    position: absolute;
+    width: clamp(110px, 14vh, 180px);
+    height: clamp(110px, 14vh, 180px);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    pointer-events: auto;
+    cursor: pointer;
+
+    filter: brightness(0.55) opacity(0.72);
+    // No CSS transition — GSAP handles all animation
+    z-index: 1;
+
+    &.active {
+        width: clamp(140px, 18vh, 240px);
+        height: clamp(140px, 22vh, 240px);
+        filter: brightness(1.2);
+        z-index: 5;
+
+        .yearText {
+            padding-left: 40%;
+            font-size: clamp(1.4rem, 2.4vw, 2rem);
+            color: #ffffff;
+        }
+    }
+
+    &:hover:not(.active) {
+        filter: brightness(0.8) opacity(0.9);
+    }
+}
+
+.slot0 {
+    left: 13%;
+    top: 24%;
+    z-index: 1;
+
+    .yearBg:nth-child(1) {
+        opacity: 1;
+    }
+
+    .yearTextFull {
+        opacity: 0;
+    }
+}
+
+.slot1 {
+    left: 27.5%;
+    top: 32%;
+    z-index: 2;
+    filter: brightness(1.2) drop-shadow(0 0 14px rgba(0, 255, 255, 0.6));
+
+    .yearBg:nth-child(2) {
+        opacity: 1;
+    }
+
+    .yearTextFull {
+        opacity: 0;
+    }
+}
+
+.slot2 {
+    left: 30%;
+    top: 43%;
+    // transform: translateY(-30%);
+    z-index: 5;
+
+    .yearBg:nth-child(3) {
+        opacity: 1;
+    }
+
+    .yearText {
+        opacity: 0;
+    }
+
+    .yearTextFull {
+        opacity: 1;
+    }
+}
+
+.slot3 {
+    left: 27.5%;
+    top: 63%;
+    z-index: 2;
+    filter: brightness(1.2) drop-shadow(0 0 14px rgba(0, 255, 255, 0.6));
+
+    .yearBg:nth-child(4) {
+        opacity: 1;
+    }
+
+    .yearTextFull {
+        opacity: 0;
+    }
+}
+
+.slot4 {
+    left: 15%;
+    top: 72%;
+    z-index: 1;
+
+    .yearBg:nth-child(5) {
+        opacity: 1;
+    }
+
+    .yearTextFull {
+        opacity: 0;
+    }
+}
+
+// ─── Year background SVG ──────────────────────────────────────────────────────
+
+.yearBg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0;
+}
+
+// ─── Year text ────────────────────────────────────────────────────────────────
+
+.yearText {
+    font-family: $font-avapore;
+    color: #a0e8e8;
+    font-size: clamp(0.95rem, 1.5vw, 1.3rem);
+    letter-spacing: 2px;
+    z-index: 1;
+    position: absolute; // Both text spans stack in the same spot
+    user-select: none;
+}
+
+.yearTextFull {
+    font-size: clamp(1.4rem, 2.4vw, 2rem);
+    color: #ffffff;
+}
+
+.speakerLabelWrapper {
+    position: absolute;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    z-index: 0;
+    pointer-events: auto;
+    cursor: pointer;
+    width: clamp(100px, 10vw, 150px);
+    transition: top 0.6s cubic-bezier(0.25, 1, 0.5, 1),
+        left 0.6s cubic-bezier(0.25, 1, 0.5, 1),
+        opacity 0.4s ease, filter 0.3s ease, transform 0.4s ease;
+
+    &.activeLabel {
+        z-index: 10;
+        transform: translateY(-50%) scale(1.08); // Only a little bit
+        filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.5));
+    }
+
+    &:hover:not(.activeLabel) {
+        filter: brightness(1.2) drop-shadow(0 0 4px rgba(0, 255, 255, 0.4));
+    }
+}
+
+.speakerPosOffTop {
+    top: 5svh;
+    left: clamp(140px, 18vw, 290px);
+}
+
+.speakerPos0 {
+    top: 22%;
+    left: 68%;
+}
+
+.speakerPos1 {
+    top: 37%;
+    left: 82.25%;
+}
+
+.speakerPos2 {
+    top: 54%;
+    left: 90%;
+}
+
+.speakerPos3 {
+    top: 70%;
+    left: 83.5%;
+}
+
+.speakerPos4 {
+    top: 87.5%;
+    left: 69%;
+}
+
+.speakerPosOffBottom {
+    top: 95svh;
+    left: clamp(140px, 18vw, 290px);
+}
+
+.speakerLabelBg {
+    --base-min: 38px;
+    --base-svh: 5.5svh;
+    --base-max: 56px;
+    position: absolute;
+    top: 50%;
+    right: -10%;
+    transform: translateY(-50%);
+    width: 180%;
+    // min-width: 250px;
+    height: auto;
+    object-fit: contain;
+    object-position: left center;
+    display: block; // No margin-right corruption here!
+}
+
+.inactiveSvg {
+    opacity: 1;
+    transition: opacity 0.6s ease;
+
+    &.fadeOut {
+        opacity: 0;
+    }
+}
+
+.activeSvg {
+
+    opacity: 0;
+    transition: opacity 0.6s ease;
+
+    width: 180%;
+    height: auto;
+
+
+    &.fadeIn {
+        opacity: 1;
+    }
+}
+
+
+.speakerNameText {
+    position: absolute;
+    top: 50%;
+    left: -22%;
+    transform: translateY(-50%);
+    width: 130%;
+    max-width: 130%;
+    padding: 0 12px 0 35px;
+    box-sizing: border-box;
+
+    display: block;
+    text-align: left;
+
+    font-family: $font-blender;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.55);
+    font-size: clamp(0.7rem, 1vw, 0.95rem);
+    letter-spacing: 2px;
+    z-index: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: color 0.3s ease, font-size 0.3s ease, text-shadow 0.3s ease;
+    user-select: none;
+}
+
+.activeLabel .speakerNameText {
+    color: #ffffff;
+    font-size: clamp(0.9rem, 1.2vw, 1.3rem);
+    width: 130%;
+    max-width: 130%;
+    left: -22%;
+    text-align: left;
+    padding-left: 28px;
+    letter-spacing: 2.5px;
+    text-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
+}
+
+
+// @media (max-width: 768px) {
+//     .header {
+//         padding: 1.5rem 1.5rem 0.75rem 1.5rem;
+//     }
+
+//     .title {
+//         font-size: 2rem;
+//     }
+
+//     .wheelContainer {
+//         width: min(55vw, 300px);
+//     }
+
+//     .slot0 {
+//         left: 1%;
+//         top: 16svh;
+//         transform: translateY(-50%);
+//     }
+//
+//     .slot1 {
+//         left: 4vw;
+//         top: 31svh;
+//         transform: translateY(-50%);
+//     }
+//
+//     .slot2 {
+//         left: 10vw;
+//         top: 50svh;
+//         transform: translateY(-50%);
+//     }
+//
+//     .slot3 {
+//         left: 8vw;
+//         top: 67svh;
+//         transform: translateY(-50%);
+//     }
+//
+//     .slot4 {
+//         left: 4vw;
+//         top: 82svh;
+//         transform: translateY(-50%);
+//     }
+//
+//     .slot0 .speakerLabelWrapper {
+//         transform: translateY(-50%);
+//     }
+//
+//     .slot1 .speakerLabelWrapper {
+//         transform: translateY(-50%);
+//     }
+//
+//     .slot2 .speakerLabelWrapper {
+//         transform: translateY(-50%);
+//     }
+//
+//     .slot3 .speakerLabelWrapper {
+//         transform: translateY(-50%);
+//     }
+//
+//     .slot4 .speakerLabelWrapper {
+//         transform: translateY(-50%);
+//     }
+// }
+
+// ─── Active Speaker Image ─────────────────────────────────────────────────────
+
+.speakerImageContainer {
+    position: absolute;
+    right: clamp(2rem, 5vw, 6rem);
+    top: 50%;
+    transform: translateY(-50%);
+    width: clamp(300px, 40vw, 700px);
+    aspect-ratio: 16 / 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+
+    @media (max-width: 768px) {
+        position: relative;
+        margin-top: 2rem;
+        width: 90vw;
+        right: auto;
+        top: auto;
+        transform: none;
+    }
+}
+
+.speakerImageFrame {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.speakerImagePos {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 95%;
+    height: 93%;
+    z-index: 1;
+    clip-path: polygon(10px 0,
+        #{calc(100% - 10px)} 0,
+        100% 10px,
+        100% #{calc(100% - 10px)},
+        #{calc(100% - 10px)} 100%,
+        10px 100%,
+        0 #{calc(100% - 10px)},
+        0 10px);
+    -webkit-clip-path: polygon(10px 0,
+        #{calc(100% - 10px)} 0,
+        100% 10px,
+        100% #{calc(100% - 10px)},
+        #{calc(100% - 10px)} 100%,
+        10px 100%,
+        0 #{calc(100% - 10px)},
+        0 10px);
+}
+
+.speakerImage {
+    width: 100%;
+    height: 100%;
+    display: block; // Prevents generic img margin space
+    object-fit: cover;
+}
+
+.glitchTarget {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+// ─── Mobile Speaker Name Nav (hidden by default) ─────────────────────────────
+
+.mobileSpeakerNav {
+    display: none; // shown only in portrait
+}
+
+// ─── Mobile / Portrait layout ─────────────────────────────────────────────────
+// Activates whenever viewport height > width
+
+@media (max-aspect-ratio: 1/1) {
+
+    // Header — tighten padding
+    .header {
+        padding: clamp(1.5rem, 5svh, 3.5rem) 1.5rem 0.5rem clamp(1.5rem, 5vw, 5rem);
+        // align-items center is inherited
+    }
+
+    .title {
+        font-size: clamp(1.8rem, 10vw, 4rem);
+    }
+
+    .backBtn {
+        width: clamp(35px, 12vw, 55px);
+        margin-right: 0.75rem;
+    }
+
+
+
+    .mobileSpeakerProfileUnit {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 38%; // Perfectly clear of the years
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+        z-index: 20;
+        gap: clamp(12px, 3.5vw, 22px);
+        pointer-events: none;
+
+        .speakerImageContainer,
+        .mobileSpeakerNav {
+            position: relative;
+            top: auto;
+            bottom: auto;
+            transform: none;
+            left: auto;
+            right: auto;
+            pointer-events: auto;
+        }
+
+        .speakerImageContainer {
+            width: clamp(250px, 82vw, 450px);
+            aspect-ratio: 16 / 10;
+            margin-bottom: 10px;
+        }
+
+        .mobileSpeakerNav {
+            width: 92vw;
+        }
+    }
+
+    // ── Speaker image — base mobile styles ────────────────────────────────────
+    .speakerImageContainer {
+        position: absolute;
+        top: clamp(65px, 13svh, 130px);
+        left: 50%;
+        transform: translateX(-50%);
+        right: auto;
+        width: clamp(250px, 82vw, 450px);
+        aspect-ratio: 16 / 10;
+        z-index: 15;
+    }
+
+    // ── Hide desktop speaker labels ───────────────────────────────────────────
+    .speakerLabelWrapper {
+        display: none !important;
+    }
+
+    // ── Mobile speaker name nav — show ────────────────────────────────────────
+    .mobileSpeakerNav {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: clamp(8px, 2vw, 20px);
+
+        position: absolute;
+        bottom: clamp(280px, 50vw, 450px);
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 20;
+        width: 92vw;
+        pointer-events: auto;
+    }
+
+    .mobileArrow {
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+
+        &:active {
+            transform: scale(0.9);
+        }
+
+        img {
+            width: clamp(28px, 8vw, 50px);
+            height: auto;
+            filter: drop-shadow(0 0 6px rgba(77, 244, 252, 0.5));
+        }
+    }
+
+    .mobileArrowLeft {
+        transform: rotate(180deg);
+    }
+
+    .mobileArrowRight {
+        transform: none;
+    }
+
+    .mobileNameContainer {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 0 1 70%; // Smaller relative to arrows
+        min-width: 0;
+
+        border: 1px solid #00ffff;
+        border-radius: 0;
+        padding: 8px 16px;
+        background: rgba(0, 255, 255, 0.05);
+        font-family: $font-blender;
+        font-weight: 700;
+    }
+
+    .mobileNameFrameImg {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    .mobileNameText {
+        color: #ffffff;
+        font-size: clamp(0.9rem, 4.5vw, 1.4rem);
+        letter-spacing: 2.5px;
+        text-align: center;
+        text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        user-select: none;
+
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 85%;
+        padding: 0 12px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    // ── Wheel — move to bottom, centered ──────────────────────────────────────
+    .wheelContainer {
+        left: 50%;
+        top: auto;
+        bottom: 0;
+        transform: translateX(-50%);
+        width: 100vw;
+        height: 55vw;
+    }
+
+    .mobileActiveYearBox {
+        position: absolute;
+        top: 5%;
+        left: 50%;
+        transform: translateX(-50%) scale(1.2);
+        width: clamp(100px, 35vw, 200px); // Fixed width for the static box
+        // height: clamp(1.6rem, 10vw, 2rem);
+        // border: 2px solid #00ffff;
+        // background: rgba(0, 255, 255, 0.05);
+        border-radius: 0;
+        z-index: 5;
+        pointer-events: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .wheelFrameBg {
+        left: 50%;
+        bottom: -45vw;
+        top: auto;
+        transform: translateX(-50%);
+        transform-origin: center center;
+        width: 100vw;
+        height: 100vw;
+        object-fit: contain;
+        object-position: center;
+        opacity: 1;
+
+    }
+
+    .yearNode {
+        width: 100px;
+        height: auto;
+
+        img {
+            display: none;
+        }
+
+        &.active {
+            width: max-content;
+            height: auto;
+            border: none;
+            padding: 8px 12px;
+            background: none;
+            border-radius: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            .yearTextFull {
+                font-size: clamp(0.5rem, 3vw, 0.8rem);
+                color: #ffffff;
+                position: relative;
+                opacity: 1;
+            }
+        }
+    }
+
+    // Arc layout: only slots 1, 2, 3 visible, spread out and larger
+    // Use .speakersContainer prefix to override desktop specificity without !important
+    .speakersContainer {
+        .slot0 {
+            left: -10%;
+            top: 110%;
+            transform: translate(-50%, -50%) rotate(20deg) scale(0.5);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .slot1 {
+            left: 15%;
+            top: 82%;
+            transform: translate(-50%, -50%) rotate(8deg) scale(1);
+            opacity: 1;
+            z-index: 2;
+
+            .yearTextFull {
+                font-size: 0.8rem;
+                opacity: 0.5;
+            }
+        }
+
+        .slot2 {
+            left: 50%;
+            top: 26%;
+            transform: translate(-50%, -50%) rotate(0deg) scale(1.2);
+            opacity: 1;
+            z-index: 10;
+
+            .yearText {
+                display: none;
+            }
+
+            .yearTextFull {
+                position: relative;
+                font-size: 1.1rem;
+                opacity: 1;
+            }
+        }
+
+        .slot3 {
+            left: 85%;
+            top: 82%;
+            transform: translate(-50%, -50%) rotate(-8deg) scale(1);
+            opacity: 1;
+            z-index: 2;
+
+            .yearTextFull {
+                font-size: 0.8rem;
+                opacity: 0.5;
+            }
+        }
+
+        .slot4 {
+            left: 110%;
+            top: 110%;
+            transform: translate(-50%, -50%) rotate(-20deg) scale(0.5);
+            opacity: 0;
+            pointer-events: none;
+        }
+    }
+
+    .yearText {
+        display: none;
+    }
+
+    .yearNode {
+        .yearTextFull {
+            display: block;
+            font-size: 0.6rem;
+            font-family: $font-avapore;
+            color: #ffffff;
+            position: relative;
+            opacity: 0; // Default for void slots
+        }
+    }
+}

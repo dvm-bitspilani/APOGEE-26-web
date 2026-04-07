@@ -1,0 +1,571 @@
+@use "/src/assets/global.scss" as *;
+
+.container {
+  height: 100svh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  backdrop-filter: blur(5px) brightness(0.6);
+
+  .goBack {
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    width: 5vw;
+    cursor: pointer;
+  }
+
+  .bgImg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+  }
+  .scanlineoverlay {
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+      to bottom,
+      transparent 0px,
+      transparent 3px,
+      rgba(0, 0, 0, 0.07) 3px,
+      rgba(0, 0, 0, 0.07) 4px
+    );
+    pointer-events: none;
+    z-index: 100000;
+  }
+  .speedometer {
+    width: 100%;
+    height: 55svh;
+    margin-top: 35svh;
+    position: relative;
+    clip-path: polygon(0% 0%, 100% 0%, 100% 55svh, 0% 55svh);
+
+    @for $i from 1 through 7 {
+      .dashCircle#{$i} {
+        position: absolute;
+        --dash: calc(1.2deg - 0.05deg * #{$i});
+        --gap: 8deg;
+        --thickness: 70%;
+        --stop: calc(42.5% - 0.2% * #{$i});
+
+        top: 100%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: calc(22vw + 6.5vw * #{$i});
+        aspect-ratio: 1;
+        border-radius: 50%;
+        clip-path: rect(0% 100% 50% 0%);
+        z-index: 5;
+        pointer-events: none;
+        background: repeating-conic-gradient(
+          #4df4fc 0deg var(--dash),
+          transparent var(--dash) var(--gap)
+        );
+
+        mask: radial-gradient(
+          circle,
+          transparent 0% 39.5%,
+          black 39.5% var(--stop),
+          transparent var(--stop) 100%
+        );
+      }
+    }
+
+    .radialCircleDummy {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      width: 62vw;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      clip-path: rect(0% 100% 50% 0%);
+      // background: radial-gradient(
+      //   circle,
+      //   transparent 50%,
+      //   #b301ffe8 80%,
+      //   #b301ffe8 100%
+      // );
+      // transform: translate(-50%, -50%);
+      z-index: 5;
+      pointer-events: none;
+      .radialCircleDummyInner {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: calc(52vw - 5px);
+        aspect-ratio: 1;
+        border-radius: 50%;
+        // background-color: #000;
+        box-shadow: 0px 0px 57px 0px #b301ffce;
+        backdrop-filter: blur(10px);
+      }
+    }
+    .radialCircle1 {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      width: 48vw;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      clip-path: rect(0% 100% 50% 0%);
+      background: radial-gradient(
+        circle,
+        transparent 50%,
+        #b301ffe8 80%,
+        #b301ffe8 100%
+      );
+      z-index: 5;
+      pointer-events: none;
+      // animation: spin2 0.8s linear forwards;
+      // @keyframes spin2 {
+      //   from {
+      //     transform: translate(-50%, -50%) rotate(-180deg);
+      //   }
+      //   to {
+      //     transform: translate(-50%, -50%) rotate(0deg);
+      //   }
+      // }
+    }
+
+    .radialCircle2 {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      width: 48vw;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      clip-path: rect(0% 100% 50% 0%);
+      background: radial-gradient(
+        circle,
+        transparent 50%,
+        #0000003a 60%,
+        #b301ffd5 80%,
+        #b301ff 100%
+      );
+      transform: translate(-50%, -50%) rotate(0deg);
+      opacity: 0.5;
+      z-index: 5;
+      pointer-events: none;
+      // animation: spin 0.8s linear forwards;
+      // @keyframes spin {
+      //   from {
+      //     transform: translate(-50%, -50%) rotate(0deg);
+      //   }
+      //   to {
+      //     transform: translate(-50%, -50%) rotate(180deg);
+      //   }
+      // }
+    }
+
+    .bigDashCircleBehind {
+      position: absolute;
+      --dash: 114deg;
+      --gap: 117.35deg;
+      --thickness: 69%;
+      --stop: 43%;
+      top: 100%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(180deg);
+      width: 51.5vw;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      clip-path: rect(50% 100% 100% 0%);
+      background: repeating-conic-gradient(
+        #4df4fc 99deg var(--dash),
+        transparent var(--dash) var(--gap)
+      );
+      mask: radial-gradient(circle, transparent 0% 69.5%, black 69.5% 100%);
+      opacity: 0.2;
+      z-index: 5;
+      pointer-events: none;
+    }
+
+    .dottedIMG {
+      position: absolute;
+      top: 98%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 43.5vw;
+      z-index: 5;
+      pointer-events: none;
+    }
+
+    .speedoDashCircle {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      width: 48vw;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      clip-path: rect(0% 100% 50% 0%);
+      background: repeating-conic-gradient(
+        #4df4fc 0deg 0.6deg,
+        transparent 0.6deg 6deg
+      );
+      mask: radial-gradient(circle, transparent 0% 68.8%, black 68.8% 100%);
+      z-index: 5;
+      pointer-events: none;
+    }
+
+    --afterBG1: #b300ff;
+    --afterBG2: #b300ff;
+    --afterBG3: #b300ff;
+    --afterBG4: #b300ff;
+    --afterBG5: #b300ff;
+    --afterBG6: #b300ff;
+
+    @for $i from 1 through 3 {
+      .speedTick#{$i} {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform-origin: bottom center;
+        transform: rotate(calc(-92.175deg + 18.375deg * #{$i}));
+        width: 0vw;
+        height: 29vw;
+        z-index: 5;
+        pointer-events: none;
+
+        &::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 50%;
+          transform: translateX(-50%) rotate(-9deg);
+          width: 0.3vw;
+          height: 5vw;
+          background-color: var(--afterBG#{$i});
+        }
+      }
+    }
+
+    @for $i from 4 through 6 {
+      .speedTick#{$i} {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform-origin: bottom center;
+        transform: rotate(calc(-36.35deg + 18.375deg * #{$i}));
+        width: 0vw;
+        height: 29vw;
+        z-index: 5;
+        pointer-events: none;
+
+        &::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 50%;
+          transform: translateX(-50%) rotate(9deg);
+          width: 0.3vw;
+          height: 5vw;
+          background-color: var(--afterBG#{$i});
+        }
+      }
+    }
+
+    --tick-rotate1: 88.5deg;
+    --tick-rotate2: 106.075deg;
+    --tick-rotate3: 124.7deg;
+    --tick-rotate4: 143.325deg;
+    --tick-rotate5: 160.95deg;
+    --tick-rotate6: 179.575deg;
+    --tick-rotate7: 198.2deg;
+    --tick-rotate8: 216.825deg;
+    --tick-rotate9: 235.45deg;
+    --tick-rotate10: 253.075deg;
+
+    @for $i from 1 through 10 {
+      .bigDashTicks#{$i} {
+        position: absolute;
+        --dash: 105deg;
+        --gap: 108.35deg;
+        --thickness: 69%;
+        --stop: 43%;
+        top: 100%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(var(--tick-rotate#{$i}));
+        width: 52vw;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        clip-path: polygon(35% 100%, 51% 100%, 51% 50%, 35% 50%);
+        background: repeating-conic-gradient(
+          #b301ff 90deg var(--dash),
+          transparent var(--dash) var(--gap)
+        );
+        mask: radial-gradient(circle, transparent 0% 68.2%, black 68.2% 100%);
+        z-index: 4;
+        opacity: 0;
+        pointer-events: none;
+      }
+    }
+
+    --bottom1: 21vw;
+    --width1: 43vw;
+    --left1: calc(48vw - var(--width1));
+    --taGwidth1: 20vw;
+    --taGleft1: 6%;
+    --bottom2: 14vw;
+    --width2: 40vw;
+    --left2: calc(41vw - var(--width2));
+    --taGwidth2: 15vw;
+    --taGleft2: 15%;
+    --bottom3: 6vw;
+    --width3: 33vw;
+    --left3: calc(35vw - var(--width3));
+    --taGwidth3: 13vw;
+    --taGleft3: 15%;
+
+    @for $j from 1 through 3 {
+      .nameTagCont#{$j} {
+        position: absolute;
+        bottom: var(--bottom#{$j});
+        left: var(--left#{$j});
+        scale: 0;
+        height: 3.6vw;
+        transform: translateX(100%);
+        width: var(--width#{$j});
+        transition: scale 0.15s ease;
+
+        &:hover {
+          cursor: pointer;
+          scale: 1.05;
+        }
+
+        .nameTagLeft#{$j} {
+          display: flex;
+          flex-direction: column;
+          height: 100%;
+          position: absolute;
+          bottom: 0;
+          left: 2.5vw;
+          transform: translate(0%, 10%);
+
+          span {
+            font-size: 2.4vw;
+            font-family: $font-bitsumishi;
+            color: #4df4fc;
+          }
+
+          img {
+            width: var(--taGwidth#{$j});
+            height: 2.4vw;
+            position: absolute;
+            top: 40%;
+            left: var(--taGleft#{$j});
+          }
+        }
+
+        .nameTagBG#{$j} {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          transform: translate(0%, 0%);
+          width: var(--width#{$j});
+          height: 100%;
+          background-color: #0000004d;
+          clip-path: polygon(
+            calc(var(--width#{$j}) - 2vw) 0,
+            100% 100%,
+            0% 100%,
+            2vw 0%
+          );
+          border: 1px solid #33e7ff;
+          z-index: 2;
+          mask-image: linear-gradient(
+            to right,
+            #000 0%,
+            transparent 85%,
+            transparent 99%,
+            #000 100%
+          );
+        }
+
+        .nameTagBorderLeft#{$j} {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          transform: translate(0%, 0%);
+          width: 2vw;
+          height: 100%;
+          background-color: #33e7ff;
+          border: 1px solid #33e7ff;
+          clip-path: polygon(100% 0%, 0.05vw 100%, 0% 100%, 1.95vw 0%);
+          z-index: 1;
+        }
+      }
+    }
+
+    --bottom4: 21vw;
+    --width4: 43vw;
+    --left4: calc(48vw - var(--width4));
+    --taGwidth4: 20vw;
+    --taGleft4: 6%;
+    --bottom5: 14vw;
+    --width5: 40vw;
+    --left5: calc(41vw - var(--width5));
+    --taGwidth5: 20vw;
+    --taGleft5: 6%;
+    --bottom6: 6vw;
+    --width6: 33vw;
+    --left6: calc(35vw - var(--width6));
+    --taGwidth6: 13vw;
+    --taGleft6: 15%;
+
+    @for $j from 4 through 6 {
+      .nameTagCont#{$j} {
+        position: absolute;
+        bottom: var(--bottom#{$j});
+        right: var(--left#{$j});
+        scale: 0;
+        height: 3.6vw;
+        transform: translateX(-100%);
+        width: var(--width#{$j});
+        transition: scale 0.15s ease;
+
+        &:hover {
+          cursor: pointer;
+          scale: 1.05;
+        }
+
+        .nameTagRight#{$j} {
+          display: flex;
+          flex-direction: column;
+          height: 100%;
+          position: absolute;
+          bottom: 0;
+          right: 2.5vw;
+          transform: translate(0%, 10%);
+
+          span {
+            font-size: 2.4vw;
+            font-family: $font-bitsumishi;
+            color: #4df4fc;
+          }
+
+          img {
+            width: var(--taGwidth#{$j});
+            position: absolute;
+            height: 2.4vw;
+            top: 40%;
+            right: var(--taGleft#{$j});
+          }
+        }
+
+        .nameTagBG#{$j} {
+          position: absolute;
+          bottom: 0;
+          right: 0;
+          transform: translate(0%, 0%);
+          width: var(--width#{$j});
+          height: 100%;
+          background-color: #0000004d;
+          clip-path: polygon(
+            calc(var(--width#{$j}) - 2vw) 0,
+            100% 100%,
+            0% 100%,
+            2vw 0%
+          );
+          border: 1px solid #33e7ff;
+          z-index: 2;
+          mask-image: linear-gradient(
+            to left,
+            #000 0%,
+            transparent 85%,
+            transparent 99%,
+            #000 100%
+          );
+        }
+
+        .nameTagBorderRight#{$j} {
+          position: absolute;
+          bottom: 0;
+          right: 0;
+          transform: translate(0%, 0%);
+          width: 2vw;
+          height: 100%;
+          background-color: #33e7ff;
+          border: 1px solid #33e7ff;
+          clip-path: polygon(0.05vw 0, 100% 100%, 1.95vw 100%, 0% 0%);
+          z-index: 1;
+        }
+      }
+    }
+
+    .speedFont {
+      position: absolute;
+      bottom: 0%;
+      left: 50%;
+      transform: translate(-50%, 50%);
+      font-size: 7vw;
+      z-index: 6;
+      width: 40vw;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: radial-gradient(
+        circle,
+        transparent 0%,
+        black 10%,
+        black 20%,
+        black 30%,
+        transparent 70%,
+        transparent 100%
+      );
+
+      span {
+        position: absolute;
+        bottom: 50%;
+        left: 50%;
+        transform: translate(-50%, 0%);
+        font-size: 6.5vw;
+        font-family: $font-dragrace;
+        color: #eee100;
+      }
+    }
+
+    .speedDial {
+      position: absolute;
+      transform-origin: bottom center;
+      // transform: translate(-50%, -100%) rotate(40deg);
+      top: 100%;
+      left: 50%;
+      width: 2vw;
+      height: 24vw;
+      z-index: 5;
+      pointer-events: none;
+
+      svg {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translate(-50%, 0%);
+        width: 1.5vw;
+        height: 17vw;
+      }
+    }
+  }
+
+  .luvBar {
+    position: absolute;
+    bottom: 2%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    font-family: $font-bitsumishi;
+    color: #fff;
+    font-size: 2vw;
+    filter: drop-shadow(3px 1px 16.8px #1c0998);
+    padding: 0.5vw 1vw;
+    z-index: 10;
+    img {
+      width: 3vw;
+      height: 3vw;
+      transform: translateY(30%);
+    }
+  }
+}

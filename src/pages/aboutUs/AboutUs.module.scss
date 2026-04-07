@@ -29,7 +29,7 @@
   .contentWrapper {
     display: flex;
     width: 70vw;
-    height: 60vh;
+    height: calc(100% - 4rem); //60vh;
     gap: 4rem;
     align-items: center;
     z-index: 1;

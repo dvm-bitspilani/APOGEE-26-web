@@ -25,6 +25,32 @@
     pointer-events: none;
 }
 
+.loaderContainer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loader {
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba(0, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: #00ffff;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
 .expandedBg {
     position: fixed;
     top: var(--origin-top, 50%);
@@ -75,6 +101,20 @@
     transform: translateY(40px);
     display: flex;
     align-items: center;
+    gap: 1.5rem;
+}
+
+.backBtn {
+    width: clamp(25px, 5vw, 60px);
+    height: auto;
+    cursor: pointer;
+    transition: transform 0.2s ease, filter 0.2s ease;
+    z-index: 21;
+
+    &:hover {
+        transform: scale(1.1);
+        filter: drop-shadow(0 0 8px rgba(0, 255, 255, 0.8));
+    }
 }
 
 .title {
@@ -115,13 +155,12 @@
 
     @media (min-width: 769px) {
         &:hover {
-            width: 22vw; // Fixed width for hovered item instead of flex-grow to avoid jittering
-            filter: drop-shadow(0 0 8px rgba(183, 0, 255, 0.8)) drop-shadow(0 0 20px rgba(183, 0, 255, 0.4));
-            // box-shadow: inset 0 0 8px rgba(183, 0, 255, 0.8), inset 0 0 20px rgba(183, 0, 255, 0.4);
+            width: 25vw; // Increased from 22vw to handle long titles better
 
             .cardInner {
                 background-color: #BC6DFF; // Acts as the border color
                 padding: 3px; // Border thickness
+                filter: drop-shadow(0 0 8px rgba(183, 0, 255, 0.8)) drop-shadow(0 0 20px rgba(183, 0, 255, 0.4));
             }
 
             .imageOverlay {
@@ -135,7 +174,7 @@
             .cardTextContainer {
                 justify-content: flex-start;
                 align-items: flex-end;
-                padding: 2rem;
+                padding: 1.5rem; // Reduced from 2rem to give more space for text
 
                 &::before {
                     opacity: 1;
@@ -147,8 +186,13 @@
                 transform: none;
                 color: #fff;
                 font-size: 1.5rem;
-                letter-spacing: 4px;
+                letter-spacing: 3px; // Slightly reduced from 4px
                 text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+
+                &.longText {
+                    font-size: 1.35rem;
+                    letter-spacing: 1.5px;
+                }
             }
         }
     }
@@ -249,13 +293,19 @@
 
 @media (max-width: 768px) {
     .header {
-        padding: 2rem 1.5rem 1rem 1.5rem;
+        padding: 2rem 1.5rem 2rem 1.5rem;
         transform: translateY(20px);
     }
 
     .title {
         font-size: 2.5rem;
     }
+
+    .backBtn {
+        width: clamp(25px, 10vw, 60px);
+        height: auto;
+    }
+
 
     .carouselContainer {
         display: grid;
@@ -272,12 +322,12 @@
     .card {
         width: 100%;
         height: 100%;
-        filter: drop-shadow(0 0 8px rgba(183, 0, 255, 0.8)) drop-shadow(0 0 20px rgba(183, 0, 255, 0.4));
 
         .cardInner {
             background-color: #BC6DFF; // Border color
             padding: 1px; // Border thickness for mobile
             clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);
+            filter: drop-shadow(0 0 8px rgba(183, 0, 255, 0.8)) drop-shadow(0 0 20px rgba(183, 0, 255, 0.4));
         }
 
         .cardImageContainer {
@@ -308,7 +358,7 @@
             transform: none;
             color: $cyber-yellow;
             // Responsive mobile font clamp taking container width roughly into account
-            font-size: clamp(1.2rem, 6vw, 2.2rem);
+            font-size: clamp(1.1rem, 6vw, 2.1rem);
             white-space: normal;
             word-wrap: break-word;
             word-break: break-word;
