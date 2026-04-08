@@ -9,7 +9,7 @@ const videos: YTVideo[] = [
   }
 ];
 
-export default function AboutUs() {
+export default function AboutUs({containerRef}: {containerRef?: React.RefObject<HTMLDivElement | null>}) {
   const playerContainerRef = useRef<HTMLDivElement | null>(null);
   const { isPlaying, nextVideo, prevVideo, togglePlayPause, current } = useYouTubePlayer(
     videos,
@@ -38,7 +38,7 @@ export default function AboutUs() {
         className={styles.bgImg}
       />
 
-      <div className={styles.contentWrapper}>
+      <div className={styles.contentWrapper} ref={containerRef}>
         <div className={styles.leftColumn}>
           <h1 className={styles.title}>ABOUT US</h1>
           <h2 className={styles.subtitle}>{videos[current].title}</h2>

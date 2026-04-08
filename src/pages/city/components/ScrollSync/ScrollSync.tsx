@@ -2,23 +2,24 @@ import { useScroll } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { getProject } from "@theatre/core";
 
-import state from "../../state-stray.json";
-import { useActiveSheetStore, useModalStore, useNavStateStore, usePreloaderStateStore } from "../../../../utils/store";
+import state from "../../state-walk.json";
+import { useActiveSheetStore, useModalStore, usePreloaderStateStore, useScrollStore, useScrollToSectionStore } from "../../../../utils/store";
 import { type Section, useCurrentSectionStore } from "../../../../utils/store";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import gsap from "gsap";
 
 // import { useLocation, useNavigate } from "react-router-dom";
 export const project = getProject("City Project", { state });
 export const scrollSheet = project.sheet("Cyber City");
 export const introAnimSheet = project.sheet("Intro Sequence");
 
-const stopPoints: Record<Section, [number, number]> = {
-  "home": [0, 0.25],
-  "about": [6.2, 9.8],
-  "contact": [16.8, 19],
-  "transition": [-1, -1],
+export const stopPoints: Record<Section, number> = {
+  "home": 0,
+  "about": 6,
+  "contact": 13,
+  "transition": -1,
 }
-const sequenceLength = 19;
+export const maxSequenceLength = 13;
 
 export default function ScrollSync() {
   const scroll = useScroll();
@@ -29,8 +30,35 @@ export default function ScrollSync() {
   const showPreloader = usePreloaderStateStore((s) => s.showPreloader);
   const currentSection = useCurrentSectionStore((s) => s.currentSection);
   const setCurrentSection = useCurrentSectionStore((s) => s.setCurrentSection);
+  const activeSheet = useActiveSheetStore((s) => s.activeSheet);
   const setActiveSheet = useActiveSheetStore((s) => s.setActiveSheet);
-  const navState = useNavStateStore((s) => s.navState);
+  const modalTriggerThrehold = 0.5;
+  const setScroll = useScrollStore((s) => s.setScroll);
+  const [isAutoScrolling, setIsAutoScroll] = useState(false);
+  const targetPositionRef = useRef<number>(0);
+
+  const sequenceLength = activeSheet === "Intro Sequence" ? 0 : maxSequenceLength;
+
+  useEffect(() => {
+    if (activeSheet !== "Cyber City") return;
+    const scrollToSection = (section: Section) => {
+      if (!scroll.el || section === "transition") return;
+      const targetPosition = stopPoints[section] * (scroll.el.scrollHeight - scroll.el.clientHeight) / sequenceLength;
+      setIsAutoScroll(true);
+      scroll.el.scrollTo({
+        top: targetPosition,
+        behavior: "smooth",
+      });
+      targetPositionRef.current = stopPoints[section];
+      closeModal();
+      setTimeout(() => setCurrentSection("transition"), 500)
+    }
+    useScrollToSectionStore.getState().scrollToSection = scrollToSection;
+  }, [activeSheet, scroll])
+
+  useEffect(() => {
+    setScroll(scroll);
+  }, [scroll])
 
   useEffect(() => {
     scrollSheet.sequence.position = 0;
@@ -46,28 +74,46 @@ export default function ScrollSync() {
   useEffect(() => {
     const scrollContainer = scroll.el;
     const scrollStep = 400;
+
     const handleKeyDown = (event: KeyboardEvent) => {
       if (isModalOpen || showPreloader) return;
 
-      if (event.key === "ArrowUp") {
-        scrollContainer.scrollBy({
-          top: scrollStep,
-          behavior: "smooth",
-        });
-      } else if (event.key === "ArrowDown") {
-        scrollContainer.scrollBy({
-          top: -scrollStep,
-          behavior: "smooth",
-        });
+      // 🔥 prevent default scroll (important)
+      if (event.code === "ArrowUp" || event.code === "ArrowDown") {
+        event.preventDefault();
+      }
+
+      switch (event.code) {
+        case "KeyS":
+        case "ArrowDown":
+          scrollContainer.scrollBy({
+            top: -scrollStep, // ⬆️ up = negative
+            behavior: "smooth",
+          });
+          break;
+
+        case "KeyW":
+        case "ArrowUp":
+          scrollContainer.scrollBy({
+            top: scrollStep, // ⬇️ down = positive
+            behavior: "smooth",
+          });
+          break;
       }
     };
 
     window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
   }, [scroll.el, isModalOpen, showPreloader]);
-  useFrame(() => {
-    if (!introOverRef.current || navState !== "off") return;
-  })
+
+  useEffect(() => {
+    if (scroll && isModalOpen && !isAutoScrolling) {
+      gsap.set(scroll.el, { scrollTop: (stopPoints[currentSection]) * (scroll.el.scrollHeight - scroll.el.clientHeight) / sequenceLength });
+    }
+  }, [scroll, isModalOpen])
 
   useFrame((_state) => {
     // ----- Scroll velocity for motion blur -----
@@ -76,31 +122,38 @@ export default function ScrollSync() {
     // prevOffset.current = scroll.offset;
     // smoothedVelocity.current +=
     //   (rawVelocity - smoothedVelocity.current) * VELOCITY_SMOOTHING;
-    // // Publish via getState to avoid React re-renders
+    // // Publish via getStonsole.log(scrollToSection);ate to avoid React re-renders
     // useScrollVelocityStore.getState().setVelocity(smoothedVelocity.current);
-
+    if (isAutoScrolling) {
+      const scrollDiff = Math.abs(scrollSheet.sequence.position - targetPositionRef.current);
+      if (scrollDiff < modalTriggerThrehold) setIsAutoScroll(false); //* Who gives a sheet about naming
+    }
     // ----- Section / modal logic (unchanged) -----
-    if (!isModalOpen) {
-      for (const path in stopPoints) {
-        if (
-          path !== currentSection &&
-          scrollSheet.sequence.position >= stopPoints[path as Section]?.[0] &&
-          scrollSheet.sequence.position <= stopPoints[path as Section]?.[1]
-        ) {
-          if (path !== "home") {
-            openModal();
+    else {
+      if (!isModalOpen) {
+        for (const path in stopPoints) {
+          const scrollDiff = Math.abs(scrollSheet.sequence.position - stopPoints[path as Section]);
+          if (
+            path !== currentSection &&
+            scrollDiff > -modalTriggerThrehold &&
+            scrollDiff < modalTriggerThrehold
+          ) {
+            if (path !== "home") {
+              openModal();
+            }
+            setCurrentSection(path as Section);
+            break;
           }
-          setCurrentSection(path as Section);
-          break;
         }
-      }
-    } else {
-      if (
-        scrollSheet.sequence.position < stopPoints[currentSection]?.[0] ||
-        scrollSheet.sequence.position > stopPoints[currentSection]?.[1]
-      ) {
-        closeModal();
-        setTimeout(() => setCurrentSection("transition"), 500)
+      } else {
+        const scrollDiff = Math.abs(scrollSheet.sequence.position - stopPoints[currentSection]);
+        if (
+          scrollDiff < -modalTriggerThrehold ||
+          scrollDiff > modalTriggerThrehold
+        ) {
+          closeModal();
+          setTimeout(() => setCurrentSection("transition"), 500)
+        }
       }
     }
 
@@ -110,46 +163,3 @@ export default function ScrollSync() {
 
   return null;
 }
-
-// const stopPoints = {
-//   "home": [0, 0],
-//   "about": [5, 8],
-//   "contact": [13, 16],
-// }
-// const sequenceLength = 20;
-
-// export default function ScrollSync() {
-
-//   const scroll = useScroll();
-//   const targetPosition = useRef<number>(0);
-//   const location = useLocation();
-//   const navigate = useNavigate();
-//   const scrollLock = useScrollLockStore((s) => s.lock);
-//   const openModal = useModalStore((s) => s.openModal);
-//   const isScrollLocked = useScrollLockStore((s) => s.locked);
-//   const getCurrentPage = (path: string) => {
-//     if (path === "/") return "home";
-//     return path.slice(1);
-//   }
-
-//   const maxVelocity = 5;
-//   const acceleration = 0.1;
-//   const threshold = 0.8; //? point to start decelerating
-
-//   useFrame(() => {
-
-//     targetPosition.current = scroll.offset * sequenceLength;
-//     if (!isScrollLocked) {
-//       for (let path in stopPoints) {
-//         path = getCurrentPage(path);
-//         if (path !== location.pathname && targetPosition.current >= stopPoints[path]?.[0] && targetPosition.current <= stopPoints[path]?.[1]) {
-//           scrollLock();
-//           openModal();
-//           navigate(path);
-//           break;
-//         }
-//       }
-//     }
-
-//   })
-// }

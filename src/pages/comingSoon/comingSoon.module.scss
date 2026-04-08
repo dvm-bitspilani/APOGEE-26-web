@@ -109,3 +109,13 @@
 //   0%, 100% { opacity: 0.3; transform: scaleX(1); }
 //   50% { opacity: 1; transform: scaleX(1.2); background: #ffffff; }
 // }
+.bgImg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    opacity: 0.9;
+  }

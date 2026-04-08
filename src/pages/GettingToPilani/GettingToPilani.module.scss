@@ -1,0 +1,663 @@
+@use "/src/assets/global.scss" as *;
+
+// VenuePage.module.scss
+// Cyberpunk-light theme — navy/cyan/magenta palette from Zephyr terminal design
+
+// ─── Keyframes ───────────────────────────────────────────────────────────────
+@keyframes ticker {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes glitch {
+  0%,
+  100% {
+    clip-path: inset(0 0 98% 0);
+    transform: translate(-3px);
+  }
+  25% {
+    clip-path: inset(30% 0 50% 0);
+    transform: translate(3px);
+  }
+  50% {
+    clip-path: inset(65% 0 15% 0);
+    transform: translate(-2px);
+  }
+  75% {
+    clip-path: inset(10% 0 80% 0);
+    transform: translate(2px);
+  }
+}
+
+@keyframes cornerPulse {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes pulseGlow {
+  0%,
+  100% {
+    box-shadow: 0 0 8px rgba(0, 229, 255, 0.15);
+  }
+  50% {
+    box-shadow:
+      0 0 28px rgba(0, 229, 255, 0.45),
+      0 0 56px rgba(0, 229, 255, 0.1);
+  }
+}
+
+// ─── CSS Custom Properties ────────────────────────────────────────────────────
+#root{
+  overflow: auto;
+}
+.venuePage {
+  --bg-deep: #080c1a;
+  --bg-mid: #0d1228;
+  --bg-card: #101624;
+  --bg-card-h: #141e32;
+  --cyan: #00e5ff;
+  --magenta: #ff2d78;
+  --purple: #7b3fe4;
+  --purple-l: #9d6ff0;
+  --txt: #dde2f5;
+  --txt-sec: #7a89ab;
+  --txt-muted: #3a4560;
+  --b-cyan: rgba(0, 229, 255, 0.2);
+  --b-mag: rgba(255, 45, 120, 0.2);
+  --glow-c: 0 0 22px rgba(0, 229, 255, 0.38);
+  --glow-m: 0 0 22px rgba(255, 45, 120, 0.38);
+  --mono: "Share Tech Mono", monospace;
+  --display: "Orbitron", sans-serif;
+  --body: "Rajdhani", sans-serif;
+  --r: 3px;
+  --ease: 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+
+  min-height: 100vh;
+  background: var(--bg-deep);
+  color: var(--txt);
+  font-family: var(--body);
+  position: relative;
+  overflow-x: hidden;
+
+  // Subtle grid overlay
+  &::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0, 229, 255, 0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 229, 255, 0.025) 1px, transparent 1px);
+    background-size: 44px 44px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  > * {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+
+// ─── Hero ─────────────────────────────────────────────────────────────────────
+.hero {
+  padding: 2.5rem 2rem .5rem;
+  text-align: center;
+  animation: fadeUp 0.8s ease both;
+  position: relative;
+}
+
+.heroEyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: var(--cyan);
+  margin-bottom: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+
+  &::before,
+  &::after {
+    content: "";
+    width: 36px;
+    height: 1px;
+    background: var(--cyan);
+    opacity: 0.35;
+  }
+}
+
+.heroTitle {
+  font-family: var(--display);
+  font-size: clamp(1rem, 3.5vw, 2.1rem);
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  line-height: 1.05;
+  color: var(--txt);
+  margin-bottom: 0.45rem;
+  position: relative;
+  display: inline-block;
+
+  span {
+    color: var(--cyan);
+    text-shadow: 0 0 36px rgba(0, 229, 255, 0.55);
+  }
+
+  &::before,
+  &::after {
+    content: attr(data-text);
+    position: absolute;
+    inset: 0;
+    font-family: var(--display);
+    font-size: inherit;
+    font-weight: 900;
+    letter-spacing: 0.04em;
+  }
+
+  &::before {
+    color: var(--magenta);
+    animation: glitch 4.5s infinite;
+    opacity: 0.35;
+  }
+
+  &::after {
+    color: var(--cyan);
+    animation: glitch 4.5s 0.12s infinite;
+    opacity: 0.18;
+  }
+}
+
+.heroSub {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--txt-sec);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 0.3rem;
+}
+
+.goBack{
+  position: absolute;
+  left: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4rem;
+  @media (max-width: 650px) {
+    top: 40%;
+    left: 1rem;
+    width: 3rem;
+  }
+}
+
+.badge {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  padding: 5px 12px;
+  border: 1px solid;
+  text-transform: uppercase;
+  border-radius: var(--r);
+}
+
+.badgeCyan {
+  color: var(--cyan);
+  border-color: var(--b-cyan);
+  background: rgba(0, 229, 255, 0.05);
+}
+.badgeMagenta {
+  color: var(--magenta);
+  border-color: var(--b-mag);
+  background: rgba(255, 45, 120, 0.05);
+}
+.badgePurple {
+  color: var(--purple-l);
+  border-color: rgba(123, 63, 228, 0.28);
+  background: rgba(123, 63, 228, 0.05);
+}
+
+// ─── Content Grid ─────────────────────────────────────────────────────────────
+.content {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 1.8rem 1.5rem 4rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+
+    @media (max-width: 860px) {
+      grid-template-columns: 1fr;
+    }
+}
+
+// ─── Section Header ───────────────────────────────────────────────────────────
+.sectionHeader {
+  margin-bottom: 1.2rem;
+}
+
+.shLabel {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--cyan);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 0.3rem;
+
+  &::before {
+    content: ">> ";
+  }
+}
+
+.shTitle {
+  font-family: var(--display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--txt);
+  letter-spacing: 0.04em;
+}
+
+// ─── Map Block ────────────────────────────────────────────────────────────────
+.mapBlock {
+  animation: fadeUp 0.75s 0.2s ease both;
+}
+
+.mapTerminal {
+  border: 1px solid var(--b-cyan);
+  background: var(--bg-card);
+  border-radius: var(--r);
+  overflow: hidden;
+  animation: pulseGlow 4s ease-in-out infinite;
+}
+
+.mapHeader {
+  background: var(--cyan);
+  padding: 0.45rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  span {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--bg-deep);
+    margin-left: 0.3rem;
+    letter-spacing: 0.08em;
+  }
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.dotR {
+  background: #ff5f57;
+}
+.dotY {
+  background: #febc2e;
+}
+.dotG {
+  background: #28c840;
+}
+
+.mapWrap {
+  position: relative;
+  width: 100%;
+  height: 280px;
+  background: #080e1c;
+  overflow: hidden;
+
+  iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+    filter: hue-rotate(185deg) invert(0.88) saturate(1.5) brightness(0.85);
+    opacity: 0.92;
+  }
+
+  // Corner brackets
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    z-index: 10;
+    pointer-events: none;
+    animation: cornerPulse 2s ease-in-out infinite;
+  }
+  &::before {
+    top: 10px;
+    left: 10px;
+    border-top: 2px solid var(--cyan);
+    border-left: 2px solid var(--cyan);
+  }
+  &::after {
+    bottom: 10px;
+    right: 10px;
+    border-bottom: 2px solid var(--magenta);
+    border-right: 2px solid var(--magenta);
+  }
+}
+
+// MapMyIndia branding badge
+.mapBrand {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  background: rgba(8, 12, 26, 0.85);
+  border: 1px solid var(--b-cyan);
+  padding: 3px 8px;
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--cyan);
+  letter-spacing: 0.08em;
+  z-index: 5;
+  pointer-events: none;
+
+  &::before {
+    content: "⊕ ";
+    opacity: 0.7;
+  }
+}
+
+.mapCoords {
+  padding: 0.7rem 1rem;
+  border-top: 1px solid var(--b-cyan);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.mapCoordsText {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--cyan);
+  opacity: 0.7;
+}
+
+.ping {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: #00ff88;
+
+  &::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #00ff88;
+    box-shadow: 0 0 6px #00ff88;
+    animation: blink 1.2s ease-in-out infinite;
+  }
+}
+
+.mapActions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.7rem;
+  margin-top: 0.7rem;
+}
+
+// ─── Buttons ──────────────────────────────────────────────────────────────────
+.btn {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.72rem 1rem;
+  border: 1px solid;
+  cursor: pointer;
+  transition: all var(--ease);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  text-decoration: none;
+  border-radius: var(--r);
+}
+
+.btnPrimary {
+  background: var(--cyan);
+  color: var(--bg-deep);
+  border-color: var(--cyan);
+  font-weight: 700;
+
+  &:hover {
+    background: transparent;
+    color: var(--cyan);
+    box-shadow: var(--glow-c);
+  }
+}
+
+.btnMag {
+  background: transparent;
+  color: var(--magenta);
+  border-color: var(--b-mag);
+
+  &:hover {
+    border-color: var(--magenta);
+    box-shadow: var(--glow-m);
+    background: rgba(255, 45, 120, 0.05);
+  }
+}
+
+// ─── Transport Block ──────────────────────────────────────────────────────────
+.transportBlock {
+  animation: fadeUp 0.75s 0.35s ease both;
+}
+
+.transportList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.transportCard {
+  background: var(--bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-left: 2px solid var(--cyan);
+  border-radius: var(--r);
+  padding: 1rem 1.2rem;
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  gap: 0.9rem;
+  align-items: start;
+  transition: all var(--ease);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      transparent,
+      rgba(0, 229, 255, 0.03),
+      transparent
+    );
+    opacity: 0;
+    transition: opacity var(--ease);
+  }
+
+  &:hover {
+    border-left-color: var(--magenta);
+    background: var(--bg-card-h);
+    transform: translateX(4px);
+    box-shadow: -4px 0 18px rgba(255, 45, 120, 0.12);
+
+    &::before {
+      opacity: 1;
+    }
+
+    .tcIcon {
+      border-color: rgba(255, 45, 120, 0.3);
+      background: rgba(255, 45, 120, 0.07);
+      color: var(--magenta);
+    }
+  }
+}
+
+.tcIcon {
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--b-cyan);
+  background: rgba(0, 229, 255, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--cyan);
+  font-size: 1.15rem;
+  border-radius: var(--r);
+  flex-shrink: 0;
+  transition: all var(--ease);
+}
+
+// .tcContent {
+// }
+
+.tcTitle {
+  font-family: var(--display);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--txt);
+  margin-bottom: 0.2rem;
+}
+
+.tcDesc {
+  font-size: 0.88rem;
+  color: var(--txt-sec);
+  line-height: 1.4;
+  margin-bottom: 0.35rem;
+}
+
+.tcTag {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--cyan);
+  letter-spacing: 0.07em;
+
+  &::before {
+    content: "> ";
+    opacity: 0.5;
+  }
+}
+
+// ─── Info Strip ───────────────────────────────────────────────────────────────
+.infoStrip {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 1.5rem 3.5rem;
+  animation: fadeUp 0.75s 0.5s ease both;
+}
+
+.infoGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--b-cyan);
+  border: 1px solid var(--b-cyan);
+  border-radius: var(--r);
+  overflow: hidden;
+
+  @media (max-width: 580px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.infoCell {
+  background: var(--bg-card);
+  padding: 1.2rem 1.4rem;
+  transition: background var(--ease);
+
+  &:hover {
+    background: var(--bg-card-h);
+  }
+}
+
+.infoLabel {
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--txt-muted);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 0.28rem;
+}
+
+.infoValue {
+  font-family: var(--display);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--cyan);
+  letter-spacing: 0.03em;
+}
+
+.infoSub {
+  font-size: 0.78rem;
+  color: var(--txt-sec);
+  margin-top: 0.18rem;
+}
+
+// ─── Footer ───────────────────────────────────────────────────────────────────
+.footer {
+  border-top: 1px solid var(--b-cyan);
+  padding: 1.4rem 2.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+
+  span {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--txt-muted);
+    letter-spacing: 0.08em;
+  }
+}
+
+.cursor {
+  animation: blink 1s step-end infinite;
+  color: var(--cyan);
+}

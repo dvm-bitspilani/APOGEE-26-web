@@ -1,57 +1,25 @@
 import * as THREE from "three";
 import { Float, Trail, useGLTF } from "@react-three/drei";
-import { type GLTF } from "three-stdlib";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useMemo } from "react";
 import infernusModel from "../../../../assets/3d/landing/car5.0-transformed.glb";
 import { useInfernusStore, useNavStateStore } from "../../../../utils/store";
 import { useNeonMaterial } from "../../hooks/useNeonMaterial";
-// import { useKonami } from "../../hooks/useKonami"; // ⭐ add this
 import { editable as e } from "@theatre/r3f";
-// import { useFrame } from "@react-three/fiber";
-// import StudioEnvironment from "../StudioEnviroment";
-import { useMemo } from "react";
 import { useTrailIntensity } from "../../hooks/useTrailIntensity";
-
-type GLTFResult = GLTF & {
-  nodes: {
-    meshId5_name: THREE.Mesh;
-    meshId5_name_1: THREE.Mesh;
-    meshId5_name_2: THREE.Mesh;
-    meshId5_name_3: THREE.Mesh;
-    meshId5_name_4: THREE.Mesh;
-    meshId5_name_5: THREE.Mesh;
-    spinner003: THREE.Mesh;
-  };
-  materials: {
-    ["white light"]: THREE.MeshStandardMaterial;
-    ex: THREE.MeshStandardMaterial;
-    int: THREE.MeshStandardMaterial;
-    mirror: THREE.MeshStandardMaterial;
-    ["red light"]: THREE.MeshStandardMaterial;
-    blue: THREE.MeshStandardMaterial;
-    ["lights purple"]: THREE.MeshStandardMaterial;
-  };
-};
+import { useCyberpunkFogMaterial } from "../../hooks/useCyberPunkFogMaterial";
+import type { GLTFCar } from "../../types/Models.types";
 
 export default function Infernus() {
-
-  // const [trailIntensity, setTrailIntensity] = useState(3.5);
-  // const smoothedIntensity = useRef(3.5);
-  // 🔑 konami state
-  // const neonActive = useKonami();
-
-  // neon shader depends on konami
-  // const neon = useNeonMaterial(true);
-  // const neon2 = useNeonMaterial2(true);
-  // const neon3 = useNeonMaterial3(true);
-  const neon = useNeonMaterial(true, [0, 1, 0.8], 1);   // cyan
-const neon2 = useNeonMaterial(true, [1, 0.5, 0], 1.5);    // red
-const neon3 = useNeonMaterial(true, [1, 0.5, 0], 1.25);  // purple
-  // try 0.6–0.8 for rough
+  //Colors
+  const neonColor = useMemo<[number, number, number]>(() => [0, 1, 0.8], []);
+  const neonColor2 = useMemo<[number, number, number]>(() => [1, 0.5, 0], []);
+  const neonColor3 = useMemo<[number, number, number]>(() => [1, 0.5, 0], []);
+  const neon = useNeonMaterial(neonColor, 1);
+  const neon2 = useNeonMaterial(neonColor2, 1.5);
+  const neon3 = useNeonMaterial(neonColor3, 1.25);
 
   const infernusRef = useRef<THREE.Group>(null!);
   const setInfernus = useInfernusStore((s) => s.setInfernus);
-
   const trailIntensity = useTrailIntensity(infernusRef);
 
   useEffect(() => {
@@ -59,17 +27,17 @@ const neon3 = useNeonMaterial(true, [1, 0.5, 0], 1.25);  // purple
       setInfernus(infernusRef.current);
     }
   }, [setInfernus]);
-  const { nodes, materials } = useGLTF(infernusModel, true) as unknown as GLTFResult;
+  const { nodes, materials } = useGLTF(infernusModel, true) as unknown as GLTFCar;
   useEffect(() => {
-  const unused = ["white light", "mirror", "red light", "blue"];
+    const unused = ["white light", "mirror", "red light", "blue"];
 
-  unused.forEach((key) => {
-    const mat = materials[key as keyof typeof materials];
-    if (mat) {
-      mat.dispose();
-    }
-  });
-}, [materials]);
+    unused.forEach((key) => {
+      const mat = materials[key as keyof typeof materials];
+      if (mat) {
+        mat.dispose();
+      }
+    });
+  }, [materials]);
 
   // useLayoutEffect(() => {
   //   const car = infernusRef.current;
@@ -95,66 +63,18 @@ const neon3 = useNeonMaterial(true, [1, 0.5, 0], 1.25);  // purple
   const rightTrailRef = useRef<THREE.Object3D>(null!);
   const navState = useNavStateStore((s) => s.navState);
 
-// const prevPos = useRef(new THREE.Vector3());
-// const speed = useRef(0);
-
-// useFrame(() => {
-//   if (!infernusRef.current) return;
-
-//   const currentPos = new THREE.Vector3();
-//   infernusRef.current.getWorldPosition(currentPos);
-
-//   speed.current = currentPos.distanceTo(prevPos.current);
-//   prevPos.current.copy(currentPos);
-
-//   const intensity = THREE.MathUtils.clamp(speed.current *1, 1, 200);
-
-//   setTrailIntensity(intensity);
-// });
-/*
-useFrame((_, delta) => {
-  if (!infernusRef.current) return;
-
-  const currentPos = new THREE.Vector3();
-  infernusRef.current.getWorldPosition(currentPos);
-
-  speed.current = currentPos.distanceTo(prevPos.current);
-  prevPos.current.copy(currentPos);
-
-  const targetIntensity = THREE.MathUtils.clamp(speed.current * 0.5, 3.5, 200);
-
-  // 🔥 smooth transition (THIS is the key)
-  smoothedIntensity.current = THREE.MathUtils.lerp(
-    smoothedIntensity.current,
-    targetIntensity,
-    5 * delta // smoothing factor (tweak this)
-  );
-
-//   const lerpFactor =
-//   targetIntensity > smoothedIntensity.current
-//     ? 8 * delta   // speed up quickly
-//     : 2 * delta;  // slow fade out
-
-// smoothedIntensity.current = THREE.MathUtils.lerp(
-//   smoothedIntensity.current,
-//   targetIntensity,
-//   lerpFactor
-// );
-
-  setTrailIntensity(smoothedIntensity.current);
-});*/
-const trailColor = useMemo(() => {
-  return new THREE.Color("#40ccef").multiplyScalar(trailIntensity);
-}, [trailIntensity]);
-const trailColor2 = useMemo(() => {
-  return new THREE.Color("#f3ff0f").multiplyScalar(trailIntensity);
-}, [trailIntensity]);
-
+  const trailColor = useMemo(() => {
+    return new THREE.Color("#40ccef").multiplyScalar(trailIntensity);
+  }, [trailIntensity]);
+  const trailColor2 = useMemo(() => {
+    return new THREE.Color("#f3ff0f").multiplyScalar(trailIntensity);
+  }, [trailIntensity]);
+  const mat = useCyberpunkFogMaterial();
   return (
     <>
       {/* <StudioEnvironment /> */}
       <group >
-        <Float floatIntensity={0.3} rotationIntensity={0.005} speed={navState === "off" ?  5 : 0}>
+        <Float floatIntensity={0.3} rotationIntensity={0.005} speed={navState === "off" ? 5 : 0}>
           <e.group
             name="infernus"
             theatreKey="UltaRickshaw"
@@ -162,12 +82,10 @@ const trailColor2 = useMemo(() => {
             dispose={null}
             position={[0.5, -6, 75]}
             scale={[6, 6, 6]}
-            frustumCulled={false}
+          // frustumCulled={false}
           >
             <group rotation={[Math.PI / 2, 0, 0]} scale={1.492}>
               <group position={[-0.3, 0, 0]} ref={leftTrailRef} />
-
-              {/* Right trail target */}
               <group position={[0.3, 0, 0]} ref={rightTrailRef} />
               <mesh
                 castShadow
@@ -176,21 +94,18 @@ const trailColor2 = useMemo(() => {
                 // material={neonActive ? neon : materials["white light"]}
                 material={neon2}
               />
-
               <mesh
                 castShadow
                 receiveShadow
                 geometry={nodes.meshId5_name_1.geometry}
-                material={materials.ex}
+                material={mat}
               />
-
               <mesh
                 castShadow
                 receiveShadow
                 geometry={nodes.meshId5_name_2.geometry}
                 material={materials.int}
               />
-
               <mesh
                 castShadow
                 receiveShadow
@@ -198,7 +113,6 @@ const trailColor2 = useMemo(() => {
                 material={neon3}
               // material={materials.mirror}
               />
-
               <mesh
                 castShadow
                 receiveShadow
@@ -206,10 +120,8 @@ const trailColor2 = useMemo(() => {
                 // material={neonActive ? neon : materials["red light"]}
                 material={neon2}
               />
-
               <Trail
                 width={8} // Width of the line
-                // color={new THREE.Color("#40ccef").multiplyScalar(3.5)}
                 color={trailColor2}
                 length={1.5} // Length of the line
                 decay={0.2} // How fast the line fades away
@@ -223,46 +135,28 @@ const trailColor2 = useMemo(() => {
                   castShadow
                   receiveShadow
                   geometry={nodes.meshId5_name_5.geometry}
-                  // material={neonActive ? neon : materials.blue}
-                  material={neon2}
+                  material={neon}
                 />
               </Trail>
-              {/* Left trail */}
               <Trail
                 width={4}
                 length={2}
                 decay={0.2}
                 target={leftTrailRef}
                 local={false}
-                // color={new THREE.Color("#40ccef").multiplyScalar(3.5)}
                 color={trailColor}
               >
-                <mesh
-                  geometry={nodes.meshId5_name_5.geometry}
-                  // material={neonActive ? neon : materials.blue}
-                  material={neon3}
-                />
               </Trail>
-
-              {/* Right trail */}
               <Trail
                 width={4}
                 length={2}
                 decay={0.2}
                 target={rightTrailRef}
                 local={false}
-                // color={new THREE.Color("#40ccef").multiplyScalar(3.5)}
                 color={trailColor}
               >
-                <mesh
-                  geometry={nodes.meshId5_name_5.geometry}
-                  // material={neonActive ? neon : materials.blue}
-                  material={neon}
-                />
               </Trail>
-
             </group>
-
             <mesh
               castShadow
               receiveShadow

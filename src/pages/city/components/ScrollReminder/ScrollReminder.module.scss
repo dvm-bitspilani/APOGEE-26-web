@@ -1,96 +1,124 @@
-@use '../../../../assets/global.scss' as *;
+@use "../../../../assets/global.scss" as *;
 
-$numberOfArrows: 4;
 
-:export {
-    numberOfArrows: $numberOfArrows;
-}
 .scrollText {
-  color: rgb(234, 234, 234);
+  color: #4df4fc;
   font-size: 1.5rem;
-  margin-left:0.6rem;
-  margin-bottom: 5rem;   // controls gap between text and arrows
-//   text-align: center;
-  @media (max-width: 768px){
-    margin-bottom:0;
-  }
+  font-family: $font-blender;
+  font-weight: 500;
+  margin-right: 0.6rem;
 }
 
 .scrollLabel {
-    @media (max-width: 768px) {$numberOfArrows: 2;}
+  position: fixed;
+  bottom: 0.8rem;
+  width: 100%;
+  z-index: 100;
+  pointer-events: none;
+  display: flex;
+  //   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.5s ease-in;
 
-    position: fixed;
-    bottom: 0.3rem;
-    width: 100%;
-    // margin: auto;
-    z-index: 100;
-    pointer-events: none;
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
 
-    // @media (max-width: 768px) {margin-right: auto;}
+    100% {
+      opacity: 1;
+    }
+  }
 
-    display: flex;
-    flex-direction: column;
-    // align-items: center;
-    
-    .scrollArrows {
-        padding: 20px;
-        padding-top: 0px;
-        display: flex;
-        flex-direction: column;
-        position: relative;
-        margin: 1rem;
+  // animation: flashPulse 1.5s ease-in-out infinite;
+  @media (max-width: 768px) {
+    // bottom: 96px;
+  }
 
-        .scrollArrow {
-            $borderWidth: 3px;
+  .scrollIconContainer {
+    position: relative;
 
-            position: absolute;
-            transform-origin: center;
-            transform: rotateZ(45deg);
-            border-width: 0 $borderWidth $borderWidth 0;
-            border-style: solid;
-            border-color: rgb(234, 234, 234);
-            width: 15px;
-            height: 15px;
+    .scrollArrow {
+      position: absolute;
+      left: 50%;
+      width: 0.5rem;
+      height: 0.5rem;
+      border-left: 2px solid #eee100;
+      border-bottom: 2px solid #eee100;
+
+      @keyframes scrollArrowAnimTop {
+        0% {
+          opacity: 0;
+          transform: translateX(-50%) translateY(0) rotate(135deg);
         }
 
-        @for $i from 1 through $numberOfArrows {
-            .scrollArrow:nth-child(#{$i}) {
-                bottom: ($i - 1) * 0.81rem;
-                opacity: 1;
-                animation: arrowAnim (($numberOfArrows + 1) * 0.3s) infinite alternate;
-                animation-delay: 1.5 - ($i - 1) * 0.3s;
-
-                @if $i > 2 {@media (max-width: 768px) {visibility: hidden;}}
-            }
-
-            @keyframes arrowAnim {
-                from {
-                    opacity: 1;
-                    transform: translateY(3px) rotateZ(45deg);
-                }
-                to {
-                    opacity: 0.3;
-                    transform: translateY(0px) rotateZ(45deg);
-                }
-            }
+        35% {
+          opacity: 1;
+          transform: translateX(-50%) translateY(-50%) rotate(135deg);
         }
+
+        45% {
+          opacity: 0;
+          transform: translateX(-50%) translateY(-50%) rotate(135deg);
+        }
+
+        100% {
+          opacity: 0;
+          transform: translateX(-50%) translateY(0) rotate(135deg);
+        }
+      }
+
+
+      @keyframes scrollArrowAnimBottom {
+        0% {
+          opacity: 0;
+          transform: translateX(-50%) translateY(0) rotate(-45deg);
+        }
+
+        35% {
+          opacity: 1;
+          transform: translateX(-50%) translateY(50%) rotate(-45deg);
+        }
+
+        45% {
+          opacity: 0;
+          transform: translateX(-50%) translateY(50%) rotate(-45deg);
+        }
+
+        100% {
+          opacity: 0;
+          transform: translateX(-50%) translateY(0) rotate(-45deg);
+        }
+      }
+
+      &:nth-of-type(1) {
+        animation: scrollArrowAnimTop 2s cubic-bezier(0.19, 1, 0.22, 1) infinite;
+        top: 0.4rem;
+        transform: translateX(-50%) rotate(135deg);
+        animation-delay: 0s;
+      }
+
+      &:nth-of-type(2) {
+        animation: scrollArrowAnimTop 2s cubic-bezier(0.19, 1, 0.22, 1) infinite;
+        top: 0rem;
+        transform: translateX(-50%) rotate(135deg);
+        animation-delay: 0.3s;
+      }
+
+      &:nth-of-type(3) {
+        animation: scrollArrowAnimBottom 2s cubic-bezier(0.19, 1, 0.22, 1) infinite;
+        bottom: 0.9rem;
+        transform: translateX(-50%) rotate(-45deg);
+        animation-delay: 1s;
+      }
+
+      &:nth-of-type(4) {
+        animation: scrollArrowAnimBottom 2s cubic-bezier(0.19, 1, 0.22, 1) infinite;
+        bottom: 0.5rem;
+        transform: translateX(-50%) rotate(-45deg);
+        animation-delay: 1.3s;
+      }
     }
-
-    .labelText {
-        // font-family: $primaryFont;
-        color: rgb(234, 234, 234);
-        font-size: 1.2rem;
-    }
-
-    @media (max-width: 768px) {
-        // bottom: 96px;
-
-        .labelText {font-size: 0.9rem;}
-    }
-}
-
-.scrollReminder{
-    // position: fixed;
-    // right: -15px;
-    // bottom: 15px;
+  }
 }

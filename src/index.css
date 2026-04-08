@@ -19,3 +19,5 @@ body,
 }
 canvas {
   display: block;}
+
+* {scroll-snap-stop: always} /* * Line of code as lucky charm :) */

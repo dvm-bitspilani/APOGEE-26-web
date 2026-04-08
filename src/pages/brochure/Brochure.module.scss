@@ -1,0 +1,103 @@
+@use "/src/assets/global.scss" as *;
+
+.brochurePageBg {
+  position: relative;
+  height: 100svh;
+  width: 100vw;
+  background: url("/images/landing/background1.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  .brochurePage {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 1.8rem;
+    height: 100%;
+    width: 100%;
+    background-image: url("/img/events/bg.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      margin-bottom: 2rem;
+      .title {
+        font-size: 3rem;
+        font-weight: 700;
+        text-align: center;
+        font-family: $font-glitch;
+        color: #00ffff;
+        @media (max-width: 768px) {
+          font-size: 2.1rem;
+        }
+      }
+      .goBack {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 2%;
+        width: 5vw;
+        cursor: pointer;
+        z-index: 100;
+        svg {
+          width: 100%;
+          height: auto;
+        }
+        @media (max-width: 768px) {
+          left: -5%;
+          width: 10vw;
+        }
+      }
+    }
+
+    .brochureWrapper {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      padding: 1.5rem 0;
+      .brochureContainer {
+        position: relative;
+        width: 69%;
+        @media (max-width: 1024px) {
+          width: 81%;
+        }
+        @media (max-width: 768px) {
+          width: 100%;
+        }
+        .brochureIframe {
+          border: 1px solid #db6365;
+          height: 100%;
+          width: 100%;
+          min-height: 450px;
+        }
+        .downloadButton {
+          position: absolute;
+          bottom: 1.2rem;
+          right: 1.2rem;
+          background-color: #bd2c35;
+          color: rgb(193, 193, 193);
+          font-size: 1.5rem;
+          border: none;
+          border-radius: 50%;
+          padding: 0.72rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          transition: background-color 0.1s ease;
+
+          &:hover {
+            background-color: #d0494a;
+          }
+        }
+      }
+    }
+  }
+}

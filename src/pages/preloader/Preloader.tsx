@@ -2,7 +2,7 @@ import styles from "./Preloader.module.scss";
 // import figlet from "figlet";
 import { gsap } from "gsap";
 import SplitText from "gsap/src/SplitText";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { usePreloaderStateStore, useSceneLoadedStore } from "../../utils/store";
 import assetList from "../../utils/assetList";
 import SVG from "./SVG";
@@ -19,14 +19,17 @@ export default function Preloader() {
   const [animDone, setAnimDone] = useState(false);
   const [animDone2, setAnimDone2] = useState(false);
   const [assetloaded, setAssetloaded] = useState(false);
-  const [progress, setProgress] = useState(0.0);
+  const [progress, setProgress] = useState(6.0);
   const [prevIndex, setPrevIndex] = useState(0);
   const sceneLoaded = useSceneLoadedStore((s) => s.loaded);
   const sceneProgress = useSceneLoadedStore((s) => s.progress);
   const setShowPreloader = usePreloaderStateStore((s) => s.setShowPreloader);
   gsap.registerPlugin(SplitText);
   const splitTextRef = useRef<SplitText | null>(null);
+  const splitText2Ref = useRef<SplitText | null>(null);
   const timelineRef = useRef<gsap.core.Timeline | null>(null);
+  const timeline2Ref = useRef<gsap.core.Timeline | null>(null);
+  const hasRunText2AnimationRef = useRef(false);
   const svgRef = useRef<HTMLDivElement>(null);
   const [width, setwidth] = useState(
     window.innerWidth < 768 && window.innerHeight / window.innerWidth > 1
@@ -46,7 +49,7 @@ export default function Preloader() {
     ? 0: Show nothing (for blink)
   */
 
-  //@ts-ignore 
+  //@ts-ignore
   const [loaderState, setLoaderState] = useState<0 | 1 | 2 | 3>(1);
   const subContainerRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -63,7 +66,7 @@ export default function Preloader() {
     // await new Promise((resolve) => setTimeout(resolve, 750));
     // setLoaderState(0);
     // await new Promise((resolve) => setTimeout(resolve, 500));
-    setLoaderState(3)
+    setLoaderState(3);
     await new Promise((resolve) => setTimeout(resolve, 2000));
     containerRef.current?.style.setProperty("opacity", "0"); //? transition duration handled in SCSS file
     await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -102,7 +105,7 @@ export default function Preloader() {
     });
 
     return () => glitch.stopGlitch();
-  })
+  });
 
   useEffect(() => {
     if (!assets) return;
@@ -144,7 +147,9 @@ export default function Preloader() {
   }, [assets, totalAssets]);
 
   useEffect(() => {
-    const media = window.matchMedia("(max-width: 768px) and (aspect-ratio < 1/1)");
+    const media = window.matchMedia(
+      "(max-width: 768px) and (aspect-ratio < 1/1)",
+    );
 
     const handleChange = (e: MediaQueryList) => {
       if (e.matches) {
@@ -168,23 +173,23 @@ export default function Preloader() {
   }, [sceneProgress]);
 
   useEffect(() => {
-  const isReady = animDone && sceneLoaded && animDone2 && assetloaded;
+    const isReady = animDone && sceneLoaded && animDone2 && assetloaded;
 
-  if (isReady && launchRef.current) {
-    launchRef.current.style.opacity = "1";
-    launchRef.current.style.pointerEvents = "auto";
-    // Added Enter button functionality after everything is done
-    const handleGlobalKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Enter") {
-        onLaunch();
-      }
-    };
-    window.addEventListener("keydown", handleGlobalKeyDown);
-    return () => {
-      window.removeEventListener("keydown", handleGlobalKeyDown);
-    };
-  }
-}, [animDone, sceneLoaded, animDone2, assetloaded]);
+    if (isReady && launchRef.current) {
+      launchRef.current.style.opacity = "1";
+      launchRef.current.style.pointerEvents = "auto";
+      // Added Enter button functionality after everything is done
+      const handleGlobalKeyDown = (event: KeyboardEvent) => {
+        if (event.key === "Enter") {
+          onLaunch();
+        }
+      };
+      window.addEventListener("keydown", handleGlobalKeyDown);
+      return () => {
+        window.removeEventListener("keydown", handleGlobalKeyDown);
+      };
+    }
+  }, [animDone, sceneLoaded, animDone2, assetloaded]);
 
   useEffect(() => {
     if (!textRef.current) return;
@@ -206,9 +211,25 @@ export default function Preloader() {
       display: "none",
     });
 
-    const tl2 = gsap.timeline();
+    gsap.set([textRef.current], {
+      display: "block",
+    });
 
-    tl2.set([textRef.current, textRef2.current], {
+    return () => {
+      split.revert();
+    };
+  }, []);
+
+  useLayoutEffect(() => {
+    if (hasRunText2AnimationRef.current) return;
+    if (!textRef2.current[0] || progress <= 6.0) return;
+
+    hasRunText2AnimationRef.current = true;
+
+    const tl2 = gsap.timeline();
+    timeline2Ref.current = tl2;
+
+    tl2.set([textRef2.current], {
       display: "block",
     });
 
@@ -217,6 +238,7 @@ export default function Preloader() {
       charsClass: "char",
       reduceWhiteSpace: false,
     });
+    splitText2Ref.current = split2;
 
     tl2.from(split2.chars, {
       display: "none",
@@ -234,11 +256,12 @@ export default function Preloader() {
         setAnimDone(true);
       },
     });
+  }, [progress]);
 
+  useEffect(() => {
     return () => {
-      split.revert();
-      split2.revert();
-      tl2.kill();
+      splitText2Ref.current?.revert();
+      timeline2Ref.current?.kill();
     };
   }, []);
 
@@ -312,8 +335,7 @@ export default function Preloader() {
 
   return (
     <div className={styles.container} ref={containerRef}>
-      {
-        loaderState == 1 &&
+      {loaderState == 1 && (
         <div className={styles.subContainer} ref={subContainerRef}>
           <div className={styles.box}>
             <div className={styles.navbar}>{`>TERMINAL`}</div>
@@ -322,7 +344,8 @@ export default function Preloader() {
               ref={textRef}
               style={{ height: "auto", overflowY: "hidden" }}
             >
-              <p className={styles.txtWhite}>A-SQUARE&nbsp;CITY&nbsp;--RUN</p>
+              <p className={styles.txtWhite}>LOADING&nbsp;RESOURCES...</p>
+              {/* <p className={styles.txtWhite}>A-SQUARE&nbsp;CITY&nbsp;--RUN</p> */}
               {/* <pre
               style={{
                 whiteSpace: "pre",
@@ -380,7 +403,8 @@ export default function Preloader() {
                     {/* <br /> */}
                   </p>
                   <p className={styles.txtRed}>
-                    &nbsp;&nbsp;&nbsp;AN INTERACTIVE AUDIOVISUAL EXPERIENCE BY DVM
+                    &nbsp;&nbsp;&nbsp;AN INTERACTIVE AUDIOVISUAL EXPERIENCE BY
+                    DVM
                   </p>
                   {/* <p className={styles.redDesign}>
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
@@ -445,13 +469,18 @@ export default function Preloader() {
                 className={styles.txtGreen}
               >{`>> INITIATING BOOT SEQUENCE...`}</p>
               <p className={styles.txtWhite}>BUILD VERSION: 11.04.26</p>
-              <p className={styles.txtWhite}>SYSTEM MANUFACTURER: BITS PILANI</p>
+              <p className={styles.txtWhite}>
+                SYSTEM MANUFACTURER: BITS PILANI
+              </p>
               <p className={styles.txtWhite}>SYSTEM BOOT TIME: {`<SOON>`}</p>
               <p className={styles.txtWhite}>OS NAME: THREE.JS</p>
               <p className={styles.txtWhite}>FEST VERSION: 0.44.0</p>
               <p
                 className={styles.txtGreen + " " + styles.customMargin}
-              >{`>> LOADING RESOURCES...`}</p>
+              >{`>> A-SQUARE CITY --RUN...`}</p>
+              {/* <p
+                className={styles.txtGreen + " " + styles.customMargin}
+              >{`>> LOADING RESOURCES...`}</p> */}
               {/* <span className={styles.cursor} id="cursor">█</span> */}
             </div>
             <div
@@ -507,7 +536,9 @@ export default function Preloader() {
                 <span className={styles.txtBlue + " " + styles.customDisplay}>
                   MODE:
                 </span>
-                <span className={styles.txtSelected + " " + styles.customDisplay}>
+                <span
+                  className={styles.txtSelected + " " + styles.customDisplay}
+                >
                   [IN PROGRESS]
                 </span>
                 <span className={styles.txtWhite + " " + styles.customDisplay}>
@@ -523,7 +554,9 @@ export default function Preloader() {
                 <span className={styles.txtWhite + " " + styles.customDisplay}>
                   [42ND]
                 </span>
-                <span className={styles.txtSelected + " " + styles.customDisplay}>
+                <span
+                  className={styles.txtSelected + " " + styles.customDisplay}
+                >
                   [44TH]
                 </span>
                 <br />
@@ -536,14 +569,18 @@ export default function Preloader() {
                 <span className={styles.txtWhite + " " + styles.customDisplay}>
                   [STEAMPUNK]
                 </span>
-                <span className={styles.txtSelected + " " + styles.customDisplay}>
+                <span
+                  className={styles.txtSelected + " " + styles.customDisplay}
+                >
                   [CYBERPUNK]
                 </span>
                 <br />
                 <span className={styles.txtBlue + " " + styles.customDisplay}>
                   DEDUCTIONS:
                 </span>
-                <span className={styles.txtSelected + " " + styles.customDisplay}>
+                <span
+                  className={styles.txtSelected + " " + styles.customDisplay}
+                >
                   [WORTH IT]
                 </span>
                 <span className={styles.txtWhite + " " + styles.customDisplay}>
@@ -582,20 +619,27 @@ export default function Preloader() {
               </div>
             </div>
           </div>
-        </div >
-      }
-      {
-        loaderState == 2 &&
-        <div className={styles.logoContainer}>
-          <img className={styles.dvmLogo} src="/img/preloader/dvm-pixelated.png" alt="DVM Logo" />
         </div>
-      }
-      {
-        loaderState == 3 &&
+      )}
+      {loaderState == 2 && (
         <div className={styles.logoContainer}>
-          <img src="apogee26logo.png" className={styles.apogeeLogo} ref={apogeeLogoRef} alt="ApogeeLogo"/>
+          <img
+            className={styles.dvmLogo}
+            src="/img/preloader/dvm-pixelated.png"
+            alt="DVM Logo"
+          />
         </div>
-      }
-    </div >
+      )}
+      {loaderState == 3 && (
+        <div className={styles.logoContainer}>
+          <img
+            src="apogee26logo.png"
+            className={styles.apogeeLogo}
+            ref={apogeeLogoRef}
+            alt="ApogeeLogo"
+          />
+        </div>
+      )}
+    </div>
   );
 }
