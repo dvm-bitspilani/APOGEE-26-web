@@ -18,7 +18,7 @@ import posterWah from "../../assets/sponsors/posterwah_org.png";
 import armor from "../../assets/sponsors/armor.png";
 import pluss from "../../assets/sponsors/pluss.png";
 import monster from "../../assets/sponsors/monster.png";
-import mapmyIndia from "../../assets/sponsors/mapmyindia.png";
+import mapmyIndia from "../../assets/sponsors/mapMyIndia.png";
 
 // ✅ Data
 const sponsorsData = {
