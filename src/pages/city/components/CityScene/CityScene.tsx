@@ -91,7 +91,7 @@ export default function CityScene({ }: any) {
        {import.meta.env.DEV && <Perf position="bottom-left" />}
       <FinalProdConfig/>
       <SceneLights />
-      <fogExp2 attach="fog" args={[color, 0.001]} />
+      <fogExp2 attach="fog" args={[color, 0.0015]} />
       {/* <fog attach="fog" args={[color, 50, 2000]} />   */}
       {/* <TheatreCameraLeva  /> //?: Not yet working... */}
       <color attach="background" args={[color]} />

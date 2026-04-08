@@ -1,7 +1,6 @@
 import * as THREE from "three";
 import { Float, Trail, useGLTF } from "@react-three/drei";
 import { useEffect, useRef, useMemo } from "react";
-import infernusModel from "../../../../assets/3d/landing/car5.0-transformed.glb";
 import { useInfernusStore, useNavStateStore } from "../../../../utils/store";
 import { useNeonMaterial } from "../../hooks/useNeonMaterial";
 import { editable as e } from "@theatre/r3f";
@@ -9,6 +8,7 @@ import { useTrailIntensity } from "../../hooks/useTrailIntensity";
 import { useCyberpunkFogMaterial } from "../../hooks/useCyberPunkFogMaterial";
 import type { GLTFCar } from "../../types/Models.types";
 
+const infernusModel = "/models/car5.0-transformed.glb"; //public folder
 export default function Infernus() {
   //Colors
   const neonColor = useMemo<[number, number, number]>(() => [0, 1, 0.8], []);
