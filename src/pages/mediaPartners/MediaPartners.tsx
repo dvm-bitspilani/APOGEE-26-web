@@ -3,33 +3,37 @@ import styles from "./MediaPartners.module.scss";
 
 import background from "../../assets/sponsors/background_sponsPage.png";
 import titleImg from "../../assets/sponsors/TitleSponsor.png";
+
 import wheel from "../../assets/sponsors/wheel.png";
+import ink from "../../assets/sponsors/inkNews.png";
+import lok from "../../assets/sponsors/lokKal.png";
+import mridul from "../../assets/sponsors/mridul.png";
+import samachar from "../../assets/sponsors/samachar.png";
+import campus from "../../assets/sponsors/campus.png";
+import iritiash from "../../assets/sponsors/irtiash.png";
+import sushant from "../../assets/sponsors/sushant.png";
+import blog from "../../assets/sponsors/blog.png";
+import aditya from "../../assets/sponsors/aditya.png";
+import nishant from "../../assets/sponsors/Nishant1.png";
+import naman from "../../assets/sponsors/Naman1jpng.jpeg";
+import rena from "../../assets/sponsors/Rena1.png";
+
 
 // ✅ Data
 const mediaPartnersData = {
-  title: {
-    head: "Official Title Sponsor",
-    img: titleImg,
-    name: "L&T",
-    link: "https://www.larsentoubro.com/",
-  },
   otherSponsors: [
-    { head: "Official Powered by Sponsor", img: titleImg, name: "Micron", link: "https://www.micron.com/" },
-    { head: "Official Technology Partner", img: titleImg, name: "Arcesium", link: "https://www.arcesium.com/" },
-    { head: "Official Platinum Partner", img: titleImg, name: "QSW", link: "https://quicksmartwash.com/" },
-    { head: "Official Bath and Body Care Partner", img: titleImg, name: "Plum", link: "https://plumgoodness.com/" },
-    { head: "Official Music Streaming Partner", img: titleImg, name: "JioSaavn", link: "https://www.jiosaavn.com/" },
-    { head: "", img: titleImg, name: "Unicorn India", link: "https://www.unicornivc.com/" },
-    { head: "", img: titleImg, name: "IIC", link: "https://iic.mic.gov.in/login" },
-    { head: "", img: titleImg, name: "XTCY", link: "https://drinkxtcy.com/" },
-    { head: "", img: titleImg, name: "ICICI Bank", link: "https://www.icicibank.com/" },
-    { head: "", img: titleImg, name: "EaseMyTrip", link: "https://www.easemytrip.com/" },
-    { head: "", img: titleImg, name: "Umeed", link: "https://umeedfoundation.co.in/" },
-    { head: "", img: titleImg, name: "Unstop", link: "https://unstop.com/" },
-    { head: "", img: titleImg, name: "StockGro", link: "https://www.stockgro.club/" },
-    { head: "Official Assessment Partner", img: titleImg, name: "Languify", link: "https://www.languify.in/" },
-    { head: "Campus Ambassador Partner", img: titleImg, name: "Etasha", link: "https://www.etashasociety.org/" },
-    { head: "Official Savings Partner", img: titleImg, name: "GrabOn", link: "https://www.grabon.in/" },
+    { img: ink, name: "The Ink News", link: "https://www.youtube.com/channel/UCaGGTGaHWDJexWhdu76BShw" },
+    { img: lok, name: "Lok Kalyani", link: "https://www.youtube.com/@lokkalyaninews2084" },
+    { img: mridul, name: "Mridul Patrika", link: "https://www.mridulpatrika.in/" },
+    { img: samachar, name: "Shekhawati Samachar", link: "https://www.facebook.com/pilanishekhawatisamachar/videos" },
+    { img: naman, name: "Naman Pal", link: "https://www.instagram.com/side_end_developer__/" },
+    { img: rena, name: "Rena Goswami", link: "https://www.youtube.com/@rena_goswami_" },
+    { img: nishant, name: "Nishant Gupta", link: "https://www.instagram.com/codewithnishant/" },
+    { img: aditya, name: "Aditya Chauhan Live", link: "https://www.youtube.com/@AdityaChauhanMusic" },
+    { img: sushant, name: "Sushant Music", link: "https://music.youtube.com/channel/UCoTEonmhlCqKCSOqf46lQHg" },
+    { img: iritiash, name: "Irtiash", link: "https://www.youtube.com/@IrtiashTheBand" },
+    { img: blog, name: "Blog Adda", link: "https://blog.blogadda.com/" },
+    { img: campus, name: "Campus Times Pune", link: "https://www.campustimespune.com/" },
   ],
 };
 
@@ -39,16 +43,20 @@ const MediaPartners = () => {
   const wheelRef = useRef<HTMLImageElement | null>(null);
   const trackRef = useRef<HTMLDivElement | null>(null);
 
+  // Helper to clamp percent between 0 and 100
+  const clampPercent = (value: number) => Math.min(100, Math.max(0, value));
+
   // 🔥 Scroll sync
-  const handleScroll = () => {
+  const handleScroll = (): void => {
     const container = mainRef.current;
-    if (!container || !wheelRef.current) return;
+    const wheel = wheelRef.current;
+    if (!container || !wheel) return;
 
     const maxScroll = container.scrollHeight - container.clientHeight;
-    const percent = (container.scrollTop / maxScroll) * 100;
+    const percent = maxScroll > 0 ? (container.scrollTop / maxScroll) * 100 : 0;
+    const clamped = clampPercent(percent);
 
-    wheelRef.current.style.top =
-      percent > 100 ? "100%" : `${percent}%`;
+    wheel.style.top = `${clamped}%`;
   };
 
   useEffect(() => {
@@ -56,24 +64,33 @@ const MediaPartners = () => {
     if (!container) return;
 
     container.addEventListener("scroll", handleScroll);
+    // set initial position
+    handleScroll();
+
     return () => container.removeEventListener("scroll", handleScroll);
   }, []);
 
   // 🔥 Drag scroll
-  const handleDrag = (e: MouseEvent) => {
+  const handleDrag = (e: MouseEvent): void => {
     const container = mainRef.current;
     const track = trackRef.current;
 
     if (!container || !track) return;
 
-    const maxScroll = container.scrollHeight - container.clientHeight;
-    const percent =
-      ((e.clientY - track.offsetTop) / track.clientHeight) * 100;
+    const rect = track.getBoundingClientRect();
+    const percent = rect.height > 0 ? ((e.clientY - rect.top) / rect.height) * 100 : 0;
+    const clamped = clampPercent(percent);
 
-    container.scrollTop = (percent / 100) * maxScroll;
+    const maxScroll = container.scrollHeight - container.clientHeight;
+    container.scrollTop = (clamped / 100) * Math.max(0, maxScroll);
+
+    // keep wheel in sync while dragging
+    if (wheelRef.current) wheelRef.current.style.top = `${clamped}%`;
   };
 
-  const startDrag = () => {
+  const startDrag = (e: React.MouseEvent) => {
+    // prevent image drag ghost
+    e.preventDefault();
     document.addEventListener("mousemove", handleDrag);
     document.addEventListener("mouseup", stopDrag);
   };
@@ -108,38 +125,12 @@ const MediaPartners = () => {
         />
       </div>
 
-      {/* Sponsors */}
+      {/* ✅ FIXED: Scroll container added */}
       <div className={styles.sponsors} ref={mainRef}>
-        <a href={mediaPartnersData.title.link} target="_blank" rel="noreferrer">
-          <div className={styles.titleSponsor}>
-            <div className={styles.head}>
-              {mediaPartnersData.title.head}
-            </div>
-
-            <div className={styles.titleSponsImage}>
-              <img src={mediaPartnersData.title.img} alt={mediaPartnersData.title.name} />
-            </div>
-
-            <div className={`${styles.titleSponsName} ${styles.sponsName}`}>
-              {mediaPartnersData.title.name}
-            </div>
-          </div>
-        </a>
-
         <div className={styles.otherSponsors}>
           {mediaPartnersData.otherSponsors.map((sponsor, index) => (
             <a href={sponsor.link} target="_blank" rel="noreferrer" key={index}>
               <div className={styles.otherSponsor}>
-                <div
-                  className={
-                    sponsor.head
-                      ? styles.head
-                      : `${styles.head} ${styles.other}`
-                  }
-                >
-                  {sponsor.head}
-                </div>
-
                 <div className={styles.otherSponsImage}>
                   <img src={sponsor.img} alt={sponsor.name} />
                 </div>
