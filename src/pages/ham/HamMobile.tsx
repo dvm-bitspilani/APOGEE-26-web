@@ -150,7 +150,7 @@ const nameTOBar: Array<{ name: string; bar: number; url: string }> = [
   { name: "developers", bar: 5, url: "/developers" },
   { name: "sponsors", bar: 11, url: "/sponsors" },
   { name: "media partners", bar: 21, url: "/media-partners" },
-  { name: "getting to pilani", bar: 28, url: "/getting-to-pilani" },
+  { name: "getting to pilani", bar: 28, url: "https://about.mappls.com" },
   { name: "brochure", bar: 37, url: "/brochure" },
   { name: "events", bar: 45, url: "/events" },
   { name: "speakers", bar: 53, url: "/speakers" },
@@ -175,7 +175,11 @@ export default function Ham() {
           ease: "power2.out",
           onComplete: () => {
             setbarsAnimated(num);
-            window.location.href = url;
+            if (url == "https://about.mappls.com") {
+              window.open(url, "_blank", "noopener");
+            } else {
+              window.location.href = url;
+            }
           },
         })
         .to(barsRef.current.slice(barsAnimated, num), {
@@ -198,7 +202,11 @@ export default function Ham() {
           ease: "power2.out",
           onComplete: () => {
             setbarsAnimated(num);
-            window.location.href = url;
+            if (url == "https://about.mappls.com") {
+              window.open(url, "_blank", "noopener");
+            } else {
+              window.location.href = url;
+            }
           },
         })
         .to(barsRef.current.slice(num, barsAnimated), {

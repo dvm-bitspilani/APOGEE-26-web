@@ -126,7 +126,7 @@ export default function Ham() {
         },
         onClick: () => {
           onClickNameTag(() => {
-            window.location.href = "/getting-to-pilani";
+            window.open("https://about.mappls.com", "_blank", "noopener");;
           }, 0.6);
         },
       },

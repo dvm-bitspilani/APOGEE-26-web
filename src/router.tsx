@@ -13,6 +13,7 @@ import Brochure from "./pages/brochure/Brochure";
 import ComingSoon from "./pages/comingSoon/ComingSoon";
 import Speakers from "./pages/speakers/Speakers";
 import Sponsors from "./pages/sponsors/Sponsors";
+import MediaPartners from "./pages/mediaPartners/MediaPartners";
 
 const RedirectToHome = () => {
   return <Navigate to="/" replace />;
@@ -79,6 +80,10 @@ const pages: page[] = [
   {
     url: "/sponsors",
     component: Sponsors,
+  },
+  {
+    url: "/media-partners",
+    component: MediaPartners,
   },
   {
     url: "/index.html",
