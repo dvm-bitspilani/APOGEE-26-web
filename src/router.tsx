@@ -8,7 +8,7 @@ import Events from "./pages/events/Events";
 // import ContactUs from "./pages/contactUs/ContactUs";
 // import Preloader from "./pages/preloader/Preloader";
 // import Ham from "./pages/ham/Ham";
-import GettingToPilani from "./pages/GettingToPilani/GettingToPilani";
+// import GettingToPilani from "./pages/GettingToPilani/GettingToPilani";
 import Brochure from "./pages/brochure/Brochure";
 import ComingSoon from "./pages/comingSoon/ComingSoon";
 import Speakers from "./pages/speakers/Speakers";
@@ -17,6 +17,10 @@ import MediaPartners from "./pages/mediaPartners/MediaPartners";
 
 const RedirectToHome = () => {
   return <Navigate to="/" replace />;
+};
+const ExternalRedirect = () => {
+  window.open("https://about.mappls.com", "_blank", "noopener");
+  return null;
 };
 
 type page = {
@@ -63,7 +67,7 @@ const pages: page[] = [
   // },
   {
     url: "/getting-to-pilani",
-    component: GettingToPilani,
+    component: ExternalRedirect,
   },
   {
     url: "/brochure",
