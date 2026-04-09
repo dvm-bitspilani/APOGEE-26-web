@@ -67,7 +67,7 @@
 .gs-scene {
   position: relative;
   width: 19vw;
-  height: 26vw;
+  height: 31vw;
   // Subtle tilt — just enough to reveal edges
   // transform:perspective(55vw)  rotateY(17deg) rotateX(-2deg);
   // transform-style: preserve-3d;
@@ -209,7 +209,7 @@
     width: 90%;
     height: auto;
     position: absolute;
-    top: 2%;
+    top: 5%;
     left: 50%;
     transform: translateX(-50%);
   }
@@ -219,7 +219,7 @@
     flex-direction: column;
     gap: 0.9vw;
     // padding: 0.5rem;
-    margin-top: 4.2vw;
+    margin-top: 6.8vw;
     // border-radius: 0.5rem;
 
     .gs-link {

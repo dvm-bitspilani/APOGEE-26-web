@@ -1,6 +1,6 @@
 import React from "react";
 import "./GlassSlab.scss";
-import titleImg from "/img/apogee26_theme.png";
+import titleImg from "/apogee_w_spons2.png";
 import { Link } from "react-router-dom";
 import { useScrollToSectionStore } from "../../../utils/store";
 

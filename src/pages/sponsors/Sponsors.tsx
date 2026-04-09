@@ -19,6 +19,7 @@ import armor from "../../assets/sponsors/armor.png";
 import pluss from "../../assets/sponsors/pluss.png";
 import monster from "../../assets/sponsors/monster.png";
 import mapmyIndia from "../../assets/sponsors/mapMyIndia.png";
+import wolfram from "../../assets/sponsors/wolfram.png";
 
 // ✅ Data
 const sponsorsData = {
@@ -119,6 +120,12 @@ const sponsorsData = {
       name: "Abhibus",
       link: "https://www.abhibus.com/",
     },
+    {
+      head: "Official Technology Partner",
+      img: wolfram,
+      name: "Wolfram Research",
+      link: "https://www.wolfram.com/",
+    }
   ],
 };
 
