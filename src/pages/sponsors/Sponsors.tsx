@@ -20,6 +20,7 @@ import pluss from "../../assets/sponsors/pluss.png";
 import monster from "../../assets/sponsors/monster.png";
 import mapmyIndia from "../../assets/sponsors/mapMyIndia.png";
 import wolfram from "../../assets/sponsors/wolfram.png";
+import iic from "../../assets/sponsors/iic.jpeg";
 
 // ✅ Data
 const sponsorsData = {
@@ -47,12 +48,6 @@ const sponsorsData = {
       img: rungtaImg,
       name: "Rungta Mines",
       link: "https://www.therungtagroup.com/",
-    },
-    {
-      head: "Official Gold Sponsor",
-      img: rtcImg,
-      name: "RTC",
-      link: "https://rtctek.com/",
     },
     {
       head: "Official Gold Sponsor",
@@ -125,7 +120,19 @@ const sponsorsData = {
       img: wolfram,
       name: "Wolfram Research",
       link: "https://www.wolfram.com/",
-    }
+    },
+    {
+      head: "Official Technology Partner",
+      img: rtcImg,
+      name: "Round the Clock",
+      link: "https://rtctek.com/",
+    },
+     {
+      head: "Official Entrepreneurship Partner",
+      img: iic,
+      name: "IIC Bits Pilani",
+      link: "https://www.bits-pilani.ac.in/iic/",
+    },
   ],
 };
 
