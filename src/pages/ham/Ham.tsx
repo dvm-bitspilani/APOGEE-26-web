@@ -9,7 +9,7 @@ export default function Ham() {
     addEventListener("resize", () => {
       if (window.innerWidth / window.innerHeight < 0.6) {
         setwidth(false);
-      } else {
+      } else {    //jfdlasjljfka
         setwidth(true);
       }
       return () => {
