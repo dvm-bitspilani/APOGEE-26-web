@@ -49,13 +49,7 @@ const TRANSPORT_MODES: TransportMode[] = [
   },
 ];
 
-/**
- * Google Maps embed for BITS Pilani Hyderabad.
- * Replace this URL with a MapMyIndia embed URL once you have an API key.
- * MapMyIndia embed format:
- *   https://www.mapmyindia.com/api/advanced-maps/doc/sample/map_sdk/map-on-page.php
- * or use their iFrame URL from the MAPPLS SDK.
- */
+
 // const MAP_EMBED_URL =
 //   "https://maps.google.com/maps?q=BITS+Pilani+Hyderabad+Campus,+Jawahar+Nagar,+Shameerpet&t=&z=15&ie=UTF8&iwloc=&output=embed";
 
@@ -82,7 +76,7 @@ const GettingToPilani: React.FC = () => {
       <ReactHelmet
         title="APOGEE '26 | Under Steel Skies | Getting To PIlani"
         description="Get directions and travel information to BITS Pilani, Pilani Campus."
-        url="https://www.bits-apogee.org/getting-to-pilani"
+        url="https://apogee2026.bits-apogee.org/getting-to-pilani"
       />
       <div className={styles.venuePage}>
         {/* ── Hero ───────────────────────────────────────────────────── */}
@@ -137,7 +131,7 @@ const GettingToPilani: React.FC = () => {
                 <span className={styles.mapCoordsText}>
                   LAT: 28.3640° N &nbsp;|&nbsp; LNG: 75.5869° E
                 </span>
-                <span className={styles.ping}>SIGNAL ACTIVE</span>
+                <span className={styles.ping}>ARCHIVE MAP</span>
               </div>
             </div>
 
@@ -152,7 +146,7 @@ const GettingToPilani: React.FC = () => {
               </a>
               <a
                 className={`${styles.btn} ${styles.btnMag}`}
-                href="https://mappls.com/travel/hotels@zdata=MjguMjY3MzIwNzY3NDM0Myw3NS42MzMwNjk5OTk5OTk5OCw4LjEzMjE0Nzk5NTQyNjczMSxlbixkZWxoaSwxNzc1Nzc5MjAwMDAwLDE3NzYxMjQ4MDAwMDA="
+                href="https://www.google.com/maps/search/hotels+near+BITS+Pilani/"
                 target="_blank"
                 rel="noopener noreferrer"
               >

@@ -8,7 +8,7 @@ import NavButton from "../navButton/NavButton";
 import FormPart1 from "./components/FormPart1";
 import FormPart2 from "./components/FormPart2";
 import * as Yup from "yup";
-import axios from "axios";
+import { demoColleges } from "../../../../utils/demoService";
 
 const validationForm1Schema = Yup.object({
   name: Yup.string().required("[Name is required]"),
@@ -56,7 +56,7 @@ const DetailsForm = ({ mail = "" }: { mail: string }) => {
   });
 
   const [step, setStep] = useState(1);
-  const [collegeList, setCollegeList] = useState([]);
+  const [collegeList, setCollegeList] = useState(demoColleges);
   const container = useRef<HTMLDivElement>(null);
   const form1Ref = useRef<HTMLDivElement>(null);
   const form2Ref = useRef<HTMLDivElement>(null);
@@ -201,20 +201,12 @@ const DetailsForm = ({ mail = "" }: { mail: string }) => {
 
   });
 
-  useEffect(() => {
-    axios.get("https://bits-apogee.org/2026/main/registrations/get_college/")
-      .then((res) => {
-        setCollegeList(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+  useEffect(() => { setCollegeList(demoColleges); }, []);
 
   return (
     <div ref={container} className={styles.container}>
       <h1 className={styles.title}>REGISTER</h1>
-      <h2 className={styles.subtitle}>[ENTER YOUR DETAILS]</h2>
+      <h2 className={styles.subtitle}>[SAMPLE DETAILS — LOCAL DEMO]</h2>
 
       <div className={`${styles.formContainer} ${styles.desktopFormContainer}`}>
         <div ref={form1Ref}>

@@ -2,7 +2,6 @@ import { useRef, useEffect } from "react";
 import styles from "./MediaPartners.module.scss";
 
 import background from "../../assets/sponsors/background_sponsPage.png";
-import titleImg from "../../assets/sponsors/TitleSponsor.png";
 
 import wheel from "../../assets/sponsors/wheel.png";
 import ink from "../../assets/sponsors/inkNews.png";

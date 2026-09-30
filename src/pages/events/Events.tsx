@@ -82,7 +82,9 @@ export default function Events() {
             }, 600);
         };
 
+        const timer = window.setTimeout(() => setLoading(false), 6000);
         loadAll();
+        return () => window.clearTimeout(timer);
     }, []);
 
     const handleCategoryClick = (category: string, element: HTMLElement) => {
@@ -107,7 +109,7 @@ export default function Events() {
             <ReactHelmet
                 title="APOGEE '26 | Under Steel Skies | Events"
                 description="Explore the various exciting events of APOGEE 2026."
-                url="https://www.bits-apogee.org/events"
+                url="https://apogee2026.bits-apogee.org/events"
             />
             <div className={styles.eventsContainer}>
                 {/* The base page background */}

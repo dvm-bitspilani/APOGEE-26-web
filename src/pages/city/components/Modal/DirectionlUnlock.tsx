@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { Observer } from 'gsap/Observer'
+import { Observer } from 'gsap/all'
 import { gsap } from 'gsap'
 import { useCurrentSectionStore, useModalStore, usePullProgressStore, useScrollStore } from '../../../../utils/store';
 import { stopPoints, maxSequenceLength } from '../ScrollSync/ScrollSync';

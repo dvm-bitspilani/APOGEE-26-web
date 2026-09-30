@@ -1,19 +1,21 @@
+import { CityBoundary } from "./pages/city/ArchiveFallback";
+import { lazy, Suspense } from "react";
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import Analytics from "./Analytics";
-import Registration from "./pages/registration/Registration";
+const Registration = lazy(() => import("./pages/registration/Registration"));
 // import Instructions from "./pages/registration/components/Instructions";
 // import Instructions from "./pages/registration/components/detailsForm/DetailsForm"
-import City from "./pages/city/City";
-import Events from "./pages/events/Events";
-import Sponsors from "./pages/sponsors/Sponsors";
-import MediaPartners from "./pages/mediaPartners/MediaPartners";
+const City = lazy(() => import("./pages/city/City"));
+const Events = lazy(() => import("./pages/events/Events"));
+const Sponsors = lazy(() => import("./pages/sponsors/Sponsors"));
+const MediaPartners = lazy(() => import("./pages/mediaPartners/MediaPartners"));
 // import ContactUs from "./pages/contactUs/ContactUs"; 
 // import Preloader from "./pages/preloader/Preloader";
 // import Ham from "./pages/ham/Ham";
-import GettingToPilani from "./pages/GettingToPilani/GettingToPilani";
-import Brochure from "./pages/brochure/Brochure";
-import ComingSoon from "./pages/comingSoon/ComingSoon";
-import Speakers from "./pages/speakers/Speakers";
+const GettingToPilani = lazy(() => import("./pages/GettingToPilani/GettingToPilani"));
+const Brochure = lazy(() => import("./pages/brochure/Brochure"));
+const ComingSoon = lazy(() => import("./pages/comingSoon/ComingSoon"));
+const Speakers = lazy(() => import("./pages/speakers/Speakers"));
 
 const RedirectToHome = () => {
   return <Navigate to="/" replace />;
@@ -98,7 +100,7 @@ const generateRoutes = (pages: page[]) => {
     return {
       path: page.url,
 
-      element: <page.component />,
+      element: <Suspense fallback={<p style={{padding:32,color:"#fff100"}}>Loading archive…</p>}><CityBoundary><page.component /></CityBoundary></Suspense>,
     };
   });
 };
@@ -111,7 +113,7 @@ const router = createBrowserRouter([
       ...generateRoutes(pages),
       {
         path: "*",
-        element: <ComingSoon />,
+        element: <div style={{padding:40,color:"#fff100"}}><h1>Page not found</h1><p>This archive page is unavailable.</p><a href="/">Explore APOGEE 2026</a></div>,
       },
     ],
   },

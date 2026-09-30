@@ -7,42 +7,34 @@
     "dev": "vite --host",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview --host 127.0.0.1",
+    "deploy": "npm run build && CLOUDFLARE_ACCOUNT_ID=e6ad8a6f22a88b57a02e176325692373 wrangler pages deploy dist --project-name dvm-portfolio-apogee-2026",
+    "verify": "node scripts/verify.mjs"
   },
   "dependencies": {
-    "@gltf-transform/core": "^4.3.0",
-    "@gltf-transform/extensions": "^4.3.0",
-    "@gltf-transform/functions": "^4.3.0",
     "@gsap/react": "^2.1.2",
-    "@react-oauth/google": "^0.13.4",
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.5.0",
     "@react-three/postprocessing": "^3.0.4",
     "@react-three/rapier": "^2.2.0",
     "@theatre/core": "^0.7.2",
     "@theatre/r3f": "^0.7.2",
-    "@theatre/studio": "^0.7.2",
-    "axios": "^1.13.2",
-    "figlet": "^1.10.0",
-    "gltfjsx": "^6.5.3",
     "gsap": "^3.14.2",
     "postprocessing": "^6.38.2",
     "powerglitch": "^2.5.0",
     "react": "^19.2.0",
-    "react-cookie": "^8.0.1",
     "react-dom": "^19.2.0",
-    "react-ga4": "^2.1.0",
     "react-helmet": "^6.1.0",
     "react-icons": "^5.5.0",
     "react-router-dom": "^7.12.0",
     "react-select": "^5.10.2",
     "sass": "^1.97.2",
     "three": "^0.182.0",
-    "yup": "^1.7.1"
+    "yup": "^1.7.1",
+    "zustand": "^5.0.11"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
-    "@gltf-transform/cli": "^4.3.0",
     "@types/node": "^24.10.1",
     "@types/react": "^19.2.5",
     "@types/react-dom": "^19.2.3",
@@ -54,9 +46,9 @@
     "eslint-plugin-react-refresh": "^0.4.24",
     "globals": "^16.5.0",
     "leva": "^0.10.1",
-    "r3f-perf": "^7.2.3",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.46.4",
-    "vite": "^7.2.4"
+    "vite": "^7.2.4",
+    "wrangler": "4.145.0"
   }
 }

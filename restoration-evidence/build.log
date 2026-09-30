@@ -1,0 +1,105 @@
+
+> apogee_25@0.0.0 build
+> tsc -b && vite build
+
+vite v7.3.6 building client environment for production...
+transforming...
+
+/images/landing/background1.png referenced in /images/landing/background1.png didn't resolve at build time, it will remain unchanged to be resolved at runtime
+DEPRECATION WARNING [global-builtin]: Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+Use color.adjust instead.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+   ╷
+61 │         color: lighten($cyber-yellow, 10%);
+   │                ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   ╵
+    src/pages/registration/components/instruction/Instructions.module.scss 61:16  root stylesheet
+
+DEPRECATION WARNING [color-functions]: lighten() is deprecated. Suggestions:
+
+color.scale($color, $lightness: 20%)
+color.adjust($color, $lightness: 10%)
+
+More info: https://sass-lang.com/d/color-functions
+
+   ╷
+61 │         color: lighten($cyber-yellow, 10%);
+   │                ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   ╵
+    src/pages/registration/components/instruction/Instructions.module.scss 61:16  root stylesheet
+
+✓ 922 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                    3.45 kB │ gzip:   1.08 kB
+dist/assets/hmel-sQJ2zsup.png                      4.73 kB
+dist/assets/uiv-CepHwqDY.png                       5.21 kB
+dist/assets/eightfoldImg-BMstOqun.png              6.11 kB
+dist/assets/kotak-DXUEKKaA.png                     6.12 kB
+dist/assets/inkNews-Dfl0y23M.png                   6.60 kB
+dist/assets/rungta-DmCGYI99.png                    7.80 kB
+dist/assets/atlassian-FzuKd_R5.jpg                 8.92 kB
+dist/assets/AbhiBus-C4vJTu9r.png                   9.50 kB
+dist/assets/2.oh!-CbGbLf3x.png                    12.88 kB
+dist/assets/posterwah_org-F20aQGWs.png            13.02 kB
+dist/assets/monster-iK6GAWgZ.png                  26.39 kB
+dist/assets/rtc-DMK6WVyu.png                      27.62 kB
+dist/assets/campus-Bgnqf8w3.png                   35.64 kB
+dist/assets/aditya-BFHAJWgI.png                   36.94 kB
+dist/assets/pluss-EEN2uY0R.png                    39.41 kB
+dist/assets/mapMyIndia-D_0nQqvS.png               45.00 kB
+dist/assets/myntraImg-BVjpJXBO.png                48.75 kB
+dist/assets/blog-CRgtt0Nr.png                     64.60 kB
+dist/assets/emt-vnOWQs9B.png                      69.89 kB
+dist/assets/lokKal-DBHK243Z.png                   70.19 kB
+dist/assets/armor-DiZQvctH.png                    78.73 kB
+dist/assets/irtiash-CteG_RZ1.png                 177.15 kB
+dist/assets/mridul-DQcKZMB2.png                  204.07 kB
+dist/assets/samachar-DtLRaOL4.png                259.23 kB
+dist/assets/car5.0-transformed-Do6lPZd1.glb      396.24 kB
+dist/assets/sushant-uM-HeP4S.png                 673.06 kB
+dist/assets/wheel-GsyqIEnC.png                   854.44 kB
+dist/assets/Nishant1-C_SNyMbv.png              1,116.06 kB
+dist/assets/body1-C-lQq6Qb.glb                 1,178.83 kB
+dist/assets/helmet6-HhdCAupp.glb               1,217.18 kB
+dist/assets/background_sponsPage-Dp7q-w5S.png  1,955.57 kB
+dist/assets/Naman1jpng-CUw5lekV.jpeg           4,295.31 kB
+dist/assets/Rena1-BMNGiu7-.png                 5,311.01 kB
+dist/assets/apogee-2026-brochure-DdukhgH9.pdf  8,175.07 kB
+dist/assets/ComingSoon-qCkPagYz.css                1.26 kB │ gzip:   0.65 kB
+dist/assets/index-Cgim5JPt.css                     2.58 kB │ gzip:   0.71 kB
+dist/assets/NavButton-Ddxbzikh.css                 3.91 kB │ gzip:   0.90 kB
+dist/assets/Brochure-C3moJt55.css                  4.67 kB │ gzip:   0.99 kB
+dist/assets/MediaPartners-DIxkUZvX.css             5.04 kB │ gzip:   1.30 kB
+dist/assets/Sponsors-CTJey07b.css                  6.03 kB │ gzip:   1.38 kB
+dist/assets/GettingToPilani-cX0CeDhU.css          11.87 kB │ gzip:   3.04 kB
+dist/assets/Speakers-CqvStuZj.css                 17.55 kB │ gzip:   3.59 kB
+dist/assets/Events-G4N0g-HZ.css                   21.49 kB │ gzip:   4.22 kB
+dist/assets/Registration-j7KmvNAT.css             26.07 kB │ gzip:   3.87 kB
+dist/assets/City-CDV1Fw-r.css                    142.72 kB │ gzip:  13.19 kB
+dist/assets/wheel-BAA4JIV-.js                      0.11 kB │ gzip:   0.11 kB
+dist/assets/index-DrufFgVA.js                      0.79 kB │ gzip:   0.47 kB
+dist/assets/ComingSoon-BePBl9_6.js                 0.80 kB │ gzip:   0.47 kB
+dist/assets/NavButton-Bamg-uc0.js                  0.98 kB │ gzip:   0.43 kB
+dist/assets/eventsData-BE-SE8LH.js                 1.23 kB │ gzip:   0.43 kB
+dist/assets/MediaPartners-WLXDZXl-.js              3.50 kB │ gzip:   1.48 kB
+dist/assets/Sponsors-CFIUoEW3.js                   4.59 kB │ gzip:   1.67 kB
+dist/assets/Brochure-Csumdx8b.js                   4.87 kB │ gzip:   2.10 kB
+dist/assets/index.esm-BDVpw-gZ.js                  4.96 kB │ gzip:   2.11 kB
+dist/assets/GettingToPilani-CEeZlGKT.js            5.58 kB │ gzip:   2.39 kB
+dist/assets/store-CHumdpz5.js                      8.41 kB │ gzip:   3.39 kB
+dist/assets/Events-CXLRcrNl.js                     9.58 kB │ gzip:   3.45 kB
+dist/assets/Speakers-v050EI__.js                  17.84 kB │ gzip:   5.73 kB
+dist/assets/ReactHelmet-BhmDfbnU.js               18.30 kB │ gzip:   6.72 kB
+dist/assets/index-DDlvirwQ.js                     69.89 kB │ gzip:  27.41 kB
+dist/assets/Registration-CGISeJOt.js             191.56 kB │ gzip:  68.27 kB
+dist/assets/City-CmyqoxgI.js                     526.22 kB │ gzip: 164.53 kB
+dist/assets/index-CMGV_WrX.js                  1,240.53 kB │ gzip: 350.95 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 19.32s

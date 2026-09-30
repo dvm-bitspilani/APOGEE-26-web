@@ -10,7 +10,7 @@ export default function Brochure() {
       <ReactHelmet
         title="APOGEE '26 | Under Steel Skies | Brochure"
         description="Download the official brochure for APOGEE 2026."
-        url="https://www.bits-apogee.org/brochure"
+        url="https://apogee2026.bits-apogee.org/brochure"
       />
       <div className={styles.brochurePageBg}>
         <div className={styles.brochurePage}>
@@ -36,7 +36,7 @@ export default function Brochure() {
             <iframe
               src={`${pdfFile}#toolbar=0&scrollbar=0`}
               className={styles.brochureIframe}
-              title="Oasis 2025 Brochure"
+              title="APOGEE 2026 Brochure" loading="lazy"
               typeof="application/pdf"
             />
             <a href={pdfFile} download>

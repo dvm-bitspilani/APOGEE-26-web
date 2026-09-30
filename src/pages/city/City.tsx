@@ -1,7 +1,6 @@
+import { prefersStatic, StaticArchive } from "./ArchiveFallback";
 import { Canvas } from "@react-three/fiber";
 import { Environment } from "@react-three/drei";
-import extension from "@theatre/r3f/dist/extension";
-import studio from "@theatre/studio";
 import ReactHelmet from "../components/ReactHelmet";
 import styles from "./City.module.scss";
 import CityScene from "./components/CityScene/CityScene";
@@ -11,9 +10,8 @@ import ScrollReminder from "./components/ScrollReminder/ScrollReminder";
 // import { getProject } from "@theatre/core";
 import { SheetProvider } from "@theatre/r3f";
 import { useEffect } from "react";
-import debugFunctions from "../../utils/debug";
 import * as THREE from "three";
-import { useActiveSheetStore, useNavStateStore, usePreloaderStateStore, useSceneLoadedStore, useScrollStore, useScrollToSectionStore } from "../../utils/store";
+import { useActiveSheetStore, useNavStateStore, usePreloaderStateStore, useSceneLoadedStore, useScrollStore } from "../../utils/store";
 import NavBar from "../components/NavBar/NavBar";
 import RegisterButton from "../components/RegisterButton/RegisterButton";
 import Preloader from "../preloader/Preloader";
@@ -42,11 +40,7 @@ THREE.DefaultLoadingManager.onLoad = () => {
 
 // import { EffectComposer, Noise } from "@react-three/postprocessing";
 // import { BlendFunction } from "postprocessing";
-if (import.meta.env.DEV) {
-  debugFunctions();
-  studio.initialize();
-  studio.extend(extension);
-}
+
 
 // Ensure the sheet is ready before rendering, if necessary, or just rely on React to handle it.
 // await project.ready; // Top level await might be issue if not handled, but usually fine in Vite + standard setups if supported.
@@ -62,29 +56,17 @@ export default function City() {
   // const setShowPreloader = usePreloaderStateStore((s) => s.setShowPreloader);
 
   useEffect(() => {
-    if (activeSheet !== "Cyber City") return;
-    console.log("Playing sheet animation");
-    project.ready.then(() => {
-      // project.sheet("Cyber City").sequence.play({ iterationCount: Infinity });
-      window.addEventListener("keydown", (e) => {
-        if (import.meta.env.DEV) {
-          if (e.key === "k") setNavState("opening");
-          if (e.key === "l") setNavState("closing");
-          if (e.key === "1") useScrollToSectionStore.getState().scrollToSection("home");
-          if (e.key === "2") useScrollToSectionStore.getState().scrollToSection("about");
-          if (e.key === "3") useScrollToSectionStore.getState().scrollToSection("contact"); 
-        }
-      })
-      // remove Infinity if you want play only once
-    });
-  }, [activeSheet]);
+    const timer = window.setTimeout(() => usePreloaderStateStore.getState().setShowPreloader(false), 12000);
+    return () => window.clearTimeout(timer);
+  }, []);
 
+  if (prefersStatic()) return <StaticArchive />;
   return (
     <>
       <ReactHelmet
         title="APOGEE '26 | Under Steel Skies | Home"
         description="Explore the city of APOGEE 2026."
-        url="https://www.bits-apogee.org/"
+        url="https://apogee2026.bits-apogee.org/"
       />
       {showPreloader && (
         <div

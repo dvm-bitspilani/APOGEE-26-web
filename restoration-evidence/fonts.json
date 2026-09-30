@@ -1,0 +1,146 @@
+[
+  {
+    "file": "public/font/fonnts.com-Blender_Pro_Thin.ttf",
+    "woff2": "public/font/fonnts.com-Blender_Pro_Thin-ttf.woff2",
+    "before": 63752,
+    "after": 27420,
+    "glyphs": 460,
+    "basicASCII": true
+  },
+  {
+    "file": "public/font/fonnts.com-BlenderPro-Bold.ttf",
+    "woff2": "public/font/fonnts.com-BlenderPro-Bold-ttf.woff2",
+    "before": 72624,
+    "after": 20008,
+    "glyphs": 461,
+    "basicASCII": true
+  },
+  {
+    "file": "public/font/JetBrainsMono-Bold.ttf",
+    "woff2": "public/font/JetBrainsMono-Bold-ttf.woff2",
+    "before": 114828,
+    "after": 40272,
+    "glyphs": 976,
+    "basicASCII": true
+  },
+  {
+    "file": "public/font/fonnts.com-Blender_Pro_Bold.ttf",
+    "woff2": "public/font/fonnts.com-Blender_Pro_Bold-ttf.woff2",
+    "before": 72680,
+    "after": 19940,
+    "glyphs": 461,
+    "basicASCII": true
+  },
+  {
+    "file": "public/font/fonnts.com-Blender_Pro_Heavy.ttf",
+    "woff2": "public/font/fonnts.com-Blender_Pro_Heavy-ttf.woff2",
+    "before": 51204,
+    "after": 21920,
+    "glyphs": 460,
+    "basicASCII": true
+  },
+  {
+    "file": "public/font/Bitsumishi.ttf",
+    "woff2": "public/font/Bitsumishi-ttf.woff2",
+    "before": 17260,
+    "after": 4984,
+    "glyphs": 91,
+    "basicASCII": false
+  },
+  {
+    "file": "public/font/Zero Hour.otf",
+    "woff2": "public/font/Zero Hour-otf.woff2",
+    "before": 25008,
+    "after": 12356,
+    "glyphs": 355,
+    "basicASCII": true
+  },
+  {
+    "file": "public/font/Orbitron-Regular.ttf",
+    "woff2": "public/font/Orbitron-Regular-ttf.woff2",
+    "before": 24716,
+    "after": 8976,
+    "glyphs": 207,
+    "basicASCII": false
+  },
+  {
+    "file": "public/font/Cyberpunks Italic.ttf",
+    "woff2": "public/font/Cyberpunks Italic-ttf.woff2",
+    "before": 16348,
+    "after": 5768,
+    "glyphs": 202,
+    "basicASCII": true
+  },
+  {
+    "file": "public/font/JetBrainsMono.ttf",
+    "woff2": "public/font/JetBrainsMono-ttf.woff2",
+    "before": 114904,
+    "after": 39096,
+    "glyphs": 976,
+    "basicASCII": true
+  },
+  {
+    "file": "public/font/Cyberpunks.otf",
+    "woff2": "public/font/Cyberpunks-otf.woff2",
+    "before": 15496,
+    "after": 5264,
+    "glyphs": 202,
+    "basicASCII": true
+  },
+  {
+    "file": "public/font/Cyberpunks.ttf",
+    "woff2": "public/font/Cyberpunks-ttf.woff2",
+    "before": 15496,
+    "after": 5264,
+    "glyphs": 202,
+    "basicASCII": true
+  },
+  {
+    "file": "public/font/Ethnocentric-Regular.otf",
+    "woff2": "public/font/Ethnocentric-Regular-otf.woff2",
+    "before": 68388,
+    "after": 31684,
+    "glyphs": 763,
+    "basicASCII": false
+  },
+  {
+    "file": "public/font/fonnts.com-Blender_Pro_Medium.ttf",
+    "woff2": "public/font/fonnts.com-Blender_Pro_Medium-ttf.woff2",
+    "before": 61000,
+    "after": 27340,
+    "glyphs": 461,
+    "basicASCII": true
+  },
+  {
+    "file": "public/font/Doctor Glitch.otf",
+    "woff2": "public/font/Doctor Glitch-otf.woff2",
+    "before": 344944,
+    "after": 34432,
+    "glyphs": 242,
+    "basicASCII": true
+  },
+  {
+    "file": "public/font/Avapore.ttf",
+    "woff2": "public/font/Avapore-ttf.woff2",
+    "before": 11816,
+    "after": 4364,
+    "glyphs": 160,
+    "basicASCII": true
+  },
+  {
+    "file": "public/font/Dragrace.ttf",
+    "woff2": "public/font/Dragrace-ttf.woff2",
+    "before": 48636,
+    "after": 14456,
+    "glyphs": 252,
+    "basicASCII": true
+  },
+  {
+    "file": "public/font/Cyberpunks Italic.otf",
+    "woff2": "public/font/Cyberpunks Italic-otf.woff2",
+    "before": 16348,
+    "after": 5764,
+    "glyphs": 202,
+    "basicASCII": true
+  }
+]

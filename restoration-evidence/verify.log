@@ -1,0 +1,5 @@
+
+> apogee_25@0.0.0 verify
+> node scripts/verify.mjs
+
+PASS: demo empty/invalid/valid confirmation, local identity, 276 deployment asset limits, fonts, no legacy APIs, SPA fallback.

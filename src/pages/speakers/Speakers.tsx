@@ -517,7 +517,7 @@ export default function Speakers() {
             <ReactHelmet
                 title="APOGEE '26 | Under Steel Skies | Speakers"
                 description="Discover the lineup of speakers at APOGEE 2026."
-                url="https://www.bits-apogee.org/speakers"
+                url="https://apogee2026.bits-apogee.org/speakers"
             />
             <div className={styles.speakersContainer}>
                 {loading && <SpeakerPreLoader loading={loading} progress={progress} />}

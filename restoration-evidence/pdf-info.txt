@@ -1,0 +1,17 @@
+Producer:        GPL Ghostscript 10.08.0
+CreationDate:    Thu Oct  1 01:02:24 2026 IST
+ModDate:         Thu Oct  1 01:02:24 2026 IST
+Custom Metadata: no
+Metadata Stream: yes
+Tagged:          no
+UserProperties:  no
+Suspects:        no
+Form:            none
+JavaScript:      no
+Pages:           38
+Encrypted:       no
+Page size:       1920 x 1080 pts
+Page rot:        0
+File size:       8175071 bytes
+Optimized:       no
+PDF version:     1.7

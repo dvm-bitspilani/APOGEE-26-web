@@ -1,0 +1,15 @@
+{
+  "start_sha": "f09be0e3bc0758e6b0f55a7f6a2753a8ba448447",
+  "before": {
+    "public/": 313805866,
+    "src/assets/": 106446466
+  },
+  "after": {
+    "public/": 112487844,
+    "src/assets/": 78870752
+  },
+  "pdf_before": 35751196,
+  "pdf_after": 8175071,
+  "removed_unreferenced_model_bytes": 202411248,
+  "dist_bytes": 141281451
+}

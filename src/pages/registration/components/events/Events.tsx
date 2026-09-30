@@ -1,10 +1,8 @@
+import { confirmDemo } from "../../../../utils/demoService";
 import { useState, useEffect, useRef } from "react";
 import { useRegistrationStore } from "../../../../utils/store";
 import styles from "./Events.module.scss";
 import NavButton from "../navButton/NavButton";
-import axios from "axios";
-import redirectWithPost from "../../redirectWithPost";
-import { useCookies } from "react-cookie";
 
 const Events = () => {
   const {
@@ -13,11 +11,11 @@ const Events = () => {
     toggleEvent,
     setActiveEvent,
     activeEvent,
-    userData,
+
     // accessToken,
   } = useRegistrationStore();
 
-  const [cookies, _setCookie] = useCookies(['id_token']);
+  const [confirmation, setConfirmation] = useState("");
 
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -36,35 +34,7 @@ const Events = () => {
 
   const isSelected = (id: number) => selectedEvents.some((e) => e.id === id);
 
-  const register = () => {
-    const submissionData = {
-      id_token: cookies["id_token"],
-      email_id: userData?.email,
-      phone: userData?.phone,
-      name: userData?.name,
-      gender: userData?.gender,
-      college_id: userData?.college,
-      year: userData?.year,
-      city: userData?.city,
-      events: selectedEvents.map((e) => e.id),
-    }
-    console.log(submissionData);
-    axios.post("https://bits-apogee.org/2026/main/registrations/register/",
-      submissionData
-    ).then((res) => {
-      console.log(res.data);
-      redirectWithPost(
-        "https://bits-apogee.org/2026/main/registrations/",
-
-        {
-          token: res.data.tokens.access,
-        },
-      );
-    }).catch((err) => {
-      alert("Error in registration. Try Again. " + err.response.data.message);
-      console.log(err);
-    })
-  }
+  const register = () => setConfirmation(confirmDemo(selectedEvents.map(e=>e.id)));
 
   return (
     <div className={styles.eventsContainer}>
@@ -167,7 +137,8 @@ const Events = () => {
             )}
           </ul>
 
-          <NavButton onClick={register} outerClass={styles.confirmButton} innerClass={styles.confirmButtonContent}>Register</NavButton>
+          <NavButton onClick={register} outerClass={styles.confirmButton} innerClass={styles.confirmButtonContent}>Confirm demo</NavButton>
+          <p role="status">{confirmation}</p>
         </div>
       </div>
 

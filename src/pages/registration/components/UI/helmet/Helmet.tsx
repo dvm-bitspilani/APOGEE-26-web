@@ -6,7 +6,7 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber"
 import { useRef } from "react"
 import * as THREE from "three"
 import { Center } from "@react-three/drei"
-import { Environment } from "@react-three/drei"
+
 
 function HelmetNeck() {
     const { scene } = useGLTF(helmetNeck);
@@ -129,7 +129,7 @@ function HelmetModel() {
 
 export default function Helmet() {
     return (
-        <Canvas
+        <Canvas dpr={[1, 1.5]}
             camera={{ position: [0, 0, 5], fov: 60 }}
             style={{
                 width: "calc(100vw - 72vh)",
@@ -138,7 +138,7 @@ export default function Helmet() {
                 backgroundColor: "transparent",
             }}
         >
-            <Environment preset="night" environmentIntensity={1} />
+            <ambientLight intensity={1} />
 
             <HelmetModel />
             <HelmetNeck />

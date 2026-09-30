@@ -10,7 +10,6 @@ import { editable as e } from "@theatre/r3f"
 import CountdownPlane from "../Countdown/CountdownPlane";
 import Globe from "../models/Globe";
 import FinalProdConfig from "../config/FinalProdConfig";
- import { Perf } from "r3f-perf";
 import { Logo } from "../models/Logo";
 import Cone from "../models/HolographicCone";
 
@@ -88,7 +87,7 @@ export default function CityScene({ }: any) {
   return (
     <>
       {/* <SceneDevOrProd /> */}
-       {import.meta.env.DEV && <Perf position="bottom-left" />}
+
       <FinalProdConfig/>
       <SceneLights />
       <fogExp2 attach="fog" args={[color, 0.001]} />
