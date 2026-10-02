@@ -2,7 +2,7 @@ import { Html } from "@react-three/drei";
 // import { editable as e } from "@theatre/r3f";
 import * as THREE from "three";
 import styles from "../InteractivePlane/InteractivePlane.module.scss";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useFrame } from "@react-three/fiber";
 import { useNavStateStore, useTheatreCameraStore } from "../../../../utils/store";
 import Countdown from "./Countdown"; // 👈 adjust path if needed
@@ -15,8 +15,8 @@ const InteractivePlane = () => {
 const navState = useNavStateStore((s) => s.navState);
   const theatreCamera = useTheatreCameraStore((s) => s.theatreCamera);
 
-  const camWorldPos = new THREE.Vector3();
-  const meshWorldPos = new THREE.Vector3();
+  const camWorldPos = useMemo(() => new THREE.Vector3(), []);
+  const meshWorldPos = useMemo(() => new THREE.Vector3(), []);
 const htmlRef = useRef<HTMLDivElement>(null);
 // const isInRangeRef = useRef(false);
 const navStateRef = useRef(navState);
@@ -25,7 +25,10 @@ useEffect(() => {
   navStateRef.current = navState;
 }, [navState]);
 
-useFrame(() => {
+const lastCheck = useRef(0);
+useFrame(state => {
+  if (state.clock.elapsedTime - lastCheck.current < 0.1) return;
+  lastCheck.current = state.clock.elapsedTime;
   if (!ref.current || !theatreCamera || !htmlRef.current) {
     return};
 

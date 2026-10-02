@@ -6,15 +6,16 @@ import gsap from "gsap";
 
 type Props = {
   onClick: () => void;
+  alwaysAvailable?: boolean;
   // ranges: [number, number][];
 };
 
-export default function HamburgerButton({ onClick }: Props) {
+export default function HamburgerButton({ onClick, alwaysAvailable = false }: Props) {
   const isHidden = useHamburgerStore((s) => s.isHidden);
   const manualHidden = useHamburgerStore((s) => s.manualHidden);
   const hamButtonLinesRef = useRef<HTMLSpanElement[]>([]);
 
-  const shouldHide = isHidden || manualHidden;
+  const shouldHide = !alwaysAvailable && (isHidden || manualHidden);
 
   useEffect(() => {
     const hamLinesTL = gsap.timeline({
@@ -34,7 +35,7 @@ export default function HamburgerButton({ onClick }: Props) {
   }, []);
 
   return (
-    <button
+    <button type="button" aria-label="Open menu" aria-hidden={shouldHide || undefined} tabIndex={shouldHide ? -1 : 0}
       onClick={() => {
         onClick();
 

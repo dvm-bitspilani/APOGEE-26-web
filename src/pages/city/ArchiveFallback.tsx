@@ -1,5 +1,0 @@
-import { Component, type ReactNode } from "react";
-import { Link } from "react-router-dom";
-export function StaticArchive(){return <main style={{minHeight:"100vh",background:"#080b17 url('/img/aboutUs/about-us-bg.png') center/cover",color:"#fff100",padding:"12vh 8vw",fontFamily:"'Blender Pro', sans-serif"}}><img src="/apogee26logo.png" alt="APOGEE 2026" style={{maxWidth:"min(70vw,600px)"}}/><h1>Under Steel Skies</h1><p>Explore the archive with reduced motion or without WebGL.</p><nav style={{display:"flex",gap:24,flexWrap:"wrap"}}>{["events","registration","speakers","sponsors","mediaPartners","brochure","getting-to-pilani"].map(path=><Link style={{color:"#fff100"}} key={path} to={'/'+path}>{path}</Link>)}</nav></main>}
-export class CityBoundary extends Component<{children:ReactNode},{failed:boolean}>{state={failed:false};static getDerivedStateFromError(){return {failed:true}}render(){return this.state.failed?<StaticArchive/>:this.props.children}}
-export function prefersStatic(){try{if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return true;const c=document.createElement('canvas');return !c.getContext('webgl2')}catch{return true}}

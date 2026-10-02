@@ -1,4 +1,4 @@
-name: Validate portfolio archive
+name: Validate APOGEE 2026
 on: [push, pull_request]
 jobs:
   build:

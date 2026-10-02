@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import useDocumentVisible from "../../../hooks/useDocumentVisible";
 import { useScrollStore } from "../../../utils/store";
 
 type Props = {
@@ -7,13 +8,15 @@ type Props = {
 };
 
 export default function NavBarScroll({ children, maxTranslate = 18000 }: Props) {
-  //const scroll = useScrollStore((s) => s.scroll);
+  const visible = useDocumentVisible();
   const ref = useRef<HTMLDivElement>(null);
   const lockedValue = useRef(0);
   const isHovered = useRef(false);
-  const prevTime = useRef(performance.now());
+  const prevTime = useRef(0);
   useEffect(() => {
-
+    if (!visible) return;
+    let frame = 0;
+    prevTime.current = performance.now();
     const animate = (time: number) => {
       const delta = time - prevTime.current;
       prevTime.current = time;
@@ -40,13 +43,12 @@ export default function NavBarScroll({ children, maxTranslate = 18000 }: Props) 
         ref.current.style.transform = `translate3d(-${lockedValue.current}vw, 0, 0)`;
       }
 
-      requestAnimationFrame(animate);
+      frame = requestAnimationFrame(animate);
     };
 
-    requestAnimationFrame(animate);
-
-    // return () => cancelAnimationFrame(frame);
-  }, [maxTranslate]);
+    frame = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(frame);
+  }, [maxTranslate, visible]);
   return (
     <div
       ref={ref}

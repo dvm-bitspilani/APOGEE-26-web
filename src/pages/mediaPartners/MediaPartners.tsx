@@ -1,21 +1,21 @@
 import { useRef, useEffect } from "react";
 import styles from "./MediaPartners.module.scss";
 
-import background from "../../assets/sponsors/background_sponsPage.png";
+import background from "../../assets/sponsors/background_sponsPage.webp";
 
-import wheel from "../../assets/sponsors/wheel.png";
+import wheel from "../../assets/sponsors/wheel.webp";
 import ink from "../../assets/sponsors/inkNews.png";
-import lok from "../../assets/sponsors/lokKal.png";
-import mridul from "../../assets/sponsors/mridul.png";
-import samachar from "../../assets/sponsors/samachar.png";
-import campus from "../../assets/sponsors/campus.png";
-import iritiash from "../../assets/sponsors/irtiash.png";
-import sushant from "../../assets/sponsors/sushant.png";
-import blog from "../../assets/sponsors/blog.png";
-import aditya from "../../assets/sponsors/aditya.png";
-import nishant from "../../assets/sponsors/Nishant1.png";
-import naman from "../../assets/sponsors/Naman1jpng.jpeg";
-import rena from "../../assets/sponsors/Rena1.png";
+import lok from "../../assets/sponsors/lokKal.webp";
+import mridul from "../../assets/sponsors/mridul.webp";
+import samachar from "../../assets/sponsors/samachar.webp";
+import campus from "../../assets/sponsors/campus.webp";
+import iritiash from "../../assets/sponsors/irtiash.webp";
+import sushant from "../../assets/sponsors/sushant.webp";
+import blog from "../../assets/sponsors/blog.webp";
+import aditya from "../../assets/sponsors/aditya.webp";
+import nishant from "../../assets/sponsors/Nishant1.webp";
+import naman from "../../assets/sponsors/Naman1jpng.webp";
+import rena from "../../assets/sponsors/Rena1.webp";
 
 
 // ✅ Data
@@ -62,11 +62,11 @@ const MediaPartners = () => {
     const container = mainRef.current;
     if (!container) return;
 
-    container.addEventListener("scroll", handleScroll);
+    container.addEventListener("scroll", handleScroll, { passive: true });
     // set initial position
     handleScroll();
 
-    return () => container.removeEventListener("scroll", handleScroll);
+    return () => { container.removeEventListener("scroll", handleScroll); stopDrag(); };
   }, []);
 
   // 🔥 Drag scroll
@@ -131,7 +131,7 @@ const MediaPartners = () => {
             <a href={sponsor.link} target="_blank" rel="noreferrer" key={index}>
               <div className={styles.otherSponsor}>
                 <div className={styles.otherSponsImage}>
-                  <img src={sponsor.img} alt={sponsor.name} />
+                  <img loading="lazy" decoding="async" src={sponsor.img} alt={sponsor.name} />
                 </div>
 
                 <div className={`${styles.otherSponsName} ${styles.sponsName}`}>

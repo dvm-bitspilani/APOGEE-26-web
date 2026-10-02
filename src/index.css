@@ -21,5 +21,7 @@ canvas {
   display: block;}
 
 * {scroll-snap-stop: always} /* * Line of code as lucky charm :) */
-.archive-notice{position:fixed;bottom:8px;left:8px;z-index:10001;background:#101015e8;color:#fff100;padding:7px 12px;border:1px solid #fff10055;font:12px monospace;max-width:calc(100vw - 32px);pointer-events:none}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+:focus-visible { outline: 2px solid #fff100; outline-offset: 4px; }
+.page-back { position: fixed; z-index: 1000; top: 20px; left: 20px; min-width: 44px; min-height: 44px; display: grid; place-items: center; }
+.page-back img { width: 60px; }

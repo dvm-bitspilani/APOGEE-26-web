@@ -1,0 +1,1333 @@
+{
+  "files": 102,
+  "before_bytes": 90047891,
+  "after_bytes": 11138694,
+  "assets": [
+    {
+      "path": "public/apogee26logo.png",
+      "before": 123524,
+      "after": 69368,
+      "dimensions_before": [
+        1809,
+        439
+      ],
+      "dimensions_after": [
+        1809,
+        439
+      ]
+    },
+    {
+      "path": "public/img/SteelSkiesbg.png",
+      "before": 2860552,
+      "after": 303758,
+      "dimensions_before": [
+        1728,
+        1153
+      ],
+      "dimensions_after": [
+        1728,
+        1153
+      ]
+    },
+    {
+      "path": "public/img/aboutUs/about-us-bg.png",
+      "before": 1348778,
+      "after": 49320,
+      "dimensions_before": [
+        1920,
+        1080
+      ],
+      "dimensions_after": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "path": "public/img/aboutUs/video-frame.png",
+      "before": 73099,
+      "after": 36876,
+      "dimensions_before": [
+        668,
+        486
+      ],
+      "dimensions_after": [
+        668,
+        486
+      ]
+    },
+    {
+      "path": "public/img/aboutUs/video-placeholder.png",
+      "before": 98752,
+      "after": 35294,
+      "dimensions_before": [
+        668,
+        557
+      ],
+      "dimensions_after": [
+        668,
+        557
+      ]
+    },
+    {
+      "path": "public/img/apogee26_hd.png",
+      "before": 81669,
+      "after": 30976,
+      "dimensions_before": [
+        672,
+        292
+      ],
+      "dimensions_after": [
+        672,
+        292
+      ]
+    },
+    {
+      "path": "public/img/apogee26_theme.png",
+      "before": 100557,
+      "after": 55994,
+      "dimensions_before": [
+        2265,
+        983
+      ],
+      "dimensions_after": [
+        2265,
+        983
+      ]
+    },
+    {
+      "path": "public/img/contacts/Anagha_Sharma_PCrA.png",
+      "before": 42792,
+      "after": 9520,
+      "dimensions_before": [
+        142,
+        181
+      ],
+      "dimensions_after": [
+        142,
+        181
+      ]
+    },
+    {
+      "path": "public/img/contacts/Atharv_Agarwal_-_Department_of_Visual_Media.png",
+      "before": 28258,
+      "after": 4966,
+      "dimensions_before": [
+        142,
+        181
+      ],
+      "dimensions_after": [
+        142,
+        181
+      ]
+    },
+    {
+      "path": "public/img/contacts/Aurvind_Mohanty_Art_Design___Publicity.png",
+      "before": 28191,
+      "after": 5576,
+      "dimensions_before": [
+        142,
+        181
+      ],
+      "dimensions_after": [
+        142,
+        181
+      ]
+    },
+    {
+      "path": "public/img/contacts/Ishita_Sethi_Department_of_Paper_Evaluation_and_Presentation.png",
+      "before": 45163,
+      "after": 9702,
+      "dimensions_before": [
+        142,
+        181
+      ],
+      "dimensions_after": [
+        142,
+        181
+      ]
+    },
+    {
+      "path": "public/img/contacts/Shivansh_Rastogi_-_Department_of_Sponsorship___Marketing.png",
+      "before": 37256,
+      "after": 7276,
+      "dimensions_before": [
+        142,
+        181
+      ],
+      "dimensions_after": [
+        142,
+        181
+      ]
+    },
+    {
+      "path": "public/img/contacts/Shreya_Karnwal_RecNAcc.png",
+      "before": 33078,
+      "after": 5884,
+      "dimensions_before": [
+        142,
+        181
+      ],
+      "dimensions_after": [
+        142,
+        181
+      ]
+    },
+    {
+      "path": "public/img/contacts/Shreyak_Shintre_-_Controls.png",
+      "before": 29815,
+      "after": 6006,
+      "dimensions_before": [
+        142,
+        181
+      ],
+      "dimensions_after": [
+        142,
+        181
+      ]
+    },
+    {
+      "path": "public/img/contacts/aditya.png",
+      "before": 28608,
+      "after": 5212,
+      "dimensions_before": [
+        142,
+        181
+      ],
+      "dimensions_after": [
+        142,
+        181
+      ]
+    },
+    {
+      "path": "public/img/contacts/bg.png",
+      "before": 1030051,
+      "after": 13382,
+      "dimensions_before": [
+        1920,
+        1080
+      ],
+      "dimensions_after": [
+        1200,
+        675
+      ]
+    },
+    {
+      "path": "public/img/contacts/cardBG.png",
+      "before": 99533,
+      "after": 21248,
+      "dimensions_before": [
+        239,
+        348
+      ],
+      "dimensions_after": [
+        239,
+        348
+      ]
+    },
+    {
+      "path": "public/img/contacts/cardBorder.png",
+      "before": 21178,
+      "after": 11056,
+      "dimensions_before": [
+        244,
+        351
+      ],
+      "dimensions_after": [
+        244,
+        351
+      ]
+    },
+    {
+      "path": "public/img/contacts/sajal.png",
+      "before": 26335,
+      "after": 5284,
+      "dimensions_before": [
+        125,
+        160
+      ],
+      "dimensions_after": [
+        125,
+        160
+      ]
+    },
+    {
+      "path": "public/img/contacts/sample.png",
+      "before": 36313,
+      "after": 7580,
+      "dimensions_before": [
+        135,
+        171
+      ],
+      "dimensions_after": [
+        135,
+        171
+      ]
+    },
+    {
+      "path": "public/img/contacts/sample2.png",
+      "before": 257353,
+      "after": 36850,
+      "dimensions_before": [
+        479,
+        503
+      ],
+      "dimensions_after": [
+        479,
+        503
+      ]
+    },
+    {
+      "path": "public/img/events/art.png",
+      "before": 2350341,
+      "after": 351362,
+      "dimensions_before": [
+        1024,
+        1024
+      ],
+      "dimensions_after": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "path": "public/img/events/bg.png",
+      "before": 1030051,
+      "after": 24750,
+      "dimensions_before": [
+        1920,
+        1080
+      ],
+      "dimensions_after": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "path": "public/img/events/caseComp.png",
+      "before": 632489,
+      "after": 86548,
+      "dimensions_before": [
+        466,
+        619
+      ],
+      "dimensions_after": [
+        466,
+        619
+      ]
+    },
+    {
+      "path": "public/img/events/coding.png",
+      "before": 343726,
+      "after": 36186,
+      "dimensions_before": [
+        640,
+        307
+      ],
+      "dimensions_after": [
+        640,
+        307
+      ]
+    },
+    {
+      "path": "public/img/events/coding1.png",
+      "before": 7725348,
+      "after": 341342,
+      "dimensions_before": [
+        2976,
+        1428
+      ],
+      "dimensions_after": [
+        2400,
+        1152
+      ]
+    },
+    {
+      "path": "public/img/events/esummit.png",
+      "before": 324995,
+      "after": 39128,
+      "dimensions_before": [
+        539,
+        303
+      ],
+      "dimensions_after": [
+        539,
+        303
+      ]
+    },
+    {
+      "path": "public/img/events/esummit1.png",
+      "before": 7774993,
+      "after": 428430,
+      "dimensions_before": [
+        2732,
+        1536
+      ],
+      "dimensions_after": [
+        2400,
+        1349
+      ]
+    },
+    {
+      "path": "public/img/events/exhibition.png",
+      "before": 716410,
+      "after": 89580,
+      "dimensions_before": [
+        1024,
+        341
+      ],
+      "dimensions_after": [
+        1024,
+        341
+      ]
+    },
+    {
+      "path": "public/img/events/exhibition1.png",
+      "before": 7934911,
+      "after": 301164,
+      "dimensions_before": [
+        3556,
+        1184
+      ],
+      "dimensions_after": [
+        2400,
+        799
+      ]
+    },
+    {
+      "path": "public/img/events/kernel.png",
+      "before": 2071978,
+      "after": 178680,
+      "dimensions_before": [
+        1376,
+        768
+      ],
+      "dimensions_after": [
+        1376,
+        768
+      ]
+    },
+    {
+      "path": "public/img/events/misc.jpeg",
+      "before": 116691,
+      "after": 72170,
+      "dimensions_before": [
+        735,
+        413
+      ],
+      "dimensions_after": [
+        735,
+        413
+      ]
+    },
+    {
+      "path": "public/img/events/misc1.png",
+      "before": 8333538,
+      "after": 488886,
+      "dimensions_before": [
+        2734,
+        1536
+      ],
+      "dimensions_after": [
+        2400,
+        1348
+      ]
+    },
+    {
+      "path": "public/img/events/quiz.png",
+      "before": 2412482,
+      "after": 369860,
+      "dimensions_before": [
+        1024,
+        1024
+      ],
+      "dimensions_after": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "path": "public/img/events/sample.png",
+      "before": 397299,
+      "after": 69344,
+      "dimensions_before": [
+        301,
+        551
+      ],
+      "dimensions_after": [
+        301,
+        551
+      ]
+    },
+    {
+      "path": "public/img/events/sample2.jpg",
+      "before": 4796140,
+      "after": 309804,
+      "dimensions_before": [
+        4096,
+        4096
+      ],
+      "dimensions_after": [
+        2400,
+        2400
+      ]
+    },
+    {
+      "path": "public/img/events/sample3.png",
+      "before": 324995,
+      "after": 39128,
+      "dimensions_before": [
+        539,
+        303
+      ],
+      "dimensions_after": [
+        539,
+        303
+      ]
+    },
+    {
+      "path": "public/img/events/sutt.jpeg",
+      "before": 260040,
+      "after": 15102,
+      "dimensions_before": [
+        2720,
+        2720
+      ],
+      "dimensions_after": [
+        2400,
+        2400
+      ]
+    },
+    {
+      "path": "public/img/ham/bg.png",
+      "before": 1510573,
+      "after": 64022,
+      "dimensions_before": [
+        1866,
+        1058
+      ],
+      "dimensions_after": [
+        1866,
+        1058
+      ]
+    },
+    {
+      "path": "public/img/landing/modal-frame.png",
+      "before": 119100,
+      "after": 24594,
+      "dimensions_before": [
+        610,
+        409
+      ],
+      "dimensions_after": [
+        610,
+        409
+      ]
+    },
+    {
+      "path": "public/img/landing/modal_border.png",
+      "before": 109425,
+      "after": 10052,
+      "dimensions_before": [
+        1000,
+        625
+      ],
+      "dimensions_after": [
+        1000,
+        625
+      ]
+    },
+    {
+      "path": "public/img/landing/modal_border_mobile.png",
+      "before": 23811,
+      "after": 11580,
+      "dimensions_before": [
+        625,
+        1000
+      ],
+      "dimensions_after": [
+        625,
+        1000
+      ]
+    },
+    {
+      "path": "public/img/landing/reg_btn.png",
+      "before": 55308,
+      "after": 27692,
+      "dimensions_before": [
+        367,
+        104
+      ],
+      "dimensions_after": [
+        367,
+        104
+      ]
+    },
+    {
+      "path": "public/img/landing/reg_btn2.png",
+      "before": 57478,
+      "after": 26766,
+      "dimensions_before": [
+        367,
+        104
+      ],
+      "dimensions_after": [
+        367,
+        104
+      ]
+    },
+    {
+      "path": "public/img/landing/reg_btn21.png",
+      "before": 57041,
+      "after": 26236,
+      "dimensions_before": [
+        367,
+        104
+      ],
+      "dimensions_after": [
+        367,
+        104
+      ]
+    },
+    {
+      "path": "public/img/landing/reg_btn22.png",
+      "before": 38766,
+      "after": 25826,
+      "dimensions_before": [
+        254,
+        126
+      ],
+      "dimensions_after": [
+        254,
+        126
+      ]
+    },
+    {
+      "path": "public/img/landing/reg_portal.png",
+      "before": 152045,
+      "after": 53208,
+      "dimensions_before": [
+        396,
+        399
+      ],
+      "dimensions_after": [
+        396,
+        399
+      ]
+    },
+    {
+      "path": "public/img/registrations/apogee-text-banner.png",
+      "before": 244766,
+      "after": 97570,
+      "dimensions_before": [
+        1093,
+        488
+      ],
+      "dimensions_after": [
+        1093,
+        488
+      ]
+    },
+    {
+      "path": "public/img/registrations/apogee2026.png",
+      "before": 257720,
+      "after": 95954,
+      "dimensions_before": [
+        970,
+        508
+      ],
+      "dimensions_after": [
+        970,
+        508
+      ]
+    },
+    {
+      "path": "public/img/registrations/apoogeBanner.png",
+      "before": 363711,
+      "after": 157034,
+      "dimensions_before": [
+        1900,
+        501
+      ],
+      "dimensions_after": [
+        1900,
+        501
+      ]
+    },
+    {
+      "path": "public/img/registrations/instructions-panel-bg-mobile.png",
+      "before": 257355,
+      "after": 30940,
+      "dimensions_before": [
+        390,
+        759
+      ],
+      "dimensions_after": [
+        390,
+        759
+      ]
+    },
+    {
+      "path": "public/img/registrations/instructions-panel-frame-mobile.png",
+      "before": 50193,
+      "after": 13204,
+      "dimensions_before": [
+        390,
+        769
+      ],
+      "dimensions_after": [
+        390,
+        769
+      ]
+    },
+    {
+      "path": "public/img/registrations/instructions-right-panel-mobile.png",
+      "before": 210458,
+      "after": 23150,
+      "dimensions_before": [
+        393,
+        768
+      ],
+      "dimensions_after": [
+        393,
+        768
+      ]
+    },
+    {
+      "path": "public/img/registrations/instructions-right-panel.png",
+      "before": 583826,
+      "after": 66372,
+      "dimensions_before": [
+        782,
+        1081
+      ],
+      "dimensions_after": [
+        782,
+        1081
+      ]
+    },
+    {
+      "path": "public/img/registrations/regBackground.png",
+      "before": 421248,
+      "after": 54672,
+      "dimensions_before": [
+        807,
+        1081
+      ],
+      "dimensions_after": [
+        807,
+        1081
+      ]
+    },
+    {
+      "path": "public/img/registrations/robot-face.png",
+      "before": 369042,
+      "after": 41412,
+      "dimensions_before": [
+        454,
+        688
+      ],
+      "dimensions_after": [
+        454,
+        688
+      ]
+    },
+    {
+      "path": "public/img/speakers/2022/Dr Ajay Kumar.jpg",
+      "before": 1066802,
+      "after": 169584,
+      "dimensions_before": [
+        4032,
+        3024
+      ],
+      "dimensions_after": [
+        1200,
+        900
+      ]
+    },
+    {
+      "path": "public/img/speakers/2022/Dr Henry Throop.jpg",
+      "before": 205650,
+      "after": 34520,
+      "dimensions_before": [
+        4096,
+        3072
+      ],
+      "dimensions_after": [
+        1200,
+        900
+      ]
+    },
+    {
+      "path": "public/img/speakers/2022/Dr. Soumya Swaminathan.jpg",
+      "before": 101226,
+      "after": 64224,
+      "dimensions_before": [
+        1350,
+        842
+      ],
+      "dimensions_after": [
+        1200,
+        748
+      ]
+    },
+    {
+      "path": "public/img/speakers/2022/Gauri_Shinde.jpg",
+      "before": 76189,
+      "after": 58834,
+      "dimensions_before": [
+        455,
+        505
+      ],
+      "dimensions_after": [
+        455,
+        505
+      ]
+    },
+    {
+      "path": "public/img/speakers/2022/Jeffrey Archer.jpg",
+      "before": 145281,
+      "after": 112694,
+      "dimensions_before": [
+        1305,
+        821
+      ],
+      "dimensions_after": [
+        1200,
+        755
+      ]
+    },
+    {
+      "path": "public/img/speakers/2022/Zainab Nagin Cox.jpg",
+      "before": 1401433,
+      "after": 223132,
+      "dimensions_before": [
+        3024,
+        4032
+      ],
+      "dimensions_after": [
+        900,
+        1200
+      ]
+    },
+    {
+      "path": "public/img/speakers/2023/Dr. V. K. Saraswat.jpg",
+      "before": 2352719,
+      "after": 407608,
+      "dimensions_before": [
+        4000,
+        3000
+      ],
+      "dimensions_after": [
+        1200,
+        900
+      ]
+    },
+    {
+      "path": "public/img/speakers/2023/Mr Dibakar Banerjee.jpg",
+      "before": 998475,
+      "after": 124472,
+      "dimensions_before": [
+        3024,
+        4032
+      ],
+      "dimensions_after": [
+        900,
+        1200
+      ]
+    },
+    {
+      "path": "public/img/speakers/2023/Mr R.B. Ramesh.jpg",
+      "before": 1231955,
+      "after": 126074,
+      "dimensions_before": [
+        3024,
+        4032
+      ],
+      "dimensions_after": [
+        900,
+        1200
+      ]
+    },
+    {
+      "path": "public/img/speakers/2023/S Nagarajan.jpg",
+      "before": 531414,
+      "after": 194718,
+      "dimensions_before": [
+        2331,
+        2976
+      ],
+      "dimensions_after": [
+        940,
+        1200
+      ]
+    },
+    {
+      "path": "public/img/speakers/2024/Vinod G. Khandare.jpg",
+      "before": 227081,
+      "after": 185810,
+      "dimensions_before": [
+        960,
+        1298
+      ],
+      "dimensions_after": [
+        888,
+        1200
+      ]
+    },
+    {
+      "path": "public/img/speakers/2025/Dilip D_Souza.jpg",
+      "before": 865584,
+      "after": 179738,
+      "dimensions_before": [
+        3072,
+        4096
+      ],
+      "dimensions_after": [
+        900,
+        1200
+      ]
+    },
+    {
+      "path": "public/img/speakers/2025/Dr Anil Kumar Gupta.jpg",
+      "before": 306531,
+      "after": 227622,
+      "dimensions_before": [
+        1200,
+        1600
+      ],
+      "dimensions_after": [
+        900,
+        1200
+      ]
+    },
+    {
+      "path": "public/img/speakers/2025/Dr Tirthankar Patnaik.jpg",
+      "before": 100898,
+      "after": 95658,
+      "dimensions_before": [
+        1280,
+        960
+      ],
+      "dimensions_after": [
+        1200,
+        900
+      ]
+    },
+    {
+      "path": "public/img/speakers/2025/Dr Vijender Singh Chauhan.jpg",
+      "before": 585777,
+      "after": 210062,
+      "dimensions_before": [
+        3000,
+        4000
+      ],
+      "dimensions_after": [
+        900,
+        1200
+      ]
+    },
+    {
+      "path": "public/img/speakers/2025/Dr. V. Anantha Nageswaran.png",
+      "before": 774377,
+      "after": 44274,
+      "dimensions_before": [
+        1835,
+        837
+      ],
+      "dimensions_after": [
+        1200,
+        547
+      ]
+    },
+    {
+      "path": "public/img/speakers/2025/IMG-20250401-WA0149.jpg",
+      "before": 1237338,
+      "after": 210088,
+      "dimensions_before": [
+        3024,
+        4032
+      ],
+      "dimensions_after": [
+        900,
+        1200
+      ]
+    },
+    {
+      "path": "public/img/speakers/2025/Mr Abhay Kumar.jpg",
+      "before": 433479,
+      "after": 73166,
+      "dimensions_before": [
+        2268,
+        4032
+      ],
+      "dimensions_after": [
+        675,
+        1200
+      ]
+    },
+    {
+      "path": "public/img/speakers/2025/Ms Nidhi Bansal.jpg",
+      "before": 83918,
+      "after": 75146,
+      "dimensions_before": [
+        960,
+        1280
+      ],
+      "dimensions_after": [
+        900,
+        1200
+      ]
+    },
+    {
+      "path": "public/img/speakers/2026/AmitabhSinha.png",
+      "before": 39082,
+      "after": 5584,
+      "dimensions_before": [
+        238,
+        161
+      ],
+      "dimensions_after": [
+        238,
+        161
+      ]
+    },
+    {
+      "path": "public/img/speakers/2026/DrShaileshNayak.png",
+      "before": 50044,
+      "after": 7328,
+      "dimensions_before": [
+        247,
+        204
+      ],
+      "dimensions_after": [
+        247,
+        204
+      ]
+    },
+    {
+      "path": "public/img/speakers/2026/OmPrakashSrivastava.png",
+      "before": 75530,
+      "after": 10296,
+      "dimensions_before": [
+        272,
+        181
+      ],
+      "dimensions_after": [
+        272,
+        181
+      ]
+    },
+    {
+      "path": "public/img/speakers/2026/PrabhladaRamaRao.png",
+      "before": 45569,
+      "after": 7028,
+      "dimensions_before": [
+        279,
+        186
+      ],
+      "dimensions_after": [
+        279,
+        186
+      ]
+    },
+    {
+      "path": "public/img/speakers/2026/sanjayaBaru.png",
+      "before": 52113,
+      "after": 7488,
+      "dimensions_before": [
+        343,
+        249
+      ],
+      "dimensions_after": [
+        343,
+        249
+      ]
+    },
+    {
+      "path": "public/img/speakers/mobileWheel.png",
+      "before": 235247,
+      "after": 116492,
+      "dimensions_before": [
+        1115,
+        1115
+      ],
+      "dimensions_after": [
+        1115,
+        1115
+      ]
+    },
+    {
+      "path": "public/img/speakers/speakerBg.png",
+      "before": 2397196,
+      "after": 177294,
+      "dimensions_before": [
+        1820,
+        1024
+      ],
+      "dimensions_after": [
+        1820,
+        1024
+      ]
+    },
+    {
+      "path": "src/assets/sponsors/Naman1jpng.jpeg",
+      "before": 4295305,
+      "after": 1401092,
+      "dimensions_before": [
+        3024,
+        3400
+      ],
+      "dimensions_after": [
+        2135,
+        2400
+      ]
+    },
+    {
+      "path": "src/assets/sponsors/Nishant1.png",
+      "before": 1116056,
+      "after": 493374,
+      "dimensions_before": [
+        1536,
+        2730
+      ],
+      "dimensions_after": [
+        1350,
+        2400
+      ]
+    },
+    {
+      "path": "src/assets/sponsors/Rena1.png",
+      "before": 5311007,
+      "after": 275572,
+      "dimensions_before": [
+        2160,
+        3840
+      ],
+      "dimensions_after": [
+        1350,
+        2400
+      ]
+    },
+    {
+      "path": "src/assets/sponsors/TitleSponsor.png",
+      "before": 153774,
+      "after": 27824,
+      "dimensions_before": [
+        1596,
+        437
+      ],
+      "dimensions_after": [
+        1596,
+        437
+      ]
+    },
+    {
+      "path": "src/assets/sponsors/aditya.png",
+      "before": 36944,
+      "after": 24386,
+      "dimensions_before": [
+        1280,
+        720
+      ],
+      "dimensions_after": [
+        1280,
+        720
+      ]
+    },
+    {
+      "path": "src/assets/sponsors/armor.png",
+      "before": 78726,
+      "after": 11492,
+      "dimensions_before": [
+        940,
+        168
+      ],
+      "dimensions_after": [
+        940,
+        168
+      ]
+    },
+    {
+      "path": "src/assets/sponsors/background_sponsPage.png",
+      "before": 1955565,
+      "after": 350014,
+      "dimensions_before": [
+        1295,
+        768
+      ],
+      "dimensions_after": [
+        1295,
+        768
+      ]
+    },
+    {
+      "path": "src/assets/sponsors/blog.png",
+      "before": 64597,
+      "after": 43002,
+      "dimensions_before": [
+        1600,
+        277
+      ],
+      "dimensions_after": [
+        1600,
+        277
+      ]
+    },
+    {
+      "path": "src/assets/sponsors/campus.png",
+      "before": 35639,
+      "after": 17904,
+      "dimensions_before": [
+        700,
+        700
+      ],
+      "dimensions_after": [
+        700,
+        700
+      ]
+    },
+    {
+      "path": "src/assets/sponsors/emt.png",
+      "before": 69888,
+      "after": 6916,
+      "dimensions_before": [
+        900,
+        675
+      ],
+      "dimensions_after": [
+        900,
+        675
+      ]
+    },
+    {
+      "path": "src/assets/sponsors/heading.png",
+      "before": 79035,
+      "after": 21382,
+      "dimensions_before": [
+        612,
+        408
+      ],
+      "dimensions_after": [
+        612,
+        408
+      ]
+    },
+    {
+      "path": "src/assets/sponsors/irtiash.png",
+      "before": 177146,
+      "after": 13838,
+      "dimensions_before": [
+        500,
+        500
+      ],
+      "dimensions_after": [
+        500,
+        500
+      ]
+    },
+    {
+      "path": "src/assets/sponsors/lokKal.png",
+      "before": 70193,
+      "after": 6484,
+      "dimensions_before": [
+        414,
+        146
+      ],
+      "dimensions_after": [
+        414,
+        146
+      ]
+    },
+    {
+      "path": "src/assets/sponsors/mapMyIndia.png",
+      "before": 45002,
+      "after": 12608,
+      "dimensions_before": [
+        512,
+        512
+      ],
+      "dimensions_after": [
+        512,
+        512
+      ]
+    },
+    {
+      "path": "src/assets/sponsors/mridul.png",
+      "before": 204070,
+      "after": 28952,
+      "dimensions_before": [
+        926,
+        240
+      ],
+      "dimensions_after": [
+        926,
+        240
+      ]
+    },
+    {
+      "path": "src/assets/sponsors/myntraImg.png",
+      "before": 48754,
+      "after": 26824,
+      "dimensions_before": [
+        364,
+        395
+      ],
+      "dimensions_after": [
+        364,
+        395
+      ]
+    },
+    {
+      "path": "src/assets/sponsors/pluss.png",
+      "before": 39405,
+      "after": 34672,
+      "dimensions_before": [
+        2155,
+        560
+      ],
+      "dimensions_after": [
+        2155,
+        560
+      ]
+    },
+    {
+      "path": "src/assets/sponsors/samachar.png",
+      "before": 259228,
+      "after": 30824,
+      "dimensions_before": [
+        1094,
+        180
+      ],
+      "dimensions_after": [
+        1094,
+        180
+      ]
+    },
+    {
+      "path": "src/assets/sponsors/sushant.png",
+      "before": 673063,
+      "after": 237492,
+      "dimensions_before": [
+        900,
+        1600
+      ],
+      "dimensions_after": [
+        900,
+        1600
+      ]
+    },
+    {
+      "path": "src/assets/sponsors/wheel.png",
+      "before": 854438,
+      "after": 102232,
+      "dimensions_before": [
+        724,
+        797
+      ],
+      "dimensions_after": [
+        724,
+        797
+      ]
+    }
+  ]
+}

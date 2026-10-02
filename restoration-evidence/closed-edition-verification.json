@@ -1,0 +1,245 @@
+{
+  "baseline": "f9c6020",
+  "before": {
+    "sha": "f9c6020",
+    "files": 284,
+    "outputBytes": 141351338,
+    "jsBytes": 2109743,
+    "jsGzip": 642118,
+    "allJsBytes": 2680664,
+    "allJsGzip": 762236,
+    "entryBytes": 1240530,
+    "entryGzip": 350948,
+    "measurement": "Locked npm ci and production build in isolated detached worktree; jsBytes/jsGzip count dist/assets chunks, allJs metrics also include local Draco."
+  },
+  "after": {
+    "files": 278,
+    "outputBytes": 32125069,
+    "jsBytes": 1917817,
+    "jsGzip": 572776,
+    "entryBytes": 371779,
+    "entryGzip": 124867
+  },
+  "artwork": {
+    "files": 102,
+    "beforeBytes": 90047891,
+    "afterBytes": 11138694
+  },
+  "brochure": {
+    "bytes": 8175071,
+    "pages": 38,
+    "sha256": "b5590b5cf81d910fa95f1ee39cf5090740de325852df647ceb9340a3770ea050"
+  },
+  "models": [
+    "city33-transformed.glb",
+    "cone.glb",
+    "dvmlogowide-v1.glb",
+    "onlyglobe-v1.glb"
+  ],
+  "fonts": [
+    {
+      "file": "public/font/3D-ASCII.flf",
+      "bytes": 15324,
+      "sha256": "a831596bd17d09e81585c207e2589627c4b94bdd03c57d8ce9b996e5be9495e4"
+    },
+    {
+      "file": "public/font/Avapore-ttf.woff2",
+      "bytes": 4364,
+      "sha256": "35834861d4d59bd3cea91221d14195e0f01afa50b4478d5767adea185b6d3906"
+    },
+    {
+      "file": "public/font/Avapore.ttf",
+      "bytes": 11816,
+      "sha256": "6b4b7e36ea4aa3b5881960ca83b211f3a55c5074cf6bb0e427d547b16d10f6c5"
+    },
+    {
+      "file": "public/font/Bitsumishi-ttf.woff2",
+      "bytes": 4984,
+      "sha256": "c11436b8a34e5c184e5cc62d4b3865e5135fc9b433a92482b638d0e430b48bb6"
+    },
+    {
+      "file": "public/font/Bitsumishi.ttf",
+      "bytes": 17260,
+      "sha256": "fa9bb58c66c17efd0203e91fc7427be80de6bfe581b6b8a22eb46b7eae87b0f5"
+    },
+    {
+      "file": "public/font/Cyberpunks Italic-otf.woff2",
+      "bytes": 5764,
+      "sha256": "b5a2df4dc19bcc53be44708ab84a9fad6792df7915983633d9cc5b2ea014defe"
+    },
+    {
+      "file": "public/font/Cyberpunks Italic-ttf.woff2",
+      "bytes": 5768,
+      "sha256": "f4b1e679cbbd4397601862595aa6ccef3dab027d63e83370149414415a19277c"
+    },
+    {
+      "file": "public/font/Cyberpunks Italic.otf",
+      "bytes": 16348,
+      "sha256": "20f75495fb5247700b1043518aa52469488b10addd77f0a34c5f6fe384d996bf"
+    },
+    {
+      "file": "public/font/Cyberpunks Italic.ttf",
+      "bytes": 16348,
+      "sha256": "46e200bb0098c1bef49a2b72ed91bb1b9d6e928e9d4973e0afa4e6d05ad01938"
+    },
+    {
+      "file": "public/font/Cyberpunks-otf.woff2",
+      "bytes": 5264,
+      "sha256": "dde4b46a2ea2e12346f01e1bc3a5d790e37fb192ad8a7dc52cce871e376a5ad4"
+    },
+    {
+      "file": "public/font/Cyberpunks-ttf.woff2",
+      "bytes": 5264,
+      "sha256": "dde4b46a2ea2e12346f01e1bc3a5d790e37fb192ad8a7dc52cce871e376a5ad4"
+    },
+    {
+      "file": "public/font/Cyberpunks.otf",
+      "bytes": 15496,
+      "sha256": "1263c4a0feac8a2635238785c1b796717a5f26be1b62a35db1fb032f1890f665"
+    },
+    {
+      "file": "public/font/Cyberpunks.ttf",
+      "bytes": 15496,
+      "sha256": "8881fa562eeedaea1e22bc8fbfe73326e33f3c31f943cb2476e425f5844d90fa"
+    },
+    {
+      "file": "public/font/Doctor Glitch-otf.woff2",
+      "bytes": 34432,
+      "sha256": "207f50b03530f32c4aa795019208c9148b7a7ae979b33afd77d39eadd9e62b97"
+    },
+    {
+      "file": "public/font/Doctor Glitch.otf",
+      "bytes": 344944,
+      "sha256": "d884ef26a2b02efdb34365d8850b92a50cc3d6878355c9cfbb7bf57baa184cd1"
+    },
+    {
+      "file": "public/font/Dragrace-ttf.woff2",
+      "bytes": 14456,
+      "sha256": "6463f6ff6434092c257b2fe3820dde7f53e69218d434228319239f5f26d36559"
+    },
+    {
+      "file": "public/font/Dragrace.ttf",
+      "bytes": 48636,
+      "sha256": "b7e88aff6734440860776632e7af76ca74371f5dfb2f570778be78b26c88f055"
+    },
+    {
+      "file": "public/font/Ethnocentric-Regular-otf.woff2",
+      "bytes": 31684,
+      "sha256": "2b12326fcf86e8552fa3c1764758d0cd2fd6f726afa60b5339327119e450475e"
+    },
+    {
+      "file": "public/font/Ethnocentric-Regular.otf",
+      "bytes": 68388,
+      "sha256": "4d7ab140b0510b38e8714c5f64ce0f6bea7aa1ef5346e9565de20901eac40247"
+    },
+    {
+      "file": "public/font/JetBrainsMono-Bold-ttf.woff2",
+      "bytes": 40272,
+      "sha256": "5386532c50675a55363818ffb39803e1d6901d7cc967f92e9b12b479fa4cd268"
+    },
+    {
+      "file": "public/font/JetBrainsMono-Bold.ttf",
+      "bytes": 114828,
+      "sha256": "a2349098b9e45419e7bf0e2958d6c4937a049dded37387b08be725be4c7615f3"
+    },
+    {
+      "file": "public/font/JetBrainsMono-ttf.woff2",
+      "bytes": 39096,
+      "sha256": "e800945b10314583f8c6c3839d858614cd3c68752ef566392124e1dc12560214"
+    },
+    {
+      "file": "public/font/JetBrainsMono.ttf",
+      "bytes": 114904,
+      "sha256": "b6b1ff4ddefe36d7f2a6174e1d001cab374e594519ee9049af028d577b64c5f5"
+    },
+    {
+      "file": "public/font/Orbitron-Regular-ttf.woff2",
+      "bytes": 8976,
+      "sha256": "1bf6d4e3c5089fcd6a61ca1e9163d2fcaf5b78225f55a00f7f3ef7aa2ea61676"
+    },
+    {
+      "file": "public/font/Orbitron-Regular.ttf",
+      "bytes": 24716,
+      "sha256": "739162ac8e6fcadb559226f2fee57f55baad126728cec901b321042c7224088e"
+    },
+    {
+      "file": "public/font/Zero Hour-otf.woff2",
+      "bytes": 12356,
+      "sha256": "b4f54d659a84f1d2bb685eeeaa0439d04d19e1b1495e15a198146a97cc2e4a11"
+    },
+    {
+      "file": "public/font/Zero Hour.otf",
+      "bytes": 25008,
+      "sha256": "86184435a211a1631a075babfecd5a952c8457fb0268a14bee9b31ac716baa1a"
+    },
+    {
+      "file": "public/font/fonnts.com-BlenderPro-Bold-ttf.woff2",
+      "bytes": 20008,
+      "sha256": "ddad6da1c88a2bf6cc58bd289d9db5dcea913716dbb69d9269e8cb184ce0263b"
+    },
+    {
+      "file": "public/font/fonnts.com-BlenderPro-Bold.ttf",
+      "bytes": 72624,
+      "sha256": "b5e00484896c0beadb39a80b4c45650ab7b552f78955b3a9c91792bd8cb434d5"
+    },
+    {
+      "file": "public/font/fonnts.com-Blender_Pro_Bold-ttf.woff2",
+      "bytes": 19940,
+      "sha256": "c4fa45ac548e776357bce5451229f7ade2f8aadacdfcd33a357c17682fffc445"
+    },
+    {
+      "file": "public/font/fonnts.com-Blender_Pro_Bold.ttf",
+      "bytes": 72680,
+      "sha256": "fa2dbb426352f2274e04ae47c682fadd27236802e4af060ee6d8ab6d2abcb8cf"
+    },
+    {
+      "file": "public/font/fonnts.com-Blender_Pro_Heavy-ttf.woff2",
+      "bytes": 21920,
+      "sha256": "b77ec1c5993f24bb3f8aafef9ef1a7289c7ce5e246fdc3ed71e0f73a175e4b88"
+    },
+    {
+      "file": "public/font/fonnts.com-Blender_Pro_Heavy.ttf",
+      "bytes": 51204,
+      "sha256": "f26abde5a7676859f87b92cf84c5e8eaf87112ca5ba3d895cc6bee07c2e80780"
+    },
+    {
+      "file": "public/font/fonnts.com-Blender_Pro_Medium-ttf.woff2",
+      "bytes": 27340,
+      "sha256": "3c72cecc2a7748e5ec53aa01bafb26b5ec0b8be0a6cb341dacd11ed3f3430497"
+    },
+    {
+      "file": "public/font/fonnts.com-Blender_Pro_Medium.ttf",
+      "bytes": 61000,
+      "sha256": "a7c3958bb3359d5c8879270491b08a1fbc21e6575a35134c8f9354f4d8b0074a"
+    },
+    {
+      "file": "public/font/fonnts.com-Blender_Pro_Thin-ttf.woff2",
+      "bytes": 27420,
+      "sha256": "63d13c4be364c6e92b0e771e8f8362e677097d9bdfad0332088b7dff5049e0ff"
+    },
+    {
+      "file": "public/font/fonnts.com-Blender_Pro_Thin.ttf",
+      "bytes": 63752,
+      "sha256": "9eb1ae467777c1f9edb1327d8dc6d52f8e3453162895923f5a480122d2ce489d"
+    }
+  ],
+  "checks": [
+    "Native labelled dialog with autofocus Close and no form fields",
+    "278 deployment files below 25 MiB",
+    "Active city models, car, environment and local Draco present",
+    "All original font and brochure hashes unchanged",
+    "124 local image references resolved",
+    "No old APIs/mock registration or added disclaimers",
+    "Original artwork navigation",
+    "Hashed immutable caching and HTML revalidation",
+    "Native Pages SPA fallback"
+  ],
+  "browserChecks": {
+    "owner": "Coordinating agent; no browser operations by repository worker",
+    "contentRouteCases": 20,
+    "contentRouteResult": "Desktop/mobile routes: no application errors, failed resources, broken images or horizontal overflow. Direct registration passed.",
+    "resilience": "Final native-GPU normal, seven-second slow-model and failed-GLB tests passed with zero page errors; original city/artwork fallback, notice and Escape work.",
+    "glbRecovery": "Five same-key GLTF hooks are read in the DOM root before Canvas. Failed GLBs are caught by the route boundary before Fiber exists.",
+    "remainingFaultReporting": "HDR loading or other later GPU/render exceptions still occur inside Fiber. The installed Fiber reports even caught errors through window.reportError; HDR fault injection is untested. No global/dependency suppression."
+  }
+}

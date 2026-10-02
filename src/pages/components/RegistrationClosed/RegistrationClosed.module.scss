@@ -1,0 +1,18 @@
+@use "/src/assets/global.scss" as *;
+
+.dialog {
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  width: min(390px, calc(100vw - 40px));
+  padding: 30px 26px 24px;
+  border: 1px solid #fff100;
+  color: #fff100;
+  background: #101520;
+  text-align: center;
+  font-family: $font-blender;
+
+  &::backdrop { background: #080b17b3; }
+  h2 { font-size: 28px; line-height: 1.2; font-weight: 500; }
+  button { min-height: 44px; margin-top: 22px; padding: 10px 28px; border: 1px solid #fff100; color: #fff100; background: transparent; font: inherit; font-size: 21px; cursor: pointer; }
+}

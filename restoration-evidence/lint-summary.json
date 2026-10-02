@@ -1,0 +1,16 @@
+{
+  "baseline": "f9c6020",
+  "before": {
+    "errors": 85,
+    "warnings": 21
+  },
+  "after": {
+    "errors": 68,
+    "warnings": 29
+  },
+  "newComponentsAndHooks": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "note": "Full-repository ESLint remains nonzero in original/generated scene code, permissive types, effect rules and older controls. Production TypeScript compilation, registration markup and deployment checks pass."
+}

@@ -2,21 +2,12 @@ import { useEffect, useState } from "react";
 import HamMobile from "./HamMobile";
 import HamDesktop from "./HamDesktop";
 
-export default function Ham() {
-  const [width, setwidth] = useState(window.innerWidth / window.innerHeight < 0.6 ? false : true);
-
+export default function Ham({ onClose }: { onClose?: () => void }) {
+  const [desktop, setDesktop] = useState(() => window.innerWidth / window.innerHeight >= 0.6);
   useEffect(() => {
-    addEventListener("resize", () => {
-      if (window.innerWidth / window.innerHeight < 0.6) {
-        setwidth(false);
-      } else {
-        setwidth(true);
-      }
-      return () => {
-        removeEventListener("resize", () => {});
-      };
-    });
+    const update = () => setDesktop(window.innerWidth / window.innerHeight >= 0.6);
+    window.addEventListener("resize", update, { passive: true });
+    return () => window.removeEventListener("resize", update);
   }, []);
-
-  return width ? <HamDesktop /> : <HamMobile />;
+  return desktop ? <HamDesktop onClose={onClose} /> : <HamMobile onClose={onClose} />;
 }

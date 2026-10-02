@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "./HamMobile.module.scss";
-// import bg from "/img/ham/bg.png";
+// import bg from "/img/ham/bg.webp";
 import luv from "/img/ham/luv_dvm.png";
 import textBottom from "/img/ham/textBottom.png";
 import gsap from "gsap";
+import { useNavigate } from "react-router-dom";
+import { prefetchRoute } from "../../routeLoaders";
 import useNavVisibility from "../../hooks/useNavVisibility";
 
 function SvgEl() {
@@ -149,14 +151,15 @@ const whiteBars = [
 const nameTOBar: Array<{ name: string; bar: number; url: string }> = [
   { name: "developers", bar: 5, url: "/developers" },
   { name: "sponsors", bar: 11, url: "/sponsors" },
-  { name: "media partners", bar: 21, url: "/media-partners" },
+  { name: "media partners", bar: 21, url: "/mediaPartners" },
   { name: "getting to pilani", bar: 28, url: "/getting-to-pilani" },
   { name: "brochure", bar: 37, url: "/brochure" },
   { name: "events", bar: 45, url: "/events" },
   { name: "speakers", bar: 53, url: "/speakers" },
 ];
 
-export default function Ham() {
+export default function Ham({ onClose }: { onClose?: () => void }) {
+  const navigate = useNavigate();
   const sideBarRef = useRef<HTMLDivElement>(null);
   const mainSpeedRef = useRef<HTMLDivElement>(null);
   const luvRef = useRef<HTMLDivElement>(null);
@@ -167,7 +170,8 @@ export default function Ham() {
   const [numOfBars, setnumOfBars] = useState(0);
 
   const onClickNameBars = (item: (typeof nameTOBar)[0]) => {
-    gsap.globalTimeline.clear();
+    gsap.killTweensOf([...barsRef.current, sideBarRef.current]);
+    prefetchRoute(item.url);
     const { bar: num, url } = item;
     if (num > barsAnimated) {
       gsap
@@ -175,7 +179,7 @@ export default function Ham() {
           ease: "power2.out",
           onComplete: () => {
             setbarsAnimated(num);
-            window.location.href = url;
+            navigate(url);
           },
         })
         .to(barsRef.current.slice(barsAnimated, num), {
@@ -198,7 +202,7 @@ export default function Ham() {
           ease: "power2.out",
           onComplete: () => {
             setbarsAnimated(num);
-            window.location.href = url;
+            navigate(url);
           },
         })
         .to(barsRef.current.slice(num, barsAnimated), {
@@ -220,6 +224,7 @@ export default function Ham() {
   };
 
   useEffect(() => {
+    const context = gsap.context(() => {
     const animBox = (ind: number) => {
       gsap.timeline({ ease: "power2.out" }).to(nameBoxesRef.current[ind], {
         transform: "translateX(0%)",
@@ -308,8 +313,11 @@ export default function Ham() {
         { scale: 0, opacity: 0, y: -20 },
         { scale: 1, opacity: 1, y: 0, duration: 0.2 },
       );
+    });
+    return () => { context.revert(); gsap.killTweensOf([...barsRef.current, ...nameBoxesRef.current, sideBarRef.current, mainSpeedRef.current, luvRef.current]); };
   }, []);
-  const { closeNav } = useNavVisibility();
+  const { closeNav: closeSceneNav } = useNavVisibility();
+  const closeNav = onClose ?? closeSceneNav;
   return (
     <div className={styles.container}>
       <div className={styles.scanlineoverlay}></div>
@@ -321,6 +329,10 @@ export default function Ham() {
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         className={styles.goBack}
+        role="button"
+        tabIndex={0}
+        aria-label="Close menu"
+        onKeyDown={event => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); closeNav(); } }}
         onClick={closeNav}
       >
         <path
@@ -358,9 +370,13 @@ export default function Ham() {
               ref={(el) => {
                 if (el) nameBoxesRef.current[i] = el;
               }}
-              onClick={() => {
-                if (entryAnim) onClickNameBars(item);
-              }}
+              role="link"
+              tabIndex={0}
+              aria-label={item.name}
+              onPointerEnter={() => prefetchRoute(item.url)}
+              onFocus={() => prefetchRoute(item.url)}
+              onKeyDown={event => { if (event.key === "Enter") onClickNameBars(item); }}
+              onClick={() => { if (entryAnim) onClickNameBars(item); }}
             >
               <SvgEl />
               <span>{item.name}</span>

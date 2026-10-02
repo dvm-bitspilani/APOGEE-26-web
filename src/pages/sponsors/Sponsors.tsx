@@ -1,9 +1,9 @@
 import { useRef, useEffect } from "react";
 import styles from "./sponsors.module.scss";
 
-import background from "../../assets/sponsors/background_sponsPage.png";
-import wheel from "../../assets/sponsors/wheel.png";
-import myntraImg from "../../assets/sponsors/myntraImg.png";
+import background from "../../assets/sponsors/background_sponsPage.webp";
+import wheel from "../../assets/sponsors/wheel.webp";
+import myntraImg from "../../assets/sponsors/myntraImg.webp";
 import kotakImg from "../../assets/sponsors/kotak.png";
 import rtcImg from "../../assets/sponsors/rtc.png";
 import rungtaImg from "../../assets/sponsors/rungta.png";
@@ -11,14 +11,14 @@ import hmelImg from "../../assets/sponsors/hmel.png";
 import eightImg from "../../assets/sponsors/eightfoldImg.png";
 import twoImg from "../../assets/sponsors/2.oh!.png";
 import atlassianImg from "../../assets/sponsors/atlassian.jpg";
-import emt from "../../assets/sponsors/emt.png";
+import emt from "../../assets/sponsors/emt.webp";
 import uiv from "../../assets/sponsors/uiv.png";
 import abhiBus from "../../assets/sponsors/AbhiBus.png";
 import posterWah from "../../assets/sponsors/posterwah_org.png";
-import armor from "../../assets/sponsors/armor.png";
-import pluss from "../../assets/sponsors/pluss.png";
+import armor from "../../assets/sponsors/armor.webp";
+import pluss from "../../assets/sponsors/pluss.webp";
 import monster from "../../assets/sponsors/monster.png";
-import mapmyIndia from "../../assets/sponsors/mapmyindia.png";
+import mapmyIndia from "../../assets/sponsors/mapMyIndia.webp";
 
 // ✅ Data
 const sponsorsData = {
@@ -71,8 +71,8 @@ const Sponsors = () => {
     const container = mainRef.current;
     if (!container) return;
 
-    container.addEventListener("scroll", handleScroll);
-    return () => container.removeEventListener("scroll", handleScroll);
+    container.addEventListener("scroll", handleScroll, { passive: true });
+    return () => { container.removeEventListener("scroll", handleScroll); stopDrag(); };
   }, []);
 
   // 🔥 Drag scroll
@@ -162,7 +162,7 @@ const Sponsors = () => {
                 </div>
 
                 <div className={styles.otherSponsImage}>
-                  <img src={sponsor.img} alt={sponsor.name} />
+                  <img loading="lazy" decoding="async" src={sponsor.img} alt={sponsor.name} />
                 </div>
 
                 <div className={`${styles.otherSponsName} ${styles.sponsName}`}>

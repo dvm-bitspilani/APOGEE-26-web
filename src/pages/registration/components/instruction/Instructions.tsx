@@ -1,3 +1,0 @@
-import styles from "./Instructions.module.scss";
-const Instructions = ({onContinue}:{onContinue:()=>void}) => <div className={styles.content} id="registration-content"><h1 className={styles.heading}>DEMO REGISTRATION</h1><ul className={styles.instructionList}><li>Explore the original registration design with a sample identity.</li><li>Sample details are prefilled. Keep sample data; do not enter personal information.</li><li>Select sample events and receive an in-memory demo confirmation.</li><li>No account, payment, email or booking is created. Refresh resets the demo.</li></ul><div className={styles.googleButton}><button onClick={onContinue}>Continue with sample identity</button></div></div>;
-export default Instructions;

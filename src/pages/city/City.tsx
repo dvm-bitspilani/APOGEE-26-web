@@ -1,5 +1,10 @@
-import { prefersStatic, StaticArchive } from "./ArchiveFallback";
-import { Canvas } from "@react-three/fiber";
+import "../../utils/localDecoders";
+import { canRenderCity } from "./CityBoundary";
+import LandingArtwork from "./LandingArtwork";
+import SceneBoundary from "./SceneBoundary";
+import CityAssets from "./CityAssets";
+import useDocumentVisible from "../../hooks/useDocumentVisible";
+import { Canvas, useThree } from "@react-three/fiber";
 import { Environment } from "@react-three/drei";
 import ReactHelmet from "../components/ReactHelmet";
 import styles from "./City.module.scss";
@@ -9,9 +14,9 @@ import ScrollReminder from "./components/ScrollReminder/ScrollReminder";
 // import { Environment } from "@react-three/drei";
 // import { getProject } from "@theatre/core";
 import { SheetProvider } from "@theatre/r3f";
-import { useEffect } from "react";
+import { Suspense, useCallback, useEffect, useState } from "react";
 import * as THREE from "three";
-import { useActiveSheetStore, useNavStateStore, usePreloaderStateStore, useSceneLoadedStore, useScrollStore } from "../../utils/store";
+import { useActiveSheetStore, useCityStore, useCurrentSectionStore, useHamburgerStore, useInfernusStore, useModalStore, useNavStateStore, usePivotStore, usePreloaderStateStore, usePullProgressStore, useSceneLoadedStore, useScrollStore, useTheatreCameraStore } from "../../utils/store";
 import NavBar from "../components/NavBar/NavBar";
 import RegisterButton from "../components/RegisterButton/RegisterButton";
 import Preloader from "../preloader/Preloader";
@@ -25,28 +30,34 @@ import { ScrollWatcher } from "./components/Countdown/ScrollWatcher";
 import NavBarScroll from "../components/NavBar/NavBarScroll";
 
 // import state from "./state-grace.json"
-// Set up loading progress tracking at module level (before useGLTF.preload() calls complete)
-THREE.DefaultLoadingManager.onProgress = (_url, loaded, total) => {
-  const progress = (loaded / total) * 100;
-  // console.log(`[Scene Loading] ${progress.toFixed(1)}% (${loaded}/${total})`);
-  useSceneLoadedStore.getState().setProgress(progress);
-};
+function SceneReady() {
+  useEffect(() => {
+    useSceneLoadedStore.getState().setLoaded(true);
+    useSceneLoadedStore.getState().setProgress(100);
+  }, []);
+  return null;
+}
 
-THREE.DefaultLoadingManager.onLoad = () => {
-  // console.log("[Scene Loading] All assets loaded!");
-  useSceneLoadedStore.getState().setProgress(100);
-  useSceneLoadedStore.getState().setLoaded(true);
-};
+function CanvasLifecycle({ onFailure }: { onFailure: () => void }) {
+  const { gl } = useThree();
+  useEffect(() => {
+    const canvas = gl.domElement;
+    const fail = (event: Event) => { event.preventDefault(); onFailure(); };
+    canvas.addEventListener("webglcontextlost", fail);
+    return () => canvas.removeEventListener("webglcontextlost", fail);
+  }, [gl, onFailure]);
+  return null;
+}
 
-// import { EffectComposer, Noise } from "@react-three/postprocessing";
-// import { BlendFunction } from "postprocessing";
-
-
-// Ensure the sheet is ready before rendering, if necessary, or just rely on React to handle it.
-// await project.ready; // Top level await might be issue if not handled, but usually fine in Vite + standard setups if supported.
-// Actually, usually we don't await at module level for React components unless Suspense is involved.
-// Theatre documentation often suggests just using it.
 export default function City() {
+  const [available, setAvailable] = useState(canRenderCity);
+  const visible = useDocumentVisible();
+  const showArtwork = useCallback(() => {
+    document.body.style.cursor = "auto";
+    useHamburgerStore.getState().setManualHidden(false);
+    useNavStateStore.getState().setNavState("off");
+    setAvailable(false);
+  }, []);
   const scroll = useScrollStore((s) => s.scroll);
   const showPreloader = usePreloaderStateStore((s) => s.showPreloader);
   const activeSheet = useActiveSheetStore((s) => s.activeSheet);
@@ -55,14 +66,27 @@ export default function City() {
 
   // const setShowPreloader = usePreloaderStateStore((s) => s.setShowPreloader);
 
-  useEffect(() => {
-    const timer = window.setTimeout(() => usePreloaderStateStore.getState().setShowPreloader(false), 12000);
-    return () => window.clearTimeout(timer);
+  useEffect(() => () => {
+    useSceneLoadedStore.getState().setLoaded(false);
+    usePreloaderStateStore.getState().setShowPreloader(true);
+    useActiveSheetStore.getState().setActiveSheet("Intro Sequence");
+    useNavStateStore.getState().setNavState("off");
+    useHamburgerStore.getState().setManualHidden(false);
+    useHamburgerStore.getState().setIsHidden(false);
+    useModalStore.getState().closeModal();
+    useCurrentSectionStore.getState().setCurrentSection("home");
+    usePullProgressStore.getState().setPullProgress(0);
+    useScrollStore.setState({ scroll: null });
+    useCityStore.setState({ city: null });
+    usePivotStore.setState({ pivot: null });
+    useInfernusStore.setState({ infernus: null });
+    useTheatreCameraStore.setState({ theatreCamera: null });
+    document.body.style.cursor = "auto";
   }, []);
 
-  if (prefersStatic()) return <StaticArchive />;
+  if (!available) return <LandingArtwork />;
   return (
-    <>
+    <CityAssets>
       <ReactHelmet
         title="APOGEE '26 | Under Steel Skies | Home"
         description="Explore the city of APOGEE 2026."
@@ -104,7 +128,8 @@ export default function City() {
           </h1>
           <Canvas
             gl={{ antialias: true }}
-            dpr={[1, 1.5]}
+            dpr={[1, 1.25]}
+            frameloop={visible ? "always" : "never"}
             // onCreated={({ gl }) => {
             //   gl.toneMapping = THREE.NoToneMapping
             // }}
@@ -119,6 +144,9 @@ export default function City() {
             }}
 
           >
+            <CanvasLifecycle onFailure={showArtwork} />
+            <SceneBoundary onFailure={showArtwork}>
+            <Suspense fallback={null}>
             <ScrollWatcher ranges={[
               // [0.2, 100],
               [0.41, 0.55],
@@ -161,6 +189,9 @@ export default function City() {
               {/* <BloomLeva /> */}
               {/* <FogPlane /> */}
             </SheetProvider>
+            <SceneReady />
+            </Suspense>
+            </SceneBoundary>
           </Canvas>
           {/* <Html> */}
           {activeSheet === "Cyber City" && <ScrollReminder />}
@@ -168,7 +199,7 @@ export default function City() {
         </div>
       }{activeSheet === "Cyber City" &&
         <HamburgerButton onClick={() => {
-          scroll.el.scrollTo({
+          scroll?.el?.scrollTo({
             top: scroll.offset * (scroll.el.scrollHeight - scroll.el.clientHeight),
             behavior: "instant"
           });
@@ -184,6 +215,6 @@ export default function City() {
       {navState === "open" && <Ham />}
       <Modal />
       <ScrollTracker />
-    </>
+    </CityAssets>
   );
 }

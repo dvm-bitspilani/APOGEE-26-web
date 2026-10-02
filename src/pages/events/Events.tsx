@@ -2,33 +2,18 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./Events.module.scss";
 import EventsItem from "./eventsItem/EventsItem";
-import { fetchEvents } from "./eventsService";
-import type { EventData } from "./eventsItem/EventsItem";
-import EventPreLoader from "./components/eventPreLoader/EventPreLoader";
+import { DUMMY_EVENTS } from "./eventsData";
 import ReactHelmet from "../components/ReactHelmet";
 
 const EVENT_CATEGORIES = [
-    { name: "CODING", image: "/img/events/coding1.png" },
-    { name: "KERNEL", image: "/img/events/kernel.png" },
-    { name: "EXHIBITIONS", image: "/img/events/esummit1.png" },
-    { name: "COMPETITIONS", image: "/img/events/caseComp.png" },
-    { name: "ART & CINEMA", image: "/img/events/art.png" },
-    { name: "MISCELLANEOUS", image: "/img/events/misc1.png" },
-    { name: "TALKS & WORKSHOPS", image: "/img/events/exhibition1.png" },
-    { name: "GAMES & QUIZ", image: "/img/events/quiz.png" },
-];
-
-const PRELOAD_IMAGES = [
-    "/img/events/bg.png",
-    "/img/events/backBtn.png",
-    "/img/events/sample3.png",
-    "/img/events/sutt.jpeg",
-    "/svg/events/arrows.svg",
-    "/svg/events/frame.svg",
-    "/svg/events/loc.svg",
-    "/svg/events/time.svg",
-    "/svg/events/call.svg",
-    ...EVENT_CATEGORIES.map(c => c.image)
+    { name: "CODING", image: "/img/events/coding1.webp" },
+    { name: "KERNEL", image: "/img/events/kernel.webp" },
+    { name: "EXHIBITIONS", image: "/img/events/esummit1.webp" },
+    { name: "COMPETITIONS", image: "/img/events/caseComp.webp" },
+    { name: "ART & CINEMA", image: "/img/events/art.webp" },
+    { name: "MISCELLANEOUS", image: "/img/events/misc1.webp" },
+    { name: "TALKS & WORKSHOPS", image: "/img/events/exhibition1.webp" },
+    { name: "GAMES & QUIZ", image: "/img/events/quiz.webp" },
 ];
 
 export default function Events() {
@@ -36,67 +21,17 @@ export default function Events() {
     const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
     const [showContent, setShowContent] = useState(false);
     const [originRect, setOriginRect] = useState<DOMRect | null>(null);
-    const [eventsData, setEventsData] = useState<Record<string, EventData[]>>({});
-    const [loading, setLoading] = useState(true);
-    const [progress, setProgress] = useState(0);
-
+    const eventsData = DUMMY_EVENTS;
     useEffect(() => {
-        const loadAll = async () => {
-            const totalItems = PRELOAD_IMAGES.length + 1; // +1 for API call
-            let loadedItems = 0;
-
-            const incrementProgress = () => {
-                loadedItems++;
-                setProgress((loadedItems / totalItems) * 100);
-            };
-
-            // 1. Fetch Events Data
-            const dataPromise = fetchEvents().then((data) => {
-                console.log("Events data loaded in component:", data);
-                setEventsData(data);
-                incrementProgress();
-                return data;
-            });
-
-            // 2. Preload Images
-            const imagePromises = PRELOAD_IMAGES.map((src) => {
-                return new Promise((resolve) => {
-                    const img = new Image();
-                    img.src = src;
-                    img.onload = () => {
-                        incrementProgress();
-                        resolve(src);
-                    };
-                    img.onerror = () => {
-                        incrementProgress(); // Count even if it fails to avoid getting stuck
-                        resolve(src);
-                    };
-                });
-            });
-
-            await Promise.all([dataPromise, ...imagePromises]);
-
-            // Artificial delay to show "ACESS GRANTED" state if sequence is too fast
-            setTimeout(() => {
-                setLoading(false);
-            }, 600);
-        };
-
-        const timer = window.setTimeout(() => setLoading(false), 6000);
-        loadAll();
-        return () => window.clearTimeout(timer);
-    }, []);
+      if (!selectedCategory) return;
+      const timer = setTimeout(() => setShowContent(true), 600);
+      return () => clearTimeout(timer);
+    }, [selectedCategory]);
 
     const handleCategoryClick = (category: string, element: HTMLElement) => {
-        console.log("Category clicked:", category);
-        console.log("Events for this category:", eventsData[category]);
         setOriginRect(element.getBoundingClientRect());
         setSelectedCategory(category);
 
-        // Wait for the background expansion (0.6s) before showing content
-        setTimeout(() => {
-            setShowContent(true);
-        }, 600);
     };
 
     const handleClose = () => {
@@ -115,7 +50,6 @@ export default function Events() {
                 {/* The base page background */}
                 <div className={styles.backgroundOverlay}></div>
 
-                {loading && <EventPreLoader loading={loading} progress={progress} />}
 
                 {/* This div acts as the expanding background originating from the card.
                 If selectedCategory is truthy, it appears and scales up */}
@@ -128,13 +62,15 @@ export default function Events() {
                         "--origin-height": originRect ? `${originRect.height}px` : "0px",
                     } as React.CSSProperties}
                 >
-                    <img src={EVENT_CATEGORIES.find(c => c.name === selectedCategory)?.image || "/img/events/sample3.png"} alt="background" />
+                    <img src={EVENT_CATEGORIES.find(c => c.name === selectedCategory)?.image || "/img/events/sample3.webp"} alt="background" />
                     <div className={styles.expandedBgDarken}></div>
                 </div>
 
                 <div className={styles.header}>
                     <img
                         src="/img/events/backBtn.png"
+                        role="button" tabIndex={0} aria-label={selectedCategory ? "Back to event categories" : "Back to home"}
+                        onKeyDown={event => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); selectedCategory ? handleClose() : navigate("/"); } }}
                         alt="Back"
                         className={styles.backBtn}
                         onClick={selectedCategory ? handleClose : () => navigate("/")}
@@ -153,11 +89,14 @@ export default function Events() {
                             <div
                                 key={index}
                                 className={styles.card}
+                                role="button" tabIndex={selectedCategory ? -1 : 0} aria-label={category.name}
+                                onKeyDown={event => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); handleCategoryClick(category.name, event.currentTarget); } }}
                                 onClick={(e) => handleCategoryClick(category.name, e.currentTarget)}
                             >
                                 <div className={styles.cardInner}>
                                     <div className={styles.cardImageContainer}>
                                         <img
+                                            decoding="async"
                                             src={category.image}
                                             alt={category.name}
                                             className={styles.cardImage}

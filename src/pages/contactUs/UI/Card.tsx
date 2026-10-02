@@ -1,7 +1,7 @@
 import styles from "./Card.module.scss";
 import type { Contact } from "../costaan";
-import cardBorders from "/img/contacts/cardBorder.png";
-import bg from "/img/contacts/cardBG.png";
+import cardBorders from "/img/contacts/cardBorder.webp";
+import bg from "/img/contacts/cardBG.webp";
 
 export default function Card({
   contact,

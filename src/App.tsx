@@ -1,12 +1,15 @@
 import { RouterProvider } from "react-router-dom";
 // import styles from "App.module.scss";
 import router from "./router";
+import { RegistrationProvider } from "./pages/components/RegistrationClosed/RegistrationClosed";
+import RoutePrefetch from "./pages/components/RoutePrefetch";
 
 function App() {
   return (
-    <>
-      <RouterProvider router={router}></RouterProvider><aside className="archive-notice">Portfolio archive · APOGEE 2026 · Registration is a local demo</aside>
-    </>
+    <RegistrationProvider>
+      <RoutePrefetch />
+      <RouterProvider router={router} />
+    </RegistrationProvider>
   )
 }
 

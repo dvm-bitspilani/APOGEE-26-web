@@ -1,0 +1,11 @@
+@use "/src/assets/global.scss" as *;
+
+.home { position: relative; isolation: isolate; min-height: 100dvh; overflow: hidden; background: #080b17; }
+.city { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1; }
+.logo { position: absolute; top: 12%; left: 50%; transform: translateX(-50%); width: min(65vw, 640px); max-height: 27vh; object-fit: contain; }
+.navigation {
+  position: absolute; left: 50%; top: 53%; transform: translate(-50%, -50%); width: min(620px, 88vw); display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;
+  a { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 58px; padding: 14px 10px; color: #00f8ff; background: #080b17dc; border: 1px solid #33e7ff; text-decoration: none; font: 600 clamp(14px, 2vw, 20px) $font-orbitron; }
+  span { color: #fff100; font-size: 1.4em; font-weight: 400; }
+}
+@media (max-width: 550px) { .logo { width: 86vw; top: 15%; } .navigation { top: 56%; gap: 12px; } }

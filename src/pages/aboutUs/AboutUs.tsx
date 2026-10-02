@@ -1,8 +1,7 @@
-import { useRef } from "react";
+import { useEffect, useState } from "react";
 import styles from "./AboutUs.module.scss";
-import { useYouTubePlayer } from "./components/useYoutubePlayer/useYoutubePlayer";
 
-const videos: YTVideo[] = [
+const videos = [
   {
     title: "[APOGEE Theme Reveal]",
     videoId: "ezk2p6KSj8M"
@@ -10,11 +9,16 @@ const videos: YTVideo[] = [
 ];
 
 export default function AboutUs({containerRef}: {containerRef?: React.RefObject<HTMLDivElement | null>}) {
-  const playerContainerRef = useRef<HTMLDivElement | null>(null);
-  const { isPlaying, nextVideo, prevVideo, togglePlayPause, current } = useYouTubePlayer(
-    videos,
-    playerContainerRef,
-  );
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [current, setCurrent] = useState(0);
+  const togglePlayPause = () => setIsPlaying(playing => !playing);
+  const nextVideo = () => setCurrent(index => (index + 1) % videos.length);
+  const prevVideo = () => setCurrent(index => (index - 1 + videos.length) % videos.length);
+  useEffect(() => {
+    const stopWhenHidden = () => { if (document.hidden) setIsPlaying(false); };
+    document.addEventListener("visibilitychange", stopWhenHidden);
+    return () => document.removeEventListener("visibilitychange", stopWhenHidden);
+  }, []);
 
   const textualContent = (
     <p>
@@ -33,7 +37,7 @@ export default function AboutUs({containerRef}: {containerRef?: React.RefObject<
   return (
     <div className={styles.container}>
       <img
-        src="/img/aboutUs/about-us-bg.png"
+        src="/img/aboutUs/about-us-bg.webp"
         alt="About Us Background"
         className={styles.bgImg}
       />
@@ -64,18 +68,24 @@ export default function AboutUs({containerRef}: {containerRef?: React.RefObject<
                 }}
               >
                 <div className={styles.youtubeFrame}>
-                  <div ref={playerContainerRef} />
+                  {isPlaying && <iframe
+                    src={`https://www.youtube-nocookie.com/embed/${videos[current].videoId}?autoplay=1&rel=0`}
+                    title={videos[current].title}
+                    width="100%" height="100%"
+                    loading="lazy" allow="autoplay; encrypted-media; picture-in-picture"
+                    referrerPolicy="strict-origin-when-cross-origin" allowFullScreen
+                  />}
                 </div>
               </div>
 
               {!isPlaying && (
-                <div
+                <button type="button" aria-label="Play theme reveal"
                   className={styles.playButton}
                   onClick={(e) => {
                     e.stopPropagation();
                     togglePlayPause();
                   }}
-                ></div>
+                ></button>
               )}
             </div>
             

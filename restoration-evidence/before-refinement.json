@@ -1,0 +1,12 @@
+{
+  "sha": "f9c6020",
+  "files": 284,
+  "outputBytes": 141351338,
+  "jsBytes": 2109743,
+  "jsGzip": 642118,
+  "allJsBytes": 2680664,
+  "allJsGzip": 762236,
+  "entryBytes": 1240530,
+  "entryGzip": 350948,
+  "measurement": "Locked npm ci and production build in isolated detached worktree; jsBytes/jsGzip count dist/assets chunks, allJs metrics also include local Draco."
+}

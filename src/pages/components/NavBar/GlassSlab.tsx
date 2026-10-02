@@ -1,6 +1,7 @@
 import React from "react";
 import "./GlassSlab.scss";
-import titleImg from "/img/apogee26_theme.png";
+import titleImg from "/img/apogee26_theme.webp";
+import { prefetchRoute } from "../../../routeLoaders";
 import { Link } from "react-router-dom";
 import { useScrollToSectionStore } from "../../../utils/store";
 
@@ -34,7 +35,7 @@ const GlassSlab: React.FC = () => {
         <div className="gs-inner-text">
           <img src={titleImg} alt="Apogee 26" />
           <div className="gs-navLinks">
-            <div className="gs-link" onClick={() => useScrollToSectionStore.getState().scrollToSection("home")}>
+            <div className="gs-link" role="button" tabIndex={0} onPointerEnter={() => prefetchRoute("/")} onFocus={() => prefetchRoute("/")} onKeyDown={event => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); useScrollToSectionStore.getState().scrollToSection("home"); } }} onClick={() => { prefetchRoute("/"); useScrollToSectionStore.getState().scrollToSection("home"); }}>
               <span>{`[`}</span>
               HOME
               <span>{`]`}</span>
@@ -49,12 +50,12 @@ const GlassSlab: React.FC = () => {
               SPEAKERS
               <span>{`]`}</span>
             </Link>
-            <div className="gs-link" onClick={() => useScrollToSectionStore.getState().scrollToSection("about")}>
+            <div className="gs-link" role="button" tabIndex={0} onPointerEnter={() => prefetchRoute("/about")} onFocus={() => prefetchRoute("/about")} onKeyDown={event => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); useScrollToSectionStore.getState().scrollToSection("about"); } }} onClick={() => { prefetchRoute("/about"); useScrollToSectionStore.getState().scrollToSection("about"); }}>
               <span>{`[`}</span>
               ABOUT US
               <span>{`]`}</span>
             </div>
-            <div className="gs-link" onClick={() => useScrollToSectionStore.getState().scrollToSection("contact")}>
+            <div className="gs-link" role="button" tabIndex={0} onPointerEnter={() => prefetchRoute("/contact")} onFocus={() => prefetchRoute("/contact")} onKeyDown={event => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); useScrollToSectionStore.getState().scrollToSection("contact"); } }} onClick={() => { prefetchRoute("/contact"); useScrollToSectionStore.getState().scrollToSection("contact"); }}>
               <span>{`[`}</span>
               CONTACT US
               <span>{`]`}</span>

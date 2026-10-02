@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import styles from "./EventsItem.module.scss";
+import { useRegistrationClosed } from "../../../hooks/registrationContext";
 import NavButton from "../../registration/components/navButton/NavButton";
 import { PowerGlitch } from "powerglitch";
 
@@ -18,6 +19,7 @@ interface EventsItemProps {
 }
 
 export default function EventsItem({ category, events }: EventsItemProps) {
+    const openRegistration = useRegistrationClosed();
     const [currentIndex, setCurrentIndex] = useState(0);
     const contentRef = useRef<HTMLDivElement>(null);
     const glitchRef = useRef<any>(null);
@@ -56,7 +58,7 @@ export default function EventsItem({ category, events }: EventsItemProps) {
                     glitchRef.current.stopGlitch();
                 }
             }, 500);
-            return () => clearTimeout(timer);
+            return () => { clearTimeout(timer); glitchRef.current?.stopGlitch(); };
         }
     }, [currentIndex, category]);
 
@@ -86,7 +88,7 @@ export default function EventsItem({ category, events }: EventsItemProps) {
                     <div className={styles.contentWrapper} ref={contentRef}>
                         <div className={styles.imageSection}>
                             <div className={styles.imageClipping}>
-                                <img src="/img/events/sutt.jpeg" alt="Event" className={styles.eventImg} />
+                                <img src="/img/events/sutt.webp" alt="Event" className={styles.eventImg} />
                             </div>
                             <img src="/svg/events/frame.svg" alt="Frame" className={styles.frameImg} />
                         </div>
@@ -125,9 +127,7 @@ export default function EventsItem({ category, events }: EventsItemProps) {
                                         {currentEvent.unstop_url && (
                                             <NavButton
                                                 innerClass={styles.registerBtn}
-                                                onClick={() => {
-                                                    window.open(currentEvent.unstop_url, "_blank", "noopener,noreferrer");
-                                                }}
+                                                onClick={openRegistration}
                                             >
                                                 Register
                                             </NavButton>

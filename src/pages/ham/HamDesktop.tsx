@@ -1,14 +1,17 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import styles from "./HamDesktop.module.scss";
-// import bg from "/img/ham/bg.png";
+// import bg from "/img/ham/bg.webp";
 import dott from "/img/ham/dott.png";
 import textBottom from "/img/ham/textBottom.png";
 import luv from "/img/ham/luv_dvm.png";
 import gsap from "gsap";
+import { useNavigate } from "react-router-dom";
+import { prefetchRoute } from "../../routeLoaders";
 // import { useNavStateStore } from "../../utils/store";
 import useNavVisibility from "../../hooks/useNavVisibility";
 
-export default function Ham() {
+export default function Ham({ onClose }: { onClose?: () => void }) {
+  const navigate = useNavigate();
   const [speedText, setspeedText] = useState(0);
   const [totalPurple, settotalPurple] = useState(0);
   const [totalSpeedPurple, settotalSpeedPurple] = useState(6);
@@ -126,7 +129,7 @@ export default function Ham() {
         },
         onClick: () => {
           onClickNameTag(() => {
-            window.location.href = "/getting-to-pilani";
+            navigate("/getting-to-pilani");
           }, 0.6);
         },
       },
@@ -155,7 +158,7 @@ export default function Ham() {
         },
         onClick: () => {
           onClickNameTag(() => {
-            window.location.href = "/brochure";
+            navigate("/brochure");
           }, 0.6);
         },
       },
@@ -181,7 +184,7 @@ export default function Ham() {
         },
         onClick: () => {
           onClickNameTag(() => {
-            window.location.href = "/developers";
+            navigate("/developers");
           }, 0.6);
         },
       },
@@ -207,7 +210,7 @@ export default function Ham() {
         },
         onClick: () => {
           onClickNameTag(() => {
-            window.location.href = "/media-partners";
+            navigate("/mediaPartners");
           }, 0.4);
         },
       },
@@ -233,7 +236,7 @@ export default function Ham() {
         },
         onClick: () => {
           onClickNameTag(() => {
-            window.location.href = "/sponsors";
+            navigate("/sponsors");
           }, 0.4);
         },
       },
@@ -259,12 +262,12 @@ export default function Ham() {
         },
         onClick: () => {
           onClickNameTag(() => {
-            window.location.href = "/events";
+            navigate("/events");
           }, 0.2);
         },
       },
     ];
-  }, []);
+  }, [navigate]);
 
   // Function to display speed dash ticks based on mouse position
   // const displaySpeedDashTicks = (x: number, y: number) => {
@@ -297,6 +300,7 @@ export default function Ham() {
   // }, []);
 
   useEffect(() => {
+    const context = gsap.context(() => {
     const startAnim = () => {
       const mainDuration = 0.6;
       gsap
@@ -370,12 +374,15 @@ export default function Ham() {
         { scale: 0, opacity: 0, y: -20 },
         { scale: 1, opacity: 1, y: 0, duration: 0.2 },
       );
+    });
+    return () => { context.revert(); clearTimeout(hoverTimeoutRef.current ?? undefined); gsap.killTweensOf([...speedDashTicksRef.current, ...bigDashTicksRef.current, ...nameTagRef.current, radialCircleDummyRef.current, radialCircle1Ref.current, radialCircle2Ref.current, speedDialRef.current, mainSpeedometerRef.current, luvRef.current]); };
   }, []);
   //   const handleOpenNav = () => {
   //   setNavState("closing");
   //   useHamburgerStore.getState().setManualHidden(false);
   // };
-  const { closeNav } = useNavVisibility();
+  const { closeNav: closeSceneNav } = useNavVisibility();
+  const closeNav = onClose ?? closeSceneNav;
   return (
     <div className={styles.container}>
       <div className={styles.scanlineoverlay}></div>
@@ -387,6 +394,10 @@ export default function Ham() {
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         className={styles.goBack}
+        role="button"
+        tabIndex={0}
+        aria-label="Close menu"
+        onKeyDown={event => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); closeNav(); } }}
         onClick={closeNav}
       >
         <path
@@ -485,9 +496,15 @@ export default function Ham() {
               if (el) nameTagRef.current[animId] = el;
             }}
             key={id}
+            role="link"
+            tabIndex={0}
+            aria-label={label.replace(/[<>]/g, "").trim()}
+            onFocus={() => prefetchRoute(["/getting-to-pilani", "/brochure", "/developers", "/mediaPartners", "/sponsors", "/events"][id - 1])}
+            onKeyDown={event => { if (event.key === "Enter") onClick(); }}
             onClick={onClick}
             className={styles[`nameTagCont${id}`]}
             onMouseEnter={() => {
+              prefetchRoute(["/getting-to-pilani", "/brochure", "/developers", "/mediaPartners", "/sponsors", "/events"][id - 1]);
               if (mouseEnter && startHovering) {
                 hoverTimeoutRef.current = setTimeout(() => {
                   mouseEnter();

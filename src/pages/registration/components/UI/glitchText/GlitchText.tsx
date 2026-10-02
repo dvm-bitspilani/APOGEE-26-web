@@ -1,7 +1,7 @@
 import styles from "./GlitchText.module.scss";
 import { PowerGlitch } from "powerglitch";
 import { useRef, useEffect } from "react";
-import ApogeeText from "/img/registrations/apoogeBanner.png"
+import ApogeeText from "/img/registrations/apoogeBanner.webp"
 
 // interface PowerGlitchConfig {
 //     playMode: "always" | "hover";

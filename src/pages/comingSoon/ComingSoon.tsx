@@ -29,7 +29,7 @@ export default function ComingSoon() {
   return (
     <div className={styles.wrapper}>
       <img
-              src="/img/aboutUs/about-us-bg.png"
+              src="/img/aboutUs/about-us-bg.webp"
               alt="About Us Background"
               className={styles.bgImg}
             />

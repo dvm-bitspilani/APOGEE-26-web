@@ -1,13 +1,13 @@
-// import sample from "/img/contacts/sample.png"
-import pcra from "/img/contacts/Anagha_Sharma_PCrA.png"
-import dvm from "/img/contacts/Atharv_Agarwal_-_Department_of_Visual_Media.png"
-import controls from "/img/contacts/Shreyak_Shintre_-_Controls.png"
-import adp from "/img/contacts/Aurvind_Mohanty_Art_Design___Publicity.png"
-import pep from "/img/contacts/Ishita_Sethi_Department_of_Paper_Evaluation_and_Presentation.png"
-import spons from "/img/contacts/Shivansh_Rastogi_-_Department_of_Sponsorship___Marketing.png"
-import recn from "/img/contacts/Shreya_Karnwal_RecNAcc.png"
-import aditya from "/img/contacts/aditya.png"
-import sajal from "/img/contacts/sajal.png"
+// import sample from "/img/contacts/sample.webp"
+import pcra from "/img/contacts/Anagha_Sharma_PCrA.webp"
+import dvm from "/img/contacts/Atharv_Agarwal_-_Department_of_Visual_Media.webp"
+import controls from "/img/contacts/Shreyak_Shintre_-_Controls.webp"
+import adp from "/img/contacts/Aurvind_Mohanty_Art_Design___Publicity.webp"
+import pep from "/img/contacts/Ishita_Sethi_Department_of_Paper_Evaluation_and_Presentation.webp"
+import spons from "/img/contacts/Shivansh_Rastogi_-_Department_of_Sponsorship___Marketing.webp"
+import recn from "/img/contacts/Shreya_Karnwal_RecNAcc.webp"
+import aditya from "/img/contacts/aditya.webp"
+import sajal from "/img/contacts/sajal.webp"
 
 interface Contact {
     name: string;

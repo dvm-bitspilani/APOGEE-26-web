@@ -131,7 +131,7 @@ const GettingToPilani: React.FC = () => {
                 <span className={styles.mapCoordsText}>
                   LAT: 28.3640° N &nbsp;|&nbsp; LNG: 75.5869° E
                 </span>
-                <span className={styles.ping}>ARCHIVE MAP</span>
+                <span className={styles.ping}>BITS PILANI</span>
               </div>
             </div>
 

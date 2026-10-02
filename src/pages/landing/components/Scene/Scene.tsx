@@ -20,7 +20,7 @@ export default function Scene({
   //     orbitRef.current.update();
   //   }
   // }, [introDone]);
-  // const texture = useTexture("/img/SteelSkiesbg.png");
+  // const texture = useTexture("/img/SteelSkiesbg.webp");
   // texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
   // texture.repeat.set(8, 8);
   return (

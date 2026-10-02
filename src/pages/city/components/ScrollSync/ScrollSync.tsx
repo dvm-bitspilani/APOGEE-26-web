@@ -36,6 +36,7 @@ export default function ScrollSync() {
   const setScroll = useScrollStore((s) => s.setScroll);
   const [isAutoScrolling, setIsAutoScroll] = useState(false);
   const targetPositionRef = useRef<number>(0);
+  const transitionTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const sequenceLength = activeSheet === "Intro Sequence" ? 0 : maxSequenceLength;
 
@@ -51,32 +52,42 @@ export default function ScrollSync() {
       });
       targetPositionRef.current = stopPoints[section];
       closeModal();
-      setTimeout(() => setCurrentSection("transition"), 500)
+      if (transitionTimer.current) clearTimeout(transitionTimer.current);
+      transitionTimer.current = setTimeout(() => setCurrentSection("transition"), 500)
     }
     useScrollToSectionStore.getState().scrollToSection = scrollToSection;
-  }, [activeSheet, scroll])
+    return () => {
+      if (transitionTimer.current) clearTimeout(transitionTimer.current);
+      useScrollToSectionStore.getState().scrollToSection = () => {};
+    };
+  }, [activeSheet, scroll, sequenceLength, closeModal, setCurrentSection])
 
   useEffect(() => {
     setScroll(scroll);
   }, [scroll])
 
   useEffect(() => {
+    let cancelled = false;
     scrollSheet.sequence.position = 0;
-    introAnimSheet.sequence.play({ iterationCount: 1 }).then(() => {
-      if (!showPreloader) {
-        introOverRef.current = true;
-        setActiveSheet("Cyber City");
-      }
-    });
-    if (showPreloader) introAnimSheet.sequence.pause();
-  }, [showPreloader])
+    if (showPreloader) { introAnimSheet.sequence.pause(); return; }
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      introAnimSheet.sequence.position = 7.5;
+      introOverRef.current = true;
+      setActiveSheet("Cyber City");
+    } else {
+      introAnimSheet.sequence.play({ iterationCount: 1 }).then(() => {
+        if (!cancelled) { introOverRef.current = true; setActiveSheet("Cyber City"); }
+      });
+    }
+    return () => { cancelled = true; introAnimSheet.sequence.pause(); };
+  }, [showPreloader, setActiveSheet]);
   // Added to control front movement by up arrow and back mpovement by down arrow
   useEffect(() => {
     const scrollContainer = scroll.el;
     const scrollStep = 400;
 
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (isModalOpen || showPreloader) return;
+      if (isModalOpen || showPreloader || event.target instanceof HTMLInputElement || event.target instanceof HTMLButtonElement || document.querySelector("dialog[open]")) return;
 
       // 🔥 prevent default scroll (important)
       if (event.code === "ArrowUp" || event.code === "ArrowDown") {
@@ -152,7 +163,8 @@ export default function ScrollSync() {
           scrollDiff > modalTriggerThrehold
         ) {
           closeModal();
-          setTimeout(() => setCurrentSection("transition"), 500)
+          if (transitionTimer.current) clearTimeout(transitionTimer.current);
+      transitionTimer.current = setTimeout(() => setCurrentSection("transition"), 500)
         }
       }
     }

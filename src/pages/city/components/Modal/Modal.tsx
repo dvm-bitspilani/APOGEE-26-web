@@ -3,10 +3,10 @@ import {
 	useModalStore,
 } from "../../../../utils/store";
 // import ComingSoon from "../../../comingSoon/ComingSoon";
-import ContactUs from "../../../contactUs/ContactUs";
-import AboutUs from "../../../aboutUs/AboutUs";
+const ContactUs = lazy(() => import("../../../contactUs/ContactUs"));
+const AboutUs = lazy(() => import("../../../aboutUs/AboutUs"));
 import ModalUI from "./ModalUI";
-import { useEffect, useRef, useState } from "react";
+import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import styles from "./Modal.module.scss";
 import NavButton from "../../../registration/components/navButton/NavButton";
 import DirectionalUnlock from "./DirectionlUnlock";
@@ -20,7 +20,6 @@ export default function Modal() {
 	
 	useEffect(() => {
 		setIsModalActive(true); //? So that next time user lands on a modal section, it activates the modal (uhh, I messed up the naming ik)
-		console.log("Current section changed to", currentsection, "isModalOpen:", isModalOpen);
 	}, [currentsection])
 
 	return (
@@ -29,10 +28,10 @@ export default function Modal() {
 				isModalActive={isModalActive && isModalOpen}
 				ref={modalUIRef}>
 				{
-					currentsection === "about" ? (
-						<AboutUs containerRef={containerRef} />
-					) : currentsection === "contact" ? (
-						<ContactUs containerRef={containerRef} />
+					currentsection === "about" && isModalOpen && isModalActive ? (
+						<Suspense fallback={null}><AboutUs containerRef={containerRef} /></Suspense>
+					) : currentsection === "contact" && isModalOpen && isModalActive ? (
+						<Suspense fallback={null}><ContactUs containerRef={containerRef} /></Suspense>
 					) : null
 				}
 			</ModalUI>

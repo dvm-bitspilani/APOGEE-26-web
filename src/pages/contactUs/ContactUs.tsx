@@ -2,21 +2,14 @@ import { useEffect, useState } from "react";
 import styles from "./ContactUs.module.scss";
 import costaans from "./costaan";
 import Card from "./UI/Card";
-import bg from "/img/contacts/bg.png";
+import bg from "/img/contacts/bg.webp";
 
 export default function ContactUs({containerRef}: {containerRef?: React.RefObject<HTMLDivElement | null>}) {
   const [width, setwidth] = useState(window.innerWidth < 550 ? true : false);
   useEffect(() => {
-    addEventListener("resize", () => {
-      if (window.innerWidth < 550) {
-        setwidth(true);
-      } else {
-        setwidth(false);
-      }
-      return () => {
-        removeEventListener("resize", () => {});
-      };
-    });
+    const update = () => setwidth(window.innerWidth < 550);
+    window.addEventListener("resize", update, { passive: true });
+    return () => window.removeEventListener("resize", update);
   }, []);
   
   return (

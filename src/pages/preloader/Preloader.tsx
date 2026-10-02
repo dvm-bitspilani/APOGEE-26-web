@@ -4,7 +4,7 @@ import { gsap } from "gsap";
 import SplitText from "gsap/src/SplitText";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { usePreloaderStateStore, useSceneLoadedStore } from "../../utils/store";
-import assetList from "../../utils/assetList";
+import { useProgress } from "@react-three/drei";
 import SVG from "./SVG";
 import { PowerGlitch } from "powerglitch";
 
@@ -15,14 +15,13 @@ import { PowerGlitch } from "powerglitch";
 export default function Preloader() {
   const textRef = useRef<HTMLParagraphElement>(null);
   const textRef2 = useRef<HTMLDivElement[]>([]);
-  const launchRef = useRef<HTMLDivElement>(null);
-  const [animDone, setAnimDone] = useState(false);
-  const [animDone2, setAnimDone2] = useState(false);
-  const [assetloaded, setAssetloaded] = useState(false);
+  const launchRef = useRef<HTMLButtonElement>(null);
+  const launchTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const launching = useRef(false);
   const [progress, setProgress] = useState(6.0);
-  const [prevIndex, setPrevIndex] = useState(0);
+  const prevIndex = useRef(0);
   const sceneLoaded = useSceneLoadedStore((s) => s.loaded);
-  const sceneProgress = useSceneLoadedStore((s) => s.progress);
+  const sceneProgress = useProgress((s) => s.progress);
   const setShowPreloader = usePreloaderStateStore((s) => s.setShowPreloader);
   gsap.registerPlugin(SplitText);
   const splitTextRef = useRef<SplitText | null>(null);
@@ -37,9 +36,6 @@ export default function Preloader() {
       : false,
   );
 
-  const assets = assetList["landing"];
-
-  const totalAssets = assets.length;
 
   /*
     ? States:
@@ -49,29 +45,21 @@ export default function Preloader() {
     ? 0: Show nothing (for blink)
   */
 
-  //@ts-ignore
   const [loaderState, setLoaderState] = useState<0 | 1 | 2 | 3>(1);
   const subContainerRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const apogeeLogoRef = useRef<HTMLImageElement>(null);
 
-  const onLaunch = async () => {
-    // subContainerRef.current?.style.setProperty("visibility", "hidden");
-    // await new Promise((resolve) => setTimeout(resolve, 500));
-    // subContainerRef.current?.style.setProperty("visibility", "visible");
-    // await new Promise((resolve) => setTimeout(resolve, 300));
-    // setLoaderState(0);
-    // await new Promise((resolve) => setTimeout(resolve, 500));
-    // setLoaderState(2)
-    // await new Promise((resolve) => setTimeout(resolve, 750));
-    // setLoaderState(0);
-    // await new Promise((resolve) => setTimeout(resolve, 500));
+  const onLaunch = () => {
+    if (!sceneLoaded || launching.current) return;
+    launching.current = true;
     setLoaderState(3);
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    containerRef.current?.style.setProperty("opacity", "0"); //? transition duration handled in SCSS file
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    setShowPreloader(false);
+    launchTimer.current = setTimeout(() => {
+      containerRef.current?.style.setProperty("opacity", "0");
+      launchTimer.current = setTimeout(() => setShowPreloader(false), 200);
+    }, 400);
   };
+  useEffect(() => () => { if (launchTimer.current) clearTimeout(launchTimer.current); }, []);
 
   useEffect(() => {
     //? Handles glitch for apogee logo
@@ -105,46 +93,7 @@ export default function Preloader() {
     });
 
     return () => glitch.stopGlitch();
-  });
-
-  useEffect(() => {
-    if (!assets) return;
-
-    let loadedAssets = 0;
-
-    // const preloadImage = (src: string) => {
-    //   return new Promise<HTMLImageElement>((resolve, reject) => {
-    //     const img = new Image();
-    //     img.src = src;
-    //     img.onload = () => {
-    //       loadedAssets++;
-    //       resolve(img);
-    //     };
-    //     img.onerror = reject;
-    //   });
-    // };
-
-    // Promise.allSettled([...(assets.map(preloadImage) || [])]).then(() => {
-    //   setAssetloaded(true);
-    // })
-    // .catch((err) => {
-    //   console.error("Error preloading assets:", err);
-    //   setAssetloaded(true);
-    // });
-    assets.forEach((src) => {
-      const img = new Image();
-      img.src = src;
-      img.onload = () => {
-        // console.log(`>> IMAGE LOADED: ${src}`);
-        loadedAssets++;
-      };
-      img.onerror = () => {
-        // console.warn(`>> FAILED TO LOAD IMAGE: ${src}`);
-        loadedAssets++;
-      };
-    });
-    setAssetloaded(true);
-  }, [assets, totalAssets]);
+  }, [loaderState]);
 
   useEffect(() => {
     const media = window.matchMedia(
@@ -154,18 +103,16 @@ export default function Preloader() {
     const handleChange = (e: MediaQueryList) => {
       if (e.matches) {
         setwidth(true);
-        setAnimDone(true);
-        // console.log("Mobile mode activated");
       } else {
         setwidth(false);
       }
     };
 
     handleChange(media); // initial check
-    media.addEventListener("change", () => handleChange(media));
-
-    return () => media.removeEventListener("change", () => handleChange(media));
-  });
+    const update = () => handleChange(media);
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
+  }, []);
 
   useEffect(() => {
     // console.log(`[Preloader] Scene progress: ${sceneProgress.toFixed(1)}%`);
@@ -173,14 +120,14 @@ export default function Preloader() {
   }, [sceneProgress]);
 
   useEffect(() => {
-    const isReady = animDone && sceneLoaded && animDone2 && assetloaded;
+    const isReady = sceneLoaded;
 
     if (isReady && launchRef.current) {
       launchRef.current.style.opacity = "1";
       launchRef.current.style.pointerEvents = "auto";
       // Added Enter button functionality after everything is done
       const handleGlobalKeyDown = (event: KeyboardEvent) => {
-        if (event.key === "Enter") {
+        if (event.key === "Enter" && !document.querySelector("dialog[open]")) {
           onLaunch();
         }
       };
@@ -189,7 +136,7 @@ export default function Preloader() {
         window.removeEventListener("keydown", handleGlobalKeyDown);
       };
     }
-  }, [animDone, sceneLoaded, animDone2, assetloaded]);
+  }, [sceneLoaded]);
 
   useEffect(() => {
     if (!textRef.current) return;
@@ -217,6 +164,7 @@ export default function Preloader() {
 
     return () => {
       split.revert();
+      tl.kill();
     };
   }, []);
 
@@ -252,9 +200,6 @@ export default function Preloader() {
         },
       },
       ease: "none",
-      onComplete: () => {
-        setAnimDone(true);
-      },
     });
   }, [progress]);
 
@@ -272,12 +217,9 @@ export default function Preloader() {
     const totalChars = chars.length;
     const targetIndex = Math.floor((progress / 100) * totalChars);
 
-    if (targetIndex <= Math.floor(prevIndex) && targetIndex !== totalChars) {
-      setPrevIndex((prev) => prev + 0.000001);
-      return;
-    }
+    if (targetIndex <= prevIndex.current) return;
 
-    for (let i = Math.floor(prevIndex); i < targetIndex; i++) {
+    for (let i = prevIndex.current; i < targetIndex; i++) {
       // console.log(`Revealing char ${i} of ${totalChars}`);
       if (i == 189) {
         timelineRef.current?.to(svgRef.current, {
@@ -293,7 +235,7 @@ export default function Preloader() {
 
       timelineRef.current?.to(char, {
         display: "inline-block",
-        duration: 0.008,
+        duration: 0.002,
         ease: "none",
         onStart() {
           if (textRef.current) {
@@ -311,14 +253,14 @@ export default function Preloader() {
             cursorEl.remove();
           }
           if (i === totalChars - 1) {
-            setAnimDone2(true);
+
           }
         },
       });
     }
 
-    setPrevIndex(targetIndex);
-  }, [prevIndex]);
+    prevIndex.current = targetIndex;
+  }, [progress]);
 
   // useEffect(() => {
   //   figlet.defaults({
@@ -483,11 +425,11 @@ export default function Preloader() {
               >{`>> LOADING RESOURCES...`}</p> */}
               {/* <span className={styles.cursor} id="cursor">█</span> */}
             </div>
-            <div
+            <button type="button" disabled={!sceneLoaded}
               className={styles.launchBtn}
               ref={launchRef}
               onClick={onLaunch}
-            >{`>>LAUNCH<<`}</div>
+            >{`>>LAUNCH<<`}</button>
           </div>
 
           <div className={styles.box}>
@@ -633,7 +575,7 @@ export default function Preloader() {
       {loaderState == 3 && (
         <div className={styles.logoContainer}>
           <img
-            src="apogee26logo.png"
+            src="/apogee26logo.webp"
             className={styles.apogeeLogo}
             ref={apogeeLogoRef}
             alt="ApogeeLogo"
